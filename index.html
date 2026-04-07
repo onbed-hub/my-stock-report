@@ -152,19 +152,19 @@
             const isSecret = card.classList.contains('is-secret');
 
             if (isSecret) {
-                // 只有完全符合關鍵字時才顯示
+                // 只有完全符合 'bor' 時才解除 hidden
                 if (input === 'bor') {
                     card.classList.remove('hidden');
                 } else {
                     card.classList.add('hidden');
                 }
             } else {
-                // 一般卡片搜尋
+                // 一般搜尋邏輯
                 card.classList.toggle('hidden', !text.includes(input));
             }
         });
 
-        // 自動隱藏空區塊
+        // 如果區塊內所有卡片都隱藏了，就隱藏整個區塊標題
         sections.forEach(section => {
             const visibleCards = section.querySelectorAll('.card:not(.hidden)');
             section.classList.toggle('hidden', visibleCards.length === 0);
