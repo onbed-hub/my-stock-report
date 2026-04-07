@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>量化交易策略儀表板</title>
     <style>
-        /* (保留之前的 CSS，僅確認 hidden 樣式) */
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f1f5f9; color: #0f172a; display: flex; justify-content: center; padding: 2rem 1.5rem; margin: 0; }
         .container { background: white; padding: 2.5rem; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); width: 100%; max-width: 680px; }
         h1 { font-size: 1.8rem; text-align: center; margin-bottom: 1.5rem; color: #1e293b; }
@@ -18,12 +20,10 @@
         .title { font-weight: 600; color: #334155; font-size: 1.05rem; }
         .file-info { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
         .file-name { font-size: 0.8rem; color: #94a3b8; font-family: 'SFMono-Regular', Consolas, monospace; }
-        
         .status-badge { font-size: 0.7rem; font-weight: bold; padding: 2px 6px; border-radius: 4px; }
         .status-ok { color: #10b981; background: #ecfdf5; }
         .status-missing { color: #ef4444; background: #fef2f2; }
         .card.missing { opacity: 0.5; cursor: not-allowed; }
-
         .badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 6px; margin-bottom: 6px; width: fit-content; font-weight: bold; }
         .bg-live { background: #ede9fe; color: #7c3aed; }
         .bg-con { background: #e0e7ff; color: #4338ca; }
@@ -35,7 +35,7 @@
 <body>
 
 <div class="container">
-    <h1>📉 量化策略分析面板</h1>
+    <h1>📈 量化策略分析面板</h1>
 
     <div class="controls">
         <div class="control-group">
@@ -43,7 +43,7 @@
             <input type="date" id="datePicker" onchange="updateReportPaths()">
         </div>
         <div class="control-group">
-            <label>🔍 快速過濾 (輸入 bor 解鎖限制級報表)</label>
+            <label>🔍 快速過濾</label>
             <input type="text" id="searchInput" placeholder="搜尋關鍵字..." onkeyup="filterReports()">
         </div>
     </div>
@@ -108,7 +108,6 @@
 </div>
 
 <script>
-    // ... (保留之前的 window.onload 和 updateReportPaths) ...
     window.onload = function() {
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('datePicker').value = today;
@@ -143,7 +142,6 @@
         }
     }
 
-    // ✨ 修正後的搜尋與隱藏邏輯
     function filterReports() {
         const input = document.getElementById('searchInput').value.toLowerCase();
         const cards = document.querySelectorAll('.card');
@@ -154,33 +152,24 @@
             const isSecret = card.classList.contains('is-secret');
 
             if (isSecret) {
-                // 祕密卡片：只有當關鍵字是 'bor' 時才解除 hidden
+                // 只有完全符合關鍵字時才顯示
                 if (input === 'bor') {
                     card.classList.remove('hidden');
                 } else {
                     card.classList.add('hidden');
                 }
             } else {
-                // 一般卡片：正常搜尋過濾
-                if (text.includes(input)) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
+                // 一般卡片搜尋
+                card.classList.toggle('hidden', !text.includes(input));
             }
         });
 
-        // 隱藏內容為空的區塊
+        // 自動隱藏空區塊
         sections.forEach(section => {
             const visibleCards = section.querySelectorAll('.card:not(.hidden)');
-            if (visibleCards.length === 0) {
-                section.classList.add('hidden');
-            } else {
-                section.classList.remove('hidden');
-            }
+            section.classList.toggle('hidden', visibleCards.length === 0);
         });
     }
 </script>
-
 </body>
 </html>
