@@ -1,0 +1,104 @@
+
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+        <style>
+            /* --- 字體放大核心設定 --- */
+            body { font-family: "Microsoft JhengHei", sans-serif; margin: 30px; background: #f8f9fa; font-size: 22px; }
+            .header { background: #1a237e; color: white; padding: 25px; border-radius: 12px; margin-bottom: 20px; }
+            h1 { font-size: 40px; margin: 0; }
+            
+            .info-bar { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-size: 24px; border-left: 10px solid #2196f3; }
+            
+            .rules-box { background: white; padding: 25px; border-radius: 12px; margin-bottom: 25px; border-left: 10px solid #fbc02d; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+            .rules-box h2 { font-size: 32px; margin-top: 0; }
+            .rules-grid { display: flex; gap: 30px; }
+            .rule-card { flex: 1; font-size: 20px; line-height: 1.6; }
+            
+            .filter-area { background: #e8eaf6; padding: 20px; border-radius: 10px; margin-bottom: 20px; font-size: 24px; font-weight: bold; }
+            
+            /* 表格字體放大 */
+            table.dataTable thead th { background: #283593 !important; color: white; font-size: 35px; padding: 18px !important; text-align: center; }
+            table.dataTable tbody td { font-size: 35px; padding: 18px !important; text-align: center; font-weight: 500; }
+            
+            select { font-size: 20px; padding: 10px; margin-right: 20px; border-radius: 8px; border: 2px solid #283593; }
+            .highlight-date { color: #d32f2f; font-weight: bold; text-decoration: underline; }
+        </style>
+    </head>
+
+    <body>
+        <div class="header">
+            <h1>📊 量化診斷報告 (2330)</h1>
+            <p style="font-size: 25px;">模式：單一標診斷 (2330) | 生成日期：20260329 | <b>交易執行：訊號次日開盤</b></p>
+        </div>
+
+        <div class="info-bar">
+            📅 <b>回測起點：</b> <span class="highlight-date">2026-01-01</span>
+            <span style="margin-left: 30px; color: #666;">(註：損益計算已採用「訊號隔日開盤價」成交)</span>
+        </div>
+
+        <div class="rules-box">
+            <h2>📈 核心交易規則說明</h2>
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <b style="color: #2e7d32; font-size: 32px; font-weight: 900; display: block; margin-bottom: 10px;">🟢 進場買入條件</b>
+                    <ul style="font-size: 22px;">
+                        <li><b>多頭結構：</b>股價高於各均線(MA5, MA10, MA20)+量價爆發</li>
+                        <li><b>趨勢確認：</b>月線斜率向上 (MA20 上揚)</li>
+                        <li><b>短線轉強：</b>股價突破 5日均線往上翹</li>
+                        <li><b>動能指標：</b>RSI > 50 (強勢區)</li>
+                    </ul>
+                </div>
+                <div class="rule-card">
+                    <b style="color: #d32f2f; font-size: 36px; font-weight: 900; display: block; margin-bottom: 10px;">🔴 出場賣出條件</b>
+                    <ul style="font-size: 22px;">
+                        <li><b>短線止損：</b>股價跌破 10日均線</li>
+                        <li><b>趨勢止損：</b>股價跌破 20日均線 (月線)</li>
+                        <li><b>盤整警示：</b>均線糾結且結構轉弱時建議觀望</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-area" id="filter-area">🔍 快速篩選標的：</div>
+
+        <table id="stockTable" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>股號</th><th>名稱</th><th>結構</th><th>最新價</th><th>均損益%</th><th>建議</th><th>原因</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>2330</td><td>台積電</td><td>⏳ 均線糾結</td><td>1820.0</td><td>6.94</td><td>⚠️ 賣出</td><td>🚨 嚴重破位：跌破雙線 (明日開盤賣)</td></tr>
+            </tbody>
+        </table>
+
+        <script>
+            $(document).ready( function () {
+                var table = $('#stockTable').DataTable({
+                    "pageLength": 100,
+                    "order": [[ 4, "desc" ]],
+                    "language": { "search": "關鍵字查詢:" },
+                    initComplete: function () {
+                        this.api().columns([2, 5]).every( function () {
+                            var column = this;
+                            var select = $('<select><option value="">顯示全部' + $(column.header()).text() + '</option></select>')
+                                .appendTo('#filter-area')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                                    column.search(val ? '^' + val + '$' : '', true, false).draw();
+                                });
+                            column.data().unique().sort().each( function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        });
+                    }
+                });
+            });
+        </script>
+    </body>
+    </html>
+    

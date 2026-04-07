@@ -1,0 +1,4056 @@
+
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>MJ 智能選股看板 (all-) - 20260402</title>
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+            <style>
+                body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; padding: 20px; background-color: #f0f2f5; }
+                .container { max-width: 1400px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+                #js-warning { background: #fff3cd; color: #856404; padding: 12px; border-radius: 6px; margin-bottom: 20px; text-align: center; font-weight: bold; border: 1px solid #ffeeba; }
+                .guide-section { display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
+                .guide-card { flex: 1; min-width: 250px; padding: 12px; border-radius: 8px; border-top: 5px solid #1a73e8; background: #fafafa; font-size: 0.85rem; line-height: 1.5; }
+                table.dataTable { width: 100% !important; border-collapse: collapse !important; }
+                table.dataTable thead th { background-color: #34495e !important; color: white !important; text-align: center !important; vertical-align: middle; padding: 12px !important; }
+                .filter-select { width: 100%; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; color: #333; }
+                tr:hover { background-color: #f1f8ff !important; }
+                td { text-align: center !important; }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <h2 style="text-align:center; color:#2c3e50;">📊 MJ 趨勢作戰看板 (20260402)</h2>
+                <div class="guide-section">
+                    <div class="guide-card"><b>🔥 強勢攻擊：</b>J低金叉+MACD紅柱。動能共振，適合做多。</div>
+                    <div class="guide-card"><b>🚀 低檔反彈：</b>J金叉但MACD負。空頭減弱，搶反彈機會。</div>
+                    <div class="guide-card"><b>💧 築底觀察：</b>J < 10 極度超賣。適合列入觀察名單。</div>
+                    <div class="guide-card"><b>⚠️ 超買警示：</b>J > 95 噴發末段。不宜追高，留意拉回。</div>
+                </div>
+
+                <table class="dataframe display nowrap my-report-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>日期</th>
+      <th>代碼</th>
+      <th>名稱</th>
+      <th>收盤價</th>
+      <th>漲跌幅%</th>
+      <th>成交量(張)</th>
+      <th>MJ狀態</th>
+      <th>J線值</th>
+      <th>MACD柱狀體</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6130.TWO</td>
+      <td>上亞科技</td>
+      <td>27.15</td>
+      <td>9.92</td>
+      <td>525</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>25.90</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3492.TWO</td>
+      <td>長盛</td>
+      <td>24.35</td>
+      <td>4.51</td>
+      <td>701</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>41.40</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2027.TW</td>
+      <td>大成鋼</td>
+      <td>38.40</td>
+      <td>3.92</td>
+      <td>61048</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>43.98</td>
+      <td>0.24</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4157.TWO</td>
+      <td>太景*-KY</td>
+      <td>11.35</td>
+      <td>0.89</td>
+      <td>1679</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>39.20</td>
+      <td>0.09</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5203.TW</td>
+      <td>訊連</td>
+      <td>63.70</td>
+      <td>0.79</td>
+      <td>807</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>47.39</td>
+      <td>0.91</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5521.TW</td>
+      <td>工信</td>
+      <td>12.65</td>
+      <td>0.40</td>
+      <td>3896</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>46.03</td>
+      <td>0.44</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2023.TW</td>
+      <td>燁輝</td>
+      <td>14.50</td>
+      <td>0.35</td>
+      <td>803</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>45.27</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6890.TW</td>
+      <td>來億-KY</td>
+      <td>168.00</td>
+      <td>0.30</td>
+      <td>673</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>29.22</td>
+      <td>2.46</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2892.TW</td>
+      <td>第一金</td>
+      <td>28.40</td>
+      <td>-0.18</td>
+      <td>17787</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>36.86</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1609.TW</td>
+      <td>大亞</td>
+      <td>32.35</td>
+      <td>-0.46</td>
+      <td>2721</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>41.45</td>
+      <td>0.20</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>9921.TW</td>
+      <td>巨大</td>
+      <td>71.10</td>
+      <td>-0.70</td>
+      <td>1231</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>40.85</td>
+      <td>0.87</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2641.TWO</td>
+      <td>正德</td>
+      <td>17.90</td>
+      <td>-1.10</td>
+      <td>825</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>33.30</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2328.TW</td>
+      <td>廣宇</td>
+      <td>44.40</td>
+      <td>-1.33</td>
+      <td>4064</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>39.60</td>
+      <td>0.12</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>9103.TW</td>
+      <td>美德醫療-DR</td>
+      <td>5.13</td>
+      <td>-1.35</td>
+      <td>503</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>35.07</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00752.TW</td>
+      <td>中信中國50</td>
+      <td>23.64</td>
+      <td>-1.38</td>
+      <td>985</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>36.05</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8069.TWO</td>
+      <td>元太</td>
+      <td>142.00</td>
+      <td>-1.39</td>
+      <td>4625</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>48.37</td>
+      <td>1.30</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4915.TW</td>
+      <td>致伸</td>
+      <td>71.00</td>
+      <td>-1.53</td>
+      <td>1042</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>32.84</td>
+      <td>0.20</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6176.TW</td>
+      <td>瑞儀</td>
+      <td>92.00</td>
+      <td>-1.60</td>
+      <td>1914</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>49.91</td>
+      <td>1.66</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2442.TW</td>
+      <td>新美齊</td>
+      <td>20.50</td>
+      <td>-1.68</td>
+      <td>1148</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>41.10</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1522.TW</td>
+      <td>堤維西</td>
+      <td>31.65</td>
+      <td>-1.71</td>
+      <td>500</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>17.88</td>
+      <td>0.52</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00688L.TW</td>
+      <td>國泰20年美債正2</td>
+      <td>6.99</td>
+      <td>-1.96</td>
+      <td>9181</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>46.04</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2354.TW</td>
+      <td>鴻準</td>
+      <td>51.40</td>
+      <td>-2.10</td>
+      <td>2446</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>43.97</td>
+      <td>0.14</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00680L.TW</td>
+      <td>元大美債20正2</td>
+      <td>7.00</td>
+      <td>-2.10</td>
+      <td>19612</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>41.82</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6472.TW</td>
+      <td>保瑞</td>
+      <td>449.00</td>
+      <td>-2.18</td>
+      <td>575</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>27.84</td>
+      <td>0.73</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2009.TW</td>
+      <td>第一銅</td>
+      <td>39.95</td>
+      <td>-2.20</td>
+      <td>1390</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>28.53</td>
+      <td>0.13</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8932.TWO</td>
+      <td>智通*</td>
+      <td>80.10</td>
+      <td>-2.32</td>
+      <td>1487</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>24.27</td>
+      <td>0.29</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00665L.TW</td>
+      <td>富邦�琤肭磪囓�2</td>
+      <td>9.31</td>
+      <td>-2.92</td>
+      <td>20916</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>48.93</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5314.TWO</td>
+      <td>世紀*</td>
+      <td>75.30</td>
+      <td>-2.96</td>
+      <td>3813</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>47.83</td>
+      <td>1.14</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00753L.TW</td>
+      <td>中信中國50正2</td>
+      <td>10.03</td>
+      <td>-3.00</td>
+      <td>11627</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>43.43</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6409.TW</td>
+      <td>旭隼</td>
+      <td>739.00</td>
+      <td>-5.01</td>
+      <td>599</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>43.75</td>
+      <td>9.07</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8358.TWO</td>
+      <td>金居</td>
+      <td>230.00</td>
+      <td>-5.35</td>
+      <td>14479</td>
+      <td>🔥 MJ強勢攻擊</td>
+      <td>41.39</td>
+      <td>0.38</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1717.TW</td>
+      <td>長興</td>
+      <td>61.90</td>
+      <td>3.17</td>
+      <td>34497</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>38.31</td>
+      <td>-0.38</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6456.TW</td>
+      <td>GIS-KY</td>
+      <td>56.00</td>
+      <td>2.94</td>
+      <td>5799</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>25.69</td>
+      <td>-2.08</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5289.TWO</td>
+      <td>宜鼎</td>
+      <td>957.00</td>
+      <td>2.79</td>
+      <td>663</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>36.01</td>
+      <td>-43.06</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8150.TW</td>
+      <td>南茂</td>
+      <td>56.70</td>
+      <td>2.16</td>
+      <td>8759</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>33.48</td>
+      <td>-0.69</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8086.TWO</td>
+      <td>宏捷科</td>
+      <td>125.50</td>
+      <td>2.03</td>
+      <td>4869</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>37.63</td>
+      <td>-1.23</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2528.TW</td>
+      <td>皇普</td>
+      <td>25.00</td>
+      <td>1.42</td>
+      <td>615</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>36.07</td>
+      <td>-0.08</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6120.TW</td>
+      <td>達運</td>
+      <td>12.85</td>
+      <td>1.18</td>
+      <td>3503</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>31.97</td>
+      <td>-0.09</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3092.TW</td>
+      <td>鴻碩</td>
+      <td>29.05</td>
+      <td>1.04</td>
+      <td>502</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>25.09</td>
+      <td>-0.72</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6546.TWO</td>
+      <td>正基</td>
+      <td>68.20</td>
+      <td>1.04</td>
+      <td>779</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>28.03</td>
+      <td>-1.54</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4909.TWO</td>
+      <td>新復興</td>
+      <td>55.40</td>
+      <td>0.91</td>
+      <td>1055</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>24.30</td>
+      <td>-0.47</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3689.TWO</td>
+      <td>湧德</td>
+      <td>113.00</td>
+      <td>0.44</td>
+      <td>3450</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>39.98</td>
+      <td>-0.46</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1215.TW</td>
+      <td>卜蜂</td>
+      <td>139.00</td>
+      <td>0.36</td>
+      <td>905</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>31.69</td>
+      <td>-1.52</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6789.TW</td>
+      <td>采鈺</td>
+      <td>318.00</td>
+      <td>0.00</td>
+      <td>2498</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>32.98</td>
+      <td>-4.39</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2258.TW</td>
+      <td>鴻華先進-創</td>
+      <td>27.30</td>
+      <td>0.00</td>
+      <td>636</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>26.65</td>
+      <td>-0.14</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6669.TW</td>
+      <td>緯穎</td>
+      <td>3410.00</td>
+      <td>-0.29</td>
+      <td>1302</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>20.03</td>
+      <td>-43.56</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3078.TWO</td>
+      <td>僑威</td>
+      <td>56.80</td>
+      <td>-0.35</td>
+      <td>502</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>27.57</td>
+      <td>-0.04</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>009817.TW</td>
+      <td>國泰日本不動產</td>
+      <td>9.33</td>
+      <td>-0.43</td>
+      <td>3987</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>16.90</td>
+      <td>-0.03</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6116.TW</td>
+      <td>彩晶</td>
+      <td>8.21</td>
+      <td>-0.48</td>
+      <td>19159</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>30.76</td>
+      <td>-0.04</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4105.TWO</td>
+      <td>東洋</td>
+      <td>73.60</td>
+      <td>-0.54</td>
+      <td>947</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>29.16</td>
+      <td>-0.02</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>0056.TW</td>
+      <td>元大高股息</td>
+      <td>37.82</td>
+      <td>-0.76</td>
+      <td>142189</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>39.05</td>
+      <td>-0.14</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00918.TW</td>
+      <td>大華優利高填息30</td>
+      <td>21.86</td>
+      <td>-0.86</td>
+      <td>18313</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>26.46</td>
+      <td>-0.07</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00919.TW</td>
+      <td>群益台灣精選高息</td>
+      <td>22.30</td>
+      <td>-0.89</td>
+      <td>79140</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>29.69</td>
+      <td>-0.07</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2353.TW</td>
+      <td>宏��</td>
+      <td>27.05</td>
+      <td>-0.92</td>
+      <td>10598</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>30.09</td>
+      <td>-0.12</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3661.TW</td>
+      <td>世芯-KY</td>
+      <td>2705.00</td>
+      <td>-0.92</td>
+      <td>2267</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>19.93</td>
+      <td>-82.59</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2603.TW</td>
+      <td>長榮</td>
+      <td>202.50</td>
+      <td>-0.98</td>
+      <td>5996</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>32.94</td>
+      <td>-1.81</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2377.TW</td>
+      <td>微星</td>
+      <td>87.20</td>
+      <td>-1.02</td>
+      <td>3475</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>25.88</td>
+      <td>-0.82</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2609.TW</td>
+      <td>陽明</td>
+      <td>52.10</td>
+      <td>-1.14</td>
+      <td>11305</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>20.02</td>
+      <td>-0.34</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5608.TW</td>
+      <td>四維航</td>
+      <td>16.25</td>
+      <td>-1.22</td>
+      <td>581</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>21.89</td>
+      <td>-0.05</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00969B.TWO</td>
+      <td>元大零息超長美債</td>
+      <td>8.44</td>
+      <td>-1.29</td>
+      <td>1272</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>35.32</td>
+      <td>-0.00</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2344.TW</td>
+      <td>華邦電</td>
+      <td>91.80</td>
+      <td>-1.40</td>
+      <td>183118</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>21.82</td>
+      <td>-2.21</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4927.TW</td>
+      <td>泰鼎-KY</td>
+      <td>40.85</td>
+      <td>-1.45</td>
+      <td>3458</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>17.52</td>
+      <td>-0.94</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3231.TW</td>
+      <td>緯創</td>
+      <td>125.00</td>
+      <td>-1.57</td>
+      <td>15606</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>25.87</td>
+      <td>-0.34</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>009816.TW</td>
+      <td>凱基台灣TOP50</td>
+      <td>10.49</td>
+      <td>-1.59</td>
+      <td>151539</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>39.67</td>
+      <td>-0.03</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3481.TW</td>
+      <td>群創</td>
+      <td>24.65</td>
+      <td>-1.60</td>
+      <td>280087</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>33.39</td>
+      <td>-0.36</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2301.TW</td>
+      <td>光寶科</td>
+      <td>145.00</td>
+      <td>-1.69</td>
+      <td>11164</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>22.43</td>
+      <td>-1.64</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6505.TW</td>
+      <td>台塑化</td>
+      <td>54.70</td>
+      <td>-1.80</td>
+      <td>9587</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>33.11</td>
+      <td>-0.40</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2515.TW</td>
+      <td>中工</td>
+      <td>13.15</td>
+      <td>-1.87</td>
+      <td>5859</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>13.09</td>
+      <td>-0.08</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00922.TW</td>
+      <td>國泰台灣領袖50</td>
+      <td>27.43</td>
+      <td>-1.93</td>
+      <td>14408</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>38.68</td>
+      <td>-0.13</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1560.TW</td>
+      <td>中砂</td>
+      <td>443.00</td>
+      <td>-1.99</td>
+      <td>1995</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>35.33</td>
+      <td>-3.65</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6873.TW</td>
+      <td>泓德能源</td>
+      <td>82.50</td>
+      <td>-2.02</td>
+      <td>749</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>11.61</td>
+      <td>-1.02</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2317.TW</td>
+      <td>鴻海</td>
+      <td>193.00</td>
+      <td>-2.03</td>
+      <td>37304</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>36.54</td>
+      <td>-0.01</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2395.TW</td>
+      <td>研華</td>
+      <td>323.50</td>
+      <td>-2.27</td>
+      <td>2036</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>37.28</td>
+      <td>-4.01</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3044.TW</td>
+      <td>健鼎</td>
+      <td>346.50</td>
+      <td>-2.39</td>
+      <td>2547</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>33.68</td>
+      <td>-0.88</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00735.TW</td>
+      <td>國泰臺韓科技</td>
+      <td>64.35</td>
+      <td>-3.23</td>
+      <td>1789</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>30.46</td>
+      <td>-0.76</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4764.TW</td>
+      <td>雙鍵</td>
+      <td>121.00</td>
+      <td>-3.59</td>
+      <td>2048</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>16.44</td>
+      <td>-4.62</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2489.TW</td>
+      <td>瑞軒</td>
+      <td>32.20</td>
+      <td>-3.59</td>
+      <td>50833</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>31.55</td>
+      <td>-1.01</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6944.TW</td>
+      <td>兆聯實業</td>
+      <td>780.00</td>
+      <td>-3.70</td>
+      <td>848</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>38.78</td>
+      <td>-6.88</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2368.TW</td>
+      <td>金像電</td>
+      <td>905.00</td>
+      <td>-4.33</td>
+      <td>10126</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>31.56</td>
+      <td>-14.94</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00685L.TW</td>
+      <td>群益臺灣加權正2</td>
+      <td>156.60</td>
+      <td>-4.63</td>
+      <td>2109</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>37.10</td>
+      <td>-1.17</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00663L.TW</td>
+      <td>國泰臺灣加權正2</td>
+      <td>57.30</td>
+      <td>-4.74</td>
+      <td>19815</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>35.62</td>
+      <td>-0.44</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00631L.TW</td>
+      <td>元大台灣50正2</td>
+      <td>20.00</td>
+      <td>-4.76</td>
+      <td>287286</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>23.02</td>
+      <td>-12.55</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00675L.TW</td>
+      <td>富邦臺灣加權正2</td>
+      <td>173.75</td>
+      <td>-4.79</td>
+      <td>5000</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>36.43</td>
+      <td>-1.32</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6510.TWO</td>
+      <td>精測</td>
+      <td>3165.00</td>
+      <td>-5.66</td>
+      <td>595</td>
+      <td>🚀 MJ低檔反彈</td>
+      <td>33.70</td>
+      <td>-26.59</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8155.TWO</td>
+      <td>博智</td>
+      <td>253.00</td>
+      <td>3.48</td>
+      <td>1038</td>
+      <td>💧 築底觀察</td>
+      <td>4.73</td>
+      <td>-5.75</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8064.TWO</td>
+      <td>東捷</td>
+      <td>66.00</td>
+      <td>2.33</td>
+      <td>7287</td>
+      <td>💧 築底觀察</td>
+      <td>-1.04</td>
+      <td>-1.68</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3673.TW</td>
+      <td>TPK-KY</td>
+      <td>44.30</td>
+      <td>1.96</td>
+      <td>2800</td>
+      <td>💧 築底觀察</td>
+      <td>4.71</td>
+      <td>-0.42</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4956.TW</td>
+      <td>光鋐</td>
+      <td>32.95</td>
+      <td>1.85</td>
+      <td>5555</td>
+      <td>💧 築底觀察</td>
+      <td>0.49</td>
+      <td>-1.06</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6269.TW</td>
+      <td>台郡</td>
+      <td>59.20</td>
+      <td>1.20</td>
+      <td>1060</td>
+      <td>💧 築底觀察</td>
+      <td>5.39</td>
+      <td>-0.29</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3005.TW</td>
+      <td>神基</td>
+      <td>98.70</td>
+      <td>1.02</td>
+      <td>4799</td>
+      <td>💧 築底觀察</td>
+      <td>-2.70</td>
+      <td>-4.51</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00656R.TW</td>
+      <td>國泰中國A50反1</td>
+      <td>6.28</td>
+      <td>0.64</td>
+      <td>517</td>
+      <td>💧 築底觀察</td>
+      <td>8.21</td>
+      <td>-0.02</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>9933.TW</td>
+      <td>中鼎</td>
+      <td>35.65</td>
+      <td>0.42</td>
+      <td>4740</td>
+      <td>💧 築底觀察</td>
+      <td>9.47</td>
+      <td>-0.43</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8936.TWO</td>
+      <td>國統</td>
+      <td>51.10</td>
+      <td>0.39</td>
+      <td>2001</td>
+      <td>💧 築底觀察</td>
+      <td>-9.60</td>
+      <td>-0.81</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00674R.TW</td>
+      <td>期元大S&amp;P黃金反1</td>
+      <td>5.30</td>
+      <td>0.38</td>
+      <td>876</td>
+      <td>💧 築底觀察</td>
+      <td>2.54</td>
+      <td>-0.05</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6234.TWO</td>
+      <td>高僑</td>
+      <td>28.10</td>
+      <td>0.36</td>
+      <td>575</td>
+      <td>💧 築底觀察</td>
+      <td>-4.96</td>
+      <td>-0.23</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3580.TWO</td>
+      <td>友威科</td>
+      <td>69.90</td>
+      <td>0.29</td>
+      <td>537</td>
+      <td>💧 築底觀察</td>
+      <td>1.93</td>
+      <td>-1.06</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4532.TW</td>
+      <td>瑞智</td>
+      <td>26.05</td>
+      <td>0.19</td>
+      <td>1139</td>
+      <td>💧 築底觀察</td>
+      <td>-5.69</td>
+      <td>-0.25</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1337.TW</td>
+      <td>再生-KY</td>
+      <td>6.16</td>
+      <td>0.16</td>
+      <td>1006</td>
+      <td>💧 築底觀察</td>
+      <td>6.86</td>
+      <td>-0.07</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3645.TW</td>
+      <td>達邁</td>
+      <td>73.20</td>
+      <td>0.14</td>
+      <td>7508</td>
+      <td>💧 築底觀察</td>
+      <td>2.96</td>
+      <td>-2.04</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6153.TW</td>
+      <td>嘉聯益</td>
+      <td>16.20</td>
+      <td>0.00</td>
+      <td>2219</td>
+      <td>💧 築底觀察</td>
+      <td>6.44</td>
+      <td>-0.17</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>9136.TW</td>
+      <td>巨騰-DR</td>
+      <td>8.70</td>
+      <td>0.00</td>
+      <td>587</td>
+      <td>💧 築底觀察</td>
+      <td>-13.78</td>
+      <td>-0.55</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5425.TWO</td>
+      <td>台半</td>
+      <td>53.30</td>
+      <td>0.00</td>
+      <td>2658</td>
+      <td>💧 築底觀察</td>
+      <td>-4.62</td>
+      <td>-1.15</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1471.TW</td>
+      <td>首利</td>
+      <td>12.25</td>
+      <td>0.00</td>
+      <td>679</td>
+      <td>💧 築底觀察</td>
+      <td>-3.28</td>
+      <td>-0.27</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2014.TW</td>
+      <td>中鴻</td>
+      <td>18.30</td>
+      <td>0.00</td>
+      <td>5176</td>
+      <td>💧 築底觀察</td>
+      <td>2.45</td>
+      <td>-0.08</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6412.TW</td>
+      <td>群電</td>
+      <td>73.00</td>
+      <td>0.00</td>
+      <td>616</td>
+      <td>💧 築底觀察</td>
+      <td>9.17</td>
+      <td>-0.17</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2547.TW</td>
+      <td>日勝生</td>
+      <td>10.55</td>
+      <td>0.00</td>
+      <td>1810</td>
+      <td>💧 築底觀察</td>
+      <td>4.30</td>
+      <td>-0.07</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2454.TW</td>
+      <td>聯發科</td>
+      <td>1465.00</td>
+      <td>0.00</td>
+      <td>9288</td>
+      <td>💧 築底觀察</td>
+      <td>0.56</td>
+      <td>-29.29</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6761.TWO</td>
+      <td>穩得</td>
+      <td>159.00</td>
+      <td>0.00</td>
+      <td>614</td>
+      <td>💧 築底觀察</td>
+      <td>5.36</td>
+      <td>-3.25</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2324.TW</td>
+      <td>仁寶</td>
+      <td>27.40</td>
+      <td>-0.18</td>
+      <td>20368</td>
+      <td>💧 築底觀察</td>
+      <td>-2.71</td>
+      <td>-0.77</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2034.TW</td>
+      <td>允強</td>
+      <td>20.25</td>
+      <td>-0.25</td>
+      <td>618</td>
+      <td>💧 築底觀察</td>
+      <td>0.15</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2535.TW</td>
+      <td>達欣工</td>
+      <td>70.70</td>
+      <td>-0.28</td>
+      <td>778</td>
+      <td>💧 築底觀察</td>
+      <td>0.20</td>
+      <td>-0.67</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1721.TW</td>
+      <td>三晃</td>
+      <td>17.30</td>
+      <td>-0.29</td>
+      <td>795</td>
+      <td>💧 築底觀察</td>
+      <td>1.49</td>
+      <td>-0.37</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2889.TW</td>
+      <td>國票金</td>
+      <td>14.95</td>
+      <td>-0.33</td>
+      <td>1994</td>
+      <td>💧 築底觀察</td>
+      <td>-18.87</td>
+      <td>-0.30</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3028.TW</td>
+      <td>增你強</td>
+      <td>50.20</td>
+      <td>-0.40</td>
+      <td>3509</td>
+      <td>💧 築底觀察</td>
+      <td>8.64</td>
+      <td>-1.23</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2329.TW</td>
+      <td>華泰</td>
+      <td>50.30</td>
+      <td>-0.40</td>
+      <td>9068</td>
+      <td>💧 築底觀察</td>
+      <td>-7.47</td>
+      <td>-1.13</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6179.TWO</td>
+      <td>亞通</td>
+      <td>23.90</td>
+      <td>-0.42</td>
+      <td>827</td>
+      <td>💧 築底觀察</td>
+      <td>1.32</td>
+      <td>-0.56</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8926.TW</td>
+      <td>台汽電</td>
+      <td>43.45</td>
+      <td>-0.46</td>
+      <td>1384</td>
+      <td>💧 築底觀察</td>
+      <td>6.23</td>
+      <td>-0.38</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2338.TW</td>
+      <td>光罩</td>
+      <td>43.25</td>
+      <td>-0.46</td>
+      <td>3316</td>
+      <td>💧 築底觀察</td>
+      <td>-8.26</td>
+      <td>-1.54</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2646.TW</td>
+      <td>星宇航空</td>
+      <td>21.00</td>
+      <td>-0.47</td>
+      <td>2901</td>
+      <td>💧 築底觀察</td>
+      <td>2.91</td>
+      <td>-0.01</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4908.TWO</td>
+      <td>前鼎</td>
+      <td>101.00</td>
+      <td>-0.49</td>
+      <td>3168</td>
+      <td>💧 築底觀察</td>
+      <td>-8.71</td>
+      <td>-3.40</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3413.TW</td>
+      <td>京鼎</td>
+      <td>293.50</td>
+      <td>-0.51</td>
+      <td>795</td>
+      <td>💧 築底觀察</td>
+      <td>0.59</td>
+      <td>-3.70</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3680.TWO</td>
+      <td>家登</td>
+      <td>375.00</td>
+      <td>-0.53</td>
+      <td>929</td>
+      <td>💧 築底觀察</td>
+      <td>-15.01</td>
+      <td>-4.56</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2404.TW</td>
+      <td>漢唐</td>
+      <td>829.00</td>
+      <td>-0.60</td>
+      <td>2645</td>
+      <td>💧 築底觀察</td>
+      <td>2.45</td>
+      <td>-14.93</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1513.TW</td>
+      <td>中興電</td>
+      <td>144.00</td>
+      <td>-0.69</td>
+      <td>2841</td>
+      <td>💧 築底觀察</td>
+      <td>-0.98</td>
+      <td>-1.96</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2504.TW</td>
+      <td>國產</td>
+      <td>35.65</td>
+      <td>-0.70</td>
+      <td>1876</td>
+      <td>💧 築底觀察</td>
+      <td>-14.46</td>
+      <td>-0.56</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2634.TW</td>
+      <td>漢翔</td>
+      <td>46.70</td>
+      <td>-0.74</td>
+      <td>2800</td>
+      <td>💧 築底觀察</td>
+      <td>-5.28</td>
+      <td>-0.37</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1312.TW</td>
+      <td>國喬</td>
+      <td>13.20</td>
+      <td>-0.75</td>
+      <td>14555</td>
+      <td>💧 築底觀察</td>
+      <td>9.53</td>
+      <td>-0.20</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6139.TW</td>
+      <td>亞翔</td>
+      <td>521.00</td>
+      <td>-0.76</td>
+      <td>2422</td>
+      <td>💧 築底觀察</td>
+      <td>-21.41</td>
+      <td>-19.25</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5515.TW</td>
+      <td>建國</td>
+      <td>36.15</td>
+      <td>-0.82</td>
+      <td>649</td>
+      <td>💧 築底觀察</td>
+      <td>-2.48</td>
+      <td>-0.57</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2017.TW</td>
+      <td>官田鋼</td>
+      <td>9.86</td>
+      <td>-0.90</td>
+      <td>512</td>
+      <td>💧 築底觀察</td>
+      <td>-6.27</td>
+      <td>-0.12</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>9941.TW</td>
+      <td>裕融</td>
+      <td>76.10</td>
+      <td>-0.91</td>
+      <td>1286</td>
+      <td>💧 築底觀察</td>
+      <td>9.26</td>
+      <td>-0.39</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5483.TWO</td>
+      <td>中美晶</td>
+      <td>106.00</td>
+      <td>-0.93</td>
+      <td>5167</td>
+      <td>💧 築底觀察</td>
+      <td>-13.18</td>
+      <td>-2.64</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6143.TWO</td>
+      <td>振曜</td>
+      <td>95.10</td>
+      <td>-0.94</td>
+      <td>819</td>
+      <td>💧 築底觀察</td>
+      <td>0.50</td>
+      <td>-0.40</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1409.TW</td>
+      <td>新纖</td>
+      <td>15.40</td>
+      <td>-0.96</td>
+      <td>2730</td>
+      <td>💧 築底觀察</td>
+      <td>-4.38</td>
+      <td>-0.18</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6488.TWO</td>
+      <td>環球晶</td>
+      <td>409.50</td>
+      <td>-0.97</td>
+      <td>3463</td>
+      <td>💧 築底觀察</td>
+      <td>-7.49</td>
+      <td>-7.84</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2208.TW</td>
+      <td>台船</td>
+      <td>20.20</td>
+      <td>-0.98</td>
+      <td>3016</td>
+      <td>💧 築底觀察</td>
+      <td>-11.62</td>
+      <td>-0.20</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2543.TW</td>
+      <td>皇昌</td>
+      <td>57.40</td>
+      <td>-1.03</td>
+      <td>1581</td>
+      <td>💧 築底觀察</td>
+      <td>-3.38</td>
+      <td>-1.77</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3324.TWO</td>
+      <td>雙鴻</td>
+      <td>910.00</td>
+      <td>-1.09</td>
+      <td>2745</td>
+      <td>💧 築底觀察</td>
+      <td>8.40</td>
+      <td>-23.05</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1314.TW</td>
+      <td>中石化</td>
+      <td>8.15</td>
+      <td>-1.09</td>
+      <td>21394</td>
+      <td>💧 築底觀察</td>
+      <td>9.05</td>
+      <td>-0.05</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2349.TW</td>
+      <td>錸德</td>
+      <td>12.95</td>
+      <td>-1.15</td>
+      <td>2357</td>
+      <td>💧 築底觀察</td>
+      <td>-4.52</td>
+      <td>-0.20</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3058.TW</td>
+      <td>立德</td>
+      <td>9.39</td>
+      <td>-1.16</td>
+      <td>554</td>
+      <td>💧 築底觀察</td>
+      <td>-7.91</td>
+      <td>-0.11</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2601.TW</td>
+      <td>益航</td>
+      <td>5.91</td>
+      <td>-1.17</td>
+      <td>798</td>
+      <td>💧 築底觀察</td>
+      <td>8.15</td>
+      <td>-0.06</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3060.TW</td>
+      <td>銘異</td>
+      <td>28.55</td>
+      <td>-1.21</td>
+      <td>3909</td>
+      <td>💧 築底觀察</td>
+      <td>-12.32</td>
+      <td>-0.74</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4534.TWO</td>
+      <td>慶騰</td>
+      <td>23.10</td>
+      <td>-1.28</td>
+      <td>581</td>
+      <td>💧 築底觀察</td>
+      <td>-6.79</td>
+      <td>-0.92</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2405.TW</td>
+      <td>輔信</td>
+      <td>15.20</td>
+      <td>-1.30</td>
+      <td>1178</td>
+      <td>💧 築底觀察</td>
+      <td>-8.59</td>
+      <td>-0.12</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2501.TW</td>
+      <td>國建</td>
+      <td>22.30</td>
+      <td>-1.33</td>
+      <td>3034</td>
+      <td>💧 築底觀察</td>
+      <td>-13.59</td>
+      <td>-0.33</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2312.TW</td>
+      <td>金寶</td>
+      <td>21.85</td>
+      <td>-1.35</td>
+      <td>7788</td>
+      <td>💧 築底觀察</td>
+      <td>5.79</td>
+      <td>-0.12</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2645.TW</td>
+      <td>長榮航太</td>
+      <td>146.50</td>
+      <td>-1.35</td>
+      <td>734</td>
+      <td>💧 築底觀察</td>
+      <td>8.56</td>
+      <td>-0.65</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2323.TW</td>
+      <td>中環</td>
+      <td>10.90</td>
+      <td>-1.36</td>
+      <td>3356</td>
+      <td>💧 築底觀察</td>
+      <td>-2.79</td>
+      <td>-0.24</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6142.TW</td>
+      <td>友勁</td>
+      <td>9.38</td>
+      <td>-1.37</td>
+      <td>512</td>
+      <td>💧 築底觀察</td>
+      <td>-11.53</td>
+      <td>-0.14</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>9914.TW</td>
+      <td>美利達</td>
+      <td>64.60</td>
+      <td>-1.37</td>
+      <td>1986</td>
+      <td>💧 築底觀察</td>
+      <td>9.48</td>
+      <td>0.19</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6207.TWO</td>
+      <td>雷科</td>
+      <td>50.00</td>
+      <td>-1.38</td>
+      <td>515</td>
+      <td>💧 築底觀察</td>
+      <td>2.82</td>
+      <td>-0.62</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00929.TW</td>
+      <td>復華台灣科技優息</td>
+      <td>18.73</td>
+      <td>-1.42</td>
+      <td>31679</td>
+      <td>💧 築底觀察</td>
+      <td>3.19</td>
+      <td>-0.17</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6854.TW</td>
+      <td>錼創科技-KY創</td>
+      <td>139.00</td>
+      <td>-1.42</td>
+      <td>597</td>
+      <td>💧 築底觀察</td>
+      <td>0.82</td>
+      <td>-2.33</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1718.TW</td>
+      <td>中纖</td>
+      <td>7.37</td>
+      <td>-1.47</td>
+      <td>5396</td>
+      <td>💧 築底觀察</td>
+      <td>8.21</td>
+      <td>-0.06</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5864.TWO</td>
+      <td>致和證</td>
+      <td>23.50</td>
+      <td>-1.47</td>
+      <td>1543</td>
+      <td>💧 築底觀察</td>
+      <td>0.32</td>
+      <td>-0.38</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3050.TW</td>
+      <td>鈺德</td>
+      <td>13.05</td>
+      <td>-1.51</td>
+      <td>506</td>
+      <td>💧 築底觀察</td>
+      <td>-9.24</td>
+      <td>-0.16</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2401.TW</td>
+      <td>凌陽</td>
+      <td>19.60</td>
+      <td>-1.51</td>
+      <td>1627</td>
+      <td>💧 築底觀察</td>
+      <td>-0.98</td>
+      <td>-0.14</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3048.TW</td>
+      <td>益登</td>
+      <td>34.15</td>
+      <td>-1.59</td>
+      <td>1413</td>
+      <td>💧 築底觀察</td>
+      <td>-9.88</td>
+      <td>-0.90</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2010.TW</td>
+      <td>春源</td>
+      <td>24.80</td>
+      <td>-1.59</td>
+      <td>1203</td>
+      <td>💧 築底觀察</td>
+      <td>-3.74</td>
+      <td>-0.24</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>9938.TW</td>
+      <td>百和</td>
+      <td>45.90</td>
+      <td>-1.61</td>
+      <td>1555</td>
+      <td>💧 築底觀察</td>
+      <td>3.14</td>
+      <td>-0.07</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4763.TW</td>
+      <td>材料*-KY</td>
+      <td>42.20</td>
+      <td>-1.63</td>
+      <td>2730</td>
+      <td>💧 築底觀察</td>
+      <td>-2.75</td>
+      <td>-0.26</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2498.TW</td>
+      <td>宏達電</td>
+      <td>39.40</td>
+      <td>-1.75</td>
+      <td>4430</td>
+      <td>💧 築底觀察</td>
+      <td>7.46</td>
+      <td>-0.09</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2103.TW</td>
+      <td>台橡</td>
+      <td>19.05</td>
+      <td>-1.80</td>
+      <td>5287</td>
+      <td>💧 築底觀察</td>
+      <td>6.13</td>
+      <td>-0.38</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2201.TW</td>
+      <td>裕隆</td>
+      <td>27.20</td>
+      <td>-1.81</td>
+      <td>2839</td>
+      <td>💧 築底觀察</td>
+      <td>6.62</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00909.TW</td>
+      <td>國泰數位支付服務</td>
+      <td>35.99</td>
+      <td>-1.83</td>
+      <td>6342</td>
+      <td>💧 築底觀察</td>
+      <td>9.99</td>
+      <td>-0.66</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1519.TW</td>
+      <td>華城</td>
+      <td>797.00</td>
+      <td>-1.85</td>
+      <td>2197</td>
+      <td>💧 築底觀察</td>
+      <td>2.49</td>
+      <td>-17.04</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2331.TW</td>
+      <td>精英</td>
+      <td>21.05</td>
+      <td>-1.86</td>
+      <td>1488</td>
+      <td>💧 築底觀察</td>
+      <td>4.91</td>
+      <td>-0.10</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6265.TWO</td>
+      <td>方土昶</td>
+      <td>36.65</td>
+      <td>-1.87</td>
+      <td>3810</td>
+      <td>💧 築底觀察</td>
+      <td>-4.06</td>
+      <td>-1.30</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3135.TW</td>
+      <td>凌航</td>
+      <td>104.50</td>
+      <td>-1.88</td>
+      <td>688</td>
+      <td>💧 築底觀察</td>
+      <td>-5.64</td>
+      <td>-5.67</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4967.TW</td>
+      <td>十銓</td>
+      <td>209.00</td>
+      <td>-1.88</td>
+      <td>8778</td>
+      <td>💧 築底觀察</td>
+      <td>-3.42</td>
+      <td>-9.38</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1608.TW</td>
+      <td>華榮</td>
+      <td>31.20</td>
+      <td>-1.89</td>
+      <td>1446</td>
+      <td>💧 築底觀察</td>
+      <td>4.66</td>
+      <td>-0.03</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1503.TW</td>
+      <td>士電</td>
+      <td>179.00</td>
+      <td>-1.92</td>
+      <td>1052</td>
+      <td>💧 築底觀察</td>
+      <td>1.52</td>
+      <td>-2.26</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3090.TW</td>
+      <td>日電貿</td>
+      <td>90.70</td>
+      <td>-1.95</td>
+      <td>1501</td>
+      <td>💧 築底觀察</td>
+      <td>0.02</td>
+      <td>-0.67</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5009.TWO</td>
+      <td>榮剛</td>
+      <td>31.95</td>
+      <td>-1.99</td>
+      <td>1282</td>
+      <td>💧 築底觀察</td>
+      <td>5.08</td>
+      <td>-0.23</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6125.TWO</td>
+      <td>廣運</td>
+      <td>53.30</td>
+      <td>-2.02</td>
+      <td>830</td>
+      <td>💧 築底觀察</td>
+      <td>-1.46</td>
+      <td>-0.71</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4966.TWO</td>
+      <td>譜瑞-KY</td>
+      <td>463.50</td>
+      <td>-2.03</td>
+      <td>660</td>
+      <td>💧 築底觀察</td>
+      <td>-2.94</td>
+      <td>-3.54</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3019.TW</td>
+      <td>亞光</td>
+      <td>120.50</td>
+      <td>-2.03</td>
+      <td>1847</td>
+      <td>💧 築底觀察</td>
+      <td>1.20</td>
+      <td>-0.44</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4768.TWO</td>
+      <td>晶呈科技</td>
+      <td>431.00</td>
+      <td>-2.05</td>
+      <td>1084</td>
+      <td>💧 築底觀察</td>
+      <td>-5.04</td>
+      <td>-12.31</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2374.TW</td>
+      <td>佳能</td>
+      <td>66.50</td>
+      <td>-2.06</td>
+      <td>2704</td>
+      <td>💧 築底觀察</td>
+      <td>-8.26</td>
+      <td>-0.42</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3029.TW</td>
+      <td>零壹</td>
+      <td>93.90</td>
+      <td>-2.09</td>
+      <td>1714</td>
+      <td>💧 築底觀察</td>
+      <td>8.76</td>
+      <td>-1.14</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8112.TW</td>
+      <td>至上</td>
+      <td>75.00</td>
+      <td>-2.09</td>
+      <td>7913</td>
+      <td>💧 築底觀察</td>
+      <td>8.33</td>
+      <td>-2.39</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2388.TW</td>
+      <td>威盛</td>
+      <td>51.40</td>
+      <td>-2.10</td>
+      <td>2247</td>
+      <td>💧 築底觀察</td>
+      <td>-4.06</td>
+      <td>-0.37</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3702.TW</td>
+      <td>大聯大</td>
+      <td>88.00</td>
+      <td>-2.11</td>
+      <td>12359</td>
+      <td>💧 築底觀察</td>
+      <td>-4.54</td>
+      <td>-2.34</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5439.TWO</td>
+      <td>高技</td>
+      <td>276.50</td>
+      <td>-2.12</td>
+      <td>3256</td>
+      <td>💧 築底觀察</td>
+      <td>8.60</td>
+      <td>-2.18</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1815.TWO</td>
+      <td>富喬</td>
+      <td>96.60</td>
+      <td>-2.13</td>
+      <td>29187</td>
+      <td>💧 築底觀察</td>
+      <td>4.01</td>
+      <td>-2.15</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4739.TW</td>
+      <td>康普</td>
+      <td>76.40</td>
+      <td>-2.18</td>
+      <td>1458</td>
+      <td>💧 築底觀察</td>
+      <td>-10.06</td>
+      <td>-2.29</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2327.TW</td>
+      <td>國巨*</td>
+      <td>246.00</td>
+      <td>-2.19</td>
+      <td>13691</td>
+      <td>💧 築底觀察</td>
+      <td>5.64</td>
+      <td>-2.64</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4919.TW</td>
+      <td>新唐</td>
+      <td>92.40</td>
+      <td>-2.22</td>
+      <td>11685</td>
+      <td>💧 築底觀察</td>
+      <td>3.67</td>
+      <td>-3.15</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3706.TW</td>
+      <td>神達</td>
+      <td>74.70</td>
+      <td>-2.23</td>
+      <td>6316</td>
+      <td>💧 築底觀察</td>
+      <td>9.89</td>
+      <td>-1.12</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4903.TWO</td>
+      <td>聯光通</td>
+      <td>43.85</td>
+      <td>-2.23</td>
+      <td>5398</td>
+      <td>💧 築底觀察</td>
+      <td>-6.18</td>
+      <td>-0.95</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2365.TW</td>
+      <td>昆盈</td>
+      <td>30.50</td>
+      <td>-2.24</td>
+      <td>1072</td>
+      <td>💧 築底觀察</td>
+      <td>-6.36</td>
+      <td>-0.42</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3289.TWO</td>
+      <td>宜特</td>
+      <td>129.00</td>
+      <td>-2.27</td>
+      <td>1377</td>
+      <td>💧 築底觀察</td>
+      <td>-9.06</td>
+      <td>-2.63</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3033.TW</td>
+      <td>威健</td>
+      <td>31.85</td>
+      <td>-2.30</td>
+      <td>2609</td>
+      <td>💧 築底觀察</td>
+      <td>-1.77</td>
+      <td>-0.46</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1319.TW</td>
+      <td>東陽</td>
+      <td>80.10</td>
+      <td>-2.32</td>
+      <td>1705</td>
+      <td>💧 築底觀察</td>
+      <td>8.40</td>
+      <td>0.58</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1727.TW</td>
+      <td>中華化</td>
+      <td>48.10</td>
+      <td>-2.34</td>
+      <td>2627</td>
+      <td>💧 築底觀察</td>
+      <td>1.65</td>
+      <td>-1.18</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2464.TW</td>
+      <td>盟立</td>
+      <td>66.50</td>
+      <td>-2.35</td>
+      <td>1890</td>
+      <td>💧 築底觀察</td>
+      <td>-8.44</td>
+      <td>-1.72</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3535.TW</td>
+      <td>晶彩科</td>
+      <td>103.50</td>
+      <td>-2.36</td>
+      <td>1944</td>
+      <td>💧 築底觀察</td>
+      <td>-1.77</td>
+      <td>-3.76</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6016.TWO</td>
+      <td>康和證</td>
+      <td>16.45</td>
+      <td>-2.37</td>
+      <td>3595</td>
+      <td>💧 築底觀察</td>
+      <td>7.60</td>
+      <td>-0.22</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6596.TWO</td>
+      <td>寬宏藝術</td>
+      <td>97.20</td>
+      <td>-2.41</td>
+      <td>644</td>
+      <td>💧 築底觀察</td>
+      <td>-5.05</td>
+      <td>-5.43</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1710.TW</td>
+      <td>東聯</td>
+      <td>14.20</td>
+      <td>-2.41</td>
+      <td>8643</td>
+      <td>💧 築底觀察</td>
+      <td>3.13</td>
+      <td>-0.21</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2630.TW</td>
+      <td>亞航</td>
+      <td>46.55</td>
+      <td>-2.41</td>
+      <td>712</td>
+      <td>💧 築底觀察</td>
+      <td>-6.01</td>
+      <td>-0.38</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1514.TW</td>
+      <td>亞力</td>
+      <td>100.50</td>
+      <td>-2.43</td>
+      <td>1229</td>
+      <td>💧 築底觀察</td>
+      <td>-1.86</td>
+      <td>-1.98</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2436.TW</td>
+      <td>偉詮電</td>
+      <td>59.60</td>
+      <td>-2.45</td>
+      <td>2184</td>
+      <td>💧 築底觀察</td>
+      <td>4.36</td>
+      <td>-1.31</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4977.TW</td>
+      <td>眾達-KY</td>
+      <td>178.00</td>
+      <td>-2.47</td>
+      <td>5714</td>
+      <td>💧 築底觀察</td>
+      <td>-6.07</td>
+      <td>-5.85</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6477.TW</td>
+      <td>安集</td>
+      <td>32.75</td>
+      <td>-2.53</td>
+      <td>682</td>
+      <td>💧 築底觀察</td>
+      <td>-4.32</td>
+      <td>-0.62</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6770.TW</td>
+      <td>力積電</td>
+      <td>53.50</td>
+      <td>-2.55</td>
+      <td>155340</td>
+      <td>💧 築底觀察</td>
+      <td>-4.30</td>
+      <td>-2.76</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1476.TW</td>
+      <td>儒鴻</td>
+      <td>322.50</td>
+      <td>-2.57</td>
+      <td>1968</td>
+      <td>💧 築底觀察</td>
+      <td>3.59</td>
+      <td>-2.90</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4540.TW</td>
+      <td>全球傳動</td>
+      <td>40.80</td>
+      <td>-2.63</td>
+      <td>762</td>
+      <td>💧 築底觀察</td>
+      <td>-0.95</td>
+      <td>-0.62</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3450.TW</td>
+      <td>聯鈞</td>
+      <td>241.00</td>
+      <td>-2.63</td>
+      <td>9105</td>
+      <td>💧 築底觀察</td>
+      <td>-1.02</td>
+      <td>-6.81</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5536.TWO</td>
+      <td>聖暉*</td>
+      <td>699.00</td>
+      <td>-2.65</td>
+      <td>1409</td>
+      <td>💧 築底觀察</td>
+      <td>-3.31</td>
+      <td>-10.54</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6284.TWO</td>
+      <td>佳邦</td>
+      <td>80.10</td>
+      <td>-2.67</td>
+      <td>777</td>
+      <td>💧 築底觀察</td>
+      <td>1.57</td>
+      <td>-0.23</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6191.TW</td>
+      <td>精成科</td>
+      <td>88.30</td>
+      <td>-2.75</td>
+      <td>2934</td>
+      <td>💧 築底觀察</td>
+      <td>-0.64</td>
+      <td>-0.47</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8054.TWO</td>
+      <td>安國</td>
+      <td>92.00</td>
+      <td>-2.75</td>
+      <td>1084</td>
+      <td>💧 築底觀察</td>
+      <td>8.13</td>
+      <td>0.09</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3664.TWO</td>
+      <td>安瑞-KY</td>
+      <td>8.80</td>
+      <td>-2.76</td>
+      <td>1273</td>
+      <td>💧 築底觀察</td>
+      <td>4.70</td>
+      <td>-0.67</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6282.TW</td>
+      <td>康舒</td>
+      <td>44.00</td>
+      <td>-2.76</td>
+      <td>12074</td>
+      <td>💧 築底觀察</td>
+      <td>-6.61</td>
+      <td>-0.70</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3209.TW</td>
+      <td>全科</td>
+      <td>40.35</td>
+      <td>-2.77</td>
+      <td>2573</td>
+      <td>💧 築底觀察</td>
+      <td>-11.75</td>
+      <td>-1.05</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6492.TWO</td>
+      <td>生華科</td>
+      <td>48.90</td>
+      <td>-2.78</td>
+      <td>653</td>
+      <td>💧 築底觀察</td>
+      <td>-13.58</td>
+      <td>-1.09</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2342.TW</td>
+      <td>茂矽</td>
+      <td>28.00</td>
+      <td>-2.78</td>
+      <td>870</td>
+      <td>💧 築底觀察</td>
+      <td>-6.27</td>
+      <td>-0.62</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6903.TWO</td>
+      <td>巨漢</td>
+      <td>279.00</td>
+      <td>-2.79</td>
+      <td>628</td>
+      <td>💧 築底觀察</td>
+      <td>0.41</td>
+      <td>-7.37</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2363.TW</td>
+      <td>矽統</td>
+      <td>46.30</td>
+      <td>-2.83</td>
+      <td>2479</td>
+      <td>💧 築底觀察</td>
+      <td>-0.81</td>
+      <td>-0.50</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2478.TW</td>
+      <td>大毅</td>
+      <td>57.50</td>
+      <td>-2.87</td>
+      <td>883</td>
+      <td>💧 築底觀察</td>
+      <td>-5.17</td>
+      <td>-1.33</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3707.TWO</td>
+      <td>漢磊</td>
+      <td>48.30</td>
+      <td>-2.91</td>
+      <td>2033</td>
+      <td>💧 築底觀察</td>
+      <td>-14.22</td>
+      <td>-2.13</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8088.TWO</td>
+      <td>品安</td>
+      <td>49.70</td>
+      <td>-2.93</td>
+      <td>2385</td>
+      <td>💧 築底觀察</td>
+      <td>5.93</td>
+      <td>-1.20</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5469.TW</td>
+      <td>瀚宇博</td>
+      <td>79.40</td>
+      <td>-2.93</td>
+      <td>2072</td>
+      <td>💧 築底觀察</td>
+      <td>-2.51</td>
+      <td>-0.15</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3543.TW</td>
+      <td>州巧</td>
+      <td>45.95</td>
+      <td>-2.96</td>
+      <td>1236</td>
+      <td>💧 築底觀察</td>
+      <td>-7.28</td>
+      <td>-0.90</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6415.TW</td>
+      <td>矽力*-KY</td>
+      <td>274.00</td>
+      <td>-3.01</td>
+      <td>3849</td>
+      <td>💧 築底觀察</td>
+      <td>-7.12</td>
+      <td>-3.08</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1536.TW</td>
+      <td>和大</td>
+      <td>47.95</td>
+      <td>-3.03</td>
+      <td>2129</td>
+      <td>💧 築底觀察</td>
+      <td>-4.52</td>
+      <td>-0.07</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1307.TW</td>
+      <td>三芳</td>
+      <td>31.50</td>
+      <td>-3.08</td>
+      <td>1353</td>
+      <td>💧 築底觀察</td>
+      <td>-11.25</td>
+      <td>-0.62</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3357.TWO</td>
+      <td>臺慶科</td>
+      <td>141.00</td>
+      <td>-3.09</td>
+      <td>1004</td>
+      <td>💧 築底觀察</td>
+      <td>-2.45</td>
+      <td>-2.61</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2413.TW</td>
+      <td>環科</td>
+      <td>48.55</td>
+      <td>-3.09</td>
+      <td>2738</td>
+      <td>💧 築底觀察</td>
+      <td>-14.62</td>
+      <td>-1.78</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6133.TW</td>
+      <td>金橋</td>
+      <td>21.95</td>
+      <td>-3.09</td>
+      <td>1014</td>
+      <td>💧 築底觀察</td>
+      <td>4.09</td>
+      <td>-0.29</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5309.TWO</td>
+      <td>系統電</td>
+      <td>56.00</td>
+      <td>-3.11</td>
+      <td>2407</td>
+      <td>💧 築底觀察</td>
+      <td>-8.43</td>
+      <td>-0.47</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6689.TW</td>
+      <td>伊雲谷</td>
+      <td>74.20</td>
+      <td>-3.13</td>
+      <td>528</td>
+      <td>💧 築底觀察</td>
+      <td>-10.50</td>
+      <td>-2.46</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8111.TWO</td>
+      <td>立��</td>
+      <td>58.60</td>
+      <td>-3.14</td>
+      <td>1149</td>
+      <td>💧 築底觀察</td>
+      <td>4.33</td>
+      <td>-0.69</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2359.TW</td>
+      <td>所羅門</td>
+      <td>107.50</td>
+      <td>-3.15</td>
+      <td>561</td>
+      <td>💧 築底觀察</td>
+      <td>6.35</td>
+      <td>-0.47</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6757.TW</td>
+      <td>台灣虎航</td>
+      <td>49.00</td>
+      <td>-3.16</td>
+      <td>1719</td>
+      <td>💧 築底觀察</td>
+      <td>-9.97</td>
+      <td>-0.14</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6126.TWO</td>
+      <td>信音</td>
+      <td>29.00</td>
+      <td>-3.17</td>
+      <td>635</td>
+      <td>💧 築底觀察</td>
+      <td>1.55</td>
+      <td>-0.20</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1529.TW</td>
+      <td>樂事綠能</td>
+      <td>22.75</td>
+      <td>-3.19</td>
+      <td>930</td>
+      <td>💧 築底觀察</td>
+      <td>-5.25</td>
+      <td>-0.75</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5269.TW</td>
+      <td>祥碩</td>
+      <td>1060.00</td>
+      <td>-3.20</td>
+      <td>797</td>
+      <td>💧 築底觀察</td>
+      <td>0.12</td>
+      <td>-17.73</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3071.TWO</td>
+      <td>協禧</td>
+      <td>27.10</td>
+      <td>-3.21</td>
+      <td>573</td>
+      <td>💧 築底觀察</td>
+      <td>-2.44</td>
+      <td>-0.55</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4749.TWO</td>
+      <td>新應材</td>
+      <td>801.00</td>
+      <td>-3.26</td>
+      <td>1272</td>
+      <td>💧 築底觀察</td>
+      <td>2.61</td>
+      <td>-16.62</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2616.TW</td>
+      <td>山隆</td>
+      <td>16.25</td>
+      <td>-3.27</td>
+      <td>1361</td>
+      <td>💧 築底觀察</td>
+      <td>-0.63</td>
+      <td>-0.42</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6188.TWO</td>
+      <td>廣明</td>
+      <td>85.50</td>
+      <td>-3.28</td>
+      <td>1859</td>
+      <td>💧 築底觀察</td>
+      <td>0.32</td>
+      <td>-1.04</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3532.TW</td>
+      <td>台勝科</td>
+      <td>130.50</td>
+      <td>-3.33</td>
+      <td>1059</td>
+      <td>💧 築底觀察</td>
+      <td>6.71</td>
+      <td>-2.04</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4722.TW</td>
+      <td>國精化</td>
+      <td>159.00</td>
+      <td>-3.34</td>
+      <td>812</td>
+      <td>💧 築底觀察</td>
+      <td>9.75</td>
+      <td>-3.09</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6205.TW</td>
+      <td>詮欣</td>
+      <td>51.80</td>
+      <td>-3.36</td>
+      <td>556</td>
+      <td>💧 築底觀察</td>
+      <td>-5.28</td>
+      <td>-1.57</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6197.TW</td>
+      <td>佳必琪</td>
+      <td>157.50</td>
+      <td>-3.37</td>
+      <td>1742</td>
+      <td>💧 築底觀察</td>
+      <td>-8.18</td>
+      <td>-6.25</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2492.TW</td>
+      <td>華新科</td>
+      <td>114.00</td>
+      <td>-3.39</td>
+      <td>6440</td>
+      <td>💧 築底觀察</td>
+      <td>-8.05</td>
+      <td>-2.58</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3016.TW</td>
+      <td>嘉晶</td>
+      <td>51.00</td>
+      <td>-3.41</td>
+      <td>1115</td>
+      <td>💧 築底觀察</td>
+      <td>-11.87</td>
+      <td>-2.07</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2457.TW</td>
+      <td>飛宏</td>
+      <td>23.90</td>
+      <td>-3.43</td>
+      <td>2123</td>
+      <td>💧 築底觀察</td>
+      <td>0.64</td>
+      <td>-0.35</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3032.TW</td>
+      <td>偉訓</td>
+      <td>61.10</td>
+      <td>-3.48</td>
+      <td>527</td>
+      <td>💧 築底觀察</td>
+      <td>-6.86</td>
+      <td>-0.25</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3624.TWO</td>
+      <td>光頡</td>
+      <td>45.55</td>
+      <td>-3.50</td>
+      <td>628</td>
+      <td>💧 築底觀察</td>
+      <td>6.67</td>
+      <td>-0.20</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3576.TW</td>
+      <td>聯合再生</td>
+      <td>20.55</td>
+      <td>-3.52</td>
+      <td>28603</td>
+      <td>💧 築底觀察</td>
+      <td>5.09</td>
+      <td>-0.96</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6290.TWO</td>
+      <td>良維</td>
+      <td>192.00</td>
+      <td>-3.52</td>
+      <td>4038</td>
+      <td>💧 築底觀察</td>
+      <td>-3.19</td>
+      <td>-6.59</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4533.TWO</td>
+      <td>協易機</td>
+      <td>30.05</td>
+      <td>-3.53</td>
+      <td>1561</td>
+      <td>💧 築底觀察</td>
+      <td>-5.01</td>
+      <td>-0.51</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5222.TW</td>
+      <td>全訊</td>
+      <td>122.50</td>
+      <td>-3.54</td>
+      <td>869</td>
+      <td>💧 築底觀察</td>
+      <td>-8.10</td>
+      <td>-1.29</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8131.TW</td>
+      <td>福懋科</td>
+      <td>58.90</td>
+      <td>-3.60</td>
+      <td>2774</td>
+      <td>💧 築底觀察</td>
+      <td>8.57</td>
+      <td>-0.66</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3694.TW</td>
+      <td>海華</td>
+      <td>53.60</td>
+      <td>-3.60</td>
+      <td>781</td>
+      <td>💧 築底觀察</td>
+      <td>5.60</td>
+      <td>-0.17</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8033.TW</td>
+      <td>雷虎</td>
+      <td>134.00</td>
+      <td>-3.60</td>
+      <td>2262</td>
+      <td>💧 築底觀察</td>
+      <td>-6.05</td>
+      <td>-2.06</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1809.TW</td>
+      <td>中釉</td>
+      <td>25.10</td>
+      <td>-3.65</td>
+      <td>2099</td>
+      <td>💧 築底觀察</td>
+      <td>-10.39</td>
+      <td>-0.94</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3234.TWO</td>
+      <td>光環</td>
+      <td>83.10</td>
+      <td>-3.71</td>
+      <td>2103</td>
+      <td>💧 築底觀察</td>
+      <td>-6.85</td>
+      <td>-2.87</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1711.TW</td>
+      <td>永光</td>
+      <td>37.50</td>
+      <td>-3.72</td>
+      <td>4766</td>
+      <td>💧 築底觀察</td>
+      <td>7.85</td>
+      <td>-1.24</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3323.TWO</td>
+      <td>加百裕</td>
+      <td>31.80</td>
+      <td>-3.78</td>
+      <td>840</td>
+      <td>💧 築底觀察</td>
+      <td>-13.80</td>
+      <td>-0.47</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3663.TWO</td>
+      <td>鑫科</td>
+      <td>66.20</td>
+      <td>-3.78</td>
+      <td>2768</td>
+      <td>💧 築底觀察</td>
+      <td>-12.33</td>
+      <td>-2.09</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3035.TW</td>
+      <td>智原</td>
+      <td>139.00</td>
+      <td>-3.81</td>
+      <td>1915</td>
+      <td>💧 築底觀察</td>
+      <td>-3.72</td>
+      <td>-1.90</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3006.TW</td>
+      <td>晶豪科</td>
+      <td>150.50</td>
+      <td>-3.83</td>
+      <td>2826</td>
+      <td>💧 築底觀察</td>
+      <td>-10.27</td>
+      <td>-7.58</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6182.TWO</td>
+      <td>合晶</td>
+      <td>31.30</td>
+      <td>-3.84</td>
+      <td>5885</td>
+      <td>💧 築底觀察</td>
+      <td>-14.13</td>
+      <td>-0.68</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2441.TW</td>
+      <td>超豐</td>
+      <td>85.00</td>
+      <td>-3.85</td>
+      <td>2930</td>
+      <td>💧 築底觀察</td>
+      <td>-6.04</td>
+      <td>-1.55</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6768.TW</td>
+      <td>志強-KY</td>
+      <td>84.60</td>
+      <td>-3.86</td>
+      <td>884</td>
+      <td>💧 築底觀察</td>
+      <td>-1.03</td>
+      <td>-0.93</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1477.TW</td>
+      <td>聚陽</td>
+      <td>219.00</td>
+      <td>-3.95</td>
+      <td>2904</td>
+      <td>💧 築底觀察</td>
+      <td>0.74</td>
+      <td>-5.85</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6215.TW</td>
+      <td>和椿</td>
+      <td>94.10</td>
+      <td>-3.98</td>
+      <td>812</td>
+      <td>💧 築底觀察</td>
+      <td>-3.24</td>
+      <td>-1.36</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6781.TW</td>
+      <td>AES-KY</td>
+      <td>957.00</td>
+      <td>-4.11</td>
+      <td>1164</td>
+      <td>💧 築底觀察</td>
+      <td>-15.60</td>
+      <td>-14.98</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2369.TW</td>
+      <td>菱生</td>
+      <td>29.00</td>
+      <td>-4.13</td>
+      <td>18449</td>
+      <td>💧 築底觀察</td>
+      <td>-4.34</td>
+      <td>-0.93</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1785.TWO</td>
+      <td>光洋科</td>
+      <td>88.10</td>
+      <td>-4.13</td>
+      <td>28143</td>
+      <td>💧 築底觀察</td>
+      <td>-2.62</td>
+      <td>-2.57</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6173.TWO</td>
+      <td>信昌電</td>
+      <td>57.10</td>
+      <td>-4.19</td>
+      <td>1363</td>
+      <td>💧 築底觀察</td>
+      <td>-4.10</td>
+      <td>-0.60</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4934.TW</td>
+      <td>太極</td>
+      <td>15.95</td>
+      <td>-4.20</td>
+      <td>1125</td>
+      <td>💧 築底觀察</td>
+      <td>-3.29</td>
+      <td>-0.53</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8028.TW</td>
+      <td>昇陽半導體</td>
+      <td>170.00</td>
+      <td>-4.23</td>
+      <td>8498</td>
+      <td>💧 築底觀察</td>
+      <td>-10.42</td>
+      <td>-4.67</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2421.TW</td>
+      <td>建準</td>
+      <td>122.50</td>
+      <td>-4.30</td>
+      <td>3653</td>
+      <td>💧 築底觀察</td>
+      <td>-3.76</td>
+      <td>-2.59</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8110.TW</td>
+      <td>華東</td>
+      <td>48.70</td>
+      <td>-4.32</td>
+      <td>17055</td>
+      <td>💧 築底觀察</td>
+      <td>4.94</td>
+      <td>-0.75</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3376.TW</td>
+      <td>新日興</td>
+      <td>187.50</td>
+      <td>-4.34</td>
+      <td>5069</td>
+      <td>💧 築底觀察</td>
+      <td>-10.14</td>
+      <td>-5.76</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6531.TW</td>
+      <td>愛普*</td>
+      <td>440.00</td>
+      <td>-4.35</td>
+      <td>2557</td>
+      <td>💧 築底觀察</td>
+      <td>-9.60</td>
+      <td>-22.71</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6869.TW</td>
+      <td>雲豹能源</td>
+      <td>85.00</td>
+      <td>-4.39</td>
+      <td>840</td>
+      <td>💧 築底觀察</td>
+      <td>2.44</td>
+      <td>-0.86</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4931.TWO</td>
+      <td>新盛力</td>
+      <td>130.50</td>
+      <td>-4.40</td>
+      <td>2112</td>
+      <td>💧 築底觀察</td>
+      <td>-9.94</td>
+      <td>-1.97</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5328.TWO</td>
+      <td>華容</td>
+      <td>22.80</td>
+      <td>-4.40</td>
+      <td>2522</td>
+      <td>💧 築底觀察</td>
+      <td>-6.96</td>
+      <td>-0.59</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8074.TWO</td>
+      <td>鉅橡</td>
+      <td>53.10</td>
+      <td>-4.50</td>
+      <td>1114</td>
+      <td>💧 築底觀察</td>
+      <td>4.28</td>
+      <td>-0.75</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2375.TW</td>
+      <td>凱美</td>
+      <td>72.60</td>
+      <td>-4.60</td>
+      <td>847</td>
+      <td>💧 築底觀察</td>
+      <td>2.70</td>
+      <td>-0.39</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3049.TW</td>
+      <td>精金</td>
+      <td>11.15</td>
+      <td>-4.70</td>
+      <td>10976</td>
+      <td>💧 築底觀察</td>
+      <td>-13.07</td>
+      <td>-0.95</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6244.TWO</td>
+      <td>茂迪</td>
+      <td>25.20</td>
+      <td>-4.73</td>
+      <td>7332</td>
+      <td>💧 築底觀察</td>
+      <td>-6.33</td>
+      <td>-1.06</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00673R.TW</td>
+      <td>期元大S&amp;P原油反1</td>
+      <td>16.20</td>
+      <td>-4.76</td>
+      <td>43139</td>
+      <td>💧 築底觀察</td>
+      <td>-3.20</td>
+      <td>-0.13</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4916.TW</td>
+      <td>事欣科</td>
+      <td>54.60</td>
+      <td>-4.88</td>
+      <td>2870</td>
+      <td>💧 築底觀察</td>
+      <td>-5.58</td>
+      <td>-0.92</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8431.TWO</td>
+      <td>匯鑽科</td>
+      <td>55.90</td>
+      <td>-4.93</td>
+      <td>1339</td>
+      <td>💧 築底觀察</td>
+      <td>-9.56</td>
+      <td>-2.23</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2408.TW</td>
+      <td>南亞科</td>
+      <td>200.50</td>
+      <td>-4.98</td>
+      <td>119531</td>
+      <td>💧 築底觀察</td>
+      <td>-0.30</td>
+      <td>-4.11</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6202.TW</td>
+      <td>盛群</td>
+      <td>45.30</td>
+      <td>-5.03</td>
+      <td>1934</td>
+      <td>💧 築底觀察</td>
+      <td>-0.35</td>
+      <td>-1.35</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2493.TW</td>
+      <td>揚博</td>
+      <td>103.50</td>
+      <td>-5.05</td>
+      <td>769</td>
+      <td>💧 築底觀察</td>
+      <td>1.52</td>
+      <td>-1.12</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2406.TW</td>
+      <td>國碩</td>
+      <td>30.80</td>
+      <td>-5.23</td>
+      <td>11326</td>
+      <td>💧 築底觀察</td>
+      <td>-15.74</td>
+      <td>-1.35</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8043.TWO</td>
+      <td>蜜望實</td>
+      <td>64.20</td>
+      <td>-5.59</td>
+      <td>1087</td>
+      <td>💧 築底觀察</td>
+      <td>-13.20</td>
+      <td>-1.25</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6155.TW</td>
+      <td>鈞寶</td>
+      <td>42.00</td>
+      <td>-5.62</td>
+      <td>1198</td>
+      <td>💧 築底觀察</td>
+      <td>6.48</td>
+      <td>-0.26</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3701.TW</td>
+      <td>大眾控</td>
+      <td>53.30</td>
+      <td>-5.66</td>
+      <td>3262</td>
+      <td>💧 築底觀察</td>
+      <td>-9.15</td>
+      <td>-1.81</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6443.TW</td>
+      <td>元晶</td>
+      <td>38.80</td>
+      <td>-5.71</td>
+      <td>37377</td>
+      <td>💧 築底觀察</td>
+      <td>-7.30</td>
+      <td>-1.85</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8042.TWO</td>
+      <td>金山電</td>
+      <td>51.00</td>
+      <td>-5.73</td>
+      <td>1111</td>
+      <td>💧 築底觀察</td>
+      <td>8.31</td>
+      <td>-0.31</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5351.TWO</td>
+      <td>鈺創</td>
+      <td>66.10</td>
+      <td>-5.84</td>
+      <td>20001</td>
+      <td>💧 築底觀察</td>
+      <td>5.46</td>
+      <td>-2.66</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5452.TWO</td>
+      <td>佶優</td>
+      <td>31.40</td>
+      <td>-5.99</td>
+      <td>2696</td>
+      <td>💧 築底觀察</td>
+      <td>-9.85</td>
+      <td>-0.98</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3138.TW</td>
+      <td>耀登</td>
+      <td>160.00</td>
+      <td>-6.16</td>
+      <td>2874</td>
+      <td>💧 築底觀察</td>
+      <td>1.92</td>
+      <td>-3.47</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4542.TWO</td>
+      <td>科嶠</td>
+      <td>154.00</td>
+      <td>-6.38</td>
+      <td>663</td>
+      <td>💧 築底觀察</td>
+      <td>-12.85</td>
+      <td>-8.24</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2495.TW</td>
+      <td>普安</td>
+      <td>32.00</td>
+      <td>-6.43</td>
+      <td>5642</td>
+      <td>💧 築底觀察</td>
+      <td>-11.09</td>
+      <td>-0.97</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8210.TW</td>
+      <td>勤誠</td>
+      <td>841.00</td>
+      <td>-6.45</td>
+      <td>5610</td>
+      <td>💧 築底觀察</td>
+      <td>7.79</td>
+      <td>-5.63</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5347.TWO</td>
+      <td>世界</td>
+      <td>110.00</td>
+      <td>-6.78</td>
+      <td>26073</td>
+      <td>💧 築底觀察</td>
+      <td>2.19</td>
+      <td>-0.42</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2072.TW</td>
+      <td>世紀風電</td>
+      <td>170.50</td>
+      <td>-6.83</td>
+      <td>1139</td>
+      <td>💧 築底觀察</td>
+      <td>3.53</td>
+      <td>-6.05</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4960.TW</td>
+      <td>誠美材</td>
+      <td>20.40</td>
+      <td>-6.85</td>
+      <td>22715</td>
+      <td>💧 築底觀察</td>
+      <td>-14.63</td>
+      <td>-1.70</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6226.TW</td>
+      <td>光鼎</td>
+      <td>12.00</td>
+      <td>-6.98</td>
+      <td>1143</td>
+      <td>💧 築底觀察</td>
+      <td>6.73</td>
+      <td>-0.41</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2449.TW</td>
+      <td>京元電子</td>
+      <td>259.00</td>
+      <td>-7.66</td>
+      <td>28890</td>
+      <td>💧 築底觀察</td>
+      <td>8.16</td>
+      <td>-5.32</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3713.TWO</td>
+      <td>新晶投控</td>
+      <td>14.00</td>
+      <td>-7.89</td>
+      <td>685</td>
+      <td>💧 築底觀察</td>
+      <td>-2.24</td>
+      <td>-0.49</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>9958.TW</td>
+      <td>世紀鋼</td>
+      <td>103.00</td>
+      <td>-8.44</td>
+      <td>5559</td>
+      <td>💧 築底觀察</td>
+      <td>-3.73</td>
+      <td>-3.31</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2380.TW</td>
+      <td>虹光</td>
+      <td>5.30</td>
+      <td>-9.56</td>
+      <td>1004</td>
+      <td>💧 築底觀察</td>
+      <td>-15.92</td>
+      <td>-0.23</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1735.TW</td>
+      <td>日勝化</td>
+      <td>23.00</td>
+      <td>-9.80</td>
+      <td>875</td>
+      <td>💧 築底觀察</td>
+      <td>-8.86</td>
+      <td>-1.44</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3712.TW</td>
+      <td>永崴投控</td>
+      <td>19.70</td>
+      <td>-9.84</td>
+      <td>1437</td>
+      <td>💧 築底觀察</td>
+      <td>-10.92</td>
+      <td>-0.51</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6907.TWO</td>
+      <td>雅特力-KY</td>
+      <td>98.20</td>
+      <td>-9.91</td>
+      <td>600</td>
+      <td>💧 築底觀察</td>
+      <td>-16.14</td>
+      <td>-10.98</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1589.TW</td>
+      <td>永冠-KY</td>
+      <td>5.54</td>
+      <td>-9.92</td>
+      <td>8402</td>
+      <td>💧 築底觀察</td>
+      <td>-8.19</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6806.TW</td>
+      <td>森崴能源</td>
+      <td>34.75</td>
+      <td>-9.97</td>
+      <td>692</td>
+      <td>💧 築底觀察</td>
+      <td>1.49</td>
+      <td>-0.46</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3437.TW</td>
+      <td>榮創</td>
+      <td>20.30</td>
+      <td>-9.98</td>
+      <td>5324</td>
+      <td>💧 築底觀察</td>
+      <td>-5.64</td>
+      <td>-0.71</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3508.TWO</td>
+      <td>位速</td>
+      <td>36.05</td>
+      <td>-9.99</td>
+      <td>1109</td>
+      <td>💧 築底觀察</td>
+      <td>-12.87</td>
+      <td>-2.33</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>4741.TWO</td>
+      <td>泓瀚</td>
+      <td>40.70</td>
+      <td>10.00</td>
+      <td>1713</td>
+      <td>⚠️ 超買警示</td>
+      <td>99.28</td>
+      <td>2.27</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3167.TW</td>
+      <td>大量</td>
+      <td>445.50</td>
+      <td>10.00</td>
+      <td>12704</td>
+      <td>⚠️ 超買警示</td>
+      <td>99.00</td>
+      <td>11.81</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6727.TWO</td>
+      <td>亞泰金屬</td>
+      <td>358.00</td>
+      <td>9.98</td>
+      <td>2837</td>
+      <td>⚠️ 超買警示</td>
+      <td>103.52</td>
+      <td>7.57</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6147.TWO</td>
+      <td>頎邦</td>
+      <td>84.00</td>
+      <td>9.95</td>
+      <td>72936</td>
+      <td>⚠️ 超買警示</td>
+      <td>95.12</td>
+      <td>1.43</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6830.TW</td>
+      <td>汎銓</td>
+      <td>565.00</td>
+      <td>9.92</td>
+      <td>5758</td>
+      <td>⚠️ 超買警示</td>
+      <td>103.68</td>
+      <td>13.56</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6664.TWO</td>
+      <td>群翊</td>
+      <td>354.50</td>
+      <td>9.92</td>
+      <td>2527</td>
+      <td>⚠️ 超買警示</td>
+      <td>104.03</td>
+      <td>12.97</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6405.TW</td>
+      <td>悅城</td>
+      <td>37.15</td>
+      <td>9.91</td>
+      <td>1265</td>
+      <td>⚠️ 超買警示</td>
+      <td>110.47</td>
+      <td>1.24</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3152.TWO</td>
+      <td>璟德</td>
+      <td>156.00</td>
+      <td>9.86</td>
+      <td>2840</td>
+      <td>⚠️ 超買警示</td>
+      <td>97.74</td>
+      <td>3.61</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5475.TWO</td>
+      <td>德宏</td>
+      <td>246.50</td>
+      <td>9.80</td>
+      <td>8531</td>
+      <td>⚠️ 超買警示</td>
+      <td>105.59</td>
+      <td>3.40</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2409.TW</td>
+      <td>友達</td>
+      <td>16.85</td>
+      <td>5.64</td>
+      <td>699865</td>
+      <td>⚠️ 超買警示</td>
+      <td>100.21</td>
+      <td>0.32</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5243.TW</td>
+      <td>乙盛-KY</td>
+      <td>93.70</td>
+      <td>5.40</td>
+      <td>17927</td>
+      <td>⚠️ 超買警示</td>
+      <td>102.15</td>
+      <td>4.71</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2101.TW</td>
+      <td>南港</td>
+      <td>37.75</td>
+      <td>5.01</td>
+      <td>4297</td>
+      <td>⚠️ 超買警示</td>
+      <td>95.75</td>
+      <td>0.78</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6213.TW</td>
+      <td>聯茂</td>
+      <td>170.00</td>
+      <td>4.29</td>
+      <td>58950</td>
+      <td>⚠️ 超買警示</td>
+      <td>98.95</td>
+      <td>3.45</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2497.TW</td>
+      <td>怡利電</td>
+      <td>52.10</td>
+      <td>3.78</td>
+      <td>1847</td>
+      <td>⚠️ 超買警示</td>
+      <td>96.82</td>
+      <td>1.85</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00642U.TW</td>
+      <td>期元大S&amp;P石油</td>
+      <td>28.48</td>
+      <td>2.74</td>
+      <td>53394</td>
+      <td>⚠️ 超買警示</td>
+      <td>107.05</td>
+      <td>0.11</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3178.TWO</td>
+      <td>公準</td>
+      <td>63.60</td>
+      <td>2.42</td>
+      <td>1256</td>
+      <td>⚠️ 超買警示</td>
+      <td>95.10</td>
+      <td>1.89</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3206.TWO</td>
+      <td>志豐</td>
+      <td>41.00</td>
+      <td>2.12</td>
+      <td>874</td>
+      <td>⚠️ 超買警示</td>
+      <td>96.78</td>
+      <td>0.21</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>3162.TWO</td>
+      <td>精確</td>
+      <td>58.80</td>
+      <td>1.91</td>
+      <td>3095</td>
+      <td>⚠️ 超買警示</td>
+      <td>95.85</td>
+      <td>0.64</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>8027.TWO</td>
+      <td>鈦昇</td>
+      <td>154.50</td>
+      <td>1.64</td>
+      <td>20334</td>
+      <td>⚠️ 超買警示</td>
+      <td>95.88</td>
+      <td>6.13</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>6462.TWO</td>
+      <td>神盾</td>
+      <td>109.00</td>
+      <td>1.40</td>
+      <td>1934</td>
+      <td>⚠️ 超買警示</td>
+      <td>102.89</td>
+      <td>2.32</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2206.TW</td>
+      <td>三陽工業</td>
+      <td>60.00</td>
+      <td>1.18</td>
+      <td>1186</td>
+      <td>⚠️ 超買警示</td>
+      <td>97.16</td>
+      <td>0.43</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>7721.TW</td>
+      <td>微程式</td>
+      <td>77.60</td>
+      <td>0.91</td>
+      <td>1158</td>
+      <td>⚠️ 超買警示</td>
+      <td>103.40</td>
+      <td>5.14</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>7734.TWO</td>
+      <td>印能科技</td>
+      <td>2350.00</td>
+      <td>0.86</td>
+      <td>974</td>
+      <td>⚠️ 超買警示</td>
+      <td>100.84</td>
+      <td>90.19</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2912.TW</td>
+      <td>統一超</td>
+      <td>227.00</td>
+      <td>0.67</td>
+      <td>2799</td>
+      <td>⚠️ 超買警示</td>
+      <td>97.98</td>
+      <td>2.03</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2834.TW</td>
+      <td>臺企銀</td>
+      <td>15.25</td>
+      <td>0.33</td>
+      <td>17151</td>
+      <td>⚠️ 超買警示</td>
+      <td>104.27</td>
+      <td>0.09</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00693U.TW</td>
+      <td>期街口S&amp;P黃豆</td>
+      <td>22.17</td>
+      <td>0.32</td>
+      <td>1104</td>
+      <td>⚠️ 超買警示</td>
+      <td>96.54</td>
+      <td>-0.03</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00945B.TW</td>
+      <td>凱基美國非投等債</td>
+      <td>14.53</td>
+      <td>0.00</td>
+      <td>4079</td>
+      <td>⚠️ 超買警示</td>
+      <td>98.68</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2845.TW</td>
+      <td>遠東銀</td>
+      <td>12.55</td>
+      <td>0.00</td>
+      <td>3389</td>
+      <td>⚠️ 超買警示</td>
+      <td>95.53</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00917.TW</td>
+      <td>中信特選金融</td>
+      <td>20.50</td>
+      <td>-0.05</td>
+      <td>2058</td>
+      <td>⚠️ 超買警示</td>
+      <td>95.31</td>
+      <td>0.14</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>1102.TW</td>
+      <td>亞泥</td>
+      <td>35.25</td>
+      <td>-0.14</td>
+      <td>7102</td>
+      <td>⚠️ 超買警示</td>
+      <td>100.36</td>
+      <td>0.21</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00980D.TWO</td>
+      <td>主動聯博投等入息</td>
+      <td>20.47</td>
+      <td>-0.24</td>
+      <td>805</td>
+      <td>⚠️ 超買警示</td>
+      <td>97.17</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00982D.TW</td>
+      <td>主動富邦動態入息</td>
+      <td>10.04</td>
+      <td>-0.30</td>
+      <td>2865</td>
+      <td>⚠️ 超買警示</td>
+      <td>96.04</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00968B.TWO</td>
+      <td>元大優息投等債</td>
+      <td>9.32</td>
+      <td>-0.32</td>
+      <td>1449</td>
+      <td>⚠️ 超買警示</td>
+      <td>100.97</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00724B.TWO</td>
+      <td>群益投資級金融債</td>
+      <td>34.10</td>
+      <td>-0.35</td>
+      <td>5383</td>
+      <td>⚠️ 超買警示</td>
+      <td>99.49</td>
+      <td>0.08</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00885.TW</td>
+      <td>富邦越南</td>
+      <td>17.50</td>
+      <td>-0.40</td>
+      <td>2631</td>
+      <td>⚠️ 超買警示</td>
+      <td>106.15</td>
+      <td>0.20</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00740B.TWO</td>
+      <td>富邦全球投等債</td>
+      <td>38.77</td>
+      <td>-0.44</td>
+      <td>4970</td>
+      <td>⚠️ 超買警示</td>
+      <td>99.11</td>
+      <td>0.08</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>00773B.TWO</td>
+      <td>中信優先金融債</td>
+      <td>35.93</td>
+      <td>-0.50</td>
+      <td>1979</td>
+      <td>⚠️ 超買警示</td>
+      <td>96.33</td>
+      <td>0.08</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>2867.TW</td>
+      <td>三商壽</td>
+      <td>7.69</td>
+      <td>-0.52</td>
+      <td>4318</td>
+      <td>⚠️ 超買警示</td>
+      <td>100.41</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <td>2026-04-02</td>
+      <td>5880.TW</td>
+      <td>合庫金</td>
+      <td>23.65</td>
+      <td>-0.63</td>
+      <td>9229</td>
+      <td>⚠️ 超買警示</td>
+      <td>95.58</td>
+      <td>0.17</td>
+    </tr>
+  </tbody>
+</table>
+            </div>
+
+            <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+            <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $('#js-warning').hide();
+                    var table = $('.my-report-table').DataTable({
+                        "pageLength": 100,
+                        "order": [],
+                        "language": {
+                            "search": "🔍 搜尋：",
+                            "lengthMenu": "顯示 _MENU_ 筆",
+                            "info": "共 _TOTAL_ 筆",
+                            "paginate": { "next": "下頁", "previous": "上頁" }
+                        },
+                        initComplete: function () {
+                            this.api().columns([6]).every( function () {
+                                var column = this;
+                                var select = $('<select class="filter-select"><option value="">所有狀態</option></select>')
+                                    .appendTo( $(column.header()) )
+                                    .on( 'change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex( $(this).val() );
+                                        column.search( val ? '^'+val+'$' : '', true, false ).draw();
+                                    } )
+                                    .on( 'click', function(e) { e.stopPropagation(); } );
+
+                                column.data().unique().sort().each( function ( d, j ) {
+                                    if(d) select.append( '<option value="'+d+'">'+d+'</option>' )
+                                } );
+                            } );
+                        }
+                    });
+                });
+            </script>
+        </body>
+        </html>
+        

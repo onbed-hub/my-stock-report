@@ -1,0 +1,263 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <title>即時監控 - 20260402</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+        <style>
+            body { font-family: "Microsoft JhengHei", sans-serif; margin: 30px; font-size: 1.2em; background-color: #f4f7f9; }
+            .container { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+            .logic-box { background: #e3f2fd; border-radius: 10px; padding: 20px; margin-bottom: 25px; font-size: 0.9em; line-height: 1.6; border: 1px solid #bbdefb; }
+            .badge { padding: 2px 8px; border-radius: 5px; font-weight: bold; color: white; margin-right: 5px; }
+            .bg-blue { background-color: #2196F3; } .bg-orange { background-color: #FF9800; } .bg-green { background-color: #4CAF50; }
+            .controls { display: flex; gap: 20px; background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 20px; align-items: center; border: 1px solid #dee2e6; }
+            input, select { font-size: 1em; padding: 8px; border-radius: 8px; border: 1px solid #ccc; outline: none; }
+            table.dataTable thead { background-color: #1565c0; color: white; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>📈 即時盤整監控 (22:35:47)</h2>
+            <div class="logic-box">
+                <b>🔍 技術判斷：</b> 
+                <span class="badge bg-blue">均線糾纏</span> (<1.5%) | 
+                <span class="badge bg-orange">進入盤整</span> (ADX<20) | 
+                <span class="badge bg-green">離開盤整</span> (布林突破)
+            </div>
+            <div class="controls">
+                <div>🔍 搜尋：<input type="text" id="customSearch"></div>
+                <div>🎯 狀態：
+                    <select id="statusFilter">
+                        <option value="">-- 全部 --</option>
+                        <option value="均線糾纏">均線糾纏</option>
+                        <option value="進入盤整">進入盤整</option>
+                        <option value="離開盤整 (向上)">離開盤整 (向上)</option>
+                        <option value="離開盤整 (向下)">離開盤整 (向下)</option>
+                        <option value="趨勢運行">趨勢運行</option>
+                    </select>
+                </div>
+            </div>
+            <table border="1" class="dataframe display" id="main_table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股號</th>
+      <th>名稱</th>
+      <th>現價</th>
+      <th>漲跌</th>
+      <th>狀態</th>
+      <th>原因</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2317</td>
+      <td>鴻海</td>
+      <td>193.00</td>
+      <td>-4.00</td>
+      <td>進入盤整</td>
+      <td>ADX 17.94 低動能</td>
+    </tr>
+    <tr>
+      <td>3702</td>
+      <td>大聯大</td>
+      <td>88.00</td>
+      <td>-1.90</td>
+      <td>進入盤整</td>
+      <td>ADX 16.81 低動能</td>
+    </tr>
+    <tr>
+      <td>2485</td>
+      <td>兆赫</td>
+      <td>78.50</td>
+      <td>-3.00</td>
+      <td>進入盤整</td>
+      <td>ADX 8.64 低動能</td>
+    </tr>
+    <tr>
+      <td>2367</td>
+      <td>燿華</td>
+      <td>71.50</td>
+      <td>-3.00</td>
+      <td>均線糾纏</td>
+      <td>乖離率 1.46%</td>
+    </tr>
+    <tr>
+      <td>4142</td>
+      <td>國光生</td>
+      <td>18.90</td>
+      <td>+0.10</td>
+      <td>均線糾纏</td>
+      <td>乖離率 1.12%</td>
+    </tr>
+    <tr>
+      <td>0050</td>
+      <td>元大台灣50</td>
+      <td>73.95</td>
+      <td>-1.50</td>
+      <td>均線糾纏</td>
+      <td>乖離率 0.73%</td>
+    </tr>
+    <tr>
+      <td>0056</td>
+      <td>元大高股息</td>
+      <td>37.82</td>
+      <td>-0.29</td>
+      <td>均線糾纏</td>
+      <td>乖離率 0.53%</td>
+    </tr>
+    <tr>
+      <td>00635U</td>
+      <td>期元大S&P黃金</td>
+      <td>49.34</td>
+      <td>-0.08</td>
+      <td>趨勢運行</td>
+      <td>方向明確</td>
+    </tr>
+    <tr>
+      <td>00738U</td>
+      <td>期元大道瓊白銀</td>
+      <td>58.55</td>
+      <td>-2.30</td>
+      <td>趨勢運行</td>
+      <td>方向明確</td>
+    </tr>
+    <tr>
+      <td>00929</td>
+      <td>復華台灣科技優息</td>
+      <td>18.73</td>
+      <td>-0.27</td>
+      <td>均線糾纏</td>
+      <td>乖離率 0.82%</td>
+    </tr>
+    <tr>
+      <td>009816</td>
+      <td>凱基台灣TOP50</td>
+      <td>10.49</td>
+      <td>-0.17</td>
+      <td>均線糾纏</td>
+      <td>乖離率 0.62%</td>
+    </tr>
+    <tr>
+      <td>00990A</td>
+      <td>主動元大AI新經濟</td>
+      <td>11.86</td>
+      <td>+0.05</td>
+      <td>均線糾纏</td>
+      <td>乖離率 0.97%</td>
+    </tr>
+    <tr>
+      <td>2009</td>
+      <td>第一銅</td>
+      <td>39.95</td>
+      <td>-0.90</td>
+      <td>均線糾纏</td>
+      <td>乖離率 1.44%</td>
+    </tr>
+    <tr>
+      <td>2337</td>
+      <td>旺宏</td>
+      <td>129.00</td>
+      <td>+2.00</td>
+      <td>進入盤整</td>
+      <td>ADX 13.37 低動能</td>
+    </tr>
+    <tr>
+      <td>2352</td>
+      <td>佳世達</td>
+      <td>23.30</td>
+      <td>+0.00</td>
+      <td>均線糾纏</td>
+      <td>乖離率 0.92%</td>
+    </tr>
+    <tr>
+      <td>2409</td>
+      <td>友達</td>
+      <td>16.85</td>
+      <td>+0.90</td>
+      <td>均線糾纏</td>
+      <td>乖離率 1.41%</td>
+    </tr>
+    <tr>
+      <td>3481</td>
+      <td>群創</td>
+      <td>24.65</td>
+      <td>-0.40</td>
+      <td>趨勢運行</td>
+      <td>方向明確</td>
+    </tr>
+    <tr>
+      <td>6136</td>
+      <td>富爾特</td>
+      <td>24.30</td>
+      <td>+0.05</td>
+      <td>均線糾纏</td>
+      <td>乖離率 0.35%</td>
+    </tr>
+    <tr>
+      <td>6806</td>
+      <td>森崴能源</td>
+      <td>34.75</td>
+      <td>-3.85</td>
+      <td>進入盤整</td>
+      <td>ADX 16.19 低動能</td>
+    </tr>
+    <tr>
+      <td>3105</td>
+      <td>穩懋</td>
+      <td>376.00</td>
+      <td>-0.50</td>
+      <td>進入盤整</td>
+      <td>ADX 11.24 低動能</td>
+    </tr>
+    <tr>
+      <td>4966</td>
+      <td>譜瑞-KY</td>
+      <td>463.50</td>
+      <td>-9.50</td>
+      <td>趨勢運行</td>
+      <td>方向明確</td>
+    </tr>
+    <tr>
+      <td>6188</td>
+      <td>廣明</td>
+      <td>85.50</td>
+      <td>-2.90</td>
+      <td>趨勢運行</td>
+      <td>方向明確</td>
+    </tr>
+    <tr>
+      <td>7792</td>
+      <td>安葆</td>
+      <td>309.00</td>
+      <td>-3.00</td>
+      <td>均線糾纏</td>
+      <td>乖離率 1.32%</td>
+    </tr>
+    <tr>
+      <td>2327</td>
+      <td>國巨*</td>
+      <td>246.00</td>
+      <td>-5.50</td>
+      <td>均線糾纏</td>
+      <td>乖離率 1.31%</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                var table = $('#main_table').DataTable({ "pageLength": 50, "dom": 'ltip' });
+                $('#customSearch').on('input', function() { table.search(this.value).draw(); });
+                $('#statusFilter').on('change', function() {
+                    var val = $(this).val();
+                    var escapedVal = val.replace(/([\(\)])/g, "\\$1");
+                    table.column(4).search(escapedVal, true, false).draw();
+                });
+            });
+        </script>
+    </body>
+    </html>
+    

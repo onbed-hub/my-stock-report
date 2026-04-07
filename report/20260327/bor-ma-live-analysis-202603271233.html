@@ -1,0 +1,226 @@
+
+    <style>
+        body { font-family: "Microsoft JhengHei", sans-serif; margin: 40px; background-color: #f8f9fa; }
+        h2 { font-size: 44px; color: #1565c0; border-left: 15px solid #1565c0; padding-left: 25px; margin-bottom: 20px; }
+        .legend-container { background: #fff; border: 2px solid #ddd; padding: 20px; margin-bottom: 30px; border-radius: 10px; display: flex; gap: 40px; }
+        .legend-item { font-size: 24px; line-height: 1.6; color: #444; }
+        table { border-collapse: collapse; width: 100%; background: white; font-size: 32px; border: 2px solid #333; }
+        th { background-color: #1565c0; color: white; padding: 25px; border: 1px solid #333; text-align: center; }
+        td { padding: 20px; text-align: center; border: 1px solid #ddd; font-weight: 700; }
+        .up { color: #d32f2f; } .down { color: #2e7d32; }
+        .macd-up-attack { color: #d32f2f; } .macd-up-fade { color: #ef9a9a; }
+        .macd-down-attack { color: #2e7d32; } .macd-down-fade { color: #a5d6a7; }
+        .advice-box { padding: 15px; border-radius: 10px; color: white; text-align: left; }
+        .sell-bg { background-color: #d32f2f; } .hold-bg { background-color: #2e7d32; }
+    </style>
+    <h2>📊 投資策略診斷報告 (2026-03-27 12:33)</h2>
+    <div class="legend-container">
+        <div class="legend-item"><b>🛡️ 診斷邏輯</b>: 破 10MA 或 20MA 建議賣出。</div>
+        <div class="legend-item"><b>📊 MACD 狀態</b>: <span class="macd-up-attack">■ 多頭攻擊</span> / <span class="macd-up-fade">■ 多頭衰退</span></div>
+    </div>
+    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股票</th>
+      <th>現價</th>
+      <th>10日均線</th>
+      <th>月線(20MA)</th>
+      <th>MACD動能</th>
+      <th>決策建議</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>鴻海<br>(2317)</td>
+      <td>200.50</td>
+      <td>203.85</td>
+      <td>211.93</td>
+      <td><span class='macd-down-fade'>-6.835<br>□ 反彈</span></td>
+      <td><div class="advice-box sell-bg">🚨 建議賣出</div></td>
+    </tr>
+    <tr>
+      <td>大聯大<br>(3702)</td>
+      <td>95.10</td>
+      <td>91.68</td>
+      <td>81.24</td>
+      <td><span class='macd-up-attack'>7.575<br>■ 攻擊</span></td>
+      <td><div class="advice-box hold-bg">🟢 建議續抱</div></td>
+    </tr>
+    <tr>
+      <td>兆赫<br>(2485)</td>
+      <td>78.70</td>
+      <td>76.78</td>
+      <td>65.43</td>
+      <td><span class='macd-up-fade'>9.671<br>□ 衰退</span></td>
+      <td><div class="advice-box hold-bg">🟢 建議續抱</div></td>
+    </tr>
+    <tr>
+      <td>燿華<br>(2367)</td>
+      <td>75.30</td>
+      <td>73.72</td>
+      <td>71.52</td>
+      <td><span class='macd-up-fade'>5.018<br>□ 衰退</span></td>
+      <td><div class="advice-box hold-bg">🟢 建議續抱</div></td>
+    </tr>
+    <tr>
+      <td>國光生<br>(4142)</td>
+      <td>18.35</td>
+      <td>18.16</td>
+      <td>17.94</td>
+      <td><span class='macd-down-fade'>-0.031<br>□ 反彈</span></td>
+      <td><div class="advice-box hold-bg">🟢 建議續抱</div></td>
+    </tr>
+    <tr>
+      <td>元大台灣50<br>(0050)</td>
+      <td>75.80</td>
+      <td>75.84</td>
+      <td>76.34</td>
+      <td><span class='macd-up-fade'>0.307<br>□ 衰退</span></td>
+      <td><div class="advice-box sell-bg">🚨 建議賣出</div></td>
+    </tr>
+    <tr>
+      <td>元大高股息<br>(0056)</td>
+      <td>38.56</td>
+      <td>38.67</td>
+      <td>38.59</td>
+      <td><span class='macd-up-fade'>0.086<br>□ 衰退</span></td>
+      <td><div class="advice-box sell-bg">🚨 建議賣出</div></td>
+    </tr>
+    <tr>
+      <td>期元大S&P黃金<br>(00635U)</td>
+      <td>47.56</td>
+      <td>49.63</td>
+      <td>52.30</td>
+      <td><span class='macd-down-attack'>-1.542<br>■ 攻擊</span></td>
+      <td><div class="advice-box sell-bg">🚨 建議賣出</div></td>
+    </tr>
+    <tr>
+      <td>期元大道瓊白銀<br>(00738U)</td>
+      <td>57.70</td>
+      <td>60.23</td>
+      <td>65.38</td>
+      <td><span class='macd-down-attack'>-3.665<br>■ 攻擊</span></td>
+      <td><div class="advice-box sell-bg">🚨 建議賣出</div></td>
+    </tr>
+    <tr>
+      <td>復華台灣科技優息<br>(00929)</td>
+      <td>19.44</td>
+      <td>19.61</td>
+      <td>19.41</td>
+      <td><span class='macd-up-fade'>0.084<br>□ 衰退</span></td>
+      <td><div class="advice-box sell-bg">🚨 建議賣出</div></td>
+    </tr>
+    <tr>
+      <td>凱基台灣TOP50<br>(009816)</td>
+      <td>10.74</td>
+      <td>10.74</td>
+      <td>10.77</td>
+      <td><span class='macd-up-fade'>0.023<br>□ 衰退</span></td>
+      <td><div class="advice-box sell-bg">🚨 建議賣出</div></td>
+    </tr>
+    <tr>
+      <td>主動元大AI新經濟<br>(00990A)</td>
+      <td>12.45</td>
+      <td>12.30</td>
+      <td>12.13</td>
+      <td><span class='macd-up-attack'>0.225<br>■ 攻擊</span></td>
+      <td><div class="advice-box hold-bg">🟢 建議續抱</div></td>
+    </tr>
+    <tr>
+      <td>第一銅<br>(2009)</td>
+      <td>40.35</td>
+      <td>41.42</td>
+      <td>42.42</td>
+      <td><span class='macd-down-attack'>-1.419<br>■ 攻擊</span></td>
+      <td><div class="advice-box sell-bg">🚨 建議賣出</div></td>
+    </tr>
+    <tr>
+      <td>旺宏<br>(2337)</td>
+      <td>120.00</td>
+      <td>138.50</td>
+      <td>120.18</td>
+      <td><span class='macd-up-fade'>12.359<br>□ 衰退</span></td>
+      <td><div class="advice-box sell-bg">🚨 建議賣出</div></td>
+    </tr>
+    <tr>
+      <td>佳世達<br>(2352)</td>
+      <td>24.05</td>
+      <td>24.13</td>
+      <td>24.00</td>
+      <td><span class='macd-down-fade'>-0.281<br>□ 反彈</span></td>
+      <td><div class="advice-box sell-bg">🚨 建議賣出</div></td>
+    </tr>
+    <tr>
+      <td>友達<br>(2409)</td>
+      <td>14.80</td>
+      <td>15.33</td>
+      <td>15.69</td>
+      <td><span class='macd-down-attack'>-0.105<br>■ 攻擊</span></td>
+      <td><div class="advice-box sell-bg">🚨 建議賣出</div></td>
+    </tr>
+    <tr>
+      <td>群創<br>(3481)</td>
+      <td>25.00</td>
+      <td>26.16</td>
+      <td>27.13</td>
+      <td><span class='macd-up-fade'>0.277<br>□ 衰退</span></td>
+      <td><div class="advice-box sell-bg">🚨 建議賣出</div></td>
+    </tr>
+    <tr>
+      <td>富爾特<br>(6136)</td>
+      <td>24.40</td>
+      <td>24.08</td>
+      <td>23.92</td>
+      <td><span class='macd-up-attack'>0.070<br>■ 攻擊</span></td>
+      <td><div class="advice-box hold-bg">🟢 建議續抱</div></td>
+    </tr>
+    <tr>
+      <td>森崴能源<br>(6806)</td>
+      <td>38.75</td>
+      <td>40.15</td>
+      <td>40.88</td>
+      <td><span class='macd-down-attack'>-1.481<br>■ 攻擊</span></td>
+      <td><div class="advice-box sell-bg">🚨 建議賣出</div></td>
+    </tr>
+    <tr>
+      <td>穩懋<br>(3105)</td>
+      <td>371.00</td>
+      <td>332.05</td>
+      <td>316.48</td>
+      <td><span class='macd-up-attack'>23.705<br>■ 攻擊</span></td>
+      <td><div class="advice-box hold-bg">🟢 建議續抱</div></td>
+    </tr>
+    <tr>
+      <td>譜瑞-KY<br>(4966)</td>
+      <td>496.50</td>
+      <td>505.40</td>
+      <td>513.10</td>
+      <td><span class='macd-down-attack'>-11.405<br>■ 攻擊</span></td>
+      <td><div class="advice-box sell-bg">🚨 建議賣出</div></td>
+    </tr>
+    <tr>
+      <td>廣明<br>(6188)</td>
+      <td>91.60</td>
+      <td>94.34</td>
+      <td>93.53</td>
+      <td><span class='macd-down-attack'>-1.894<br>■ 攻擊</span></td>
+      <td><div class="advice-box sell-bg">🚨 建議賣出</div></td>
+    </tr>
+    <tr>
+      <td>安葆<br>(7792)</td>
+      <td>308.50</td>
+      <td>312.90</td>
+      <td>328.48</td>
+      <td><span class='macd-down-attack'>-5.606<br>■ 攻擊</span></td>
+      <td><div class="advice-box sell-bg">🚨 建議賣出</div></td>
+    </tr>
+    <tr>
+      <td>國巨*<br>(2327)</td>
+      <td>258.00</td>
+      <td>265.60</td>
+      <td>265.05</td>
+      <td><span class='macd-down-attack'>-2.367<br>■ 攻擊</span></td>
+      <td><div class="advice-box sell-bg">🚨 建議賣出</div></td>
+    </tr>
+  </tbody>
+</table>

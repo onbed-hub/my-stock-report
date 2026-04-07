@@ -1,0 +1,417 @@
+
+    <html><head><meta charset="UTF-8"><title>SMC 即時分析 (bor)</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style>
+        body { font-family: "PingFang TC", sans-serif; padding: 20px; background-color: #f8fafc; font-size: 18px; }
+        .container { max-width: 1800px; margin: auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        h2 { text-align: center; font-size: 40px; color: #1e293b; }
+        .dashboard { display: flex; gap: 20px; margin-bottom: 20px; }
+        .stat-card { flex: 1; padding: 25px; border-radius: 15px; color: white; text-align: center; font-weight: bold; font-size: 28px; }
+        .bg-bull { background: #22c55e; } .bg-bear { background: #ef4444; } .bg-neut { background: #94a3b8; }
+        table.dataTable thead th { background-color: #1e293b !important; color: white !important; padding: 15px; }
+        .action-buy { color: #15803d !important; font-weight: 800; background-color: #f0fdf4 !important; }
+        .action-sell { color: #b91c1c !important; font-weight: 800; background-color: #fef2f2 !important; }
+    </style></head>
+    <body><div class="container">
+        <h2>📊 SMC 即時分析 (bor)</h2>
+        <div class="dashboard">
+            <div class="stat-card bg-bull">🟢 買進: 2</div>
+            <div class="stat-card bg-bear">🔴 放空: 5</div>
+            <div class="stat-card bg-neut">⚪ 失效: 3</div>
+        </div>
+        <table class="dataframe display nowrap my-report-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股號</th>
+      <th>股票名稱</th>
+      <th>訊號日期</th>
+      <th>缺口類型</th>
+      <th>進場參考價</th>
+      <th>止損點</th>
+      <th>目標止盈</th>
+      <th>當前狀態</th>
+      <th>建議操作</th>
+      <th>主力爆量</th>
+      <th>RSI指標</th>
+      <th>確認日期</th>
+      <th>權重</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0056.TW</td>
+      <td>元大高股息</td>
+      <td>2026-03-31</td>
+      <td>看跌 FVG</td>
+      <td>37.66</td>
+      <td>38.26</td>
+      <td>35.78</td>
+      <td>⏳ 待回測</td>
+      <td>⚡結構突破</td>
+      <td>1</td>
+      <td>49.67</td>
+      <td>-</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>00990A.TW</td>
+      <td>主動元大AI新經濟</td>
+      <td>2026-03-31</td>
+      <td>看跌 FVG</td>
+      <td>11.61</td>
+      <td>11.88</td>
+      <td>11.03</td>
+      <td>⏳ 待回測</td>
+      <td>⚡結構突破</td>
+      <td>0</td>
+      <td>50.89</td>
+      <td>-</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2009.TW</td>
+      <td>第一銅</td>
+      <td>2026-03-24</td>
+      <td>看跌 FVG</td>
+      <td>41.30</td>
+      <td>41.71</td>
+      <td>39.23</td>
+      <td>⚠️ 壓力確認</td>
+      <td>🔴 放空</td>
+      <td>0</td>
+      <td>42.97</td>
+      <td>2026-03-26</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2352.TW</td>
+      <td>佳世達</td>
+      <td>2026-03-31</td>
+      <td>看跌 FVG</td>
+      <td>23.25</td>
+      <td>23.47</td>
+      <td>22.09</td>
+      <td>⏳ 待回測</td>
+      <td>⚡結構突破</td>
+      <td>0</td>
+      <td>51.19</td>
+      <td>-</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2409.TW</td>
+      <td>友達</td>
+      <td>2026-03-30</td>
+      <td>看跌 FVG</td>
+      <td>14.30</td>
+      <td>14.82</td>
+      <td>13.59</td>
+      <td>⚠️ 壓力確認</td>
+      <td>🔴 放空</td>
+      <td>0</td>
+      <td>38.71</td>
+      <td>2026-03-31</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>6136.TW</td>
+      <td>富爾特</td>
+      <td>2026-03-31</td>
+      <td>看漲 FVG</td>
+      <td>24.15</td>
+      <td>23.93</td>
+      <td>25.36</td>
+      <td>⏳ 待回測</td>
+      <td>⚡結構突破</td>
+      <td>0</td>
+      <td>60.38</td>
+      <td>-</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>6188.TWO</td>
+      <td>廣明</td>
+      <td>2026-03-31</td>
+      <td>看跌 FVG</td>
+      <td>89.50</td>
+      <td>90.55</td>
+      <td>85.02</td>
+      <td>⏳ 待回測</td>
+      <td>⚡結構突破</td>
+      <td>1</td>
+      <td>44.35</td>
+      <td>-</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>0050.TW</td>
+      <td>元大台灣50</td>
+      <td>2026-03-31</td>
+      <td>看跌 FVG</td>
+      <td>73.45</td>
+      <td>74.47</td>
+      <td>69.78</td>
+      <td>⏳ 待回測</td>
+      <td>監控中</td>
+      <td>0</td>
+      <td>45.83</td>
+      <td>-</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>00635U.TW</td>
+      <td>期元大S&amp;P黃金</td>
+      <td>2026-03-31</td>
+      <td>看漲 FVG</td>
+      <td>47.95</td>
+      <td>46.80</td>
+      <td>50.35</td>
+      <td>⏳ 待回測</td>
+      <td>監控中</td>
+      <td>0</td>
+      <td>25.35</td>
+      <td>-</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>00738U.TW</td>
+      <td>期元大道瓊白銀</td>
+      <td>2026-03-31</td>
+      <td>看漲 FVG</td>
+      <td>57.60</td>
+      <td>56.71</td>
+      <td>60.48</td>
+      <td>⏳ 待回測</td>
+      <td>監控中</td>
+      <td>0</td>
+      <td>26.65</td>
+      <td>-</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>00929.TW</td>
+      <td>復華台灣科技優息</td>
+      <td>2026-03-31</td>
+      <td>看跌 FVG</td>
+      <td>19.00</td>
+      <td>19.21</td>
+      <td>18.05</td>
+      <td>⏳ 待回測</td>
+      <td>監控中</td>
+      <td>0</td>
+      <td>50.94</td>
+      <td>-</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>009816.TW</td>
+      <td>凱基台灣TOP50</td>
+      <td>2026-03-31</td>
+      <td>看跌 FVG</td>
+      <td>10.41</td>
+      <td>10.56</td>
+      <td>9.89</td>
+      <td>⏳ 待回測</td>
+      <td>監控中</td>
+      <td>0</td>
+      <td>48.56</td>
+      <td>-</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>2317.TW</td>
+      <td>鴻海</td>
+      <td>2026-03-31</td>
+      <td>看跌 FVG</td>
+      <td>192.50</td>
+      <td>197.48</td>
+      <td>182.88</td>
+      <td>⏳ 待回測</td>
+      <td>監控中</td>
+      <td>0</td>
+      <td>34.34</td>
+      <td>-</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>2327.TW</td>
+      <td>國巨*</td>
+      <td>2026-03-30</td>
+      <td>看跌 FVG</td>
+      <td>258.00</td>
+      <td>260.29</td>
+      <td>245.10</td>
+      <td>⚠️ 壓力確認</td>
+      <td>🔴 放空</td>
+      <td>0</td>
+      <td>49.76</td>
+      <td>2026-03-31</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>2337.TW</td>
+      <td>旺宏</td>
+      <td>2026-03-27</td>
+      <td>看跌 FVG</td>
+      <td>125.00</td>
+      <td>134.67</td>
+      <td>118.75</td>
+      <td>⚠️ 壓力確認</td>
+      <td>🔴 放空</td>
+      <td>0</td>
+      <td>63.82</td>
+      <td>2026-03-30</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>2367.TW</td>
+      <td>燿華</td>
+      <td>2026-03-17</td>
+      <td>看漲 FVG</td>
+      <td>75.60</td>
+      <td>73.43</td>
+      <td>79.38</td>
+      <td>❌ 已失效</td>
+      <td>實體破中線</td>
+      <td>0</td>
+      <td>68.57</td>
+      <td>2026-03-18</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>2485.TW</td>
+      <td>兆赫</td>
+      <td>2026-03-23</td>
+      <td>看跌 FVG</td>
+      <td>78.50</td>
+      <td>79.09</td>
+      <td>74.58</td>
+      <td>❌ 已失效</td>
+      <td>實體過中線</td>
+      <td>0</td>
+      <td>70.70</td>
+      <td>2026-03-24</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>3105.TWO</td>
+      <td>穩懋</td>
+      <td>2026-03-26</td>
+      <td>看漲 FVG</td>
+      <td>348.50</td>
+      <td>332.83</td>
+      <td>365.93</td>
+      <td>✅ 已站穩</td>
+      <td>🟢 買進</td>
+      <td>0</td>
+      <td>62.50</td>
+      <td>2026-03-27</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>3481.TW</td>
+      <td>群創</td>
+      <td>2026-03-30</td>
+      <td>看跌 FVG</td>
+      <td>24.60</td>
+      <td>25.12</td>
+      <td>23.37</td>
+      <td>⚠️ 壓力確認</td>
+      <td>🔴 放空</td>
+      <td>0</td>
+      <td>41.50</td>
+      <td>2026-03-31</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>3702.TW</td>
+      <td>大聯大</td>
+      <td>2026-03-31</td>
+      <td>看跌 FVG</td>
+      <td>90.40</td>
+      <td>91.05</td>
+      <td>85.88</td>
+      <td>⏳ 待回測</td>
+      <td>監控中</td>
+      <td>0</td>
+      <td>76.99</td>
+      <td>-</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>4142.TW</td>
+      <td>國光生</td>
+      <td>2026-03-18</td>
+      <td>看漲 FVG</td>
+      <td>18.00</td>
+      <td>17.41</td>
+      <td>18.90</td>
+      <td>✅ 已站穩</td>
+      <td>🟢 買進</td>
+      <td>1</td>
+      <td>52.50</td>
+      <td>2026-03-19</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>4966.TWO</td>
+      <td>譜瑞-KY</td>
+      <td>2026-03-11</td>
+      <td>看漲 FVG</td>
+      <td>525.00</td>
+      <td>497.50</td>
+      <td>551.25</td>
+      <td>❌ 已失效</td>
+      <td>實體破中線</td>
+      <td>0</td>
+      <td>54.60</td>
+      <td>2026-03-12</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>6806.TW</td>
+      <td>森崴能源</td>
+      <td>2026-03-31</td>
+      <td>看跌 FVG</td>
+      <td>38.30</td>
+      <td>38.59</td>
+      <td>36.38</td>
+      <td>⏳ 待回測</td>
+      <td>監控中</td>
+      <td>0</td>
+      <td>42.86</td>
+      <td>-</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>7792.TWO</td>
+      <td>安葆</td>
+      <td>2026-03-16</td>
+      <td>看跌 FVG</td>
+      <td>329.50</td>
+      <td>336.67</td>
+      <td>313.02</td>
+      <td>⏳ 待回測</td>
+      <td>監控中</td>
+      <td>0</td>
+      <td>45.30</td>
+      <td>-</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.my-report-table').DataTable({
+                "pageLength": 50, "order": [[ 12, "asc" ]],
+                "rowCallback": function(row, data) {
+                    if (data[8].includes('買進')) $('td:eq(8)', row).addClass('action-buy');
+                    if (data[8].includes('放空')) $('td:eq(8)', row).addClass('action-sell');
+                }
+            });
+        });
+    </script></body></html>
+    

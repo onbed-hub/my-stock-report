@@ -1,0 +1,274 @@
+
+    <style>
+        body { font-family: "Microsoft JhengHei", sans-serif; margin: 40px; background-color: #f4f7f9; }
+        h2 { font-size: 50px; color: #1a237e; border-left: 20px solid #1a237e; padding-left: 25px; }
+        .legend-container { background: white; border: 3px solid #1a237e; padding: 25px; margin-bottom: 30px; border-radius: 15px; }
+        .legend-title { font-size: 35px; font-weight: bold; color: #1a237e; margin-bottom: 15px; }
+        .legend-item { font-size: 24px; line-height: 1.6; }
+        table { border-collapse: collapse; width: 100%; background: white; font-size: 28px; border: 2px solid #444; }
+        th { background-color: #1a237e; color: white; padding: 15px; font-size: 30px; }
+        td { padding: 15px; text-align: center; border: 1px solid #ddd; font-weight: bold; }
+        .price-now { font-size: 45px; color: #d32f2f; font-weight: 900; }
+        .advice-box { padding: 15px; border-radius: 10px; color: white; text-align: left; min-width: 300px; }
+        .sell-bg { background-color: #c62828; }
+        .hold-bg { background-color: #2e7d32; }
+        .buy-bg { background-color: #ef6c00; }
+        .advice-title { font-size: 32px; font-weight: 900; display: block; }
+        .advice-reason { font-size: 22px; }
+    </style>
+    <h2>📊 即時診斷報告 (09:45:24)</h2><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股票</th>
+      <th>現價</th>
+      <th>5MA</th>
+      <th>10MA</th>
+      <th>20MA</th>
+      <th>RSI</th>
+      <th>量能</th>
+      <th>診斷建議</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>鴻海<br>(2317)</td>
+      <td><span class='price-now'>199.50</span></td>
+      <td>198.90<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>202.05<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>209.90<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>38.6</td>
+      <td>11360<br><small>(60388335)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>大聯大<br>(3702)</td>
+      <td><span class='price-now'>90.40</span></td>
+      <td>92.82<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>92.23<br><small><span style="color:red;">▲</span> <span style="color:green;">☆</span></small></td>
+      <td>82.23<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>77.0</td>
+      <td>4316<br><small>(18653712)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA</span></div></td>
+    </tr>
+    <tr>
+      <td>兆赫<br>(2485)</td>
+      <td><span class='price-now'>79.80</span></td>
+      <td>78.82<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>78.11<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>67.03<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>78.8</td>
+      <td>2036<br><small>(81509413)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>燿華<br>(2367)</td>
+      <td><span class='price-now'>78.20</span></td>
+      <td>75.02<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>74.43<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>72.03<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>71.8</td>
+      <td>49635<br><small>(94573642)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>國光生<br>(4142)</td>
+      <td><span class='price-now'>18.50</span></td>
+      <td>18.46<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>18.28<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>17.98<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>61.2</td>
+      <td>444<br><small>(1301044)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>元大台灣50<br>(0050)</td>
+      <td><span class='price-now'>75.00</span></td>
+      <td>75.28<br><small><span style="color:red;">▲</span> <span style="color:green;">☆</span></small></td>
+      <td>75.70<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>76.04<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>49.3</td>
+      <td>66097<br><small>(155786791)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>元大高股息<br>(0056)</td>
+      <td><span class='price-now'>38.43</span></td>
+      <td>38.41<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>38.62<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>38.51<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>56.8</td>
+      <td>32709<br><small>(54607173)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>期元大S&P黃金<br>(00635U)</td>
+      <td><span class='price-now'>47.01</span></td>
+      <td>47.17<br><small><span style="color:red;">▲</span> <span style="color:green;">☆</span></small></td>
+      <td>48.98<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>51.79<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>21.6</td>
+      <td>1923<br><small>(8971363)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>期元大道瓊白銀<br>(00738U)</td>
+      <td><span class='price-now'>56.85</span></td>
+      <td>57.08<br><small><span style="color:red;">▲</span> <span style="color:green;">☆</span></small></td>
+      <td>59.30<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>64.37<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>25.4</td>
+      <td>3442<br><small>(12824958)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>復華台灣科技優息<br>(00929)</td>
+      <td><span class='price-now'>19.42</span></td>
+      <td>19.42<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>19.60<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>19.40<br><small><span style="color:green;">▼</span> <span style="color:red;">★</span></small></td>
+      <td>56.6</td>
+      <td>7613<br><small>(37459710)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA</span></div></td>
+    </tr>
+    <tr>
+      <td>凱基台灣TOP50<br>(009816)</td>
+      <td><span class='price-now'>10.67</span></td>
+      <td>10.67<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>10.73<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>10.73<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>54.0</td>
+      <td>61248<br><small>(281417775)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>主動元大AI新經濟<br>(00990A)</td>
+      <td><span class='price-now'>12.14</span></td>
+      <td>12.25<br><small><span style="color:red;">▲</span> <span style="color:green;">☆</span></small></td>
+      <td>12.27<br><small><span style="color:red;">▲</span> <span style="color:green;">☆</span></small></td>
+      <td>12.09<br><small><span style="color:green;">▼</span> <span style="color:red;">★</span></small></td>
+      <td>56.4</td>
+      <td>16292<br><small>(37156852)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA</span></div></td>
+    </tr>
+    <tr>
+      <td>第一銅<br>(2009)</td>
+      <td><span class='price-now'>40.50</span></td>
+      <td>40.52<br><small><span style="color:red;">▲</span> <span style="color:green;">☆</span></small></td>
+      <td>41.28<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>42.13<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>37.3</td>
+      <td>416<br><small>(1706504)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>旺宏<br>(2337)</td>
+      <td><span class='price-now'>127.00</span></td>
+      <td>131.70<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>139.80<br><small><span style="color:red;">▲</span> <span style="color:green;">☆</span></small></td>
+      <td>120.98<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>65.3</td>
+      <td>6044<br><small>(117087753)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA</span></div></td>
+    </tr>
+    <tr>
+      <td>佳世達<br>(2352)</td>
+      <td><span class='price-now'>23.65</span></td>
+      <td>23.76<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>24.02<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>23.89<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>58.9</td>
+      <td>1186<br><small>(5191812)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>友達<br>(2409)</td>
+      <td><span class='price-now'>14.40</span></td>
+      <td>14.65<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>15.16<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>15.54<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>39.3</td>
+      <td>15442<br><small>(174916985)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>群創<br>(3481)</td>
+      <td><span class='price-now'>24.80</span></td>
+      <td>24.95<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>25.89<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>26.94<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>42.0</td>
+      <td>79113<br><small>(708119103)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>富爾特<br>(6136)</td>
+      <td><span class='price-now'>24.35</span></td>
+      <td>24.12<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>24.08<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>23.92<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>59.6</td>
+      <td>72<br><small>(192178)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>森崴能源<br>(6806)</td>
+      <td><span class='price-now'>39.55</span></td>
+      <td>39.05<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>40.00<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>40.76<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>47.0</td>
+      <td>197<br><small>(1437394)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>穩懋<br>(3105)</td>
+      <td><span class='price-now'>382.50</span></td>
+      <td>356.30<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>341.10<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>319.60<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>73.9</td>
+      <td>17237<br><small>(20132227)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>譜瑞-KY<br>(4966)</td>
+      <td><span class='price-now'>500.00</span></td>
+      <td>497.70<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>503.75<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>511.52<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>37.8</td>
+      <td>176<br><small>(566588)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>廣明<br>(6188)</td>
+      <td><span class='price-now'>89.50</span></td>
+      <td>91.54<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>93.80<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>93.10<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>48.0</td>
+      <td>246<br><small>(1306732)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>安葆<br>(7792)</td>
+      <td><span class='price-now'>314.00</span></td>
+      <td>310.30<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>312.55<br><small><span style="color:green;">▼</span> <span style="color:red;">★</span></small></td>
+      <td>325.98<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>42.0</td>
+      <td>54<br><small>(218590)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>國巨*<br>(2327)</td>
+      <td><span class='price-now'>260.00</span></td>
+      <td>258.50<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>265.80<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>263.55<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>50.7</td>
+      <td>3062<br><small>(25144042)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線</span></div></td>
+    </tr>
+  </tbody>
+</table>

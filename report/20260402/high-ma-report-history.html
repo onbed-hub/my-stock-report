@@ -1,0 +1,457 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <title>high 交易回測報告</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+        <style>
+            body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; margin: 30px; background-color: #f4f7f6; font-size: 1.6em; }
+            .container { max-width: 1500px; margin: auto; }
+            .info-header { background: #2c3e50; color: white; padding: 25px; border-radius: 12px 12px 0 0; }
+            .summary-box { background: white; padding: 20px; border-radius: 0 0 12px 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 30px; white-space: pre-wrap; line-height: 1.6; border-left: 8px solid #2c3e50; font-size: 1.1em; }
+            .filter-section { margin-bottom: 20px; background: #fff; padding: 20px; border-radius: 12px; border: 1px solid #ddd; }
+            select { padding: 12px; font-size: 1.1em; border-radius: 6px; width: 450px; border: 2px solid #3498db; }
+            .dataTables_info { font-size: 1.2em !important; font-weight: bold; color: #2c3e50; background: #eef2f3; padding: 15px !important; border-radius: 8px; margin-top: 20px !important; line-height: 1.8; border-left: 5px solid #3498db; }
+            .stat-highlight { margin-left: 15px; color: #d22d2d; }
+            table.dataTable thead th { background-color: #34495e; color: white; padding: 15px !important; }
+            .profit-positive { color: #e74c3c; font-weight: bold; }
+            .profit-negative { color: #27ae60; font-weight: bold; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="info-header">
+                <h2 style="margin:0;">📈 MA20 策略回測歷史報告 - high</h2>
+                <div style="margin-top:10px;">
+                    <small>回測起始日：<strong>2026-01-01</strong></small> |
+                    <small>報告產出時間：<strong>2026-04-02 20:12:28</strong></small>
+                </div>
+            </div>
+            <div class="summary-box"><strong>📊 全體統計數據：</strong>
+回測起始日期: 2026-01-01
+全體總交易次數: 40 次
+總勝率: 35.0% (14/40)
+全體累計收益: +225.70%
+全體平均單筆收益: +5.64%</div>
+            <div class="filter-section">
+                <label for="stockSelector"><strong>🔍 篩選股票：</strong></label>
+                <select id="stockSelector">
+                    <option value="">-- 顯示全體股票 --</option>
+                    <option value="乙盛-KY(5243.TW)">乙盛-KY(5243.TW)</option><option value="友達(2409.TW)">友達(2409.TW)</option><option value="台虹(8039.TW)">台虹(8039.TW)</option><option value="台達化(1309.TW)">台達化(1309.TW)</option><option value="大量(3167.TW)">大量(3167.TW)</option><option value="宏齊(6168.TW)">宏齊(6168.TW)</option><option value="富采(3714.TW)">富采(3714.TW)</option><option value="強茂(2481.TW)">強茂(2481.TW)</option><option value="欣興(3037.TW)">欣興(3037.TW)</option><option value="華夏(1305.TW)">華夏(1305.TW)</option><option value="頎邦(6147.TWO)">頎邦(6147.TWO)</option><option value="鼎元(2426.TW)">鼎元(2426.TW)</option>
+                </select>
+            </div>
+            <table id="tradeTable" class="dataframe display nowrap">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股票</th>
+      <th>買入日期</th>
+      <th>買入價</th>
+      <th>賣出日期</th>
+      <th>賣出價</th>
+      <th>持股天數</th>
+      <th>收益%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>友達(2409.TW)</td>
+      <td>2026-01-02</td>
+      <td>12.60</td>
+      <td>2026-01-22</td>
+      <td>15.35</td>
+      <td>20</td>
+      <td>21.83</td>
+    </tr>
+    <tr>
+      <td>友達(2409.TW)</td>
+      <td>2026-02-11</td>
+      <td>16.15</td>
+      <td>2026-03-03</td>
+      <td>15.75</td>
+      <td>20</td>
+      <td>-2.48</td>
+    </tr>
+    <tr>
+      <td>友達(2409.TW)</td>
+      <td>2026-03-12</td>
+      <td>17.25</td>
+      <td>2026-03-16</td>
+      <td>15.70</td>
+      <td>4</td>
+      <td>-8.99</td>
+    </tr>
+    <tr>
+      <td>頎邦(6147.TWO)</td>
+      <td>2026-01-02</td>
+      <td>54.60</td>
+      <td>2026-01-05</td>
+      <td>52.70</td>
+      <td>3</td>
+      <td>-3.48</td>
+    </tr>
+    <tr>
+      <td>頎邦(6147.TWO)</td>
+      <td>2026-01-06</td>
+      <td>54.00</td>
+      <td>2026-01-29</td>
+      <td>57.20</td>
+      <td>23</td>
+      <td>5.93</td>
+    </tr>
+    <tr>
+      <td>頎邦(6147.TWO)</td>
+      <td>2026-03-12</td>
+      <td>61.00</td>
+      <td>2026-03-31</td>
+      <td>69.50</td>
+      <td>19</td>
+      <td>13.93</td>
+    </tr>
+    <tr>
+      <td>頎邦(6147.TWO)</td>
+      <td>2026-04-01</td>
+      <td>76.40</td>
+      <td>尚未賣出</td>
+      <td>84.00</td>
+      <td>1</td>
+      <td>9.95</td>
+    </tr>
+    <tr>
+      <td>台達化(1309.TW)</td>
+      <td>2026-01-12</td>
+      <td>11.70</td>
+      <td>2026-01-21</td>
+      <td>11.70</td>
+      <td>9</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>台達化(1309.TW)</td>
+      <td>2026-01-26</td>
+      <td>12.85</td>
+      <td>2026-02-02</td>
+      <td>11.55</td>
+      <td>7</td>
+      <td>-10.12</td>
+    </tr>
+    <tr>
+      <td>台達化(1309.TW)</td>
+      <td>2026-03-03</td>
+      <td>13.35</td>
+      <td>尚未賣出</td>
+      <td>25.95</td>
+      <td>30</td>
+      <td>94.38</td>
+    </tr>
+    <tr>
+      <td>欣興(3037.TW)</td>
+      <td>2026-01-06</td>
+      <td>230.50</td>
+      <td>2026-02-06</td>
+      <td>340.00</td>
+      <td>31</td>
+      <td>47.51</td>
+    </tr>
+    <tr>
+      <td>欣興(3037.TW)</td>
+      <td>2026-02-24</td>
+      <td>446.00</td>
+      <td>2026-03-04</td>
+      <td>417.00</td>
+      <td>8</td>
+      <td>-6.50</td>
+    </tr>
+    <tr>
+      <td>欣興(3037.TW)</td>
+      <td>2026-03-17</td>
+      <td>543.00</td>
+      <td>2026-03-23</td>
+      <td>499.00</td>
+      <td>6</td>
+      <td>-8.10</td>
+    </tr>
+    <tr>
+      <td>富采(3714.TW)</td>
+      <td>2026-01-05</td>
+      <td>35.90</td>
+      <td>2026-01-14</td>
+      <td>35.35</td>
+      <td>9</td>
+      <td>-1.53</td>
+    </tr>
+    <tr>
+      <td>富采(3714.TW)</td>
+      <td>2026-01-26</td>
+      <td>37.90</td>
+      <td>2026-01-29</td>
+      <td>36.10</td>
+      <td>3</td>
+      <td>-4.75</td>
+    </tr>
+    <tr>
+      <td>富采(3714.TW)</td>
+      <td>2026-03-02</td>
+      <td>38.75</td>
+      <td>2026-03-04</td>
+      <td>36.50</td>
+      <td>2</td>
+      <td>-5.81</td>
+    </tr>
+    <tr>
+      <td>富采(3714.TW)</td>
+      <td>2026-03-05</td>
+      <td>38.35</td>
+      <td>2026-03-09</td>
+      <td>37.15</td>
+      <td>4</td>
+      <td>-3.13</td>
+    </tr>
+    <tr>
+      <td>富采(3714.TW)</td>
+      <td>2026-03-11</td>
+      <td>39.70</td>
+      <td>2026-03-30</td>
+      <td>47.75</td>
+      <td>19</td>
+      <td>20.28</td>
+    </tr>
+    <tr>
+      <td>富采(3714.TW)</td>
+      <td>2026-04-02</td>
+      <td>54.20</td>
+      <td>尚未賣出</td>
+      <td>54.20</td>
+      <td>0</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>華夏(1305.TW)</td>
+      <td>2026-01-12</td>
+      <td>11.60</td>
+      <td>2026-02-02</td>
+      <td>11.60</td>
+      <td>21</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>華夏(1305.TW)</td>
+      <td>2026-03-04</td>
+      <td>12.30</td>
+      <td>2026-03-05</td>
+      <td>12.05</td>
+      <td>1</td>
+      <td>-2.03</td>
+    </tr>
+    <tr>
+      <td>華夏(1305.TW)</td>
+      <td>2026-03-06</td>
+      <td>13.25</td>
+      <td>2026-03-11</td>
+      <td>12.75</td>
+      <td>5</td>
+      <td>-3.77</td>
+    </tr>
+    <tr>
+      <td>華夏(1305.TW)</td>
+      <td>2026-03-12</td>
+      <td>14.00</td>
+      <td>2026-04-01</td>
+      <td>16.90</td>
+      <td>20</td>
+      <td>20.71</td>
+    </tr>
+    <tr>
+      <td>華夏(1305.TW)</td>
+      <td>2026-04-02</td>
+      <td>17.95</td>
+      <td>尚未賣出</td>
+      <td>17.95</td>
+      <td>0</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>強茂(2481.TW)</td>
+      <td>2026-01-15</td>
+      <td>87.40</td>
+      <td>2026-01-23</td>
+      <td>89.50</td>
+      <td>8</td>
+      <td>2.40</td>
+    </tr>
+    <tr>
+      <td>強茂(2481.TW)</td>
+      <td>2026-03-16</td>
+      <td>99.50</td>
+      <td>2026-03-20</td>
+      <td>94.80</td>
+      <td>4</td>
+      <td>-4.72</td>
+    </tr>
+    <tr>
+      <td>乙盛-KY(5243.TW)</td>
+      <td>2026-01-12</td>
+      <td>82.90</td>
+      <td>2026-01-21</td>
+      <td>81.90</td>
+      <td>9</td>
+      <td>-1.21</td>
+    </tr>
+    <tr>
+      <td>乙盛-KY(5243.TW)</td>
+      <td>2026-01-27</td>
+      <td>88.70</td>
+      <td>2026-01-30</td>
+      <td>84.40</td>
+      <td>3</td>
+      <td>-4.85</td>
+    </tr>
+    <tr>
+      <td>乙盛-KY(5243.TW)</td>
+      <td>2026-03-31</td>
+      <td>82.50</td>
+      <td>尚未賣出</td>
+      <td>93.70</td>
+      <td>2</td>
+      <td>13.58</td>
+    </tr>
+    <tr>
+      <td>台虹(8039.TW)</td>
+      <td>2026-01-23</td>
+      <td>94.20</td>
+      <td>2026-01-29</td>
+      <td>90.30</td>
+      <td>6</td>
+      <td>-4.14</td>
+    </tr>
+    <tr>
+      <td>台虹(8039.TW)</td>
+      <td>2026-02-26</td>
+      <td>97.00</td>
+      <td>2026-03-09</td>
+      <td>96.70</td>
+      <td>11</td>
+      <td>-0.31</td>
+    </tr>
+    <tr>
+      <td>台虹(8039.TW)</td>
+      <td>2026-03-12</td>
+      <td>128.00</td>
+      <td>2026-03-23</td>
+      <td>109.50</td>
+      <td>11</td>
+      <td>-14.45</td>
+    </tr>
+    <tr>
+      <td>宏齊(6168.TW)</td>
+      <td>2026-01-20</td>
+      <td>20.90</td>
+      <td>2026-01-30</td>
+      <td>20.70</td>
+      <td>10</td>
+      <td>-0.96</td>
+    </tr>
+    <tr>
+      <td>宏齊(6168.TW)</td>
+      <td>2026-03-13</td>
+      <td>22.40</td>
+      <td>2026-03-30</td>
+      <td>23.10</td>
+      <td>17</td>
+      <td>3.13</td>
+    </tr>
+    <tr>
+      <td>大量(3167.TW)</td>
+      <td>2026-02-10</td>
+      <td>275.50</td>
+      <td>2026-03-04</td>
+      <td>266.00</td>
+      <td>22</td>
+      <td>-3.45</td>
+    </tr>
+    <tr>
+      <td>大量(3167.TW)</td>
+      <td>2026-03-11</td>
+      <td>323.00</td>
+      <td>2026-03-23</td>
+      <td>325.00</td>
+      <td>12</td>
+      <td>0.62</td>
+    </tr>
+    <tr>
+      <td>大量(3167.TW)</td>
+      <td>2026-03-31</td>
+      <td>368.50</td>
+      <td>尚未賣出</td>
+      <td>445.50</td>
+      <td>2</td>
+      <td>20.90</td>
+    </tr>
+    <tr>
+      <td>鼎元(2426.TW)</td>
+      <td>2026-01-20</td>
+      <td>20.15</td>
+      <td>2026-01-29</td>
+      <td>18.40</td>
+      <td>9</td>
+      <td>-8.68</td>
+    </tr>
+    <tr>
+      <td>鼎元(2426.TW)</td>
+      <td>2026-03-03</td>
+      <td>19.85</td>
+      <td>2026-03-04</td>
+      <td>18.90</td>
+      <td>1</td>
+      <td>-4.79</td>
+    </tr>
+    <tr>
+      <td>鼎元(2426.TW)</td>
+      <td>2026-03-05</td>
+      <td>20.75</td>
+      <td>2026-03-24</td>
+      <td>32.95</td>
+      <td>19</td>
+      <td>58.80</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                var table = $('#tradeTable').DataTable({
+                    "order": [[ 1, "asc" ]],
+                    "pageLength": 100,
+                    "dom": 'lrtip',
+                    "language": { "lengthMenu": "每頁顯示 _MENU_ 筆", "paginate": { "next": "下一頁", "previous": "上一頁" } },
+                    "rowCallback": function(row, data, index) {
+                        var profit = parseFloat(data[6]);
+                        if (profit > 0) $('td:eq(6)', row).addClass('profit-positive');
+                        else if (profit < 0) $('td:eq(6)', row).addClass('profit-negative');
+                    },
+                    "infoCallback": function( settings, start, end, max, total, pre ) {
+                        var api = this.api();
+                        var data = api.rows({filter: 'applied'}).data();
+                        var totalCount = data.length;
+                        if (totalCount === 0) return "查無紀錄";
+                        var winCount = 0; var totalProfit = 0;
+                        for (var i = 0; i < totalCount; i++) {
+                            var p = parseFloat(data[i][6]);
+                            if (p > 0) winCount++;
+                            totalProfit += p;
+                        }
+                        return "📍 當前篩選統計: " + totalCount + " 筆交易" +
+                               "<span class='stat-highlight'>🏆 勝率: " + (winCount / totalCount * 100).toFixed(1) + "% (" + winCount + "/" + totalCount + ")</span>" +
+                               "<span class='stat-highlight'>💰 累計收益: " + totalProfit.toFixed(2) + "%</span>";
+                    }
+                });
+                $('#stockSelector').on('change', function() {
+                    table.column(0).search($(this).val(), false, false).draw();
+                });
+            });
+        </script>
+    </body>
+    </html>
+    

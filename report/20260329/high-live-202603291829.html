@@ -1,0 +1,224 @@
+
+    <style>
+        body { font-family: "Microsoft JhengHei", sans-serif; margin: 40px; background-color: #f4f7f9; }
+        h2 { font-size: 50px; color: #1a237e; border-left: 20px solid #1a237e; padding-left: 25px; }
+        .legend-container { background: white; border: 3px solid #1a237e; padding: 25px; margin-bottom: 30px; border-radius: 15px; }
+        .legend-title { font-size: 35px; font-weight: bold; color: #1a237e; margin-bottom: 15px; }
+        .legend-item { font-size: 24px; line-height: 1.6; }
+        table { border-collapse: collapse; width: 100%; background: white; font-size: 28px; border: 2px solid #444; }
+        th { background-color: #1a237e; color: white; padding: 15px; font-size: 30px; }
+        td { padding: 15px; text-align: center; border: 1px solid #ddd; font-weight: bold; }
+        .price-now { font-size: 45px; color: #d32f2f; font-weight: 900; }
+        .advice-box { padding: 15px; border-radius: 10px; color: white; text-align: left; min-width: 300px; }
+        .sell-bg { background-color: #c62828; }
+        .hold-bg { background-color: #2e7d32; }
+        .buy-bg { background-color: #ef6c00; }
+        .advice-title { font-size: 32px; font-weight: 900; display: block; }
+        .advice-reason { font-size: 22px; }
+    </style>
+    <h2>📊 即時診斷報告 (18:29:09)</h2><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股票</th>
+      <th>現價</th>
+      <th>5MA</th>
+      <th>10MA</th>
+      <th>20MA</th>
+      <th>RSI</th>
+      <th>量能</th>
+      <th>診斷建議</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>華通<br>(2313.TW)</td>
+      <td><span class='price-now'>270.00</span></td>
+      <td>245.00<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>235.30<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>220.35<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>78.0</td>
+      <td>154175<br><small>(90902111)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>定穎投控<br>(3715.TW)</td>
+      <td><span class='price-now'>203.50</span></td>
+      <td>188.30<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>181.25<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>166.50<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>73.4</td>
+      <td>76004<br><small>(41318926)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>華紙<br>(1905.TW)</td>
+      <td><span class='price-now'>15.40</span></td>
+      <td>13.97<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>12.91<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>12.36<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>85.3</td>
+      <td>62900<br><small>(7234127)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>穩懋<br>(3105.TWO)</td>
+      <td><span class='price-now'>382.50</span></td>
+      <td>356.30<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>341.10<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>319.60<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>73.9</td>
+      <td>59954<br><small>(20134363)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>瑞軒<br>(2489.TW)</td>
+      <td><span class='price-now'>35.05</span></td>
+      <td>33.22<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>36.14<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>38.16<br><small><span style="color:green;">▼</span> <span style="color:green;">☆</span></small></td>
+      <td>49.4</td>
+      <td>57948<br><small>(34123596)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>臻鼎-KY<br>(4958.TW)</td>
+      <td><span class='price-now'>230.00</span></td>
+      <td>216.60<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>210.80<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>194.70<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>83.3</td>
+      <td>54467<br><small>(24794733)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>光洋科<br>(1785.TWO)</td>
+      <td><span class='price-now'>96.40</span></td>
+      <td>92.36<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>93.99<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>82.83<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>69.4</td>
+      <td>49526<br><small>(37211920)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>啟��<br>(6285.TW)</td>
+      <td><span class='price-now'>188.50</span></td>
+      <td>179.20<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>175.85<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>170.35<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>72.9</td>
+      <td>46141<br><small>(19817056)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>仲琦<br>(2419.TW)</td>
+      <td><span class='price-now'>35.40</span></td>
+      <td>32.65<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>31.83<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>30.54<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>72.5</td>
+      <td>41929<br><small>(5950622)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>恩德<br>(1528.TW)</td>
+      <td><span class='price-now'>25.45</span></td>
+      <td>23.65<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>23.26<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>22.69<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>70.8</td>
+      <td>32339<br><small>(6570618)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>新唐<br>(4919.TW)</td>
+      <td><span class='price-now'>102.50</span></td>
+      <td>99.76<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>98.18<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>89.92<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>62.8</td>
+      <td>28438<br><small>(22128814)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>信錦<br>(1582.TW)</td>
+      <td><span class='price-now'>102.00</span></td>
+      <td>92.72<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>91.78<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>88.82<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>65.9</td>
+      <td>26426<br><small>(9489207)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>聯茂<br>(6213.TW)</td>
+      <td><span class='price-now'>158.00</span></td>
+      <td>147.60<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>147.35<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>138.47<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>69.3</td>
+      <td>25155<br><small>(15366002)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>建漢<br>(3062.TW)</td>
+      <td><span class='price-now'>27.95</span></td>
+      <td>26.07<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>25.08<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>24.68<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>73.0</td>
+      <td>24842<br><small>(4834903)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>台嘉碩<br>(3221.TWO)</td>
+      <td><span class='price-now'>36.05</span></td>
+      <td>35.37<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>33.99<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>31.71<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>65.3</td>
+      <td>17737<br><small>(6136479)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>台達化<br>(1309.TW)</td>
+      <td><span class='price-now'>22.15</span></td>
+      <td>20.56<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>18.93<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>16.60<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>80.5</td>
+      <td>15430<br><small>(16286601)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>希華<br>(2484.TW)</td>
+      <td><span class='price-now'>30.90</span></td>
+      <td>29.68<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>28.69<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>27.88<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>68.4</td>
+      <td>14113<br><small>(2477276)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>泰谷<br>(3339.TWO)</td>
+      <td><span class='price-now'>39.15</span></td>
+      <td>38.74<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>35.91<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>32.26<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>76.1</td>
+      <td>11341<br><small>(4334490)</small></td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量能不足</span></div></td>
+    </tr>
+    <tr>
+      <td>威剛<br>(3260.TWO)</td>
+      <td><span class='price-now'>390.50</span></td>
+      <td>388.70<br><small><span style="color:green;">▼</span> <span style="color:red;">★</span></small></td>
+      <td>420.35<br><small><span style="color:red;">▲</span> <span style="color:green;">☆</span></small></td>
+      <td>364.12<br><small><span style="color:red;">▲</span> <span style="color:red;">★</span></small></td>
+      <td>60.3</td>
+      <td>10747<br><small>(19489340)</small></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA</span></div></td>
+    </tr>
+  </tbody>
+</table>

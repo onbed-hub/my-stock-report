@@ -1,0 +1,84 @@
+
+    <style>
+        body { font-family: "Microsoft JhengHei", "Segoe UI", sans-serif; margin: 40px; background-color: #f4f7f9; color: #333; }
+        /* 標題放大 1.5倍: 38px -> 57px */
+        h2 { font-size: 57px; color: #1a237e; border-left: 20px solid #1a237e; padding-left: 25px; margin-bottom: 30px; }
+        
+        /* Legend 區塊強化 */
+        .legend-container { background: #ffffff; border: 3px solid #1a237e; padding: 30px; margin-bottom: 40px; border-radius: 20px; box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+        /* 解說標題放大 1.5倍: 28px -> 42px */
+        .legend-title { font-size: 42px; font-weight: bold; color: #1a237e; margin-bottom: 20px; border-bottom: 3px solid #e0e0e0; padding-bottom: 15px; }
+        .legend-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        /* 解說內文放大 1.5倍: 20px -> 30px, 18px -> 27px */
+        .legend-item { font-size: 30px; line-height: 1.6; }
+        .legend-item b { color: #d32f2f; }
+        .legend-item i { color: #666; font-style: normal; font-size: 27px; display: block; margin-left: 35px; margin-top: 5px; }
+
+        /* 表格樣式優化 - 內容放大 1.5倍: 22px -> 33px */
+        table { border-collapse: collapse; width: 100%; background: white; font-size: 33px; border: 3px solid #444; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        /* 表頭放大 1.5倍: 24px -> 36px */
+        th { background-color: #1a237e; color: white; padding: 20px; border: 2px solid #444; text-align: center; font-size: 36px; }
+        td { padding: 18px; text-align: center; border: 1px solid #eee; font-weight: 700; vertical-align: middle; }
+        tr:nth-child(even) { background-color: #fafafa; }
+        
+        /* 數值與建議方塊 - 現價放大 1.5倍: 34px -> 51px */
+        .price-now { font-size: 51px; color: #d32f2f; font-family: "Consolas", monospace; font-weight: 900; }
+        .advice-box { padding: 18px; border-radius: 12px; color: white; text-align: left; min-width: 360px; }
+        .sell-bg { background-color: #c62828; } 
+        .hold-bg { background-color: #2e7d32; }
+        .buy-bg { background-color: #ef6c00; }
+        /* 建議標題放大 1.5倍: 26px -> 39px */
+        .advice-title { font-size: 39px; font-weight: 900; display: block; margin-bottom: 8px; }
+        /* 建議理由放大 1.5倍: 17px -> 25px */
+        .advice-reason { font-size: 25px; opacity: 0.95; font-weight: normal; }
+        
+        .macd-up-attack { color: #d32f2f; } .macd-up-fade { color: #f48fb1; }
+        .macd-down-attack { color: #2e7d32; } .macd-down-fade { color: #81c784; }
+    </style>
+    <h2>📊 投資策略即時診斷報告 (2026-03-27 14:31)</h2>
+    <div class="legend-container">
+        <div class="legend-title">🛡️ 策略診斷與操作邏輯詳細說明</div>
+        <div class="legend-grid">
+            <div class="legend-item">
+                <b>📈 強勢買入條件 (多頭攻擊)：</b>
+                <i>1. 核心：價格站上 20MA (月線) 且月線趨勢上揚。</i>
+                <i>2. 動能：MA5 > MA10 (黃金交叉) 且 MA5 勾頭向上 (Slope > 0)。</i>
+                <i>3. 量能：今日成交量 > 20日均量 (有量才有價)。</i>
+                <i>4. 強勢：RSI 指標 > 55 (進入強勢多頭區)。</i>
+            </div>
+            <div class="legend-item">
+                <b>🚨 賣出訊號 (風險警示)：</b>
+                <i>1. 破位：收盤價 <b>跌破 10MA</b> (短線轉弱)。</i>
+                <i>2. 止損：收盤價 <b>跌破 20MA</b> (趨勢反轉，生命線失守)。</i>
+                <i>3. 提醒：符合任一條件即觸發「建議賣出」。</i>
+            </div>
+        </div>
+    </div>
+    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股票名稱</th>
+      <th>即時現價</th>
+      <th>5日均線</th>
+      <th>10日均線</th>
+      <th>月線(20MA)</th>
+      <th>量能檢查</th>
+      <th>RSI(14)</th>
+      <th>MACD動能</th>
+      <th>決策建議與理由</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>台積電<br><small>2330</small></td>
+      <td><span class='price-now'>1820.00</span></td>
+      <td>1825.00<br><small><span style="color:#2e7d32;">↓下跌</span></small></td>
+      <td>1842.90<br><small><span style="color:#2e7d32;">↓下跌</span></small></td>
+      <td>1864.12<br><small><span style="color:#2e7d32;">↓下跌</span></small></td>
+      <td>28883<br><small>(36903942)</small></td>
+      <td>51.8</td>
+      <td><span class='macd-up-fade'>1.868<br>□ 衰退</span></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、破10MA、破月線、動能減弱</span></div></td>
+    </tr>
+  </tbody>
+</table>

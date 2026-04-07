@@ -1,0 +1,217 @@
+
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>MJ 智能選股看板 (bor-) - 20260324</title>
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+            <style>
+                body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; padding: 20px; background-color: #f0f2f5; }
+                .container { max-width: 1400px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+                #js-warning { background: #fff3cd; color: #856404; padding: 12px; border-radius: 6px; margin-bottom: 20px; text-align: center; font-weight: bold; border: 1px solid #ffeeba; }
+                .guide-section { display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
+                .guide-card { flex: 1; min-width: 250px; padding: 12px; border-radius: 8px; border-top: 5px solid #1a73e8; background: #fafafa; font-size: 0.85rem; line-height: 1.5; }
+                table.dataTable { width: 100% !important; border-collapse: collapse !important; }
+                table.dataTable thead th { background-color: #34495e !important; color: white !important; text-align: center !important; vertical-align: middle; padding: 12px !important; }
+                .filter-select { width: 100%; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; color: #333; }
+                tr:hover { background-color: #f1f8ff !important; }
+                td { text-align: center !important; }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <h2 style="text-align:center; color:#2c3e50;">📊 MJ 趨勢作戰看板 (20260324)</h2>
+                <div class="guide-section">
+                    <div class="guide-card"><b>🔥 強勢攻擊：</b>J低金叉+MACD紅柱。動能共振，適合做多。</div>
+                    <div class="guide-card"><b>🚀 低檔反彈：</b>J金叉但MACD負。空頭減弱，搶反彈機會。</div>
+                    <div class="guide-card"><b>💧 築底觀察：</b>J < 10 極度超賣。適合列入觀察名單。</div>
+                    <div class="guide-card"><b>⚠️ 超買警示：</b>J > 95 噴發末段。不宜追高，留意拉回。</div>
+                </div>
+
+                <table class="dataframe display nowrap my-report-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>日期</th>
+      <th>代碼</th>
+      <th>名稱</th>
+      <th>收盤價</th>
+      <th>漲跌幅%</th>
+      <th>成交量(張)</th>
+      <th>MJ狀態</th>
+      <th>J線值</th>
+      <th>MACD柱狀體</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2026-03-24</td>
+      <td>00738U.TW</td>
+      <td>期元大道瓊白銀</td>
+      <td>54.25</td>
+      <td>1.12</td>
+      <td>14329</td>
+      <td>💧 築底觀察</td>
+      <td>-2.57</td>
+      <td>-2.64</td>
+    </tr>
+    <tr>
+      <td>2026-03-24</td>
+      <td>0056.TW</td>
+      <td>元大高股息</td>
+      <td>38.04</td>
+      <td>0.18</td>
+      <td>49247</td>
+      <td>💧 築底觀察</td>
+      <td>5.13</td>
+      <td>-0.20</td>
+    </tr>
+    <tr>
+      <td>2026-03-24</td>
+      <td>00929.TW</td>
+      <td>復華台灣科技優息</td>
+      <td>19.18</td>
+      <td>-0.21</td>
+      <td>25880</td>
+      <td>💧 築底觀察</td>
+      <td>3.08</td>
+      <td>-0.09</td>
+    </tr>
+    <tr>
+      <td>2026-03-24</td>
+      <td>2009.TW</td>
+      <td>第一銅</td>
+      <td>40.30</td>
+      <td>-0.37</td>
+      <td>1606</td>
+      <td>💧 築底觀察</td>
+      <td>-1.34</td>
+      <td>-0.24</td>
+    </tr>
+    <tr>
+      <td>2026-03-24</td>
+      <td>00635U.TW</td>
+      <td>期元大S&amp;P黃金</td>
+      <td>45.99</td>
+      <td>-0.41</td>
+      <td>13502</td>
+      <td>💧 築底觀察</td>
+      <td>-3.91</td>
+      <td>-1.76</td>
+    </tr>
+    <tr>
+      <td>2026-03-24</td>
+      <td>2317.TW</td>
+      <td>鴻海</td>
+      <td>195.00</td>
+      <td>-0.51</td>
+      <td>56051</td>
+      <td>💧 築底觀察</td>
+      <td>-2.59</td>
+      <td>-3.41</td>
+    </tr>
+    <tr>
+      <td>2026-03-24</td>
+      <td>6188.TWO</td>
+      <td>廣明</td>
+      <td>94.00</td>
+      <td>-0.63</td>
+      <td>762</td>
+      <td>💧 築底觀察</td>
+      <td>3.34</td>
+      <td>0.26</td>
+    </tr>
+    <tr>
+      <td>2026-03-24</td>
+      <td>4966.TWO</td>
+      <td>譜瑞-KY</td>
+      <td>494.50</td>
+      <td>-0.90</td>
+      <td>567</td>
+      <td>💧 築底觀察</td>
+      <td>-5.42</td>
+      <td>-2.74</td>
+    </tr>
+    <tr>
+      <td>2026-03-24</td>
+      <td>2327.TW</td>
+      <td>國巨*</td>
+      <td>250.50</td>
+      <td>-0.99</td>
+      <td>18472</td>
+      <td>💧 築底觀察</td>
+      <td>6.40</td>
+      <td>-2.97</td>
+    </tr>
+    <tr>
+      <td>2026-03-24</td>
+      <td>2409.TW</td>
+      <td>友達</td>
+      <td>14.65</td>
+      <td>-1.35</td>
+      <td>75381</td>
+      <td>💧 築底觀察</td>
+      <td>-10.99</td>
+      <td>-0.39</td>
+    </tr>
+    <tr>
+      <td>2026-03-24</td>
+      <td>3481.TW</td>
+      <td>群創</td>
+      <td>24.50</td>
+      <td>-2.00</td>
+      <td>387696</td>
+      <td>💧 築底觀察</td>
+      <td>-15.18</td>
+      <td>-1.25</td>
+    </tr>
+    <tr>
+      <td>2026-03-24</td>
+      <td>2367.TW</td>
+      <td>燿華</td>
+      <td>68.30</td>
+      <td>-4.21</td>
+      <td>124847</td>
+      <td>💧 築底觀察</td>
+      <td>7.74</td>
+      <td>-2.13</td>
+    </tr>
+  </tbody>
+</table>
+            </div>
+
+            <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+            <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $('#js-warning').hide();
+                    var table = $('.my-report-table').DataTable({
+                        "pageLength": 100,
+                        "order": [],
+                        "language": {
+                            "search": "🔍 搜尋：",
+                            "lengthMenu": "顯示 _MENU_ 筆",
+                            "info": "共 _TOTAL_ 筆",
+                            "paginate": { "next": "下頁", "previous": "上頁" }
+                        },
+                        initComplete: function () {
+                            this.api().columns([6]).every( function () {
+                                var column = this;
+                                var select = $('<select class="filter-select"><option value="">所有狀態</option></select>')
+                                    .appendTo( $(column.header()) )
+                                    .on( 'change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex( $(this).val() );
+                                        column.search( val ? '^'+val+'$' : '', true, false ).draw();
+                                    } )
+                                    .on( 'click', function(e) { e.stopPropagation(); } );
+
+                                column.data().unique().sort().each( function ( d, j ) {
+                                    if(d) select.append( '<option value="'+d+'">'+d+'</option>' )
+                                } );
+                            } );
+                        }
+                    });
+                });
+            </script>
+        </body>
+        </html>
+        

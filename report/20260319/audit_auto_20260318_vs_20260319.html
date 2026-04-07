@@ -1,0 +1,789 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <title>戰績稽核: 20260318 vs 20260319</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+        <style>
+            body { padding: 20px; background-color: #f4f7f6; }
+            .container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+            .text-success { color: #28a745 !important; }
+            .text-danger { color: #dc3545 !important; }
+            .header-info { background: #e9ecef; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2 class="mb-4">📈 自動戰績稽核報告</h2>
+            <div class="header-info">
+                <strong>選股基準日 (Base):</strong> 20260318 <br>
+                <strong>結算比對日 (Compare):</strong> 20260319
+            </div>
+            <div class="table-responsive">
+                <table id="auditTable" class="table table-hover table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>代碼</th><th>股票</th><th>戰術</th><th>當初建議價</th><th>目前市價</th><th>區間損益</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        <tr>
+            <td>7734.TWO</td>
+            <td>印能科技</td>
+            <td><span class="badge bg-info text-dark">🟢 黃金標的</span></td>
+            <td>1832.02</td>
+            <td>1815.00</td>
+            <td class="text-success fw-bold">-0.93%</td>
+        </tr>
+        
+        <tr>
+            <td>3135.TW</td>
+            <td>凌航</td>
+            <td><span class="badge bg-info text-dark">🟢 黃金標的</span></td>
+            <td>121.32</td>
+            <td>143.00</td>
+            <td class="text-danger fw-bold">+17.87%</td>
+        </tr>
+        
+        <tr>
+            <td>2360.TW</td>
+            <td>致茂</td>
+            <td><span class="badge bg-info text-dark">🟢 黃金標的</span></td>
+            <td>1517.92</td>
+            <td>1595.00</td>
+            <td class="text-danger fw-bold">+5.08%</td>
+        </tr>
+        
+        <tr>
+            <td>3508.TWO</td>
+            <td>位速</td>
+            <td><span class="badge bg-info text-dark">🟢 黃金標的</span></td>
+            <td>46.88</td>
+            <td>52.30</td>
+            <td class="text-danger fw-bold">+11.56%</td>
+        </tr>
+        
+        <tr>
+            <td>6456.TW</td>
+            <td>GIS-KY</td>
+            <td><span class="badge bg-info text-dark">🟢 黃金標的</span></td>
+            <td>59.71</td>
+            <td>64.70</td>
+            <td class="text-danger fw-bold">+8.36%</td>
+        </tr>
+        
+        <tr>
+            <td>3702.TW</td>
+            <td>大聯大</td>
+            <td><span class="badge bg-info text-dark">🟢 黃金標的</span></td>
+            <td>90.46</td>
+            <td>93.00</td>
+            <td class="text-danger fw-bold">+2.81%</td>
+        </tr>
+        
+        <tr>
+            <td>6141.TW</td>
+            <td>柏承</td>
+            <td><span class="badge bg-info text-dark">🟢 黃金標的</span></td>
+            <td>26.23</td>
+            <td>28.30</td>
+            <td class="text-danger fw-bold">+7.89%</td>
+        </tr>
+        
+        <tr>
+            <td>1809.TW</td>
+            <td>中釉</td>
+            <td><span class="badge bg-info text-dark">🟢 黃金標的</span></td>
+            <td>28.58</td>
+            <td>32.50</td>
+            <td class="text-danger fw-bold">+13.72%</td>
+        </tr>
+        
+        <tr>
+            <td>8105.TW</td>
+            <td>凌巨</td>
+            <td><span class="badge bg-info text-dark">🟡 妖股/高波動</span></td>
+            <td>13.32</td>
+            <td>13.70</td>
+            <td class="text-danger fw-bold">+2.85%</td>
+        </tr>
+        
+        <tr>
+            <td>2451.TW</td>
+            <td>創見</td>
+            <td><span class="badge bg-info text-dark">🟡 妖股/高波動</span></td>
+            <td>297.10</td>
+            <td>309.00</td>
+            <td class="text-danger fw-bold">+4.01%</td>
+        </tr>
+        
+        <tr>
+            <td>8076.TWO</td>
+            <td>伍豐</td>
+            <td><span class="badge bg-info text-dark">🟡 妖股/高波動</span></td>
+            <td>25.72</td>
+            <td>26.90</td>
+            <td class="text-danger fw-bold">+4.59%</td>
+        </tr>
+        
+        <tr>
+            <td>7751.TWO</td>
+            <td>竑騰</td>
+            <td><span class="badge bg-info text-dark">🟡 妖股/高波動</span></td>
+            <td>1475.96</td>
+            <td>1655.00</td>
+            <td class="text-danger fw-bold">+12.13%</td>
+        </tr>
+        
+        <tr>
+            <td>4744.TWO</td>
+            <td>皇將</td>
+            <td><span class="badge bg-info text-dark">🟡 妖股/高波動</span></td>
+            <td>36.35</td>
+            <td>36.20</td>
+            <td class="text-success fw-bold">-0.41%</td>
+        </tr>
+        
+        <tr>
+            <td>6197.TW</td>
+            <td>佳必琪</td>
+            <td><span class="badge bg-info text-dark">🟡 妖股/高波動</span></td>
+            <td>188.36</td>
+            <td>196.00</td>
+            <td class="text-danger fw-bold">+4.06%</td>
+        </tr>
+        
+        <tr>
+            <td>3171.TWO</td>
+            <td>炎洲流通</td>
+            <td><span class="badge bg-info text-dark">🟡 妖股/高波動</span></td>
+            <td>60.07</td>
+            <td>61.90</td>
+            <td class="text-danger fw-bold">+3.05%</td>
+        </tr>
+        
+        <tr>
+            <td>8064.TWO</td>
+            <td>東捷</td>
+            <td><span class="badge bg-info text-dark">🟡 妖股/高波動</span></td>
+            <td>65.29</td>
+            <td>67.00</td>
+            <td class="text-danger fw-bold">+2.62%</td>
+        </tr>
+        
+        <tr>
+            <td>2345.TW</td>
+            <td>智邦</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>1559.80</td>
+            <td>1590.00</td>
+            <td class="text-danger fw-bold">+1.94%</td>
+        </tr>
+        
+        <tr>
+            <td>3038.TW</td>
+            <td>全台</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>23.26</td>
+            <td>22.00</td>
+            <td class="text-success fw-bold">-5.42%</td>
+        </tr>
+        
+        <tr>
+            <td>5351.TWO</td>
+            <td>鈺創</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>83.03</td>
+            <td>84.30</td>
+            <td class="text-danger fw-bold">+1.53%</td>
+        </tr>
+        
+        <tr>
+            <td>2347.TW</td>
+            <td>聯強</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>79.17</td>
+            <td>78.40</td>
+            <td class="text-success fw-bold">-0.97%</td>
+        </tr>
+        
+        <tr>
+            <td>3131.TWO</td>
+            <td>弘塑</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>2193.94</td>
+            <td>2260.00</td>
+            <td class="text-danger fw-bold">+3.01%</td>
+        </tr>
+        
+        <tr>
+            <td>6488.TWO</td>
+            <td>環球晶</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>448.55</td>
+            <td>472.00</td>
+            <td class="text-danger fw-bold">+5.23%</td>
+        </tr>
+        
+        <tr>
+            <td>7781.TWO</td>
+            <td>昕力資*</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>24.19</td>
+            <td>33.55</td>
+            <td class="text-danger fw-bold">+38.69%</td>
+        </tr>
+        
+        <tr>
+            <td>6894.TWO</td>
+            <td>衛司特</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>353.43</td>
+            <td>374.50</td>
+            <td class="text-danger fw-bold">+5.96%</td>
+        </tr>
+        
+        <tr>
+            <td>2436.TW</td>
+            <td>偉詮電</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>67.04</td>
+            <td>66.10</td>
+            <td class="text-success fw-bold">-1.40%</td>
+        </tr>
+        
+        <tr>
+            <td>1711.TW</td>
+            <td>永光</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>37.84</td>
+            <td>43.25</td>
+            <td class="text-danger fw-bold">+14.30%</td>
+        </tr>
+        
+        <tr>
+            <td>6509.TWO</td>
+            <td>聚和</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>45.06</td>
+            <td>46.30</td>
+            <td class="text-danger fw-bold">+2.75%</td>
+        </tr>
+        
+        <tr>
+            <td>6147.TWO</td>
+            <td>頎邦</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>69.94</td>
+            <td>71.10</td>
+            <td class="text-danger fw-bold">+1.66%</td>
+        </tr>
+        
+        <tr>
+            <td>6776.TW</td>
+            <td>展�眥篕�</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>67.06</td>
+            <td>73.50</td>
+            <td class="text-danger fw-bold">+9.60%</td>
+        </tr>
+        
+        <tr>
+            <td>3189.TW</td>
+            <td>景碩</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>340.52</td>
+            <td>383.50</td>
+            <td class="text-danger fw-bold">+12.62%</td>
+        </tr>
+        
+        <tr>
+            <td>3066.TWO</td>
+            <td>李洲</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>21.32</td>
+            <td>24.00</td>
+            <td class="text-danger fw-bold">+12.57%</td>
+        </tr>
+        
+        <tr>
+            <td>2010.TW</td>
+            <td>春源</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>24.78</td>
+            <td>24.75</td>
+            <td class="text-success fw-bold">-0.12%</td>
+        </tr>
+        
+        <tr>
+            <td>2851.TW</td>
+            <td>中再保</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>30.34</td>
+            <td>30.35</td>
+            <td class="text-danger fw-bold">+0.03%</td>
+        </tr>
+        
+        <tr>
+            <td>6231.TWO</td>
+            <td>系微</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>239.87</td>
+            <td>246.00</td>
+            <td class="text-danger fw-bold">+2.56%</td>
+        </tr>
+        
+        <tr>
+            <td>4923.TWO</td>
+            <td>力士</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>41.30</td>
+            <td>38.10</td>
+            <td class="text-success fw-bold">-7.75%</td>
+        </tr>
+        
+        <tr>
+            <td>6167.TWO</td>
+            <td>久正</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>16.40</td>
+            <td>15.70</td>
+            <td class="text-success fw-bold">-4.27%</td>
+        </tr>
+        
+        <tr>
+            <td>6499.TWO</td>
+            <td>益安</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>122.50</td>
+            <td>118.50</td>
+            <td class="text-success fw-bold">-3.27%</td>
+        </tr>
+        
+        <tr>
+            <td>2465.TW</td>
+            <td>麗臺</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>60.75</td>
+            <td>65.80</td>
+            <td class="text-danger fw-bold">+8.31%</td>
+        </tr>
+        
+        <tr>
+            <td>1735.TW</td>
+            <td>日勝化</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>34.56</td>
+            <td>31.70</td>
+            <td class="text-success fw-bold">-8.28%</td>
+        </tr>
+        
+        <tr>
+            <td>1409.TW</td>
+            <td>新纖</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>16.85</td>
+            <td>16.70</td>
+            <td class="text-success fw-bold">-0.89%</td>
+        </tr>
+        
+        <tr>
+            <td>6592.TW</td>
+            <td>和潤企業</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>64.90</td>
+            <td>63.90</td>
+            <td class="text-success fw-bold">-1.54%</td>
+        </tr>
+        
+        <tr>
+            <td>2314.TW</td>
+            <td>台揚</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>20.75</td>
+            <td>20.00</td>
+            <td class="text-success fw-bold">-3.61%</td>
+        </tr>
+        
+        <tr>
+            <td>6684.TWO</td>
+            <td>安格</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>47.15</td>
+            <td>45.65</td>
+            <td class="text-success fw-bold">-3.18%</td>
+        </tr>
+        
+        <tr>
+            <td>1799.TWO</td>
+            <td>易威</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>43.60</td>
+            <td>40.70</td>
+            <td class="text-success fw-bold">-6.65%</td>
+        </tr>
+        
+        <tr>
+            <td>5272.TWO</td>
+            <td>笙科</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>23.10</td>
+            <td>23.55</td>
+            <td class="text-danger fw-bold">+1.95%</td>
+        </tr>
+        
+        <tr>
+            <td>9929.TW</td>
+            <td>秋雨</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>12.45</td>
+            <td>13.65</td>
+            <td class="text-danger fw-bold">+9.64%</td>
+        </tr>
+        
+        <tr>
+            <td>6226.TW</td>
+            <td>光鼎</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>13.35</td>
+            <td>14.65</td>
+            <td class="text-danger fw-bold">+9.74%</td>
+        </tr>
+        
+        <tr>
+            <td>6233.TWO</td>
+            <td>旺玖</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>30.45</td>
+            <td>29.05</td>
+            <td class="text-success fw-bold">-4.60%</td>
+        </tr>
+        
+        <tr>
+            <td>6574.TWO</td>
+            <td>霈方</td>
+            <td><span class="badge bg-info text-dark">⚪ 一般監控</span></td>
+            <td>124.75</td>
+            <td>123.00</td>
+            <td class="text-success fw-bold">-1.40%</td>
+        </tr>
+        
+        <tr>
+            <td>2855.TW</td>
+            <td>統一證</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>32.90</td>
+            <td>32.90</td>
+            <td class="text-danger fw-bold">+0.00%</td>
+        </tr>
+        
+        <tr>
+            <td>4905.TWO</td>
+            <td>台聯電</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>72.28</td>
+            <td>81.20</td>
+            <td class="text-danger fw-bold">+12.34%</td>
+        </tr>
+        
+        <tr>
+            <td>3430.TWO</td>
+            <td>奇鈦科</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>79.29</td>
+            <td>82.20</td>
+            <td class="text-danger fw-bold">+3.67%</td>
+        </tr>
+        
+        <tr>
+            <td>3006.TW</td>
+            <td>晶豪科</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>195.24</td>
+            <td>217.00</td>
+            <td class="text-danger fw-bold">+11.15%</td>
+        </tr>
+        
+        <tr>
+            <td>3693.TWO</td>
+            <td>營邦</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>475.79</td>
+            <td>583.00</td>
+            <td class="text-danger fw-bold">+22.53%</td>
+        </tr>
+        
+        <tr>
+            <td>6579.TW</td>
+            <td>研揚</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>112.10</td>
+            <td>115.00</td>
+            <td class="text-danger fw-bold">+2.59%</td>
+        </tr>
+        
+        <tr>
+            <td>8028.TW</td>
+            <td>昇陽半導體</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>186.18</td>
+            <td>188.00</td>
+            <td class="text-danger fw-bold">+0.98%</td>
+        </tr>
+        
+        <tr>
+            <td>4741.TWO</td>
+            <td>泓瀚</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>26.34</td>
+            <td>27.35</td>
+            <td class="text-danger fw-bold">+3.83%</td>
+        </tr>
+        
+        <tr>
+            <td>3049.TW</td>
+            <td>精金</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>13.13</td>
+            <td>16.40</td>
+            <td class="text-danger fw-bold">+24.90%</td>
+        </tr>
+        
+        <tr>
+            <td>6451.TW</td>
+            <td>訊芯-KY</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>248.90</td>
+            <td>272.00</td>
+            <td class="text-danger fw-bold">+9.28%</td>
+        </tr>
+        
+        <tr>
+            <td>3583.TW</td>
+            <td>辛耘</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>405.88</td>
+            <td>416.50</td>
+            <td class="text-danger fw-bold">+2.62%</td>
+        </tr>
+        
+        <tr>
+            <td>6112.TW</td>
+            <td>邁達特</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>46.21</td>
+            <td>49.25</td>
+            <td class="text-danger fw-bold">+6.58%</td>
+        </tr>
+        
+        <tr>
+            <td>2605.TW</td>
+            <td>新興</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>37.89</td>
+            <td>43.35</td>
+            <td class="text-danger fw-bold">+14.41%</td>
+        </tr>
+        
+        <tr>
+            <td>4739.TW</td>
+            <td>康普</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>76.69</td>
+            <td>83.20</td>
+            <td class="text-danger fw-bold">+8.49%</td>
+        </tr>
+        
+        <tr>
+            <td>4967.TW</td>
+            <td>十銓</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>230.52</td>
+            <td>271.00</td>
+            <td class="text-danger fw-bold">+17.56%</td>
+        </tr>
+        
+        <tr>
+            <td>6108.TW</td>
+            <td>競國</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>16.51</td>
+            <td>16.85</td>
+            <td class="text-danger fw-bold">+2.06%</td>
+        </tr>
+        
+        <tr>
+            <td>2485.TW</td>
+            <td>兆赫</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>73.29</td>
+            <td>80.10</td>
+            <td class="text-danger fw-bold">+9.29%</td>
+        </tr>
+        
+        <tr>
+            <td>2355.TW</td>
+            <td>敬鵬</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>44.80</td>
+            <td>47.05</td>
+            <td class="text-danger fw-bold">+5.02%</td>
+        </tr>
+        
+        <tr>
+            <td>3086.TWO</td>
+            <td>華義</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>250.32</td>
+            <td>281.00</td>
+            <td class="text-danger fw-bold">+12.26%</td>
+        </tr>
+        
+        <tr>
+            <td>2351.TW</td>
+            <td>順德</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>86.66</td>
+            <td>94.20</td>
+            <td class="text-danger fw-bold">+8.70%</td>
+        </tr>
+        
+        <tr>
+            <td>6689.TW</td>
+            <td>伊雲谷</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>71.62</td>
+            <td>82.60</td>
+            <td class="text-danger fw-bold">+15.33%</td>
+        </tr>
+        
+        <tr>
+            <td>2243.TW</td>
+            <td>宏旭-KY</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>20.04</td>
+            <td>19.70</td>
+            <td class="text-success fw-bold">-1.70%</td>
+        </tr>
+        
+        <tr>
+            <td>2390.TW</td>
+            <td>云辰</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>10.40</td>
+            <td>11.25</td>
+            <td class="text-danger fw-bold">+8.17%</td>
+        </tr>
+        
+        <tr>
+            <td>8176.TWO</td>
+            <td>智捷</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>12.70</td>
+            <td>13.90</td>
+            <td class="text-danger fw-bold">+9.45%</td>
+        </tr>
+        
+        <tr>
+            <td>1449.TW</td>
+            <td>佳和</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>11.55</td>
+            <td>13.05</td>
+            <td class="text-danger fw-bold">+12.99%</td>
+        </tr>
+        
+        <tr>
+            <td>2413.TW</td>
+            <td>環科</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>52.96</td>
+            <td>58.00</td>
+            <td class="text-danger fw-bold">+9.52%</td>
+        </tr>
+        
+        <tr>
+            <td>5468.TWO</td>
+            <td>凱鈺</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>17.43</td>
+            <td>19.80</td>
+            <td class="text-danger fw-bold">+13.60%</td>
+        </tr>
+        
+        <tr>
+            <td>3033.TW</td>
+            <td>威健</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>32.91</td>
+            <td>35.20</td>
+            <td class="text-danger fw-bold">+6.96%</td>
+        </tr>
+        
+        <tr>
+            <td>2438.TW</td>
+            <td>翔耀</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>21.00</td>
+            <td>23.20</td>
+            <td class="text-danger fw-bold">+10.48%</td>
+        </tr>
+        
+        <tr>
+            <td>2233.TW</td>
+            <td>宇隆</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>222.52</td>
+            <td>231.50</td>
+            <td class="text-danger fw-bold">+4.04%</td>
+        </tr>
+        
+        <tr>
+            <td>8021.TW</td>
+            <td>尖點</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>242.74</td>
+            <td>260.00</td>
+            <td class="text-danger fw-bold">+7.11%</td>
+        </tr>
+        
+        <tr>
+            <td>6292.TWO</td>
+            <td>迅德</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>47.81</td>
+            <td>50.10</td>
+            <td class="text-danger fw-bold">+4.79%</td>
+        </tr>
+        
+        <tr>
+            <td>5483.TWO</td>
+            <td>中美晶</td>
+            <td><span class="badge bg-info text-dark">🔴 空頭陷阱</span></td>
+            <td>120.83</td>
+            <td>124.00</td>
+            <td class="text-danger fw-bold">+2.62%</td>
+        </tr>
+        </tbody>
+                </table>
+            </div>
+            <hr>
+            <p class="text-muted">產出時間：2026-03-19 21:11:01</p>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#auditTable').DataTable({
+                    "language": { "url": "https://cdn.datatables.net/plug-ins/1.11.5/i18n/zh-HANT.json" },
+                    "order": [[ 5, "desc" ]],
+                    "pageLength": 50
+                });
+            });
+        </script>
+    </body>
+    </html>
+    

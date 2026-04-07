@@ -1,0 +1,255 @@
+
+    <html><head><meta charset="UTF-8">
+<style>
+    body { font-family: 'Microsoft JhengHei', sans-serif; background: #f4f7f6; padding: 30px; }
+    .card { background: white; border-radius: 15px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 1600px; margin: auto; }
+    h2 { font-size: 3em; color: #1a2a3a; border-left: 15px solid #1a2a3a; padding-left: 25px; margin-bottom: 40px; }
+    
+    #searchInput {
+        width: 100%; font-size: 2em; padding: 20px; margin-bottom: 40px;
+        border: 4px solid #1a2a3a; border-radius: 12px; box-sizing: border-box;
+    }
+
+    table { width: 100%; border-collapse: collapse; table-layout: fixed; } /* 固定佈局確保寬度分配有效 */
+    
+    /* 欄位寬度分配 */
+    th:nth-child(1), td:nth-child(1) { width: 22%; text-align: left; } /* 標的 */
+    th:nth-child(2), td:nth-child(2) { width: 10%; } /* 成本 */
+    th:nth-child(3), td:nth-child(3) { width: 10%; } /* 現價 */
+    th:nth-child(4), td:nth-child(4) { width: 10%; } /* 損益 */
+    th:nth-child(5), td:nth-child(5) { width: 13%; } /* 建議動作 */
+    th:nth-child(6), td:nth-child(6) { width: 35%; text-align: left; } /* 原因：給予最大寬度 */
+
+    th { background: #1a2a3a; color: white; padding: 25px 15px; font-size: 1.8em; }
+    td { padding: 25px 15px; border-bottom: 2px solid #eee; font-size: 1.8em; vertical-align: middle; }
+    
+    /* 強化特定欄位數據 */
+    .price-text { font-weight: bold; font-size: 1.1em; color: #000; }
+    
+    /* 重點：原因欄位的極致放大 */
+    .reason-cell { 
+        font-size: 1.75em !important; /* 強制放大到 28px 以上 */
+        color: #000; 
+        font-weight: 900; 
+        line-height: 1.5; 
+        padding-left: 20px !important;
+        background-color: #fff9db; /* 淡淡的底色幫助視覺對焦 */
+    }
+
+    .status-hold { color: #2ecc71; font-weight: 900; }
+    .status-sell { color: #e74c3c; font-weight: 900; }
+    .pnl-pos { color: #d63031; font-weight: 900; }
+    .pnl-neg { color: #27ae60; font-weight: 900; }
+</style>
+</head>
+    <body>
+        <div class="card">
+            <h2>🛡️ 診斷報告 (20260328)</h2>
+            <input type="text" id="searchInput" placeholder="🔍 搜尋標的代碼或名稱..." onkeyup="filterTable()">
+            <table id="monitorTable">
+                <thead><tr><th>標的</th><th>成本</th><th>現價</th><th>損益</th><th>動作</th><th>診斷原因</th></tr></thead>
+                <tbody>
+            <tr>
+                <td style="font-weight:bold;">2317 鴻海</td>
+                <td>241.21</td>
+                <td class="price-text">199.50</td>
+                <td class="pnl-neg">-17.29%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">3702 大聯大</td>
+                <td>94.48</td>
+                <td class="price-text">92.10</td>
+                <td class="pnl-neg">-2.52%</td>
+                <td class="status-sell">🟡 減碼</td>
+                <td class="reason-cell">RSI 高檔轉折</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">2485 兆赫</td>
+                <td>81.37</td>
+                <td class="price-text">80.40</td>
+                <td class="pnl-neg">-1.19%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">2367 燿華</td>
+                <td>77.07</td>
+                <td class="price-text">78.20</td>
+                <td class="pnl-pos">1.47%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">4142 國光生</td>
+                <td>25.32</td>
+                <td class="price-text">18.50</td>
+                <td class="pnl-neg">-26.94%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">0050 元大台灣50</td>
+                <td>46.6</td>
+                <td class="price-text">75.00</td>
+                <td class="pnl-pos">60.94%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">0056 元大高股息</td>
+                <td>36.43</td>
+                <td class="price-text">38.43</td>
+                <td class="pnl-pos">5.49%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">00635U 期元大S&P黃金</td>
+                <td>55.25</td>
+                <td class="price-text">47.01</td>
+                <td class="pnl-neg">-14.91%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">00738U 期元大道瓊白銀</td>
+                <td>66.26</td>
+                <td class="price-text">56.85</td>
+                <td class="pnl-neg">-14.20%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">00929 復華台灣科技優息</td>
+                <td>19.73</td>
+                <td class="price-text">19.42</td>
+                <td class="pnl-neg">-1.57%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">009816 凱基台灣TOP50</td>
+                <td>11.01</td>
+                <td class="price-text">10.67</td>
+                <td class="pnl-neg">-3.09%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">00990A 主動元大AI新經濟</td>
+                <td>11.48</td>
+                <td class="price-text">12.14</td>
+                <td class="pnl-pos">5.75%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">2009 第一銅</td>
+                <td>50.56</td>
+                <td class="price-text">40.50</td>
+                <td class="pnl-neg">-19.90%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">2337 旺宏</td>
+                <td>95.28</td>
+                <td class="price-text">125.00</td>
+                <td class="pnl-pos">31.19%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">2352 佳世達</td>
+                <td>9.72</td>
+                <td class="price-text">23.65</td>
+                <td class="pnl-pos">143.31%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">2409 友達</td>
+                <td>16.21</td>
+                <td class="price-text">14.40</td>
+                <td class="pnl-neg">-11.17%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">3481 群創</td>
+                <td>25.1</td>
+                <td class="price-text">24.80</td>
+                <td class="pnl-neg">-1.20%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">6136 富爾特</td>
+                <td>11.46</td>
+                <td class="price-text">24.25</td>
+                <td class="pnl-pos">111.61%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">6806 森崴能源</td>
+                <td>45.39</td>
+                <td class="price-text">39.55</td>
+                <td class="pnl-neg">-12.87%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">3105 穩懋</td>
+                <td>425.36</td>
+                <td class="price-text">382.50</td>
+                <td class="pnl-neg">-10.08%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">4966 譜瑞-KY</td>
+                <td>1921.64</td>
+                <td class="price-text">500.00</td>
+                <td class="pnl-neg">-73.98%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">6188 廣明</td>
+                <td>115.6</td>
+                <td class="price-text">91.10</td>
+                <td class="pnl-neg">-21.19%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">7792 安葆</td>
+                <td>307.26</td>
+                <td class="price-text">314.00</td>
+                <td class="pnl-pos">2.19%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">2327 國巨*</td>
+                <td>236.2</td>
+                <td class="price-text">260.00</td>
+                <td class="pnl-pos">10.08%</td>
+                <td class="status-hold">🟢 續抱</td>
+                <td class="reason-cell">趨勢動能尚在</td>
+            </tr></tbody>
+            </table>
+        </div>
+        <script>
+            function filterTable() {
+                let f = document.getElementById('searchInput').value.toUpperCase();
+                let trs = document.querySelectorAll('#monitorTable tbody tr');
+                trs.forEach(tr => {
+                    tr.style.display = tr.cells[0].innerText.toUpperCase().includes(f) ? '' : 'none';
+                });
+            }
+        </script>
+    </body></html>

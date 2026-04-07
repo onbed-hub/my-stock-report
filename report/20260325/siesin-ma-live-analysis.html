@@ -1,0 +1,128 @@
+
+    <style>
+        body { font-family: "Microsoft JhengHei", sans-serif; margin: 40px; background-color: #f8f9fa; }
+        h2 { font-size: 44px; color: #1565c0; border-left: 15px solid #1565c0; padding-left: 25px; margin-bottom: 20px; }
+        .legend-container { background: #fff; border: 2px solid #ddd; padding: 20px; margin-bottom: 30px; border-radius: 10px; display: flex; gap: 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .legend-item { font-size: 24px; line-height: 1.6; color: #444; }
+        .legend-title { font-weight: 900; color: #333; font-size: 28px; margin-bottom: 8px; display: block; }
+        table { border-collapse: collapse; width: 100%; background: white; font-size: 32px; border: 2px solid #333; }
+        th { background-color: #1565c0; color: white; padding: 25px; border: 1px solid #333; text-align: center; }
+        td { padding: 20px; text-align: center; border: 1px solid #ddd; font-weight: 700; vertical-align: middle; }
+        .val-num { font-size: 36px; display: block; margin-bottom: 5px; color: #000; }
+        .up { color: #d32f2f; font-size: 32px; font-weight: 900; }
+        .down { color: #2e7d32; font-size: 32px; font-weight: 900; }
+        .val-desc { font-size: 24px; color: #666; font-weight: bold; }
+
+        /* MACD 動能顏色：紅色系代表多方，綠色系代表空方 */
+        .macd-up-attack { color: #d32f2f; }   /* 深紅：多頭加速 */
+        .macd-up-fade { color: #ef9a9a; }     /* 淺紅：多頭減速 */
+        .macd-down-attack { color: #2e7d32; } /* 深綠：空頭加速 */
+        .macd-down-fade { color: #a5d6a7; }   /* 淺綠：空頭減速 */
+
+        .advice-box { display: block; padding: 15px; border-radius: 10px; color: white; text-align: left; }
+        .sell-bg { background-color: #d32f2f; }
+        .hold-bg { background-color: #2e7d32; }
+        .advice-title { font-size: 32px; font-weight: 900; display: block; }
+        .advice-reason { font-size: 22px; font-weight: normal; border-top: 1px solid rgba(255,255,255,0.4); padding-top: 5px; display: block; }
+        .struct-text { font-size: 32px; color: #0d47a1; font-weight: bold; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+    </style>
+    <h2>📊 投資策略診斷報告 (2026-03-25 23:00)</h2>
+    <div class="legend-container">
+        <div class="legend-item">
+            <span class="legend-title">🛡️ 診斷邏輯 (5MA/10MA/20MA)</span>
+            • <b>建議賣出</b>：價格跌破 10MA <b>或</b> 跌破 20MA (月線)。<br>
+            • <b>建議續抱</b>：價格站穩 10MA <b>與</b> 20MA 之上。
+        </div>
+        <div class="legend-item">
+            <span class="legend-title">📊 MACD 狀態說明</span>
+            • <span class="macd-up-attack">■ 多頭攻擊</span>：柱狀體 > 0 且持續增長。<br>
+            • <span class="macd-up-fade">■ 多頭衰退</span>：柱狀體 > 0 但開始縮短。
+        </div>
+    </div>
+    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股票</th>
+      <th>現價</th>
+      <th>5日均線</th>
+      <th>10日均線</th>
+      <th>月線(20MA)</th>
+      <th>MACD動能</th>
+      <th>診斷結構</th>
+      <th>決策建議</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>運錩<br>(2069)</td>
+      <td>18.85</td>
+      <td><span class='val-num'>18.60</span><span style='font-size:20px;color:#666'>(<span class='up'>🔺站上</span>)</span></td>
+      <td><span class='val-num'>18.78</span><span class='val-desc'>(<span class='up'>🔺站上</span>/<span class='down'>🔻下墜</span>)</span></td>
+      <td><span class='val-num'>18.72</span><span class='val-desc'>(<span class='up'>🔺站上</span>/<span class='down'>🔻下墜</span>)</span></td>
+      <td><span class='val-num macd-down-fade'>-0.075</span><span class='val-desc macd-down-fade'>□ 反彈</span></td>
+      <td><span class='struct-text'>🛡️ 多頭攻擊</span></td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">🟢 建議續抱</span><span class="advice-reason">原因：趨勢穩定</span></div></td>
+    </tr>
+    <tr>
+      <td>燿華<br>(2367)</td>
+      <td>75.10</td>
+      <td><span class='val-num'>71.96</span><span style='font-size:20px;color:#666'>(<span class='up'>🔺站上</span>)</span></td>
+      <td><span class='val-num'>73.22</span><span class='val-desc'>(<span class='up'>🔺站上</span>/<span class='up'>🔺上揚</span>)</span></td>
+      <td><span class='val-num'>70.15</span><span class='val-desc'>(<span class='up'>🔺站上</span>/<span class='up'>🔺上揚</span>)</span></td>
+      <td><span class='val-num macd-up-fade'>5.194</span><span class='val-desc macd-up-fade'>□ 衰退</span></td>
+      <td><span class='struct-text'>📈 多頭排列</span></td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">🟢 建議續抱</span><span class="advice-reason">原因：趨勢穩定</span></div></td>
+    </tr>
+    <tr>
+      <td>兆赫<br>(2485)</td>
+      <td>80.00</td>
+      <td><span class='val-num'>77.44</span><span style='font-size:20px;color:#666'>(<span class='up'>🔺站上</span>)</span></td>
+      <td><span class='val-num'>73.32</span><span class='val-desc'>(<span class='up'>🔺站上</span>/<span class='up'>🔺上揚</span>)</span></td>
+      <td><span class='val-num'>61.91</span><span class='val-desc'>(<span class='up'>🔺站上</span>/<span class='up'>🔺上揚</span>)</span></td>
+      <td><span class='val-num macd-up-attack'>9.949</span><span class='val-desc macd-up-attack'>■ 攻擊</span></td>
+      <td><span class='struct-text'>📈 多頭排列</span></td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">🟢 建議續抱</span><span class="advice-reason">原因：趨勢穩定</span></div></td>
+    </tr>
+    <tr>
+      <td>精金<br>(3049)</td>
+      <td>13.15</td>
+      <td><span class='val-num'>15.67</span><span style='font-size:20px;color:#666'>(<span class='down'>🔻跌破</span>)</span></td>
+      <td><span class='val-num'>14.48</span><span class='val-desc'>(<span class='down'>🔻跌破</span>/<span class='down'>🔻下墜</span>)</span></td>
+      <td><span class='val-num'>13.44</span><span class='val-desc'>(<span class='down'>🔻跌破</span>/<span class='up'>🔺上揚</span>)</span></td>
+      <td><span class='val-num macd-up-fade'>1.367</span><span class='val-desc macd-up-fade'>□ 衰退</span></td>
+      <td><span class='struct-text'>❄️ 弱勢空頭</span></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><span class="advice-reason">原因：跌破5日線、跌破10日線、跌破月線、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td>群創<br>(3481)</td>
+      <td>25.65</td>
+      <td><span class='val-num'>25.74</span><span style='font-size:20px;color:#666'>(<span class='down'>🔻跌破</span>)</span></td>
+      <td><span class='val-num'>27.43</span><span class='val-desc'>(<span class='down'>🔻跌破</span>/<span class='down'>🔻下墜</span>)</span></td>
+      <td><span class='val-num'>27.20</span><span class='val-desc'>(<span class='down'>🔻跌破</span>/<span class='up'>🔺上揚</span>)</span></td>
+      <td><span class='val-num macd-up-fade'>0.580</span><span class='val-desc macd-up-fade'>□ 衰退</span></td>
+      <td><span class='struct-text'>❄️ 弱勢空頭</span></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><span class="advice-reason">原因：跌破5日線、跌破10日線、跌破月線、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td>大聯大<br>(3702)</td>
+      <td>95.80</td>
+      <td><span class='val-num'>92.32</span><span style='font-size:20px;color:#666'>(<span class='up'>🔺站上</span>)</span></td>
+      <td><span class='val-num'>87.46</span><span class='val-desc'>(<span class='up'>🔺站上</span>/<span class='up'>🔺上揚</span>)</span></td>
+      <td><span class='val-num'>78.66</span><span class='val-desc'>(<span class='up'>🔺站上</span>/<span class='up'>🔺上揚</span>)</span></td>
+      <td><span class='val-num macd-up-attack'>7.366</span><span class='val-desc macd-up-attack'>■ 攻擊</span></td>
+      <td><span class='struct-text'>📈 多頭排列</span></td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">🟢 建議續抱</span><span class="advice-reason">原因：趨勢穩定</span></div></td>
+    </tr>
+    <tr>
+      <td>網家<br>(8044)</td>
+      <td>23.60</td>
+      <td><span class='val-num'>23.04</span><span style='font-size:20px;color:#666'>(<span class='up'>🔺站上</span>)</span></td>
+      <td><span class='val-num'>23.33</span><span class='val-desc'>(<span class='up'>🔺站上</span>/<span class='down'>🔻下墜</span>)</span></td>
+      <td><span class='val-num'>24.85</span><span class='val-desc'>(<span class='down'>🔻跌破</span>/<span class='down'>🔻下墜</span>)</span></td>
+      <td><span class='val-num macd-down-fade'>-1.337</span><span class='val-desc macd-down-fade'>□ 反彈</span></td>
+      <td><span class='struct-text'>🛡️ 多頭攻擊</span></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><span class="advice-reason">原因：跌破月線</span></div></td>
+    </tr>
+  </tbody>
+</table>

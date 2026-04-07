@@ -1,0 +1,606 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <title>bor 交易報告</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+        <style>
+            /* --- 字體放大設定 --- */
+            body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; margin: 30px; background-color: #f4f7f6; font-size: 1.6em; }
+            .container { max-width: 1500px; margin: auto; }
+            .info-header { background: #2c3e50; color: white; padding: 25px; border-radius: 12px 12px 0 0; }
+            
+            .summary-box { background: white; padding: 20px; border-radius: 0 0 12px 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 30px; white-space: pre-wrap; line-height: 1.6; border-left: 8px solid #2c3e50; font-size: 1.1em; }
+            
+            .filter-section { margin-bottom: 20px; background: #fff; padding: 20px; border-radius: 12px; border: 1px solid #ddd; }
+            select { padding: 12px; font-size: 1.1em; border-radius: 6px; width: 450px; border: 2px solid #3498db; }
+            
+            /* --- 下方動態資訊列字體放大 --- */
+            .dataTables_info { 
+                font-size: 1.2em !important; font-weight: bold; color: #2c3e50; background: #eef2f3; 
+                padding: 15px !important; border-radius: 8px; margin-top: 20px !important; line-height: 1.8; border-left: 5px solid #3498db;
+            }
+            .stat-highlight { margin-left: 15px; color: #d22d2d; }
+
+            table.dataTable thead th { background-color: #34495e; color: white; padding: 15px !important; }
+            table.dataTable tbody td { padding: 12px !important; }
+            .profit-positive { color: #e74c3c; font-weight: bold; }
+            .profit-negative { color: #27ae60; font-weight: bold; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="info-header">
+                <h2 style="margin:0;">📈 MA20 策略回測報告 - bor</h2>
+                <div style="margin-top:10px;">
+                    <small>回測起始日：<strong>2026-01-01</strong></small> | 
+                    <small>報告產出時間：<strong>2026-03-26 23:08:34</strong></small>
+                </div>
+            </div>
+            
+            <div class="summary-box"><strong>📊 全體原始統計 (固定數據)：</strong>
+回測起始日期: 2026-01-01
+全體總交易次數: 44 次
+總勝率: 50.0% (22/44)
+全體累計收益: +417.75%
+全體平均單筆收益: +9.49%</div>
+
+            <div class="filter-section">
+                <label for="stockSelector"><strong>🔍 篩選股票：</strong></label>
+                <select id="stockSelector">
+                    <option value="">-- 顯示全體股票 --</option>
+                    <option value="主動元大AI新經濟(00990A)">主動元大AI新經濟(00990A)</option><option value="佳世達(2352)">佳世達(2352)</option><option value="元大台灣50(0050)">元大台灣50(0050)</option><option value="元大高股息(0056)">元大高股息(0056)</option><option value="兆赫(2485)">兆赫(2485)</option><option value="友達(2409)">友達(2409)</option><option value="國光生(4142)">國光生(4142)</option><option value="國巨*(2327)">國巨*(2327)</option><option value="大聯大(3702)">大聯大(3702)</option><option value="安葆(7792)">安葆(7792)</option><option value="廣明(6188)">廣明(6188)</option><option value="復華台灣科技優息(00929)">復華台灣科技優息(00929)</option><option value="旺宏(2337)">旺宏(2337)</option><option value="期元大S&P黃金(00635U)">期元大S&P黃金(00635U)</option><option value="期元大道瓊白銀(00738U)">期元大道瓊白銀(00738U)</option><option value="森崴能源(6806)">森崴能源(6806)</option><option value="燿華(2367)">燿華(2367)</option><option value="穩懋(3105)">穩懋(3105)</option><option value="第一銅(2009)">第一銅(2009)</option><option value="群創(3481)">群創(3481)</option><option value="譜瑞-KY(4966)">譜瑞-KY(4966)</option><option value="鴻海(2317)">鴻海(2317)</option>
+                </select>
+            </div>
+
+            <table id="tradeTable" class="dataframe display nowrap">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股票</th>
+      <th>買入日期</th>
+      <th>買入價</th>
+      <th>買入收盤價</th>
+      <th>賣出日期</th>
+      <th>賣出價</th>
+      <th>賣出收盤價</th>
+      <th>持股天數</th>
+      <th>收益%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>鴻海(2317)</td>
+      <td>2026-01-02</td>
+      <td>232.00</td>
+      <td>232.00</td>
+      <td>2026-01-08</td>
+      <td>229.50</td>
+      <td>229.50</td>
+      <td>6</td>
+      <td>-1.08</td>
+    </tr>
+    <tr>
+      <td>鴻海(2317)</td>
+      <td>2026-02-25</td>
+      <td>246.50</td>
+      <td>246.50</td>
+      <td>2026-03-03</td>
+      <td>229.00</td>
+      <td>229.00</td>
+      <td>6</td>
+      <td>-7.10</td>
+    </tr>
+    <tr>
+      <td>大聯大(3702)</td>
+      <td>2026-02-24</td>
+      <td>66.60</td>
+      <td>66.60</td>
+      <td>尚未賣出</td>
+      <td>95.10</td>
+      <td>95.10</td>
+      <td>30</td>
+      <td>42.79</td>
+    </tr>
+    <tr>
+      <td>兆赫(2485)</td>
+      <td>2026-01-13</td>
+      <td>30.25</td>
+      <td>30.25</td>
+      <td>2026-02-09</td>
+      <td>39.10</td>
+      <td>39.10</td>
+      <td>27</td>
+      <td>29.26</td>
+    </tr>
+    <tr>
+      <td>兆赫(2485)</td>
+      <td>2026-03-02</td>
+      <td>49.50</td>
+      <td>49.50</td>
+      <td>尚未賣出</td>
+      <td>78.70</td>
+      <td>78.70</td>
+      <td>24</td>
+      <td>58.99</td>
+    </tr>
+    <tr>
+      <td>燿華(2367)</td>
+      <td>2026-01-07</td>
+      <td>31.65</td>
+      <td>31.65</td>
+      <td>2026-02-10</td>
+      <td>51.60</td>
+      <td>51.60</td>
+      <td>34</td>
+      <td>63.03</td>
+    </tr>
+    <tr>
+      <td>燿華(2367)</td>
+      <td>2026-02-25</td>
+      <td>58.70</td>
+      <td>58.70</td>
+      <td>2026-03-09</td>
+      <td>62.10</td>
+      <td>62.10</td>
+      <td>12</td>
+      <td>5.79</td>
+    </tr>
+    <tr>
+      <td>燿華(2367)</td>
+      <td>2026-03-20</td>
+      <td>73.00</td>
+      <td>73.00</td>
+      <td>2026-03-23</td>
+      <td>71.30</td>
+      <td>71.30</td>
+      <td>3</td>
+      <td>-2.33</td>
+    </tr>
+    <tr>
+      <td>國光生(4142)</td>
+      <td>2026-01-08</td>
+      <td>19.60</td>
+      <td>19.60</td>
+      <td>2026-01-20</td>
+      <td>20.15</td>
+      <td>20.15</td>
+      <td>12</td>
+      <td>2.81</td>
+    </tr>
+    <tr>
+      <td>國光生(4142)</td>
+      <td>2026-03-23</td>
+      <td>18.35</td>
+      <td>18.35</td>
+      <td>尚未賣出</td>
+      <td>18.35</td>
+      <td>18.35</td>
+      <td>3</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>元大台灣50(0050)</td>
+      <td>2026-01-05</td>
+      <td>68.53</td>
+      <td>68.53</td>
+      <td>2026-02-02</td>
+      <td>71.50</td>
+      <td>71.50</td>
+      <td>28</td>
+      <td>4.33</td>
+    </tr>
+    <tr>
+      <td>元大台灣50(0050)</td>
+      <td>2026-02-11</td>
+      <td>77.20</td>
+      <td>77.20</td>
+      <td>2026-03-04</td>
+      <td>75.60</td>
+      <td>75.60</td>
+      <td>21</td>
+      <td>-2.07</td>
+    </tr>
+    <tr>
+      <td>元大高股息(0056)</td>
+      <td>2026-01-02</td>
+      <td>36.17</td>
+      <td>36.17</td>
+      <td>2026-01-30</td>
+      <td>37.58</td>
+      <td>37.58</td>
+      <td>28</td>
+      <td>3.89</td>
+    </tr>
+    <tr>
+      <td>元大高股息(0056)</td>
+      <td>2026-02-10</td>
+      <td>38.34</td>
+      <td>38.34</td>
+      <td>2026-03-04</td>
+      <td>37.74</td>
+      <td>37.74</td>
+      <td>22</td>
+      <td>-1.56</td>
+    </tr>
+    <tr>
+      <td>期元大S&amp;P黃金(00635U)</td>
+      <td>2026-01-12</td>
+      <td>49.01</td>
+      <td>49.01</td>
+      <td>2026-02-02</td>
+      <td>49.61</td>
+      <td>49.61</td>
+      <td>21</td>
+      <td>1.22</td>
+    </tr>
+    <tr>
+      <td>期元大道瓊白銀(00738U)</td>
+      <td>2026-01-02</td>
+      <td>60.40</td>
+      <td>60.40</td>
+      <td>2026-02-02</td>
+      <td>63.00</td>
+      <td>63.00</td>
+      <td>31</td>
+      <td>4.30</td>
+    </tr>
+    <tr>
+      <td>復華台灣科技優息(00929)</td>
+      <td>2026-01-02</td>
+      <td>18.00</td>
+      <td>18.00</td>
+      <td>2026-01-30</td>
+      <td>19.35</td>
+      <td>19.35</td>
+      <td>28</td>
+      <td>7.54</td>
+    </tr>
+    <tr>
+      <td>復華台灣科技優息(00929)</td>
+      <td>2026-03-18</td>
+      <td>20.15</td>
+      <td>20.15</td>
+      <td>2026-03-23</td>
+      <td>19.22</td>
+      <td>19.22</td>
+      <td>5</td>
+      <td>-4.62</td>
+    </tr>
+    <tr>
+      <td>主動元大AI新經濟(00990A)</td>
+      <td>2026-02-02</td>
+      <td>10.92</td>
+      <td>10.92</td>
+      <td>2026-02-05</td>
+      <td>11.14</td>
+      <td>11.14</td>
+      <td>3</td>
+      <td>2.01</td>
+    </tr>
+    <tr>
+      <td>主動元大AI新經濟(00990A)</td>
+      <td>2026-02-09</td>
+      <td>11.54</td>
+      <td>11.54</td>
+      <td>2026-03-04</td>
+      <td>11.60</td>
+      <td>11.60</td>
+      <td>23</td>
+      <td>0.52</td>
+    </tr>
+    <tr>
+      <td>主動元大AI新經濟(00990A)</td>
+      <td>2026-03-25</td>
+      <td>12.53</td>
+      <td>12.53</td>
+      <td>尚未賣出</td>
+      <td>12.45</td>
+      <td>12.45</td>
+      <td>1</td>
+      <td>-0.64</td>
+    </tr>
+    <tr>
+      <td>第一銅(2009)</td>
+      <td>2026-01-07</td>
+      <td>51.20</td>
+      <td>51.20</td>
+      <td>2026-01-08</td>
+      <td>48.15</td>
+      <td>48.15</td>
+      <td>1</td>
+      <td>-5.96</td>
+    </tr>
+    <tr>
+      <td>第一銅(2009)</td>
+      <td>2026-01-13</td>
+      <td>50.40</td>
+      <td>50.40</td>
+      <td>2026-01-16</td>
+      <td>49.30</td>
+      <td>49.30</td>
+      <td>3</td>
+      <td>-2.18</td>
+    </tr>
+    <tr>
+      <td>第一銅(2009)</td>
+      <td>2026-01-28</td>
+      <td>52.00</td>
+      <td>52.00</td>
+      <td>2026-01-30</td>
+      <td>50.10</td>
+      <td>50.10</td>
+      <td>2</td>
+      <td>-3.65</td>
+    </tr>
+    <tr>
+      <td>旺宏(2337)</td>
+      <td>2026-01-02</td>
+      <td>43.35</td>
+      <td>43.35</td>
+      <td>2026-02-06</td>
+      <td>80.80</td>
+      <td>80.80</td>
+      <td>35</td>
+      <td>86.39</td>
+    </tr>
+    <tr>
+      <td>旺宏(2337)</td>
+      <td>2026-02-11</td>
+      <td>98.50</td>
+      <td>98.50</td>
+      <td>2026-03-04</td>
+      <td>98.00</td>
+      <td>98.00</td>
+      <td>21</td>
+      <td>-0.51</td>
+    </tr>
+    <tr>
+      <td>旺宏(2337)</td>
+      <td>2026-03-18</td>
+      <td>143.50</td>
+      <td>143.50</td>
+      <td>2026-03-26</td>
+      <td>128.00</td>
+      <td>128.00</td>
+      <td>8</td>
+      <td>-10.80</td>
+    </tr>
+    <tr>
+      <td>佳世達(2352)</td>
+      <td>2026-01-19</td>
+      <td>25.50</td>
+      <td>25.50</td>
+      <td>2026-01-28</td>
+      <td>25.50</td>
+      <td>25.50</td>
+      <td>9</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>友達(2409)</td>
+      <td>2026-01-02</td>
+      <td>12.60</td>
+      <td>12.60</td>
+      <td>2026-01-22</td>
+      <td>15.35</td>
+      <td>15.35</td>
+      <td>20</td>
+      <td>21.83</td>
+    </tr>
+    <tr>
+      <td>友達(2409)</td>
+      <td>2026-02-11</td>
+      <td>16.15</td>
+      <td>16.15</td>
+      <td>2026-03-03</td>
+      <td>15.75</td>
+      <td>15.75</td>
+      <td>20</td>
+      <td>-2.48</td>
+    </tr>
+    <tr>
+      <td>友達(2409)</td>
+      <td>2026-03-12</td>
+      <td>17.25</td>
+      <td>17.25</td>
+      <td>2026-03-16</td>
+      <td>15.70</td>
+      <td>15.70</td>
+      <td>4</td>
+      <td>-8.99</td>
+    </tr>
+    <tr>
+      <td>群創(3481)</td>
+      <td>2026-01-02</td>
+      <td>18.10</td>
+      <td>18.10</td>
+      <td>2026-01-23</td>
+      <td>24.00</td>
+      <td>24.00</td>
+      <td>21</td>
+      <td>32.60</td>
+    </tr>
+    <tr>
+      <td>群創(3481)</td>
+      <td>2026-03-02</td>
+      <td>28.55</td>
+      <td>28.55</td>
+      <td>2026-03-16</td>
+      <td>27.30</td>
+      <td>27.30</td>
+      <td>14</td>
+      <td>-4.38</td>
+    </tr>
+    <tr>
+      <td>森崴能源(6806)</td>
+      <td>2026-01-12</td>
+      <td>40.05</td>
+      <td>40.05</td>
+      <td>2026-01-29</td>
+      <td>49.60</td>
+      <td>49.60</td>
+      <td>17</td>
+      <td>23.85</td>
+    </tr>
+    <tr>
+      <td>穩懋(3105)</td>
+      <td>2026-01-08</td>
+      <td>197.50</td>
+      <td>197.50</td>
+      <td>2026-02-02</td>
+      <td>221.50</td>
+      <td>221.50</td>
+      <td>25</td>
+      <td>12.15</td>
+    </tr>
+    <tr>
+      <td>穩懋(3105)</td>
+      <td>2026-02-10</td>
+      <td>255.50</td>
+      <td>255.50</td>
+      <td>2026-03-06</td>
+      <td>298.50</td>
+      <td>298.50</td>
+      <td>24</td>
+      <td>16.83</td>
+    </tr>
+    <tr>
+      <td>穩懋(3105)</td>
+      <td>2026-03-18</td>
+      <td>322.50</td>
+      <td>322.50</td>
+      <td>2026-03-24</td>
+      <td>313.50</td>
+      <td>313.50</td>
+      <td>6</td>
+      <td>-2.79</td>
+    </tr>
+    <tr>
+      <td>穩懋(3105)</td>
+      <td>2026-03-26</td>
+      <td>358.50</td>
+      <td>358.50</td>
+      <td>尚未賣出</td>
+      <td>358.50</td>
+      <td>358.50</td>
+      <td>0</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>譜瑞-KY(4966)</td>
+      <td>2026-01-09</td>
+      <td>633.00</td>
+      <td>633.00</td>
+      <td>2026-01-13</td>
+      <td>598.00</td>
+      <td>598.00</td>
+      <td>4</td>
+      <td>-5.53</td>
+    </tr>
+    <tr>
+      <td>廣明(6188)</td>
+      <td>2026-01-02</td>
+      <td>109.50</td>
+      <td>109.50</td>
+      <td>2026-01-13</td>
+      <td>111.00</td>
+      <td>111.00</td>
+      <td>11</td>
+      <td>1.37</td>
+    </tr>
+    <tr>
+      <td>廣明(6188)</td>
+      <td>2026-03-18</td>
+      <td>99.19</td>
+      <td>99.19</td>
+      <td>2026-03-19</td>
+      <td>95.16</td>
+      <td>95.16</td>
+      <td>1</td>
+      <td>-4.06</td>
+    </tr>
+    <tr>
+      <td>安葆(7792)</td>
+      <td>2026-01-02</td>
+      <td>226.50</td>
+      <td>226.50</td>
+      <td>2026-01-30</td>
+      <td>368.00</td>
+      <td>368.00</td>
+      <td>28</td>
+      <td>62.47</td>
+    </tr>
+    <tr>
+      <td>國巨*(2327)</td>
+      <td>2026-01-02</td>
+      <td>241.00</td>
+      <td>241.00</td>
+      <td>2026-01-28</td>
+      <td>285.50</td>
+      <td>285.50</td>
+      <td>26</td>
+      <td>18.46</td>
+    </tr>
+    <tr>
+      <td>國巨*(2327)</td>
+      <td>2026-02-24</td>
+      <td>301.00</td>
+      <td>301.00</td>
+      <td>2026-03-04</td>
+      <td>259.00</td>
+      <td>259.00</td>
+      <td>8</td>
+      <td>-13.95</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                var table = $('#tradeTable').DataTable({
+                    "order": [[ 1, "asc" ]], // 🚀 買入日期從小到大
+                    "pageLength": 100,
+                    "dom": 'lrtip',
+                    "language": {
+                        "lengthMenu": "每頁顯示 _MENU_ 筆",
+                        "paginate": { "next": "下一頁", "previous": "上一頁" }
+                    },
+                    "rowCallback": function(row, data, index) {
+                        var profit = parseFloat(data[8]);
+                        if (profit > 0) $('td:eq(8)', row).addClass('profit-positive');
+                        else if (profit < 0) $('td:eq(8)', row).addClass('profit-negative');
+                    },
+                    "infoCallback": function( settings, start, end, max, total, pre ) {
+                        var api = this.api();
+                        var data = api.rows({filter: 'applied'}).data();
+                        var totalCount = data.length;
+                        if (totalCount === 0) return "查無紀錄";
+
+                        var winCount = 0; var totalProfit = 0;
+                        for (var i = 0; i < totalCount; i++) {
+                            var p = parseFloat(data[i][8]);
+                            if (p > 0) winCount++;
+                            totalProfit += p;
+                        }
+                        var winRate = (winCount / totalCount * 100).toFixed(1);
+                        var avgProfit = (totalProfit / totalCount).toFixed(2);
+                        
+                        return "📍 當前篩選統計: " + totalCount + " 筆交易" +
+                               "<span class='stat-highlight'>🏆 勝率: " + winRate + "% (" + winCount + "/" + totalCount + ")</span>" +
+                               "<span class='stat-highlight'>💰 累計收益: " + (totalProfit >= 0 ? '+' : '') + totalProfit.toFixed(2) + "%</span>" +
+                               "<span class='stat-highlight'>📊 平均收益: " + (avgProfit >= 0 ? '+' : '') + avgProfit + "%</span>";
+                    }
+                });
+
+                $('#stockSelector').on('change', function() {
+                    table.column(0).search($(this).val(), false, false).draw();
+                });
+            });
+        </script>
+    </body>
+    </html>
+    

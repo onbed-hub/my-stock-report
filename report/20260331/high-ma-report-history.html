@@ -1,0 +1,178 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <title>high 交易回測報告</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+        <style>
+            body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; margin: 30px; background-color: #f4f7f6; font-size: 1.6em; }
+            .container { max-width: 1500px; margin: auto; }
+            .info-header { background: #2c3e50; color: white; padding: 25px; border-radius: 12px 12px 0 0; }
+            .summary-box { background: white; padding: 20px; border-radius: 0 0 12px 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 30px; white-space: pre-wrap; line-height: 1.6; border-left: 8px solid #2c3e50; font-size: 1.1em; }
+            .filter-section { margin-bottom: 20px; background: #fff; padding: 20px; border-radius: 12px; border: 1px solid #ddd; }
+            select { padding: 12px; font-size: 1.1em; border-radius: 6px; width: 450px; border: 2px solid #3498db; }
+            .dataTables_info { font-size: 1.2em !important; font-weight: bold; color: #2c3e50; background: #eef2f3; padding: 15px !important; border-radius: 8px; margin-top: 20px !important; line-height: 1.8; border-left: 5px solid #3498db; }
+            .stat-highlight { margin-left: 15px; color: #d22d2d; }
+            table.dataTable thead th { background-color: #34495e; color: white; padding: 15px !important; }
+            .profit-positive { color: #e74c3c; font-weight: bold; }
+            .profit-negative { color: #27ae60; font-weight: bold; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="info-header">
+                <h2 style="margin:0;">📈 MA20 策略回測歷史報告 - high</h2>
+                <div style="margin-top:10px;">
+                    <small>回測起始日：<strong>2026-01-01</strong></small> |
+                    <small>報告產出時間：<strong>2026-03-31 20:40:18</strong></small>
+                </div>
+            </div>
+            <div class="summary-box"><strong>📊 全體統計數據：</strong>
+回測起始日期: 2026-01-01
+全體總交易次數: 9 次
+總勝率: 55.6% (5/9)
+全體累計收益: +46.01%
+全體平均單筆收益: +5.11%</div>
+            <div class="filter-section">
+                <label for="stockSelector"><strong>🔍 篩選股票：</strong></label>
+                <select id="stockSelector">
+                    <option value="">-- 顯示全體股票 --</option>
+                    <option value="九豪(6127.TWO)">九豪(6127.TWO)</option><option value="康霈*(6919.TW)">康霈*(6919.TW)</option><option value="恩德(1528.TW)">恩德(1528.TW)</option><option value="華紙(1905.TW)">華紙(1905.TW)</option>
+                </select>
+            </div>
+            <table id="tradeTable" class="dataframe display nowrap">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股票</th>
+      <th>買入日期</th>
+      <th>買入價</th>
+      <th>賣出日期</th>
+      <th>賣出價</th>
+      <th>持股天數</th>
+      <th>收益%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>華紙(1905.TW)</td>
+      <td>2026-01-09</td>
+      <td>11.95</td>
+      <td>2026-01-22</td>
+      <td>12.25</td>
+      <td>13</td>
+      <td>2.51</td>
+    </tr>
+    <tr>
+      <td>華紙(1905.TW)</td>
+      <td>2026-02-24</td>
+      <td>12.70</td>
+      <td>2026-03-02</td>
+      <td>12.20</td>
+      <td>6</td>
+      <td>-3.94</td>
+    </tr>
+    <tr>
+      <td>華紙(1905.TW)</td>
+      <td>2026-03-24</td>
+      <td>12.30</td>
+      <td>尚未賣出</td>
+      <td>18.55</td>
+      <td>7</td>
+      <td>50.81</td>
+    </tr>
+    <tr>
+      <td>恩德(1528.TW)</td>
+      <td>2026-01-19</td>
+      <td>31.15</td>
+      <td>2026-01-27</td>
+      <td>28.15</td>
+      <td>8</td>
+      <td>-9.63</td>
+    </tr>
+    <tr>
+      <td>恩德(1528.TW)</td>
+      <td>2026-03-27</td>
+      <td>25.45</td>
+      <td>尚未賣出</td>
+      <td>26.95</td>
+      <td>4</td>
+      <td>5.89</td>
+    </tr>
+    <tr>
+      <td>九豪(6127.TWO)</td>
+      <td>2026-01-02</td>
+      <td>37.50</td>
+      <td>2026-01-21</td>
+      <td>39.45</td>
+      <td>19</td>
+      <td>5.20</td>
+    </tr>
+    <tr>
+      <td>九豪(6127.TWO)</td>
+      <td>2026-03-18</td>
+      <td>40.40</td>
+      <td>2026-03-26</td>
+      <td>40.65</td>
+      <td>8</td>
+      <td>0.62</td>
+    </tr>
+    <tr>
+      <td>康霈*(6919.TW)</td>
+      <td>2026-01-15</td>
+      <td>165.00</td>
+      <td>2026-01-26</td>
+      <td>159.00</td>
+      <td>11</td>
+      <td>-3.64</td>
+    </tr>
+    <tr>
+      <td>康霈*(6919.TW)</td>
+      <td>2026-01-27</td>
+      <td>166.00</td>
+      <td>2026-02-09</td>
+      <td>163.00</td>
+      <td>13</td>
+      <td>-1.81</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                var table = $('#tradeTable').DataTable({
+                    "order": [[ 1, "asc" ]],
+                    "pageLength": 100,
+                    "dom": 'lrtip',
+                    "language": { "lengthMenu": "每頁顯示 _MENU_ 筆", "paginate": { "next": "下一頁", "previous": "上一頁" } },
+                    "rowCallback": function(row, data, index) {
+                        var profit = parseFloat(data[6]);
+                        if (profit > 0) $('td:eq(6)', row).addClass('profit-positive');
+                        else if (profit < 0) $('td:eq(6)', row).addClass('profit-negative');
+                    },
+                    "infoCallback": function( settings, start, end, max, total, pre ) {
+                        var api = this.api();
+                        var data = api.rows({filter: 'applied'}).data();
+                        var totalCount = data.length;
+                        if (totalCount === 0) return "查無紀錄";
+                        var winCount = 0; var totalProfit = 0;
+                        for (var i = 0; i < totalCount; i++) {
+                            var p = parseFloat(data[i][6]);
+                            if (p > 0) winCount++;
+                            totalProfit += p;
+                        }
+                        return "📍 當前篩選統計: " + totalCount + " 筆交易" +
+                               "<span class='stat-highlight'>🏆 勝率: " + (winCount / totalCount * 100).toFixed(1) + "% (" + winCount + "/" + totalCount + ")</span>" +
+                               "<span class='stat-highlight'>💰 累計收益: " + totalProfit.toFixed(2) + "%</span>";
+                    }
+                });
+                $('#stockSelector').on('change', function() {
+                    table.column(0).search($(this).val(), false, false).draw();
+                });
+            });
+        </script>
+    </body>
+    </html>
+    

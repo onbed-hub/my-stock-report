@@ -1,0 +1,53 @@
+
+    <style>
+        body { font-family: "Microsoft JhengHei", sans-serif; margin: 30px; background-color: #f8f9fa; }
+        h2 { font-size: 36px; color: #1565c0; border-left: 12px solid #1565c0; padding-left: 20px; margin-bottom: 20px; }
+        .legend-container { background: #fff; border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+        .legend-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 18px; color: #444; }
+        table { border-collapse: collapse; width: 100%; background: white; font-size: 22px; border: 2px solid #333; }
+        th { background-color: #1565c0; color: white; padding: 12px; border: 1px solid #333; text-align: center; }
+        td { padding: 10px; text-align: center; border: 1px solid #ddd; font-weight: 700; vertical-align: middle; }
+        .price-now { font-size: 32px; color: #d32f2f; }
+        .advice-box { padding: 10px; border-radius: 6px; color: white; text-align: left; min-width: 220px; }
+        .sell-bg { background-color: #d32f2f; } 
+        .hold-bg { background-color: #2e7d32; }
+        .buy-bg { background-color: #ef6c00; }
+        .advice-title { font-size: 26px; font-weight: 900; }
+        .advice-reason { font-size: 16px; opacity: 0.9; }
+        .macd-up-attack { color: #d32f2f; } .macd-up-fade { color: #ef9a9a; }
+    </style>
+    <h2>📊 即時診斷報告 (2026-03-27 14:22)</h2>
+    <div class="legend-container">
+        <div class="legend-grid">
+            <div>📌 <b>買入</b>：站上月線+月線上揚+5/10黃金交叉+5日勾頭+爆量+RSI>55</div>
+            <div>🚨 <b>賣出</b>：收盤價 <b>跌破 10MA 或 20MA</b>。</div>
+        </div>
+    </div>
+    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股票名稱</th>
+      <th>即時現價</th>
+      <th>5日均線</th>
+      <th>10日均線</th>
+      <th>月線(20MA)</th>
+      <th>量能檢查</th>
+      <th>RSI(14)</th>
+      <th>MACD動能</th>
+      <th>決策建議與理由</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>台積電<br><small>2330</small></td>
+      <td><span class='price-now'>1820.00</span></td>
+      <td>1825.00</td>
+      <td>1842.90</td>
+      <td>1864.12</td>
+      <td>28883<br><small>(36903942)</small></td>
+      <td>51.8</td>
+      <td><span class='macd-up-fade'>1.868<br>□ 衰退</span></td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、破10MA、破月線、動能減弱</span></div></td>
+    </tr>
+  </tbody>
+</table>
