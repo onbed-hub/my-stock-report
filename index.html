@@ -29,13 +29,23 @@
             color: #1e293b;
         }
 
-        /* 搜尋框樣式 */
-        .search-container {
+        /* 控制列：日期與搜尋 */
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
             margin-bottom: 2rem;
         }
-        #searchInput {
+        .control-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+        input {
             width: 100%;
-            padding: 12px 20px;
+            padding: 12px 15px;
             font-size: 1rem;
             border: 2px solid #e2e8f0;
             border-radius: 12px;
@@ -43,7 +53,7 @@
             transition: border-color 0.2s;
             box-sizing: border-box;
         }
-        #searchInput:focus {
+        input:focus {
             border-color: #6366f1;
         }
 
@@ -90,11 +100,21 @@
             color: #334155;
             font-size: 1.05rem;
         }
+        .file-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4px;
+        }
         .file-name {
             font-size: 0.8rem;
             color: #94a3b8;
-            margin-top: 4px;
             font-family: 'SFMono-Regular', Consolas, monospace;
+        }
+        .current-path {
+            font-size: 0.75rem;
+            color: #6366f1;
+            font-weight: bold;
         }
         .badge {
             font-size: 0.7rem;
@@ -104,13 +124,16 @@
             width: fit-content;
             font-weight: bold;
         }
-        /* 分類標籤顏色 */
-        .bg-live { background: #ede9fe; color: #7c3aed; } /* 實時-紫色 */
-        .bg-con { background: #e0e7ff; color: #4338ca; } /* 盤整-靛色 */
-        .bg-all { background: #f1f5f9; color: #475569; } /* 全市場-灰色 */
-        .bg-high { background: #fef3c7; color: #92400e; } /* 高強度-琥珀色 */
-        
+        .bg-live { background: #ede9fe; color: #7c3aed; }
+        .bg-con { background: #e0e7ff; color: #4338ca; }
+        .bg-all { background: #f1f5f9; color: #475569; }
+        .bg-high { background: #fef3c7; color: #92400e; }
+
         .hidden { display: none !important; }
+
+        @media (max-width: 480px) {
+            .controls { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -118,22 +141,35 @@
 <div class="container">
     <h1>📈 量化策略分析面板</h1>
 
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="搜尋報表 (輸入 bor, live, ma, rsi...)" onkeyup="filterReports()">
+    <div class="controls">
+        <div class="control-group">
+            <label>📅 報告日期</label>
+            <input type="date" id="datePicker" onchange="updateReportPaths()">
+        </div>
+        <div class="control-group">
+            <label>🔍 快速過濾</label>
+            <input type="text" id="searchInput" placeholder="輸入關鍵字..." onkeyup="filterReports()">
+        </div>
     </div>
 
     <div class="report-section">
         <div class="section-header">Summary & Consolidation</div>
         <div class="report-grid">
-            <a href="bor-consolidation-live.html" class="card">
+            <a href="#" class="card" data-base="bor-consolidation-live.html">
                 <span class="badge bg-live">LIVE</span>
                 <span class="title">BOR 盤整區間實時監控</span>
-                <span class="file-name">📄 bor-consolidation-live.html</span>
+                <div class="file-info">
+                    <span class="file-name">📄 bor-consolidation-live.html</span>
+                    <span class="current-path"></span>
+                </div>
             </a>
-            <a href="consolidation-report.html" class="card">
+            <a href="#" class="card" data-base="consolidation-report.html">
                 <span class="badge bg-con">CONSOLIDATION</span>
                 <span class="title">盤整區間 / 綜合彙整報表</span>
-                <span class="file-name">📄 consolidation-report.html</span>
+                <div class="file-info">
+                    <span class="file-name">📄 consolidation-report.html</span>
+                    <span class="current-path"></span>
+                </div>
             </a>
         </div>
     </div>
@@ -141,20 +177,29 @@
     <div class="report-section">
         <div class="section-header">All Market Reports</div>
         <div class="report-grid">
-            <a href="all-ma-report.html" class="card">
+            <a href="#" class="card" data-base="all-ma-report.html">
                 <span class="badge bg-all">ALL</span>
                 <span class="title">均線扣抵全市場報表</span>
-                <span class="file-name">📄 all-ma-report.html</span>
+                <div class="file-info">
+                    <span class="file-name">📄 all-ma-report.html</span>
+                    <span class="current-path"></span>
+                </div>
             </a>
-            <a href="all-rsi-dmi-obv-report.html" class="card">
+            <a href="#" class="card" data-base="all-rsi-dmi-obv-report.html">
                 <span class="badge bg-all">ALL</span>
                 <span class="title">RSI / DMI / OBV 綜合分析</span>
-                <span class="file-name">📄 all-rsi-dmi-obv-report.html</span>
+                <div class="file-info">
+                    <span class="file-name">📄 all-rsi-dmi-obv-report.html</span>
+                    <span class="current-path"></span>
+                </div>
             </a>
-            <a href="all-fvg-summary.html" class="card">
+            <a href="#" class="card" data-base="all-fvg-summary.html">
                 <span class="badge bg-all">ALL</span>
                 <span class="title">FVG 缺口彙整摘要</span>
-                <span class="file-name">📄 all-fvg-summary.html</span>
+                <div class="file-info">
+                    <span class="file-name">📄 all-fvg-summary.html</span>
+                    <span class="current-path"></span>
+                </div>
             </a>
         </div>
     </div>
@@ -162,26 +207,64 @@
     <div class="report-section">
         <div class="section-header">High Intensity Analysis</div>
         <div class="report-grid">
-            <a href="high-ma-report.html" class="card">
+            <a href="#" class="card" data-base="high-ma-report.html">
                 <span class="badge bg-high">HIGH</span>
                 <span class="title">MA 均線精選標的</span>
-                <span class="file-name">📄 high-ma-report.html</span>
+                <div class="file-info">
+                    <span class="file-name">📄 high-ma-report.html</span>
+                    <span class="current-path"></span>
+                </div>
             </a>
-            <a href="high-rsi-dmi-obv-report.html" class="card">
+            <a href="#" class="card" data-base="high-rsi-dmi-obv-report.html">
                 <span class="badge bg-high">HIGH</span>
                 <span class="title">RSI / DMI / OBV 高強度過濾</span>
-                <span class="file-name">📄 high-rsi-dmi-obv-report.html</span>
+                <div class="file-info">
+                    <span class="file-name">📄 high-rsi-dmi-obv-report.html</span>
+                    <span class="current-path"></span>
+                </div>
             </a>
-            <a href="high-fvg-summary.html" class="card">
+            <a href="#" class="card" data-base="high-fvg-summary.html">
                 <span class="badge bg-high">HIGH</span>
                 <span class="title">FVG 缺口彙整摘要</span>
-                <span class="file-name">📄 high-fvg-summary.html</span>
+                <div class="file-info">
+                    <span class="file-name">📄 high-fvg-summary.html</span>
+                    <span class="current-path"></span>
+                </div>
             </a>
         </div>
     </div>
 </div>
 
 <script>
+    // 頁面載入時，預設選取今天
+    window.onload = function() {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('datePicker').value = today;
+        updateReportPaths();
+    };
+
+    // 當日期改變時，更新所有卡片的 href 連結
+    function updateReportPaths() {
+        const dateInput = document.getElementById('datePicker').value; // 格式 YYYY-MM-DD
+        if (!dateInput) return;
+
+        // 將 YYYY-MM-DD 轉為 YYYYMMDD
+        const dateDir = dateInput.replace(/-/g, '');
+        const cards = document.querySelectorAll('.card');
+
+        cards.forEach(card => {
+            const fileName = card.getAttribute('data-base');
+            // 組合新路徑: report/YYYYMMDD/filename.html
+            const newHref = `report/${dateDir}/${fileName}`;
+            card.setAttribute('href', newHref);
+            
+            // 在卡片右下角顯示當前指向的路徑，方便確認
+            const pathDisplay = card.querySelector('.current-path');
+            pathDisplay.textContent = `📍 ${dateDir}`;
+        });
+    }
+
+    // 原有的過濾功能
     function filterReports() {
         const input = document.getElementById('searchInput').value.toLowerCase();
         const cards = document.querySelectorAll('.card');
