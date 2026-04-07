@@ -1,146 +1,41 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>量化交易策略儀表板</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #f1f5f9;
-            color: #0f172a;
-            display: flex;
-            justify-content: center;
-            padding: 2rem 1.5rem;
-            margin: 0;
-        }
-        .container {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 24px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
-            width: 100%;
-            max-width: 680px;
-        }
-        h1 {
-            font-size: 1.8rem;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: #1e293b;
-        }
-
-        /* 控制列：日期與搜尋 */
-        .controls {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 2rem;
-        }
-        .control-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #64748b;
-            margin-bottom: 5px;
-        }
-        input {
-            width: 100%;
-            padding: 12px 15px;
-            font-size: 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            outline: none;
-            transition: border-color 0.2s;
-            box-sizing: border-box;
-        }
+        /* (保留之前的 CSS，僅確認 hidden 樣式) */
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f1f5f9; color: #0f172a; display: flex; justify-content: center; padding: 2rem 1.5rem; margin: 0; }
+        .container { background: white; padding: 2.5rem; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); width: 100%; max-width: 680px; }
+        h1 { font-size: 1.8rem; text-align: center; margin-bottom: 1.5rem; color: #1e293b; }
+        .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 2rem; }
+        .control-group label { display: block; font-size: 0.85rem; font-weight: 700; color: #64748b; margin-bottom: 5px; }
+        input { width: 100%; padding: 12px 15px; font-size: 1rem; border: 2px solid #e2e8f0; border-radius: 12px; outline: none; transition: border-color 0.2s; box-sizing: border-box; }
         input:focus { border-color: #6366f1; }
-
-        .section-header {
-            font-size: 1rem;
-            color: #64748b;
-            margin: 1.8rem 0 0.8rem 0;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            display: flex;
-            align-items: center;
-        }
-        .section-header::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: #e2e8f0;
-            margin-left: 15px;
-        }
-        .report-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
-        .card {
-            display: flex;
-            flex-direction: column;
-            text-decoration: none;
-            padding: 1rem 1.25rem;
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            transition: all 0.2s ease-out;
-            position: relative;
-        }
-        .card:hover {
-            border-color: #6366f1;
-            background: #f8fafc;
-            transform: translateX(8px);
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
-        }
-        .title {
-            font-weight: 600;
-            color: #334155;
-            font-size: 1.05rem;
-        }
-        .file-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 4px;
-        }
-        .file-name {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            font-family: 'SFMono-Regular', Consolas, monospace;
-        }
-
-        /* 狀態標籤 */
-        .status-badge {
-            font-size: 0.7rem;
-            font-weight: bold;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
+        .section-header { font-size: 1rem; color: #64748b; margin: 1.8rem 0 0.8rem 0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; }
+        .section-header::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; margin-left: 15px; }
+        .report-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+        .card { display: flex; flex-direction: column; text-decoration: none; padding: 1rem 1.25rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; transition: all 0.2s ease-out; position: relative; }
+        .card:hover { border-color: #6366f1; background: #f8fafc; transform: translateX(8px); box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1); }
+        .title { font-weight: 600; color: #334155; font-size: 1.05rem; }
+        .file-info { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
+        .file-name { font-size: 0.8rem; color: #94a3b8; font-family: 'SFMono-Regular', Consolas, monospace; }
+        
+        .status-badge { font-size: 0.7rem; font-weight: bold; padding: 2px 6px; border-radius: 4px; }
         .status-ok { color: #10b981; background: #ecfdf5; }
         .status-missing { color: #ef4444; background: #fef2f2; }
         .card.missing { opacity: 0.5; cursor: not-allowed; }
 
-        .badge {
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 6px;
-            margin-bottom: 6px;
-            width: fit-content;
-            font-weight: bold;
-        }
+        .badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 6px; margin-bottom: 6px; width: fit-content; font-weight: bold; }
         .bg-live { background: #ede9fe; color: #7c3aed; }
+        .bg-con { background: #e0e7ff; color: #4338ca; }
         .bg-all { background: #f1f5f9; color: #475569; }
         .bg-high { background: #fef3c7; color: #92400e; }
-
         .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>📈 量化策略分析面板</h1>
+    <h1>📉 量化策略分析面板</h1>
 
     <div class="controls">
         <div class="control-group">
@@ -148,18 +43,23 @@
             <input type="date" id="datePicker" onchange="updateReportPaths()">
         </div>
         <div class="control-group">
-            <label>🔍 快速過濾 (輸入 bor 解鎖)</label>
+            <label>🔍 快速過濾 (輸入 bor 解鎖限制級報表)</label>
             <input type="text" id="searchInput" placeholder="搜尋關鍵字..." onkeyup="filterReports()">
         </div>
     </div>
 
-    <div id="secretSection" class="report-section hidden">
-        <div class="section-header" style="color: #7c3aed;">🔒 Secret Analysis</div>
+    <div class="report-section">
+        <div class="section-header">Summary & Consolidation</div>
         <div class="report-grid">
-            <a href="#" class="card is-secret" data-base="bor-consolidation-live.html">
+            <a href="#" class="card is-secret hidden" data-base="bor-consolidation-live.html">
                 <span class="badge bg-live">LIVE</span>
                 <span class="title">BOR 盤整區間實時監控 <span class="status-badge"></span></span>
                 <div class="file-info"><span class="file-name">📄 bor-consolidation-live.html</span></div>
+            </a>
+            <a href="#" class="card" data-base="consolidation-report.html">
+                <span class="badge bg-con">CONSOLIDATION</span>
+                <span class="title">盤整區間 / 綜合彙整報表 <span class="status-badge"></span></span>
+                <div class="file-info"><span class="file-name">📄 consolidation-report.html</span></div>
             </a>
         </div>
     </div>
@@ -177,45 +77,54 @@
                 <span class="title">RSI / DMI / OBV 綜合分析 <span class="status-badge"></span></span>
                 <div class="file-info"><span class="file-name">📄 all-rsi-dmi-obv-report.html</span></div>
             </a>
+            <a href="#" class="card" data-base="all-fvg-summary.html">
+                <span class="badge bg-all">ALL</span>
+                <span class="title">FVG 缺口彙整摘要 <span class="status-badge"></span></span>
+                <div class="file-info"><span class="file-name">📄 all-fvg-summary.html</span></div>
+            </a>
         </div>
     </div>
 
     <div class="report-section">
-        <div class="section-header">High Intensity</div>
+        <div class="section-header">High Intensity Analysis</div>
         <div class="report-grid">
             <a href="#" class="card" data-base="high-ma-report.html">
                 <span class="badge bg-high">HIGH</span>
                 <span class="title">MA 均線精選標的 <span class="status-badge"></span></span>
                 <div class="file-info"><span class="file-name">📄 high-ma-report.html</span></div>
             </a>
+            <a href="#" class="card" data-base="high-rsi-dmi-obv-report.html">
+                <span class="badge bg-high">HIGH</span>
+                <span class="title">RSI / DMI / OBV 高強度過濾 <span class="status-badge"></span></span>
+                <div class="file-info"><span class="file-name">📄 high-rsi-dmi-obv-report.html</span></div>
+            </a>
+            <a href="#" class="card" data-base="high-fvg-summary.html">
+                <span class="badge bg-high">HIGH</span>
+                <span class="title">FVG 缺口彙整摘要 <span class="status-badge"></span></span>
+                <div class="file-info"><span class="file-name">📄 high-fvg-summary.html</span></div>
+            </a>
         </div>
     </div>
 </div>
 
 <script>
-    // 初始化設定
+    // ... (保留之前的 window.onload 和 updateReportPaths) ...
     window.onload = function() {
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('datePicker').value = today;
         updateReportPaths();
     };
 
-    // 更新所有報表路徑並檢查檔案是否存在
     async function updateReportPaths() {
         const dateInput = document.getElementById('datePicker').value;
         if (!dateInput) return;
-
         const dateDir = dateInput.replace(/-/g, '');
         const cards = document.querySelectorAll('.card');
-
         for (const card of cards) {
             const fileName = card.getAttribute('data-base');
             const newHref = `report/${dateDir}/${fileName}`;
             const statusBadge = card.querySelector('.status-badge');
-            
             card.setAttribute('href', newHref);
-
-            // 檢查檔案是否存在 (HEAD 請求)
             try {
                 const response = await fetch(newHref, { method: 'HEAD' });
                 if (response.ok) {
@@ -229,33 +138,45 @@
                 }
             } catch (error) {
                 statusBadge.textContent = "⚠️ 無資料";
-                statusBadge.className = "status-badge status-missing";
                 card.classList.add('missing');
             }
         }
     }
 
-    // 搜尋與隱藏邏輯
+    // ✨ 修正後的搜尋與隱藏邏輯
     function filterReports() {
         const input = document.getElementById('searchInput').value.toLowerCase();
         const cards = document.querySelectorAll('.card');
-        const secretSection = document.getElementById('secretSection');
-
-        // 如果關鍵字是 bor，顯示祕密區塊
-        if (input === 'bor') {
-            secretSection.classList.remove('hidden');
-        } else {
-            secretSection.classList.add('hidden');
-        }
+        const sections = document.querySelectorAll('.report-section');
 
         cards.forEach(card => {
             const text = card.textContent.toLowerCase();
             const isSecret = card.classList.contains('is-secret');
 
             if (isSecret) {
-                // 祕密卡片由上面的 Section 控制，這裡不重複處理
+                // 祕密卡片：只有當關鍵字是 'bor' 時才解除 hidden
+                if (input === 'bor') {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
             } else {
-                card.classList.toggle('hidden', !text.includes(input));
+                // 一般卡片：正常搜尋過濾
+                if (text.includes(input)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            }
+        });
+
+        // 隱藏內容為空的區塊
+        sections.forEach(section => {
+            const visibleCards = section.querySelectorAll('.card:not(.hidden)');
+            if (visibleCards.length === 0) {
+                section.classList.add('hidden');
+            } else {
+                section.classList.remove('hidden');
             }
         });
     }
@@ -263,4 +184,3 @@
 
 </body>
 </html>
-
