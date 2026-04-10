@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>實時監控入口 - 量化儀表板</title>
+    <title>實時監控入口 - 全自動掃描版</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f8fafc; color: #0f172a; display: flex; justify-content: center; padding: 2rem 1.5rem; margin: 0; }
         .container { background: white; padding: 2.5rem; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); width: 100%; max-width: 680px; }
@@ -31,8 +31,8 @@
 
     <div class="controls">
         <div class="control-group">
-            <label>📅 報告日期</label>
-            <input type="date" id="datePicker" onchange="startAutoScan()">
+            <label>📅 選擇報告日期</label>
+            <input type="date" id="datePicker" onchange="loadDynamicReports()">
         </div>
     </div>
 
@@ -40,88 +40,95 @@
 </div>
 
 <script>
-    /**
-     * 🚀 這是你唯一需要維護的地方：前綴與類型配置
-     */
-    const scannerConfig = {
-        // 在這裡增加你想抓取的前綴
-        prefixes: ['bor', 'ABC', 'XYZ', 'live', 'trend'],
-        
-        // 在這裡定義報表類型 (後綴)
-        types: [
-            { suffix: 'ma-live-analysis.html', label: '均線實時分析', color: '#7c3aed' },
-            { suffix: 'rsi-live-analysis.html', label: '強弱實時分析', color: '#10b981' },
-            { suffix: 'fvg-live-analysis.html', label: '缺口實時分析', color: '#f59e0b' }
-        ]
+    // 💡 類型對應的顯示名稱與顏色 (可以自由擴充)
+    const typeConfig = {
+        'ma': { label: '均線分析', color: '#7c3aed' },
+        'rsi': { label: '強弱指標', color: '#10b981' },
+        'fvg': { label: '缺口偵測', color: '#f59e0b' },
+        'profile': { label: '輪廓分析', color: '#6366f1' },
+        'live': { label: '實時監控', color: '#64748b' }
     };
 
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
         let dateVal = urlParams.get('date') || new Date().toISOString().split('T')[0];
         document.getElementById('datePicker').value = dateVal;
-        startAutoScan();
+        loadDynamicReports();
     };
 
-    async function startAutoScan() {
+    async function loadDynamicReports() {
         const dateInput = document.getElementById('datePicker').value;
         const dateDir = dateInput.replace(/-/g, '');
         const displayArea = document.getElementById('dynamicContent');
-        displayArea.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:2rem;">正在偵測報表...</div>';
+        
+        displayArea.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:2rem;">正在讀取檔案清單...</div>';
 
-        let fragments = document.createDocumentFragment();
-        let anyFileFound = false;
+        try {
+            // 讀取該日期資料夾下的 files.json
+            const response = await fetch(`report/${dateDir}/files.json`);
+            if (!response.ok) throw new Error('No list found');
+            
+            const allFiles = await response.json();
 
-        // 雙層循環：每個前綴 X 每個類型
-        for (const prefix of scannerConfig.prefixes) {
-            let sectionWrapper = null;
-            let grid = null;
+            // 💡 核心過濾邏輯：
+            // 1. 必須是 .html 且包含 'live'
+            // 2. 使用正規表達式 /\d{8,}/ 排除檔名中包含連續 8 位數字 (時間戳記) 的檔案
+            const filteredFiles = allFiles.filter(file => {
+                const nameLower = file.toLowerCase();
+                const isLiveFile = nameLower.includes('live') && nameLower.endsWith('.html');
+                const hasTimestamp = /\d{8,}/.test(file); 
+                return isLiveFile && !hasTimestamp;
+            });
 
-            for (const type of scannerConfig.types) {
-                const fileName = `${prefix}-${type.suffix}`;
-                const filePath = `report/${dateDir}/${fileName}`;
+            // 根據前綴 (第一個 "-" 之前的部分) 進行分組
+            const groups = {};
+            filteredFiles.forEach(file => {
+                const prefix = file.split('-')[0];
+                if (!groups[prefix]) groups[prefix] = [];
+                groups[prefix].push(file);
+            });
 
-                try {
-                    // 使用 HEAD 請求偵測檔案
-                    const response = await fetch(filePath, { method: 'HEAD' });
-                    
-                    if (response.ok) {
-                        anyFileFound = true;
-                        
-                        // 如果該前綴的第一個檔案被抓到，才建立 Section Header
-                        if (!sectionWrapper) {
-                            sectionWrapper = document.createElement('div');
-                            sectionWrapper.innerHTML = `<div class="section-header">${prefix} 系列監控</div>`;
-                            grid = document.createElement('div');
-                            grid.className = 'report-grid';
-                            sectionWrapper.appendChild(grid);
-                            fragments.appendChild(sectionWrapper);
-                        }
-
-                        // 建立卡片
-                        const card = document.createElement('a');
-                        card.href = filePath;
-                        card.className = 'card';
-                        card.innerHTML = `
-                            <span class="badge" style="background:${type.color}">${prefix}</span>
-                            <span class="title">${type.label} <span class="status-ready">✅ 已就緒</span></span>
-                            <div class="file-info">📄 ${fileName}</div>
-                        `;
-                        grid.appendChild(card);
-                    }
-                } catch (e) {
-                    // 檔案不存在，安靜跳過
-                }
+            // 清空並重新渲染
+            displayArea.innerHTML = '';
+            
+            const sortedPrefixes = Object.keys(groups).sort();
+            
+            if (sortedPrefixes.length === 0) {
+                displayArea.innerHTML = `<div style="text-align:center; color:#94a3b8; padding:3rem;">📅 ${dateInput} 查無「最終版」實時報表</div>`;
+                return;
             }
-        }
 
-        displayArea.innerHTML = ''; // 清除「載入中」
-        if (!anyFileFound) {
-            displayArea.innerHTML = `<div style="text-align:center; color:#94a3b8; padding:3rem;">📅 ${dateInput} 查無符合條件的報表檔案</div>`;
-        } else {
-            displayArea.appendChild(fragments);
+            sortedPrefixes.forEach(prefix => {
+                const section = document.createElement('div');
+                section.innerHTML = `<div class="section-header">${prefix.toUpperCase()} 系列報表</div>`;
+                
+                const grid = document.createElement('div');
+                grid.className = 'report-grid';
+
+                groups[prefix].forEach(file => {
+                    // 自動判定檔案類型標籤
+                    const typeKey = Object.keys(typeConfig).find(k => file.toLowerCase().includes(k)) || 'live';
+                    const config = typeConfig[typeKey];
+
+                    const card = document.createElement('a');
+                    card.href = `report/${dateDir}/${file}`;
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <span class="badge" style="background:${config.color}">${prefix} ${typeKey}</span>
+                        <span class="title">${config.label} <span class="status-ready">✅ 已就緒</span></span>
+                        <div class="file-info">📄 ${file}</div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                section.appendChild(grid);
+                displayArea.appendChild(section);
+            });
+
+        } catch (error) {
+            displayArea.innerHTML = `<div style="text-align:center; color:#ef4444; padding:3rem;">⚠️ 無法讀取報表清單 (files.json 未產生或路徑錯誤)</div>`;
         }
     }
 </script>
 </body>
 </html>
-
