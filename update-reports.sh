@@ -21,8 +21,8 @@ for dir_path in $(find "$SOURCE_BASE" -maxdepth 1 -type d -regextype sed -regex 
     # 取得日期資料夾名稱 (例如 20260406)
     dir_name=$(basename "$dir_path")
     
-    echo "---------------------------------------"
-    echo "📂 處理日期: $dir_name"
+#    echo "---------------------------------------"
+#    echo "📂 處理日期: $dir_name"
     
     # 建立目標對應的日期資料夾
     mkdir -p "$TARGET_BASE/$dir_name"
