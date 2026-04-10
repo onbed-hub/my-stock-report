@@ -1,0 +1,84 @@
+
+    <html><head><meta charset="UTF-8"><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <style>
+        /* 基礎字體大小設為預設的 1.5 倍 (1.5rem) */
+        body { font-family: "Microsoft JhengHei", sans-serif; margin: 30px; background: #f8f9fa; font-size: 1.5rem; }
+        
+        .header { background: #1a237e; color: white; padding: 25px; border-radius: 12px; margin-bottom: 20px; }
+        .header h1 { font-size: 2.2rem; margin: 0 0 10px 0; }
+        .header p { font-size: 1.2rem; margin: 0; opacity: 0.9; }
+
+        .info-bar { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-size: 1.3rem; border-left: 10px solid #2196f3; }
+        
+        .rules-box { background: white; padding: 25px; border-radius: 12px; margin-bottom: 25px; border-left: 10px solid #fbc02d; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .rules-box h2 { font-size: 1.8rem; margin-top: 0; color: #333; }
+        .rules-grid { display: flex; gap: 30px; }
+        .rule-card { flex: 1; font-size: 1.2rem; line-height: 1.6; }
+
+        .filter-area { background: #e8eaf6; padding: 20px; border-radius: 10px; margin-bottom: 20px; font-size: 1.4rem; font-weight: bold; }
+        
+        table.dataTable thead th { background: #283593 !important; color: white; font-size: 1.5rem; padding: 15px !important; text-align: center; }
+        table.dataTable tbody td { font-size: 1.4rem; padding: 15px !important; text-align: center; font-weight: 500; }
+        
+        select { font-size: 1.1rem; padding: 8px; margin-right: 20px; border-radius: 8px; border: 2px solid #283593; }
+        a:hover { color: #ff5252 !important; text-decoration: underline !important; }
+    </style></head>
+    <body>
+        <div class="header"><h1>📊 量化診斷報告 (high)</h1><p>模式：組合分析 (high) | 交易執行：訊號次日開盤</p></div>
+
+        <div class="info-bar">📅 <b>回測起點：</b> 2026-01-01 (勝率計算：訊號次日開盤買入 vs N日後開盤)</div>
+
+        <div class="rules-box">
+            <h2>📈 核心交易規則說明</h2>
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <b style="color: #2e7d32; font-size: 1.5rem;">🟢 進場買入條件</b>
+                    <ul>
+                        <li><b>多頭結構：</b>股價 > MA5, MA10, MA20 + 量價爆發</li>
+                        <li><b>趨勢確認：</b>月線斜率向上 (MA20 上揚)</li>
+                        <li><b>短線轉強：</b>5日均線勾頭向上 (Slope > 0)</li>
+                        <li><b>動能指標：</b>RSI > 55 (強勢區)</li>
+                    </ul>
+                </div>
+                <div class="rule-card">
+                    <b style="color: #d32f2f; font-size: 1.5rem;">🔴 出場賣出條件</b>
+                    <ul>
+                        <li><b>短線止損：</b>股價跌破 10日均線</li>
+                        <li><b>趨勢止損：</b>股價跌破 20日均線 (月線)</li>
+                        <li><b>盤整警示：</b>均線糾結且結構轉弱時觀望</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-area" id="filter-area">🔍 快速篩選標的：</div>
+
+        <table id="stockTable" class="display" style="width:100%">
+            <thead><tr><th>股號</th><th>名稱</th><th>結構</th><th>現價</th><th>均損益%</th><th>隔日勝%</th><th>5日勝%</th><th>建議</th><th>原因</th></tr></thead>
+            <tbody>
+                <tr><td><a href='https://tw.stock.yahoo.com/quote/2409.TW/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>2409.TW</a></td><td>友達</td><td>📈 月線上揚</td><td>18.75</td><td>2.51</td><td>50.0%</td><td>42.9%</td><td>🔥 買入</td><td>🔥 符合全數攻擊條件 (明日開盤買)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/1815.TWO/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>1815.TWO</a></td><td>富喬</td><td>📈 月線上揚</td><td>121.5</td><td>-3.68</td><td>50.0%</td><td>0.0%</td><td>🔥 買入</td><td>🔥 符合全數攻擊條件 (明日開盤買)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/1717.TW/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>1717.TW</a></td><td>長興</td><td>📈 月線上揚</td><td>73.8</td><td>11.92</td><td>53.8%</td><td>61.5%</td><td>🔥 買入</td><td>🔥 符合全數攻擊條件 (明日開盤買)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/2489.TW/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>2489.TW</a></td><td>瑞軒</td><td>📈 月線上揚</td><td>42.75</td><td>12.36</td><td>60.0%</td><td>26.7%</td><td>⏳ 觀望</td><td>⏳ 觀望中 (缺: RSI動能弱)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/3714.TW/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>3714.TW</a></td><td>富采</td><td>🚀 多頭強勢</td><td>57.3</td><td>1.22</td><td>47.4%</td><td>57.9%</td><td>🔥 買入</td><td>🔥 符合全數攻擊條件 (明日開盤買)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/1785.TWO/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>1785.TWO</a></td><td>光洋科</td><td>🚀 多頭強勢</td><td>105.0</td><td>20.74</td><td>80.0%</td><td>80.0%</td><td>⏳ 觀望</td><td>⏳ 觀望中 (缺: RSI動能弱)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/6190.TWO/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>6190.TWO</a></td><td>萬泰科</td><td>🚀 多頭強勢</td><td>66.0</td><td>-4.99</td><td>30.8%</td><td>30.8%</td><td>🔥 買入</td><td>🔥 符合全數攻擊條件 (明日開盤買)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/3264.TWO/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>3264.TWO</a></td><td>欣銓</td><td>🚀 多頭強勢</td><td>180.5</td><td>22.39</td><td>22.2%</td><td>44.4%</td><td>🔥 買入</td><td>🔥 符合全數攻擊條件 (明日開盤買)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/8039.TW/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>8039.TW</a></td><td>台虹</td><td>📈 月線上揚</td><td>136.0</td><td>-2.99</td><td>23.1%</td><td>30.8%</td><td>🔥 買入</td><td>🔥 符合全數攻擊條件 (明日開盤買)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/1711.TW/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>1711.TW</a></td><td>永光</td><td>⏳ 均線糾結</td><td>36.65</td><td>5.29</td><td>52.2%</td><td>56.5%</td><td>⚠️ 賣出</td><td>🚨 嚴重破位：跌破雙線 (明日開盤賣)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/8028.TW/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>8028.TW</a></td><td>昇陽半導體</td><td>🚀 多頭強勢</td><td>205.5</td><td>-2.91</td><td>36.4%</td><td>27.3%</td><td>⏳ 觀望</td><td>⏳ 觀望中 (缺: RSI動能弱)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/2486.TW/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>2486.TW</a></td><td>一詮</td><td>📈 月線上揚</td><td>174.0</td><td>7.41</td><td>66.7%</td><td>55.6%</td><td>🔥 買入</td><td>🔥 符合全數攻擊條件 (明日開盤買)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/2426.TW/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>2426.TW</a></td><td>鼎元</td><td>🚀 多頭強勢</td><td>43.0</td><td>16.89</td><td>63.6%</td><td>72.7%</td><td>🔥 買入</td><td>🔥 符合全數攻擊條件 (明日開盤買)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/6213.TW/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>6213.TW</a></td><td>聯茂</td><td>🚀 多頭強勢</td><td>216.5</td><td>-7.52</td><td>16.7%</td><td>8.3%</td><td>⏳ 觀望</td><td>⏳ 觀望中 (缺: 量能不足)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/5443.TWO/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>5443.TWO</a></td><td>均豪</td><td>🚀 多頭強勢</td><td>116.0</td><td>0.28</td><td>47.4%</td><td>42.1%</td><td>🔥 買入</td><td>🔥 符合全數攻擊條件 (明日開盤買)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/5388.TW/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>5388.TW</a></td><td>中磊</td><td>🚀 多頭強勢</td><td>86.4</td><td>-2.02</td><td>33.3%</td><td>0.0%</td><td>🔥 買入</td><td>🔥 符合全數攻擊條件 (明日開盤買)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/8027.TWO/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>8027.TWO</a></td><td>鈦昇</td><td>🚀 多頭強勢</td><td>150.0</td><td>-0.14</td><td>75.0%</td><td>62.5%</td><td>🔥 買入</td><td>🔥 符合全數攻擊條件 (明日開盤買)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/6217.TWO/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>6217.TWO</a></td><td>中探針</td><td>🚀 多頭強勢</td><td>215.0</td><td>72.35</td><td>58.3%</td><td>50.0%</td><td>🔥 買入</td><td>🔥 符合全數攻擊條件 (明日開盤買)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/3026.TW/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>3026.TW</a></td><td>禾伸堂</td><td>🚀 多頭強勢</td><td>183.5</td><td>-3.23</td><td>46.7%</td><td>40.0%</td><td>🔥 買入</td><td>🔥 符合全數攻擊條件 (明日開盤買)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/8064.TWO/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>8064.TWO</a></td><td>東捷</td><td>🚀 多頭強勢</td><td>78.3</td><td>9.07</td><td>47.6%</td><td>61.9%</td><td>🔥 買入</td><td>🔥 符合全數攻擊條件 (明日開盤買)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/4927.TW/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>4927.TW</a></td><td>泰鼎-KY</td><td>📈 月線上揚</td><td>45.4</td><td>-6.43</td><td>62.5%</td><td>37.5%</td><td>⏳ 觀望</td><td>⏳ 觀望中 (缺: RSI動能弱)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/2495.TW/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>2495.TW</a></td><td>普安</td><td>📈 月線上揚</td><td>36.15</td><td>-0.64</td><td>33.3%</td><td>25.0%</td><td>⏳ 觀望</td><td>⏳ 觀望中 (缺: RSI動能弱)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/3049.TW/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>3049.TW</a></td><td>精金</td><td>📉 趨勢轉弱</td><td>12.5</td><td>-0.43</td><td>41.2%</td><td>41.2%</td><td>⚠️ 賣出</td><td>📢 趨勢轉向：跌破月線</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/6672.TW/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>6672.TW</a></td><td>騰輝電子-KY</td><td>🚀 多頭強勢</td><td>154.0</td><td>-4.55</td><td>38.5%</td><td>53.8%</td><td>🔥 買入</td><td>🔥 符合全數攻擊條件 (明日開盤買)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/4908.TWO/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>4908.TWO</a></td><td>前鼎</td><td>🚀 多頭強勢</td><td>117.5</td><td>-0.9</td><td>42.9%</td><td>42.9%</td><td>⏳ 觀望</td><td>🔄 盤整中：等待均線多頭排列</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/3042.TW/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>3042.TW</a></td><td>晶技</td><td>🚀 多頭強勢</td><td>107.5</td><td>-0.98</td><td>50.0%</td><td>50.0%</td><td>🔥 買入</td><td>🔥 符合全數攻擊條件 (明日開盤買)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/6274.TWO/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>6274.TWO</a></td><td>台燿</td><td>🚀 多頭強勢</td><td>797.0</td><td>-0.51</td><td>57.1%</td><td>42.9%</td><td>⏳ 觀望</td><td>⏳ 觀望中 (缺: 量能不足)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/2316.TW/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>2316.TW</a></td><td>楠梓電</td><td>📈 月線上揚</td><td>107.5</td><td>-9.61</td><td>25.0%</td><td>0.0%</td><td>⏳ 觀望</td><td>⏳ 觀望中 (缺: RSI動能弱)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/2476.TW/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>2476.TW</a></td><td>鉅祥</td><td>🚀 多頭強勢</td><td>101.5</td><td>0.0</td><td>0.0%</td><td>0.0%</td><td>🔥 買入</td><td>🔥 符合全數攻擊條件 (明日開盤買)</td></tr><tr><td><a href='https://tw.stock.yahoo.com/quote/3234.TWO/technical-analysis' target='_blank' style='text-decoration:none; color:#1a237e;'>3234.TWO</a></td><td>光環</td><td>🚀 多頭強勢</td><td>105.0</td><td>10.12</td><td>40.0%</td><td>73.3%</td><td>🔥 買入</td><td>🔥 符合全數攻擊條件 (明日開盤買)</td></tr>
+            </tbody>
+        </table>
+
+        <script>
+            $(document).ready( function () {
+                var table = $('#stockTable').DataTable({ "pageLength": 100, "order": [[ 4, "desc" ]], "language": { "search": "關鍵字查詢:" },
+                    initComplete: function () {
+                        this.api().columns([2, 7]).every( function () {
+                            var column = this;
+                            var select = $('<select><option value="">顯示全部' + $(column.header()).text() + '</option></select>')
+                                .appendTo('#filter-area')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                                    column.search(val ? '^' + val + '$' : '', true, false).draw();
+                                });
+                            column.data().unique().sort().each( function (d, j) { select.append('<option value="' + d + '">' + d + '</option>') });
+                        });
+                    }
+                });
+            });
+        </script>
+    </body></html>
+    
