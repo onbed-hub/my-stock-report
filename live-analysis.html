@@ -2,93 +2,131 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>實時監控入口 - 全自動掃描版</title>
     <style>
-        /* 延用你喜歡的樣式 */
-        body { font-family: sans-serif; background-color: #f8fafc; padding: 2rem; }
-        .container { background: white; padding: 2rem; border-radius: 20px; max-width: 700px; margin: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        .section-header { font-weight: 800; color: #64748b; margin: 2rem 0 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px; text-transform: uppercase; }
-        .report-grid { display: grid; gap: 10px; }
-        .card { display: flex; align-items: center; text-decoration: none; padding: 1rem; border: 1px solid #e2e8f0; border-radius: 12px; transition: 0.2s; }
-        .card:hover { border-color: #6366f1; background: #f8fafc; transform: translateX(5px); }
-        .badge { font-size: 0.7rem; padding: 3px 8px; border-radius: 5px; margin-right: 12px; color: white; font-weight: bold; }
-        .title { color: #334155; font-weight: 600; flex-grow: 1; }
-        .time-tag { font-size: 0.7rem; color: #94a3b8; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f8fafc; color: #0f172a; display: flex; justify-content: center; padding: 2rem 1.5rem; margin: 0; }
+        .container { background: white; padding: 2.5rem; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); width: 100%; max-width: 680px; }
+        .back-link { text-decoration: none; color: #6366f1; font-weight: bold; font-size: 0.9rem; display: inline-block; margin-bottom: 1rem; }
+        h1 { font-size: 1.8rem; margin-bottom: 1.5rem; color: #1e293b; text-align: center; }
+        .controls { margin-bottom: 2rem; }
+        .control-group label { display: block; font-size: 0.85rem; font-weight: 700; color: #64748b; margin-bottom: 5px; }
+        input { width: 100%; padding: 12px 15px; font-size: 1rem; border: 2px solid #e2e8f0; border-radius: 12px; outline: none; box-sizing: border-box; }
+        .section-header { font-size: 1rem; color: #64748b; margin: 2rem 0 1rem 0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; }
+        .section-header::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; margin-left: 15px; }
+        .report-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 2rem; }
+        .card { display: flex; flex-direction: column; text-decoration: none; padding: 1.2rem 1.5rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; transition: all 0.2s ease-out; position: relative; }
+        .card:hover { border-color: #6366f1; transform: translateX(8px); background: #f8fafc; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1); }
+        .title { font-weight: 600; color: #334155; font-size: 1.05rem; }
+        .badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 6px; margin-bottom: 8px; width: fit-content; font-weight: bold; color: white; text-transform: uppercase; }
+        .file-info { font-size: 0.75rem; color: #94a3b8; font-family: monospace; margin-top: 5px; }
+        .status-ready { color: #10b981; font-size: 0.75rem; font-weight: bold; margin-left: 8px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <a href="index.html" style="text-decoration:none; color:#6366f1;">← 返回主頁</a>
-    <h1>🛰️ 實時監控自動偵測</h1>
-    <input type="date" id="datePicker" onchange="loadDynamicReports()" style="width:100%; padding:10px; margin:10px 0; border-radius:10px; border:1px solid #ddd;">
-    
-    <div id="reportArea"></div>
+    <a href="index.html" class="back-link">← 返回主儀表板</a>
+    <h1>🛰️ 實時監控入口</h1>
+
+    <div class="controls">
+        <div class="control-group">
+            <label>📅 選擇報告日期</label>
+            <input type="date" id="datePicker" onchange="loadDynamicReports()">
+        </div>
+    </div>
+
+    <div id="dynamicContent"></div>
 </div>
 
 <script>
-    // 定義類型對應的標籤顏色
-    const typeMap = {
-        'ma': { label: '均線', color: '#7c3aed' },
-        'rsi': { label: '強弱', color: '#10b981' },
-        'fvg': { label: '缺口', color: '#f59e0b' },
-        'consolidation': { label: '盤整', color: '#6366f1' }
+    // 💡 類型對應的顯示名稱與顏色 (可以自由擴充)
+    const typeConfig = {
+        'ma': { label: '均線分析', color: '#7c3aed' },
+        'rsi': { label: '強弱指標', color: '#10b981' },
+        'fvg': { label: '缺口偵測', color: '#f59e0b' },
+        'profile': { label: '輪廓分析', color: '#6366f1' },
+        'live': { label: '實時監控', color: '#64748b' }
     };
 
-    window.onload = () => {
+    window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
-        document.getElementById('datePicker').value = urlParams.get('date') || new Date().toISOString().split('T')[0];
+        let dateVal = urlParams.get('date') || new Date().toISOString().split('T')[0];
+        document.getElementById('datePicker').value = dateVal;
         loadDynamicReports();
     };
 
     async function loadDynamicReports() {
-        const dateDir = document.getElementById('datePicker').value.replace(/-/g, '');
-        const area = document.getElementById('reportArea');
-        area.innerHTML = '偵測中...';
+        const dateInput = document.getElementById('datePicker').value;
+        const dateDir = dateInput.replace(/-/g, '');
+        const displayArea = document.getElementById('dynamicContent');
+        
+        displayArea.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:2rem;">正在讀取檔案清單...</div>';
 
         try {
-            // 讀取當天目錄下的 files.json (由你的腳本產生)
+            // 讀取該日期資料夾下的 files.json
             const response = await fetch(`report/${dateDir}/files.json`);
-            if (!response.ok) throw new Error();
+            if (!response.ok) throw new Error('No list found');
             
-            const text = await response.text();
-            const files = text.split('\n').filter(f => f.trim() !== '' && f.includes('-live-'));
-            
-            // 根據前綴分組
+            const allFiles = await response.json();
+
+            // 💡 核心過濾邏輯：
+            // 1. 必須是 .html 且包含 'live'
+            // 2. 使用正規表達式 /\d{8,}/ 排除檔名中包含連續 8 位數字 (時間戳記) 的檔案
+            const filteredFiles = allFiles.filter(file => {
+                const nameLower = file.toLowerCase();
+                const isLiveFile = nameLower.includes('live') && nameLower.endsWith('.html');
+                const hasTimestamp = /\d{8,}/.test(file); 
+                return isLiveFile && !hasTimestamp;
+            });
+
+            // 根據前綴 (第一個 "-" 之前的部分) 進行分組
             const groups = {};
-            files.forEach(file => {
-                const prefix = file.split('-')[0]; // 抓出 bor, siesin, 2485
+            filteredFiles.forEach(file => {
+                const prefix = file.split('-')[0];
                 if (!groups[prefix]) groups[prefix] = [];
                 groups[prefix].push(file);
             });
 
-            area.innerHTML = '';
-            Object.keys(groups).sort().forEach(prefix => {
+            // 清空並重新渲染
+            displayArea.innerHTML = '';
+            
+            const sortedPrefixes = Object.keys(groups).sort();
+            
+            if (sortedPrefixes.length === 0) {
+                displayArea.innerHTML = `<div style="text-align:center; color:#94a3b8; padding:3rem;">📅 ${dateInput} 查無「最終版」實時報表</div>`;
+                return;
+            }
+
+            sortedPrefixes.forEach(prefix => {
                 const section = document.createElement('div');
-                section.innerHTML = `<div class="section-header">${prefix.toUpperCase()} 系列</div>`;
+                section.innerHTML = `<div class="section-header">${prefix.toUpperCase()} 系列報表</div>`;
+                
                 const grid = document.createElement('div');
                 grid.className = 'report-grid';
 
                 groups[prefix].forEach(file => {
-                    // 辨識類型
-                    let typeKey = Object.keys(typeMap).find(k => file.toLowerCase().includes(k)) || 'live';
-                    const config = typeMap[typeKey] || { label: 'LIVE', color: '#94a3b8' };
-                    
+                    // 自動判定檔案類型標籤
+                    const typeKey = Object.keys(typeConfig).find(k => file.toLowerCase().includes(k)) || 'live';
+                    const config = typeConfig[typeKey];
+
                     const card = document.createElement('a');
                     card.href = `report/${dateDir}/${file}`;
                     card.className = 'card';
                     card.innerHTML = `
-                        <span class="badge" style="background:${config.color}">${config.label}</span>
-                        <span class="title">${file}</span>
+                        <span class="badge" style="background:${config.color}">${prefix} ${typeKey}</span>
+                        <span class="title">${config.label} <span class="status-ready">✅ 已就緒</span></span>
+                        <div class="file-info">📄 ${file}</div>
                     `;
                     grid.appendChild(card);
                 });
+
                 section.appendChild(grid);
-                area.appendChild(section);
+                displayArea.appendChild(section);
             });
 
-        } catch (e) {
-            area.innerHTML = '<div style="padding:2rem; text-align:center; color:#94a3b8;">📅 尚未產生 files.json 或當天無 live 報表</div>';
+        } catch (error) {
+            displayArea.innerHTML = `<div style="text-align:center; color:#ef4444; padding:3rem;">⚠️ 無法讀取報表清單 (files.json 未產生或路徑錯誤)</div>`;
         }
     }
 </script>
