@@ -2,126 +2,95 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>實時監控入口 - 量化儀表板</title>
+    <title>實時監控入口 - 全自動掃描版</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f8fafc; color: #0f172a; display: flex; justify-content: center; padding: 2rem 1.5rem; margin: 0; }
-        .container { background: white; padding: 2.5rem; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); width: 100%; max-width: 680px; }
-        .back-link { text-decoration: none; color: #6366f1; font-weight: bold; font-size: 0.9rem; display: inline-block; margin-bottom: 1rem; }
-        h1 { font-size: 1.8rem; margin-bottom: 1.5rem; color: #1e293b; text-align: center; }
-        .controls { margin-bottom: 2rem; }
-        .control-group label { display: block; font-size: 0.85rem; font-weight: 700; color: #64748b; margin-bottom: 5px; }
-        input { width: 100%; padding: 12px 15px; font-size: 1rem; border: 2px solid #e2e8f0; border-radius: 12px; outline: none; box-sizing: border-box; }
-        .section-header { font-size: 1rem; color: #64748b; margin: 2rem 0 1rem 0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; }
-        .section-header::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; margin-left: 15px; }
-        .report-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 2rem; }
-        .card { display: flex; flex-direction: column; text-decoration: none; padding: 1.2rem 1.5rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; transition: all 0.2s ease-out; position: relative; }
-        .card:hover { border-color: #6366f1; transform: translateX(8px); background: #f8fafc; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1); }
-        .title { font-weight: 600; color: #334155; font-size: 1.05rem; }
-        .badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 6px; margin-bottom: 8px; width: fit-content; font-weight: bold; color: white; text-transform: uppercase; }
-        .file-info { font-size: 0.75rem; color: #94a3b8; font-family: monospace; margin-top: 5px; }
-        .status-ready { color: #10b981; font-size: 0.75rem; font-weight: bold; margin-left: 8px; }
+        /* 延用你喜歡的樣式 */
+        body { font-family: sans-serif; background-color: #f8fafc; padding: 2rem; }
+        .container { background: white; padding: 2rem; border-radius: 20px; max-width: 700px; margin: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .section-header { font-weight: 800; color: #64748b; margin: 2rem 0 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px; text-transform: uppercase; }
+        .report-grid { display: grid; gap: 10px; }
+        .card { display: flex; align-items: center; text-decoration: none; padding: 1rem; border: 1px solid #e2e8f0; border-radius: 12px; transition: 0.2s; }
+        .card:hover { border-color: #6366f1; background: #f8fafc; transform: translateX(5px); }
+        .badge { font-size: 0.7rem; padding: 3px 8px; border-radius: 5px; margin-right: 12px; color: white; font-weight: bold; }
+        .title { color: #334155; font-weight: 600; flex-grow: 1; }
+        .time-tag { font-size: 0.7rem; color: #94a3b8; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <a href="index.html" class="back-link">← 返回主儀表板</a>
-    <h1>🛰️ 實時監控入口</h1>
-
-    <div class="controls">
-        <div class="control-group">
-            <label>📅 報告日期</label>
-            <input type="date" id="datePicker" onchange="startAutoScan()">
-        </div>
-    </div>
-
-    <div id="dynamicContent"></div>
+    <a href="index.html" style="text-decoration:none; color:#6366f1;">← 返回主頁</a>
+    <h1>🛰️ 實時監控自動偵測</h1>
+    <input type="date" id="datePicker" onchange="loadDynamicReports()" style="width:100%; padding:10px; margin:10px 0; border-radius:10px; border:1px solid #ddd;">
+    
+    <div id="reportArea"></div>
 </div>
 
 <script>
-    /**
-     * 🚀 這是你唯一需要維護的地方：前綴與類型配置
-     */
-    const scannerConfig = {
-        // 在這裡增加你想抓取的前綴
-        prefixes: ['bor', 'ABC', 'XYZ', 'live', 'trend'],
-        
-        // 在這裡定義報表類型 (後綴)
-        types: [
-            { suffix: 'ma-live-analysis.html', label: '均線實時分析', color: '#7c3aed' },
-            { suffix: 'rsi-live-analysis.html', label: '強弱實時分析', color: '#10b981' },
-            { suffix: 'fvg-live-analysis.html', label: '缺口實時分析', color: '#f59e0b' }
-        ]
+    // 定義類型對應的標籤顏色
+    const typeMap = {
+        'ma': { label: '均線', color: '#7c3aed' },
+        'rsi': { label: '強弱', color: '#10b981' },
+        'fvg': { label: '缺口', color: '#f59e0b' },
+        'consolidation': { label: '盤整', color: '#6366f1' }
     };
 
-    window.onload = function() {
+    window.onload = () => {
         const urlParams = new URLSearchParams(window.location.search);
-        let dateVal = urlParams.get('date') || new Date().toISOString().split('T')[0];
-        document.getElementById('datePicker').value = dateVal;
-        startAutoScan();
+        document.getElementById('datePicker').value = urlParams.get('date') || new Date().toISOString().split('T')[0];
+        loadDynamicReports();
     };
 
-    async function startAutoScan() {
-        const dateInput = document.getElementById('datePicker').value;
-        const dateDir = dateInput.replace(/-/g, '');
-        const displayArea = document.getElementById('dynamicContent');
-        displayArea.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:2rem;">正在偵測報表...</div>';
+    async function loadDynamicReports() {
+        const dateDir = document.getElementById('datePicker').value.replace(/-/g, '');
+        const area = document.getElementById('reportArea');
+        area.innerHTML = '偵測中...';
 
-        let fragments = document.createDocumentFragment();
-        let anyFileFound = false;
+        try {
+            // 讀取當天目錄下的 files.json (由你的腳本產生)
+            const response = await fetch(`report/${dateDir}/files.json`);
+            if (!response.ok) throw new Error();
+            
+            const text = await response.text();
+            const files = text.split('\n').filter(f => f.trim() !== '' && f.includes('-live-'));
+            
+            // 根據前綴分組
+            const groups = {};
+            files.forEach(file => {
+                const prefix = file.split('-')[0]; // 抓出 bor, siesin, 2485
+                if (!groups[prefix]) groups[prefix] = [];
+                groups[prefix].push(file);
+            });
 
-        // 雙層循環：每個前綴 X 每個類型
-        for (const prefix of scannerConfig.prefixes) {
-            let sectionWrapper = null;
-            let grid = null;
+            area.innerHTML = '';
+            Object.keys(groups).sort().forEach(prefix => {
+                const section = document.createElement('div');
+                section.innerHTML = `<div class="section-header">${prefix.toUpperCase()} 系列</div>`;
+                const grid = document.createElement('div');
+                grid.className = 'report-grid';
 
-            for (const type of scannerConfig.types) {
-                const fileName = `${prefix}-${type.suffix}`;
-                const filePath = `report/${dateDir}/${fileName}`;
-
-                try {
-                    // 使用 HEAD 請求偵測檔案
-                    const response = await fetch(filePath, { method: 'HEAD' });
+                groups[prefix].forEach(file => {
+                    // 辨識類型
+                    let typeKey = Object.keys(typeMap).find(k => file.toLowerCase().includes(k)) || 'live';
+                    const config = typeMap[typeKey] || { label: 'LIVE', color: '#94a3b8' };
                     
-                    if (response.ok) {
-                        anyFileFound = true;
-                        
-                        // 如果該前綴的第一個檔案被抓到，才建立 Section Header
-                        if (!sectionWrapper) {
-                            sectionWrapper = document.createElement('div');
-                            sectionWrapper.innerHTML = `<div class="section-header">${prefix} 系列監控</div>`;
-                            grid = document.createElement('div');
-                            grid.className = 'report-grid';
-                            sectionWrapper.appendChild(grid);
-                            fragments.appendChild(sectionWrapper);
-                        }
+                    const card = document.createElement('a');
+                    card.href = `report/${dateDir}/${file}`;
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <span class="badge" style="background:${config.color}">${config.label}</span>
+                        <span class="title">${file}</span>
+                    `;
+                    grid.appendChild(card);
+                });
+                section.appendChild(grid);
+                area.appendChild(section);
+            });
 
-                        // 建立卡片
-                        const card = document.createElement('a');
-                        card.href = filePath;
-                        card.className = 'card';
-                        card.innerHTML = `
-                            <span class="badge" style="background:${type.color}">${prefix}</span>
-                            <span class="title">${type.label} <span class="status-ready">✅ 已就緒</span></span>
-                            <div class="file-info">📄 ${fileName}</div>
-                        `;
-                        grid.appendChild(card);
-                    }
-                } catch (e) {
-                    // 檔案不存在，安靜跳過
-                }
-            }
-        }
-
-        displayArea.innerHTML = ''; // 清除「載入中」
-        if (!anyFileFound) {
-            displayArea.innerHTML = `<div style="text-align:center; color:#94a3b8; padding:3rem;">📅 ${dateInput} 查無符合條件的報表檔案</div>`;
-        } else {
-            displayArea.appendChild(fragments);
+        } catch (e) {
+            area.innerHTML = '<div style="padding:2rem; text-align:center; color:#94a3b8;">📅 尚未產生 files.json 或當天無 live 報表</div>';
         }
     }
 </script>
 </body>
 </html>
-
