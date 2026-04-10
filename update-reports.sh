@@ -38,6 +38,8 @@ for dir_path in $(find "$SOURCE_BASE" -maxdepth 1 -type d -regextype sed -regex 
     fi
 done
 
+./gen_file_list.sh
+
 echo "======================================="
 echo "☁️ 準備上傳至 GitHub..."
 
