@@ -64,24 +64,42 @@
 
 <script>
     window.onload = function() {
+        // 1. 先從網址列抓參數 (?date=2026-04-10)
         const urlParams = new URLSearchParams(window.location.search);
-        const dateParam = urlParams.get('date');
+        let dateVal = urlParams.get('date');
         
-        // 如果從主頁跳過來有帶日期，就用那個日期，否則用今天
-        const today = dateParam || new Date().toISOString().split('T')[0];
-        document.getElementById('datePicker').value = today;
+        // 2. 如果網址沒參數，就抓今天日期
+        if (!dateVal) {
+            dateVal = new Date().toISOString().split('T')[0];
+        }
+
+        const datePicker = document.getElementById('datePicker');
+        datePicker.value = dateVal;
+
+        // 3. 確保日期填入後，再觸發更新路徑
         updateReportPaths();
     };
 
     async function updateReportPaths() {
         const dateInput = document.getElementById('datePicker').value;
+        
+        // 🛡️ 防呆：如果日期是空的，直接結束，不要去抓 /null
+        if (!dateInput) {
+            console.error("日期未選擇");
+            return;
+        }
+
         const dateDir = dateInput.replace(/-/g, '');
         const cards = document.querySelectorAll('.card');
 
         for (const card of cards) {
+            // 跳過沒有 data-base 的卡片（例如返回主頁的連結）
             const fileName = card.getAttribute('data-base');
+            if (!fileName) continue;
+
             const newHref = `report/${dateDir}/${fileName}`;
             const statusBadge = card.querySelector('.status-badge');
+            
             card.setAttribute('href', newHref);
 
             try {
@@ -102,6 +120,8 @@
         }
     }
 </script>
+
+
 </body>
 </html>
 
