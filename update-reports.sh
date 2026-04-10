@@ -31,11 +31,11 @@ for dir_path in $(find "$SOURCE_BASE" -maxdepth 1 -type d -regextype sed -regex 
     # 使用 -u 參數：僅在來源檔案較新或目標不存在時才複製
     cp -u "$dir_path"/*.html "$TARGET_BASE/$dir_name/" 2>/dev/null
     
-    if [ $? -eq 0 ]; then
-        echo "✅ 已更新: $TARGET_BASE/$dir_name/"
-    else
-        echo "⚠️  $dir_name 資料夾內無 HTML 檔案，跳過。"
-    fi
+#    if [ $? -eq 0 ]; then
+#        echo "✅ 已更新: $TARGET_BASE/$dir_name/"
+#    else
+#        echo "⚠️  $dir_name 資料夾內無 HTML 檔案，跳過。"
+#    fi
 done
 
 ./gen_file_list.sh
