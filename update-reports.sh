@@ -36,6 +36,7 @@ for dir_path in $(find "$SOURCE_BASE" -maxdepth 1 -type d -regextype sed -regex 
 #    fi
 done
 
+echo "產生 live-analysis.html 的 json 檔案"
 ./gen_file_list.sh
 
 echo "======================================="
