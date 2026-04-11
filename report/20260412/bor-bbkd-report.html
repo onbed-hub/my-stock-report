@@ -1,0 +1,179 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>BBKD 策略分析報告</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+        <style>
+            body { font-family: "Segoe UI", "Microsoft JhengHei", sans-serif; font-size: 110%; padding: 30px; background-color: #f4f7f6; color: #2c3e50; line-height: 1.6; }
+            .container { max-width: 1400px; margin: auto; }
+            .header-box { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 40px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+            h1 { margin: 0 0 15px 0; font-size: 2.5em; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 10px; }
+            
+            .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px; }
+            .info-card { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); }
+            .info-card h3 { margin-top: 0; color: #ffcc00; font-size: 1.3em; }
+            
+            .status-guide { background: white; padding: 25px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-left: 10px solid #3498db; }
+            .status-tag { padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.9em; }
+            
+            .filter-area { margin-bottom: 25px; padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px; }
+            table.dataTable { font-size: 1.1em; background: white; border-radius: 10px; overflow: hidden; }
+            thead th { background-color: #2c3e50 !important; color: white !important; padding: 15px !important; }
+            
+            .memo { background: #fff3cd; padding: 15px; border-radius: 8px; border: 1px solid #ffeeba; color: #856404; margin-top: 15px; font-weight: bold; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header-box">
+                <h1>📊 BBKD 趨勢追蹤量化交易系統</h1>
+                <p style="font-size: 1.2em; opacity: 0.9;">統計期間：2026-01-01 起至 今日</p>
+                
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>核心邏輯 (Logic)</h3>
+                        <ul>
+                            <li><b>DMA 趨勢判斷：</b>快線穿越慢線（翻正）代表短期動能轉強。</li>
+                            <li><b>關鍵 K 線：</b>轉強當日的紅 K 高點為「景氣壓力點」，低點為「防守支撐點」。</li>
+                            <li><b>觸發進場：</b>收盤價站穩壓力點，代表多頭確立，於次日開盤進場。</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3>出場與風險控制 (Exit Strategy)</h3>
+                        <ul>
+                            <li><b>趨勢轉向：</b>DMA 轉為負值（動能消失）。</li>
+                            <li><b>跌破支撐：</b>收盤跌破關鍵 K 線的低點。</li>
+                            <li><b>隔日執行：</b>所有訊號皆以收盤確認，次日開盤動作，排除盤中波動干擾。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="status-guide">
+                <h3>🔍 狀態解讀說明 (未來操作指引)</h3>
+                <table style="width: 100%; border-collapse: collapse; line-height: 2;">
+                    <tr>
+                        <td width="150px"><span class="status-tag" style="background:#e3f2fd; color:#0d47a1;">🚩 建議買入</span></td>
+                        <td><b>動作：明日開盤買進。</b> 代表今日收盤已成功突破關鍵高點。</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status-tag" style="background:#ffebee; color:#b71c1c;">🚫 建議賣出</span></td>
+                        <td><b>動作：明日開盤清倉。</b> 代表跌破支撐或趨勢反轉，優先保護獲利。</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status-tag" style="background:#e8f5e9; color:#1b5e20;">🔹 持股中</span></td>
+                        <td><b>動作：繼續持有。</b> 目前處於多頭波段，尚未觸發賣出條件。</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status-tag" style="background:#fff3e0; color:#e65100;">⏳ 觀察中</span></td>
+                        <td><b>動作：列入清單。</b> DMA 已翻正，正在等待收盤突破關鍵高點（準備起飛）。</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status-tag" style="background:#f5f5f5; color:#616161;">⚪ 觀望中</span></td>
+                        <td><b>動作：不予理會。</b> 無明確趨勢，或正處於整理階段，不建議介入。</td>
+                    </tr>
+                </table>
+                <div class="memo">
+                    💡 備忘錄：表格中的「累計收益%」包含已實現（過去已出場）與未實現（目前持股）的所有波段損益加總。
+                </div>
+            </div>
+
+            <div class="filter-area">
+                <b style="font-size: 1.2em;">快速篩選目前應對策略：</b>
+                <select id="statusFilter" style="padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                    <option value="">顯示所有股票 (All Items)</option>
+                    <option value="建議買入">🚩 買入訊號 (Entry)</option>
+                    <option value="建議賣出">🚫 賣出訊號 (Exit)</option>
+                    <option value="持股中">🔹 持續持有 (Holding)</option>
+                    <option value="觀察中">⏳ 列入觀察 (Watching)</option>
+                </select>
+            </div>
+
+            <table id="reportTable" border="1" class="dataframe display">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股票代號</th>
+      <th>名稱</th>
+      <th>買入價</th>
+      <th>結算價</th>
+      <th>累計收益%</th>
+      <th>動作數</th>
+      <th>目前狀態</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2317.TW</td>
+      <td>鴻海</td>
+      <td>246.50</td>
+      <td>200.50</td>
+      <td>-11.97</td>
+      <td>2</td>
+      <td>觀望中</td>
+    </tr>
+    <tr>
+      <td>0050.TW</td>
+      <td>元大台灣50</td>
+      <td>80.75</td>
+      <td>80.75</td>
+      <td>0.00</td>
+      <td>1</td>
+      <td>🚩 建議買入</td>
+    </tr>
+    <tr>
+      <td>00990A.TW</td>
+      <td>主動元大AI新經濟</td>
+      <td>12.04</td>
+      <td>14.01</td>
+      <td>-6.15</td>
+      <td>2</td>
+      <td>觀望中</td>
+    </tr>
+    <tr>
+      <td>2409.TW</td>
+      <td>友達</td>
+      <td>15.20</td>
+      <td>18.15</td>
+      <td>-5.26</td>
+      <td>2</td>
+      <td>觀望中</td>
+    </tr>
+    <tr>
+      <td>6806.TW</td>
+      <td>森崴能源</td>
+      <td>51.90</td>
+      <td>22.90</td>
+      <td>-4.43</td>
+      <td>2</td>
+      <td>觀望中</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+
+        <script>
+            $(document).ready( function () {
+                var table = $('#reportTable').DataTable({
+                    "pageLength": 100,
+                    "order": [[ 4, "desc" ]],
+                    "language": {
+                        "search": "搜尋股票代號/名稱：",
+                        "lengthMenu": "每頁顯示 _MENU_ 筆",
+                        "info": "顯示第 _START_ 到 _END_ 筆，共 _TOTAL_ 檔標的",
+                        "paginate": { "previous": "上一頁", "next": "下一頁" }
+                    }
+                });
+                
+                $('#statusFilter').on('change', function () {
+                    var val = $(this).val();
+                    table.column(6).search(val).draw();
+                });
+            });
+        </script>
+    </body>
+    </html>
+    

@@ -51,10 +51,10 @@
     <div class="report-section">
         <div class="section-header">摘要 & 盤整/均線糾纏 分析</div>
         <div class="report-grid">
-            
-            <a href="javascript:void(0)" 
-               onclick="location.href='live-analysis.html?date=' + document.getElementById('datePicker').value" 
-               class="card portal-card" 
+
+            <a href="javascript:void(0)"
+               onclick="location.href='live-analysis.html?date=' + document.getElementById('datePicker').value"
+               class="card portal-card"
                style="border-left: 5px solid #7c3aed;">
                 <span class="badge bg-live">LIVE MENU</span>
                 <span class="title">進入 實時分析監控入口 ➔</span>
@@ -92,6 +92,11 @@
                 <span class="badge bg-all">1600筆股票</span>
                 <span class="title">FVG 缺口彙整摘要 <span class="status-badge"></span></span>
                 <div class="file-info"><span class="file-name">📄 all-fvg-summary.html</span></div>
+            </a>
+            <a href="#" class="card" data-base="all-bbkd-report.html">
+                <span class="badge bg-all">1600筆股票</span>
+                <span class="title">布林帶 (Bollinger) / KD 綜合分析 <span class="status-badge"></span></span>
+                <div class="file-info"><span class="file-name">📄 all-bbkd-report.html</span></div>
             </a>
         </div>
     </div>
@@ -132,15 +137,14 @@
         const cards = document.querySelectorAll('.card');
 
         for (const card of cards) {
-            // 修正點：跳過傳送門卡片，不進行 report 子目錄路徑檢查
             if (card.classList.contains('portal-card')) continue;
 
             const fileName = card.getAttribute('data-base');
             const newHref = `report/${dateDir}/${fileName}`;
             const statusBadge = card.querySelector('.status-badge');
-            
+
             card.setAttribute('href', newHref);
-            
+
             try {
                 const response = await fetch(newHref, { method: 'HEAD' });
                 if (response.ok) {
