@@ -36,7 +36,7 @@ for dir_path in $(find "$SOURCE_BASE" -maxdepth 1 -type d -regextype sed -regex 
 #    fi
 done
 
-echo "產生 live-analysis.html 的 json 檔案"
+echo "產生 live-analysis.html 的即時分析 json 檔案"
 ./gen_file_list.sh
 
 echo "======================================="
@@ -48,5 +48,6 @@ git commit -m "Auto-sync reports: $(date '+%Y-%m-%d %H:%M:%S')"
 git push origin main
 
 echo "✨ 全部完成！"
+echo "🌐 GitHub: https://github.com/onbed-hub/my-stock-report"
 echo "🌐 網址: https://onbed-hub.github.io/my-stock-report/"
 
