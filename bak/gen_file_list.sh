@@ -19,10 +19,10 @@ for dir in "$REPORT_BASE"/*/; do
     # 檢查是否為目錄
     if [ -d "$dir" ]; then
         # 💡 新增判斷：如果 files.json 已經存在就跳過
-        if [ -f "$dir/files.json" ]; then
+#        if [ -f "$dir/files.json" ]; then
 #            echo "⏭️  跳過目錄: $dir_name (files.json 已存在)"
-            continue
-        fi
+#            continue
+#        fi
 
         echo "處理目錄: $dir_name"
         
