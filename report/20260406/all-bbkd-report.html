@@ -8,19 +8,66 @@
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
         <style>
-            body { font-family: "Segoe UI", "Microsoft JhengHei", sans-serif; font-size: 150%; padding: 30px; background-color: #f4f7f6; color: #2c3e50; line-height: 1.6; }
+            /* 1. 整體網頁放大至 1.5 倍 */
+            body { 
+                font-family: "Segoe UI", "Microsoft JhengHei", sans-serif; 
+                font-size: 150%; 
+                padding: 30px; 
+                background-color: #f4f7f6; 
+                color: #2c3e50; 
+                line-height: 1.6; 
+            }
             .container { max-width: 1400px; margin: auto; }
             .header-box { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 40px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
             h1 { margin: 0 0 15px 0; font-size: 2.5em; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 10px; }
+            
+            /* 2. 強化篩選區域的文字與選單大小 */
+            .filter-area { 
+                margin-bottom: 25px; 
+                padding: 25px; 
+                background: #fff; 
+                border-radius: 10px; 
+                box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+                display: flex; 
+                align-items: center; 
+                gap: 20px; 
+            }
+            .filter-area b { font-size: 1.2em; } /* 「快速篩選...」文字放大 */
+            
+            #statusFilter { 
+                padding: 12px 25px; 
+                font-size: 1.1em; /* 選單文字放大 */
+                font-weight: bold;
+                border: 2px solid #3498db;
+                border-radius: 8px; 
+                cursor: pointer;
+                background-color: #f0f9ff;
+                color: #1e3c72;
+            }
+
+            /* 表格與欄位控制 */
+            table.dataTable {
+                font-size: 1.1em; background: white; border-radius: 10px; overflow: hidden; width: 100% !important;
+            }
+            thead th { background-color: #2c3e50 !important; color: white !important; padding: 15px !important; }
+
+            /* 強制縮小名稱欄位文字長度，避免換行過多 */
+            .col-name {
+                max-width: 150px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            /* 其他既有樣式維持不變... */
             .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px; }
             .info-card { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); }
             .info-card h3 { margin-top: 0; color: #ffcc00; font-size: 1.3em; }
             .status-guide { background: white; padding: 25px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-left: 10px solid #3498db; }
             .status-tag { padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.9em; }
-            .filter-area { margin-bottom: 25px; padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px; }
-            table.dataTable { font-size: 1.1em; background: white; border-radius: 10px; overflow: hidden; }
-            thead th { background-color: #2c3e50 !important; color: white !important; padding: 15px !important; }
             .memo { background: #fff3cd; padding: 15px; border-radius: 8px; border: 1px solid #ffeeba; color: #856404; margin-top: 15px; font-weight: bold; }
+            .stock-link { color: #1e3c72; text-decoration: none; font-weight: bold; border-bottom: 1px dashed #1e3c72; }
+            .stock-link:hover { color: #ff4500; border-bottom: 1px solid #ff4500; }
         </style>
     </head>
     <body>
@@ -73,7 +120,7 @@
                     </tr>
                 </table>
                 <div class="memo">
-                    💡 備忘錄：表格中的「累計收益%」包含已實現（過去已出場）與未實現（目前持股）的所有波段損益加總。
+                    💡 備忘錄：表格中的「累計收益%」包含已實現（過去已出場）與未實現（目前持股）的所有波段損益加總。點擊「股票代號」可開啟 Yahoo 股市技術分析。
                 </div>
             </div>
 
@@ -96,7 +143,7 @@
       <th>買入價</th>
       <th>結算價</th>
       <th>累計收益%</th>
-      <th>動作數</th>
+      <th>交易次數</th>
       <th>目前狀態</th>
     </tr>
   </thead>
@@ -615,6 +662,15 @@
       <td>持股中</td>
     </tr>
     <tr>
+      <td>8032.TWO</td>
+      <td>光菱</td>
+      <td>40.00</td>
+      <td>33.70</td>
+      <td>-7.00</td>
+      <td>2</td>
+      <td>觀望中</td>
+    </tr>
+    <tr>
       <td>00934.TW</td>
       <td>中信成長高股息</td>
       <td>21.04</td>
@@ -685,6 +741,15 @@
       <td>14.49</td>
       <td>1</td>
       <td>持股中</td>
+    </tr>
+    <tr>
+      <td>3665.TW</td>
+      <td>貿聯-KY</td>
+      <td>1645.00</td>
+      <td>1915.00</td>
+      <td>-2.13</td>
+      <td>2</td>
+      <td>觀望中</td>
     </tr>
     <tr>
       <td>3714.TW</td>
@@ -4115,18 +4180,41 @@
                 var table = $('#reportTable').DataTable({
                     "pageLength": 100,
                     "order": [[ 4, "desc" ]],
-                    "language": {
-                        "search": "搜尋股票代號/名稱：",
-                        "lengthMenu": "每頁顯示 _MENU_ 筆",
-                        "info": "顯示第 _START_ 到 _END_ 筆，共 _TOTAL_ 檔標的",
-                        "paginate": { "previous": "上一頁", "next": "下一頁" }
-                    }
+                    "columnDefs": [
+                        {
+                            "targets": 0,
+                            "render": function ( data, type, row ) {
+                                if (type === 'display') {
+                                    var stockId = data.toString().trim();
+                                    var finalSymbol = stockId;
+                                    
+                                    // 修正點：如果股號還沒有點號(.)，才補上後綴
+                                    if (stockId.indexOf('.') === -1) {
+                                        var suffix = (stockId.length >= 4 && /^[568]/.test(stockId)) ? ".TWO" : ".TW";
+                                        finalSymbol = stockId + suffix;
+                                    }
+                                    
+                                    var url = "https://tw.stock.yahoo.com/quote/" + finalSymbol + "/technical-analysis";
+                                    return '<a href="' + url + '" target="_blank" class="stock-link">' + stockId + '</a>';
+                                }
+                                return data;
+                            }
+                        },
+                        {
+                            "targets": 1,
+                            "width": "120px",
+                            "createdCell": function (td) {
+                                $(td).addClass('col-name');
+                            }
+                        }
+                    ]
                 });
                 $('#statusFilter').on('change', function () {
                     table.column(6).search($(this).val()).draw();
                 });
             });
         </script>
+
     </body>
     </html>
     
