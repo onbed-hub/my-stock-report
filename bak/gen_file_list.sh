@@ -3,7 +3,6 @@
 # 設定 report 目錄路徑
 REPORT_BASE="report"
 
-# 檢查 report 目錄是否存在
 if [ ! -d "$REPORT_BASE" ]; then
     echo "錯誤: 找不到 $REPORT_BASE 目錄。"
     exit 1
@@ -11,29 +10,43 @@ fi
 
 echo "開始掃描報表目錄..."
 
-# 遍歷 report 底下的所有子目錄 (即日期資料夾)
-for dir in "$REPORT_BASE"/*/; do
-    # 去除路徑結尾的斜線，取得單純的目錄名稱
-    dir_name=$(basename "$dir")
-    
-    # 檢查是否為目錄
-    if [ -d "$dir" ]; then
-        # 💡 新增判斷：如果 files.json 已經存在就跳過
-#        if [ -f "$dir/files.json" ]; then
-#            echo "⏭️  跳過目錄: $dir_name (files.json 已存在)"
-#            continue
-#        fi
+# 使用 nullglob 防止資料夾為空時抓到原始字串 "*"
+shopt -s nullglob
 
-        echo "處理目錄: $dir_name"
-        
-        # 1. 進入該目錄並列出所有 .html 檔案
-        # 2. 將清單轉成標準的 JSON 陣列格式
-        ls "$dir"*.html 2>/dev/null | xargs -n 1 basename | \
-        python3 -c "import sys, json; print(json.dumps([line.strip() for line in sys.stdin if line.strip()]))" > "$dir/files.json"
-        
-        echo "  ✅ 已產生: $dir/files.json"
+for dir in "$REPORT_BASE"/*/; do
+    # 確保變數不為空且確實是目錄
+    [ -d "$dir" ] || continue
+
+    # 💡 使用 Bash 內建語法移除路徑與結尾斜線，代替 basename 指令
+    # 這能防止 "missing operand" 錯誤
+    temp_dir=${dir%/}
+    dir_name=${temp_dir##*/}
+
+    # ---------------------------------------------------------
+    # 💡 補回判斷邏輯：如果 files.json 已經存在就跳過
+#    if [ -f "$temp_dir/files.json" ]; then
+#        echo "⏭️  跳過目錄: $dir_name (files.json 已存在)"
+#        continue
+#    fi
+    # ---------------------------------------------------------
+
+#    echo "處理目錄: $dir_name"
+
+    # 1. 直接在 ls 階段處理，並加入檢查確保有 html 檔案
+    # 2. 將清單轉成標準 JSON
+    html_files=$(ls "$temp_dir"/*.html 2>/dev/null)
+    
+    if [ -z "$html_files" ]; then
+        echo "  ⚠️  警告: $dir_name 內沒有 HTML 檔案，產生空陣列。"
+        echo "[]" > "$temp_dir/files.json"
+    else
+        echo "$html_files" | xargs -n 1 basename | \
+        python3 -c "import sys, json; print(json.dumps([line.strip() for line in sys.stdin if line.strip()]))" > "$temp_dir/files.json"
     fi
+
+#    echo "  ✅ 已產生: $temp_dir/files.json"
 done
 
 echo "---"
 echo "全部處理完成！"
+
