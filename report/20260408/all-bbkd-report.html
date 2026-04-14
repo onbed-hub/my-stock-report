@@ -8,36 +8,44 @@
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
         <style>
-            body { font-family: "Microsoft JhengHei", sans-serif; padding: 20px; background-color: #f8f9fa; font-size: 110%; }
-            .container { max-width: 1400px; margin: auto; }
-            
+            /* 設定預設放大 1.5 倍 */
+            body { font-family: "Microsoft JhengHei", sans-serif; padding: 20px; background-color: #f8f9fa; font-size: 150%; }
+
+            /* 修正容器：在大字體下使用 95% 寬度，確保內容不擁擠 */
+            .container { max-width: 95%; margin: auto; }
+
             /* 頂部深藍看板 */
             .header-box { background-color: #2c529c; color: white; padding: 30px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
             .header-box h1 { margin: 0; font-size: 2.2em; display: flex; align-items: center; gap: 15px; }
             .stats-period { margin-top: 10px; opacity: 0.8; font-size: 1.1em; }
 
-            /* 指標定義區塊 (新增) */
+            /* 指標定義區塊 (完整保留內容) */
             .indicator-def-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
             .def-card { background: rgba(255, 255, 255, 0.15); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); }
             .def-card b { color: #ffeb3b; font-size: 1.1em; display: block; margin-bottom: 5px; }
             .def-card span { font-size: 0.9em; line-height: 1.4; display: block; opacity: 0.9; }
 
-            /* 核心邏輯與風控 */
+            /* 核心邏輯與風控 (完整保留內容) */
             .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 25px; }
             .info-card { background: rgba(0, 0, 0, 0.2); padding: 20px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1); }
             .info-card h3 { color: #ffeb3b; margin-top: 0; font-size: 1.3em; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; }
             .info-card ul { padding-left: 20px; margin-top: 10px; }
             .info-card li { margin-bottom: 8px; list-style: square; font-size: 0.95em; }
 
-            /* 狀態解讀 */
+            /* 狀態解讀區塊 (完整保留內容) */
             .doc-section { background: white; padding: 25px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
             .doc-section h3 { border-left: 5px solid #2c529c; padding-left: 15px; margin-bottom: 20px; }
             .status-guide { width: 100%; border-collapse: collapse; line-height: 2.2; }
-            
-            .memo-box { background-color: #fff9c4; padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 0.9em; color: #856404; border-left: 5px solid #fbc02d; }
-            .filter-area { background: #e3f2fd; padding: 15px; border-radius: 8px; margin-bottom: 15px; font-weight: bold; }
-            #reportTable { background: white; width: 100% !important; border-radius: 8px; }
-            .advice-cell { color: #555; font-size: 0.85em; background-color: #fafafa !important; }
+            .memo-box { background-color: #fff9c4; padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 1.3em; color: #856404; border-left: 5px solid #fbc02d; }
+
+            /* 篩選區域 */
+            .filter-area { background: #e3f2fd; padding: 20px; border-radius: 8px; margin-bottom: 15px; font-weight: bold; font-size: 1.0em; color: #0d47a1; display: flex; align-items: center; }
+            #statusFilter { font-size: 0.9em; margin-left: 15px; padding: 5px 15px; border: 2px solid #2c529c; border-radius: 8px; }
+
+            /* --- 表格防爆修正 --- */
+            #reportTable { background: white; width: 100% !important; border-radius: 8px; table-layout: auto; }
+            #reportTable th, #reportTable td { white-space: normal !important; word-wrap: break-word; vertical-align: middle; padding: 12px 8px; }
+            .advice-cell { color: #555; font-size: 0.85em; background-color: #fafafa !important; min-width: 350px; line-height: 1.4; }
         </style>
     </head>
     <body>
@@ -45,7 +53,7 @@
             <div class="header-box">
                 <h1>📈 BBKD 2.0 趨勢追蹤量化系統</h1>
                 <div class="stats-period">📊 統計期間：2026-01-01 起至 2026-04-08</div>
-                
+
                 <div class="indicator-def-grid">
                     <div class="def-card">
                         <b>🟢 短期指標 (3-10 DMA)</b>
@@ -86,7 +94,7 @@
             <div class="doc-section">
                 <h3>🔍 狀態解讀 (未來操作指引)</h3>
                 <table class="status-guide">
-                    <tr><td width="150px">🚩 <span style="color:#0d47a1; font-weight:bold;">建議買入</span></td><td><b>動作：明日開盤買進。</b> 今日收盤已確認成功突破關鍵壓力。</td></tr>
+                    <tr><td width="200px">🚩 <span style="color:#0d47a1; font-weight:bold;">建議買入</span></td><td><b>動作：明日開盤買進。</b> 今日收盤已確認成功突破關鍵壓力。</td></tr>
                     <tr><td>🚫 <span style="color:#b71c1c; font-weight:bold;">建議賣出</span></td><td><b>動作：明日開盤清倉。</b> 趨勢反轉或跌破移動支撐，果斷離場。</td></tr>
                     <tr><td>🔹 <span style="color:#fbc02d; font-weight:bold;">已鎖利續抱</span></td><td><b>動作：繼續持有。</b> 已達 1:2 保護門檻，此單已立於不敗之地。</td></tr>
                     <tr><td>🍀 <span style="color:#2e7d32; font-weight:bold;">持股中</span></td><td><b>動作：繼續持有。</b> 趨勢推升中，尚未觸發移動止損條件。</td></tr>
@@ -99,7 +107,7 @@
             </div>
 
             <div class="filter-area">🎯 快速篩選標的狀態：<select id="statusFilter"><option value="">顯示所有</option></select></div>
-            <table id="reportTable" border="1" class="dataframe display nowrap">
+            <table id="reportTable" border="1" class="dataframe display cell-border">
   <thead>
     <tr style="text-align: right;">
       <th>股號</th>
@@ -349,6 +357,19 @@
       <td>▼</td>
       <td>▲</td>
       <td>🚨 價格防衛：收盤價 45.5 跌破移動支撐位 47.2。 優先鎖利落袋，等待下次訊號。</td>
+    </tr>
+    <tr>
+      <td>2748</td>
+      <td>雲品</td>
+      <td>40.30</td>
+      <td>-0.03</td>
+      <td>-4.36%</td>
+      <td>50</td>
+      <td>⏳ 觀察中</td>
+      <td>▲</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>🔍 準備起飛：指標已翻正，等待收盤價突破關鍵高點 41.35 (景氣壓力點)。</td>
     </tr>
     <tr>
       <td>6525</td>
@@ -1586,6 +1607,32 @@
       <td>🔍 準備起飛：指標已翻正，等待收盤價突破關鍵高點 16.0 (景氣壓力點)。</td>
     </tr>
     <tr>
+      <td>2722</td>
+      <td>夏都</td>
+      <td>23.85</td>
+      <td>0.11</td>
+      <td>-23.71%</td>
+      <td>74</td>
+      <td>⏳ 觀察中</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▼</td>
+      <td>🔍 準備起飛：指標已翻正，等待收盤價突破關鍵高點 30.05 (景氣壓力點)。</td>
+    </tr>
+    <tr>
+      <td>6240</td>
+      <td>松崗</td>
+      <td>18.60</td>
+      <td>-0.31</td>
+      <td>-12.62%</td>
+      <td>74</td>
+      <td>🚫 建議賣出</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>🚨 價格防衛：收盤價 18.35 跌破移動支撐位 18.8。 優先鎖利落袋，等待下次訊號。</td>
+    </tr>
+    <tr>
       <td>2885</td>
       <td>元大金</td>
       <td>47.10</td>
@@ -2056,15 +2103,15 @@
     <tr>
       <td>00940</td>
       <td>元大台灣價值高息</td>
-      <td>9.82</td>
+      <td>9.77</td>
       <td>-0.07</td>
       <td>2.69%</td>
       <td>16</td>
       <td>🚫 建議賣出</td>
       <td>▲</td>
       <td>▼</td>
-      <td>▲</td>
-      <td>🚨 價格防衛：收盤價 9.74 跌破移動支撐位 9.77。 優先鎖利落袋，等待下次訊號。</td>
+      <td>▼</td>
+      <td>🚨 價格防衛：收盤價 9.7 跌破移動支撐位 9.73。 優先鎖利落袋，等待下次訊號。</td>
     </tr>
     <tr>
       <td>3706</td>
@@ -2639,6 +2686,19 @@
       <td>🚨 價格防衛：收盤價 16.9 跌破移動支撐位 16.95。 優先鎖利落袋，等待下次訊號。</td>
     </tr>
     <tr>
+      <td>2719</td>
+      <td>燦星旅</td>
+      <td>27.30</td>
+      <td>0.48</td>
+      <td>64.21%</td>
+      <td>55</td>
+      <td>🔹 已鎖利續抱</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▼</td>
+      <td>🌀 趨勢分歧震盪：目前為鎖利續抱中。守穩移動支撐位 27.2。</td>
+    </tr>
+    <tr>
       <td>6492</td>
       <td>生華科</td>
       <td>49.30</td>
@@ -2845,6 +2905,19 @@
       <td>▼</td>
       <td>▼</td>
       <td>🚨 價格防衛：收盤價 53.0 跌破移動支撐位 53.1。 優先鎖利落袋，等待下次訊號。</td>
+    </tr>
+    <tr>
+      <td>5288</td>
+      <td>豐祥-KY</td>
+      <td>141.50</td>
+      <td>1.07</td>
+      <td>2.55%</td>
+      <td>76</td>
+      <td>⏳ 觀察中</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▼</td>
+      <td>🔍 準備起飛：指標已翻正，等待收盤價突破關鍵高點 142.5 (景氣壓力點)。</td>
     </tr>
     <tr>
       <td>2252</td>
@@ -6578,6 +6651,19 @@
       <td>🌀 趨勢分歧震盪：目前為強勢推升中。守穩移動支撐位 147.0。</td>
     </tr>
     <tr>
+      <td>4183</td>
+      <td>福永生技</td>
+      <td>16.00</td>
+      <td>-0.05</td>
+      <td>-52.95%</td>
+      <td>78</td>
+      <td>⏳ 觀察中</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>🔍 準備起飛：指標已翻正，等待收盤價突破關鍵高點 16.2 (景氣壓力點)。</td>
+    </tr>
+    <tr>
       <td>2061</td>
       <td>風青</td>
       <td>17.00</td>
@@ -9321,6 +9407,19 @@
       <td>🔍 準備起飛：指標已翻正，等待收盤價突破關鍵高點 79.5 (景氣壓力點)。</td>
     </tr>
     <tr>
+      <td>3362</td>
+      <td>先進光</td>
+      <td>97.00</td>
+      <td>-2.02</td>
+      <td>-28.8%</td>
+      <td>56</td>
+      <td>🚫 建議賣出</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>🚨 價格防衛：收盤價 92.8 跌破移動支撐位 92.9。 優先鎖利落袋，等待下次訊號。</td>
+    </tr>
+    <tr>
       <td>3002</td>
       <td>歐格</td>
       <td>19.30</td>
@@ -9442,7 +9541,7 @@
       <td>主動聯博投等入息</td>
       <td>20.61</td>
       <td>0.04</td>
-      <td>0.72%</td>
+      <td>1.11%</td>
       <td>4</td>
       <td>⏳ 觀察中</td>
       <td>▲</td>
@@ -10567,6 +10666,19 @@
       <td>▲</td>
       <td>▲</td>
       <td>🚨 價格防衛：收盤價 14.8 跌破移動支撐位 14.85。 優先鎖利落袋，等待下次訊號。</td>
+    </tr>
+    <tr>
+      <td>6411</td>
+      <td>晶焱</td>
+      <td>76.10</td>
+      <td>-3.27</td>
+      <td>-34.36%</td>
+      <td>68</td>
+      <td>🚫 建議賣出</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>📉 趨勢反轉：中期指標由正轉負 (-0.83)，動能消失。 優先鎖利落袋，等待下次訊號。</td>
     </tr>
     <tr>
       <td>1611</td>
@@ -13884,6 +13996,19 @@
       <td>🚨 價格防衛：收盤價 143.0 跌破移動支撐位 144.5。 優先鎖利落袋，等待下次訊號。</td>
     </tr>
     <tr>
+      <td>6150</td>
+      <td>撼訊</td>
+      <td>57.20</td>
+      <td>-2.17</td>
+      <td>132.39%</td>
+      <td>68</td>
+      <td>🚫 建議賣出</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>🚨 價格防衛：收盤價 70.5 跌破移動支撐位 72.1。 優先鎖利落袋，等待下次訊號。</td>
+    </tr>
+    <tr>
       <td>1459</td>
       <td>聯發</td>
       <td>11.70</td>
@@ -14428,6 +14553,19 @@
       <td>▼</td>
       <td>▼</td>
       <td>🚨 價格防衛：收盤價 12.95 跌破移動支撐位 13.2。 優先鎖利落袋，等待下次訊號。</td>
+    </tr>
+    <tr>
+      <td>2734</td>
+      <td>易飛網</td>
+      <td>16.50</td>
+      <td>-0.08</td>
+      <td>142.11%</td>
+      <td>74</td>
+      <td>⏳ 觀察中</td>
+      <td>▲</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>🔍 準備起飛：指標已翻正，等待收盤價突破關鍵高點 21.75 (景氣壓力點)。</td>
     </tr>
     <tr>
       <td>2882</td>
@@ -15197,11 +15335,24 @@
       <td>🚨 價格防衛：收盤價 40.6 跌破移動支撐位 41.3。 優先鎖利落袋，等待下次訊號。</td>
     </tr>
     <tr>
+      <td>6872</td>
+      <td>浩宇生醫</td>
+      <td>16.90</td>
+      <td>-0.29</td>
+      <td>-11.4%</td>
+      <td>18</td>
+      <td>⏳ 觀察中</td>
+      <td>▲</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>🔍 準備起飛：指標已翻正，等待收盤價突破關鍵高點 20.95 (景氣壓力點)。</td>
+    </tr>
+    <tr>
       <td>00948B</td>
       <td>中信優息投資級債</td>
       <td>9.61</td>
       <td>0.06</td>
-      <td>0.42%</td>
+      <td>-0.3%</td>
       <td>5</td>
       <td>🚩 建議買入</td>
       <td>▲</td>
@@ -15845,6 +15996,19 @@
       <td>▲</td>
       <td>▼</td>
       <td>🚨 價格防衛：收盤價 83.0 跌破移動支撐位 83.3。 優先鎖利落袋，等待下次訊號。</td>
+    </tr>
+    <tr>
+      <td>1541</td>
+      <td>錩泰</td>
+      <td>26.55</td>
+      <td>0.70</td>
+      <td>15.63%</td>
+      <td>69</td>
+      <td>🔹 已鎖利續抱</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>🚀 三期共振強勢：目前為鎖利續抱中。守穩移動支撐位 26.5。</td>
     </tr>
     <tr>
       <td>3419</td>
@@ -17940,6 +18104,19 @@
       <td>🔍 準備起飛：指標已翻正，等待收盤價突破關鍵高點 31.15 (景氣壓力點)。</td>
     </tr>
     <tr>
+      <td>2527</td>
+      <td>宏璟</td>
+      <td>30.95</td>
+      <td>0.35</td>
+      <td>-35.1%</td>
+      <td>71</td>
+      <td>🚩 建議買入</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▼</td>
+      <td>🔥 突破確認：成功站穩壓力位，指標呈 🌀 趨勢分歧震盪，具備攻擊動能。</td>
+    </tr>
+    <tr>
       <td>2330</td>
       <td>台積電</td>
       <td>1950.00</td>
@@ -18341,6 +18518,19 @@
       <td>▲</td>
       <td>▲</td>
       <td>🚨 價格防衛：收盤價 35.0 跌破移動支撐位 37.1。 優先鎖利落袋，等待下次訊號。</td>
+    </tr>
+    <tr>
+      <td>2712</td>
+      <td>遠雄來</td>
+      <td>14.90</td>
+      <td>-0.57</td>
+      <td>-71.03%</td>
+      <td>90</td>
+      <td>🚫 建議賣出</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>🚨 價格防衛：收盤價 22.2 跌破移動支撐位 22.3。 優先鎖利落袋，等待下次訊號。</td>
     </tr>
     <tr>
       <td>3652</td>
@@ -20293,6 +20483,19 @@
       <td>🔍 準備起飛：指標已翻正，等待收盤價突破關鍵高點 24.0 (景氣壓力點)。</td>
     </tr>
     <tr>
+      <td>5364</td>
+      <td>力麗店</td>
+      <td>11.35</td>
+      <td>-0.15</td>
+      <td>-70.54%</td>
+      <td>48</td>
+      <td>🚫 建議賣出</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>🚨 價格防衛：收盤價 22.85 跌破移動支撐位 22.95。 優先鎖利落袋，等待下次訊號。</td>
+    </tr>
+    <tr>
       <td>3623</td>
       <td>富晶通</td>
       <td>22.05</td>
@@ -20956,6 +21159,19 @@
       <td>🌀 趨勢分歧震盪：目前為強勢推升中。守穩移動支撐位 157.0。</td>
     </tr>
     <tr>
+      <td>00954</td>
+      <td>中信日本半導體</td>
+      <td>15.27</td>
+      <td>-0.25</td>
+      <td>8.92%</td>
+      <td>12</td>
+      <td>🚫 建議賣出</td>
+      <td>▲</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>🚨 價格防衛：收盤價 12.91 跌破移動支撐位 12.97。 優先鎖利落袋，等待下次訊號。</td>
+    </tr>
+    <tr>
       <td>009805</td>
       <td>新光美國電力基建</td>
       <td>15.39</td>
@@ -21130,7 +21346,9 @@
         <script>
             $(document).ready(function() {
                 var table = $('#reportTable').DataTable({
-                    "pageLength": 100, "order": [[ 4, "desc" ]],
+                    "pageLength": 100, 
+                    "order": [[ 4, "desc" ]],
+                    "autoWidth": false,
                     "columnDefs": [
                         { "targets": 0, "render": function(data) {
                             var s = data.toString().trim();
@@ -21141,7 +21359,7 @@
                             var color = data === "▲" ? "#d32f2f" : "#388e3c";
                             return '<span style="color:'+color+'; font-weight:bold; font-size:1.3em;">'+data+'</span>';
                         } },
-                        { "targets": 10, "createdCell": function(td) { $(td).addClass('advice-cell'); } }
+                        { "targets": 10, "width": "35%", "createdCell": function(td) { $(td).addClass('advice-cell'); } }
                     ],
                     "initComplete": function() {
                         this.api().column(6).every(function() {
