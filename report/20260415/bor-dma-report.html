@@ -1,0 +1,867 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <title>CIS 泥鰍量化報表系統</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+        <style>
+            body { font-family: "Microsoft JhengHei", sans-serif; padding: 25px; background-color: #f4f7f6; font-size: 1.5em; }
+            .container { max-width: 98%; margin: auto; }
+            .header-box { background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); color: white; padding: 35px; border-radius: 12px; margin-bottom: 25px; }
+            .header-box h1 { margin: 0; font-size: 2.5em; }
+            .stats-period { font-size: 1.2em; margin-top: 10px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 15px; }
+            .filter-area { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; display: flex; gap: 40px; border: 2px solid #1a2a6c; }
+            #reportTable th { background-color: #1a2a6c; color: white; font-size: 1.2em; padding: 15px; }
+            #reportTable td { font-size: 1.1em; padding: 12px; text-align: center; }
+            .advice-cell { background-color: #fffde7 !important; text-align: left !important; font-weight: bold; color: #b21f1f; }
+            .dataTables_filter input { font-size: 1.1em; padding: 5px; border: 2px solid #1a2a6c; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header-box">
+                <h1>🐟 DMA 泥鰍波段分析報表</h1>
+                <div class="stats-period">📊 統計起點：2026-01-01 | 分析基準日：2026-04-15</div>
+            </div>
+            <div class="filter-area">
+                <div class="filter-group">🎯 狀態篩選：<select id="statusFilter" style="font-size:1em;"><option value="">顯示所有</option></select></div>
+                <div id="search_target" class="filter-group">🔍 搜尋：</div>
+            </div>
+            <table id="reportTable" border="1" class="dataframe display cell-border">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股票代碼</th>
+      <th>名稱</th>
+      <th>模式</th>
+      <th>隔日勝率%</th>
+      <th>5日勝率%</th>
+      <th>收益%</th>
+      <th>交易次數</th>
+      <th>目前狀態</th>
+      <th>專家建議</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2317.TW</td>
+      <td>HON HAI PR</td>
+      <td>ultra</td>
+      <td>0.00</td>
+      <td>100.0</td>
+      <td>-4.35</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>2317.TW</td>
+      <td>HON HAI PR</td>
+      <td>short</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>-8.43</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>2317.TW</td>
+      <td>HON HAI PR</td>
+      <td>medium</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>-7.82</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>3702.TW</td>
+      <td>WPG HOLDIN</td>
+      <td>ultra</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>31.34</td>
+      <td>2</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>3702.TW</td>
+      <td>WPG HOLDIN</td>
+      <td>short</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>3702.TW</td>
+      <td>WPG HOLDIN</td>
+      <td>medium</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>2485.TW</td>
+      <td>ZINWELL</td>
+      <td>ultra</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>24.52</td>
+      <td>2</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>2485.TW</td>
+      <td>ZINWELL</td>
+      <td>short</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>23.72</td>
+      <td>2</td>
+      <td>觀望中</td>
+      <td>等待低檔金叉</td>
+    </tr>
+    <tr>
+      <td>2485.TW</td>
+      <td>ZINWELL</td>
+      <td>medium</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>16.89</td>
+      <td>2</td>
+      <td>觀望中</td>
+      <td>等待低檔金叉</td>
+    </tr>
+    <tr>
+      <td>2367.TW</td>
+      <td>UNITECH  P</td>
+      <td>ultra</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>觀望中</td>
+      <td>等待低檔金叉</td>
+    </tr>
+    <tr>
+      <td>2367.TW</td>
+      <td>UNITECH  P</td>
+      <td>short</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>觀望中</td>
+      <td>等待低檔金叉</td>
+    </tr>
+    <tr>
+      <td>2367.TW</td>
+      <td>UNITECH  P</td>
+      <td>medium</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>4142.TW</td>
+      <td>ADIMMUNE C</td>
+      <td>ultra</td>
+      <td>50.00</td>
+      <td>100.0</td>
+      <td>1.85</td>
+      <td>4</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>4142.TW</td>
+      <td>ADIMMUNE C</td>
+      <td>short</td>
+      <td>0.00</td>
+      <td>100.0</td>
+      <td>-0.32</td>
+      <td>2</td>
+      <td>觀望中</td>
+      <td>等待低檔金叉</td>
+    </tr>
+    <tr>
+      <td>4142.TW</td>
+      <td>ADIMMUNE C</td>
+      <td>medium</td>
+      <td>0.00</td>
+      <td>100.0</td>
+      <td>-6.19</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>0050.TW</td>
+      <td>YUANTA SEC</td>
+      <td>ultra</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>0050.TW</td>
+      <td>YUANTA SEC</td>
+      <td>short</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>-5.13</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>0050.TW</td>
+      <td>YUANTA SEC</td>
+      <td>medium</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>2</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>0056.TW</td>
+      <td>YUANTA SEC</td>
+      <td>ultra</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>-2.75</td>
+      <td>2</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>0056.TW</td>
+      <td>YUANTA SEC</td>
+      <td>short</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>2</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>0056.TW</td>
+      <td>YUANTA SEC</td>
+      <td>medium</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>-4.25</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>00635U.TW</td>
+      <td>YUANTA SEC</td>
+      <td>ultra</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>2</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>00635U.TW</td>
+      <td>YUANTA SEC</td>
+      <td>short</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>-7.00</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>00635U.TW</td>
+      <td>YUANTA SEC</td>
+      <td>medium</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>2</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>00738U.TW</td>
+      <td>YUANTA SEC</td>
+      <td>ultra</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>-8.38</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>00738U.TW</td>
+      <td>YUANTA SEC</td>
+      <td>short</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>-12.03</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>00738U.TW</td>
+      <td>YUANTA SEC</td>
+      <td>medium</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>-15.72</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>00929.TW</td>
+      <td>FUH HWA SE</td>
+      <td>ultra</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>-5.94</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>00929.TW</td>
+      <td>FUH HWA SE</td>
+      <td>short</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>-4.55</td>
+      <td>6</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>00929.TW</td>
+      <td>FUH HWA SE</td>
+      <td>medium</td>
+      <td>50.00</td>
+      <td>50.0</td>
+      <td>-5.02</td>
+      <td>6</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>009816.TW</td>
+      <td>KGI SECURI</td>
+      <td>ultra</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>009816.TW</td>
+      <td>KGI SECURI</td>
+      <td>short</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>-5.11</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>009816.TW</td>
+      <td>KGI SECURI</td>
+      <td>medium</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>2</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>00990A.TW</td>
+      <td>YUANTA SEC</td>
+      <td>ultra</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>00990A.TW</td>
+      <td>YUANTA SEC</td>
+      <td>short</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>00990A.TW</td>
+      <td>YUANTA SEC</td>
+      <td>medium</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>2009.TW</td>
+      <td>FIRST COPP</td>
+      <td>ultra</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>-12.59</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>2009.TW</td>
+      <td>FIRST COPP</td>
+      <td>short</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>2</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>2009.TW</td>
+      <td>FIRST COPP</td>
+      <td>medium</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>2</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>2337.TW</td>
+      <td>MACRONIX I</td>
+      <td>ultra</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>2</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>2337.TW</td>
+      <td>MACRONIX I</td>
+      <td>short</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>2</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>2337.TW</td>
+      <td>MACRONIX I</td>
+      <td>medium</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>2352.TW</td>
+      <td>QISDA CORP</td>
+      <td>ultra</td>
+      <td>0.00</td>
+      <td>100.0</td>
+      <td>-1.02</td>
+      <td>2</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>2352.TW</td>
+      <td>QISDA CORP</td>
+      <td>short</td>
+      <td>50.00</td>
+      <td>100.0</td>
+      <td>-8.53</td>
+      <td>4</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>2352.TW</td>
+      <td>QISDA CORP</td>
+      <td>medium</td>
+      <td>50.00</td>
+      <td>100.0</td>
+      <td>-1.45</td>
+      <td>4</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>2409.TW</td>
+      <td>AUO CORPOR</td>
+      <td>ultra</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>3.34</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>2409.TW</td>
+      <td>AUO CORPOR</td>
+      <td>short</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>-10.48</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>2409.TW</td>
+      <td>AUO CORPOR</td>
+      <td>medium</td>
+      <td>0.00</td>
+      <td>100.0</td>
+      <td>-3.98</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>3481.TW</td>
+      <td>INNOLUX CO</td>
+      <td>ultra</td>
+      <td>0.00</td>
+      <td>100.0</td>
+      <td>3.08</td>
+      <td>2</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>3481.TW</td>
+      <td>INNOLUX CO</td>
+      <td>short</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>11.75</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>3481.TW</td>
+      <td>INNOLUX CO</td>
+      <td>medium</td>
+      <td>0.00</td>
+      <td>100.0</td>
+      <td>5.00</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>6136.TW</td>
+      <td>FULLERTON</td>
+      <td>ultra</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>-1.84</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>6136.TW</td>
+      <td>FULLERTON</td>
+      <td>short</td>
+      <td>0.00</td>
+      <td>100.0</td>
+      <td>-3.28</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>6136.TW</td>
+      <td>FULLERTON</td>
+      <td>medium</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>2</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>6806.TW</td>
+      <td>SHINFOX EN</td>
+      <td>ultra</td>
+      <td>50.00</td>
+      <td>100.0</td>
+      <td>4.25</td>
+      <td>4</td>
+      <td>觀望中</td>
+      <td>等待低檔金叉</td>
+    </tr>
+    <tr>
+      <td>6806.TW</td>
+      <td>SHINFOX EN</td>
+      <td>short</td>
+      <td>0.00</td>
+      <td>100.0</td>
+      <td>-0.43</td>
+      <td>4</td>
+      <td>觀望中</td>
+      <td>等待低檔金叉</td>
+    </tr>
+    <tr>
+      <td>6806.TW</td>
+      <td>SHINFOX EN</td>
+      <td>medium</td>
+      <td>0.00</td>
+      <td>100.0</td>
+      <td>7.30</td>
+      <td>2</td>
+      <td>觀望中</td>
+      <td>等待低檔金叉</td>
+    </tr>
+    <tr>
+      <td>3105.TWO</td>
+      <td>WIN SEMICO</td>
+      <td>ultra</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>3105.TWO</td>
+      <td>WIN SEMICO</td>
+      <td>short</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>3105.TWO</td>
+      <td>WIN SEMICO</td>
+      <td>medium</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>觀望中</td>
+      <td>高檔震盪觀望</td>
+    </tr>
+    <tr>
+      <td>4966.TWO</td>
+      <td>PARADE TEC</td>
+      <td>ultra</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>-8.29</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>4966.TWO</td>
+      <td>PARADE TEC</td>
+      <td>short</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>-8.83</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>4966.TWO</td>
+      <td>PARADE TEC</td>
+      <td>medium</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>-8.83</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>6188.TWO</td>
+      <td>QUANTA STO</td>
+      <td>ultra</td>
+      <td>33.33</td>
+      <td>100.0</td>
+      <td>-11.03</td>
+      <td>8</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>6188.TWO</td>
+      <td>QUANTA STO</td>
+      <td>short</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>-3.62</td>
+      <td>2</td>
+      <td>觀望中</td>
+      <td>等待低檔金叉</td>
+    </tr>
+    <tr>
+      <td>6188.TWO</td>
+      <td>QUANTA STO</td>
+      <td>medium</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>-7.94</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>7792.TWO</td>
+      <td>AM POWER</td>
+      <td>ultra</td>
+      <td>0.00</td>
+      <td>100.0</td>
+      <td>-6.22</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>7792.TWO</td>
+      <td>AM POWER</td>
+      <td>short</td>
+      <td>100.00</td>
+      <td>100.0</td>
+      <td>-15.58</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>7792.TWO</td>
+      <td>AM POWER</td>
+      <td>medium</td>
+      <td>0.00</td>
+      <td>100.0</td>
+      <td>-13.11</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>2327.TW</td>
+      <td>YAGEO CORP</td>
+      <td>ultra</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>2</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>2327.TW</td>
+      <td>YAGEO CORP</td>
+      <td>short</td>
+      <td>0.00</td>
+      <td>100.0</td>
+      <td>-14.47</td>
+      <td>4</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+    <tr>
+      <td>2327.TW</td>
+      <td>YAGEO CORP</td>
+      <td>medium</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>2</td>
+      <td>持股中</td>
+      <td>守住移動停利</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        <script>
+            $(document).ready(function() {
+                var table = $('#reportTable').DataTable({
+                    "pageLength": 50, "order": [[ 5, "desc" ]],
+                    "columnDefs": [
+                        { "targets": 0, "render": function(data) {
+                            var sym = data.toString().includes('.') ? data : (data.startsWith('2') ? data+'.TW' : data+'.TWO');
+                            return '<a href="https://tw.stock.yahoo.com/quote/'+sym+'/technical-analysis" target="_blank">'+data+'</a>';
+                        } },
+                        { "targets": 8, "createdCell": function(td) { $(td).addClass('advice-cell'); } }
+                    ],
+                    "initComplete": function() {
+                        $('.dataTables_filter').appendTo('#search_target');
+                        this.api().column(7).every(function() {
+                            var column = this; var select = $('#statusFilter');
+                            column.data().unique().sort().each(function(d) { select.append('<option value="'+d+'">'+d+'</option>'); });
+                        });
+                    }
+                });
+                $('#statusFilter').on('change', function() { table.column(7).search($(this).val()).draw(); });
+            });
+        </script>
+    </body>
+    </html>
+    
