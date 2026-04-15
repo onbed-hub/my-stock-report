@@ -79,6 +79,15 @@
                         <option value="連2日大跌">📉 連2日大跌</option>
                     </select>
                 </div>
+                <div class="control-item">🎙️ 法說會篩選：
+                    <select id="confFilter">
+                        <option value="">-- 全部 --</option>
+                        <option value="⚠️ 今天">⚠️ 今天的法說會</option>
+                        <option value="📅 預告">📅 即將到來 (預告)</option>
+                        <option value="✅ 已過">✅ 已經結束</option>
+                        <option value="---">--- 無法說會資訊 ---</option>
+                    </select>
+                </div>
             </div>
             <table class="dataframe display cell-border" id="main_table">
   <thead>
@@ -22308,14 +22317,33 @@
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script>
             $(document).ready(function() {
-                var table = $('#main_table').DataTable({ "pageLength": 50, "dom": 'ltip', "language": { "info": "共 _TOTAL_ 筆" } });
+                var table = $('#main_table').DataTable({ 
+                    "pageLength": 50, 
+                    "dom": 'ltip', 
+                    "language": { "info": "共 _TOTAL_ 筆" } 
+                });
+                
                 $('#customSearch').on('input', function() { table.search(this.value).draw(); });
-                function getIdx(n) { var i=-1; $('#main_table thead th').each(function(j){ if($(this).text().trim()===n) i=j; }); return i; }
-                var sIdx = getIdx('狀態'), rIdx = getIdx('連續大漲'), dIdx = getIdx('連續大跌');
+                
+                function getIdx(n) { 
+                    var i=-1; 
+                    $('#main_table thead th').each(function(j){ 
+                        if($(this).text().trim()===n) i=j; 
+                    }); 
+                    return i; 
+                }
+                
+                var sIdx = getIdx('狀態'), 
+                    rIdx = getIdx('連續大漲'), 
+                    dIdx = getIdx('連續大跌'),
+                    cIdx = getIdx('法說會');
+                
                 $('#statusFilter').on('change', function() { table.column(sIdx).search(this.value).draw(); });
                 $('#riseFilter').on('change', function() { table.column(rIdx).search(this.value).draw(); });
                 $('#dropFilter').on('change', function() { table.column(dIdx).search(this.value).draw(); });
+                $('#confFilter').on('change', function() { table.column(cIdx).search(this.value).draw(); });
             });
+
         </script>
     </body>
     </html>

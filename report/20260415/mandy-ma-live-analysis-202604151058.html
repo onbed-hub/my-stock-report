@@ -1,0 +1,147 @@
+<html><head><meta charset='UTF-8'>
+    <style>
+        /* 將基礎字型設定為預設的 1.5 倍 */
+        body { 
+            font-family: "Microsoft JhengHei", sans-serif; 
+            margin: 40px; 
+            background-color: #f4f7f9; 
+            font-size: 1.5rem; 
+        }
+        
+        h2 { 
+            font-size: 2.5rem; 
+            color: #1a237e; 
+            border-left: 15px solid #1a237e; 
+            padding-left: 20px; 
+            margin-bottom: 30px;
+        }
+        
+        table { 
+            border-collapse: collapse; 
+            width: 100%; 
+            background: white; 
+            border: 2px solid #444; 
+        }
+        
+        th { 
+            background-color: #1a237e; 
+            color: white; 
+            padding: 15px; 
+            font-size: 1.6rem; 
+            border: 2px solid #444; 
+        }
+        
+        td { 
+            padding: 15px; 
+            text-align: center; 
+            border: 1px solid #ddd; 
+            font-weight: bold; 
+            font-size: 1.5rem;
+        }
+        
+        .price-now { 
+            font-size: 2.2rem; 
+            color: #d32f2f; 
+            font-weight: 900; 
+        }
+        
+        .advice-box { 
+            padding: 15px; 
+            border-radius: 10px; 
+            color: white; 
+            text-align: left; 
+            min-width: 250px; 
+        }
+        
+        .sell-bg { background-color: #c62828; }
+        .hold-bg { background-color: #78909c; } /* 續抱/觀望改用較穩重的灰色 */
+        .buy-bg { background-color: #ef6c00; }
+        
+        .advice-title { 
+            font-size: 1.8rem; 
+            font-weight: 900; 
+            display: block; 
+            margin-bottom: 5px;
+        }
+        
+        .advice-reason { 
+            font-size: 1.2rem; 
+            opacity: 0.9;
+        }
+        
+        small { font-size: 1rem; opacity: 0.8; }
+        
+        .macd-up-attack { color: #d32f2f; } 
+        .macd-up-fade { color: #f48fb1; }
+        .macd-down-attack { color: #2e7d32; } 
+        .macd-down-fade { color: #81c784; }
+    </style>
+    </head><body><h2>📊 投資策略即時診斷報告 (2026-04-15 10:58)</h2><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股票名稱</th>
+      <th>即時現價</th>
+      <th>5日均線</th>
+      <th>月線(20MA)</th>
+      <th>量能狀況</th>
+      <th>RSI(14)</th>
+      <th>決策建議</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>元大台灣50<br><small>0050</small></td>
+      <td><span class='price-now'>83.10</span><br><small>+0.00 (+0.00%)</small></td>
+      <td>81.34</td>
+      <td>76.94</td>
+      <td>62181000<br><small>(20MA:115524729)</small></td>
+      <td>72.0</td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量 > 20MA..</span></div></td>
+    </tr>
+    <tr>
+      <td>元大高股息<br><small>0056</small></td>
+      <td><span class='price-now'>39.97</span><br><small>+0.00 (+0.00%)</small></td>
+      <td>39.59</td>
+      <td>38.69</td>
+      <td>52932000<br><small>(20MA:62586360)</small></td>
+      <td>67.8</td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量 > 20MA..</span></div></td>
+    </tr>
+    <tr>
+      <td>期元大S&P黃金<br><small>00635U</small></td>
+      <td><span class='price-now'>50.15</span><br><small>+0.00 (+0.00%)</small></td>
+      <td>49.98</td>
+      <td>49.35</td>
+      <td>3963000<br><small>(20MA:8495814)</small></td>
+      <td>70.6</td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：MA20 上揚, MA5 勾頭..</span></div></td>
+    </tr>
+    <tr>
+      <td>大華優利高填息30<br><small>00918</small></td>
+      <td><span class='price-now'>22.80</span><br><small>+0.00 (+0.00%)</small></td>
+      <td>22.68</td>
+      <td>22.37</td>
+      <td>24433000<br><small>(20MA:29135281)</small></td>
+      <td>64.0</td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量 > 20MA..</span></div></td>
+    </tr>
+    <tr>
+      <td>群益台灣精選高息<br><small>00919</small></td>
+      <td><span class='price-now'>23.03</span><br><small>+0.12 (+0.52%)</small></td>
+      <td>22.91</td>
+      <td>22.74</td>
+      <td>71031000<br><small>(20MA:109114252)</small></td>
+      <td>59.7</td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：MA20 上揚, 量 > 20MA..</span></div></td>
+    </tr>
+    <tr>
+      <td>凱基台灣TOP50<br><small>009816</small></td>
+      <td><span class='price-now'>11.67</span><br><small>+0.00 (+0.00%)</small></td>
+      <td>11.46</td>
+      <td>10.88</td>
+      <td>115224000<br><small>(20MA:194883434)</small></td>
+      <td>71.5</td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量 > 20MA..</span></div></td>
+    </tr>
+  </tbody>
+</table></body></html>
