@@ -22339,8 +22339,36 @@
                     cIdx = getIdx('法說會');
                 
                 $('#statusFilter').on('change', function() { table.column(sIdx).search(this.value).draw(); });
-                $('#riseFilter').on('change', function() { table.column(rIdx).search(this.value).draw(); });
-                $('#dropFilter').on('change', function() { table.column(dIdx).search(this.value).draw(); });
+                $('#riseFilter').on('change', function() {
+                    var val = $(this).val();
+    
+                    if (val === "連4日大漲") {
+                        // 選 4 日時，搜尋條件設為 "4日" OR "5日"
+                        table.column(rIdx).search("4日|5日", true, false).draw();
+                    } else if (val === "連3日大漲") {
+                        // 選 3 日時，搜尋條件設為 "3日" OR "4日" OR "5日"
+                        table.column(rIdx).search("3日|4日|5日", true, false).draw();
+                    } else if (val === "連2日大漲") {
+                        // 選 2 日時，搜尋條件設為 "2日" OR "3日" OR "4日" OR "5日"
+                        table.column(rIdx).search("2日|3日|4日|5日", true, false).draw();
+                    } else {
+                        // 其他 (連5日 或 全部) 就按正常搜尋
+                        table.column(rIdx).search(val).draw();
+                    }
+                });
+                $('#dropFilter').on('change', function() {
+                    var val = $(this).val();
+                    if (val === "連4日大跌") {
+                        // 選 4 日跌，也要看到更慘的 5 日跌
+                        table.column(dIdx).search("4日|5日", true, false).draw();
+                    } else if (val === "連3日大跌") {
+                        table.column(dIdx).search("3日|4日|5日", true, false).draw();
+                    } else if (val === "連2日大跌") {
+                        table.column(dIdx).search("2日|3日|4日|5日", true, false).draw();
+                    } else {
+                        table.column(dIdx).search(val).draw();
+                    }
+                });
                 $('#confFilter').on('change', function() { table.column(cIdx).search(this.value).draw(); });
             });
 
