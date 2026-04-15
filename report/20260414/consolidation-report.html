@@ -66,6 +66,7 @@
                         <option value="連4日大漲">💎 連4日大漲</option>
                         <option value="連3日大漲">🔥 連3日大漲</option>
                         <option value="連2日大漲">✨ 連2日大漲</option>
+                        <option value="連1日大漲">👆 連1日大漲</option>
                         <option value="隔一漲">⚡ 隔一漲</option>
                         <option value="隔二漲">⏳ 隔二漲</option>
                     </select>
@@ -77,6 +78,7 @@
                         <option value="連4日大跌">🧊 連4日大跌</option>
                         <option value="連3日大跌">💧 連3日大跌</option>
                         <option value="連2日大跌">📉 連2日大跌</option>
+                        <option value="連1日大跌">📉 連1日大跌</option>
                     </select>
                 </div>
                 <div class="control-item">🎙️ 法說會篩選：
@@ -22351,6 +22353,9 @@
                     } else if (val === "連2日大漲") {
                         // 選 2 日時，搜尋條件設為 "2日" OR "3日" OR "4日" OR "5日"
                         table.column(rIdx).search("2日|3日|4日|5日", true, false).draw();
+                    } else if (val === "連1日大漲") {
+                        // 選 1 日大漲時，顯示所有連漲標籤 (1|2|3|4|5)
+                        table.column(rIdx).search("1日|2日|3日|4日|5日", true, false).draw();
                     } else {
                         // 其他 (連5日 或 全部) 就按正常搜尋
                         table.column(rIdx).search(val).draw();
@@ -22365,6 +22370,8 @@
                         table.column(dIdx).search("3日|4日|5日", true, false).draw();
                     } else if (val === "連2日大跌") {
                         table.column(dIdx).search("2日|3日|4日|5日", true, false).draw();
+                    } else if (val === "連1日大跌") {
+                        table.column(dIdx).search("1日|2日|3日|4日|5日", true, false).draw();
                     } else {
                         table.column(dIdx).search(val).draw();
                     }
