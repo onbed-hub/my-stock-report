@@ -1,0 +1,461 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>CIS 泥鰍波段策略分析系統</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+        <style>
+            body { font-family: "Microsoft JhengHei", sans-serif; padding: 20px; background-color: #f4f7f6; font-size: 110%; }
+            .container { max-width: 95%; margin: auto; }
+            .header-box { background-color: #1a2a6c; color: white; padding: 30px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+            .header-box h1 { margin: 0; font-size: 2.5em; }
+            .stats-period { margin-top: 10px; opacity: 0.9; font-size: 1.2em; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 10px; }
+            
+            .indicator-def-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
+            .def-card { background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); }
+            .def-card b { color: #fbc02d; font-size: 1.1em; display: block; }
+
+            .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 25px; }
+            .info-card { background: rgba(0, 0, 0, 0.2); padding: 20px; border-radius: 10px; }
+            .info-card h3 { color: #fbc02d; margin-top: 0; }
+            
+            .status-guide { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; margin-bottom: 20px; }
+            .status-guide td { padding: 12px 20px; border-bottom: 1px solid #eee; }
+            
+            .filter-area { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; align-items: center; font-weight: bold; }
+            #statusFilter { margin-left: 15px; padding: 8px; border-radius: 5px; border: 1px solid #1a2a6c; }
+
+            #reportTable { background: white; width: 100% !important; border-radius: 8px; }
+            #reportTable th { background-color: #f8f9fa; color: #1a2a6c; }
+            .advice-cell { color: #444; font-size: 0.95em; background-color: #fffde7 !important; min-width: 300px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header-box">
+                <h1>🐟 CIS 泥鰍波段追蹤系統</h1>
+                <div class="stats-period">📊 統計與買賣起點：2026-01-01 | 分析至：2026-04-15</div>
+                
+                <div class="indicator-def-grid">
+                    <div class="def-card"><b>🟢 短線指標 (MA5)</b><span>股價生命線。突破買入，連續兩日跌破則執行「確認法」出場。</span></div>
+                    <div class="def-card"><b>🟡 長線趨勢 (MA20/25)</b><span>方向盤。MA20 必須平坦或向上，才具備「泥鰍」發動條件。</span></div>
+                    <div class="def-card"><b>🔴 三隻泥鰍心法</b><span>第一、二隻泥鰍最肥；第三隻魚肉少且易反轉，建議觀望。</span></div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>核心進場 (Buy)</h3>
+                        <ul>
+                            <li><b>長線走平向上：</b>確保大趨勢不是空頭。</li>
+                            <li><b>金叉突破：</b>股價由下往上穿越 MA5。</li>
+                            <li><b>泥鰍計數：</b>僅參與該趨勢段的前兩次突破訊號。</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3>風控出場 (Sell)</h3>
+                        <ul>
+                            <li><b>確認法：</b>收盤跌破 MA5，隔日仍未收復，開盤即賣。</li>
+                            <li><b>紀律執行：</b>買賣最快隔日執行，不進行當沖。</li>
+                            <li><b>不吃魚尾：</b>第三次突破不進場，避開末跌段風險。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-area">🎯 狀態快速篩選：<select id="statusFilter"><option value="">顯示所有股票</option></select></div>
+            <table id="reportTable" border="1" class="dataframe display cell-border">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股號</th>
+      <th>名稱</th>
+      <th>現價</th>
+      <th>收益%</th>
+      <th>次數</th>
+      <th>隔日勝率</th>
+      <th>5日勝率</th>
+      <th>目前狀態</th>
+      <th>泥鰍階段</th>
+      <th>短均</th>
+      <th>長趨勢</th>
+      <th>專業建議</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2317</td>
+      <td>鴻海</td>
+      <td>207.50</td>
+      <td>165.51%</td>
+      <td>2</td>
+      <td>36.6%</td>
+      <td>45.0%</td>
+      <td>🚫 建議賣出</td>
+      <td>0</td>
+      <td>▲</td>
+      <td>▼</td>
+      <td>📉 確認法出場：連續兩日跌破 MA5，動能消失，建議獲利了結或停損。</td>
+    </tr>
+    <tr>
+      <td>3702</td>
+      <td>大聯大</td>
+      <td>96.50</td>
+      <td>68.51%</td>
+      <td>10</td>
+      <td>44.3%</td>
+      <td>49.6%</td>
+      <td>🚫 建議賣出</td>
+      <td>3</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>📉 確認法出場：連續兩日跌破 MA5，動能消失，建議獲利了結或停損。</td>
+    </tr>
+    <tr>
+      <td>2485</td>
+      <td>兆赫</td>
+      <td>78.30</td>
+      <td>-11.37%</td>
+      <td>4</td>
+      <td>42.2%</td>
+      <td>50.0%</td>
+      <td>🚫 建議賣出</td>
+      <td>8</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>📉 確認法出場：連續兩日跌破 MA5，動能消失，建議獲利了結或停損。</td>
+    </tr>
+    <tr>
+      <td>2367</td>
+      <td>燿華</td>
+      <td>72.00</td>
+      <td>458.26%</td>
+      <td>1</td>
+      <td>36.9%</td>
+      <td>55.7%</td>
+      <td>🚫 建議賣出</td>
+      <td>6</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>📉 確認法出場：連續兩日跌破 MA5，動能消失，建議獲利了結或停損。</td>
+    </tr>
+    <tr>
+      <td>4142</td>
+      <td>國光生</td>
+      <td>18.20</td>
+      <td>-30.77%</td>
+      <td>7</td>
+      <td>40.9%</td>
+      <td>36.4%</td>
+      <td>🍀 持股中</td>
+      <td>1</td>
+      <td>▼</td>
+      <td>▲</td>
+      <td>⚠️ 警訊：股價已破 MA5，明日若未站回則觸發「確認法」賣出。</td>
+    </tr>
+    <tr>
+      <td>0050</td>
+      <td>元大台灣50</td>
+      <td>83.10</td>
+      <td>243.44%</td>
+      <td>5</td>
+      <td>50.8%</td>
+      <td>51.6%</td>
+      <td>🚫 建議賣出</td>
+      <td>0</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>📉 確認法出場：連續兩日跌破 MA5，動能消失，建議獲利了結或停損。</td>
+    </tr>
+    <tr>
+      <td>0056</td>
+      <td>元大高股息</td>
+      <td>39.97</td>
+      <td>95.17%</td>
+      <td>6</td>
+      <td>59.4%</td>
+      <td>65.1%</td>
+      <td>🍀 持股中</td>
+      <td>0</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>🚀 趨勢推升：第 0 隻泥鰍成長中，守穩 MA5 持股即可。</td>
+    </tr>
+    <tr>
+      <td>00635U</td>
+      <td>期元大S&amp;P黃金</td>
+      <td>50.15</td>
+      <td>74.18%</td>
+      <td>2</td>
+      <td>47.6%</td>
+      <td>48.5%</td>
+      <td>🚫 建議賣出</td>
+      <td>0</td>
+      <td>▲</td>
+      <td>▼</td>
+      <td>📉 確認法出場：連續兩日跌破 MA5，動能消失，建議獲利了結或停損。</td>
+    </tr>
+    <tr>
+      <td>00738U</td>
+      <td>期元大道瓊白銀</td>
+      <td>62.55</td>
+      <td>12.37%</td>
+      <td>0</td>
+      <td>50.0%</td>
+      <td>51.2%</td>
+      <td>⚪ 觀望中</td>
+      <td>0</td>
+      <td>▲</td>
+      <td>▼</td>
+      <td>⚪ 待機：長線趨勢不明或未出現突破訊號，保持現金耐心等待。</td>
+    </tr>
+    <tr>
+      <td>00929</td>
+      <td>復華台灣科技優息</td>
+      <td>20.42</td>
+      <td>35.96%</td>
+      <td>1</td>
+      <td>69.0%</td>
+      <td>58.6%</td>
+      <td>🚫 建議賣出</td>
+      <td>0</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>📉 確認法出場：連續兩日跌破 MA5，動能消失，建議獲利了結或停損。</td>
+    </tr>
+    <tr>
+      <td>009816</td>
+      <td>凱基台灣TOP50</td>
+      <td>11.67</td>
+      <td>-0.58%</td>
+      <td>3</td>
+      <td>100.0%</td>
+      <td>0.0%</td>
+      <td>🍀 持股中</td>
+      <td>0</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>🚀 趨勢推升：第 0 隻泥鰍成長中，守穩 MA5 持股即可。</td>
+    </tr>
+    <tr>
+      <td>00990A</td>
+      <td>主動元大AI新經濟</td>
+      <td>14.50</td>
+      <td>-1.89%</td>
+      <td>8</td>
+      <td>75.0%</td>
+      <td>75.0%</td>
+      <td>🚫 建議賣出</td>
+      <td>0</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>📉 確認法出場：連續兩日跌破 MA5，動能消失，建議獲利了結或停損。</td>
+    </tr>
+    <tr>
+      <td>2009</td>
+      <td>第一銅</td>
+      <td>41.65</td>
+      <td>83.25%</td>
+      <td>1</td>
+      <td>39.5%</td>
+      <td>43.9%</td>
+      <td>🚫 建議賣出</td>
+      <td>0</td>
+      <td>▲</td>
+      <td>▼</td>
+      <td>📉 確認法出場：連續兩日跌破 MA5，動能消失，建議獲利了結或停損。</td>
+    </tr>
+    <tr>
+      <td>2337</td>
+      <td>旺宏</td>
+      <td>155.50</td>
+      <td>999.07%</td>
+      <td>8</td>
+      <td>45.9%</td>
+      <td>43.4%</td>
+      <td>🍀 持股中</td>
+      <td>2</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>🚀 趨勢推升：第 2 隻泥鰍成長中，守穩 MA5 持股即可。</td>
+    </tr>
+    <tr>
+      <td>2352</td>
+      <td>佳世達</td>
+      <td>24.20</td>
+      <td>57.33%</td>
+      <td>4</td>
+      <td>42.1%</td>
+      <td>49.2%</td>
+      <td>🚫 建議賣出</td>
+      <td>0</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>📉 確認法出場：連續兩日跌破 MA5，動能消失，建議獲利了結或停損。</td>
+    </tr>
+    <tr>
+      <td>2409</td>
+      <td>友達</td>
+      <td>19.80</td>
+      <td>27.34%</td>
+      <td>8</td>
+      <td>43.2%</td>
+      <td>47.7%</td>
+      <td>🍀 持股中</td>
+      <td>1</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>🚀 趨勢推升：第 1 隻泥鰍成長中，守穩 MA5 持股即可。</td>
+    </tr>
+    <tr>
+      <td>3481</td>
+      <td>群創</td>
+      <td>27.25</td>
+      <td>211.88%</td>
+      <td>6</td>
+      <td>45.6%</td>
+      <td>47.4%</td>
+      <td>🍀 持股中</td>
+      <td>1</td>
+      <td>▲</td>
+      <td>▼</td>
+      <td>🚀 趨勢推升：第 1 隻泥鰍成長中，守穩 MA5 持股即可。</td>
+    </tr>
+    <tr>
+      <td>6136</td>
+      <td>富爾特</td>
+      <td>24.25</td>
+      <td>49.76%</td>
+      <td>5</td>
+      <td>34.9%</td>
+      <td>49.6%</td>
+      <td>🚩 建議買入</td>
+      <td>1</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>🔥 泥鰍發動：第 1 隻泥鰍出現。長線趨勢向上且突破短均，具備波段攻擊力。</td>
+    </tr>
+    <tr>
+      <td>6806</td>
+      <td>森崴能源</td>
+      <td>18.60</td>
+      <td>49.45%</td>
+      <td>4</td>
+      <td>47.5%</td>
+      <td>42.4%</td>
+      <td>🚫 建議賣出</td>
+      <td>1</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>📉 確認法出場：連續兩日跌破 MA5，動能消失，建議獲利了結或停損。</td>
+    </tr>
+    <tr>
+      <td>3105</td>
+      <td>穩懋</td>
+      <td>457.00</td>
+      <td>101.13%</td>
+      <td>0</td>
+      <td>47.0%</td>
+      <td>49.6%</td>
+      <td>⚪ 觀望中</td>
+      <td>14</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>⚪ 觀望：已進入第 14 隻泥鰍，依 CIS 心法，魚尾肉少風險高，不建議追價。</td>
+    </tr>
+    <tr>
+      <td>4966</td>
+      <td>譜瑞-KY</td>
+      <td>539.00</td>
+      <td>-188.26%</td>
+      <td>4</td>
+      <td>42.9%</td>
+      <td>45.7%</td>
+      <td>🚫 建議賣出</td>
+      <td>0</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>📉 確認法出場：連續兩日跌破 MA5，動能消失，建議獲利了結或停損。</td>
+    </tr>
+    <tr>
+      <td>6188</td>
+      <td>廣明</td>
+      <td>87.70</td>
+      <td>30.44%</td>
+      <td>7</td>
+      <td>40.5%</td>
+      <td>46.3%</td>
+      <td>🚫 建議賣出</td>
+      <td>1</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>📉 確認法出場：連續兩日跌破 MA5，動能消失，建議獲利了結或停損。</td>
+    </tr>
+    <tr>
+      <td>7792</td>
+      <td>安葆</td>
+      <td>356.00</td>
+      <td>13.27%</td>
+      <td>3</td>
+      <td>50.0%</td>
+      <td>75.0%</td>
+      <td>🚫 建議賣出</td>
+      <td>0</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>📉 確認法出場：連續兩日跌破 MA5，動能消失，建議獲利了結或停損。</td>
+    </tr>
+    <tr>
+      <td>2327</td>
+      <td>國巨*</td>
+      <td>312.00</td>
+      <td>3123.49%</td>
+      <td>2</td>
+      <td>49.5%</td>
+      <td>60.6%</td>
+      <td>🚫 建議賣出</td>
+      <td>0</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>📉 確認法出場：連續兩日跌破 MA5，動能消失，建議獲利了結或停損。</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        <script>
+            $(document).ready(function() {
+                var table = $('#reportTable').DataTable({
+                    "pageLength": 50,
+                    "order": [[ 3, "desc" ]],
+                    "columnDefs": [
+                        { "targets": 0, "render": function(data) {
+                            var s = data.toString().trim();
+                            var sym = (s.length >= 4 && /^[568]/.test(s)) ? s + ".TWO" : s + ".TW";
+                            return '<a href="https://tw.stock.yahoo.com/quote/'+sym+'/technical-analysis" target="_blank" style="font-weight:bold;color:#1a2a6c;">'+s+'</a>';
+                        } },
+                        { "targets": [9, 10], "render": function(data) {
+                            var color = data === "▲" ? "#d32f2f" : "#388e3c";
+                            return '<span style="color:'+color+'; font-weight:bold; font-size:1.2em;">'+data+'</span>';
+                        } },
+                        { "targets": 11, "createdCell": function(td) { $(td).addClass('advice-cell'); } }
+                    ],
+                    "initComplete": function() {
+                        this.api().column(7).every(function() {
+                            var column = this; var select = $('#statusFilter');
+                            column.data().unique().sort().each(function(d) {
+                                var clean = d.replace(/<[^>]*>?/gm, '').trim();
+                                if(clean) select.append('<option value="'+clean+'">'+clean+'</option>');
+                            });
+                        });
+                    }
+                });
+                $('#statusFilter').on('change', function() {
+                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                    table.column(7).search(val ? '^'+val+'$' : '', true, false).draw();
+                });
+            });
+        </script>
+    </body>
+    </html>
+    
