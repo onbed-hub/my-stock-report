@@ -1,0 +1,136 @@
+
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>📊 MANDY- 戰術掃描</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+        <style>
+            body { font-family: "Microsoft JhengHei", sans-serif; margin: 20px; background: #f8f9fa; font-size: 20px; } /* 回歸基礎 20px */
+            .header { background: #1a237e; color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+            h1 { font-size: 36px; margin: 0; }
+            
+            .rules-box { background: white; padding: 25px; border-radius: 10px; margin-bottom: 20px; border-left: 10px solid #fbc02d; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+            .rules-box h2 { font-size: 28px; margin-top: 0; color: #1a237e; padding-bottom: 10px; border-bottom: 2px solid #eee; }
+            .rules-grid { display: flex; gap: 30px; margin-top: 20px; }
+            .rule-card { flex: 1; font-size: 18px; line-height: 1.6; }
+            .rule-card b { font-size: 22px; display: block; margin-bottom: 10px; }
+            
+            .filter-area { background: #e8eaf6; padding: 15px; border-radius: 10px; margin-bottom: 20px; font-size: 20px; border: 2px solid #283593; }
+            table.dataTable thead th { background: #283593 !important; color: white; font-size: 22px; padding: 12px !important; }
+            table.dataTable tbody td { font-size: 22px; padding: 12px !important; font-weight: 500; border-bottom: 1px solid #ddd; }
+            select { font-size: 18px; padding: 8px; margin-right: 15px; border-radius: 8px; }
+            
+            .gold-row { background-color: #fff9db !important; }
+            .fire { color: #d32f2f; font-weight: bold; animation: blink 2s infinite; }
+            @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>📊 MANDY- 強勢量能戰術掃描</h1>
+            <p style="font-size: 22px;">生成日期：20260416 | 統計起點：2026-01-01</p>
+        </div>
+
+        <div class="rules-box">
+            <h2>📈 核心戰術規則 (🔥 訊號觸發)</h2>
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <b style="color: #2e7d32;">🎯 進場條件</b>
+                    <ul style="padding-left: 25px;">
+                        <li><b>量能突破：</b>OBV 指標創下 20 日新高，且當日成交量大於 10 日均量的 1.3 倍。</li>
+                        <li><b>趨勢確認：</b>DMI 指標中 DI+ > DI-，且 ADX > 20，代表上升趨勢已正式成形。</li>
+                        <li><b>K線型態：</b>必須為「紅K」且「收盤價 > 昨日收盤價」，確保多頭動能延續。</li>
+                        <li><b>流動性過濾：</b>10 日平均成交量需大於 500 張，排除低流動性殭屍股。</li>
+                    </ul>
+                </div>
+                <div class="rule-card">
+                    <b style="color: #1565c0;">🏷️ 標籤定義 (5日統計)</b>
+                    <ul style="padding-left: 25px;">
+                        <li>🟢 黃金：勝率 > 55% & 收益 > 3%</li>
+                        <li>🔵 穩健：勝率 > 55% & 收益 0~1%</li>
+                        <li>🟡 妖股：勝率 < 45% & 收益 > 3%</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-area" id="filter-area">🔍 快速過濾：</div>
+        <table id="stockTable" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>代碼</th><th>名稱</th><th>狀態</th><th>收盤</th><th>RSI</th><th>標籤</th>
+                    <th>隔天</th><th>五日</th><th>收益</th><th>建議買進</th><th>次數</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/0056.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">0056.TW</a></td>
+                    <td>元大高股息</td>
+                    <td >無</td>
+                    <td>40.80</td><td>69.47</td><td>🔵 穩健標的</td>
+                    <td>80.00%</td><td>60.00%</td><td>0.48%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>5</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/0050.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">0050.TW</a></td>
+                    <td>元大台灣50</td>
+                    <td >無</td>
+                    <td>85.00</td><td>72.11</td><td>🔴 空頭陷阱</td>
+                    <td>66.67%</td><td>66.67%</td><td>-0.97%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>3</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/00635U.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">00635U.TW</a></td>
+                    <td>期元大S&P黃金</td>
+                    <td >無</td>
+                    <td>50.80</td><td>64.77</td><td>🔴 空頭陷阱</td>
+                    <td>25.00%</td><td>25.00%</td><td>-4.68%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>4</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/00918.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">00918.TW</a></td>
+                    <td>大華優利高填息30</td>
+                    <td >無</td>
+                    <td>23.26</td><td>65.74</td><td>🔴 空頭陷阱</td>
+                    <td>0.00%</td><td>0.00%</td><td>-1.85%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>1</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/00919.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">00919.TW</a></td>
+                    <td>群益台灣精選高息</td>
+                    <td >無</td>
+                    <td>23.30</td><td>57.43</td><td>🔴 空頭陷阱</td>
+                    <td>100.00%</td><td>0.00%</td><td>-1.98%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>3</td>
+                </tr>
+            </tbody>
+        </table>
+        <script>
+            $(document).ready( function () {
+                $('#stockTable').DataTable({
+                    "pageLength": 50, "order": [[ 2, "desc" ], [ 8, "desc" ]],
+                    "language": { "search": "搜尋標的:" },
+                    initComplete: function () {
+                        this.api().columns([2, 5]).every( function () {
+                            var column = this;
+                            var select = $('<select><option value="">全部' + $(column.header()).text() + '</option></select>')
+                                .appendTo('#filter-area')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                                    column.search(val ? '^' + val + '$' : '', true, false).draw();
+                                });
+                            column.data().unique().sort().each( function (d) {
+                                var cleanText = d.replace(/<[^>]*>?/gm, '').trim();
+                                if(cleanText) select.append('<option value="' + cleanText + '">' + cleanText + '</option>')
+                            });
+                        });
+                    }
+                });
+            });
+        </script>
+    </body>
+    </html>
+    
