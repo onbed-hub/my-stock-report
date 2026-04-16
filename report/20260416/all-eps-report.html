@@ -14,17 +14,20 @@
         .rule-table { width: 100%; border-collapse: collapse; font-size: 1.5rem; margin-bottom: 20px; }
         .rule-table th { background: #e2e8f0; padding: 20px; text-align: left; border: 1px solid #cbd5e1; }
         .rule-table td { border: 1px solid #e2e8f0; padding: 20px; line-height: 1.5; }
-        .filter-group { display: flex; gap: 30px; margin-bottom: 30px; background: #1e293b; padding: 30px; border-radius: 15px; color: white; }
+        
+        .filter-group { display: flex; gap: 30px; margin-bottom: 30px; background: #1e293b; padding: 30px; border-radius: 15px; color: white; align-items: flex-end; }
         .filter-item { display: flex; flex-direction: column; gap: 10px; }
-        select { padding: 15px; font-size: 1.6rem; border-radius: 10px; min-width: 320px; cursor: pointer; border: none; }
+        select, input { padding: 15px; font-size: 1.6rem; border-radius: 10px; border: none; outline: none; }
+        select { min-width: 250px; cursor: pointer; }
+        input { min-width: 300px; background: white; color: #0f172a; }
+        
         .data-table { width: 100%; border-collapse: collapse; font-size: 1.6rem; }
         .data-table th { background: #2563eb; color: white; padding: 25px 15px; cursor: pointer; position: sticky; top: 0; z-index: 10; }
         .data-table td { padding: 25px 15px; border-bottom: 2px solid #f1f5f9; text-align: center; }
         .data-table tr:hover { background: #eff6ff; }
         .tag-link { font-weight: bold; padding: 8px 15px; border-radius: 8px; background: #f8fafc; border: 1px solid #cbd5e1; text-decoration: none; color: #2563eb; }
-        .tag-link:hover { background: #2563eb; color: white; }
         .stock-name { font-weight: bold; color: #334155; font-size: 1.7rem; }
-        /* 分頁控制項樣式 */
+        
         .pagination { display: flex; justify-content: center; align-items: center; margin-top: 40px; gap: 15px; padding-bottom: 50px; }
         .page-btn { padding: 12px 25px; background: #1e293b; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1.6rem; }
         .page-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
@@ -35,7 +38,7 @@
     <body>
         <div class='container'>
             <h2>量化獲利品質診斷報告</h2>
-            <div class='time-info'>📅 分析日期：2026-04-16 17:12</div>
+            <div class='time-info'>📅 分析日期：2026-04-16 17:21</div>
             
     <div class="card">
         <h3 style="font-size: 2.2rem; margin-bottom:20px; border-left: 10px solid #2563eb; padding-left:20px;">📊 獲利品質分析準則</h3>
@@ -54,7 +57,12 @@
     
             
     <div class="filter-group">
-        <div class="filter-item"><label>🔍 狀態篩選</label>
+        <div class="filter-item">
+            <label>🔍 搜尋股號或名稱</label>
+            <input type="text" id="searchInput" onkeyup="filterAndSort()" placeholder="輸入代號或名稱...">
+        </div>
+        <div class="filter-item">
+            <label>🔎 狀態篩選</label>
             <select id="statusSelect" onchange="filterAndSort()">
                 <option value="all">顯示全部</option>
                 <option value="🚀 利潤擴張">🚀 利潤擴張</option>
@@ -65,7 +73,8 @@
                 <option value="🔄 轉虧為盈">🔄 轉虧為盈</option>
             </select>
         </div>
-        <div class="filter-item"><label>📊 利潤空間</label>
+        <div class="filter-item">
+            <label>📊 利潤空間</label>
             <select id="expSelect" onchange="filterAndSort()">
                 <option value="all">不限</option>
                 <option value="positive">利潤空間 > 0%</option>
@@ -79,7 +88,7 @@
                 <table class='data-table' id='stockTable'>
                     <thead>
                         <tr>
-                            <th onclick='sortTable(0, false)'>代號</th>
+                            <th onclick='sortTable(0, false)'>代號 (圖)</th>
                             <th onclick='sortTable(1, false)'>名稱</th>
                             <th onclick='sortTable(2, false)'>月份</th>
                             <th onclick='sortTable(3, true)'>EPS</th>
@@ -109,7 +118,6 @@
     function initTable() {
         const table = document.getElementById("stockTable");
         const tbody = table.tBodies[0];
-        // 初始記錄所有行
         filteredRows = Array.from(tbody.rows);
         updateDisplay();
     }
@@ -125,14 +133,15 @@
         const start = (currentPage - 1) * pageSize;
         const end = start + pageSize;
 
-        // 先隱藏所有行，再顯示當前頁面行
+        // 隱藏所有
         Array.from(tbody.rows).forEach(row => row.style.display = "none");
         
+        // 顯示當前過濾後的分頁
         filteredRows.slice(start, end).forEach(row => {
             row.style.display = "";
         });
 
-        document.getElementById("pageInfo").innerText = `第 ${currentPage} / ${totalPages} 頁 (總共 ${filteredRows.length} 檔)`;
+        document.getElementById("pageInfo").innerText = `第 ${currentPage} / ${totalPages} 頁 (符合條件：${filteredRows.length} 檔)`;
         document.getElementById("prevBtn").disabled = (currentPage === 1);
         document.getElementById("nextBtn").disabled = (currentPage === totalPages);
     }
@@ -144,19 +153,25 @@
     }
 
     function filterAndSort() {
+        const searchVal = document.getElementById("searchInput").value.toUpperCase();
         const statusFilter = document.getElementById("statusSelect").value;
         const expFilter = document.getElementById("expSelect").value;
         const allRows = Array.from(document.getElementById("stockTable").tBodies[0].rows);
 
         filteredRows = allRows.filter(row => {
+            const symbol = row.cells[0].innerText.toUpperCase();
+            const name = row.cells[1].innerText.toUpperCase();
             const tdStatus = row.cells[7].innerText;
             const tdExp = parseFloat(row.cells[6].innerText);
-            const showStatus = (statusFilter === "all" || tdStatus.includes(statusFilter));
-            const showExp = (expFilter === "all") || 
+
+            const matchSearch = (symbol.includes(searchVal) || name.includes(searchVal));
+            const matchStatus = (statusFilter === "all" || tdStatus.includes(statusFilter));
+            const matchExp = (expFilter === "all") || 
                            (expFilter === "positive" && tdExp > 0) || 
                            (expFilter === "high" && tdExp > 10) || 
                            (expFilter === "negative" && tdExp < 0);
-            return showStatus && showExp;
+            
+            return matchSearch && matchStatus && matchExp;
         });
 
         currentPage = 1;
@@ -166,7 +181,7 @@
     function sortTable(n, isNumber) {
         const table = document.getElementById("stockTable");
         const tbody = table.tBodies[0];
-        const rows = Array.from(tbody.rows); // 針對所有原始數據排序
+        const rows = Array.from(tbody.rows);
         const dir = table.getAttribute("data-order") === "desc" ? "asc" : "desc";
         table.setAttribute("data-order", dir);
 
@@ -178,7 +193,7 @@
         });
 
         rows.forEach(row => tbody.appendChild(row));
-        filterAndSort(); // 排序後重新套用篩選與分頁顯示
+        filterAndSort(); 
     }
 
     window.onload = initTable;
