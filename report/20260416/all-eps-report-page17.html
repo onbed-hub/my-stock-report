@@ -1,0 +1,129 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset='utf-8'>
+            <title>all 獲利診斷報告 - Page 17</title>
+            
+    <style>
+        body { font-family: 'Segoe UI', system-ui, sans-serif; padding: 50px; background: #f1f5f9; color: #0f172a; font-size: 1.8rem; }
+        .container { max-width: 1900px; margin: auto; }
+        .card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 40px; }
+        h2 { font-size: 3.5rem; color: #1e3a8a; text-align: center; margin-bottom: 5px; }
+        .time-info { text-align: center; color: #64748b; font-size: 1.5rem; margin-bottom: 30px; font-weight: bold; }
+        .rule-table { width: 100%; border-collapse: collapse; font-size: 1.5rem; margin-bottom: 20px; }
+        .rule-table th { background: #e2e8f0; padding: 20px; text-align: left; border: 1px solid #cbd5e1; }
+        .rule-table td { border: 1px solid #e2e8f0; padding: 20px; line-height: 1.5; }
+        .filter-group { display: flex; gap: 30px; margin-bottom: 30px; background: #1e293b; padding: 30px; border-radius: 15px; color: white; }
+        .filter-item { display: flex; flex-direction: column; gap: 10px; }
+        select { padding: 15px; font-size: 1.6rem; border-radius: 10px; min-width: 320px; cursor: pointer; border: none; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 1.6rem; }
+        .data-table th { background: #2563eb; color: white; padding: 25px 15px; cursor: pointer; position: sticky; top: 0; z-index: 10; }
+        .data-table td { padding: 25px 15px; border-bottom: 2px solid #f1f5f9; text-align: center; }
+        .data-table tr:hover { background: #eff6ff; }
+        .tag-link { font-weight: bold; padding: 8px 15px; border-radius: 8px; background: #f8fafc; border: 1px solid #cbd5e1; text-decoration: none; color: #2563eb; }
+        .tag-link:hover { background: #2563eb; color: white; }
+        .stock-name { font-weight: bold; color: #334155; font-size: 1.7rem; }
+        .nav-btn { padding: 15px 30px; background: #1e293b; color: white; text-decoration: none; border-radius: 10px; margin: 0 10px; font-size: 1.6rem; display: inline-block; }
+        .nav-btn:hover { background: #334155; }
+    </style>
+    
+        </head>
+        <body>
+            <div class='container'>
+                <h2>量化獲利品質診斷報告</h2>
+                <div class='time-info'>📅 分析日期：2026-04-16 16:40</div>
+                
+    <div class="card">
+        <h3 style="font-size: 2.2rem; margin-bottom:20px; border-left: 10px solid #2563eb; padding-left:20px;">📊 獲利品質分析準則</h3>
+        <table class="rule-table">
+            <thead><tr style="font-weight:bold"><th>診斷標籤</th><th>數學模型</th><th>經營策略深度解析</th></tr></thead>
+            <tbody>
+                <tr><td>🚀 利潤擴張</td><td>ΔEPS > ΔRev > 0</td><td>規模經濟優化：獲利動能領先營收。代表產品具定價權或固定成本大幅攤提。</td></tr>
+                <tr><td>📈 穩健同步</td><td>ΔRev ≈ ΔEPS > 0</td><td>健康營運：獲利隨業務等比例增加，經營效能維持在穩定水位。</td></tr>
+                <tr><td>⚠️ 獲利稀釋</td><td>ΔRev > ΔEPS > 0</td><td>效率警訊：生意變大但利潤成長跟不上，受成本上升或削價競爭影響。</td></tr>
+                <tr><td>📉 獲利侵蝕</td><td>ΔRev > 0 且 ΔEPS < 0</td><td>邊際貢獻崩壞：營收增、獲利跌。經營陷入「白忙一場」的結構性惡化。</td></tr>
+                <tr><td>🧐 疑業外收益</td><td>ΔRev < 0 且 ΔEPS > 0</td><td>獲利虛胖：本業衰退但EPS上升。需嚴防資產處分或匯兌收益一次性干擾。</td></tr>
+                <tr><td>🔄 轉虧為盈</td><td>Prev EPS < 0 < EPS</td><td>基期反轉：從虧損轉為獲利，需觀察獲利是否具備續航力。</td></tr>
+            </tbody>
+        </table>
+    </div>
+    
+                
+    <div class="filter-group">
+        <div class="filter-item"><label>🔍 狀態篩選</label>
+            <select id="statusSelect" onchange="filterAndSort()">
+                <option value="all">顯示全部</option>
+                <option value="🚀 利潤擴張">🚀 利潤擴張</option>
+                <option value="📈 穩健同步">📈 穩健同步</option>
+                <option value="⚠️ 獲利稀釋">⚠️ 獲利稀釋</option>
+                <option value="📉 獲利侵蝕">📉 獲利侵蝕</option>
+                <option value="🧐 疑業外收益">🧐 疑業外收益</option>
+                <option value="🔄 轉虧為盈">🔄 轉虧為盈</option>
+            </select>
+        </div>
+        <div class="filter-item"><label>📊 利潤空間</label>
+            <select id="expSelect" onchange="filterAndSort()">
+                <option value="all">不限</option>
+                <option value="positive">利潤空間 > 0%</option>
+                <option value="high">利潤空間 > 10%</option>
+                <option value="negative">利潤空間 < 0%</option>
+            </select>
+        </div>
+    </div>
+    
+                <div class='card'>
+                    <table class='data-table' id='stockTable'>
+                        <thead>
+                            <tr>
+                                <th onclick='sortTable(0, false)'>代號 (圖)</th>
+                                <th onclick='sortTable(1, false)'>名稱</th>
+                                <th onclick='sortTable(2, false)'>月份</th>
+                                <th onclick='sortTable(3, true)'>EPS</th>
+                                <th onclick='sortTable(4, true)'>EPS YOY</th>
+                                <th onclick='sortTable(5, true)'>營收 YOY</th>
+                                <th onclick='sortTable(6, true)'>利潤空間</th>
+                                <th>診斷狀態</th>
+                            </tr>
+                        </thead>
+                        <tbody><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/6227.TWO/technical-analysis'>6227.TWO</a></td><td><span class='stock-name'>茂綸</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>7.54</td><td>17.08%</td><td>41.88%</td><td style='color:#b91c1c; font-weight:bold'>-24.80%</td><td style='text-align:left'>⚠️ 獲利稀釋</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2382.TW/technical-analysis'>2382.TW</a></td><td><span class='stock-name'>廣達</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>19.45</td><td>25.55%</td><td>50.54%</td><td style='color:#b91c1c; font-weight:bold'>-24.99%</td><td style='text-align:left'>⚠️ 獲利稀釋</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/6151.TWO/technical-analysis'>6151.TWO</a></td><td><span class='stock-name'>晉倫</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>1.16</td><td>-21.62%</td><td>3.42%</td><td style='color:#b91c1c; font-weight:bold'>-25.04%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/1597.TW/technical-analysis'>1597.TW</a></td><td><span class='stock-name'>直得</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>0.91</td><td>-15.24%</td><td>9.81%</td><td style='color:#b91c1c; font-weight:bold'>-25.05%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/1504.TW/technical-analysis'>1504.TW</a></td><td><span class='stock-name'>東元</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>2.42</td><td>-18.15%</td><td>6.99%</td><td style='color:#b91c1c; font-weight:bold'>-25.14%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/6143.TWO/technical-analysis'>6143.TWO</a></td><td><span class='stock-name'>振曜</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>6.46</td><td>-10.28%</td><td>15.03%</td><td style='color:#b91c1c; font-weight:bold'>-25.31%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2535.TW/technical-analysis'>2535.TW</a></td><td><span class='stock-name'>達欣工</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>6.50</td><td>24.80%</td><td>50.25%</td><td style='color:#b91c1c; font-weight:bold'>-25.45%</td><td style='text-align:left'>⚠️ 獲利稀釋</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2250.TW/technical-analysis'>2250.TW</a></td><td><span class='stock-name'>IKKA-KY</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>3.99</td><td>-33.62%</td><td>-8.12%</td><td style='color:#b91c1c; font-weight:bold'>-25.50%</td><td style='text-align:left'>🌑 雙重衰退</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/1723.TW/technical-analysis'>1723.TW</a></td><td><span class='stock-name'>中碳</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>2.65</td><td>-48.92%</td><td>-23.40%</td><td style='color:#b91c1c; font-weight:bold'>-25.52%</td><td style='text-align:left'>🌑 雙重衰退</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/3592.TW/technical-analysis'>3592.TW</a></td><td><span class='stock-name'>瑞鼎</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>18.24</td><td>-34.08%</td><td>-8.12%</td><td style='color:#b91c1c; font-weight:bold'>-25.96%</td><td style='text-align:left'>🌑 雙重衰退</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/4770.TW/technical-analysis'>4770.TW</a></td><td><span class='stock-name'>上品</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>10.20</td><td>-52.93%</td><td>-26.81%</td><td style='color:#b91c1c; font-weight:bold'>-26.12%</td><td style='text-align:left'>🌑 雙重衰退</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/4549.TWO/technical-analysis'>4549.TWO</a></td><td><span class='stock-name'>桓達</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>3.32</td><td>-29.66%</td><td>-3.48%</td><td style='color:#b91c1c; font-weight:bold'>-26.18%</td><td style='text-align:left'>🌑 雙重衰退</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/1227.TW/technical-analysis'>1227.TW</a></td><td><span class='stock-name'>佳格</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>1.33</td><td>-30.16%</td><td>-3.80%</td><td style='color:#b91c1c; font-weight:bold'>-26.36%</td><td style='text-align:left'>🌑 雙重衰退</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/3015.TW/technical-analysis'>3015.TW</a></td><td><span class='stock-name'>全漢</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>1.86</td><td>-13.89%</td><td>12.58%</td><td style='color:#b91c1c; font-weight:bold'>-26.47%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/5292.TW/technical-analysis'>5292.TW</a></td><td><span class='stock-name'>華懋</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>9.93</td><td>0.71%</td><td>27.29%</td><td style='color:#b91c1c; font-weight:bold'>-26.58%</td><td style='text-align:left'>⚠️ 獲利稀釋</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/3693.TWO/technical-analysis'>3693.TWO</a></td><td><span class='stock-name'>營邦</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>15.50</td><td>-38.69%</td><td>-11.96%</td><td style='color:#b91c1c; font-weight:bold'>-26.73%</td><td style='text-align:left'>🌑 雙重衰退</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/3580.TWO/technical-analysis'>3580.TWO</a></td><td><span class='stock-name'>友威科</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>1.94</td><td>-61.35%</td><td>-34.55%</td><td style='color:#b91c1c; font-weight:bold'>-26.80%</td><td style='text-align:left'>🌑 雙重衰退</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/6651.TWO/technical-analysis'>6651.TWO</a></td><td><span class='stock-name'>全宇昕</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>6.32</td><td>-22.95%</td><td>3.91%</td><td style='color:#b91c1c; font-weight:bold'>-26.86%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2427.TW/technical-analysis'>2427.TW</a></td><td><span class='stock-name'>三商電</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>1.53</td><td>6.99%</td><td>33.95%</td><td style='color:#b91c1c; font-weight:bold'>-26.96%</td><td style='text-align:left'>⚠️ 獲利稀釋</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/3443.TW/technical-analysis'>3443.TW</a></td><td><span class='stock-name'>創意</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>28.13</td><td>9.24%</td><td>36.32%</td><td style='color:#b91c1c; font-weight:bold'>-27.08%</td><td style='text-align:left'>⚠️ 獲利稀釋</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/6279.TWO/technical-analysis'>6279.TWO</a></td><td><span class='stock-name'>胡連</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>10.74</td><td>-15.51%</td><td>11.63%</td><td style='color:#b91c1c; font-weight:bold'>-27.14%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/1519.TW/technical-analysis'>1519.TW</a></td><td><span class='stock-name'>華城</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>13.99</td><td>-6.30%</td><td>20.89%</td><td style='color:#b91c1c; font-weight:bold'>-27.19%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/3691.TWO/technical-analysis'>3691.TWO</a></td><td><span class='stock-name'>碩禾</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>-7.62</td><td>-35.83%</td><td>-8.54%</td><td style='color:#b91c1c; font-weight:bold'>-27.29%</td><td style='text-align:left'>🌑 雙重衰退</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/3533.TW/technical-analysis'>3533.TW</a></td><td><span class='stock-name'>嘉澤</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>70.17</td><td>-15.21%</td><td>12.28%</td><td style='color:#b91c1c; font-weight:bold'>-27.49%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/6768.TW/technical-analysis'>6768.TW</a></td><td><span class='stock-name'>志強-KY</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>6.77</td><td>-17.06%</td><td>10.46%</td><td style='color:#b91c1c; font-weight:bold'>-27.52%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/4905.TWO/technical-analysis'>4905.TWO</a></td><td><span class='stock-name'>台聯電</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>2.76</td><td>-5.15%</td><td>22.56%</td><td style='color:#b91c1c; font-weight:bold'>-27.71%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/5291.TWO/technical-analysis'>5291.TWO</a></td><td><span class='stock-name'>邑昇</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>0.31</td><td>-17.95%</td><td>9.81%</td><td style='color:#b91c1c; font-weight:bold'>-27.76%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2492.TW/technical-analysis'>2492.TW</a></td><td><span class='stock-name'>華新科</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>4.74</td><td>-22.96%</td><td>4.91%</td><td style='color:#b91c1c; font-weight:bold'>-27.87%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/6668.TW/technical-analysis'>6668.TW</a></td><td><span class='stock-name'>中揚光</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>-1.93</td><td>-3.35%</td><td>24.60%</td><td style='color:#b91c1c; font-weight:bold'>-27.95%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/5203.TW/technical-analysis'>5203.TW</a></td><td><span class='stock-name'>訊連</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>3.63</td><td>-9.05%</td><td>18.91%</td><td style='color:#b91c1c; font-weight:bold'>-27.96%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/4164.TW/technical-analysis'>4164.TW</a></td><td><span class='stock-name'>承業醫</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>1.00</td><td>-5.94%</td><td>22.15%</td><td style='color:#b91c1c; font-weight:bold'>-28.09%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/6887.TW/technical-analysis'>6887.TW</a></td><td><span class='stock-name'>寶綠特-KY</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>4.58</td><td>-40.21%</td><td>-12.03%</td><td style='color:#b91c1c; font-weight:bold'>-28.18%</td><td style='text-align:left'>🌑 雙重衰退</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/1436.TW/technical-analysis'>1436.TW</a></td><td><span class='stock-name'>華友聯</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>5.39</td><td>-72.40%</td><td>-44.06%</td><td style='color:#b91c1c; font-weight:bold'>-28.34%</td><td style='text-align:left'>🌑 雙重衰退</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2233.TW/technical-analysis'>2233.TW</a></td><td><span class='stock-name'>宇隆</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>6.70</td><td>-38.87%</td><td>-10.49%</td><td style='color:#b91c1c; font-weight:bold'>-28.38%</td><td style='text-align:left'>🌑 雙重衰退</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2476.TW/technical-analysis'>2476.TW</a></td><td><span class='stock-name'>鉅祥</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>4.36</td><td>-15.98%</td><td>12.66%</td><td style='color:#b91c1c; font-weight:bold'>-28.64%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/4551.TW/technical-analysis'>4551.TW</a></td><td><span class='stock-name'>智伸科</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>6.04</td><td>-27.14%</td><td>1.71%</td><td style='color:#b91c1c; font-weight:bold'>-28.85%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2905.TW/technical-analysis'>2905.TW</a></td><td><span class='stock-name'>三商</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>0.71</td><td>-49.63%</td><td>-20.78%</td><td style='color:#b91c1c; font-weight:bold'>-28.85%</td><td style='text-align:left'>🌑 雙重衰退</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/4161.TWO/technical-analysis'>4161.TWO</a></td><td><span class='stock-name'>聿新科</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>1.23</td><td>-32.77%</td><td>-3.25%</td><td style='color:#b91c1c; font-weight:bold'>-29.52%</td><td style='text-align:left'>🌑 雙重衰退</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/4721.TWO/technical-analysis'>4721.TWO</a></td><td><span class='stock-name'>美琪瑪</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>3.01</td><td>-10.42%</td><td>19.28%</td><td style='color:#b91c1c; font-weight:bold'>-29.70%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2748.TW/technical-analysis'>2748.TW</a></td><td><span class='stock-name'>雲品</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>2.17</td><td>-30.67%</td><td>-0.76%</td><td style='color:#b91c1c; font-weight:bold'>-29.91%</td><td style='text-align:left'>🌑 雙重衰退</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/5471.TW/technical-analysis'>5471.TW</a></td><td><span class='stock-name'>松翰</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>0.72</td><td>-32.71%</td><td>-2.51%</td><td style='color:#b91c1c; font-weight:bold'>-30.20%</td><td style='text-align:left'>🌑 雙重衰退</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/6412.TW/technical-analysis'>6412.TW</a></td><td><span class='stock-name'>群電</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>5.20</td><td>-37.65%</td><td>-7.33%</td><td style='color:#b91c1c; font-weight:bold'>-30.32%</td><td style='text-align:left'>🌑 雙重衰退</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/4401.TWO/technical-analysis'>4401.TWO</a></td><td><span class='stock-name'>東隆興</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>0.73</td><td>-31.13%</td><td>-0.68%</td><td style='color:#b91c1c; font-weight:bold'>-30.45%</td><td style='text-align:left'>🌑 雙重衰退</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/6136.TW/technical-analysis'>6136.TW</a></td><td><span class='stock-name'>富爾特</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>0.89</td><td>-1.11%</td><td>29.83%</td><td style='color:#b91c1c; font-weight:bold'>-30.94%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2493.TW/technical-analysis'>2493.TW</a></td><td><span class='stock-name'>揚博</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>4.36</td><td>-27.93%</td><td>3.03%</td><td style='color:#b91c1c; font-weight:bold'>-30.96%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/6642.TWO/technical-analysis'>6642.TWO</a></td><td><span class='stock-name'>富致</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>2.60</td><td>-27.37%</td><td>3.61%</td><td style='color:#b91c1c; font-weight:bold'>-30.98%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2548.TW/technical-analysis'>2548.TW</a></td><td><span class='stock-name'>華固</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>10.15</td><td>121.88%</td><td>152.88%</td><td style='color:#b91c1c; font-weight:bold'>-31.00%</td><td style='text-align:left'>⚠️ 獲利稀釋</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2881.TW/technical-analysis'>2881.TW</a></td><td><span class='stock-name'>富邦金</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>8.37</td><td>-21.56%</td><td>9.74%</td><td style='color:#b91c1c; font-weight:bold'>-31.30%</td><td style='text-align:left'>📉 獲利侵蝕</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/6163.TWO/technical-analysis'>6163.TWO</a></td><td><span class='stock-name'>華電網</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>0.75</td><td>-20.43%</td><td>10.94%</td><td style='color:#b91c1c; font-weight:bold'>-31.37%</td><td style='text-align:left'>🔄 轉虧為盈</td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2208.TW/technical-analysis'>2208.TW</a></td><td><span class='stock-name'>台船</span></td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>-1.77</td><td>18.81%</td><td>50.27%</td><td style='color:#b91c1c; font-weight:bold'>-31.46%</td><td style='text-align:left'>⚠️ 獲利稀釋</td></tr></tbody>
+                    </table>
+                </div>
+                <div style="text-align:center; margin-top:40px; padding-bottom:50px;"><a href="all-eps-report-page16.html" class="nav-btn">⬅️ 上一頁</a><span style="font-size:1.8rem; font-weight:bold; margin:0 20px;">第 17 / 27 頁 (本頁 50 檔)</span><a href="all-eps-report-page18.html" class="nav-btn">下一頁 ➡️</a></div>
+            </div>
+            
+    <script>
+    function filterAndSort() {
+      let statusFilter = document.getElementById("statusSelect").value;
+      let expFilter = document.getElementById("expSelect").value;
+      let rows = document.getElementById("stockTable").tBodies[0].rows;
+      for (let i = 0; i < rows.length; i++) {
+        let tdStatus = rows[i].cells[7].innerText;
+        let tdExp = parseFloat(rows[i].cells[6].innerText);
+        let showStatus = (statusFilter === "all" || tdStatus.includes(statusFilter));
+        let showExp = (expFilter === "all") || 
+                     (expFilter === "positive" && tdExp > 0) || 
+                     (expFilter === "high" && tdExp > 10) || 
+                     (expFilter === "negative" && tdExp < 0);
+        rows[i].style.display = (showStatus && showExp) ? "" : "none";
+      }
+    }
+    function sortTable(n, isNumber) {
+      let table = document.getElementById("stockTable");
+      let tbody = table.tBodies[0];
+      let rows = Array.from(tbody.rows);
+      let dir = table.getAttribute("data-order") === "desc" ? "asc" : "desc";
+      table.setAttribute("data-order", dir);
+      rows.sort((a, b) => {
+        let x = a.cells[n].innerText.replace('%','').replace(',','');
+        let y = b.cells[n].innerText.replace('%','').replace(',','');
+        if (n === 0) { x = a.cells[0].innerText; y = b.cells[0].innerText; }
+        return dir === "asc" ? (isNumber ? x - y : x.localeCompare(y)) : (isNumber ? y - x : y.localeCompare(x));
+      });
+      rows.forEach(row => tbody.appendChild(row));
+    }
+    </script>
+    
+        </body>
+        </html>
+        
