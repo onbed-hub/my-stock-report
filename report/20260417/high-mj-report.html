@@ -1,0 +1,294 @@
+
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>MJ 智能選股看板 (high-) - 20260417</title>
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+            <style>
+                body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; padding: 20px; background-color: #f0f2f5; }
+                .container { max-width: 1400px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+                #js-warning { background: #fff3cd; color: #856404; padding: 12px; border-radius: 6px; margin-bottom: 20px; text-align: center; font-weight: bold; border: 1px solid #ffeeba; }
+                .guide-section { display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
+                .guide-card { flex: 1; min-width: 250px; padding: 12px; border-radius: 8px; border-top: 5px solid #1a73e8; background: #fafafa; font-size: 0.85rem; line-height: 1.5; }
+                table.dataTable { width: 100% !important; border-collapse: collapse !important; }
+                table.dataTable thead th { background-color: #34495e !important; color: white !important; text-align: center !important; vertical-align: middle; padding: 12px !important; }
+                .filter-select { width: 100%; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; color: #333; }
+                tr:hover { background-color: #f1f8ff !important; }
+                td { text-align: center !important; }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <h2 style="text-align:center; color:#2c3e50;">📊 MJ 趨勢作戰看板 (20260417)</h2>
+                <div class="guide-section">
+                    <div class="guide-card"><b>🔥 強勢攻擊：</b>J低金叉+MACD紅柱。動能共振，適合做多。</div>
+                    <div class="guide-card"><b>🚀 低檔反彈：</b>J金叉但MACD負。空頭減弱，搶反彈機會。</div>
+                    <div class="guide-card"><b>💧 築底觀察：</b>J < 10 極度超賣。適合列入觀察名單。</div>
+                    <div class="guide-card"><b>⚠️ 超買警示：</b>J > 95 噴發末段。不宜追高，留意拉回。</div>
+                </div>
+
+                <table class="dataframe display nowrap my-report-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>日期</th>
+      <th>代碼</th>
+      <th>名稱</th>
+      <th>收盤價</th>
+      <th>漲跌幅%</th>
+      <th>成交量(張)</th>
+      <th>MJ狀態</th>
+      <th>J線值</th>
+      <th>MACD柱狀體</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2026-04-17</td>
+      <td>8111.TWO</td>
+      <td>立��</td>
+      <td>79.20</td>
+      <td>10.00</td>
+      <td>16310</td>
+      <td>⚠️ 超買警示</td>
+      <td>114.39</td>
+      <td>3.44</td>
+    </tr>
+    <tr>
+      <td>2026-04-17</td>
+      <td>3339.TWO</td>
+      <td>泰谷</td>
+      <td>69.30</td>
+      <td>10.00</td>
+      <td>14103</td>
+      <td>⚠️ 超買警示</td>
+      <td>106.21</td>
+      <td>4.02</td>
+    </tr>
+    <tr>
+      <td>2026-04-17</td>
+      <td>1711.TW</td>
+      <td>永光</td>
+      <td>47.95</td>
+      <td>9.98</td>
+      <td>73450</td>
+      <td>⚠️ 超買警示</td>
+      <td>111.20</td>
+      <td>1.36</td>
+    </tr>
+    <tr>
+      <td>2026-04-17</td>
+      <td>1815.TWO</td>
+      <td>富喬</td>
+      <td>127.00</td>
+      <td>9.96</td>
+      <td>128147</td>
+      <td>⚠️ 超買警示</td>
+      <td>97.78</td>
+      <td>2.97</td>
+    </tr>
+    <tr>
+      <td>2026-04-17</td>
+      <td>6415.TW</td>
+      <td>矽力*-KY</td>
+      <td>332.50</td>
+      <td>9.92</td>
+      <td>16066</td>
+      <td>⚠️ 超買警示</td>
+      <td>107.95</td>
+      <td>7.54</td>
+    </tr>
+    <tr>
+      <td>2026-04-17</td>
+      <td>8261.TW</td>
+      <td>富鼎</td>
+      <td>127.50</td>
+      <td>9.91</td>
+      <td>10648</td>
+      <td>⚠️ 超買警示</td>
+      <td>105.52</td>
+      <td>3.59</td>
+    </tr>
+    <tr>
+      <td>2026-04-17</td>
+      <td>2402.TW</td>
+      <td>毅嘉</td>
+      <td>77.70</td>
+      <td>9.90</td>
+      <td>39483</td>
+      <td>⚠️ 超買警示</td>
+      <td>99.43</td>
+      <td>3.67</td>
+    </tr>
+    <tr>
+      <td>2026-04-17</td>
+      <td>3437.TW</td>
+      <td>榮創</td>
+      <td>27.20</td>
+      <td>9.90</td>
+      <td>14359</td>
+      <td>⚠️ 超買警示</td>
+      <td>108.15</td>
+      <td>0.75</td>
+    </tr>
+    <tr>
+      <td>2026-04-17</td>
+      <td>6173.TWO</td>
+      <td>信昌電</td>
+      <td>92.20</td>
+      <td>9.89</td>
+      <td>40763</td>
+      <td>⚠️ 超買警示</td>
+      <td>115.28</td>
+      <td>5.89</td>
+    </tr>
+    <tr>
+      <td>2026-04-17</td>
+      <td>3105.TWO</td>
+      <td>穩懋</td>
+      <td>539.00</td>
+      <td>9.89</td>
+      <td>29135</td>
+      <td>⚠️ 超買警示</td>
+      <td>100.29</td>
+      <td>13.66</td>
+    </tr>
+    <tr>
+      <td>2026-04-17</td>
+      <td>8358.TWO</td>
+      <td>金居</td>
+      <td>367.50</td>
+      <td>9.87</td>
+      <td>40149</td>
+      <td>⚠️ 超買警示</td>
+      <td>106.41</td>
+      <td>20.56</td>
+    </tr>
+    <tr>
+      <td>2026-04-17</td>
+      <td>5425.TWO</td>
+      <td>台半</td>
+      <td>65.70</td>
+      <td>9.87</td>
+      <td>16154</td>
+      <td>⚠️ 超買警示</td>
+      <td>107.29</td>
+      <td>1.81</td>
+    </tr>
+    <tr>
+      <td>2026-04-17</td>
+      <td>1785.TWO</td>
+      <td>光洋科</td>
+      <td>156.00</td>
+      <td>9.86</td>
+      <td>14490</td>
+      <td>⚠️ 超買警示</td>
+      <td>111.12</td>
+      <td>8.40</td>
+    </tr>
+    <tr>
+      <td>2026-04-17</td>
+      <td>6278.TW</td>
+      <td>台表科</td>
+      <td>157.00</td>
+      <td>9.79</td>
+      <td>27534</td>
+      <td>⚠️ 超買警示</td>
+      <td>115.73</td>
+      <td>11.37</td>
+    </tr>
+    <tr>
+      <td>2026-04-17</td>
+      <td>4919.TW</td>
+      <td>新唐</td>
+      <td>129.00</td>
+      <td>9.79</td>
+      <td>10412</td>
+      <td>⚠️ 超買警示</td>
+      <td>118.35</td>
+      <td>5.66</td>
+    </tr>
+    <tr>
+      <td>2026-04-17</td>
+      <td>2481.TW</td>
+      <td>強茂</td>
+      <td>118.00</td>
+      <td>9.77</td>
+      <td>48710</td>
+      <td>⚠️ 超買警示</td>
+      <td>105.75</td>
+      <td>3.45</td>
+    </tr>
+    <tr>
+      <td>2026-04-17</td>
+      <td>4960.TW</td>
+      <td>誠美材</td>
+      <td>33.85</td>
+      <td>9.72</td>
+      <td>75488</td>
+      <td>⚠️ 超買警示</td>
+      <td>122.68</td>
+      <td>1.94</td>
+    </tr>
+    <tr>
+      <td>2026-04-17</td>
+      <td>2404.TW</td>
+      <td>漢唐</td>
+      <td>1025.00</td>
+      <td>9.63</td>
+      <td>11319</td>
+      <td>⚠️ 超買警示</td>
+      <td>110.11</td>
+      <td>31.21</td>
+    </tr>
+    <tr>
+      <td>2026-04-17</td>
+      <td>4540.TW</td>
+      <td>全球傳動</td>
+      <td>57.90</td>
+      <td>9.45</td>
+      <td>16686</td>
+      <td>⚠️ 超買警示</td>
+      <td>112.62</td>
+      <td>2.98</td>
+    </tr>
+  </tbody>
+</table>
+            </div>
+
+            <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+            <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $('#js-warning').hide();
+                    var table = $('.my-report-table').DataTable({
+                        "pageLength": 100,
+                        "order": [],
+                        "language": {
+                            "search": "🔍 搜尋：",
+                            "lengthMenu": "顯示 _MENU_ 筆",
+                            "info": "共 _TOTAL_ 筆",
+                            "paginate": { "next": "下頁", "previous": "上頁" }
+                        },
+                        initComplete: function () {
+                            this.api().columns([6]).every( function () {
+                                var column = this;
+                                var select = $('<select class="filter-select"><option value="">所有狀態</option></select>')
+                                    .appendTo( $(column.header()) )
+                                    .on( 'change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex( $(this).val() );
+                                        column.search( val ? '^'+val+'$' : '', true, false ).draw();
+                                    } )
+                                    .on( 'click', function(e) { e.stopPropagation(); } );
+
+                                column.data().unique().sort().each( function ( d, j ) {
+                                    if(d) select.append( '<option value="'+d+'">'+d+'</option>' )
+                                } );
+                            } );
+                        }
+                    });
+                });
+            </script>
+        </body>
+        </html>
+        
