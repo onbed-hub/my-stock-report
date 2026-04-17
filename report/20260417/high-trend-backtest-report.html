@@ -1,0 +1,119 @@
+
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; padding: 30px; background: #f4f7f6; line-height: 1.6; }
+            .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-top: 20px; }
+            
+            /* 說明區塊樣式 */
+            .guide-card { background: #2c3e50; color: #ecf0f1; padding: 25px; border-radius: 15px; margin-bottom: 20px; }
+            .guide-card h3 { margin-top: 0; color: #f1c40f; border-bottom: 1px solid #7f8c8d; padding-bottom: 10px; }
+            .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+            .guide-item h4 { color: #3498db; margin-bottom: 8px; }
+            .guide-item ul { padding-left: 20px; font-size: 0.95rem; }
+            
+            .filter-bar { display: flex; gap: 30px; margin-bottom: 20px; background: #eee; padding: 15px; border-radius: 10px; align-items: center; }
+            select { padding: 8px; border-radius: 5px; border: 1px solid #ccc; }
+            
+            table { width: 100%; border-collapse: collapse; }
+            th, td { padding: 15px; border-bottom: 1px solid #ddd; text-align: left; }
+            th { background: #333; color: white; }
+            .sig-buy { color: #e74c3c; font-weight: bold; background: #fdf2f2; }
+            .sig-sell { color: #27ae60; font-weight: bold; background: #f2faf6; }
+            .hero { background: #fffde7; border-left: 8px solid #ffd700; }
+        </style>
+    </head>
+    <body>
+        
+    <div class="guide-card">
+        <h3>📖 V3 策略操作說明 (Strategy Manual)</h3>
+        <div class="guide-grid">
+            <div class="guide-item">
+                <h4>🎯 進場條件 (買入 🔥)</h4>
+                <ul>
+                    <li><b>均線多頭：</b> MA5 > MA10 > MA20</li>
+                    <li><b>布林突破：</b> 收盤價觸及/超過 Upper Band (98%)</li>
+                    <li><b>能量確認：</b> MACD OSC (紅柱) > 0</li>
+                </ul>
+            </div>
+            <div class="guide-item">
+                <h4>🛡️ 出場條件 (賣出 ❄️)</h4>
+                <ul>
+                    <li><b>趨勢結束：</b> 收盤價 < MA20 且 MACD 轉負</li>
+                    <li><b>硬性停損：</b> 跌破買入價格之 93% (-7%)</li>
+                </ul>
+            </div>
+            <div class="guide-item">
+                <h4>🔍 過濾器說明</h4>
+                <ul>
+                    <li><b>收益門檻：</b> 僅顯示歷史總累積獲利超過該 % 的標的。</li>
+                    <li><b>訊號篩選：</b> 可快速找尋今日剛出現「買入」或「賣出」的個股。</li>
+                    <li><b>英雄標記：</b> 符合門檻標的的列位會以 <span style="background:#fffde7; padding:2px 5px;">黃色</span> 突顯。</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+
+        <div class="card">
+            <h2>📊 V3 趨勢掃描報告 (HIGH)</h2>
+            <p>分析日期：20260417 | 回測起點：2025-11-11</p>
+            
+            <div class="filter-bar">
+                <strong>快速篩選：</strong>
+                <div>收益門檻 > <select id="pFilter" onchange="runFilter()">
+                    <option value="-999">全部</option>
+                    <option value="0">正收益</option>
+                    <option value="30" selected>30% (英雄榜)</option>
+                    <option value="50">50%</option>
+                </select></div>
+                <div>目前訊號：<select id="sFilter" onchange="runFilter()">
+                    <option value="all">顯示全部</option>
+                    <option value="買入">🔥 買入</option>
+                    <option value="賣出">❄️ 賣出</option>
+                    <option value="持股">💎 持股</option>
+                </select></div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>股號</th><th>名稱</th><th>現價</th><th>今日訊號</th><th>累積獲利</th><th>交易次數</th><th>勝率</th><th>理由</th>
+                    </tr>
+                </thead>
+                <tbody id="tb"></tbody>
+            </table>
+        </div>
+
+        <script>
+            const rawData = [{"id": "1711.TW", "name": "\u6c38\u5149", "price": 47.9500007629, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": 44.55, "count": 2, "win_rate": 100.0, "reason": "\u8da8\u52e2\u7a81\u7834"}, {"id": "1785.TWO", "name": "\u5149\u6d0b\u79d1", "price": 156.0, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": -6.33, "count": 2, "win_rate": 0.0, "reason": "\u8da8\u52e2\u7a81\u7834"}, {"id": "1815.TWO", "name": "\u5bcc\u55ac", "price": 127.0, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": -32.12, "count": 4, "win_rate": 0.0, "reason": "\u8da8\u52e2\u7a81\u7834"}, {"id": "2402.TW", "name": "\u6bc5\u5609", "price": 77.6999969482, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": 18.36, "count": 1, "win_rate": 100.0, "reason": "\u8da8\u52e2\u7a81\u7834"}, {"id": "2404.TW", "name": "\u6f22\u5510", "price": 1025.0, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": 8.25, "count": 3, "win_rate": 33.33, "reason": "\u8da8\u52e2\u7a81\u7834"}, {"id": "2481.TW", "name": "\u5f37\u8302", "price": 118.0, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": -17.88, "count": 3, "win_rate": 0.0, "reason": "\u8da8\u52e2\u7a81\u7834"}, {"id": "3105.TWO", "name": "\u7a69\u61cb", "price": 539.0, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": 43.23, "count": 3, "win_rate": 33.33, "reason": "\u8da8\u52e2\u7a81\u7834"}, {"id": "3339.TWO", "name": "\u6cf0\u8c37", "price": 69.3000030518, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": -10.31, "count": 3, "win_rate": 33.33, "reason": "\u8da8\u52e2\u7a81\u7834"}, {"id": "3437.TW", "name": "\u69ae\u5275", "price": 27.2000007629, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": -10.8, "count": 3, "win_rate": 33.33, "reason": "\u8da8\u52e2\u7a81\u7834"}, {"id": "4540.TW", "name": "\u5168\u7403\u50b3\u52d5", "price": 57.9000015259, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": 8.97, "count": 2, "win_rate": 50.0, "reason": "\u8da8\u52e2\u7a81\u7834"}, {"id": "4919.TW", "name": "\u65b0\u5510", "price": 129.0, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": 33.22, "count": 2, "win_rate": 100.0, "reason": "\u8da8\u52e2\u7a81\u7834"}, {"id": "4958.TW", "name": "\u81fb\u9f0e-KY", "price": 282.0, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": 0.05, "count": 2, "win_rate": 50.0, "reason": "\u8da8\u52e2\u7a81\u7834"}, {"id": "4960.TW", "name": "\u8aa0\u7f8e\u6750", "price": 33.8499984741, "signal": "\ud83d\udc8e \u6301\u80a1", "pnl": 34.04, "count": 3, "win_rate": 33.33, "reason": "\u8da8\u52e2\u7dad\u6301"}, {"id": "5425.TWO", "name": "\u53f0\u534a", "price": 65.6999969482, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": -7.23, "count": 2, "win_rate": 0.0, "reason": "\u8da8\u52e2\u7a81\u7834"}, {"id": "6173.TWO", "name": "\u4fe1\u660c\u96fb", "price": 92.1999969482, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": -16.73, "count": 3, "win_rate": 0.0, "reason": "\u8da8\u52e2\u7a81\u7834"}, {"id": "6278.TW", "name": "\u53f0\u8868\u79d1", "price": 157.0, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": -6.42, "count": 2, "win_rate": 0.0, "reason": "\u8da8\u52e2\u7a81\u7834"}, {"id": "6415.TW", "name": "\u77fd\u529b*-KY", "price": 332.5, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": -10.95, "count": 2, "win_rate": 0.0, "reason": "\u8da8\u52e2\u7a81\u7834"}, {"id": "6548.TWO", "name": "\u9577\u79d1*", "price": 54.7000007629, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": 2.92, "count": 2, "win_rate": 50.0, "reason": "\u8da8\u52e2\u7a81\u7834"}, {"id": "8111.TWO", "name": "\u7acb\ufffd\ufffd", "price": 79.1999969482, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": -30.34, "count": 4, "win_rate": 0.0, "reason": "\u8da8\u52e2\u7a81\u7834"}, {"id": "8261.TW", "name": "\u5bcc\u9f0e", "price": 127.5, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": -0.02, "count": 3, "win_rate": 33.33, "reason": "\u8da8\u52e2\u7a81\u7834"}, {"id": "8358.TWO", "name": "\u91d1\u5c45", "price": 367.5, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": -18.9, "count": 3, "win_rate": 0.0, "reason": "\u8da8\u52e2\u7a81\u7834"}];
+            function runFilter() {
+                const pLimit = parseFloat(document.getElementById('pFilter').value);
+                const sLimit = document.getElementById('sFilter').value;
+                const tb = document.getElementById('tb');
+                
+                const filtered = rawData.filter(i => {
+                    const matchP = i.pnl >= pLimit;
+                    const matchS = (sLimit === 'all' || i.signal.includes(sLimit));
+                    return matchP && matchS;
+                });
+
+                tb.innerHTML = filtered.map(i => `
+                    <tr class="${i.pnl >= 30 ? 'hero' : ''}">
+                        <td><b>${i.id}</b></td>
+                        <td>${i.name}</td>
+                        <td>${i.price.toFixed(2)}</td>
+                        <td class="${i.signal.includes('買入')?'sig-buy':(i.signal.includes('賣出')?'sig-sell':'')}">${i.signal}</td>
+                        <td>${i.pnl}%</td>
+                        <td>${i.count}</td>
+                        <td>${i.win_rate}%</td>
+                        <td>${i.reason}</td>
+                    </tr>
+                `).join('');
+            }
+            runFilter(); // 初始執行
+        </script>
+    </body>
+    </html>
+    

@@ -1,0 +1,58 @@
+
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            body { font-family: sans-serif; padding: 30px; background: #f4f7f6; font-size: 1.5rem; }
+            .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+            .filter-bar { display: flex; gap: 30px; margin-bottom: 30px; background: #eee; padding: 20px; border-radius: 10px; }
+            select { font-size: 1.3rem; padding: 8px; }
+            table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+            th, td { padding: 15px; border-bottom: 1px solid #ddd; text-align: left; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+            th:nth-child(1), td:nth-child(1) { width: 10%; } th:nth-child(2), td:nth-child(2) { width: 8%; } 
+            th:nth-child(3), td:nth-child(3) { width: 8%; }  th:nth-child(4), td:nth-child(4) { width: 12%; } 
+            th:nth-child(5), td:nth-child(5) { width: 10%; } th:nth-child(6), td:nth-child(6) { width: 8%; } 
+            th:nth-child(7), td:nth-child(7) { width: 10%; } th:nth-child(8), td:nth-child(8) { width: auto; }
+            th { background: #333; color: white; }
+            .sig-buy { color: red; font-weight: bold; background: #ffebee; }
+            .sig-sell { color: green; font-weight: bold; background: #e8f5e9; }
+            .hero { border-left: 12px solid #ffd700; background: #fffde7; }
+        </style>
+    </head>
+    <body>
+        <div class="card">
+            <h1>📊 V3 策略操作建議 (20260417)</h1>
+            <div class="filter-bar">
+                <div> 收益門檻 > <select id="pFilter" onchange="runFilter()">
+                    <option value="-99">全部</option><option value="30" selected>30%</option>
+                    <option value="50">50%</option><option value="70">70%</option>
+                </select></div>
+                <div> 訊號篩選: <select id="sFilter" onchange="runFilter()">
+                    <option value="all">全部</option><option value="買入">🔥 買入</option>
+                    <option value="賣出">❄️ 賣出</option><option value="持股">💎 持股</option>
+                </select></div>
+            </div>
+            <table>
+                <thead><tr><th>股號</th><th>名稱</th><th>收盤價</th><th>今日訊號</th><th>累積收益</th><th>次數</th><th>勝率</th><th>理由</th></tr></thead>
+                <tbody id="tb"></tbody>
+            </table>
+        </div>
+        <script>
+            const raw = [{"id": "00910.TW", "name": "\u7b2c\u4e00\u91d1\u592a\u7a7a\u885b\u661f", "price": 71.75, "signal": "\ud83d\udd25 \u8cb7\u5165", "pnl": 32.72, "count": 2, "win_rate": 50.0, "reason": "\u8da8\u52e2\u7a81\u7834"}];
+            function runFilter() {
+                const p = parseFloat(document.getElementById('pFilter').value);
+                const s = document.getElementById('sFilter').value;
+                const tb = document.getElementById('tb');
+                let filtered = raw.filter(i => i.pnl >= p && (s === 'all' || i.signal.includes(s)));
+                tb.innerHTML = filtered.map(i => `
+                    <tr class="${i.pnl >= 30 ? 'hero' : ''}">
+                        <td><b>${i.id}</b></td><td>${i.name}</td><td>${i.price.toFixed(2)}</td>
+                        <td class="${i.signal.includes('買入')?'sig-buy':(i.signal.includes('賣出')?'sig-sell':'')}">${i.signal}</td>
+                        <td>${i.pnl}%</td><td>${i.count}</td><td>${i.win_rate}%</td><td>${i.reason}</td>
+                    </tr>`).join('');
+            }
+            runFilter();
+        </script>
+    </body>
+    </html>
+    
