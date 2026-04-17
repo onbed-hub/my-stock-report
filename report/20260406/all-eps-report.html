@@ -26,7 +26,7 @@
     </head>
     <body><div class='container'>
         <h2>量化獲利品質診斷報告</h2>
-        <div class='time-info'>📅 基準日期：20260406 | 生成時間：2026-04-17 13:30</div>
+        <div class='time-info'>📅 基準日期：20260406 | 生成時間：2026-04-17 15:24</div>
         
     <div class="card">
         <h3 style="font-size: 2.2rem; margin-bottom:20px; border-left: 10px solid #2563eb; padding-left:20px;">📊 獲利品質與估值準則</h3>
@@ -132,19 +132,25 @@
         const adv = document.getElementById("adviceSelect").value; // 抓取建議過濾值
         
         const all = Array.from(document.getElementById("stockTable").tBodies[0].rows);
-        
+
         filteredRows = all.filter(r => {
-            const mS = r.cells[0].innerText.toUpperCase().includes(sVal) || r.cells[1].innerText.toUpperCase().includes(sVal);
-            const mSt = stat === "all" || r.cells[10].innerText.includes(stat);
+            // 0:代號, 1:名稱
+            const mS = r.cells[0].innerText.toUpperCase().includes(sVal) || 
+                       r.cells[1].innerText.toUpperCase().includes(sVal);
             
-            // 利潤空間比對 (索引 9)
-            const valExp = parseFloat(r.cells[9].innerText);
-            const mEx = (exp === "all") || (exp === "positive" && valExp > 0) || (exp === "high" && valExp > 10);
+            // 11: 診斷狀態 (原本是 10，因為多了 EPS 欄位所以變成 11)
+            const mSt = stat === "all" || r.cells[11].innerText.includes(stat);
             
-            // 操作建議比對 (索引 11)
-            const mAd = (adv === "all") || r.cells[11].innerText.includes(adv);
+            // 10: 利潤空間 (原本是 9)
+            const valExp = parseFloat(r.cells[10].innerText);
+            const mEx = (exp === "all") || 
+                        (exp === "positive" && valExp > 0) || 
+                        (exp === "high" && valExp > 10);
             
-            return mS && mSt && mEx && mAd; // 四個條件都要符合
+            // 12: 操作建議 (原本是 11)
+            const mAd = (adv === "all") || r.cells[12].innerText.includes(adv);
+            
+            return mS && mSt && mEx && mAd;
         });
         currentPage = 1; update();
     }
