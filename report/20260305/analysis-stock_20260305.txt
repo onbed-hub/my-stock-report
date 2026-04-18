@@ -1,0 +1,1035 @@
+=== 短線動能 + 扣抵分析 (資料日期: 20260305) ===
+代號         |     最佳策略     |      勝率 |     期望回報 | 今日狀態
+-------------------------------------------------------------------------------------
+6831.TW    | short_swing  |   63.6% |    8.27% | ⚡ 短線攻擊
+00696B.TWO | short_swing  |   41.3% |   -0.53% | 觀望
+6153.TW    |   rebound    |   50.3% |    0.38% | 觀望
+8261.TW    | short_swing  |   41.6% |    0.42% | ⏱️ 短線撤退
+6205.TW    |   rebound    |   44.9% |    0.89% | 觀望
+1789.TW    | bias_reversion |   41.3% |   -0.23% | 觀望
+4721.TWO   | short_swing  |   44.5% |    0.85% | ⏱️ 短線撤退
+6924.TW    | short_swing  |   52.4% |   -0.73% | ⏱️ 短線撤退
+3044.TW    |   rebound    |   51.4% |    0.31% | 觀望
+00676R.TW  | short_swing  |   30.0% |   -0.83% | 觀望
+4961.TW    | bias_reversion |   46.0% |    0.24% | 觀望
+2012.TW    |   rebound    |   41.3% |    0.05% | 觀望
+8114.TW    |   rebound    |   43.2% |    0.12% | 觀望
+8028.TW    | bias_reversion |   49.0% |    0.40% | 觀望
+6443.TW    | short_swing  |   45.2% |    1.31% | ⏱️ 短線撤退
+6525.TW    | short_swing  |   46.5% |    0.36% | ⏱️ 短線撤退
+6877.TWO   | bias_reversion |   55.6% |    2.88% | 觀望
+1802.TW    | short_swing  |   46.9% |    0.67% | ⏱️ 短線撤退
+00635U.TW  | bias_reversion |   51.0% |    0.24% | 觀望
+2408.TW    | short_swing  |   49.1% |    0.88% | ⏱️ 短線撤退
+5546.TW    | bias_reversion |   39.4% |   -0.34% | 觀望
+3086.TWO   | short_swing  |   42.5% |    2.04% | ⏱️ 短線撤退
+2395.TW    |   rebound    |   49.2% |    0.24% | 觀望
+6176.TW    |   rebound    |   47.8% |    0.16% | 觀望
+6811.TWO   | short_swing  |   41.5% |    1.97% | ⏱️ 短線撤退
+4510.TWO   | short_swing  |   41.0% |    0.50% | ⏱️ 短線撤退
+6124.TWO   |   rebound    |   42.4% |    0.27% | 觀望
+00757.TW   |   rebound    |   56.8% |    0.33% | 🛡️ 十日撐買
+00945B.TW  | bias_reversion |   66.7% |   -0.16% | 觀望
+4556.TWO   | short_swing  |   38.5% |   -0.18% | ⏱️ 短線撤退
+1612.TW    | short_swing  |   50.7% |    0.33% | ⏱️ 短線撤退
+3081.TWO   | short_swing  |   45.8% |    0.61% | ⚡ 短線攻擊
+6446.TW    | short_swing  |   48.0% |    1.14% | ⏱️ 短線撤退
+6485.TWO   | short_swing  |   50.9% |    1.25% | ⏱️ 短線撤退
+5403.TWO   |   rebound    |   51.4% |    0.51% | 觀望
+5455.TWO   | short_swing  |   40.8% |    0.21% | 觀望
+2374.TW    |   rebound    |   46.4% |    0.43% | 觀望
+1443.TW    | bias_reversion |   50.7% |    1.36% | 觀望
+6141.TW    |   rebound    |   44.2% |    0.62% | 觀望
+5243.TW    |   rebound    |   47.4% |    0.06% | 觀望
+2303.TW    | short_swing  |   47.8% |    0.70% | ⏱️ 短線撤退
+3372.TWO   | short_swing  |   43.8% |    0.94% | ⏱️ 短線撤退
+4968.TW    |   rebound    |   46.7% |    0.93% | 觀望
+2351.TW    |   rebound    |   51.7% |    0.75% | 觀望
+2420.TW    |   rebound    |   50.1% |    0.12% | 觀望
+911622.TW  | short_swing  |   31.5% |    1.60% | ⏱️ 短線撤退
+3499.TWO   |   rebound    |   45.4% |    0.82% | 觀望
+6223.TWO   | short_swing  |   47.8% |    0.96% | ⏱️ 短線撤退
+7583.TWO   | bias_reversion |   46.0% |    1.06% | 觀望
+2059.TW    | short_swing  |   49.2% |    0.44% | ⏱️ 短線撤退
+3030.TW    |   rebound    |   49.6% |    0.28% | 觀望
+00918.TW   | short_swing  |   60.2% |    0.36% | ⏱️ 短線撤退
+3022.TW    |   rebound    |   46.2% |    0.13% | 觀望
+2412.TW    | bias_reversion |   45.8% |   -0.09% | 觀望
+2428.TW    |   rebound    |   48.3% |    0.25% | 觀望
+4536.TW    |   rebound    |   43.0% |    0.02% | 觀望
+6173.TWO   |   rebound    |   48.8% |    0.80% | 觀望
+3231.TW    |   rebound    |   49.6% |    0.44% | 觀望
+2464.TW    |   rebound    |   46.9% |    0.25% | 觀望
+2884.TW    |   rebound    |   48.3% |    0.18% | 觀望
+5355.TWO   |   rebound    |   42.8% |    0.51% | 觀望
+6116.TW    | short_swing  |   42.8% |    1.08% | ⏱️ 短線撤退
+2453.TW    |   rebound    |   52.6% |    0.73% | 觀望
+6735.TWO   | short_swing  |   43.5% |    1.42% | ⏱️ 短線撤退
+3609.TWO   | short_swing  |   38.2% |    0.86% | ⏱️ 短線撤退
+8923.TWO   | bias_reversion |   41.4% |    0.27% | 觀望
+9958.TW    | short_swing  |   51.4% |    1.96% | ⏱️ 短線撤退
+2885.TW    |   rebound    |   51.3% |    0.12% | 觀望
+8472.TWO   |   rebound    |   40.5% |    0.12% | 觀望
+3306.TWO   |   rebound    |   48.0% |    0.99% | 觀望
+7792.TWO   |   rebound    |   51.5% |    2.74% | 觀望
+00881.TW   |   rebound    |   53.0% |    0.33% | 觀望
+1717.TW    | short_swing  |   45.6% |    0.22% | ⏱️ 短線撤退
+6127.TWO   |   rebound    |   48.1% |    0.62% | 觀望
+7556.TWO   |   rebound    |   37.7% |    0.82% | 觀望
+4763.TW    |   rebound    |   49.6% |    0.77% | 觀望
+2535.TW    |   rebound    |   48.6% |    0.20% | 觀望
+2013.TW    | short_swing  |   35.9% |    0.67% | ⏱️ 短線撤退
+1714.TW    | bias_reversion |   45.9% |   -0.19% | 觀望
+3709.TWO   | bias_reversion |   56.5% |    1.89% | 觀望
+2352.TW    | short_swing  |   48.1% |    0.18% | ⏱️ 短線撤退
+1568.TW    |   rebound    |   46.2% |    0.45% | 觀望
+5475.TWO   | short_swing  |   46.1% |    2.40% | ⏱️ 短線撤退
+5289.TWO   |   rebound    |   55.6% |    0.63% | 觀望
+3587.TWO   | short_swing  |   48.5% |    0.68% | ⏱️ 短線撤退
+6532.TWO   |   rebound    |   53.5% |    0.93% | 觀望
+00927.TW   | short_swing  |   52.0% |    0.53% | ⏱️ 短線撤退
+00950B.TWO | short_swing  |   50.0% |    0.14% | 觀望
+4529.TWO   | short_swing  |   39.5% |    1.51% | ⏱️ 短線撤退
+3523.TWO   | short_swing  |   45.0% |    0.28% | ⏱️ 短線撤退
+4908.TWO   |   rebound    |   49.2% |    0.55% | 觀望
+3029.TW    | short_swing  |   44.6% |    0.20% | ⏱️ 短線撤退
+7769.TW    |   rebound    |  100.0% |    6.94% | 觀望
+4958.TW    |   rebound    |   51.3% |    0.33% | 觀望
+6245.TWO   |   rebound    |   48.1% |   -0.19% | 觀望
+3583.TW    |   rebound    |   54.5% |    0.81% | 觀望
+00940.TW   | bias_reversion |   63.6% |    0.41% | 觀望
+3706.TW    | short_swing  |   44.7% |    0.64% | ⏱️ 短線撤退
+5009.TWO   |   rebound    |   49.9% |    0.29% | 🛡️ 十日撐買
+3054.TW    |   rebound    |   37.0% |    0.10% | 觀望
+2031.TW    | short_swing  |   47.1% |    0.83% | ⏱️ 短線撤退
+3317.TWO   | bias_reversion |   49.1% |    0.41% | 觀望
+4416.TWO   | short_swing  |   43.6% |   -0.02% | ⏱️ 短線撤退
+6925.TWO   | short_swing  |   37.5% |    2.81% | ⏱️ 短線撤退
+6285.TW    |   rebound    |   47.7% |    0.21% | 觀望
+4744.TWO   | short_swing  |   40.3% |    0.43% | ⏱️ 短線撤退
+00642U.TW  | short_swing  |   51.4% |    0.27% | ⚡ 短線攻擊
+6994.TW    | bias_reversion |   65.0% |    3.25% | 📉 乖離反彈
+3576.TW    | short_swing  |   41.6% |    0.41% | 觀望
+8112.TW    |   rebound    |   53.9% |    0.27% | 觀望
+00633L.TW  |   rebound    |   55.1% |    0.77% | 觀望
+6642.TWO   |   rebound    |   43.8% |    0.40% | 觀望
+00885.TW   | short_swing  |   48.8% |    0.08% | ⏱️ 短線撤退
+1721.TW    | short_swing  |   39.3% |    0.43% | ⏱️ 短線撤退
+6902.TW    | bias_reversion |   39.0% |   -0.00% | 觀望
+2461.TW    | bias_reversion |   46.9% |    0.01% | 觀望
+6461.TWO   |   rebound    |   35.5% |    0.01% | 觀望
+7805.TWO   |   rebound    |   47.6% |    0.20% | 觀望
+8131.TW    |   rebound    |   51.3% |    0.40% | 觀望
+7752.TWO   | bias_reversion |   33.9% |   -0.59% | 觀望
+00637L.TW  |   rebound    |   56.2% |    0.82% | 觀望
+4538.TWO   |   rebound    |   42.5% |   -0.01% | 觀望
+6962.TW    | short_swing  |   34.6% |    0.15% | ⏱️ 短線撤退
+3323.TWO   |   rebound    |   44.7% |    0.31% | 觀望
+00664R.TW  | short_swing  |   29.4% |   -0.78% | 觀望
+8091.TWO   |   rebound    |   51.5% |    0.38% | 觀望
+7810.TWO   | short_swing  |   47.7% |    4.33% | ⏱️ 短線撤退
+2434.TW    |   rebound    |   37.0% |    0.84% | 觀望
+7610.TW    | short_swing  |   66.7% |    5.83% | ⏱️ 短線撤退
+4952.TW    |   rebound    |   48.9% |    0.21% | 觀望
+1623.TW    |   rebound    |    0.0% |  -21.79% | 觀望
+6187.TWO   | short_swing  |   46.5% |    0.96% | 觀望
+00980A.TW  |   rebound    |   71.4% |    0.99% | 觀望
+00929.TW   |   rebound    |   52.1% |    0.27% | 觀望
+2252.TWO   | short_swing  |   45.6% |    0.82% | ⏱️ 短線撤退
+2034.TW    |   rebound    |   47.9% |    0.18% | 觀望
+00947.TW   | short_swing  |   46.5% |    0.39% | ⏱️ 短線撤退
+3581.TWO   |   rebound    |   47.5% |    1.10% | 觀望
+3380.TW    |   rebound    |   49.0% |    0.34% | 🛡️ 十日撐買
+5301.TWO   | short_swing  |   40.3% |    2.27% | ⏱️ 短線撤退
+1795.TW    | bias_reversion |   49.4% |    0.81% | 觀望
+2406.TW    | short_swing  |   44.2% |    0.75% | ⏱️ 短線撤退
+6147.TWO   | bias_reversion |   50.9% |    0.33% | 觀望
+6667.TWO   | short_swing  |   45.9% |    0.86% | ⏱️ 短線撤退
+6231.TWO   | bias_reversion |   47.9% |    0.58% | 觀望
+00674R.TW  | short_swing  |   37.2% |   -0.56% | 觀望
+00751B.TWO | bias_reversion |   42.7% |   -0.34% | 觀望
+6657.TW    |   rebound    |   27.7% |   -1.10% | 觀望
+6799.TW    | bias_reversion |   46.3% |    0.20% | 觀望
+6689.TW    |   rebound    |   44.4% |    1.32% | 觀望
+1536.TW    | bias_reversion |   49.1% |    0.15% | 觀望
+6716.TWO   | short_swing  |   44.7% |    1.85% | ⏱️ 短線撤退
+3664.TWO   | bias_reversion |   49.2% |    0.25% | 觀望
+3665.TW    |   rebound    |   49.5% |    0.41% | 觀望
+3714.TW    | bias_reversion |   54.9% |   -0.12% | 觀望
+3218.TWO   |   rebound    |   45.2% |    0.65% | 觀望
+6698.TW    | short_swing  |   43.8% |    0.31% | ⏱️ 短線撤退
+5228.TWO   |   rebound    |   33.1% |   -0.21% | 觀望
+5880.TW    | bias_reversion |   67.5% |    1.00% | 觀望
+2349.TW    | short_swing  |   35.3% |    0.93% | ⏱️ 短線撤退
+4161.TWO   | bias_reversion |   39.7% |   -0.39% | 觀望
+7734.TWO   |   rebound    |   40.5% |    1.27% | 🛡️ 十日撐買
+2401.TW    |   rebound    |   51.6% |    0.18% | 觀望
+6906.TW    | bias_reversion |   46.5% |    1.13% | 觀望
+3563.TW    | short_swing  |   56.3% |    1.34% | ⚡ 短線攻擊
+6279.TWO   |   rebound    |   49.1% |   -0.01% | 觀望
+3324.TWO   | bias_reversion |   50.9% |    0.52% | 觀望
+3577.TWO   |   rebound    |   47.7% |    0.65% | 觀望
+3357.TWO   |   rebound    |   46.4% |    0.58% | 觀望
+2254.TW    | short_swing  |   32.3% |   -0.88% | ⚡ 短線攻擊
+2369.TW    | bias_reversion |   50.6% |    0.56% | 觀望
+7751.TWO   | short_swing  |   62.0% |    3.95% | ⏱️ 短線撤退
+8489.TWO   | short_swing  |   45.9% |    0.57% | ⏱️ 短線撤退
+1773.TW    |   rebound    |   48.1% |    0.48% | 觀望
+6844.TWO   | short_swing  |   47.8% |    1.47% | 觀望
+6931.TW    | short_swing  |   46.4% |    1.62% | ⏱️ 短線撤退
+4956.TW    | short_swing  |   36.9% |    0.20% | ⏱️ 短線撤退
+5876.TW    | bias_reversion |   65.8% |    0.98% | 觀望
+4977.TW    | bias_reversion |   49.5% |    0.59% | 觀望
+00632R.TW  | short_swing  |   36.6% |    5.63% | 觀望
+8935.TWO   |   rebound    |   40.9% |    0.32% | 觀望
+5227.TWO   | bias_reversion |   37.8% |   -0.28% | 📉 乖離反彈
+3521.TWO   |   rebound    |   36.1% |    0.67% | 觀望
+3564.TWO   |   rebound    |   48.6% |    0.85% | 觀望
+6419.TWO   |   rebound    |   38.5% |    0.22% | 觀望
+2845.TW    | bias_reversion |   62.7% |    0.29% | 觀望
+3266.TW    |   rebound    |   42.3% |    0.25% | 觀望
+2812.TW    |   rebound    |   51.5% |    0.15% | 觀望
+2867.TW    | short_swing  |   43.3% |    0.35% | ⏱️ 短線撤退
+4906.TW    | bias_reversion |   50.7% |    0.09% | 觀望
+1203.TW    | bias_reversion |   48.5% |   -0.13% | 觀望
+2002.TW    | short_swing  |   47.3% |    0.42% | ⏱️ 短線撤退
+2478.TW    | short_swing  |   41.4% |    0.46% | ⏱️ 短線撤退
+8291.TWO   |   rebound    |   32.8% |   -0.40% | 觀望
+6865.TWO   | short_swing  |   38.2% |   -0.05% | ⏱️ 短線撤退
+6988.TW    | short_swing  |   48.0% |    0.53% | ⏱️ 短線撤退
+5543.TWO   |   rebound    |   44.9% |    0.60% | 觀望
+6668.TW    |   rebound    |   45.6% |    0.59% | 觀望
+3691.TWO   | short_swing  |   47.1% |    0.32% | ⏱️ 短線撤退
+2897.TW    | bias_reversion |   50.9% |    0.54% | 觀望
+3592.TW    | short_swing  |   51.8% |    0.62% | ⏱️ 短線撤退
+4806.TWO   | short_swing  |   47.6% |    1.30% | ⏱️ 短線撤退
+1718.TW    | bias_reversion |   51.6% |    0.27% | 觀望
+6491.TW    |   rebound    |   44.3% |    0.38% | 觀望
+00955.TWO  | short_swing  |   52.3% |    0.68% | ⏱️ 短線撤退
+3078.TWO   |   rebound    |   51.3% |    0.37% | 觀望
+2484.TW    |   rebound    |   45.7% |   -0.15% | 觀望
+6166.TW    |   rebound    |   46.3% |   -0.08% | 觀望
+1338.TW    | bias_reversion |   41.2% |   -0.14% | 觀望
+3023.TW    |   rebound    |   47.5% |    0.15% | 觀望
+00738U.TW  | bias_reversion |   56.6% |    0.54% | 觀望
+6672.TW    |   rebound    |   47.6% |    0.36% | 觀望
+3694.TW    |   rebound    |   44.5% |    0.07% | 觀望
+6160.TWO   | short_swing  |   45.3% |    0.60% | ⏱️ 短線撤退
+5426.TWO   | short_swing  |   50.4% |    1.70% | ⏱️ 短線撤退
+8048.TWO   | short_swing  |   46.1% |    0.43% | 觀望
+2312.TW    |   rebound    |   50.2% |    0.44% | 觀望
+2208.TW    | bias_reversion |   49.5% |    0.46% | 觀望
+009803.TW  |   rebound    |   71.7% |    1.58% | 觀望
+7584.TWO   | bias_reversion |   50.3% |   -0.11% | 觀望
+8050.TWO   | bias_reversion |   51.1% |   -0.01% | 觀望
+3455.TWO   | bias_reversion |   54.1% |    0.78% | 觀望
+2104.TW    |   rebound    |   45.8% |    0.04% | 觀望
+6122.TWO   | short_swing  |   53.6% |    1.15% | ⏱️ 短線撤退
+2880.TW    | bias_reversion |   65.7% |    0.74% | 觀望
+6435.TWO   | short_swing  |   48.9% |    0.67% | ⏱️ 短線撤退
+8476.TW    |   rebound    |   42.9% |    0.16% | 觀望
+6530.TWO   |   rebound    |   44.1% |    0.74% | 觀望
+6806.TW    | short_swing  |   47.3% |    1.45% | ⏱️ 短線撤退
+2755.TWO   |   rebound    |   50.2% |    1.44% | 觀望
+1605.TW    | bias_reversion |   48.4% |    0.42% | 觀望
+8038.TWO   |   rebound    |   42.4% |    0.17% | 觀望
+3006.TW    | short_swing  |   44.3% |    0.67% | ⏱️ 短線撤退
+1442.TW    | short_swing  |   48.1% |    0.54% | ⏱️ 短線撤退
+1303.TW    | short_swing  |   52.3% |    0.51% | ⏱️ 短線撤退
+00715L.TW  |   rebound    |   55.8% |    2.17% | 觀望
+8349.TWO   | short_swing  |   46.7% |    0.72% | ⏱️ 短線撤退
+2633.TW    | short_swing  |   38.8% |    0.22% | ⏱️ 短線撤退
+4530.TWO   |   rebound    |   39.9% |   -0.15% | 觀望
+3693.TWO   | short_swing  |   44.4% |    1.30% | ⏱️ 短線撤退
+6290.TWO   |   rebound    |   54.1% |    0.67% | 觀望
+2543.TW    | bias_reversion |   48.4% |    1.19% | 觀望
+1762.TW    | bias_reversion |   47.0% |    0.16% | 觀望
+2388.TW    | short_swing  |   44.5% |    1.33% | ⏱️ 短線撤退
+3360.TWO   |   rebound    |   45.2% |    0.23% | 觀望
+3260.TWO   | short_swing  |   51.6% |    0.97% | ⏱️ 短線撤退
+2035.TWO   | bias_reversion |   45.2% |   -0.13% | 觀望
+6418.TWO   | bias_reversion |   46.3% |    0.27% | 觀望
+5230.TWO   | short_swing  |   51.2% |    0.33% | ⏱️ 短線撤退
+3169.TWO   | short_swing  |   43.1% |    0.51% | ⏱️ 短線撤退
+1516.TW    |   rebound    |   41.3% |    0.28% | 觀望
+3413.TW    | short_swing  |   51.1% |    0.89% | ⏱️ 短線撤退
+2201.TW    | bias_reversion |   51.0% |    0.42% | 觀望
+1323.TW    | bias_reversion |   47.0% |   -0.13% | 觀望
+3071.TWO   |   rebound    |   51.8% |    0.92% | 觀望
+00662.TW   |   rebound    |   54.9% |    0.07% | 觀望
+8046.TW    | short_swing  |   48.3% |    0.60% | ⏱️ 短線撤退
+00931B.TWO | short_swing  |   43.1% |   -0.75% | ⚡ 短線攻擊
+2948.TWO   | short_swing  |   35.6% |    0.93% | 觀望
+2419.TW    | bias_reversion |   51.5% |    0.05% | 觀望
+2392.TW    | short_swing  |   43.8% |    0.41% | ⏱️ 短線撤退
+4966.TWO   | short_swing  |   49.1% |    0.12% | ⏱️ 短線撤退
+6186.TWO   | short_swing  |   57.4% |    0.98% | ⏱️ 短線撤退
+3045.TW    | bias_reversion |   44.4% |   -0.01% | 觀望
+6515.TW    | short_swing  |   51.4% |    1.57% | ⏱️ 短線撤退
+8102.TWO   |   rebound    |   39.5% |    0.42% | 觀望
+8416.TWO   |   rebound    |   44.2% |   -0.01% | 觀望
+3715.TW    | short_swing  |   46.8% |    1.87% | ⏱️ 短線撤退
+3444.TWO   |   rebound    |   47.6% |    0.86% | 觀望
+8027.TWO   |   rebound    |   42.4% |    0.79% | 觀望
+4991.TWO   |   rebound    |   51.1% |    0.94% | 觀望
+4542.TWO   | bias_reversion |   47.9% |    0.82% | 觀望
+6415.TW    |   rebound    |   50.2% |    0.69% | 觀望
+6573.TW    |   rebound    |   42.6% |    0.17% | 觀望
+3597.TWO   |   rebound    |   31.0% |    0.17% | 觀望
+5536.TWO   | short_swing  |   54.0% |    1.18% | ⏱️ 短線撤退
+6104.TWO   | short_swing  |   47.9% |    0.92% | ⏱️ 短線撤退
+2211.TW    | short_swing  |   51.8% |    1.52% | ⏱️ 短線撤退
+00949.TW   | bias_reversion |   69.6% |    2.00% | 觀望
+2542.TW    |   rebound    |   50.5% |    0.13% | 觀望
+6431.TW    | short_swing  |   51.8% |    1.20% | ⏱️ 短線撤退
+7721.TW    |   rebound    |   40.4% |    0.71% | 觀望
+4192.TWO   | short_swing  |   36.5% |    0.05% | ⏱️ 短線撤退
+9917.TW    | bias_reversion |   42.5% |   -0.23% | 觀望
+8271.TW    | short_swing  |   49.1% |    0.49% | ⏱️ 短線撤退
+7455.TWO   | bias_reversion |   15.4% |   -0.50% | 觀望
+8047.TWO   | bias_reversion |   45.9% |    0.92% | 📉 乖離反彈
+4540.TW    | bias_reversion |   47.0% |    0.93% | 觀望
+00904.TW   | short_swing  |   50.9% |    0.61% | ⏱️ 短線撤退
+6756.TW    |   rebound    |   37.5% |    0.67% | 觀望
+6919.TW    | short_swing  |   62.9% |    4.71% | ⏱️ 短線撤退
+3211.TWO   |   rebound    |   49.1% |    0.38% | 觀望
+2360.TW    |   rebound    |   56.6% |    1.15% | 觀望
+8016.TW    |   rebound    |   47.6% |    0.13% | 觀望
+3094.TW    |   rebound    |   43.8% |    0.14% | 觀望
+5484.TW    |   rebound    |   42.9% |    0.90% | 觀望
+6284.TWO   |   rebound    |   48.5% |    0.70% | 觀望
+7783.TWO   | bias_reversion |   45.9% |    1.10% | 觀望
+3014.TW    | bias_reversion |   51.5% |    0.11% | 觀望
+3558.TWO   |   rebound    |   46.7% |    0.27% | 觀望
+3406.TW    | short_swing  |   46.5% |    1.27% | ⏱️ 短線撤退
+6794.TW    |   rebound    |   43.8% |    1.40% | 觀望
+2383.TW    |   rebound    |   56.4% |    0.97% | 觀望
+7402.TWO   | short_swing  |   43.6% |    0.96% | ⏱️ 短線撤退
+6235.TW    |   rebound    |   48.9% |    0.52% | 觀望
+3149.TW    | short_swing  |   42.5% |    0.32% | ⏱️ 短線撤退
+7717.TWO   |   rebound    |  100.0% |   14.69% | 觀望
+4580.TWO   |   rebound    |   45.5% |    0.21% | 觀望
+6739.TWO   | short_swing  |   60.3% |    3.72% | ⏱️ 短線撤退
+7702.TWO   | short_swing  |   48.5% |    1.21% | ⏱️ 短線撤退
+2023.TW    | short_swing  |   40.1% |    0.32% | ⏱️ 短線撤退
+3454.TW    |   rebound    |   45.4% |    0.18% | 🛡️ 十日撐買
+3543.TW    |   rebound    |   45.1% |    0.68% | 觀望
+2345.TW    | short_swing  |   52.6% |    0.59% | ⏱️ 短線撤退
+3018.TW    | short_swing  |   47.8% |    1.47% | 觀望
+6526.TW    |   rebound    |   38.3% |   -0.07% | 觀望
+6843.TWO   | short_swing  |   45.8% |   -0.08% | ⏱️ 短線撤退
+3686.TW    | bias_reversion |   40.6% |    0.37% | 觀望
+6933.TW    | short_swing  |   29.8% |   -0.45% | ⏱️ 短線撤退
+1337.TW    | short_swing  |   38.2% |   -0.49% | ⏱️ 短線撤退
+7719.TWO   | short_swing  |   31.2% |    1.20% | ⏱️ 短線撤退
+3663.TWO   | short_swing  |   44.4% |    0.57% | ⏱️ 短線撤退
+6588.TWO   |   rebound    |   44.7% |    1.66% | 觀望
+4563.TWO   | bias_reversion |   45.5% |    0.13% | 觀望
+3707.TWO   | short_swing  |   46.8% |    0.54% | ⏱️ 短線撤退
+8103.TW    |   rebound    |   50.6% |    0.33% | 觀望
+3498.TWO   |   rebound    |   45.6% |    0.64% | 觀望
+2883.TW    | short_swing  |   47.9% |    0.37% | ⏱️ 短線撤退
+6788.TWO   | short_swing  |   52.4% |    2.02% | ⏱️ 短線撤退
+6793.TWO   |   rebound    |   35.6% |   -0.70% | 觀望
+2308.TW    | short_swing  |   46.0% |    0.16% | ⏱️ 短線撤退
+6903.TWO   | short_swing  |   52.7% |    1.91% | ⏱️ 短線撤退
+2324.TW    |   rebound    |   47.3% |    0.02% | 觀望
+00764B.TWO | short_swing  |   44.6% |   -0.25% | 觀望
+00965.TW   |   rebound    |   58.9% |    0.69% | 觀望
+4513.TWO   | short_swing  |   51.8% |    1.50% | ⏱️ 短線撤退
+6805.TW    | short_swing  |   60.3% |    3.93% | ⏱️ 短線撤退
+5292.TW    | short_swing  |   53.9% |    1.31% | ⏱️ 短線撤退
+3013.TW    | bias_reversion |   47.0% |    0.13% | 觀望
+3529.TWO   | short_swing  |   49.6% |    1.47% | ⏱️ 短線撤退
+8436.TWO   | short_swing  |   45.1% |    0.45% | ⏱️ 短線撤退
+6182.TWO   | short_swing  |   47.2% |    0.58% | ⏱️ 短線撤退
+6598.TW    | short_swing  |   43.2% |    0.93% | ⏱️ 短線撤退
+4931.TWO   | short_swing  |   45.1% |    0.86% | ⏱️ 短線撤退
+2387.TW    | short_swing  |   48.5% |    0.43% | ⏱️ 短線撤退
+00968B.TWO | short_swing  |   33.3% |   -0.27% | ⚡ 短線攻擊
+2609.TW    | short_swing  |   49.3% |    1.34% | ⚡ 短線攻擊
+3057.TW    |   rebound    |   42.5% |    0.30% | 觀望
+3632.TWO   | short_swing  |   37.6% |    0.36% | 觀望
+5013.TWO   |   rebound    |   43.7% |    0.05% | 🛡️ 十日撐買
+6548.TWO   |   rebound    |   53.9% |    1.35% | 觀望
+5314.TWO   | short_swing  |   42.8% |    1.01% | ⏱️ 短線撤退
+00713.TW   | bias_reversion |   70.9% |    0.95% | 觀望
+4764.TW    | bias_reversion |   56.5% |    1.85% | 觀望
+6472.TW    | short_swing  |   46.5% |    2.02% | ⏱️ 短線撤退
+6863.TW    |   rebound    |   51.7% |    0.27% | 觀望
+2365.TW    | short_swing  |   45.7% |    0.78% | ⏱️ 短線撤退
+2425.TW    | short_swing  |   46.0% |    0.59% | ⏱️ 短線撤退
+3594.TWO   |   rebound    |   47.4% |    0.31% | 觀望
+6128.TW    |   rebound    |   43.4% |    0.08% | 觀望
+3008.TW    | short_swing  |   50.6% |    0.41% | ⏱️ 短線撤退
+2313.TW    |   rebound    |   54.0% |    0.50% | 觀望
+5321.TWO   | short_swing  |   45.9% |    3.31% | ⏱️ 短線撤退
+3379.TWO   |   rebound    |   46.3% |    0.38% | 觀望
+2723.TW    | short_swing  |   47.4% |    0.43% | ⏱️ 短線撤退
+3625.TWO   |   rebound    |   44.0% |    0.57% | 觀望
+3141.TWO   |   rebound    |   47.3% |    0.67% | 觀望
+7740.TW    | bias_reversion |   65.5% |    2.11% | 觀望
+6708.TWO   |   rebound    |   39.4% |    0.95% | 觀望
+1589.TW    | short_swing  |   44.1% |    0.36% | ⏱️ 短線撤退
+6291.TWO   | short_swing  |   38.7% |    0.90% | ⏱️ 短線撤退
+9945.TW    | bias_reversion |   50.7% |    0.40% | 觀望
+6140.TWO   | bias_reversion |   41.7% |    0.34% | 觀望
+4949.TW    | short_swing  |   42.6% |    1.94% | ⏱️ 短線撤退
+00988A.TW  |   rebound    |  100.0% |   15.92% | 觀望
+6282.TW    |   rebound    |   47.6% |    0.01% | 觀望
+1312.TW    | bias_reversion |   49.9% |    0.37% | 觀望
+3049.TW    | bias_reversion |   51.0% |    0.36% | 觀望
+1537.TW    | bias_reversion |   51.2% |    0.12% | 觀望
+2515.TW    | short_swing  |   46.3% |    0.63% | ⏱️ 短線撤退
+1723.TW    | short_swing  |   42.2% |   -0.32% | ⏱️ 短線撤退
+6179.TWO   |   rebound    |   39.0% |    0.29% | 觀望
+5493.TWO   |   rebound    |   44.5% |    0.13% | 觀望
+00951.TW   | bias_reversion |   55.3% |    0.29% | 觀望
+6531.TW    | short_swing  |   51.7% |    3.02% | ⏱️ 短線撤退
+2457.TW    | short_swing  |   44.5% |    0.25% | ⏱️ 短線撤退
+6203.TWO   |   rebound    |   45.1% |    0.01% | 觀望
+8926.TW    |   rebound    |   43.6% |    0.09% | 觀望
+3028.TW    |   rebound    |   45.2% |    0.24% | 觀望
+3430.TWO   | short_swing  |   48.2% |    1.48% | ⏱️ 短線撤退
+3265.TWO   |   rebound    |   55.5% |    1.14% | 觀望
+3481.TW    | bias_reversion |   47.6% |    0.60% | 觀望
+6841.TWO   |   rebound    |   33.3% |   -0.68% | 觀望
+2067.TWO   | bias_reversion |   37.0% |   -0.17% | 觀望
+2409.TW    | short_swing  |   47.1% |    0.59% | ⏱️ 短線撤退
+3236.TWO   | bias_reversion |   53.5% |    0.39% | 觀望
+3289.TWO   |   rebound    |   52.7% |    0.80% | 觀望
+0050.TW    | short_swing  |   55.9% |    0.25% | ⏱️ 短線撤退
+3710.TWO   |   rebound    |   46.4% |    0.40% | 觀望
+4526.TW    |   rebound    |   39.5% |    0.31% | 觀望
+3090.TW    | bias_reversion |   53.9% |    0.80% | 觀望
+5309.TWO   | short_swing  |   42.6% |    0.27% | ⏱️ 短線撤退
+6719.TW    | bias_reversion |   52.6% |   -0.55% | 觀望
+2301.TW    | bias_reversion |   53.9% |    0.25% | 觀望
+00679B.TWO | short_swing  |   40.6% |   -0.37% | ⚡ 短線攻擊
+2382.TW    | short_swing  |   48.9% |    0.18% | ⏱️ 短線撤退
+1711.TW    | bias_reversion |   44.3% |   -0.06% | 觀望
+1102.TW    | bias_reversion |   57.4% |    0.45% | 觀望
+6762.TWO   | short_swing  |   42.4% |   -0.13% | 觀望
+7782.TWO   | short_swing  |   37.5% |   -0.33% | ⏱️ 短線撤退
+TXF.TW     | bias_reversion |   58.7% |    0.20% | 觀望
+3088.TWO   | bias_reversion |   47.4% |   -0.03% | 觀望
+7744.TWO   | short_swing  |   54.0% |    1.91% | ⏱️ 短線撤退
+6191.TW    | bias_reversion |   53.6% |    0.68% | 觀望
+8422.TW    | short_swing  |   38.3% |    0.43% | ⏱️ 短線撤退
+3701.TW    |   rebound    |   33.0% |    0.32% | 觀望
+5508.TWO   |   rebound    |   51.4% |    0.61% | 觀望
+4562.TW    |   rebound    |   32.2% |   -0.12% | 觀望
+5258.TW    |   rebound    |   49.8% |    1.10% | 觀望
+6904.TWO   | short_swing  |   43.1% |   -0.09% | ⏱️ 短線撤退
+8044.TWO   | short_swing  |   45.2% |    0.30% | ⏱️ 短線撤退
+3530.TW    |   rebound    |   45.3% |    0.88% | 觀望
+1599.TWO   | bias_reversion |   51.8% |    0.65% | 觀望
+3092.TW    |   rebound    |   48.0% |    0.52% | 觀望
+1726.TW    | bias_reversion |   46.9% |   -0.16% | 觀望
+7728.TWO   | bias_reversion |   46.2% |    0.86% | 觀望
+2618.TW    | short_swing  |   47.8% |    0.59% | ⏱️ 短線撤退
+8045.TW    | short_swing  |   48.7% |    1.67% | ⏱️ 短線撤退
+2489.TW    | short_swing  |   43.4% |    0.38% | 觀望
+6509.TWO   |   rebound    |   42.5% |   -0.17% | 觀望
+2838.TW    | short_swing  |   46.5% |    0.14% | ⏱️ 短線撤退
+3501.TW    | short_swing  |   43.3% |   -0.22% | ⏱️ 短線撤退
+8039.TW    | bias_reversion |   50.6% |    0.64% | 觀望
+3105.TWO   |   rebound    |   55.2% |    0.64% | 🛡️ 十日撐買
+8478.TW    | short_swing  |   48.0% |    1.28% | ⏱️ 短線撤退
+3550.TW    |   rebound    |   44.7% |    0.12% | 觀望
+3432.TW    |   rebound    |   49.9% |    0.71% | 觀望
+1514.TW    | short_swing  |   45.0% |    1.02% | ⏱️ 短線撤退
+7750.TW    | short_swing  |   71.4% |    3.47% | ⏱️ 短線撤退
+6209.TW    | short_swing  |   47.3% |    1.12% | ⏱️ 短線撤退
+4912.TW    |   rebound    |   50.2% |    1.27% | 觀望
+3015.TW    |   rebound    |   49.3% |    0.36% | 觀望
+3703.TW    |   rebound    |   47.8% |    0.03% | 觀望
+1735.TW    |   rebound    |   37.1% |   -0.00% | 觀望
+1522.TW    | bias_reversion |   47.9% |    0.59% | 觀望
+00712.TW   |   rebound    |   48.7% |   -0.04% | 觀望
+00924.TW   |   rebound    |   60.8% |    0.18% | 觀望
+6196.TW    |   rebound    |   57.0% |    0.84% | 觀望
+5299.TWO   | bias_reversion |   55.2% |    0.98% | 觀望
+3002.TW    | short_swing  |   40.0% |   -0.12% | ⏱️ 短線撤退
+4989.TW    |   rebound    |   44.4% |    1.29% | 觀望
+6405.TW    | short_swing  |   42.9% |    0.34% | ⏱️ 短線撤退
+2423.TW    | bias_reversion |   59.6% |    0.42% | 觀望
+1784.TWO   |   rebound    |   48.8% |    0.43% | 觀望
+6130.TWO   | short_swing  |   45.2% |    1.76% | ⏱️ 短線撤退
+4749.TWO   | short_swing  |   55.5% |    3.11% | ⏱️ 短線撤退
+00933B.TWO | bias_reversion |   50.0% |   -0.29% | 觀望
+5425.TWO   | bias_reversion |   54.5% |    0.39% | 觀望
+1307.TW    | bias_reversion |   48.6% |    0.23% | 觀望
+2235.TWO   | bias_reversion |   42.2% |   -0.42% | 觀望
+3629.TWO   | short_swing  |   50.2% |    3.39% | ⏱️ 短線撤退
+6683.TWO   | short_swing  |   49.1% |    1.28% | ⏱️ 短線撤退
+1513.TW    | short_swing  |   46.9% |    0.71% | ⏱️ 短線撤退
+00989A.TW  | short_swing  |   33.3% |   -1.22% | ⏱️ 短線撤退
+3038.TW    |   rebound    |   49.6% |    0.56% | 觀望
+8996.TW    |   rebound    |   53.1% |    1.54% | 觀望
+3465.TWO   | short_swing  |   48.8% |    2.03% | ⏱️ 短線撤退
+2485.TW    |   rebound    |   47.7% |   -0.19% | 觀望
+3708.TW    | short_swing  |   47.4% |    1.02% | ⏱️ 短線撤退
+1466.TW    | bias_reversion |   44.6% |    0.70% | 觀望
+4533.TWO   |   rebound    |   49.8% |    0.23% | 觀望
+6855.TWO   |   rebound    |   44.3% |    0.03% | 觀望
+2108.TW    | short_swing  |   43.4% |    0.51% | ⏱️ 短線撤退
+1409.TW    |   rebound    |   46.9% |    0.00% | 觀望
+2049.TW    |   rebound    |   50.3% |    0.22% | 觀望
+6859.TWO   | short_swing  |   44.1% |   -0.08% | ⏱️ 短線撤退
+6212.TWO   | short_swing  |   44.5% |    0.51% | ⏱️ 短線撤退
+5474.TWO   | short_swing  |   47.6% |    1.31% | ⏱️ 短線撤退
+8438.TW    | short_swing  |   43.3% |    0.98% | ⏱️ 短線撤退
+5351.TWO   | bias_reversion |   49.9% |    0.23% | 觀望
+1560.TW    | bias_reversion |   52.0% |    0.67% | 觀望
+9105.TW    |   rebound    |   43.8% |    0.17% | 觀望
+2353.TW    | bias_reversion |   54.3% |    0.34% | 觀望
+2646.TW    | bias_reversion |   40.0% |    0.21% | 觀望
+1736.TW    |   rebound    |   46.7% |    0.52% | 觀望
+6982.TWO   |   rebound    |   44.4% |    0.77% | 觀望
+1593.TWO   | short_swing  |   37.0% |    0.21% | ⏱️ 短線撤退
+6190.TWO   | bias_reversion |   55.3% |    0.47% | 觀望
+2331.TW    | bias_reversion |   46.3% |    0.06% | 觀望
+9910.TW    | bias_reversion |   46.1% |    0.27% | 觀望
+5471.TW    |   rebound    |   53.8% |    0.30% | 觀望
+00909.TW   | short_swing  |   67.0% |    1.04% | ⏱️ 短線撤退
+3508.TWO   | short_swing  |   42.8% |    0.71% | ⏱️ 短線撤退
+2498.TW    | short_swing  |   46.1% |    0.98% | ⏱️ 短線撤退
+00753L.TW  | short_swing  |   53.4% |    1.21% | ⏱️ 短線撤退
+6861.TW    | short_swing  |   41.6% |    0.75% | 觀望
+8110.TW    |   rebound    |   50.9% |    0.84% | 觀望
+2481.TW    | short_swing  |   47.8% |    1.10% | ⏱️ 短線撤退
+4722.TW    |   rebound    |   48.6% |    0.12% | 觀望
+5516.TWO   |   rebound    |   40.0% |    0.14% | 觀望
+5223.TWO   | short_swing  |   43.1% |    0.88% | ⏱️ 短線撤退
+3083.TWO   | short_swing  |   43.5% |    0.47% | ⏱️ 短線撤退
+7777.TWO   | short_swing  |   42.3% |    6.01% | ⏱️ 短線撤退
+2393.TW    | bias_reversion |   48.3% |   -0.05% | 觀望
+3615.TWO   | bias_reversion |   50.2% |    0.85% | 觀望
+5205.TWO   | short_swing  |   43.9% |    3.53% | 觀望
+6937.TW    |   rebound    |   43.2% |    0.96% | 觀望
+1611.TW    | bias_reversion |   45.9% |   -0.29% | 觀望
+6230.TW    | short_swing  |   44.0% |    1.06% | ⚡ 短線攻擊
+2413.TW    | bias_reversion |   49.0% |    0.36% | 觀望
+6887.TW    | short_swing  |   20.0% |   -5.18% | ⏱️ 短線撤退
+6188.TWO   | bias_reversion |   49.9% |    0.47% | 觀望
+3535.TW    | bias_reversion |   45.1% |    0.40% | 觀望
+2726.TWO   |   rebound    |   44.3% |    0.13% | 觀望
+2103.TW    | bias_reversion |   47.3% |    0.24% | 觀望
+6980.TWO   |   rebound    |   63.6% |    4.61% | 觀望
+2317.TW    | short_swing  |   46.1% |    0.15% | ⏱️ 短線撤退
+1815.TWO   |   rebound    |   46.8% |    0.25% | 觀望
+6890.TW    | short_swing  |   37.5% |   -0.01% | ⏱️ 短線撤退
+2431.TW    | bias_reversion |   47.2% |    0.56% | 觀望
+9921.TW    | short_swing  |   44.2% |   -0.13% | ⏱️ 短線撤退
+6640.TWO   | short_swing  |   43.1% |    0.95% | ⏱️ 短線撤退
+2451.TW    | short_swing  |   48.5% |    0.16% | ⏱️ 短線撤退
+3526.TWO   |   rebound    |   51.8% |    0.44% | 觀望
+2010.TW    | short_swing  |   51.1% |    0.77% | ⏱️ 短線撤退
+00770.TW   |   rebound    |   61.2% |    0.37% | 觀望
+3234.TWO   | short_swing  |   41.1% |    0.32% | ⏱️ 短線撤退
+00795B.TWO | short_swing  |   40.2% |   -0.47% | ⚡ 短線攻擊
+2302.TW    | bias_reversion |   45.7% |    0.32% | 觀望
+6957.TW    |   rebound    |   36.7% |   -0.77% | 觀望
+3025.TW    | short_swing  |   45.4% |    1.20% | ⏱️ 短線撤退
+5011.TWO   | bias_reversion |   44.2% |    0.05% | 觀望
+8234.TWO   | short_swing  |   47.4% |    0.68% | ⏱️ 短線撤退
+7714.TWO   | short_swing  |   44.6% |   -0.69% | ⏱️ 短線撤退
+1432.TW    | short_swing  |   38.9% |    0.42% | ⏱️ 短線撤退
+3661.TW    |   rebound    |   49.1% |    1.41% | 觀望
+3033.TW    | bias_reversion |   54.5% |    0.49% | 觀望
+00646.TW   | short_swing  |   54.3% |    0.04% | ⏱️ 短線撤退
+6592.TW    |   rebound    |   46.2% |    0.10% | 觀望
+2314.TW    | short_swing  |   39.4% |   -0.21% | ⏱️ 短線撤退
+6451.TW    | bias_reversion |   54.7% |    1.41% | 觀望
+3308.TW    |   rebound    |   44.2% |    0.94% | 觀望
+3712.TW    |   rebound    |   50.5% |    1.02% | 觀望
+4123.TWO   | short_swing  |   44.4% |    0.22% | ⚡ 短線攻擊
+4973.TWO   |   rebound    |   46.6% |    0.27% | 觀望
+00720B.TWO | bias_reversion |   41.4% |    0.03% | 觀望
+5225.TW    | bias_reversion |   49.6% |    0.34% | 觀望
+1438.TW    |   rebound    |   38.9% |    0.47% | 觀望
+4927.TW    | short_swing  |   47.2% |    0.36% | ⏱️ 短線撤退
+3221.TWO   | bias_reversion |   48.4% |    0.60% | 觀望
+00830.TW   | short_swing  |   56.7% |    0.58% | ⏱️ 短線撤退
+8150.TW    |   rebound    |   48.0% |    0.20% | 觀望
+6438.TW    |   rebound    |   47.4% |    0.34% | 觀望
+2359.TW    | short_swing  |   41.4% |    0.31% | ⏱️ 短線撤退
+2891.TW    | bias_reversion |   61.0% |    0.68% | 觀望
+6706.TW    | short_swing  |   46.2% |    0.77% | ⏱️ 短線撤退
+2455.TW    | short_swing  |   51.9% |    0.90% | 觀望
+8111.TWO   | short_swing  |   43.9% |    1.01% | ⏱️ 短線撤退
+2492.TW    | short_swing  |   45.7% |    0.61% | ⏱️ 短線撤退
+2347.TW    | bias_reversion |   53.0% |    0.02% | 觀望
+00981B.TWO | bias_reversion |   62.5% |   -0.11% | 觀望
+3252.TWO   | short_swing  |   38.1% |    0.57% | ⏱️ 短線撤退
+6789.TW    | short_swing  |   48.1% |    0.70% | ⏱️ 短線撤退
+2404.TW    | short_swing  |   60.3% |    0.90% | ⏱️ 短線撤退
+4916.TW    |   rebound    |   47.8% |    0.31% | 觀望
+00953B.TW  | bias_reversion |   50.0% |   -0.20% | 觀望
+1418.TW    |   rebound    |   35.6% |    0.24% | 觀望
+6138.TWO   | bias_reversion |   57.2% |    0.80% | 觀望
+6965.TW    |   rebound    |   50.0% |    0.27% | 觀望
+7812.TWO   | short_swing  |   23.8% |   -1.05% | 觀望
+2923.TW    | bias_reversion |   49.7% |    0.65% | 觀望
+8477.TWO   |   rebound    |   37.8% |   -0.28% | 觀望
+1538.TW    |   rebound    |   35.6% |    0.21% | 觀望
+2466.TW    | short_swing  |   43.7% |    0.93% | ⏱️ 短線撤退
+2367.TW    | short_swing  |   42.0% |    0.90% | ⚡ 短線攻擊
+3131.TWO   |   rebound    |   56.4% |    1.25% | 觀望
+2230.TWO   | short_swing  |   41.9% |    0.74% | ⏱️ 短線撤退
+3675.TWO   | bias_reversion |   46.9% |    0.72% | 觀望
+8431.TWO   |   rebound    |   45.1% |    0.40% | 🛡️ 十日撐買
+3189.TW    | bias_reversion |   51.7% |    0.43% | 觀望
+2206.TW    | short_swing  |   44.4% |    0.31% | ⏱️ 短線撤退
+6486.TWO   |   rebound    |   50.9% |    0.26% | 觀望
+2881.TW    |   rebound    |   48.6% |    0.12% | 觀望
+6928.TW    | short_swing  |   29.5% |    0.24% | ⏱️ 短線撤退
+3443.TW    | bias_reversion |   59.2% |    1.74% | 觀望
+5328.TWO   |   rebound    |   51.4% |    0.97% | 觀望
+2329.TW    | short_swing  |   48.8% |    0.55% | ⏱️ 短線撤退
+6163.TWO   |   rebound    |   47.2% |    0.21% | 觀望
+2316.TW    |   rebound    |   51.7% |    0.81% | 觀望
+6244.TWO   | short_swing  |   43.1% |    0.04% | ⏱️ 短線撤退
+2834.TW    | bias_reversion |   63.6% |    0.83% | 觀望
+2022.TW    | short_swing  |   42.5% |    0.99% | ⏱️ 短線撤退
+8088.TWO   | bias_reversion |   49.4% |    0.23% | 觀望
+1310.TW    | short_swing  |   45.9% |    0.38% | ⚡ 短線攻擊
+2072.TWO   |   rebound    |   45.1% |    1.07% | 觀望
+5386.TWO   | short_swing  |   39.3% |    0.85% | 觀望
+00703.TW   | short_swing  |   53.5% |    0.33% | ⏱️ 短線撤退
+4551.TW    | short_swing  |   45.2% |   -0.01% | ⏱️ 短線撤退
+5203.TW    |   rebound    |   48.4% |    0.13% | 觀望
+7795.TW    | short_swing  |   64.5% |    3.68% | ⏱️ 短線撤退
+4904.TW    | bias_reversion |   50.5% |   -0.07% | 觀望
+4946.TWO   |   rebound    |   37.7% |    2.57% | 觀望
+6695.TW    | bias_reversion |   48.1% |    1.36% | 觀望
+1305.TW    | short_swing  |   46.5% |    0.34% | ⏱️ 短線撤退
+00900.TW   |   rebound    |   52.8% |    0.08% | 觀望
+3532.TW    | short_swing  |   48.7% |    1.59% | ⏱️ 短線撤退
+1314.TW    |   rebound    |   49.0% |    0.49% | 觀望
+6885.TW    |   rebound    |   57.1% |    0.89% | 觀望
+00719B.TWO | bias_reversion |    0.0% |   -0.88% | 觀望
+1304.TW    | short_swing  |   42.9% |    0.42% | ⏱️ 短線撤退
+5274.TWO   | bias_reversion |   51.5% |    0.79% | 觀望
+00923.TW   |   rebound    |   55.7% |    0.24% | 觀望
+6873.TW    | short_swing  |   53.8% |    1.13% | ⏱️ 短線撤退
+4909.TWO   |   rebound    |   42.8% |    0.21% | 觀望
+6016.TWO   | short_swing  |   53.7% |    0.79% | ⏱️ 短線撤退
+9906.TW    | short_swing  |   47.2% |    1.66% | ⏱️ 短線撤退
+8069.TWO   | short_swing  |   48.5% |    0.14% | ⏱️ 短線撤退
+2340.TW    | bias_reversion |   53.4% |    0.20% | 觀望
+3138.TW    | short_swing  |   45.9% |    1.79% | ⏱️ 短線撤退
+5347.TWO   |   rebound    |   52.4% |    0.37% | 觀望
+3017.TW    | bias_reversion |   58.3% |    1.15% | 觀望
+3037.TW    | bias_reversion |   61.0% |    1.23% | 觀望
+1503.TW    | short_swing  |   45.6% |    0.64% | ⏱️ 短線撤退
+3441.TWO   |   rebound    |   41.9% |   -0.00% | 觀望
+8080.TWO   | short_swing  |   42.7% |    3.38% | ⏱️ 短線撤退
+5490.TWO   |   rebound    |   46.9% |    0.03% | 🛡️ 十日撐買
+2607.TW    | bias_reversion |   52.0% |    0.45% | 觀望
+4768.TWO   | short_swing  |   48.6% |    1.40% | ⏱️ 短線撤退
+4755.TW    |   rebound    |   50.7% |    0.50% | 觀望
+5469.TW    | short_swing  |   51.5% |    0.55% | ⏱️ 短線撤退
+3305.TW    | short_swing  |   43.3% |    0.53% | ⏱️ 短線撤退
+6236.TWO   | short_swing  |   45.7% |    1.78% | ⏱️ 短線撤退
+6214.TW    | bias_reversion |   50.5% |    0.21% | 觀望
+6552.TW    |   rebound    |   47.1% |    0.45% | 觀望
+1216.TW    | bias_reversion |   43.4% |   -0.25% | 觀望
+2887.TW    |   rebound    |   50.0% |    0.11% | 觀望
+1471.TW    | short_swing  |   40.2% |    0.82% | ⏱️ 短線撤退
+2493.TW    |   rebound    |   56.3% |    0.36% | 觀望
+1590.TW    | bias_reversion |   48.5% |    0.07% | 觀望
+4127.TWO   | short_swing  |   40.4% |    0.06% | ⏱️ 短線撤退
+00919.TW   |   rebound    |   57.7% |    0.32% | 觀望
+6217.TWO   |   rebound    |   51.4% |    0.77% | 觀望
+1710.TW    |   rebound    |   47.5% |    0.10% | 觀望
+6213.TW    | bias_reversion |   54.5% |    0.88% | 觀望
+9103.TW    | short_swing  |   32.1% |    0.86% | ⏱️ 短線撤退
+2337.TW    | short_swing  |   51.8% |    1.46% | ⏱️ 短線撤退
+6796.TW    | short_swing  |   41.3% |    0.83% | ⏱️ 短線撤退
+6133.TW    | bias_reversion |   49.1% |    0.94% | 觀望
+3466.TWO   | short_swing  |   38.7% |    0.82% | 觀望
+7799.TW    | short_swing  |   60.5% |    4.76% | ⏱️ 短線撤退
+3036.TW    | bias_reversion |   54.2% |    0.72% | 觀望
+3163.TWO   | short_swing  |   48.6% |    0.94% | ⏱️ 短線撤退
+2495.TW    |   rebound    |   48.3% |    0.05% | 觀望
+6225.TW    | short_swing  |   41.7% |    1.33% | 觀望
+1444.TW    | bias_reversion |   51.4% |    0.46% | 觀望
+0056.TW    | short_swing  |   59.5% |    0.28% | ⏱️ 短線撤退
+8463.TW    |   rebound    |   41.2% |   -0.02% | 觀望
+8077.TWO   | short_swing  |   37.4% |    0.82% | ⏱️ 短線撤退
+6684.TWO   |   rebound    |   46.6% |    1.42% | 觀望
+3546.TWO   | short_swing  |   48.2% |    0.75% | ⏱️ 短線撤退
+3552.TWO   | bias_reversion |   45.9% |    0.01% | 觀望
+2377.TW    |   rebound    |   52.2% |    0.40% | 🛡️ 十日撐買
+4583.TW    | short_swing  |   49.3% |    1.21% | ⏱️ 短線撤退
+00910.TW   |   rebound    |   57.9% |    0.75% | 觀望
+2397.TW    |   rebound    |   44.8% |    0.27% | 觀望
+8279.TWO   | bias_reversion |   52.1% |    0.61% | 觀望
+2006.TW    | short_swing  |   51.5% |    0.73% | ⚡ 短線攻擊
+6715.TW    |   rebound    |   50.8% |    1.32% | 觀望
+3034.TW    |   rebound    |   49.6% |    0.21% | 觀望
+3588.TW    | bias_reversion |   46.8% |    0.65% | 觀望
+2603.TW    | short_swing  |   50.0% |    0.87% | ⚡ 短線攻擊
+6643.TWO   | short_swing  |   43.0% |    0.33% | 觀望
+6854.TW    | short_swing  |   50.0% |    2.09% | ⏱️ 短線撤退
+1459.TW    |   rebound    |   40.5% |    0.16% | 觀望
+4903.TWO   | short_swing  |   45.1% |    1.53% | ⏱️ 短線撤退
+8444.TWO   | short_swing  |   47.6% |    0.96% | ⏱️ 短線撤退
+3016.TW    | short_swing  |   47.3% |    0.84% | ⏱️ 短線撤退
+6533.TW    | short_swing  |   45.1% |    1.78% | ⏱️ 短線撤退
+00985A.TW  |   rebound    |   58.3% |    1.29% | 觀望
+6620.TWO   | short_swing  |   47.0% |    1.48% | ⏱️ 短線撤退
+1326.TW    | bias_reversion |   51.2% |   -0.08% | 觀望
+6517.TWO   | short_swing  |   50.8% |    2.84% | ⏱️ 短線撤退
+1583.TW    | bias_reversion |   49.5% |    0.02% | 觀望
+4919.TW    | short_swing  |   44.6% |    0.69% | ⏱️ 短線撤退
+6142.TW    | bias_reversion |   45.1% |    0.14% | 觀望
+2321.TW    | short_swing  |   42.3% |    2.27% | ⏱️ 短線撤退
+3213.TWO   |   rebound    |   48.5% |    0.42% | 觀望
+2327.TW    | short_swing  |   48.1% |    0.41% | ⏱️ 短線撤退
+8289.TWO   | short_swing  |   41.3% |   -0.03% | ⏱️ 短線撤退
+5439.TWO   | short_swing  |   50.5% |    0.92% | ⏱️ 短線撤退
+2009.TW    | bias_reversion |   44.4% |    0.90% | 觀望
+6423.TWO   | short_swing  |   40.6% |    0.92% | ⏱️ 短線撤退
+2610.TW    | short_swing  |   50.0% |    0.89% | ⏱️ 短線撤退
+2836.TW    | bias_reversion |   72.0% |    0.92% | 觀望
+2379.TW    |   rebound    |   54.5% |    0.73% | 觀望
+6546.TWO   | short_swing  |   45.9% |    1.06% | ⚡ 短線攻擊
+3533.TW    |   rebound    |   47.2% |    0.31% | 觀望
+2882.TW    |   rebound    |   48.4% |    0.00% | 觀望
+6456.TW    |   rebound    |   48.9% |   -0.19% | 觀望
+00981A.TW  |   rebound    |   76.7% |    1.38% | 觀望
+3059.TW    | bias_reversion |   52.1% |    0.57% | 觀望
+4541.TWO   |   rebound    |   45.9% |    0.30% | 觀望
+4938.TW    |   rebound    |   51.2% |    0.23% | 觀望
+6265.TWO   |   rebound    |   43.2% |    0.28% | 觀望
+3206.TWO   |   rebound    |   48.1% |    0.57% | 觀望
+5340.TWO   | short_swing  |   46.0% |    1.33% | ⏱️ 短線撤退
+4585.TW    | bias_reversion |   33.3% |   -0.38% | 觀望
+3338.TW    | short_swing  |   44.8% |    0.35% | ⏱️ 短線撤退
+5302.TWO   |   rebound    |   47.0% |    0.96% | 觀望
+3702.TW    | bias_reversion |   52.5% |    0.33% | 觀望
+2548.TW    | short_swing  |   55.1% |    0.43% | ⏱️ 短線撤退
+00922.TW   |   rebound    |   62.4% |    0.52% | 觀望
+8390.TWO   | bias_reversion |   51.2% |    1.07% | 觀望
+3672.TWO   |   rebound    |   37.3% |    0.18% | 🛡️ 十日撐買
+2615.TW    | short_swing  |   55.6% |    2.64% | ⚡ 短線攻擊
+2606.TW    | bias_reversion |   57.0% |    0.66% | 觀望
+1308.TW    | bias_reversion |   51.1% |    0.58% | 觀望
+6768.TW    |   rebound    |   49.3% |    0.83% | 觀望
+6720.TWO   |   rebound    |   37.0% |    1.91% | 🛡️ 十日撐買
+8383.TWO   |   rebound    |   45.4% |    0.07% | 觀望
+6550.TW    | short_swing  |   40.9% |    0.86% | ⏱️ 短線撤退
+6753.TW    | short_swing  |   48.6% |    2.68% | ⏱️ 短線撤退
+6228.TWO   | short_swing  |   41.9% |    1.85% | ⏱️ 短線撤退
+2468.TW    | short_swing  |   41.6% |    0.54% | ⏱️ 短線撤退
+3041.TW    |   rebound    |   41.4% |    0.00% | 觀望
+2472.TW    |   rebound    |   49.9% |    0.66% | 觀望
+6275.TWO   |   rebound    |   53.1% |    0.67% | 觀望
+6469.TWO   |   rebound    |   46.9% |    0.66% | 觀望
+6426.TW    | short_swing  |   45.9% |    0.93% | ⏱️ 短線撤退
+6112.TW    |   rebound    |   42.0% |   -0.00% | 觀望
+5272.TWO   |   rebound    |   46.1% |   -0.06% | 觀望
+6005.TW    | short_swing  |   54.1% |    0.44% | ⏱️ 短線撤退
+2258.TW    |   rebound    |   47.5% |    0.23% | 觀望
+00948B.TWO | short_swing  |   45.5% |   -0.25% | ⚡ 短線攻擊
+00902.TW   |   rebound    |   53.3% |    0.07% | 觀望
+2449.TW    | short_swing  |   51.5% |    0.68% | ⏱️ 短線撤退
+6613.TWO   |   rebound    |   49.3% |    0.62% | 觀望
+5443.TWO   |   rebound    |   55.4% |    0.78% | 觀望
+3167.TW    | short_swing  |   51.8% |    1.03% | ⏱️ 短線撤退
+6579.TW    | bias_reversion |   53.3% |    0.57% | 觀望
+3611.TWO   |   rebound    |   46.6% |    0.16% | 觀望
+6219.TWO   | bias_reversion |   47.5% |    0.40% | 觀望
+2892.TW    | bias_reversion |   61.8% |    1.00% | 觀望
+2889.TW    | short_swing  |   50.0% |    0.29% | ⏱️ 短線撤退
+3713.TWO   |   rebound    |   35.1% |    1.50% | 觀望
+2014.TW    |   rebound    |   48.1% |    0.78% | 觀望
+2438.TW    | short_swing  |   42.9% |    0.84% | ⏱️ 短線撤退
+2231.TW    | short_swing  |   41.6% |   -0.51% | ⏱️ 短線撤退
+2354.TW    | short_swing  |   48.8% |    0.66% | ⏱️ 短線撤退
+3680.TWO   |   rebound    |   45.2% |    0.48% | 觀望
+00761B.TWO | bias_reversion |   42.1% |   -0.10% | 觀望
+4171.TWO   | short_swing  |   42.0% |    1.11% | ⏱️ 短線撤退
+6541.TW    | short_swing  |   40.8% |    0.70% | ⏱️ 短線撤退
+4154.TWO   | short_swing  |   38.6% |    0.70% | ⏱️ 短線撤退
+7738.TWO   |   rebound    |   51.6% |    1.86% | 觀望
+5371.TWO   | short_swing  |   51.3% |    1.46% | ⏱️ 短線撤退
+3541.TWO   |   rebound    |   51.8% |    0.48% | 觀望
+00939.TW   | bias_reversion |   75.0% |    0.67% | 觀望
+3062.TW    |   rebound    |   46.4% |    0.06% | 觀望
+4571.TW    | short_swing  |   46.1% |    2.48% | ⏱️ 短線撤退
+9929.TW    |   rebound    |   33.7% |   -0.19% | 觀望
+6488.TWO   | short_swing  |   50.4% |    0.58% | 觀望
+3416.TW    |   rebound    |   48.6% |    0.36% | 觀望
+4142.TW    |   rebound    |   37.4% |   -0.09% | 觀望
+5388.TW    | bias_reversion |   46.2% |   -0.34% | 觀望
+3419.TW    |   rebound    |   45.1% |    0.10% | 🛡️ 十日撐買
+3191.TWO   | short_swing  |   48.2% |    1.87% | 觀望
+5222.TW    |   rebound    |   47.3% |    0.59% | 觀望
+009814.TWO | short_swing  |  100.0% |    0.39% | ⏱️ 短線撤退
+1528.TW    |   rebound    |   41.1% |    0.53% | 觀望
+6666.TW    | short_swing  |   34.9% |   -0.05% | ⏱️ 短線撤退
+2344.TW    | short_swing  |   46.2% |    1.03% | ⏱️ 短線撤退
+7788.TW    | short_swing  |   66.7% |    8.35% | ⏱️ 短線撤退
+3684.TWO   |   rebound    |   40.5% |    0.22% | 🛡️ 十日撐買
+00735.TW   |   rebound    |   53.1% |    0.22% | 觀望
+3227.TWO   | short_swing  |   46.8% |    0.64% | ⏱️ 短線撤退
+2105.TW    | bias_reversion |   48.9% |    0.15% | 觀望
+2460.TW    |   rebound    |   49.5% |    0.91% | 觀望
+7781.TWO   |   rebound    |   46.2% |   12.63% | 觀望
+3035.TW    | short_swing  |   49.4% |    1.12% | ⏱️ 短線撤退
+2357.TW    | bias_reversion |   51.0% |    0.35% | 觀望
+00686R.TW  | short_swing  |   28.9% |   -0.76% | 觀望
+2801.TW    | bias_reversion |   53.8% |    0.25% | 觀望
+00864B.TWO | bias_reversion |    0.0% |   -0.90% | 觀望
+5291.TWO   | short_swing  |   47.8% |    1.13% | ⏱️ 短線撤退
+8455.TWO   |   rebound    |   38.0% |    0.61% | 觀望
+3040.TW    |   rebound    |   38.5% |    0.14% | 觀望
+4130.TWO   | short_swing  |   40.1% |   -0.03% | 觀望
+3205.TWO   | short_swing  |   39.2% |    0.99% | ⏱️ 短線撤退
+2439.TW    |   rebound    |   49.7% |    0.05% | 觀望
+2371.TW    | short_swing  |   49.1% |    0.83% | ⏱️ 短線撤退
+6894.TWO   |   rebound    |   54.4% |    1.07% | 觀望
+00937B.TWO | bias_reversion |   53.8% |   -0.98% | 觀望
+6125.TWO   | bias_reversion |   53.3% |    0.40% | 觀望
+2204.TW    | bias_reversion |   48.4% |    0.61% | 觀望
+5871.TW    | short_swing  |   47.3% |    0.02% | ⏱️ 短線撤退
+2429.TW    | short_swing  |   39.8% |    1.40% | ⏱️ 短線撤退
+1809.TW    | bias_reversion |   50.9% |    0.32% | 觀望
+6884.TWO   |   rebound    |   39.4% |    0.53% | 觀望
+7737.TWO   | short_swing  |   28.6% |   -1.39% | ⏱️ 短線撤退
+2342.TW    | short_swing  |   42.3% |    0.89% | ⏱️ 短線撤退
+8255.TWO   | bias_reversion |   50.8% |    0.32% | 觀望
+6612.TWO   |   rebound    |   43.3% |    0.49% | 觀望
+6560.TWO   |   rebound    |   41.6% |    0.33% | 觀望
+8299.TWO   | short_swing  |   51.4% |    0.88% | ⏱️ 短線撤退
+1609.TW    | bias_reversion |   50.8% |    0.20% | 觀望
+009801.TW  |   rebound    |   70.3% |    0.88% | 觀望
+5269.TW    | short_swing  |   54.4% |    0.87% | ⏱️ 短線撤退
+2069.TW    |   rebound    |   41.8% |    0.13% | 觀望
+3555.TWO   |   rebound    |   38.8% |    1.35% | 觀望
+3551.TWO   |   rebound    |   50.5% |    0.65% | 觀望
+5285.TW    |   rebound    |   46.9% |    0.33% | 觀望
+6243.TW    | short_swing  |   43.9% |    0.67% | ⏱️ 短線撤退
+3570.TWO   | bias_reversion |   49.8% |    0.47% | 觀望
+1301.TW    | bias_reversion |   56.4% |    0.27% | 觀望
+3207.TWO   | short_swing  |   44.8% |    1.76% | ⏱️ 短線撤退
+6202.TW    | bias_reversion |   50.6% |   -0.08% | 觀望
+912000.TW  | short_swing  |   45.5% |    1.19% | ⏱️ 短線撤退
+1101.TW    |   rebound    |   48.2% |    0.01% | 觀望
+3067.TWO   |   rebound    |   36.8% |   -0.28% | 觀望
+3504.TW    |   rebound    |   53.1% |    0.53% | 觀望
+2903.TW    | short_swing  |   49.8% |    0.38% | ⏱️ 短線撤退
+5521.TW    |   rebound    |   46.2% |    0.59% | 觀望
+4939.TWO   |   rebound    |   45.5% |    0.41% | 觀望
+6669.TW    | bias_reversion |   51.1% |    0.38% | 觀望
+2421.TW    |   rebound    |   47.7% |    0.37% | 觀望
+1525.TW    | bias_reversion |   46.2% |    0.02% | 觀望
+6239.TW    |   rebound    |   53.5% |    0.51% | 觀望
+4577.TWO   | short_swing  |   47.1% |    1.88% | ⏱️ 短線撤退
+00995A.TW  |   rebound    |  100.0% |    8.81% | 觀望
+9907.TW    | short_swing  |   50.9% |    0.08% | ⚡ 短線攻擊
+6830.TW    |   rebound    |   48.3% |    0.45% | 觀望
+00891.TW   | short_swing  |   55.0% |    0.47% | ⏱️ 短線撤退
+3010.TW    |   rebound    |   51.5% |    0.22% | 觀望
+2886.TW    | bias_reversion |   44.6% |    0.06% | 觀望
+2376.TW    | short_swing  |   52.0% |    0.58% | ⏱️ 短線撤退
+6412.TW    | short_swing  |   43.0% |    0.02% | ⚡ 短線攻擊
+6616.TWO   |   rebound    |   44.5% |   -0.10% | 觀望
+3019.TW    | short_swing  |   45.3% |    1.26% | ⏱️ 短線撤退
+3217.TWO   |   rebound    |   46.8% |    0.59% | 觀望
+3545.TW    |   rebound    |   46.9% |    0.08% | 觀望
+6134.TWO   | bias_reversion |   44.5% |    0.64% | 觀望
+4534.TWO   | short_swing  |   40.8% |    0.58% | ⏱️ 短線撤退
+6655.TW    |   rebound    |   48.1% |    0.37% | 觀望
+2458.TW    |   rebound    |   53.8% |    0.05% | 觀望
+1597.TW    | short_swing  |   46.0% |    0.71% | ⏱️ 短線撤退
+4131.TWO   | short_swing  |   40.1% |    0.93% | ⏱️ 短線撤退
+6462.TWO   | short_swing  |   46.6% |    0.40% | ⏱️ 短線撤退
+3687.TWO   | short_swing  |   39.2% |    1.15% | ⏱️ 短線撤退
+3147.TWO   | bias_reversion |   44.1% |    0.61% | 觀望
+4523.TWO   |   rebound    |   44.2% |    1.05% | 觀望
+00665L.TW  | short_swing  |   52.5% |    0.87% | ⏱️ 短線撤退
+2328.TW    | short_swing  |   43.9% |    0.24% | ⏱️ 短線撤退
+6691.TW    | short_swing  |   54.9% |    1.29% | ⏱️ 短線撤退
+1439.TW    | short_swing  |   43.1% |    0.37% | ⏱️ 短線撤退
+4915.TW    | short_swing  |   46.2% |   -0.05% | ⏱️ 短線撤退
+0052.TW    |   rebound    |   50.4% |    0.23% | 觀望
+2241.TW    |   rebound    |   44.5% |    0.02% | 觀望
+1213.TW    | short_swing  |   38.9% |    0.02% | ⏱️ 短線撤退
+4702.TWO   |   rebound    |   36.8% |   -0.16% | 🛡️ 十日撐買
+5234.TW    |   rebound    |   50.2% |    0.63% | 觀望
+2740.TWO   | short_swing  |   40.3% |    0.37% | ⏱️ 短線撤退
+1805.TW    | bias_reversion |   40.0% |    0.05% | 觀望
+2634.TW    |   rebound    |   41.9% |   -0.03% | 觀望
+2237.TWO   |   rebound    |   39.9% |    0.58% | 觀望
+5487.TWO   |   rebound    |   39.5% |   -0.16% | 觀望
+00936.TW   |   rebound    |   51.5% |    0.19% | 觀望
+2363.TW    | bias_reversion |   54.6% |    0.83% | 觀望
+8096.TWO   | bias_reversion |   52.9% |    0.68% | 觀望
+6510.TWO   | short_swing  |   53.3% |    2.00% | ⏱️ 短線撤退
+3645.TW    |   rebound    |   51.9% |    0.70% | 觀望
+2414.TW    |   rebound    |   48.6% |    0.30% | 觀望
+7749.TW    |   rebound    |   37.5% |   -2.04% | 觀望
+2355.TW    | bias_reversion |   54.1% |    0.23% | 觀望
+2480.TW    |   rebound    |   50.2% |    0.21% | 觀望
+2233.TW    |   rebound    |   47.4% |    0.44% | 觀望
+2330.TW    |   rebound    |   54.2% |    0.31% | 觀望
+2385.TW    |   rebound    |   49.1% |    0.03% | 🛡️ 十日撐買
+1529.TW    | short_swing  |   38.5% |   -0.10% | ⏱️ 短線撤退
+3004.TW    | short_swing  |   44.1% |    1.00% | ⏱️ 短線撤退
+3230.TWO   | short_swing  |   42.0% |    0.92% | ⏱️ 短線撤退
+6170.TWO   |   rebound    |   51.5% |    0.55% | 觀望
+6727.TWO   | short_swing  |   51.3% |    4.12% | ⏱️ 短線撤退
+3363.TWO   | short_swing  |   48.8% |    0.90% | ⏱️ 短線撤退
+6121.TWO   |   rebound    |   49.1% |    0.26% | 觀望
+8162.TW    |   rebound    |   34.8% |    0.11% | 觀望
+8081.TW    |   rebound    |   49.0% |    0.27% | 觀望
+4943.TW    | short_swing  |   46.9% |    1.60% | 觀望
+1587.TW    |   rebound    |   43.8% |    0.55% | 觀望
+2017.TW    |   rebound    |   38.9% |    0.18% | 觀望
+2645.TW    | short_swing  |   44.3% |    0.96% | ⏱️ 短線撤退
+6534.TW    | short_swing  |   51.3% |    1.70% | ⏱️ 短線撤退
+6679.TWO   | short_swing  |   44.1% |    0.46% | ⏱️ 短線撤退
+9110.TW    | short_swing  |   43.0% |    1.28% | ⏱️ 短線撤退
+9914.TW    |   rebound    |   45.9% |   -0.06% | 觀望
+2605.TW    | short_swing  |   47.5% |    1.21% | ⏱️ 短線撤退
+3652.TW    |   rebound    |   47.2% |    0.89% | 觀望
+3162.TWO   | short_swing  |   46.2% |    1.06% | ⏱️ 短線撤退
+3491.TWO   | short_swing  |   49.9% |    0.94% | ⏱️ 短線撤退
+00857B.TWO | short_swing  |   50.0% |   -0.35% | ⚡ 短線攻擊
+1436.TW    | short_swing  |   47.6% |    0.57% | ⏱️ 短線撤退
+5864.TWO   | short_swing  |   49.8% |    1.27% | ⏱️ 短線撤退
+6785.TWO   | short_swing  |   46.0% |    1.54% | ⏱️ 短線撤退
+6603.TWO   | bias_reversion |   47.2% |    0.21% | 觀望
+3483.TWO   | short_swing  |   48.1% |    0.95% | ⏱️ 短線撤退
+6274.TWO   | bias_reversion |   57.6% |    1.09% | 觀望
+8210.TW    | short_swing  |   49.1% |    0.89% | ⏱️ 短線撤退
+2547.TW    | short_swing  |   41.7% |   -0.10% | ⏱️ 短線撤退
+8183.TWO   |   rebound    |   48.4% |    0.38% | 🛡️ 十日撐買
+8277.TWO   |   rebound    |   39.5% |   -0.31% | 觀望
+2820.TW    | bias_reversion |   37.8% |   -0.29% | 觀望
+3042.TW    |   rebound    |   49.1% |    0.08% | 觀望
+1563.TW    | short_swing  |   46.2% |    0.66% | ⏱️ 短線撤退
+4934.TW    |   rebound    |   43.3% |   -0.11% | 🛡️ 十日撐買
+00772B.TWO | bias_reversion |   44.9% |   -0.16% | 觀望
+6271.TW    |   rebound    |   52.4% |   -0.04% | 觀望
+2441.TW    |   rebound    |   55.2% |    0.41% | 觀望
+8464.TW    | short_swing  |   42.0% |   -0.28% | ⏱️ 短線撤退
+2442.TW    |   rebound    |   50.1% |    0.47% | 觀望
+3257.TW    |   rebound    |   43.1% |    0.33% | 觀望
+8021.TW    | bias_reversion |   51.9% |    0.72% | 觀望
+6929.TWO   | short_swing  |   28.6% |    0.85% | ⏱️ 短線撤退
+5381.TWO   | short_swing  |   44.8% |    2.59% | ⏱️ 短線撤退
+00780B.TWO | bias_reversion |   81.8% |    1.85% | 觀望
+6565.TWO   |   rebound    |   35.0% |   -0.38% | 觀望
+8067.TWO   | bias_reversion |   42.2% |   -0.44% | 觀望
+1402.TW    | bias_reversion |   51.0% |   -0.09% | 觀望
+1313.TW    | bias_reversion |   54.8% |    0.82% | 觀望
+3450.TW    | short_swing  |   51.6% |    0.59% | ⏱️ 短線撤退
+6629.TWO   | short_swing  |   53.8% |    1.02% | ⏱️ 短線撤退
+3003.TW    |   rebound    |   49.6% |    0.36% | 觀望
+00688L.TW  | short_swing  |   49.1% |   -0.17% | ⏱️ 短線撤退
+4555.TW    | bias_reversion |   48.2% |    0.52% | 觀望
+6584.TWO   | short_swing  |   48.5% |    2.42% | ⏱️ 短線撤退
+2444.TW    |   rebound    |   47.3% |    0.06% | 觀望
+2323.TW    | short_swing  |   43.4% |    1.42% | ⏱️ 短線撤退
+2368.TW    | short_swing  |   50.3% |    1.10% | ⏱️ 短線撤退
+9933.TW    |   rebound    |   44.4% |   -0.03% | 觀望
+5245.TWO   | short_swing  |   40.1% |    1.63% | ⏱️ 短線撤退
+6152.TW    |   rebound    |   45.5% |    0.31% | 觀望
+6237.TWO   | short_swing  |   43.4% |    0.75% | ⏱️ 短線撤退
+3689.TWO   | short_swing  |   51.4% |    1.21% | ⏱️ 短線撤退
+3354.TWO   | short_swing  |   37.9% |   -0.15% | ⚡ 短線攻擊
+2890.TW    |   rebound    |   51.8% |    0.15% | 觀望
+2486.TW    | short_swing  |   45.5% |    1.07% | ⏱️ 短線撤退
+7712.TWO   | short_swing  |   52.2% |    3.59% | ⏱️ 短線撤退
+2066.TWO   | bias_reversion |   47.4% |    0.11% | 觀望
+2454.TW    |   rebound    |   51.6% |    0.50% | 觀望
+5905.TWO   |   rebound    |   41.7% |    0.11% | 觀望
+6664.TWO   | short_swing  |   51.0% |    0.41% | ⏱️ 短線撤退
+00875.TW   | bias_reversion |   54.6% |    0.12% | 📉 乖離反彈
+6257.TW    | bias_reversion |   62.5% |    0.97% | 觀望
+6414.TW    |   rebound    |   51.0% |    0.29% | 觀望
+1569.TWO   | short_swing  |   45.8% |    0.51% | ⏱️ 短線撤退
+4739.TW    |   rebound    |   49.0% |    0.31% | 觀望
+6233.TWO   |   rebound    |   44.9% |    1.36% | 🛡️ 十日撐買
+00990A.TW  |   rebound    |  100.0% |    2.65% | 觀望
+2482.TW    | short_swing  |   41.2% |   -0.01% | ⏱️ 短線撤退
+6869.TW    | short_swing  |   53.3% |    2.93% | ⚡ 短線攻擊
+00687B.TWO | short_swing  |   34.4% |   -0.59% | ⚡ 短線攻擊
+3168.TW    | bias_reversion |   52.5% |    0.78% | 觀望
+2236.TW    | short_swing  |   45.2% |    0.45% | ⏱️ 短線撤退
+4804.TWO   | short_swing  |   46.2% |    1.83% | 觀望
+00877.TWO  |   rebound    |   51.8% |    0.22% | 觀望
+3176.TWO   |   rebound    |   40.9% |    0.41% | 觀望
+6206.TW    | short_swing  |   46.1% |    0.22% | ⏱️ 短線撤退
+4576.TW    | short_swing  |   49.7% |    0.77% | ⚡ 短線攻擊
+3178.TWO   | short_swing  |   46.1% |    0.89% | ⏱️ 短線撤退
+8043.TWO   | short_swing  |   41.0% |    0.72% | ⏱️ 短線撤退
+2338.TW    | bias_reversion |   51.3% |    0.62% | 觀望
+2597.TW    | short_swing  |   49.8% |    0.87% | ⏱️ 短線撤退
+3374.TWO   | short_swing  |   42.6% |    0.70% | ⏱️ 短線撤退
+8086.TWO   | short_swing  |   48.4% |    0.85% | ⏱️ 短線撤退
+6757.TW    | short_swing  |   43.8% |    0.79% | ⏱️ 短線撤退
+00725B.TWO | bias_reversion |   41.3% |   -0.37% | 觀望
+^TWII      | bias_reversion |   60.0% |    0.13% | 觀望
+2855.TW    | short_swing  |   50.0% |    0.60% | ⏱️ 短線撤退
+3032.TW    | short_swing  |   52.9% |    1.20% | ⏱️ 短線撤退
+1477.TW    |   rebound    |   47.5% |   -0.02% | 觀望
+6505.TW    | bias_reversion |   44.5% |   -0.10% | 觀望
+2405.TW    | bias_reversion |   49.0% |    0.45% | 觀望
+00752.TW   | short_swing  |   49.4% |    0.35% | ⏱️ 短線撤退
+3264.TWO   |   rebound    |   56.7% |    0.74% | 觀望
+8358.TWO   | bias_reversion |   56.5% |    0.80% | 觀望
+6983.TWO   | short_swing  |   58.7% |    5.22% | 觀望
+00878.TW   |   rebound    |   54.1% |    0.04% | 觀望
+6568.TWO   | short_swing  |   49.7% |    0.96% | ⏱️ 短線撤退
+6174.TWO   |   rebound    |   42.3% |    0.32% | 觀望
+3623.TWO   | short_swing  |   46.4% |    0.76% | ⏱️ 短線撤退
+6477.TW    | bias_reversion |   51.5% |    0.89% | 觀望
+6761.TWO   | short_swing  |   43.5% |    1.10% | ⏱️ 短線撤退
+5483.TWO   | short_swing  |   52.1% |    0.96% | ⏱️ 短線撤退
+6742.TW    |   rebound    |   51.0% |    0.38% | 觀望
+1340.TW    | bias_reversion |   45.2% |    0.01% | 觀望
+6770.TW    |   rebound    |   47.2% |    1.24% | 觀望
+00655L.TW  |   rebound    |   50.9% |    0.25% | 觀望
+2630.TW    |   rebound    |   45.3% |    0.48% | 觀望
+3624.TWO   |   rebound    |   45.3% |    0.16% | 觀望
+3135.TW    |   rebound    |   40.4% |    0.25% | 觀望
+3085.TWO   | bias_reversion |   39.8% |    1.05% | 觀望
+8099.TWO   | short_swing  |   51.1% |    1.38% | ⏱️ 短線撤退
+3073.TWO   | short_swing  |   43.0% |    2.19% | ⏱️ 短線撤退
+2356.TW    |   rebound    |   48.6% |    0.15% | 觀望
+6838.TW    | short_swing  |   40.0% |    1.19% | ⏱️ 短線撤退
+6139.TW    | short_swing  |   43.1% |    0.90% | ⏱️ 短線撤退
+7709.TWO   | short_swing  |   50.0% |    2.67% | ⏱️ 短線撤退
+1519.TW    | short_swing  |   45.9% |    1.24% | ⏱️ 短線撤退
+2239.TW    | short_swing  |   42.4% |    0.32% | ⏱️ 短線撤退
+1235.TW    | short_swing  |   53.6% |    1.39% | ⏱️ 短線撤退
+8087.TWO   |   rebound    |   36.3% |    0.26% | 觀望
+00887.TWO  | short_swing  |   48.4% |    5.41% | ⏱️ 短線撤退
+00983A.TW  |   rebound    |   63.3% |    0.64% | 觀望
+1504.TW    |   rebound    |   50.2% |    0.16% | 觀望
+4979.TWO   | bias_reversion |   48.2% |    0.66% | 觀望
+2436.TW    | bias_reversion |   50.1% |    0.27% | 觀望
+2027.TW    | short_swing  |   48.9% |    0.63% | ⏱️ 短線撤退
+00650L.TW  | short_swing  |   48.7% |    0.13% | ⏱️ 短線撤退
+7786.TW    | bias_reversion |   25.0% |   -2.84% | 觀望
+4971.TWO   | short_swing  |   45.6% |    0.42% | ⏱️ 短線撤退
+3711.TW    |   rebound    |   54.7% |    0.25% | 觀望
+5498.TWO   | short_swing  |   46.9% |    0.95% | ⏱️ 短線撤退
+8033.TW    |   rebound    |   40.4% |    0.95% | 觀望
+4967.TW    | short_swing  |   49.5% |    1.83% | ⏱️ 短線撤退
+1785.TWO   |   rebound    |   44.7% |    0.35% | 觀望
+3152.TWO   |   rebound    |   45.4% |    0.47% | 觀望
+009805.TW  |   rebound    |   61.4% |    0.69% | 觀望
+2467.TW    | short_swing  |   53.9% |    0.79% | 觀望
+6782.TW    | short_swing  |   59.0% |    2.27% | ⏱️ 短線撤退
+3653.TW    | bias_reversion |   55.1% |    1.04% | 觀望
+8462.TW    |   rebound    |   45.7% |    0.40% | 觀望
+00680L.TW  |   rebound    |   47.0% |   -0.21% | 🛡️ 十日撐買
+8101.TW    | short_swing  |   34.3% |    0.24% | ⏱️ 短線撤退

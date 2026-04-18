@@ -1,0 +1,73 @@
+     股票代碼         名稱     模式  隔日勝率%  5日勝率%    收益%  交易次數 目前狀態   專家建議
+  2317.TW HON HAI PR  ultra   0.00  100.0  -4.35     4  持股中 守住移動停利
+  2317.TW HON HAI PR  short 100.00  100.0  -8.43     4  持股中 守住移動停利
+  2317.TW HON HAI PR medium 100.00  100.0  -7.82     4  持股中 守住移動停利
+  3702.TW WPG HOLDIN  ultra 100.00  100.0  31.34     2  觀望中 高檔震盪觀望
+  3702.TW WPG HOLDIN  short   0.00    0.0   0.00     0  觀望中 高檔震盪觀望
+  3702.TW WPG HOLDIN medium   0.00    0.0   0.00     0  觀望中 高檔震盪觀望
+  2485.TW    ZINWELL  ultra 100.00  100.0  24.52     2  觀望中 高檔震盪觀望
+  2485.TW    ZINWELL  short 100.00  100.0  23.72     2  觀望中 等待低檔金叉
+  2485.TW    ZINWELL medium 100.00  100.0  16.89     2  觀望中 等待低檔金叉
+  2367.TW UNITECH  P  ultra   0.00    0.0   0.00     0  觀望中 等待低檔金叉
+  2367.TW UNITECH  P  short   0.00    0.0   0.00     0  觀望中 等待低檔金叉
+  2367.TW UNITECH  P medium   0.00    0.0   0.00     0  觀望中 高檔震盪觀望
+  4142.TW ADIMMUNE C  ultra  50.00  100.0   1.85     4  觀望中 高檔震盪觀望
+  4142.TW ADIMMUNE C  short   0.00  100.0  -0.32     2  觀望中 等待低檔金叉
+  4142.TW ADIMMUNE C medium   0.00  100.0  -6.19     4  持股中 守住移動停利
+  0050.TW YUANTA SEC  ultra   0.00    0.0   0.00     0  觀望中 高檔震盪觀望
+  0050.TW YUANTA SEC  short   0.00    0.0  -5.13     4  持股中 守住移動停利
+  0050.TW YUANTA SEC medium   0.00    0.0   0.00     2  持股中 守住移動停利
+  0056.TW YUANTA SEC  ultra 100.00  100.0  -2.75     2  觀望中 高檔震盪觀望
+  0056.TW YUANTA SEC  short   0.00    0.0   0.00     2  持股中 守住移動停利
+  0056.TW YUANTA SEC medium   0.00    0.0  -4.25     4  持股中 守住移動停利
+00635U.TW YUANTA SEC  ultra   0.00    0.0   0.00     2  持股中 守住移動停利
+00635U.TW YUANTA SEC  short 100.00  100.0  -7.00     4  持股中 守住移動停利
+00635U.TW YUANTA SEC medium   0.00    0.0   0.00     2  持股中 守住移動停利
+00738U.TW YUANTA SEC  ultra 100.00  100.0  -8.38     4  持股中 守住移動停利
+00738U.TW YUANTA SEC  short 100.00  100.0 -12.03     4  持股中 守住移動停利
+00738U.TW YUANTA SEC medium   0.00    0.0 -15.72     4  持股中 守住移動停利
+ 00929.TW FUH HWA SE  ultra 100.00  100.0  -5.94     4  持股中 守住移動停利
+ 00929.TW FUH HWA SE  short 100.00  100.0  -4.55     6  持股中 守住移動停利
+ 00929.TW FUH HWA SE medium  50.00   50.0  -5.02     6  持股中 守住移動停利
+009816.TW KGI SECURI  ultra   0.00    0.0   0.00     0  觀望中 高檔震盪觀望
+009816.TW KGI SECURI  short   0.00    0.0  -5.11     4  持股中 守住移動停利
+009816.TW KGI SECURI medium   0.00    0.0   0.00     2  持股中 守住移動停利
+00990A.TW YUANTA SEC  ultra   0.00    0.0   0.00     0  觀望中 高檔震盪觀望
+00990A.TW YUANTA SEC  short   0.00    0.0   0.00     0  觀望中 高檔震盪觀望
+00990A.TW YUANTA SEC medium   0.00    0.0   0.00     0  觀望中 高檔震盪觀望
+  2009.TW FIRST COPP  ultra 100.00  100.0 -12.59     4  持股中 守住移動停利
+  2009.TW FIRST COPP  short   0.00    0.0   0.00     2  持股中 守住移動停利
+  2009.TW FIRST COPP medium   0.00    0.0   0.00     2  持股中 守住移動停利
+  2337.TW MACRONIX I  ultra   0.00    0.0   0.00     2  持股中 守住移動停利
+  2337.TW MACRONIX I  short   0.00    0.0   0.00     2  持股中 守住移動停利
+  2337.TW MACRONIX I medium   0.00    0.0   0.00     0  觀望中 高檔震盪觀望
+  2352.TW QISDA CORP  ultra   0.00  100.0  -1.02     2  觀望中 高檔震盪觀望
+  2352.TW QISDA CORP  short  50.00  100.0  -8.53     4  觀望中 高檔震盪觀望
+  2352.TW QISDA CORP medium  50.00  100.0  -1.45     4  觀望中 高檔震盪觀望
+  2409.TW AUO CORPOR  ultra 100.00  100.0   3.34     4  持股中 守住移動停利
+  2409.TW AUO CORPOR  short 100.00  100.0 -10.48     4  持股中 守住移動停利
+  2409.TW AUO CORPOR medium   0.00  100.0  -3.98     4  持股中 守住移動停利
+  3481.TW INNOLUX CO  ultra   0.00  100.0   3.08     2  觀望中 高檔震盪觀望
+  3481.TW INNOLUX CO  short 100.00  100.0  11.75     4  持股中 守住移動停利
+  3481.TW INNOLUX CO medium   0.00  100.0   5.00     4  持股中 守住移動停利
+  6136.TW FULLERTON   ultra 100.00  100.0  -1.84     4  持股中 守住移動停利
+  6136.TW FULLERTON   short   0.00  100.0  -3.28     4  持股中 守住移動停利
+  6136.TW FULLERTON  medium   0.00    0.0   0.00     2  持股中 守住移動停利
+  6806.TW SHINFOX EN  ultra  50.00  100.0   4.25     4  觀望中 等待低檔金叉
+  6806.TW SHINFOX EN  short   0.00  100.0  -0.43     4  觀望中 等待低檔金叉
+  6806.TW SHINFOX EN medium   0.00  100.0   7.30     2  觀望中 等待低檔金叉
+ 3105.TWO WIN SEMICO  ultra   0.00    0.0   0.00     0  觀望中 高檔震盪觀望
+ 3105.TWO WIN SEMICO  short   0.00    0.0   0.00     0  觀望中 高檔震盪觀望
+ 3105.TWO WIN SEMICO medium   0.00    0.0   0.00     0  觀望中 高檔震盪觀望
+ 4966.TWO PARADE TEC  ultra 100.00  100.0  -8.29     4  持股中 守住移動停利
+ 4966.TWO PARADE TEC  short 100.00  100.0  -8.83     4  持股中 守住移動停利
+ 4966.TWO PARADE TEC medium 100.00  100.0  -8.83     4  持股中 守住移動停利
+ 6188.TWO QUANTA STO  ultra  33.33  100.0 -11.03     8  持股中 守住移動停利
+ 6188.TWO QUANTA STO  short 100.00  100.0  -3.62     2  觀望中 等待低檔金叉
+ 6188.TWO QUANTA STO medium 100.00  100.0  -7.94     4  持股中 守住移動停利
+ 7792.TWO   AM POWER  ultra   0.00  100.0  -6.22     4  持股中 守住移動停利
+ 7792.TWO   AM POWER  short 100.00  100.0 -15.58     4  持股中 守住移動停利
+ 7792.TWO   AM POWER medium   0.00  100.0 -13.11     4  持股中 守住移動停利
+  2327.TW YAGEO CORP  ultra   0.00    0.0   0.00     2  持股中 守住移動停利
+  2327.TW YAGEO CORP  short   0.00  100.0 -14.47     4  持股中 守住移動停利
+  2327.TW YAGEO CORP medium   0.00    0.0   0.00     2  持股中 守住移動停利

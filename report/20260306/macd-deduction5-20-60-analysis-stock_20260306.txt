@@ -1,0 +1,1051 @@
+=== 凱利策略分析 (資料日期: 20260306) ===
+代號         |    最佳策略    |      勝率 |     期望報酬 | 今日狀態
+--------------------------------------------------------------------------------
+6831.TW    |   brain    |   72.7% |    7.91% | ★★★ 強力買進
+00696B.TWO | reversion  |    0.0% |    0.00% | 💰 乖離修正賣出
+6153.TW    | reversion  |   55.4% |    1.18% | 觀望
+8261.TW    | reversion  |   73.2% |    4.21% | 💰 乖離修正賣出
+6205.TW    |   brain    |   43.9% |    1.46% | ★★★ 強力買進
+1789.TW    | reversion  |   47.8% |   -0.11% | 觀望
+4721.TWO   | long_trend |   60.5% |    9.78% | 🚪 趨勢結束
+6924.TW    | reversion  |   37.5% |   -2.14% | 觀望
+3044.TW    | strong_support |   64.6% |    0.99% | 觀望
+00676R.TW  | reversion  |    0.0% |   -6.69% | 💰 乖離修正賣出
+4961.TW    | long_trend |   53.3% |   10.68% | 🚪 趨勢結束
+2012.TW    | strong_support |   42.6% |    0.26% | 🛡️ 支撐進場
+8114.TW    | long_trend |   54.6% |    1.35% | 🚪 趨勢結束
+8028.TW    | long_trend |   45.7% |    1.76% | 觀望
+6443.TW    | long_trend |   63.4% |    8.19% | 觀望
+6525.TW    |   brain    |   49.3% |    1.00% | 觀望
+6877.TWO   | long_trend |   58.5% |    6.95% | 觀望
+1802.TW    | long_trend |   56.4% |    4.92% | 觀望
+00635U.TW  | reversion  |    0.0% |    0.00% | 💰 乖離修正賣出
+2408.TW    |   brain    |   50.5% |    1.83% | ☠ 立即止損
+5546.TW    | reversion  |  100.0% |    2.52% | 觀望
+3086.TWO   |   brain    |   41.3% |    2.18% | 觀望
+2395.TW    | reversion  |   66.7% |    0.99% | 💰 乖離修正賣出
+00984B.TWO | strong_support |   57.6% |    0.06% | 🛡️ 支撐進場
+6176.TW    |   brain    |   46.2% |    0.06% | ☠ 立即止損
+6811.TWO   |   brain    |   42.3% |    2.01% | ☠ 立即止損
+4510.TWO   |   brain    |   42.0% |    0.84% | ☠ 立即止損
+6124.TWO   | strong_support |   43.6% |    0.91% | 觀望
+00757.TW   | long_trend |   61.0% |    1.04% | 🚪 趨勢結束
+00945B.TW  | momentum_burst |   50.0% |    0.04% | 觀望
+4556.TWO   | reversion  |   31.2% |    0.69% | 觀望
+1612.TW    | reversion  |   92.3% |    6.24% | 觀望
+3081.TWO   | long_trend |   64.5% |    6.85% | 觀望
+6446.TW    | long_trend |   58.7% |   12.51% | 觀望
+009813.TW  | momentum_burst |    0.0% |    0.00% | 觀望
+6485.TWO   | momentum_burst |   45.2% |    4.11% | 觀望
+5403.TWO   |   brain    |   52.6% |    0.90% | 觀望
+00981D.TWO | reversion  |    0.0% |    0.00% | 觀望
+5455.TWO   | momentum_burst |   46.8% |    2.14% | 🔥 動能爆發
+2374.TW    |   brain    |   48.3% |    1.02% | ☠ 立即止損
+1443.TW    | strong_support |   38.5% |    1.26% | 觀望
+6141.TW    |   brain    |   50.0% |    0.66% | ★★★ 強力買進
+5243.TW    | reversion  |   80.6% |    4.34% | 觀望
+2303.TW    |   brain    |   47.6% |    1.41% | ☠ 立即止損
+3372.TWO   |   brain    |   46.8% |    1.25% | 觀望
+4968.TW    | long_trend |   68.5% |    5.09% | 🚪 趨勢結束
+00991A.TW  | strong_support |    0.0% |    0.00% | 觀望
+2351.TW    | reversion  |   68.3% |    4.13% | 觀望
+2420.TW    | reversion  |   84.2% |    4.51% | 觀望
+911622.TW  |   brain    |   28.9% |    0.31% | ☠ 立即止損
+3499.TWO   |   brain    |   41.4% |    1.23% | ★★★ 強力買進
+6223.TWO   |   brain    |   56.6% |    2.11% | 觀望
+7583.TWO   | strong_support |   50.0% |    8.37% | 觀望
+2059.TW    | long_trend |   53.9% |    2.88% | 觀望
+3030.TW    | long_trend |   51.6% |    3.26% | 觀望
+00918.TW   |   brain    |   53.3% |    0.63% | 觀望
+3022.TW    |   brain    |   48.7% |    0.75% | ☠ 立即止損
+2412.TW    | reversion  |    0.0% |    0.00% | 💰 乖離修正賣出
+2428.TW    |   brain    |   46.3% |    0.52% | 觀望
+4536.TW    |   brain    |   47.5% |    0.51% | 觀望
+6173.TWO   |   brain    |   46.0% |    0.62% | ☠ 立即止損
+3231.TW    | long_trend |   54.5% |    4.08% | 🚪 趨勢結束
+2464.TW    |   brain    |   49.1% |    0.40% | ☠ 立即止損
+2884.TW    | strong_support |   51.8% |    0.12% | 🛡️ 支撐進場
+5355.TWO   | reversion  |   46.0% |   -0.05% | 觀望
+6116.TW    |   brain    |   44.6% |    1.09% | ☠ 立即止損
+2453.TW    |   brain    |   45.2% |    1.00% | ☠ 立即止損
+6735.TWO   | strong_support |   47.1% |    3.34% | 觀望
+3609.TWO   |   brain    |   42.5% |    0.74% | ☠ 立即止損
+8923.TWO   | reversion  |    0.0% |    0.00% | 觀望
+9958.TW    |   brain    |   48.7% |    2.63% | ☠ 立即止損
+2885.TW    |   brain    |   49.2% |    0.32% | 觀望
+8472.TWO   | long_trend |   52.5% |    9.54% | 🚪 趨勢結束
+3306.TWO   | reversion  |   60.7% |    1.79% | 觀望
+7792.TWO   | long_trend |   66.7% |   22.37% | 觀望
+00881.TW   |   brain    |   55.9% |    0.56% | 觀望
+1717.TW    |   brain    |   40.8% |    0.45% | ★★★ 強力買進
+6127.TWO   |   brain    |   47.8% |    1.12% | 觀望
+7556.TWO   |   brain    |   45.4% |    0.63% | 觀望
+4763.TW    |   brain    |   49.7% |    1.11% | ☠ 立即止損
+2535.TW    |   brain    |   52.7% |    0.41% | 觀望
+2013.TW    | momentum_burst |   33.1% |    2.23% | 觀望
+1714.TW    | reversion  |   78.6% |    3.48% | 💰 乖離修正賣出
+3709.TWO   | strong_support |   42.6% |    2.30% | 觀望
+2352.TW    | long_trend |   59.7% |    1.92% | 🚪 趨勢結束
+1568.TW    | reversion  |   64.4% |    3.67% | 觀望
+5475.TWO   | long_trend |   66.4% |    9.66% | 觀望
+5289.TWO   |   brain    |   53.6% |    1.48% | 觀望
+3587.TWO   |   brain    |   49.3% |    1.46% | 觀望
+6532.TWO   | reversion  |   58.3% |    3.50% | 觀望
+00927.TW   |   brain    |   62.6% |    1.38% | ☠ 立即止損
+00950B.TWO | momentum_burst |  100.0% |    1.56% | 觀望
+4529.TWO   | long_trend |   56.8% |    9.74% | 🚪 趨勢結束
+3523.TWO   | reversion  |   51.4% |    5.26% | 觀望
+4908.TWO   | momentum_burst |   47.8% |    1.46% | 觀望
+3029.TW    |   brain    |   49.1% |    1.08% | 觀望
+7769.TW    | strong_support |    0.0% |    0.00% | 觀望
+4958.TW    |   brain    |   49.0% |    0.68% | 觀望
+6245.TWO   | reversion  |   66.7% |    4.95% | 觀望
+3583.TW    |   brain    |   49.6% |    1.21% | 觀望
+00940.TW   | reversion  |  100.0% |    6.27% | 觀望
+3706.TW    |   brain    |   49.5% |    1.01% | 觀望
+5009.TWO   |   brain    |   49.5% |    0.42% | ★★★ 強力買進
+3054.TW    | reversion  |   57.7% |    1.39% | 💰 乖離修正賣出
+2031.TW    |   brain    |   52.2% |    1.30% | ☠ 立即止損
+3317.TWO   | reversion  |   67.1% |    4.13% | 觀望
+4416.TWO   | reversion  |   46.7% |   -2.92% | 觀望
+6925.TWO   | long_trend |   47.1% |    7.26% | 🚪 趨勢結束
+6285.TW    |   brain    |   49.3% |    0.27% | ☠ 立即止損
+4744.TWO   |   brain    |   44.2% |    0.82% | 觀望
+00642U.TW  | long_trend |   55.9% |    1.34% | 🚀 長線突破
+6994.TW    |   brain    |   49.2% |    3.41% | ★★★ 強力買進
+3576.TW    | long_trend |   48.1% |    6.37% | 觀望
+8112.TW    |   brain    |   51.7% |    1.07% | ☠ 立即止損
+00633L.TW  |   brain    |   47.6% |    0.56% | ☠ 立即止損
+6642.TWO   | long_trend |   50.0% |    1.33% | 🚪 趨勢結束
+00885.TW   | long_trend |   67.9% |    1.14% | 觀望
+1721.TW    | strong_support |   37.5% |    1.31% | 觀望
+6902.TW    | reversion  |   50.0% |    1.32% | 觀望
+2461.TW    | reversion  |   84.2% |    4.83% | 觀望
+6461.TWO   | reversion  |   58.2% |    1.89% | 💰 乖離修正賣出
+7805.TWO   | strong_support |   55.6% |   -0.23% | 觀望
+8131.TW    |   brain    |   53.8% |    0.66% | ☠ 立即止損
+7752.TWO   | reversion  |   60.0% |    4.79% | 📉 超跌抄底
+00637L.TW  | reversion  |   53.2% |    0.81% | 觀望
+4538.TWO   | reversion  |   80.0% |    4.71% | 💰 乖離修正賣出
+6962.TW    | reversion  |   80.0% |    3.05% | 觀望
+3323.TWO   | reversion  |   63.0% |    4.40% | 觀望
+00664R.TW  | reversion  |    0.0% |    0.00% | 💰 乖離修正賣出
+8091.TWO   |   brain    |   50.4% |    0.85% | ☠ 立即止損
+7810.TWO   | momentum_burst |   52.0% |    4.80% | 觀望
+2434.TW    | momentum_burst |   36.4% |    1.37% | 觀望
+7610.TW    |   brain    |   77.3% |   10.68% | 觀望
+4952.TW    | reversion  |   77.6% |    4.75% | 💰 乖離修正賣出
+1623.TW    | strong_support |    0.0% |    0.00% | 觀望
+6187.TWO   |   brain    |   50.1% |    1.65% | 觀望
+00980A.TW  |   brain    |   67.6% |    0.99% | 觀望
+00929.TW   |   brain    |   56.2% |    0.72% | ☠ 立即止損
+2252.TWO   | reversion  |   67.4% |    3.60% | 觀望
+2034.TW    |   brain    |   45.1% |    0.28% | ☠ 立即止損
+00947.TW   | long_trend |   69.2% |    3.39% | 觀望
+3581.TWO   |   brain    |   49.5% |    1.56% | ☠ 立即止損
+3380.TW    | reversion  |   69.0% |    3.75% | 觀望
+5301.TWO   |   brain    |   33.7% |    2.04% | ☠ 立即止損
+1795.TW    |   brain    |   44.1% |    1.34% | ☠ 立即止損
+2406.TW    | long_trend |   50.6% |    4.76% | 觀望
+6147.TWO   | reversion  |   79.2% |    3.00% | 觀望
+6667.TWO   |   brain    |   46.2% |    1.28% | 觀望
+6231.TWO   |   brain    |   42.0% |    1.58% | ☠ 立即止損
+00674R.TW  | reversion  |   50.0% |   -0.56% | 觀望
+00751B.TWO | reversion  |  100.0% |   15.84% | 💰 乖離修正賣出
+6657.TW    | strong_support |   54.5% |    5.74% | 觀望
+6799.TW    | strong_support |   53.8% |    2.87% | 觀望
+6689.TW    | long_trend |   57.4% |    3.50% | 🚪 趨勢結束
+1536.TW    | strong_support |   52.4% |    0.91% | 觀望
+6716.TWO   |   brain    |   40.3% |    1.94% | 觀望
+3664.TWO   |   brain    |   40.5% |    0.32% | ☠ 立即止損
+3665.TW    |   brain    |   52.4% |    1.40% | ★★★ 強力買進
+3714.TW    | strong_support |   52.1% |    1.14% | 觀望
+3218.TWO   | long_trend |   51.9% |    2.49% | 🚪 趨勢結束
+6698.TW    | reversion  |   59.6% |    3.21% | 觀望
+5228.TWO   | reversion  |   63.2% |    1.52% | 觀望
+5880.TW    | reversion  |  100.0% |    7.38% | 觀望
+2349.TW    | long_trend |   48.3% |   10.21% | 觀望
+4161.TWO   | reversion  |   75.0% |    6.25% | 觀望
+7734.TWO   | momentum_burst |   44.4% |    5.61% | 觀望
+2401.TW    | reversion  |   62.5% |    3.30% | 觀望
+6906.TW    | reversion  |   31.6% |    3.04% | 觀望
+3563.TW    |   brain    |   52.2% |    2.40% | ★★★ 強力買進
+6279.TWO   |   brain    |   48.4% |    0.36% | 觀望
+3324.TWO   |   brain    |   50.9% |    1.54% | 觀望
+3577.TWO   | momentum_burst |   45.0% |   -0.10% | 觀望
+3357.TWO   | long_trend |   50.0% |    5.03% | 觀望
+2254.TW    | reversion  |   71.4% |    2.05% | 💰 乖離修正賣出
+2369.TW    | strong_support |   48.3% |    1.37% | 🛡️ 支撐進場
+7751.TWO   |   brain    |   63.0% |    5.06% | 觀望
+8489.TWO   | reversion  |   56.2% |    3.47% | 觀望
+1773.TW    | strong_support |   52.5% |    0.82% | 觀望
+6844.TWO   |   brain    |   45.4% |    0.73% | 觀望
+6931.TW    |   brain    |   38.5% |    2.86% | ☠ 立即止損
+4956.TW    |   brain    |   42.0% |    0.86% | 觀望
+5876.TW    | reversion  |  100.0% |    4.72% | 觀望
+4977.TW    | reversion  |   67.9% |    3.80% | 💰 乖離修正賣出
+00632R.TW  |   brain    |   32.0% |   10.50% | 觀望
+8935.TWO   | strong_support |   41.4% |    0.72% | 🛡️ 支撐進場
+5227.TWO   | reversion  |   61.5% |    4.00% | 觀望
+3521.TWO   | long_trend |   45.7% |    1.38% | 觀望
+3564.TWO   | strong_support |   56.1% |    2.49% | 觀望
+6419.TWO   | long_trend |   49.4% |    4.37% | 觀望
+2845.TW    |   brain    |   49.6% |    0.13% | ☠ 立即止損
+3266.TW    | reversion  |   63.2% |    2.66% | 觀望
+2812.TW    | strong_support |   51.1% |    0.14% | 觀望
+2867.TW    | reversion  |   69.2% |    3.75% | 觀望
+4906.TW    | strong_support |   55.6% |    1.19% | 觀望
+1203.TW    | reversion  |    0.0% |    0.00% | 觀望
+2002.TW    |   brain    |   42.2% |    0.40% | ☠ 立即止損
+2478.TW    |   brain    |   46.0% |    1.72% | ★★★ 強力買進
+8291.TWO   | reversion  |   53.7% |    3.95% | 觀望
+6865.TWO   | reversion  |   22.2% |   -1.02% | 觀望
+6988.TW    |   brain    |   47.4% |    0.94% | ☠ 立即止損
+5543.TWO   | long_trend |   48.9% |    1.55% | 觀望
+6668.TW    | reversion  |   55.4% |    1.61% | 觀望
+3691.TWO   | strong_support |   50.0% |    1.28% | 觀望
+2897.TW    | reversion  |   83.3% |    2.74% | 💰 乖離修正賣出
+3592.TW    | long_trend |   51.4% |    0.85% | 🚪 趨勢結束
+4806.TWO   | long_trend |   40.4% |    2.05% | 🚪 趨勢結束
+1718.TW    | reversion  |   84.6% |    6.09% | 觀望
+6491.TW    | long_trend |   50.4% |    1.52% | 🚪 趨勢結束
+00955.TWO  | long_trend |   66.0% |    1.20% | 觀望
+3078.TWO   | long_trend |   57.0% |    3.34% | 🚪 趨勢結束
+2484.TW    | reversion  |   65.8% |    3.73% | 觀望
+6166.TW    | reversion  |   53.1% |   -0.15% | 觀望
+1338.TW    | reversion  |   53.8% |    3.20% | 觀望
+3023.TW    | reversion  |   57.9% |    3.22% | 觀望
+00738U.TW  | long_trend |   54.8% |    2.12% | 觀望
+6672.TW    | long_trend |   45.6% |    1.50% | 觀望
+3694.TW    | reversion  |   64.9% |    2.99% | 觀望
+6160.TWO   | momentum_burst |   44.8% |    1.10% | 觀望
+5426.TWO   |   brain    |   41.6% |    0.77% | 觀望
+8048.TWO   | long_trend |   55.1% |    5.06% | 觀望
+2312.TW    | reversion  |   59.5% |    2.53% | 觀望
+2208.TW    | long_trend |   44.4% |    3.50% | 觀望
+009803.TW  |   brain    |   55.6% |    1.13% | 觀望
+7584.TWO   | long_trend |   64.4% |    4.95% | 🚪 趨勢結束
+8050.TWO   | reversion  |   70.0% |    3.79% | 觀望
+3455.TWO   | reversion  |   77.3% |    4.96% | 觀望
+2104.TW    | reversion  |   65.4% |    0.84% | 💰 乖離修正賣出
+6122.TWO   |   brain    |   46.1% |    1.26% | ☠ 立即止損
+2880.TW    | reversion  |  100.0% |    3.28% | 💰 乖離修正賣出
+6435.TWO   |   brain    |   49.4% |    1.26% | 觀望
+8476.TW    | reversion  |   55.9% |   23.78% | 觀望
+6530.TWO   |   brain    |   45.3% |    1.36% | 觀望
+6806.TW    | momentum_burst |   51.4% |    1.12% | 觀望
+2755.TWO   |   brain    |   51.5% |    1.93% | 觀望
+1605.TW    |   brain    |   47.7% |    0.59% | ☠ 立即止損
+8038.TWO   | reversion  |   55.6% |    0.63% | 觀望
+3006.TW    |   brain    |   49.2% |    1.38% | ☠ 立即止損
+1442.TW    |   brain    |   47.4% |    0.67% | ☠ 立即止損
+1303.TW    |   brain    |   47.7% |    0.63% | 觀望
+00715L.TW  | long_trend |   57.3% |    3.04% | 🚀 長線突破
+8349.TWO   |   brain    |   45.2% |    1.01% | ☠ 立即止損
+2633.TW    | long_trend |   53.3% |    1.72% | 🚪 趨勢結束
+4530.TWO   | reversion  |   73.5% |    3.66% | 觀望
+3693.TWO   |   brain    |   47.3% |    3.06% | 觀望
+6290.TWO   |   brain    |   50.0% |    1.09% | 觀望
+2543.TW    |   brain    |   39.8% |    1.58% | ★★★ 強力買進
+1762.TW    | reversion  |   66.7% |    4.98% | 觀望
+2388.TW    |   brain    |   45.1% |    2.03% | ☠ 立即止損
+3360.TWO   | reversion  |   67.4% |    2.48% | 觀望
+3260.TWO   |   brain    |   53.3% |    1.33% | ☠ 立即止損
+2035.TWO   | reversion  |    0.0% |    0.00% | 💰 乖離修正賣出
+6418.TWO   | long_trend |   44.4% |    3.23% | 🚪 趨勢結束
+5230.TWO   | reversion  |   65.0% |    1.87% | 觀望
+3169.TWO   |   brain    |   44.7% |    1.42% | ★★★ 強力買進
+1516.TW    | reversion  |   76.3% |    4.39% | 💰 乖離修正賣出
+3413.TW    |   brain    |   51.5% |    1.42% | 觀望
+2201.TW    | reversion  |   87.5% |    9.59% | 觀望
+1323.TW    | reversion  |   80.0% |    3.28% | 觀望
+3071.TWO   | reversion  |   83.7% |    4.92% | 觀望
+00662.TW   |   brain    |   59.9% |    0.25% | ☠ 立即止損
+8046.TW    |   brain    |   50.3% |    1.36% | 觀望
+00931B.TWO | reversion  |    0.0% |    0.00% | 💰 乖離修正賣出
+2948.TWO   |   brain    |   43.4% |    1.04% | 觀望
+2419.TW    | long_trend |   55.9% |    2.82% | 觀望
+2392.TW    | long_trend |   43.8% |    1.99% | 🚪 趨勢結束
+4966.TWO   | strong_support |   51.7% |    0.77% | 觀望
+6186.TWO   | long_trend |   56.4% |    2.36% | 🚪 趨勢結束
+3045.TW    | reversion  |    0.0% |    0.00% | 💰 乖離修正賣出
+6515.TW    |   brain    |   52.7% |    2.07% | 觀望
+8102.TWO   | reversion  |   42.9% |    1.31% | 觀望
+8416.TWO   | reversion  |   86.7% |    3.65% | 觀望
+3715.TW    |   brain    |   56.1% |    5.11% | 觀望
+3444.TWO   |   brain    |   43.7% |    1.45% | ☠ 立即止損
+8027.TWO   | momentum_burst |   50.0% |    1.99% | 觀望
+4991.TWO   | reversion  |   82.1% |    6.23% | 💰 乖離修正賣出
+4542.TWO   |   brain    |   41.9% |    1.41% | 觀望
+6415.TW    | reversion  |   64.6% |    4.93% | 觀望
+6573.TW    | strong_support |   46.7% |    1.83% | 觀望
+3597.TWO   | strong_support |   35.7% |    0.46% | 觀望
+5536.TWO   |   brain    |   53.8% |    1.57% | 觀望
+6104.TWO   |   brain    |   50.2% |    1.80% | ☠ 立即止損
+2211.TW    | long_trend |   55.4% |    1.93% | 觀望
+00949.TW   | strong_support |   76.3% |    1.86% | 🛡️ 支撐進場
+2542.TW    |   brain    |   47.8% |    0.34% | ☠ 立即止損
+6431.TW    | long_trend |   56.7% |    3.85% | 觀望
+7721.TW    |   brain    |   37.3% |    0.73% | 觀望
+4192.TWO   | long_trend |   52.5% |   10.63% | 🚪 趨勢結束
+9917.TW    | momentum_burst |   57.7% |    0.15% | 觀望
+8271.TW    |   brain    |   47.3% |    0.78% | ☠ 立即止損
+7455.TWO   | momentum_burst |   60.0% |    0.31% | 觀望
+8047.TWO   | long_trend |   37.3% |    5.26% | 觀望
+4540.TW    |   brain    |   45.3% |    1.42% | 觀望
+00904.TW   |   brain    |   63.2% |    1.26% | 觀望
+6756.TW    | reversion  |   60.6% |    0.92% | 觀望
+6919.TW    | momentum_burst |   68.2% |    6.75% | 觀望
+3211.TWO   | long_trend |   51.3% |    2.47% | 觀望
+2360.TW    | long_trend |   54.8% |    1.09% | 觀望
+8016.TW    | reversion  |   58.0% |    1.81% | 觀望
+3094.TW    | reversion  |   73.6% |    3.93% | 觀望
+5484.TW    | long_trend |   52.1% |    8.00% | 🚪 趨勢結束
+6284.TWO   | strong_support |   42.1% |    2.04% | 觀望
+7783.TWO   | reversion  |   50.0% |    2.14% | 觀望
+3014.TW    | reversion  |   69.0% |    2.41% | 觀望
+3558.TWO   |   brain    |   45.1% |    0.73% | ☠ 立即止損
+3406.TW    |   brain    |   48.3% |    2.15% | ☠ 立即止損
+6794.TW    | reversion  |   33.3% |   -1.21% | 觀望
+2383.TW    | long_trend |   58.4% |    1.91% | 觀望
+7402.TWO   |   brain    |   43.9% |    2.16% | 觀望
+6235.TW    | long_trend |   48.1% |    3.28% | 🚪 趨勢結束
+3149.TW    |   brain    |   39.5% |    1.27% | 觀望
+7717.TWO   |   brain    |   61.5% |    9.56% | 觀望
+4580.TWO   | reversion  |   50.0% |    3.81% | 觀望
+6739.TWO   |   brain    |   55.1% |    5.45% | 觀望
+7702.TWO   |   brain    |   53.2% |    2.34% | ☠ 立即止損
+2023.TW    | long_trend |   47.7% |    0.62% | 🚪 趨勢結束
+3454.TW    | momentum_burst |   46.2% |    0.71% | 觀望
+3543.TW    |   brain    |   45.6% |    1.37% | 觀望
+2345.TW    |   brain    |   52.6% |    1.50% | 觀望
+3018.TW    | reversion  |   58.3% |    2.98% | 💰 乖離修正賣出
+6526.TW    | strong_support |   63.6% |    1.11% | 觀望
+6843.TWO   | reversion  |   75.0% |    7.00% | 觀望
+3686.TW    | long_trend |   45.3% |    3.74% | 觀望
+6933.TW    | momentum_burst |   45.8% |    1.72% | 觀望
+1337.TW    | reversion  |   55.8% |    1.66% | 觀望
+7719.TWO   | long_trend |   50.0% |   31.92% | 觀望
+3663.TWO   | reversion  |   67.4% |    4.03% | 觀望
+6588.TWO   |   brain    |   45.3% |    2.69% | 觀望
+4563.TWO   | reversion  |   68.8% |    4.91% | 觀望
+3707.TWO   |   brain    |   47.2% |    0.82% | ☠ 立即止損
+8103.TW    | strong_support |   59.3% |    0.76% | 觀望
+3498.TWO   | reversion  |   60.2% |    2.27% | 💰 乖離修正賣出
+2883.TW    | strong_support |   49.5% |    0.43% | 觀望
+6788.TWO   |   brain    |   53.8% |    3.72% | 觀望
+6793.TWO   | reversion  |   36.6% |    0.40% | 觀望
+2308.TW    | long_trend |   63.7% |    2.89% | 觀望
+6903.TWO   |   brain    |   54.3% |    2.44% | 觀望
+2324.TW    |   brain    |   49.3% |    0.11% | ☠ 立即止損
+00764B.TWO | momentum_burst |   52.4% |    0.03% | 觀望
+00965.TW   |   brain    |   72.2% |    1.96% | 觀望
+4513.TWO   |   brain    |   50.4% |    2.19% | ☠ 立即止損
+6805.TW    |   brain    |   67.1% |    4.67% | 觀望
+5292.TW    |   brain    |   51.9% |    0.54% | ☠ 立即止損
+3013.TW    | reversion  |   41.4% |    0.87% | 觀望
+3529.TWO   |   brain    |   50.6% |    1.91% | 觀望
+8436.TWO   |   brain    |   43.7% |    0.55% | ☠ 立即止損
+6182.TWO   |   brain    |   49.1% |    1.39% | ☠ 立即止損
+6598.TW    | long_trend |   30.8% |   21.07% | 觀望
+4931.TWO   | long_trend |   40.5% |   18.59% | 🚪 趨勢結束
+2387.TW    | long_trend |   42.7% |    2.59% | 🚪 趨勢結束
+00968B.TWO | momentum_burst |    0.0% |    0.00% | 觀望
+2609.TW    | long_trend |   54.9% |   10.19% | 觀望
+3057.TW    | strong_support |   42.9% |   -0.17% | 觀望
+3632.TWO   | reversion  |   53.8% |    3.31% | 💰 乖離修正賣出
+5013.TWO   | strong_support |   45.1% |    0.63% | 觀望
+6548.TWO   |   brain    |   47.9% |    0.98% | ☠ 立即止損
+5314.TWO   |   brain    |   49.9% |    2.76% | ☠ 立即止損
+00713.TW   | long_trend |   54.5% |    0.30% | 觀望
+4764.TW    | reversion  |   88.2% |   10.03% | 💰 乖離修正賣出
+2887I.TW   | reversion  |    0.0% |    0.00% | 觀望
+6472.TW    |   brain    |   49.6% |    3.37% | ☠ 立即止損
+6863.TW    | momentum_burst |   52.6% |    2.67% | 觀望
+2365.TW    |   brain    |   43.2% |    1.08% | ☠ 立即止損
+2425.TW    | long_trend |   47.2% |    4.65% | 🚪 趨勢結束
+3594.TWO   | reversion  |   76.4% |    4.01% | 💰 乖離修正賣出
+6128.TW    | long_trend |   50.7% |    1.36% | 🚪 趨勢結束
+3008.TW    |   brain    |   50.5% |    0.37% | 觀望
+2313.TW    | long_trend |   59.1% |    2.80% | 觀望
+5321.TWO   |   brain    |   48.1% |    6.20% | 觀望
+3379.TWO   | long_trend |   45.9% |    3.06% | 🚪 趨勢結束
+2723.TW    | reversion  |   57.4% |    3.40% | 觀望
+3625.TWO   |   brain    |   43.2% |    0.82% | ☠ 立即止損
+3141.TWO   | long_trend |   57.3% |    4.09% | 🚪 趨勢結束
+7740.TW    | reversion  |   66.7% |    7.43% | 💰 乖離修正賣出
+6708.TWO   | strong_support |   35.8% |    1.58% | 🛡️ 支撐進場
+1589.TW    | long_trend |   41.5% |   -0.78% | 🚪 趨勢結束
+6291.TWO   | momentum_burst |   55.6% |    7.20% | 觀望
+9945.TW    |   brain    |   47.9% |    0.85% | ☠ 立即止損
+6140.TWO   | strong_support |   48.3% |    1.61% | 觀望
+4949.TW    |   brain    |   38.2% |    2.42% | 觀望
+00988A.TW  |   brain    |   33.3% |    3.15% | 觀望
+6282.TW    | reversion  |   51.5% |    0.62% | 觀望
+1312.TW    | reversion  |   65.5% |    4.70% | 觀望
+3049.TW    | reversion  |   65.1% |    3.88% | 💰 乖離修正賣出
+1537.TW    | reversion  |   42.9% |    0.98% | 觀望
+2515.TW    |   brain    |   50.5% |    0.90% | 觀望
+1723.TW    | reversion  |   77.8% |   -0.12% | 觀望
+6179.TWO   | reversion  |   66.7% |    3.46% | 觀望
+5493.TWO   | reversion  |   62.5% |    5.29% | 觀望
+00951.TW   | long_trend |   68.6% |    2.38% | 觀望
+6531.TW    |   brain    |   57.7% |    4.93% | 觀望
+2457.TW    |   brain    |   45.5% |    1.03% | ☠ 立即止損
+6203.TWO   | strong_support |   45.4% |    0.40% | 觀望
+8926.TW    | reversion  |   50.0% |    1.22% | 💰 乖離修正賣出
+3028.TW    | strong_support |   55.7% |    0.52% | 觀望
+3430.TWO   |   brain    |   51.1% |    1.51% | 觀望
+3265.TWO   | long_trend |   57.1% |    2.04% | 觀望
+3481.TW    | momentum_burst |   59.8% |    4.10% | 觀望
+6841.TWO   | strong_support |   35.0% |    2.07% | 觀望
+2067.TWO   | strong_support |   39.9% |    0.15% | 觀望
+2409.TW    | momentum_burst |   51.4% |    2.59% | 觀望
+3236.TWO   | reversion  |   58.8% |    1.39% | 觀望
+3289.TWO   | reversion  |   66.7% |    3.39% | 觀望
+0050.TW    | long_trend |   51.2% |    0.35% | 觀望
+3710.TWO   | reversion  |   60.6% |    0.97% | 觀望
+4526.TW    | strong_support |   44.7% |    0.93% | 觀望
+3090.TW    |   brain    |   50.0% |    0.51% | ☠ 立即止損
+5309.TWO   | momentum_burst |   50.3% |    2.54% | 觀望
+6719.TW    | reversion  |   60.0% |    1.57% | 觀望
+2301.TW    | long_trend |   44.6% |    0.23% | 觀望
+00679B.TWO | reversion  |    0.0% |    0.00% | 💰 乖離修正賣出
+2382.TW    | long_trend |   54.8% |    1.93% | 觀望
+1711.TW    | reversion  |   75.0% |    3.86% | 💰 乖離修正賣出
+1102.TW    | long_trend |   53.1% |    0.25% | 🚪 趨勢結束
+6762.TWO   |   brain    |   44.9% |    0.90% | 觀望
+7782.TWO   | long_trend |    0.0% |    0.00% | 🚪 趨勢結束
+TXF.TW     | reversion  |  100.0% |    6.85% | 觀望
+3088.TWO   | long_trend |   50.9% |    0.72% | 🚪 趨勢結束
+7744.TWO   | long_trend |   63.2% |   15.23% | 觀望
+6191.TW    | reversion  |   89.3% |    7.70% | 觀望
+8422.TW    |   brain    |   44.9% |    1.17% | ☠ 立即止損
+3701.TW    | long_trend |   43.0% |    0.98% | 觀望
+5508.TWO   | long_trend |   61.9% |    2.93% | 🚪 趨勢結束
+4562.TW    | long_trend |   46.3% |    2.67% | 🚪 趨勢結束
+5258.TW    |   brain    |   48.6% |    1.51% | ☠ 立即止損
+6904.TWO   |   brain    |   50.5% |    1.02% | ☠ 立即止損
+8044.TWO   | reversion  |   53.0% |    1.95% | 觀望
+3530.TW    |   brain    |   43.9% |    1.33% | ☠ 立即止損
+1599.TWO   | strong_support |   56.0% |    0.37% | 觀望
+6921.TW    |   brain    |   33.3% |    2.26% | ☠ 立即止損
+3092.TW    | momentum_burst |   47.5% |    1.94% | 觀望
+1726.TW    | reversion  |   80.0% |    2.36% | 觀望
+00985B.TW  | reversion  |    0.0% |    0.00% | 💰 乖離修正賣出
+7728.TWO   |   brain    |   51.5% |    4.27% | 觀望
+2618.TW    |   brain    |   49.6% |    0.75% | ☠ 立即止損
+8045.TW    |   brain    |   53.9% |    2.88% | 觀望
+2489.TW    | long_trend |   55.4% |    3.54% | 觀望
+6509.TWO   | reversion  |   66.7% |    3.86% | 💰 乖離修正賣出
+2838.TW    | strong_support |   54.4% |    0.47% | 觀望
+3501.TW    | long_trend |   55.4% |    0.55% | 🚪 趨勢結束
+8039.TW    | strong_support |   42.9% |    0.28% | 觀望
+3105.TWO   | long_trend |   53.8% |    2.21% | 觀望
+8478.TW    |   brain    |   42.6% |    1.92% | ☠ 立即止損
+3550.TW    | reversion  |   70.0% |    4.82% | 觀望
+3432.TW    |   brain    |   42.4% |    0.93% | ☠ 立即止損
+1514.TW    |   brain    |   49.9% |    0.75% | ☠ 立即止損
+7750.TW    |   brain    |   73.3% |    7.54% | 觀望
+6209.TW    |   brain    |   46.8% |    1.65% | ☠ 立即止損
+4912.TW    | long_trend |   54.5% |    2.72% | 觀望
+3015.TW    | reversion  |   68.2% |    2.94% | 觀望
+3703.TW    | long_trend |   52.5% |    1.51% | 🚪 趨勢結束
+1735.TW    | strong_support |   38.7% |    0.15% | 觀望
+1522.TW    |   brain    |   45.2% |    0.93% | ☠ 立即止損
+00712.TW   |   brain    |   51.6% |    0.15% | 觀望
+00924.TW   | momentum_burst |  100.0% |    1.46% | 觀望
+6196.TW    | long_trend |   56.8% |    2.21% | 觀望
+5299.TWO   | momentum_burst |   43.4% |    1.45% | 觀望
+3002.TW    | strong_support |   47.1% |    0.49% | 觀望
+4989.TW    | strong_support |   48.9% |    1.18% | 觀望
+6405.TW    |   brain    |   43.6% |    0.87% | 觀望
+2423.TW    | reversion  |  100.0% |    4.64% | 觀望
+1784.TWO   | long_trend |   41.0% |    2.00% | 觀望
+6130.TWO   |   brain    |   39.9% |    1.47% | ☠ 立即止損
+4749.TWO   |   brain    |   57.1% |    5.20% | ★★★ 強力買進
+7823.TW    | strong_support |    0.0% |    0.00% | 觀望
+00933B.TWO | reversion  |    0.0% |    0.00% | 💰 乖離修正賣出
+5425.TWO   |   brain    |   46.7% |    0.69% | ☠ 立即止損
+1307.TW    | reversion  |   73.3% |    4.64% | 💰 乖離修正賣出
+2235.TWO   | reversion  |   63.6% |    1.21% | 觀望
+3629.TWO   |   brain    |   47.3% |    3.27% | ☠ 立即止損
+009815.TWO | strong_support |    0.0% |    0.00% | 觀望
+6683.TWO   |   brain    |   54.3% |    3.31% | 觀望
+1513.TW    |   brain    |   45.8% |    1.12% | ☠ 立即止損
+00989A.TW  | strong_support |    0.0% |    0.00% | 觀望
+3038.TW    | reversion  |   88.0% |   10.11% | 觀望
+8996.TW    |   brain    |   52.6% |    1.72% | ☠ 立即止損
+3465.TWO   | long_trend |   54.1% |    7.09% | 🚪 趨勢結束
+2485.TW    | long_trend |   48.2% |    1.63% | 觀望
+3708.TW    | long_trend |   54.1% |    4.10% | 觀望
+1466.TW    | long_trend |   42.6% |    6.37% | 觀望
+4533.TWO   |   brain    |   43.1% |    1.17% | ★★★ 強力買進
+6855.TWO   | strong_support |   45.5% |    1.38% | 觀望
+2108.TW    | long_trend |   56.6% |    4.30% | 觀望
+1409.TW    | reversion  |   86.7% |    4.37% | 觀望
+2049.TW    | long_trend |   49.7% |    0.79% | 觀望
+00993A.TW  | strong_support |    0.0% |    0.00% | 觀望
+6859.TWO   | momentum_burst |   52.6% |    1.38% | 觀望
+6212.TWO   | long_trend |   45.6% |    1.47% | 🚪 趨勢結束
+5474.TWO   |   brain    |   51.9% |    2.17% | ☠ 立即止損
+8438.TW    | long_trend |   28.0% |    2.10% | 觀望
+5351.TWO   | long_trend |   42.3% |    1.43% | 觀望
+1560.TW    |   brain    |   49.4% |    0.73% | 觀望
+9105.TW    | long_trend |   50.0% |    7.18% | 🚪 趨勢結束
+2353.TW    | long_trend |   60.9% |    1.90% | 🚪 趨勢結束
+2646.TW    | reversion  |    0.0% |    0.00% | 觀望
+1736.TW    |   brain    |   46.0% |    0.77% | ☠ 立即止損
+6982.TWO   | reversion  |   60.0% |    0.36% | 觀望
+1593.TWO   | strong_support |   41.2% |    0.63% | 觀望
+6190.TWO   | reversion  |   69.2% |    5.74% | 觀望
+2331.TW    | reversion  |   53.8% |    1.33% | 觀望
+6934.TW    | strong_support |    0.0% |    0.00% | 觀望
+9910.TW    |   brain    |   48.1% |    0.46% | 觀望
+5471.TW    | reversion  |   77.3% |    2.71% | 💰 乖離修正賣出
+00909.TW   |   brain    |   67.6% |    1.98% | 觀望
+3508.TWO   | long_trend |   43.2% |    6.96% | 觀望
+2498.TW    | momentum_burst |   47.9% |    4.17% | 觀望
+00753L.TW  |   brain    |   41.3% |    0.24% | ☠ 立即止損
+6861.TW    | long_trend |   63.6% |   16.48% | 🚀 長線突破
+8110.TW    |   brain    |   49.5% |    0.84% | ☠ 立即止損
+2481.TW    |   brain    |   49.9% |    1.31% | 觀望
+4722.TW    | long_trend |   50.3% |    2.11% | 觀望
+5516.TWO   | strong_support |   41.2% |    0.29% | 觀望
+5223.TWO   | long_trend |   31.0% |    0.57% | 觀望
+3083.TWO   |   brain    |   43.2% |    0.60% | ☠ 立即止損
+7777.TWO   |   brain    |   45.7% |    4.65% | ☠ 立即止損
+2393.TW    | reversion  |   55.6% |    4.44% | 觀望
+3615.TWO   | reversion  |   55.9% |    3.38% | 💰 乖離修正賣出
+5205.TWO   |   brain    |   43.6% |    5.23% | 觀望
+6937.TW    |   brain    |   43.8% |    2.84% | 觀望
+1611.TW    | reversion  |   61.5% |    1.11% | 觀望
+6230.TW    | long_trend |   46.1% |    2.82% | 觀望
+2413.TW    | reversion  |   73.0% |    5.55% | 💰 乖離修正賣出
+6887.TW    | strong_support |    0.0% |    0.00% | 觀望
+6188.TWO   |   brain    |   50.7% |    0.85% | ☠ 立即止損
+3535.TW    |   brain    |   46.1% |    1.71% | ★★★ 強力買進
+2726.TWO   |   brain    |   52.2% |    1.26% | ☠ 立即止損
+2103.TW    | reversion  |   60.7% |    2.88% | 💰 乖離修正賣出
+6980.TWO   |   brain    |   44.7% |    4.37% | ☠ 立即止損
+2317.TW    | long_trend |   53.0% |    1.65% | 觀望
+1815.TWO   |   brain    |   49.1% |    0.87% | 觀望
+6890.TW    |   brain    |   41.5% |    1.06% | ☠ 立即止損
+2431.TW    | strong_support |   51.2% |    1.03% | 觀望
+9921.TW    | reversion  |   48.3% |    0.70% | 觀望
+6640.TWO   | long_trend |   50.9% |    6.82% | 觀望
+2451.TW    | strong_support |   51.5% |    0.41% | 觀望
+3526.TWO   | long_trend |   54.3% |    1.26% | 觀望
+2010.TW    |   brain    |   44.4% |    0.96% | 觀望
+00770.TW   | strong_support |   61.7% |    0.60% | 觀望
+3234.TWO   | long_trend |   57.3% |    3.47% | 觀望
+00795B.TWO | reversion  |    0.0% |    0.00% | 💰 乖離修正賣出
+2302.TW    | reversion  |   59.5% |    5.02% | 觀望
+6957.TW    | reversion  |   60.0% |    3.24% | 觀望
+3025.TW    |   brain    |   50.7% |    2.64% | 觀望
+5011.TWO   | reversion  |   57.1% |    1.05% | 💰 乖離修正賣出
+8234.TWO   |   brain    |   48.6% |    1.02% | ☠ 立即止損
+7714.TWO   |   brain    |   63.6% |    4.68% | 觀望
+1432.TW    | reversion  |   58.3% |    2.19% | 觀望
+3661.TW    |   brain    |   50.0% |    1.50% | ☠ 立即止損
+3033.TW    | strong_support |   52.1% |    0.25% | 觀望
+00646.TW   | reversion  |   66.7% |    3.87% | 觀望
+6592.TW    | long_trend |   50.8% |    0.90% | 🚪 趨勢結束
+2314.TW    | strong_support |   53.4% |    1.36% | 觀望
+6451.TW    | momentum_burst |   54.7% |    3.28% | 觀望
+3308.TW    | long_trend |   44.6% |    1.70% | 觀望
+3712.TW    |   brain    |   47.4% |    2.05% | ☠ 立即止損
+4123.TWO   |   brain    |   46.1% |    0.62% | ★★★ 強力買進
+4973.TWO   | reversion  |   65.2% |    2.94% | 觀望
+00720B.TWO | reversion  |  100.0% |   16.76% | 💰 乖離修正賣出
+5225.TW    | reversion  |   60.9% |    2.74% | 觀望
+1438.TW    | strong_support |   42.3% |    0.99% | 觀望
+4927.TW    |   brain    |   50.5% |    0.89% | 觀望
+3221.TWO   | reversion  |   53.5% |    1.85% | 💰 乖離修正賣出
+00830.TW   | strong_support |   68.0% |    1.85% | 🛡️ 支撐進場
+8150.TW    |   brain    |   50.4% |    0.54% | ★★★ 強力買進
+6438.TW    | reversion  |   66.0% |    3.55% | 觀望
+2359.TW    | long_trend |   45.5% |    6.74% | 🚪 趨勢結束
+2891.TW    | reversion  |   83.3% |    5.44% | 觀望
+6706.TW    |   brain    |   47.4% |    1.30% | 觀望
+2455.TW    |   brain    |   50.0% |    0.97% | 觀望
+8111.TWO   |   brain    |   44.0% |    1.66% | 觀望
+2492.TW    |   brain    |   49.4% |    1.22% | 觀望
+2347.TW    | reversion  |   57.1% |    1.98% | 觀望
+00981B.TWO | momentum_burst |    0.0% |    0.00% | 觀望
+3252.TWO   | reversion  |   54.5% |    2.31% | 💰 乖離修正賣出
+6789.TW    |   brain    |   51.6% |    1.80% | 觀望
+2404.TW    | long_trend |   61.4% |    2.53% | 觀望
+4916.TW    |   brain    |   45.8% |    1.12% | ☠ 立即止損
+00953B.TW  | reversion  |    0.0% |    0.00% | 觀望
+1418.TW    | momentum_burst |   42.1% |    2.27% | 觀望
+6138.TWO   |   brain    |   53.0% |    0.67% | ☠ 立即止損
+6965.TW    | reversion  |   75.0% |    3.60% | 觀望
+7812.TWO   | long_trend |    0.0% |    0.00% | 🚪 趨勢結束
+2923.TW    | strong_support |   44.7% |    0.39% | 觀望
+8477.TWO   | strong_support |   45.2% |   -0.19% | 觀望
+1538.TW    | reversion  |   56.5% |    1.44% | 觀望
+2466.TW    | momentum_burst |   41.4% |    4.59% | 觀望
+2367.TW    |   brain    |   48.5% |    1.89% | ★★★ 強力買進
+3131.TWO   |   brain    |   54.1% |    2.41% | ★★★ 強力買進
+2230.TWO   |   brain    |   43.4% |    1.17% | ☠ 立即止損
+3675.TWO   | momentum_burst |   53.5% |    3.35% | 觀望
+8431.TWO   | momentum_burst |   48.6% |    1.67% | 觀望
+3189.TW    | reversion  |   46.8% |    2.49% | 💰 乖離修正賣出
+2206.TW    | long_trend |   48.5% |    3.47% | 🚪 趨勢結束
+6486.TWO   | momentum_burst |   42.2% |    0.59% | 觀望
+2881.TW    | long_trend |   48.2% |    0.37% | 觀望
+6928.TW    | strong_support |   33.3% |    5.26% | 觀望
+3443.TW    |   brain    |   49.1% |    1.48% | ☠ 立即止損
+5328.TWO   |   brain    |   42.3% |    0.56% | 觀望
+2329.TW    |   brain    |   51.4% |    1.02% | ☠ 立即止損
+6163.TWO   | long_trend |   44.6% |    1.74% | 觀望
+2316.TW    | long_trend |   54.2% |    4.64% | 觀望
+6244.TWO   | long_trend |   48.4% |    4.57% | 觀望
+2834.TW    | long_trend |   49.6% |    0.39% | 觀望
+2022.TW    |   brain    |   45.8% |    2.08% | 觀望
+8088.TWO   | strong_support |   56.1% |    1.77% | 觀望
+1310.TW    | reversion  |   80.8% |    5.67% | 💰 乖離修正賣出
+2072.TWO   | long_trend |   52.5% |    2.25% | 觀望
+5386.TWO   | long_trend |   61.3% |   11.07% | 🚀 長線突破
+00703.TW   | reversion  |  100.0% |    8.33% | 觀望
+4551.TW    | reversion  |   74.3% |    4.38% | 觀望
+5203.TW    | reversion  |   45.5% |    0.37% | 觀望
+7795.TW    | momentum_burst |   78.3% |   11.82% | 觀望
+4904.TW    | reversion  |    0.0% |    0.00% | 💰 乖離修正賣出
+4946.TWO   |   brain    |   37.4% |    1.54% | 觀望
+6695.TW    | reversion  |   58.5% |    1.69% | 觀望
+1305.TW    | reversion  |   71.1% |    4.95% | 💰 乖離修正賣出
+00900.TW   | long_trend |   54.3% |    0.98% | 觀望
+3532.TW    |   brain    |   55.4% |    2.51% | ☠ 立即止損
+1314.TW    | reversion  |   61.3% |    2.73% | 💰 乖離修正賣出
+6885.TW    | momentum_burst |   50.0% |    7.13% | 觀望
+00719B.TWO | reversion  |    0.0% |    0.00% | 💰 乖離修正賣出
+1304.TW    | reversion  |   69.0% |    4.52% | 💰 乖離修正賣出
+5274.TWO   | reversion  |   75.4% |    5.84% | 觀望
+00923.TW   |   brain    |   58.5% |    0.37% | 觀望
+6873.TW    |   brain    |   49.6% |    1.79% | ☠ 立即止損
+4909.TWO   | long_trend |   54.5% |    1.71% | 觀望
+6016.TWO   |   brain    |   48.9% |    0.90% | 觀望
+9906.TW    |   brain    |   46.1% |    2.29% | 觀望
+8069.TWO   |   brain    |   53.0% |    0.94% | ☠ 立即止損
+2340.TW    | reversion  |   70.6% |    3.95% | 觀望
+3138.TW    |   brain    |   46.3% |    3.62% | 觀望
+5347.TWO   | momentum_burst |   54.5% |    3.11% | 觀望
+3017.TW    | reversion  |   80.3% |    7.59% | 💰 乖離修正賣出
+3037.TW    | long_trend |   48.0% |    2.66% | 觀望
+1503.TW    |   brain    |   42.0% |    0.87% | ☠ 立即止損
+3441.TWO   | reversion  |   55.9% |    3.04% | 觀望
+8080.TWO   | momentum_burst |   38.0% |    2.69% | 觀望
+5490.TWO   |   brain    |   44.3% |    0.22% | 觀望
+2607.TW    | strong_support |   43.3% |    0.18% | 觀望
+4768.TWO   | strong_support |   42.7% |   18.83% | 觀望
+4755.TW    |   brain    |   50.6% |    1.04% | 觀望
+5469.TW    |   brain    |   51.7% |    0.69% | ☠ 立即止損
+3305.TW    |   brain    |   45.1% |    1.01% | ☠ 立即止損
+6236.TWO   |   brain    |   41.7% |    1.86% | ☠ 立即止損
+6214.TW    | reversion  |   66.7% |    2.45% | 觀望
+6552.TW    | reversion  |   70.4% |    4.49% | 觀望
+1216.TW    | strong_support |   51.6% |    0.31% | 觀望
+2887.TW    | reversion  |  100.0% |    4.35% | 💰 乖離修正賣出
+1471.TW    | long_trend |   56.8% |    8.32% | 觀望
+2493.TW    |   brain    |   57.1% |    0.82% | ☠ 立即止損
+1590.TW    | reversion  |   53.7% |    0.25% | 觀望
+4127.TWO   | long_trend |   42.2% |    4.65% | 觀望
+00919.TW   | long_trend |   66.7% |    1.98% | 觀望
+6217.TWO   | reversion  |   63.3% |    3.66% | 💰 乖離修正賣出
+1710.TW    | reversion  |   58.3% |    1.45% | 觀望
+6213.TW    | reversion  |   69.6% |    3.23% | 💰 乖離修正賣出
+9103.TW    | long_trend |   67.1% |   18.23% | 觀望
+2337.TW    |   brain    |   53.7% |    2.63% | 觀望
+6796.TW    |   brain    |   51.0% |    2.35% | ☠ 立即止損
+6133.TW    |   brain    |   40.5% |    0.63% | ★★★ 強力買進
+3466.TWO   |   brain    |   40.4% |    0.80% | 觀望
+7799.TW    |   brain    |   58.5% |    6.32% | 觀望
+3036.TW    | long_trend |   51.8% |    1.53% | 🚀 長線突破
+3163.TWO   |   brain    |   48.0% |    1.35% | 觀望
+2495.TW    | reversion  |   81.0% |    5.04% | 觀望
+6225.TW    | strong_support |   48.0% |    4.91% | 觀望
+1444.TW    | reversion  |  100.0% |    7.12% | 觀望
+0056.TW    |   brain    |   56.5% |    0.21% | 觀望
+8463.TW    | strong_support |   40.1% |    0.67% | 觀望
+8077.TWO   | momentum_burst |   39.0% |    3.18% | 觀望
+6684.TWO   | long_trend |   56.5% |    2.38% | 🚪 趨勢結束
+3546.TWO   |   brain    |   50.0% |    0.66% | ☠ 立即止損
+00987A.TW  | strong_support |    0.0% |    0.00% | 觀望
+3552.TWO   | reversion  |   51.7% |    1.93% | 觀望
+2377.TW    | reversion  |   60.0% |    3.34% | 💰 乖離修正賣出
+4583.TW    | long_trend |   51.9% |    4.50% | 🚪 趨勢結束
+00910.TW   |   brain    |   57.8% |    1.02% | 觀望
+2397.TW    | reversion  |   70.8% |    4.05% | 觀望
+8279.TWO   | strong_support |   55.3% |    3.10% | 觀望
+2006.TW    |   brain    |   49.5% |    0.41% | ★★★ 強力買進
+6715.TW    |   brain    |   47.8% |    0.70% | 觀望
+3034.TW    | reversion  |   55.9% |    2.32% | 觀望
+3588.TW    | reversion  |   63.7% |    2.96% | 觀望
+2603.TW    |   brain    |   52.4% |    2.59% | ★★★ 強力買進
+6643.TWO   |   brain    |   42.8% |    0.82% | 觀望
+6854.TW    | long_trend |   77.4% |   13.43% | 🚪 趨勢結束
+1459.TW    | strong_support |   43.4% |    0.44% | 🛡️ 支撐進場
+4903.TWO   |   brain    |   46.8% |    2.16% | 觀望
+8444.TWO   | long_trend |   60.2% |    3.18% | 🚪 趨勢結束
+3016.TW    |   brain    |   47.1% |    1.10% | ☠ 立即止損
+6533.TW    |   brain    |   45.6% |    1.38% | ☠ 立即止損
+00985A.TW  |   brain    |   60.9% |    0.99% | 觀望
+6620.TWO   |   brain    |   50.9% |    2.38% | 觀望
+1326.TW    | reversion  |   70.6% |    2.45% | 💰 乖離修正賣出
+6517.TWO   |   brain    |   47.3% |    1.74% | ☠ 立即止損
+1583.TW    | reversion  |   81.2% |    9.60% | 觀望
+4919.TW    |   brain    |   50.7% |    1.55% | 觀望
+6142.TW    | reversion  |   63.2% |    4.74% | 觀望
+2321.TW    |   brain    |   39.7% |    1.01% | ☠ 立即止損
+3213.TWO   | reversion  |   80.0% |    8.87% | 觀望
+2327.TW    | long_trend |   57.3% |    2.25% | 觀望
+8289.TWO   |   brain    |   42.5% |    0.68% | 觀望
+5439.TWO   |   brain    |   53.6% |    1.53% | ☠ 立即止損
+2009.TW    |   brain    |   39.2% |    1.24% | ☠ 立即止損
+6423.TWO   | reversion  |   68.0% |    4.37% | 觀望
+2610.TW    |   brain    |   48.2% |    1.73% | ☠ 立即止損
+2836.TW    | long_trend |   48.2% |    0.37% | 觀望
+2379.TW    |   brain    |   56.1% |    0.97% | ☠ 立即止損
+6546.TWO   | long_trend |   32.5% |   14.32% | 觀望
+3533.TW    |   brain    |   50.1% |    0.63% | 觀望
+2882.TW    | strong_support |   51.9% |    0.24% | 觀望
+6456.TW    | long_trend |   47.5% |    2.02% | 觀望
+00981A.TW  |   brain    |   67.6% |    1.52% | 觀望
+3059.TW    | reversion  |   68.1% |    4.07% | 觀望
+4541.TWO   | reversion  |   57.7% |    1.28% | 觀望
+4938.TW    | reversion  |   83.3% |    4.50% | 觀望
+6265.TWO   | long_trend |   38.7% |    4.75% | 觀望
+3206.TWO   | reversion  |   67.9% |    2.67% | 💰 乖離修正賣出
+5340.TWO   |   brain    |   47.6% |    1.71% | 觀望
+4585.TW    | reversion  |   60.0% |    6.01% | 觀望
+3338.TW    |   brain    |   45.2% |    1.45% | ★★★ 強力買進
+5302.TWO   | strong_support |   39.7% |    1.27% | 觀望
+3702.TW    | long_trend |   55.5% |    0.18% | 觀望
+2548.TW    |   brain    |   48.8% |    0.33% | 觀望
+00922.TW   | long_trend |   62.1% |    0.79% | 觀望
+8390.TWO   | reversion  |   72.0% |    7.21% | 觀望
+3672.TWO   | reversion  |   59.3% |    4.85% | 💰 乖離修正賣出
+2615.TW    | long_trend |   60.9% |    7.82% | 🚪 趨勢結束
+2606.TW    | long_trend |   50.9% |    1.75% | 觀望
+1308.TW    | reversion  |   73.9% |    3.27% | 💰 乖離修正賣出
+6768.TW    | long_trend |   58.8% |    1.18% | 🚪 趨勢結束
+6720.TWO   |   brain    |   49.0% |    1.61% | 觀望
+8383.TWO   | reversion  |   83.3% |    4.39% | 觀望
+6550.TW    | long_trend |   66.2% |   18.43% | 🚪 趨勢結束
+6753.TW    |   brain    |   49.7% |    3.41% | ☠ 立即止損
+6228.TWO   |   brain    |   43.1% |    3.43% | ☠ 立即止損
+2468.TW    | strong_support |   40.9% |    1.15% | 觀望
+3041.TW    | reversion  |   59.6% |    1.73% | 觀望
+2472.TW    |   brain    |   50.7% |    0.75% | 觀望
+6275.TWO   | reversion  |   43.9% |    0.61% | 觀望
+6469.TWO   |   brain    |   50.0% |    1.17% | ☠ 立即止損
+6426.TW    |   brain    |   49.2% |    2.69% | 觀望
+6112.TW    | reversion  |   64.0% |    1.81% | 觀望
+5272.TWO   | reversion  |   54.2% |    1.36% | 💰 乖離修正賣出
+6005.TW    | long_trend |   56.8% |    1.65% | 觀望
+2258.TW    | reversion  |  100.0% |    2.57% | 觀望
+00948B.TWO | reversion  |    0.0% |    0.00% | 💰 乖離修正賣出
+00902.TW   | long_trend |   69.2% |    1.79% | 觀望
+2449.TW    |   brain    |   53.3% |    1.26% | ☠ 立即止損
+6613.TWO   |   brain    |   51.4% |    1.14% | ☠ 立即止損
+5443.TWO   |   brain    |   47.9% |    0.69% | 觀望
+3167.TW    |   brain    |   49.2% |    1.69% | 觀望
+6579.TW    | momentum_burst |   42.5% |    1.32% | 觀望
+3611.TWO   |   brain    |   45.1% |    0.27% | ☠ 立即止損
+6219.TWO   | strong_support |   49.2% |    1.76% | 觀望
+2892.TW    | reversion  |  100.0% |    6.04% | 觀望
+2889.TW    | strong_support |   54.0% |    0.37% | 觀望
+3713.TWO   | momentum_burst |   47.5% |    3.93% | 觀望
+2014.TW    | long_trend |   50.0% |    5.24% | 觀望
+2438.TW    | long_trend |   56.6% |   10.57% | 🚪 趨勢結束
+2231.TW    | momentum_burst |   45.5% |    1.97% | 觀望
+2354.TW    |   brain    |   47.2% |    0.57% | ☠ 立即止損
+3680.TWO   | long_trend |   51.6% |    2.74% | 觀望
+00761B.TWO | reversion  |  100.0% |   14.68% | 💰 乖離修正賣出
+4171.TWO   | long_trend |   57.9% |    9.47% | 🚪 趨勢結束
+6541.TW    |   brain    |   44.0% |    1.52% | ☠ 立即止損
+4154.TWO   | long_trend |   48.1% |    4.21% | 🚪 趨勢結束
+7738.TWO   |   brain    |   47.2% |    2.51% | ★★★ 強力買進
+5371.TWO   |   brain    |   50.3% |    2.02% | ☠ 立即止損
+3541.TWO   |   brain    |   49.4% |    0.68% | ☠ 立即止損
+00939.TW   | momentum_burst |   62.5% |    0.24% | 觀望
+3062.TW    | reversion  |   65.1% |    2.24% | 觀望
+4571.TW    |   brain    |   48.5% |    3.44% | 觀望
+9929.TW    | reversion  |   30.8% |   -0.72% | 觀望
+6488.TWO   |   brain    |   52.9% |    1.46% | ☠ 立即止損
+3416.TW    | strong_support |   53.8% |    0.74% | 觀望
+4142.TW    | long_trend |   50.0% |    3.08% | 🚪 趨勢結束
+5388.TW    | reversion  |   56.5% |    1.34% | 觀望
+3419.TW    | reversion  |   62.9% |    2.65% | 💰 乖離修正賣出
+3191.TWO   |   brain    |   45.5% |    2.33% | 觀望
+5222.TW    | strong_support |   43.1% |    5.47% | 觀望
+009814.TWO | strong_support |    0.0% |    0.00% | 觀望
+1528.TW    |   brain    |   48.1% |    1.32% | ☠ 立即止損
+6666.TW    | strong_support |   43.7% |    1.50% | 觀望
+2344.TW    |   brain    |   52.4% |    2.22% | 觀望
+7788.TW    |   brain    |   58.3% |    6.51% | ☠ 立即止損
+3684.TWO   | reversion  |   65.4% |    1.22% | 💰 乖離修正賣出
+00735.TW   | long_trend |   61.8% |    1.35% | 觀望
+3227.TWO   | long_trend |   50.4% |    1.93% | 🚪 趨勢結束
+2105.TW    | reversion  |   66.7% |    2.70% | 觀望
+2460.TW    | reversion  |   68.3% |    3.17% | 💰 乖離修正賣出
+7781.TWO   |   brain    |   28.6% |   40.81% | ☠ 立即止損
+3035.TW    |   brain    |   52.0% |    1.66% | ☠ 立即止損
+2357.TW    | reversion  |  100.0% |    7.96% | 觀望
+00686R.TW  | reversion  |    0.0% |   -6.72% | 💰 乖離修正賣出
+2801.TW    | reversion  |   50.0% |    1.06% | 觀望
+00864B.TWO | reversion  |    0.0% |    0.00% | 💰 乖離修正賣出
+5291.TWO   |   brain    |   48.4% |    1.15% | 觀望
+8455.TWO   | reversion  |   44.7% |    1.86% | 💰 乖離修正賣出
+3040.TW    | reversion  |   46.4% |    1.99% | 📉 超跌抄底
+4130.TWO   | reversion  |   43.2% |    1.07% | 💰 乖離修正賣出
+3205.TWO   | long_trend |   60.6% |    6.13% | 觀望
+2439.TW    | long_trend |   54.8% |    2.57% | 🚪 趨勢結束
+2371.TW    | long_trend |   56.1% |    5.84% | 🚪 趨勢結束
+6894.TWO   | reversion  |   66.7% |    0.98% | 💰 乖離修正賣出
+00937B.TWO | momentum_burst |    0.0% |    0.00% | 觀望
+6125.TWO   | long_trend |   46.4% |    5.71% | 🚪 趨勢結束
+2204.TW    |   brain    |   49.1% |    0.26% | 觀望
+5871.TW    | reversion  |   69.0% |    3.91% | 觀望
+2429.TW    |   brain    |   39.5% |    2.35% | ☠ 立即止損
+1809.TW    | long_trend |   45.5% |    3.04% | 觀望
+6884.TWO   | strong_support |   42.2% |    0.73% | 觀望
+7737.TWO   | long_trend |    0.0% |    0.00% | 🚪 趨勢結束
+2342.TW    |   brain    |   42.2% |    1.17% | ☠ 立即止損
+8255.TWO   | long_trend |   51.8% |    2.25% | 🚪 趨勢結束
+6612.TWO   |   brain    |   45.9% |    0.84% | 觀望
+6560.TWO   | long_trend |   46.5% |    5.57% | 觀望
+8299.TWO   |   brain    |   54.2% |    0.99% | ☠ 立即止損
+1609.TW    | long_trend |   61.0% |    3.49% | 🚪 趨勢結束
+009801.TW  |   brain    |   53.3% |    0.52% | ☠ 立即止損
+5269.TW    |   brain    |   55.0% |    1.82% | ☠ 立即止損
+2069.TW    | long_trend |   53.8% |    1.97% | 觀望
+3555.TWO   | momentum_burst |   45.2% |    2.83% | 觀望
+3551.TWO   |   brain    |   50.2% |    0.95% | ☠ 立即止損
+5285.TW    | long_trend |   49.5% |    1.51% | 🚪 趨勢結束
+6243.TW    |   brain    |   46.9% |    1.06% | ☠ 立即止損
+3570.TWO   | strong_support |   47.5% |    0.87% | 觀望
+1301.TW    | reversion  |   85.7% |    6.83% | 觀望
+3207.TWO   |   brain    |   48.3% |    2.49% | 觀望
+6202.TW    | reversion  |   61.0% |    0.55% | 💰 乖離修正賣出
+912000.TW  |   brain    |   50.5% |    1.86% | ☠ 立即止損
+1101.TW    | long_trend |   46.0% |   -0.00% | 觀望
+3067.TWO   | long_trend |   53.2% |    6.61% | 🚪 趨勢結束
+3504.TW    |   brain    |   43.4% |    1.19% | 觀望
+2903.TW    |   brain    |   51.4% |    0.56% | ☠ 立即止損
+5521.TW    | long_trend |   42.9% |    2.05% | 觀望
+4939.TWO   | reversion  |   59.4% |    3.80% | 觀望
+6669.TW    |   brain    |   52.2% |    1.24% | 觀望
+2421.TW    |   brain    |   49.5% |    1.34% | ☠ 立即止損
+1525.TW    | long_trend |   44.4% |    2.44% | 🚪 趨勢結束
+6239.TW    | long_trend |   48.5% |    1.64% | 觀望
+4577.TWO   |   brain    |   44.5% |    2.62% | 觀望
+00995A.TW  | strong_support |    0.0% |    0.00% | 觀望
+9907.TW    | momentum_burst |   51.1% |    1.09% | 觀望
+6830.TW    |   brain    |   46.7% |    1.43% | ★★★ 強力買進
+00891.TW   | strong_support |   67.5% |    2.01% | 觀望
+3010.TW    |   brain    |   49.4% |    0.32% | ☠ 立即止損
+2886.TW    | reversion  |   66.7% |   -0.49% | 觀望
+2376.TW    | long_trend |   51.2% |    2.06% | 🚪 趨勢結束
+6412.TW    |   brain    |   44.8% |    0.32% | ★★★ 強力買進
+6616.TWO   |   brain    |   45.3% |   -0.04% | ☠ 立即止損
+3019.TW    |   brain    |   48.4% |    1.59% | ☠ 立即止損
+3217.TWO   |   brain    |   48.9% |    0.38% | ☠ 立即止損
+3545.TW    | reversion  |   51.0% |    1.24% | 觀望
+6134.TWO   | strong_support |   49.7% |    3.80% | 觀望
+4534.TWO   |   brain    |   41.4% |    1.72% | 觀望
+6655.TW    | long_trend |   63.1% |    2.69% | 觀望
+2458.TW    |   brain    |   53.2% |    0.66% | ★★★ 強力買進
+1597.TW    |   brain    |   47.6% |    1.46% | ☠ 立即止損
+4131.TWO   | momentum_burst |   40.4% |    3.48% | 觀望
+6462.TWO   |   brain    |   47.5% |    1.52% | ☠ 立即止損
+3687.TWO   |   brain    |   38.8% |    1.02% | ☠ 立即止損
+3147.TWO   |   brain    |   52.6% |    2.49% | 觀望
+4523.TWO   |   brain    |   39.4% |    1.02% | 觀望
+00665L.TW  | reversion  |   60.0% |    2.30% | 觀望
+2328.TW    | long_trend |   55.7% |    6.13% | 🚪 趨勢結束
+6691.TW    |   brain    |   52.9% |    2.26% | 觀望
+1439.TW    |   brain    |   42.1% |    0.80% | ☠ 立即止損
+4915.TW    |   brain    |   53.2% |    0.35% | ☠ 立即止損
+0052.TW    | long_trend |   55.6% |    0.82% | 🚪 趨勢結束
+2241.TW    | strong_support |   56.4% |    0.76% | 觀望
+1213.TW    | long_trend |   50.7% |    6.37% | 🚪 趨勢結束
+4702.TWO   | long_trend |   50.0% |    0.53% | 🚪 趨勢結束
+5234.TW    |   brain    |   50.4% |    1.75% | 觀望
+2740.TWO   |   brain    |   40.3% |    0.42% | ☠ 立即止損
+1805.TW    | reversion  |   72.2% |    5.94% | 觀望
+2634.TW    | long_trend |   47.1% |    0.42% | 觀望
+2237.TWO   | reversion  |   53.1% |    9.12% | 觀望
+5487.TWO   | strong_support |   42.9% |    0.55% | 觀望
+00936.TW   |   brain    |   48.1% |    0.27% | ☠ 立即止損
+2363.TW    |   brain    |   43.4% |    1.02% | ☠ 立即止損
+8096.TWO   |   brain    |   44.0% |    1.37% | ☠ 立即止損
+6510.TWO   | long_trend |   62.3% |    6.99% | 觀望
+3645.TW    |   brain    |   48.0% |    1.21% | 觀望
+2414.TW    | strong_support |   58.6% |    0.51% | 觀望
+7749.TW    | long_trend |    0.0% |    0.00% | 觀望
+2355.TW    | reversion  |   70.6% |    4.00% | 💰 乖離修正賣出
+6907.TWO   |   brain    |  100.0% |   42.82% | 觀望
+2480.TW    | strong_support |   49.6% |    0.50% | 觀望
+2233.TW    |   brain    |   50.8% |    0.43% | ☠ 立即止損
+2330.TW    |   brain    |   53.9% |    0.78% | 觀望
+2385.TW    | long_trend |   49.7% |    0.40% | 🚪 趨勢結束
+1529.TW    | reversion  |   58.3% |    4.42% | 觀望
+3004.TW    |   brain    |   43.8% |    0.48% | ☠ 立即止損
+3230.TWO   |   brain    |   45.9% |    1.50% | 觀望
+6170.TWO   | strong_support |   45.6% |    0.71% | 觀望
+6727.TWO   |   brain    |   50.8% |    6.16% | 觀望
+3363.TWO   |   brain    |   53.3% |    3.00% | 觀望
+6121.TWO   | reversion  |   90.0% |    8.81% | 觀望
+8162.TW    | strong_support |   42.9% |    0.75% | 觀望
+8081.TW    |   brain    |   46.4% |    0.50% | 觀望
+4943.TW    |   brain    |   48.7% |    2.13% | 觀望
+1587.TW    | long_trend |   52.7% |    4.70% | 觀望
+2017.TW    | long_trend |   56.2% |    2.62% | 觀望
+2645.TW    |   brain    |   47.6% |    2.61% | 觀望
+6534.TW    | strong_support |   46.3% |    1.29% | 觀望
+009816.TW  | strong_support |    0.0% |    0.00% | 觀望
+6679.TWO   | reversion  |   54.5% |    2.72% | 💰 乖離修正賣出
+9110.TW    | long_trend |   43.5% |    3.22% | 🚪 趨勢結束
+9914.TW    | reversion  |   69.2% |    3.26% | 觀望
+2605.TW    |   brain    |   48.4% |    1.20% | ★★★ 強力買進
+3652.TW    | long_trend |   49.1% |    3.09% | 🚪 趨勢結束
+3162.TWO   | long_trend |   45.7% |    4.94% | 觀望
+3491.TWO   | long_trend |   59.0% |    8.37% | 觀望
+00857B.TWO | reversion  |    0.0% |    0.00% | 💰 乖離修正賣出
+1436.TW    | long_trend |   56.0% |    1.76% | 🚪 趨勢結束
+5864.TWO   | long_trend |   51.6% |    3.31% | 觀望
+6785.TWO   | momentum_burst |   56.2% |    8.20% | 觀望
+6603.TWO   | reversion  |   60.0% |    2.45% | 觀望
+3483.TWO   | long_trend |   51.6% |    4.28% | 🚪 趨勢結束
+6274.TWO   |   brain    |   51.2% |    1.00% | ☠ 立即止損
+8210.TW    | long_trend |   58.3% |    4.65% | 觀望
+2547.TW    | long_trend |   61.1% |    2.89% | 🚪 趨勢結束
+8183.TWO   | long_trend |   47.8% |    1.34% | 觀望
+8277.TWO   | reversion  |   61.3% |    1.54% | 觀望
+2820.TW    | momentum_burst |   54.4% |    0.27% | 觀望
+3042.TW    |   brain    |   49.3% |    0.46% | 觀望
+1563.TW    | reversion  |  100.0% |    8.56% | 觀望
+4934.TW    | reversion  |   53.8% |    1.11% | 💰 乖離修正賣出
+00772B.TWO | reversion  |  100.0% |   13.09% | 💰 乖離修正賣出
+6271.TW    | reversion  |   67.8% |    3.30% | 觀望
+2441.TW    |   brain    |   50.7% |    0.31% | ☠ 立即止損
+00992A.TW  | strong_support |    0.0% |    0.00% | 觀望
+8464.TW    | reversion  |   72.7% |    4.04% | 觀望
+2442.TW    | strong_support |   60.7% |    1.76% | 觀望
+3257.TW    | reversion  |   54.7% |    0.34% | 觀望
+8021.TW    |   brain    |   48.7% |    1.12% | 觀望
+6929.TWO   | long_trend |    0.0% |  -10.72% | 🚪 趨勢結束
+5381.TWO   |   brain    |   44.2% |    4.07% | 觀望
+00780B.TWO | reversion  |  100.0% |    6.02% | 💰 乖離修正賣出
+6565.TWO   |   brain    |   35.7% |   -0.07% | ☠ 立即止損
+8067.TWO   | reversion  |   60.0% |    2.65% | 💰 乖離修正賣出
+1402.TW    | strong_support |   53.3% |    0.18% | 🛡️ 支撐進場
+1313.TW    | long_trend |   45.7% |    1.83% | 🚀 長線突破
+3450.TW    |   brain    |   54.0% |    1.91% | 觀望
+6629.TWO   |   brain    |   48.4% |    1.16% | ☠ 立即止損
+3003.TW    | reversion  |   71.4% |    3.69% | 觀望
+00688L.TW  | strong_support |   47.9% |   -0.04% | 觀望
+4555.TW    | reversion  |   81.0% |    6.92% | 觀望
+6584.TWO   |   brain    |   43.8% |    2.10% | 觀望
+2444.TW    | long_trend |   52.2% |    1.79% | 觀望
+2323.TW    | strong_support |   48.1% |    1.55% | 觀望
+2368.TW    |   brain    |   51.8% |    2.03% | ☠ 立即止損
+9933.TW    | reversion  |   70.6% |    2.55% | 觀望
+5245.TWO   |   brain    |   45.0% |    1.64% | ☠ 立即止損
+6152.TW    | reversion  |   62.3% |    2.94% | 💰 乖離修正賣出
+6237.TWO   |   brain    |   45.9% |    1.03% | ☠ 立即止損
+3689.TWO   |   brain    |   51.9% |    1.28% | ☠ 立即止損
+3354.TWO   | strong_support |   51.7% |    1.24% | 觀望
+2890.TW    | strong_support |   53.5% |    0.38% | 觀望
+2486.TW    |   brain    |   43.3% |    1.74% | ☠ 立即止損
+7712.TWO   |   brain    |   50.9% |    5.59% | 觀望
+2066.TWO   | strong_support |   44.9% |    0.77% | 觀望
+2454.TW    | reversion  |   56.2% |    1.08% | 觀望
+5905.TWO   |   brain    |   46.0% |    0.42% | ☠ 立即止損
+6664.TWO   |   brain    |   53.6% |    1.30% | ☠ 立即止損
+00875.TW   | reversion  |  100.0% |    3.03% | 💰 乖離修正賣出
+6257.TW    | strong_support |   53.0% |    0.61% | 觀望
+6414.TW    | strong_support |   53.9% |    1.57% | 觀望
+1569.TWO   | long_trend |   47.2% |    2.27% | 🚪 趨勢結束
+4739.TW    | reversion  |   54.0% |    4.59% | 觀望
+6233.TWO   | reversion  |   58.9% |    2.90% | 💰 乖離修正賣出
+00990A.TW  |   brain    |   60.0% |    0.97% | 觀望
+2482.TW    | long_trend |   50.7% |    2.77% | 🚪 趨勢結束
+6869.TW    |   brain    |   50.4% |    4.46% | ★★★ 強力買進
+00687B.TWO | reversion  |    0.0% |    0.00% | 💰 乖離修正賣出
+3168.TW    | momentum_burst |   53.8% |    3.24% | 觀望
+2236.TW    |   brain    |   48.6% |    1.24% | ☠ 立即止損
+4804.TWO   | long_trend |   56.9% |    8.47% | 🚪 趨勢結束
+00877.TWO  |   brain    |   52.7% |    0.56% | 觀望
+3176.TWO   | reversion  |   47.2% |    4.07% | 觀望
+6206.TW    | long_trend |   47.6% |    3.72% | 🚪 趨勢結束
+4576.TW    | strong_support |   53.0% |    1.92% | 觀望
+3178.TWO   | long_trend |   46.0% |    2.40% | 觀望
+8043.TWO   |   brain    |   45.3% |    1.05% | ☠ 立即止損
+2338.TW    | long_trend |   50.4% |    3.56% | 觀望
+2597.TW    |   brain    |   47.9% |    0.86% | ☠ 立即止損
+3374.TWO   |   brain    |   46.7% |    1.49% | 觀望
+8086.TWO   |   brain    |   51.1% |    1.49% | 觀望
+6757.TW    |   brain    |   55.7% |    2.71% | ☠ 立即止損
+00725B.TWO | reversion  |  100.0% |   12.64% | 💰 乖離修正賣出
+^TWII      | reversion  |  100.0% |    6.70% | 觀望
+2855.TW    |   brain    |   50.8% |    0.76% | 觀望
+3032.TW    |   brain    |   52.4% |    1.39% | ☠ 立即止損
+1477.TW    | momentum_burst |   60.0% |    2.51% | 觀望
+6505.TW    | reversion  |   53.3% |    1.67% | 💰 乖離修正賣出
+2405.TW    | reversion  |   54.5% |    2.58% | 觀望
+00752.TW   | reversion  |   90.9% |    6.98% | 觀望
+3264.TWO   |   brain    |   55.9% |    1.25% | ☠ 立即止損
+8358.TWO   | long_trend |   59.7% |    5.24% | 觀望
+6983.TWO   |   brain    |   62.1% |    9.63% | 觀望
+00878.TW   |   brain    |   57.5% |    0.11% | ☠ 立即止損
+6568.TWO   |   brain    |   48.6% |    1.69% | 觀望
+6174.TWO   | strong_support |   43.5% |    1.20% | 🛡️ 支撐進場
+3623.TWO   |   brain    |   48.2% |    0.71% | 觀望
+6477.TW    | momentum_burst |   44.6% |    1.62% | 觀望
+6761.TWO   |   brain    |   40.0% |    1.66% | 觀望
+5483.TWO   |   brain    |   51.9% |    0.98% | ☠ 立即止損
+6742.TW    | reversion  |   48.6% |    0.37% | 觀望
+1340.TW    | reversion  |   57.1% |    2.47% | 觀望
+6770.TW    |   brain    |   47.4% |    3.65% | 觀望
+00655L.TW  | reversion  |   61.9% |    3.17% | 觀望
+2630.TW    | momentum_burst |   46.7% |    2.21% | 🔥 動能爆發
+3624.TWO   | long_trend |   44.0% |    2.75% | 觀望
+3135.TW    | long_trend |   42.9% |    2.34% | 觀望
+3085.TWO   | momentum_burst |   38.9% |    4.68% | 觀望
+8099.TWO   |   brain    |   47.0% |    2.16% | ☠ 立即止損
+3073.TWO   | long_trend |   34.8% |    6.99% | 🚪 趨勢結束
+2356.TW    | long_trend |   53.4% |    1.65% | 🚪 趨勢結束
+6838.TW    |   brain    |   40.5% |    1.33% | ☠ 立即止損
+6139.TW    |   brain    |   47.7% |    1.56% | ☠ 立即止損
+7709.TWO   | long_trend |   76.9% |   22.87% | 觀望
+1519.TW    |   brain    |   47.6% |    1.41% | ☠ 立即止損
+2239.TW    | reversion  |   61.1% |    3.65% | 觀望
+1235.TW    | long_trend |   54.9% |    2.29% | 🚪 趨勢結束
+8087.TWO   | momentum_burst |   44.9% |    3.18% | 觀望
+00887.TWO  | reversion  |   90.0% |    2.10% | 觀望
+00983A.TW  | long_trend |    0.0% |    0.00% | 觀望
+1504.TW    | long_trend |   47.5% |    0.60% | 🚪 趨勢結束
+4979.TWO   |   brain    |   45.9% |    1.93% | 觀望
+2436.TW    | strong_support |   47.0% |    0.37% | 觀望
+2027.TW    |   brain    |   48.1% |    1.00% | ☠ 立即止損
+00650L.TW  | reversion  |   76.0% |    3.79% | 觀望
+7786.TW    | reversion  |    0.0% |    0.00% | 觀望
+4971.TWO   |   brain    |   50.5% |    1.88% | 觀望
+3711.TW    | long_trend |   48.0% |    0.58% | 觀望
+5498.TWO   | long_trend |   59.6% |    5.91% | 觀望
+8033.TW    |   brain    |   41.1% |    1.06% | ★★★ 強力買進
+4967.TW    |   brain    |   49.6% |    2.79% | ☠ 立即止損
+1785.TWO   | long_trend |   47.9% |    3.97% | 🚪 趨勢結束
+3152.TWO   | momentum_burst |   49.6% |    1.59% | 觀望
+009805.TW  |   brain    |   68.3% |    1.58% | 觀望
+2467.TW    |   brain    |   52.9% |    1.72% | 觀望
+6782.TW    |   brain    |   52.7% |    2.32% | 觀望
+009817.TW  | strong_support |    0.0% |    0.00% | 觀望
+3653.TW    |   brain    |   49.6% |    1.54% | ☠ 立即止損
+8462.TW    | long_trend |   55.3% |    1.89% | 🚪 趨勢結束
+00680L.TW  | strong_support |   53.1% |    0.28% | 觀望
+8101.TW    | long_trend |   31.2% |   15.66% | 🚪 趨勢結束
