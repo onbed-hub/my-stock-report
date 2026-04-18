@@ -1,0 +1,125 @@
+
+    <!DOCTYPE html><html><head><meta charset='utf-8'><title>high 趨勢回測</title>
+    <style>
+        body { font-family: 'Segoe UI', "PingFang TC", "Microsoft JhengHei", sans-serif; padding: 50px; background: #f1f5f9; color: #0f172a; font-size: 1.6rem; }
+        .container { max-width: 1900px; margin: auto; }
+        .card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 40px; }
+        h2 { font-size: 3.5rem; color: #1e3a8a; text-align: center; margin-bottom: 5px; }
+        .time-info { text-align: center; color: #64748b; font-size: 1.4rem; margin-bottom: 30px; font-weight: bold; }
+        .rule-table { width: 100%; border-collapse: collapse; font-size: 1.4rem; margin-bottom: 20px; }
+        .rule-table th { background: #e2e8f0; padding: 20px; text-align: left; border: 1px solid #cbd5e1; }
+        .rule-table td { border: 1px solid #e2e8f0; padding: 20px; line-height: 1.5; }
+        .filter-group { display: flex; gap: 30px; margin-bottom: 30px; background: #1e293b; padding: 30px; border-radius: 15px; color: white; align-items: flex-end; }
+        .filter-item { display: flex; flex-direction: column; gap: 10px; }
+        select, input { padding: 15px; font-size: 1.5rem; border-radius: 10px; border: none; outline: none; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 1.6rem; }
+        .data-table th { background: #2563eb; color: white; padding: 25px 15px; cursor: pointer; position: sticky; top: 0; z-index: 10; }
+        .data-table td { padding: 20px 15px; border-bottom: 2px solid #f1f5f9; text-align: center; }
+        .sig-buy { color: #dc2626; font-weight: bold; background: #fef2f2; border-radius: 8px; }
+        .sig-hold { color: #2563eb; font-weight: bold; }
+        .hero { background: #fffde7 !important; border-left: 10px solid #fbbf24; }
+    </style>
+    </head>
+    <body><div class='container'>
+        <h2>HIGH 趨勢回測策略報告</h2>
+        <div class='time-info'>📅 分析日期：20260418 | 生成時間：2026-04-18 23:11</div>
+        
+    <div class="card">
+        <h3 style="font-size: 2.2rem; margin-bottom:20px; border-left: 10px solid #2563eb; padding-left:20px;">🛡️ V3 趨勢回測策略準則</h3>
+        
+        <h4 style="font-size: 1.8rem; color: #1e40af; margin: 20px 0 10px 0;">❶ 進場技術模型 (Entry Signal)</h4>
+        <table class="rule-table">
+            <thead>
+                <tr style="font-weight:bold; background: #f8fafc;">
+                    <th>指標名稱</th><th>判斷邏輯</th><th>策略含意</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="font-weight:bold;">均線多頭排佈</td>
+                    <td>MA_5 > MA_10 > MA_20</td>
+                    <td>確認短、中、長期趨勢同步向上，排除盤整干擾。</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold;">布林強勢突破</td>
+                    <td>收盤價 ≥ 上軌 (Upper Band) × 0.98</td>
+                    <td>動能爆發訊號，代表股價進入極強勢區域。</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold;">MACD 動能確認</td>
+                    <td>MACD OSC > 0 (紅柱)</td>
+                    <td>多方力道佔優，增加突破的真實性。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4 style="font-size: 1.8rem; color: #b91c1c; margin: 20px 0 10px 0;">💡 風控與出場機制 (Exit Logic)</h4>
+        <div style="background: #fff5f5; border: 1px solid #fecaca; padding: 25px; border-radius: 10px; line-height: 1.8;">
+            <p>• <b>硬性停損 (Hard Stop)：</b> 跌破買入價格之 <b>93% (-7%)</b> 時立即撤退，保護本金。</p>
+            <p>• <b>趨勢轉弱 (Trend Dead)：</b> 當價格跌破 <b>MA_20</b> 且 MACD 轉為負值，代表慣性改變，波段獲利了結。</p>
+        </div>
+    </div>
+    
+        
+    <div class="filter-group">
+        <div class="filter-item"><label>🔍 搜尋股號/名稱</label><input type="text" id="searchInput" onkeyup="filter()" placeholder="搜尋..."></div>
+        <div class="filter-item"><label>📊 累積獲利門檻</label>
+            <select id="pFilter" onchange="filter()">
+                <option value="-999">全部</option>
+                <option value="0">正收益 (>0%)</option>
+                <option value="20">顯著獲利 (>20%)</option>
+                <option value="30" selected>英雄榜 (>30%)</option>
+                <option value="50">強勢飆股 (>50%)</option>
+            </select>
+        </div>
+        <div class="filter-item"><label>🔥 今日訊號</label>
+            <select id="sFilter" onchange="filter()">
+                <option value="all">不限</option>
+                <option value="買入">🔥 買入</option>
+                <option value="持股">💎 持股</option>
+                <option value="賣出">❄️ 賣出</option>
+            </select>
+        </div>
+    </div>
+    
+        <div class='card'>
+            <table class='data-table' id='stockTable' data-order='desc'>
+                <thead><tr>
+                    <th onclick='sortTable(0,false)'>代號</th><th onclick='sortTable(1,false)'>名稱</th>
+                    <th onclick='sortTable(2,true)'>現價</th><th onclick='sortTable(3,false)'>今日訊號</th>
+                    <th onclick='sortTable(4,true)'>回測累積獲利</th><th onclick='sortTable(5,true)'>交易次數</th>
+                    <th onclick='sortTable(6,true)'>勝率</th><th>訊號理由</th>
+                </tr></thead>
+                <tbody><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/1711.TW'>1711.TW</a></td><td><span class='stock-name'>永光</span></td><td>47.95</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#059669'>44.55%</td><td>2</td><td>100.0%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3105.TWO'>3105.TWO</a></td><td><span class='stock-name'>穩懋</span></td><td>539.00</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#059669'>43.23%</td><td>3</td><td>33.33%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/4960.TW'>4960.TW</a></td><td><span class='stock-name'>誠美材</span></td><td>33.85</td><td class='sig-hold'>💎 持股</td><td style='font-weight:bold; color:#059669'>34.04%</td><td>3</td><td>33.33%</td><td style='text-align:left; font-size:1.4rem;'>趨勢維持</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/4919.TW'>4919.TW</a></td><td><span class='stock-name'>新唐</span></td><td>129.00</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#059669'>33.22%</td><td>2</td><td>100.0%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2402.TW'>2402.TW</a></td><td><span class='stock-name'>毅嘉</span></td><td>77.70</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#059669'>18.36%</td><td>1</td><td>100.0%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/4540.TW'>4540.TW</a></td><td><span class='stock-name'>全球傳動</span></td><td>57.90</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#059669'>8.97%</td><td>2</td><td>50.0%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2404.TW'>2404.TW</a></td><td><span class='stock-name'>漢唐</span></td><td>1025.00</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#059669'>8.25%</td><td>3</td><td>33.33%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/6548.TWO'>6548.TWO</a></td><td><span class='stock-name'>長科*</span></td><td>54.70</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#059669'>2.92%</td><td>2</td><td>50.0%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/4958.TW'>4958.TW</a></td><td><span class='stock-name'>臻鼎-KY</span></td><td>282.00</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#059669'>0.05%</td><td>2</td><td>50.0%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/8261.TW'>8261.TW</a></td><td><span class='stock-name'>富鼎</span></td><td>127.50</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#dc2626'>-0.02%</td><td>3</td><td>33.33%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/1785.TWO'>1785.TWO</a></td><td><span class='stock-name'>光洋科</span></td><td>156.00</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#dc2626'>-6.33%</td><td>2</td><td>0.0%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/6278.TW'>6278.TW</a></td><td><span class='stock-name'>台表科</span></td><td>157.00</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#dc2626'>-6.42%</td><td>2</td><td>0.0%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/5425.TWO'>5425.TWO</a></td><td><span class='stock-name'>台半</span></td><td>65.70</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#dc2626'>-7.23%</td><td>2</td><td>0.0%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3339.TWO'>3339.TWO</a></td><td><span class='stock-name'>泰谷</span></td><td>69.30</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#dc2626'>-10.31%</td><td>3</td><td>33.33%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3437.TW'>3437.TW</a></td><td><span class='stock-name'>榮創</span></td><td>27.20</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#dc2626'>-10.8%</td><td>3</td><td>33.33%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/6415.TW'>6415.TW</a></td><td><span class='stock-name'>矽力*-KY</span></td><td>332.50</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#dc2626'>-10.95%</td><td>2</td><td>0.0%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/6173.TWO'>6173.TWO</a></td><td><span class='stock-name'>信昌電</span></td><td>92.20</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#dc2626'>-16.73%</td><td>3</td><td>0.0%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2481.TW'>2481.TW</a></td><td><span class='stock-name'>強茂</span></td><td>118.00</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#dc2626'>-17.88%</td><td>3</td><td>0.0%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/8358.TWO'>8358.TWO</a></td><td><span class='stock-name'>金居</span></td><td>367.50</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#dc2626'>-18.9%</td><td>3</td><td>0.0%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/8111.TWO'>8111.TWO</a></td><td><span class='stock-name'>立��</span></td><td>79.20</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#dc2626'>-30.34%</td><td>4</td><td>0.0%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/1815.TWO'>1815.TWO</a></td><td><span class='stock-name'>富喬</span></td><td>127.00</td><td class='sig-buy'>🔥 買入</td><td style='font-weight:bold; color:#dc2626'>-32.12%</td><td>4</td><td>0.0%</td><td style='text-align:left; font-size:1.4rem;'>趨勢突破</td></tr></tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+    function filter() {
+        const sVal = document.getElementById("searchInput").value.toUpperCase();
+        const pLimit = parseFloat(document.getElementById("pFilter").value);
+        const sLimit = document.getElementById("sFilter").value;
+        const rows = Array.from(document.getElementById("stockTable").tBodies[0].rows);
+
+        rows.forEach(r => {
+            const mText = r.cells[0].innerText.includes(sVal) || r.cells[1].innerText.includes(sVal);
+            const mPnl = parseFloat(r.cells[4].innerText) >= pLimit;
+            const mSig = (sLimit === "all") || r.cells[3].innerText.includes(sLimit);
+            r.style.display = (mText && mPnl && mSig) ? "" : "none";
+        });
+    }
+    function sortTable(n, isNum) {
+        const table = document.getElementById("stockTable");
+        const rows = Array.from(table.tBodies[0].rows);
+        const dir = table.getAttribute("data-order") === "asc" ? "desc" : "asc";
+        table.setAttribute("data-order", dir);
+        rows.sort((a, b) => {
+            let x = a.cells[n].innerText.replace('%','');
+            let y = b.cells[n].innerText.replace('%','');
+            return dir === "asc" ? (parseFloat(x)-parseFloat(y)) : (parseFloat(y)-parseFloat(x));
+        });
+        rows.forEach(r => table.tBodies[0].appendChild(r));
+    }
+    </script>
+    </body></html>
+    
