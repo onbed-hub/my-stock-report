@@ -26,50 +26,54 @@
     </head>
     <body><div class='container'>
         <h2>量化獲利品質診斷報告</h2>
-        <div class='time-info'>📅 基準日期：20260417 | 生成時間：2026-04-18 21:52</div>
+        <div class='time-info'>📅 基準日期：20260417 | 生成時間：2026-04-18 22:16</div>
         
-    <div class="card">
-        <h3 style="font-size: 2.2rem; margin-bottom:20px; border-left: 10px solid #2563eb; padding-left:20px;">📊 獲利品質與估值準則</h3>
-        <h4 style="font-size: 1.8rem; color: #1e40af; margin: 20px 0 10px 0;">❶ 估值參考指標</h4>
-        <table class="rule-table" style="margin-bottom: 30px;">
-            <thead><tr style="font-weight:bold; background: #f8fafc;"><th>指標名稱</th><th>計算邏輯</th><th>判讀方式</th></tr></thead>
+    <div class="advice-section" style="background: #f8fafc; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0; margin: 1rem 0;">
+        <h3 style="margin-top: 0; color: #1e293b;">💡 操作建議標籤說明 (Advice Logic)</h3>
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; line-height: 1.5;">
+            <thead>
+                <tr style="border-bottom: 2px solid #cbd5e1; text-align: left; background: #f1f5f9;">
+                    <th style="padding: 10px;">建議標籤</th>
+                    <th style="padding: 10px;">適用情境 (EPS 成長 & 估值)</th>
+                    <th style="padding: 10px;">操作說明與風險提示</th>
+                </tr>
+            </thead>
             <tbody>
-                <tr><td style="font-weight:bold;">本益比 (PE)</td><td>現價 / 近四季 EPS 總和</td><td>反映回本年數。15 倍為合理中軸，低於 12 倍相對便宜。</td></tr>
-                <tr><td style="font-weight:bold; color:#2563eb;">15X 推估價</td><td>近四季 EPS 總和 × 15</td><td>量化合理價基準。若目前股價低於此值，代表具備估值優勢。</td></tr>
-            </tbody>
-        </table>
-
-        <h4 style="font-size: 1.8rem; color: #b91c1c; margin: 20px 0 10px 0;">💡 關鍵計算：利潤空間 (Profit Expansion)</h4>
-        <div style="background: #fff5f5; border: 1px solid #fecaca; padding: 20px; border-radius: 10px; margin-bottom: 30px; line-height: 1.8;">
-            <p style="margin: 0;"><b>算法：</b> <code style="background: #fee2e2; padding: 2px 8px; border-radius: 4px;">利潤空間 = EPS 年增率 (YoY) - 營收年增率 (YoY)</code></p>
-            <p style="margin: 10px 0 0 0; color: #475569;">
-                <b>解釋：</b> 此指標用來衡量「獲利成長是否跑贏營收成長」。<br>
-                • <b>大於 0% (正值)：</b> 代表「獲利品質提升」。可能是毛利率拉高、費用率降低或具備規模經濟優勢。<br>
-                • <b>小於 0% (負值)：</b> 代表「獲利遭到侵蝕」。生意雖然變大，但被成本、費用或低價競爭吃掉利潤。
-            </p>
-        </div>
-
-        <h4 style="font-size: 1.8rem; color: #1e40af; margin: 20px 0 10px 0;">❷ 經營策略深度解析</h4>
-        <table class="rule-table">
-            <thead><tr style="font-weight:bold; background: #f8fafc;"><th>診斷標籤</th><th>數學模型</th><th>經營策略深度解析</th></tr></thead>
-            <tbody>
-                <tr><td>🚀 利潤擴張</td><td>ΔEPS > ΔRev > 0</td><td>規模經濟優化：獲利動能領先營收。代表產品具定價權或固定成本大幅攤提。</td></tr>
-                <tr><td>📈 穩健同步</td><td>ΔRev ≈ ΔEPS > 0</td><td>健康營運：獲利隨業務等比例增加，經營效能維持在穩定水位。</td></tr>
-                <tr><td>⚠️ 獲利稀釋</td><td>ΔRev > ΔEPS > 0</td><td>效率警訊：生意變大但利潤成長跟不上，受成本上升或削價競爭影響。</td></tr>
-                <tr><td>📉 獲利侵蝕</td><td>ΔRev > 0 且 ΔEPS < 0</td><td>邊際貢獻崩壞：營收增、獲利跌。經營陷入「白忙一場」的結構性惡化。</td></tr>
-                <tr><td>🧐 疑業外收益</td><td>ΔRev < 0 且 ΔEPS > 0</td><td>獲利虛胖：本業衰退但EPS上升。需嚴防資產處分或匯兌收益一次性干擾。</td></tr>
-                <tr><td>🔄 轉虧為盈</td><td>Prev EPS < 0 < EPS</td><td>基期反轉：從虧損轉為獲利，需觀察獲利是否具備續航力。</td></tr>
-                <tr><td>🌑 雙重衰退</td><td>ΔRev < 0 且 ΔEPS < 0</td><td>衰退警訊：營收與獲利同步縮減。</td></tr>
-            </tbody>
-        </table>
-
-        <h4 style="font-size: 1.8rem; color: #059669; margin: 20px 0 10px 0;">❸ 操作建議說明 (Advice)</h4>
-        <table class="rule-table">
-            <thead><tr style="font-weight:bold; background: #f8fafc;"><th>建議標籤</th><th>適用情境</th><th>動作說明</th></tr></thead>
-            <tbody>
-                <tr><td style="color:#b91c1c; font-weight:bold;">💎 強力關注</td><td>利潤空間 > 10% 且 PE < 12</td><td>具備極高獲利品質且估值顯著低估。</td></tr>
-                <tr><td style="color:#92400e; font-weight:bold;">✅ 穩健價值</td><td>利潤空間 > 0% 且 PE < 16</td><td>獲利能力提升且股價處於合理範圍。</td></tr>
-                <tr><td style="color:#475569;">⚪ 中性觀察 / ❌ 暫避</td><td>利潤空間 < 0% 或 PE 高</td><td>獲利遭稀釋或市場溢價過高。</td></tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 10px;"><b>💎 強力關注</b></td>
+                    <td style="padding: 10px;">利潤空間 &gt; 10% 且 PE &lt; 12</td>
+                    <td style="padding: 10px;"><b>低估成長股：</b> 獲利爆發但股價尚未反應，具備戴維斯雙擊潛力。</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 10px;"><b>✅ 穩健價值</b></td>
+                    <td style="padding: 10px;">利潤空間 &gt; 0% 且 PE &lt; 16</td>
+                    <td style="padding: 10px;"><b>體質優化：</b> 獲利穩定墊高且估值合理，適合中長線分批布局。</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 10px;"><b>📈 轉機確認</b></td>
+                    <td style="padding: 10px;">利潤空間由負轉正 (轉虧為盈)</td>
+                    <td style="padding: 10px;"><b>基本面拐點：</b> 營運脫離谷底，初期 PE 雖高但具備強烈反彈動能。</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 10px;"><b>⚠️ 成長趨緩</b></td>
+                    <td style="padding: 10px;">利潤空間 -5% ~ 0% 或 PE 18-22</td>
+                    <td style="padding: 10px;"><b>動能轉弱：</b> 獲利開始縮水，若股價在高點需防範利多出盡的修正。</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 10px;"><b>❌ 價值陷阱</b></td>
+                    <td style="padding: 10px;">利潤空間 &lt; -10% 但 PE &lt; 8</td>
+                    <td style="padding: 10px;"><b>假便宜：</b> 低 PE 是因為過去表現好，未來獲利大幅萎縮將導致 PE 暴增。</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 10px;"><b>🚫 泡沫風險</b></td>
+                    <td style="padding: 10px;">利潤空間 &lt; 0% 且 PE &gt; 25</td>
+                    <td style="padding: 10px;"><b>嚴重高估：</b> 典型情緒溢價區，獲利倒退且股價過貴，應避開追高風險。</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 10px;"><b>⚪ 中性觀察</b></td>
+                    <td style="padding: 10px;">不符合上述任一條件</td>
+                    <td style="padding: 10px;"><b>表現平淡：</b> 獲利與估值處於常態區間，缺乏明確的操作訊號。</td>
+                </tr>
             </tbody>
         </table>
     </div>
