@@ -26,7 +26,7 @@
     </head>
     <body><div class='container'>
         <h2>量化獲利品質診斷報告</h2>
-        <div class='time-info'>📅 基準日期：20260417 | 生成時間：2026-04-18 19:12</div>
+        <div class='time-info'>📅 基準日期：20260417 | 生成時間：2026-04-18 19:23</div>
         
     <div class="card">
         <h3 style="font-size: 2.2rem; margin-bottom:20px; border-left: 10px solid #2563eb; padding-left:20px;">📊 獲利品質與估值準則</h3>
@@ -77,21 +77,33 @@
         <div class="filter-item"><label>🔍 搜尋股號或名稱</label><input type="text" id="searchInput" onkeyup="filter()" placeholder="輸入代碼或名稱..."></div>
         <div class="filter-item"><label>🔎 狀態篩選</label>
             <select id="statusSelect" onchange="filter()">
-                <option value="all">顯示全部</option><option value="🚀">🚀 利潤擴張</option><option value="📈">📈 穩健同步</option>
-                <option value="⚠️">⚠️ 獲利稀釋</option><option value="📉">📉 獲利侵蝕</option><option value="🔄">🔄 轉虧為盈</option>
+                <option value="all">顯示全部</option>
+                <option value="🚀">🚀 利潤擴張</option>
+                <option value="📈">📈 穩健同步</option>
+                <option value="⚠️">⚠️ 獲利稀釋</option>
+                <option value="📉">📉 獲利侵蝕</option>
+                <option value="🧐">🧐 疑業外收益</option>
+                <option value="🔄">🔄 轉虧為盈</option>
+                <option value="🌑">🌑 雙重衰退</option>
             </select>
         </div>
         <div class="filter-item"><label>📊 利潤空間</label>
             <select id="expSelect" onchange="filter()">
-                <option value="all">不限</option><option value="positive">利潤空間 > 0%</option><option value="high">利潤空間 > 10%</option>
+                <option value="all">不限</option>
+                <option value="high_plus">極高成長 (>20%)</option>
+                <option value="positive">獲利優化 (>0%)</option>
+                <option value="negative">獲利衰退 (<0%)</option>
+                <option value="danger">嚴重侵蝕 (<-10%)</option>
             </select>
         </div>
         <div class="filter-item"><label>💡 建議篩選</label>
             <select id="adviceSelect" onchange="filter()">
                 <option value="all">顯示全部建議</option>
-                <option value="強烈關注">🔥 強烈關注</option>
-                <option value="值得關注">👀 值得關注</option>
-                <option value="觀望">⚪ 觀望 / 警訊</option>
+                <option value="強力關注">💎 強力關注</option>
+                <option value="穩健價值">✅ 穩健價值</option>
+                <option value="追價風險">⚠️ 追價風險</option>
+                <option value="暫避觀望">❌ 暫避觀望</option>
+                <option value="中性觀察">⚪ 中性觀察</option>
             </select>
         </div>
     </div>

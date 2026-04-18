@@ -26,7 +26,7 @@
     </head>
     <body><div class='container'>
         <h2>量化獲利品質診斷報告</h2>
-        <div class='time-info'>📅 基準日期：20260410 | 生成時間：2026-04-18 18:37</div>
+        <div class='time-info'>📅 基準日期：20260410 | 生成時間：2026-04-18 19:24</div>
         
     <div class="card">
         <h3 style="font-size: 2.2rem; margin-bottom:20px; border-left: 10px solid #2563eb; padding-left:20px;">📊 獲利品質與估值準則</h3>
@@ -77,21 +77,33 @@
         <div class="filter-item"><label>🔍 搜尋股號或名稱</label><input type="text" id="searchInput" onkeyup="filter()" placeholder="輸入代碼或名稱..."></div>
         <div class="filter-item"><label>🔎 狀態篩選</label>
             <select id="statusSelect" onchange="filter()">
-                <option value="all">顯示全部</option><option value="🚀">🚀 利潤擴張</option><option value="📈">📈 穩健同步</option>
-                <option value="⚠️">⚠️ 獲利稀釋</option><option value="📉">📉 獲利侵蝕</option><option value="🔄">🔄 轉虧為盈</option>
+                <option value="all">顯示全部</option>
+                <option value="🚀">🚀 利潤擴張</option>
+                <option value="📈">📈 穩健同步</option>
+                <option value="⚠️">⚠️ 獲利稀釋</option>
+                <option value="📉">📉 獲利侵蝕</option>
+                <option value="🧐">🧐 疑業外收益</option>
+                <option value="🔄">🔄 轉虧為盈</option>
+                <option value="🌑">🌑 雙重衰退</option>
             </select>
         </div>
         <div class="filter-item"><label>📊 利潤空間</label>
             <select id="expSelect" onchange="filter()">
-                <option value="all">不限</option><option value="positive">利潤空間 > 0%</option><option value="high">利潤空間 > 10%</option>
+                <option value="all">不限</option>
+                <option value="high_plus">極高成長 (>20%)</option>
+                <option value="positive">獲利優化 (>0%)</option>
+                <option value="negative">獲利衰退 (<0%)</option>
+                <option value="danger">嚴重侵蝕 (<-10%)</option>
             </select>
         </div>
         <div class="filter-item"><label>💡 建議篩選</label>
             <select id="adviceSelect" onchange="filter()">
                 <option value="all">顯示全部建議</option>
-                <option value="強烈關注">🔥 強烈關注</option>
-                <option value="值得關注">👀 值得關注</option>
-                <option value="觀望">⚪ 觀望 / 警訊</option>
+                <option value="強力關注">💎 強力關注</option>
+                <option value="穩健價值">✅ 穩健價值</option>
+                <option value="追價風險">⚠️ 追價風險</option>
+                <option value="暫避觀望">❌ 暫避觀望</option>
+                <option value="中性觀察">⚪ 中性觀察</option>
             </select>
         </div>
     </div>
@@ -129,31 +141,36 @@
         const sVal = document.getElementById("searchInput").value.toUpperCase();
         const stat = document.getElementById("statusSelect").value;
         const exp = document.getElementById("expSelect").value;
-        const adv = document.getElementById("adviceSelect").value; // 抓取建議過濾值
-        
+        const adv = document.getElementById("adviceSelect").value;
+
         const all = Array.from(document.getElementById("stockTable").tBodies[0].rows);
 
         filteredRows = all.filter(r => {
             // 0:代號, 1:名稱
-            const mS = r.cells[0].innerText.toUpperCase().includes(sVal) || 
+            const mS = r.cells[0].innerText.toUpperCase().includes(sVal) ||
                        r.cells[1].innerText.toUpperCase().includes(sVal);
+
+            // --- 修正索引開始 ---
             
-            // 11: 診斷狀態 (原本是 10，因為多了 EPS 欄位所以變成 11)
-            const mSt = stat === "all" || r.cells[11].innerText.includes(stat);
-            
-            // 10: 利潤空間 (原本是 9)
-            const valExp = parseFloat(r.cells[10].innerText);
-            const mEx = (exp === "all") || 
-                        (exp === "positive" && valExp > 0) || 
+            // 9: 利潤空間 (Expansion)
+            const valExp = parseFloat(r.cells[9].innerText);
+            const mEx = (exp === "all") ||
+                        (exp === "positive" && valExp > 0) ||
                         (exp === "high" && valExp > 10);
+
+            // 10: 診斷狀態 (Status)
+            const mSt = stat === "all" || r.cells[10].innerText.includes(stat);
+
+            // 11: 操作建議 (Advice)
+            const mAd = (adv === "all") || r.cells[11].innerText.includes(adv);
             
-            // 12: 操作建議 (原本是 11)
-            const mAd = (adv === "all") || r.cells[12].innerText.includes(adv);
-            
+            // --- 修正索引結束 ---
+
             return mS && mSt && mEx && mAd;
         });
         currentPage = 1; update();
     }
+
     function sortTable(n, isNum) {
         const table = document.getElementById("stockTable");
         const tbody = table.tBodies[0];
