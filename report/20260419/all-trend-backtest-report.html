@@ -21,7 +21,7 @@
     </head>
     <body><div class='container'>
         <h2>📈 ALL 趨勢回測策略報告 (V3 Pro)</h2>
-        <div style="text-align:center; font-weight:bold; color:#64748b; margin-bottom:30px;">📅 分析日期：20260419 | 生成時間：2026-04-19 02:45</div>
+        <div style="text-align:center; font-weight:bold; color:#64748b; margin-bottom:30px;">📅 分析日期：20260419 | 生成時間：2026-04-19 02:58</div>
         
         
     <div class="card">
@@ -116,17 +116,29 @@
             });
         }, 150);
     }
-
     async function showLog(id) {
         const modal = document.getElementById("logModal");
         const content = document.getElementById("logContent");
-        document.getElementById("logTitle").innerText = "📄 詳細交易日誌: " + id;
+        
+        // 修正：對接檔名，移除 .TW 等後綴
+        const pureId = id.split('.')[0];
+        const fileName = `${pureId}-trend-backtest-report.txt`;
+        
+        document.getElementById("logTitle").innerText = "📄 詳細交易日誌: " + pureId;
         modal.style.display = "block";
         content.innerText = "讀取中...";
+
         try {
-            let res = await fetch(`${id}-trend-backtest-report.txt`);
-            content.innerText = res.ok ? await res.text() : "⚠️ 找不到日誌檔 (${id}-trend-backtest-report.txt)";
-        } catch(e) { content.innerText = "讀取失敗"; }
+            let res = await fetch(fileName);
+            if (res.ok) {
+                content.innerText = await res.text();
+            } else {
+                content.innerHTML = `<p style='color:#ef4444; font-weight:bold;'>⚠️ 找不到日誌檔</p>` +
+                                    `<p style='font-size:1.2rem; color:#64748b;'>嘗試讀取: ${fileName}</p>`;
+            }
+        } catch(e) {
+            content.innerText = "連線失敗: " + e.message;
+        }
     }
     function closeModal() { document.getElementById("logModal").style.display = "none"; }
     window.onclick = (e) => { if(e.target == document.getElementById("logModal")) closeModal(); }
