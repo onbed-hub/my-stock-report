@@ -1,0 +1,76 @@
+
+    <!DOCTYPE html><html><head><meta charset='utf-8'><title>V3 Pro 報告</title>
+    <style>
+        body { font-family: 'Segoe UI', "PingFang TC", "Microsoft JhengHei", sans-serif; padding: 50px; background: #f1f5f9; color: #0f172a; font-size: 1.6rem; }
+        .container { max-width: 1900px; margin: auto; }
+        .card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 40px; }
+        h2 { font-size: 3.5rem; color: #1e3a8a; text-align: center; margin-bottom: 5px; }
+        .rule-table { width: 100%; border-collapse: collapse; font-size: 1.4rem; margin-bottom: 20px; }
+        .rule-table th { background: #e2e8f0; padding: 20px; text-align: left; border: 1px solid #cbd5e1; }
+        .rule-table td { border: 1px solid #e2e8f0; padding: 20px; line-height: 1.5; }
+        .filter-group { display: flex; gap: 30px; margin-bottom: 30px; background: #1e293b; padding: 30px; border-radius: 15px; color: white; align-items: flex-end; }
+        .filter-item { display: flex; flex-direction: column; gap: 10px; }
+        select, input { padding: 15px; font-size: 1.5rem; border-radius: 10px; border: none; }
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table th { background: #2563eb; color: white; padding: 20px; cursor: pointer; position: sticky; top: 0; }
+        .data-table td { padding: 18px; border-bottom: 2px solid #f1f5f9; text-align: center; }
+        .hero { background: #fffde7 !important; border-left: 10px solid #fbbf24; }
+        .sig-buy { color: #dc2626; font-weight: bold; background: #fef2f2; padding: 5px 10px; border-radius: 5px; }
+    </style>
+    </head>
+    <body><div class='container'>
+        <h2>ALL 趨勢回測策略報告 (V3 Pro)</h2>
+        <div style="text-align:center; font-weight:bold; color:#64748b; margin-bottom:30px;">📅 分析日期：20260419 | 生成時間：2026-04-19 01:29</div>
+        
+    <div class="card">
+        <h3 style="font-size: 2.2rem; color: #1e3a8a; border-left: 10px solid #2563eb; padding-left:20px;">🛡️ V3 Pro 趨勢與動態風控準則</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px;">
+            <div>
+                <h4 style="color: #1e40af;">❶ 進場嚴選 (Entry Filter)</h4>
+                <ul style="font-size: 1.4rem; line-height: 2;">
+                    <li><b>均線多頭：</b> MA 5 > 10 > 20 (波段確立)</li>
+                    <li><b>布林突破：</b> 股價觸及上軌 98% (動能爆發)</li>
+                    <li><b>防 FOMO 機制：</b> 20日乖離率 (BIAS) < 8.0 (避開過熱)</li>
+                    <li><b>實體辨識：</b> 紅棒實體須大於上影線 1.6 倍 (過濾假突破)</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #b91c1c;">❷ 風控與停利 (Exit Management)</h4>
+                <ul style="font-size: 1.4rem; line-height: 2;">
+                    <li><b>ATR 動態止損：</b> 以進場點 - 2倍ATR 作為硬止損線</li>
+                    <li><b>趨勢雙重確認：</b> 收盤價 < MA20 且 MACD 翻負連兩日</li>
+                    <li><b>移動停利 (Trailing)：</b> 獲利達 15% 後，若從高點回落 10% 鎖利</li>
+                    <li><b>弱勢過濾 (WeakFail)：</b> 持股 10 日未脫離成本且跌破 ATR 線</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+        <div class="filter-group">
+            <div class="filter-item"><label>🔍 搜尋股號/名稱</label><input type="text" id="searchInput" onkeyup="filter()"></div>
+            <div class="filter-item"><label>📊 獲利門檻</label>
+                <select id="pFilter" onchange="filter()">
+                    <option value="-999">全部</option><option value="20">20%</option><option value="50">50%</option>
+                    <option value="70">70%</option><option value="100">100%</option>
+                </select>
+            </div>
+        </div>
+        <div class='card'><table class='data-table' id='stockTable'>
+            <thead><tr><th>代號</th><th>名稱</th><th>現價</th><th>訊號</th><th>累積獲利</th><th>次數</th><th>勝率</th><th>理由</th></tr></thead>
+            <tbody><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/6715.TW/technical-analysis'>6715.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("6715.TW")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>嘉基</a></td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>231.36%</td><td>1</td><td>100.0%</td><td>趨勢維持</td></tr></tbody>
+        </table></div>
+    </div>
+    <script>
+    function filter() {
+        let s = document.getElementById("searchInput").value.toUpperCase();
+        let p = parseFloat(document.getElementById("pFilter").value);
+        let rows = Array.from(document.getElementById("stockTable").tBodies[0].rows);
+        rows.forEach(r => {
+            let mText = r.cells[0].innerText.includes(s) || r.cells[1].innerText.includes(s);
+            let mPnl = parseFloat(r.cells[4].innerText.replace('%','')) >= p;
+            r.style.display = (mText && mPnl) ? "" : "none";
+        });
+    }
+    </script>
+    </body></html>
+    
