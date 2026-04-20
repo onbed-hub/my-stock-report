@@ -1,0 +1,481 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <title>CIS 泥鰍量化報表系統</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+        <style>
+            body { font-family: "Microsoft JhengHei", sans-serif; padding: 25px; background-color: #f4f7f6; }
+            .container { max-width: 98%; margin: auto; }
+            .header-box { background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); color: white; padding: 35px; border-radius: 12px; margin-bottom: 25px; }
+            .header-box h1 { margin: 0; font-size: 3em; }
+            .stats-period { font-size: 1.5em; margin-top: 10px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 15px; }
+
+            .condition-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 25px; }
+            .card { background: rgba(0,0,0,0.2); padding: 25px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); }
+            .card h3 { color: #ffd700; font-size: 1.8em; margin-top: 0; }
+            .card li { font-size: 1.3em; line-height: 1.6; margin-bottom: 10px; color: #fff; list-style: none; }
+            .card b { color: #ffd700; }
+
+            .loach-detail { background: rgba(255, 255, 255, 0.1); margin-top: 20px; padding: 20px; border-radius: 8px; border-left: 8px solid #ffd700; }
+            .loach-detail h4 { color: #ffd700; margin: 0 0 10px 0; font-size: 1.6em; }
+            .loach-detail p { font-size: 1.3em; line-height: 1.5; margin: 5px 0; color: #eee; }
+
+            .filter-area { 
+                background: #fff; padding: 20px 30px; border-radius: 8px; margin-bottom: 20px; 
+                display: flex; align-items: center; gap: 40px; 
+            }
+            .filter-group { display: flex; align-items: center; font-size: 24px; font-weight: bold; color: #1a2a6c; }
+            #statusFilter, .dataTables_filter input { 
+                font-size: 22px !important; padding: 10px; border-radius: 8px; border: 2px solid #1a2a6c; margin-left: 15px;
+            }
+
+            .dataTables_filter label { font-size: 0; color: transparent; }
+            .dataTables_filter label::before { 
+                content: "🔍 關鍵字搜尋："; font-size: 24px; color: #1a2a6c; font-weight: bold; vertical-align: middle;
+            }
+
+            #reportTable th { background-color: #f8f9fa; color: #1a2a6c; font-size: 24px !important; padding: 20px !important; border-bottom: 4px solid #1a2a6c !important; }
+            #reportTable td { font-size: 24px !important; padding: 18px 12px !important; text-align: center; }
+            .advice-cell { text-align: left !important; background-color: #fffde7 !important; min-width: 500px; line-height: 1.5; font-size: 22px !important; color: #333; }
+            #reportTable td a { text-decoration: none; color: #1a2a6c; font-weight: bold; border-bottom: 2px solid #1a2a6c; display: block; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header-box">
+                <h1>🐟 CIS 泥鰍波段分析報表</h1>
+                <div class="stats-period">📊 統計起點：2026-01-01 | 分析基準日：2026-04-20</div>
+                
+                <div class="condition-grid">
+                    <div class="card">
+                        <h3>📈 購買條件 (Buy Setup)</h3>
+                        <ul>
+                            <li><b>1. 趨勢過濾：</b>長線 MA20 必須保持「平坦」或「上揚」狀態。</li>
+                            <li><b>2. 訊號觸發：</b>收盤價必須「由下往上」帶量突破 MA5。</li>
+                            <li><b>3. 泥鰍限量：</b>僅參與該段趨勢的第 1 與第 2 次突破。</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>📉 賣出條件 (Sell Setup)</h3>
+                        <ul>
+                            <li><b>1. 確認法邏輯：</b>收盤價「跌破 MA5」視為警報。</li>
+                            <li><b>2. 二日確認：</b>若「連續兩日」無法收復 MA5，則動能消失。</li>
+                            <li><b>3. 執行紀律：</b>確認後的次日開盤立即「全數賣出」。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="loach-detail">
+                    <h4>🌊 三隻泥鰍詳細心法補充</h4>
+                    <p><b>第 1 隻 (初生)：</b>趨勢翻轉首度站上 MA5。此時市場多疑，空間最大，為核心建倉區。</p>
+                    <p><b>第 2 隻 (主升)：</b>首度拉回測 MA5 不破後再噴發。趨勢已確認，為最佳加碼或第二進場點。</p>
+                    <p><b>第 3 隻 (末升)：</b>高位盤旋、乖離已大。依 CIS 心法「不吃魚尾」，此時建議觀望不開新倉。</p>
+                </div>
+            </div>
+
+            <div class="filter-area">
+                <div class="filter-group">
+                    🎯 狀態篩選：<select id="statusFilter"><option value="">顯示所有股票</option></select>
+                </div>
+                <div id="search_target" class="filter-group"></div>
+            </div>
+
+            <table id="reportTable" border="1" class="dataframe display cell-border">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股號</th>
+      <th>名稱</th>
+      <th>現價</th>
+      <th>隔日勝率</th>
+      <th>5日勝率</th>
+      <th>收益%</th>
+      <th>目前狀態</th>
+      <th>階段</th>
+      <th>交易次數</th>
+      <th>MA5</th>
+      <th>MA20趨勢</th>
+      <th>專業建議</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2317</td>
+      <td>鴻海</td>
+      <td>206.00</td>
+      <td>36.6%</td>
+      <td>45.0%</td>
+      <td>165.51%</td>
+      <td>🚫 建議賣出</td>
+      <td>第 0 隻</td>
+      <td>2</td>
+      <td>▲</td>
+      <td>▼</td>
+      <td>🛡️ 確認法離場：收盤連續兩日跌破 MA5，動能已失，請依紀律執行賣出。</td>
+    </tr>
+    <tr>
+      <td>3702</td>
+      <td>大聯大</td>
+      <td>98.80</td>
+      <td>44.3%</td>
+      <td>49.6%</td>
+      <td>68.51%</td>
+      <td>🚫 建議賣出</td>
+      <td>第 3 隻</td>
+      <td>10</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>🛡️ 確認法離場：收盤連續兩日跌破 MA5，動能已失，請依紀律執行賣出。</td>
+    </tr>
+    <tr>
+      <td>2485</td>
+      <td>兆赫</td>
+      <td>77.70</td>
+      <td>42.2%</td>
+      <td>50.0%</td>
+      <td>-11.37%</td>
+      <td>🚫 建議賣出</td>
+      <td>第 8 隻</td>
+      <td>4</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>🛡️ 確認法離場：收盤連續兩日跌破 MA5，動能已失，請依紀律執行賣出。</td>
+    </tr>
+    <tr>
+      <td>2367</td>
+      <td>燿華</td>
+      <td>68.50</td>
+      <td>36.9%</td>
+      <td>55.7%</td>
+      <td>458.26%</td>
+      <td>🚫 建議賣出</td>
+      <td>第 6 隻</td>
+      <td>1</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>🛡️ 確認法離場：收盤連續兩日跌破 MA5，動能已失，請依紀律執行賣出。</td>
+    </tr>
+    <tr>
+      <td>4142</td>
+      <td>國光生</td>
+      <td>18.50</td>
+      <td>40.9%</td>
+      <td>36.4%</td>
+      <td>-30.77%</td>
+      <td>🍀 持股中</td>
+      <td>第 1 隻</td>
+      <td>7</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>🚀 趨勢中：第 1 隻泥鰍成長中。收盤守穩 MA5 續抱，不預設壓力點。</td>
+    </tr>
+    <tr>
+      <td>0050</td>
+      <td>元大台灣50</td>
+      <td>84.15</td>
+      <td>50.8%</td>
+      <td>51.6%</td>
+      <td>243.44%</td>
+      <td>🚫 建議賣出</td>
+      <td>第 0 隻</td>
+      <td>5</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>🛡️ 確認法離場：收盤連續兩日跌破 MA5，動能已失，請依紀律執行賣出。</td>
+    </tr>
+    <tr>
+      <td>0056</td>
+      <td>元大高股息</td>
+      <td>40.98</td>
+      <td>59.4%</td>
+      <td>65.1%</td>
+      <td>95.17%</td>
+      <td>🍀 持股中</td>
+      <td>第 0 隻</td>
+      <td>6</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>🚀 趨勢中：第 0 隻泥鰍成長中。收盤守穩 MA5 續抱，不預設壓力點。</td>
+    </tr>
+    <tr>
+      <td>009816</td>
+      <td>凱基台灣TOP50</td>
+      <td>11.95</td>
+      <td>100.0%</td>
+      <td>0.0%</td>
+      <td>-0.58%</td>
+      <td>🍀 持股中</td>
+      <td>第 0 隻</td>
+      <td>3</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>🚀 趨勢中：第 0 隻泥鰍成長中。收盤守穩 MA5 續抱，不預設壓力點。</td>
+    </tr>
+    <tr>
+      <td>2009</td>
+      <td>第一銅</td>
+      <td>40.50</td>
+      <td>39.5%</td>
+      <td>43.9%</td>
+      <td>83.25%</td>
+      <td>🚫 建議賣出</td>
+      <td>第 0 隻</td>
+      <td>1</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>🛡️ 確認法離場：收盤連續兩日跌破 MA5，動能已失，請依紀律執行賣出。</td>
+    </tr>
+    <tr>
+      <td>2337</td>
+      <td>旺宏</td>
+      <td>131.00</td>
+      <td>46.3%</td>
+      <td>43.9%</td>
+      <td>1121.31%</td>
+      <td>🚫 建議賣出</td>
+      <td>第 2 隻</td>
+      <td>9</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>🛡️ 確認法離場：收盤連續兩日跌破 MA5，動能已失，請依紀律執行賣出。</td>
+    </tr>
+    <tr>
+      <td>2352</td>
+      <td>佳世達</td>
+      <td>25.65</td>
+      <td>42.1%</td>
+      <td>49.2%</td>
+      <td>57.33%</td>
+      <td>🚫 建議賣出</td>
+      <td>第 0 隻</td>
+      <td>4</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>🛡️ 確認法離場：收盤連續兩日跌破 MA5，動能已失，請依紀律執行賣出。</td>
+    </tr>
+    <tr>
+      <td>2409</td>
+      <td>友達</td>
+      <td>19.85</td>
+      <td>43.2%</td>
+      <td>47.7%</td>
+      <td>27.34%</td>
+      <td>🍀 持股中</td>
+      <td>第 1 隻</td>
+      <td>8</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>🚀 趨勢中：第 1 隻泥鰍成長中。收盤守穩 MA5 續抱，不預設壓力點。</td>
+    </tr>
+    <tr>
+      <td>3481</td>
+      <td>群創</td>
+      <td>25.90</td>
+      <td>45.6%</td>
+      <td>47.4%</td>
+      <td>211.88%</td>
+      <td>🍀 持股中</td>
+      <td>第 0 隻</td>
+      <td>6</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>⚠️ 警報：今日收盤已破 MA5。明日若不收復即構成「二日確認法」，需執行清倉。</td>
+    </tr>
+    <tr>
+      <td>6136</td>
+      <td>富爾特</td>
+      <td>NaN</td>
+      <td>35.4%</td>
+      <td>49.2%</td>
+      <td>49.76%</td>
+      <td>🍀 持股中</td>
+      <td>第 0 隻</td>
+      <td>7</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>🚀 趨勢中：第 0 隻泥鰍成長中。收盤守穩 MA5 續抱，不預設壓力點。</td>
+    </tr>
+    <tr>
+      <td>6806</td>
+      <td>森崴能源</td>
+      <td>NaN</td>
+      <td>47.5%</td>
+      <td>42.4%</td>
+      <td>49.45%</td>
+      <td>🚫 建議賣出</td>
+      <td>第 1 隻</td>
+      <td>4</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>🛡️ 確認法離場：收盤連續兩日跌破 MA5，動能已失，請依紀律執行賣出。</td>
+    </tr>
+    <tr>
+      <td>3105</td>
+      <td>穩懋</td>
+      <td>539.00</td>
+      <td>47.0%</td>
+      <td>49.6%</td>
+      <td>101.13%</td>
+      <td>⚪ 觀望中</td>
+      <td>第 15 隻</td>
+      <td>0</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>🦴 魚尾階段：已進入第 3 隻泥鰍。依 CIS 心法，此階段風險較大，建議觀望。</td>
+    </tr>
+    <tr>
+      <td>4966</td>
+      <td>譜瑞-KY</td>
+      <td>546.00</td>
+      <td>42.9%</td>
+      <td>45.7%</td>
+      <td>-188.26%</td>
+      <td>🚫 建議賣出</td>
+      <td>第 0 隻</td>
+      <td>4</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>🛡️ 確認法離場：收盤連續兩日跌破 MA5，動能已失，請依紀律執行賣出。</td>
+    </tr>
+    <tr>
+      <td>6188</td>
+      <td>廣明</td>
+      <td>NaN</td>
+      <td>40.5%</td>
+      <td>46.3%</td>
+      <td>30.44%</td>
+      <td>🚫 建議賣出</td>
+      <td>第 1 隻</td>
+      <td>7</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>🛡️ 確認法離場：收盤連續兩日跌破 MA5，動能已失，請依紀律執行賣出。</td>
+    </tr>
+    <tr>
+      <td>7792</td>
+      <td>安葆</td>
+      <td>NaN</td>
+      <td>50.0%</td>
+      <td>75.0%</td>
+      <td>13.27%</td>
+      <td>🍀 持股中</td>
+      <td>第 1 隻</td>
+      <td>4</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>🚀 趨勢中：第 1 隻泥鰍成長中。收盤守穩 MA5 續抱，不預設壓力點。</td>
+    </tr>
+    <tr>
+      <td>2327</td>
+      <td>國巨*</td>
+      <td>316.50</td>
+      <td>49.5%</td>
+      <td>60.6%</td>
+      <td>3123.49%</td>
+      <td>🚫 建議賣出</td>
+      <td>第 0 隻</td>
+      <td>2</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>🛡️ 確認法離場：收盤連續兩日跌破 MA5，動能已失，請依紀律執行賣出。</td>
+    </tr>
+    <tr>
+      <td>3714</td>
+      <td>富采</td>
+      <td>77.90</td>
+      <td>45.3%</td>
+      <td>54.7%</td>
+      <td>-30.85%</td>
+      <td>🚫 建議賣出</td>
+      <td>第 7 隻</td>
+      <td>7</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>🛡️ 確認法離場：收盤連續兩日跌破 MA5，動能已失，請依紀律執行賣出。</td>
+    </tr>
+    <tr>
+      <td>1802</td>
+      <td>台玻</td>
+      <td>74.20</td>
+      <td>41.4%</td>
+      <td>39.8%</td>
+      <td>88.58%</td>
+      <td>🚫 建議賣出</td>
+      <td>第 0 隻</td>
+      <td>4</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>🛡️ 確認法離場：收盤連續兩日跌破 MA5，動能已失，請依紀律執行賣出。</td>
+    </tr>
+    <tr>
+      <td>1721</td>
+      <td>三晃</td>
+      <td>20.50</td>
+      <td>36.8%</td>
+      <td>35.0%</td>
+      <td>-40.36%</td>
+      <td>🍀 持股中</td>
+      <td>第 0 隻</td>
+      <td>8</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>🚀 趨勢中：第 0 隻泥鰍成長中。收盤守穩 MA5 續抱，不預設壓力點。</td>
+    </tr>
+    <tr>
+      <td>8104</td>
+      <td>錸寶</td>
+      <td>NaN</td>
+      <td>32.3%</td>
+      <td>42.7%</td>
+      <td>25.9%</td>
+      <td>🚫 建議賣出</td>
+      <td>第 0 隻</td>
+      <td>8</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>🛡️ 確認法離場：收盤連續兩日跌破 MA5，動能已失，請依紀律執行賣出。</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        <script>
+            $(document).ready(function() {
+                var table = $('#reportTable').DataTable({
+                    "pageLength": 50, "order": [[ 5, "desc" ]], // 預設依收益%排序
+                    "columnDefs": [
+                        { "targets": 0, "render": function(data) {
+                            var s = data.toString().trim();
+                            var sym = (s.length >= 4 && /^[568]/.test(s)) ? s + ".TWO" : s + ".TW";
+                            return '<a href="https://tw.stock.yahoo.com/quote/'+sym+'/technical-analysis" target="_blank">'+s+'</a>';
+                        } },
+                        { "targets": [9, 10], "render": function(data) {
+                            var color = data === "▲" ? "#d32f2f" : "#388e3c";
+                            return '<span style="color:'+color+'; font-weight:bold; font-size:1.2em;">'+data+'</span>';
+                        } },
+                        { "targets": 11, "createdCell": function(td) { $(td).addClass('advice-cell'); } }
+                    ],
+                    "initComplete": function() {
+                        $('.dataTables_filter').appendTo('#search_target');
+                        
+                        // 目前狀態在 Index 6
+                        this.api().column(6).every(function() {
+                            var column = this; var select = $('#statusFilter');
+                            column.data().unique().sort().each(function(d) {
+                                var clean = d.replace(/<[^>]*>?/gm, '').trim();
+                                if(clean) select.append('<option value="'+clean+'">'+clean+'</option>');
+                            });
+                        });
+                    }
+                });
+                $('#statusFilter').on('change', function() {
+                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                    table.column(6).search(val ? '^'+val+'$' : '', true, false).draw();
+                });
+            });
+        </script>
+    </body>
+    </html>
+    
