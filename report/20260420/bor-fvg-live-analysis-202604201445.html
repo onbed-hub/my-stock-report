@@ -1,0 +1,395 @@
+
+    <html><head><meta charset="UTF-8"><title>SMC FVG 即時追蹤 - bor</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style>
+        body { font-family: "PingFang TC", sans-serif; padding: 20px; background: #f1f5f9; }
+        .container { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        h2 { color: #1e293b; text-align: center; font-size: 32px; }
+        table.dataTable thead th { background: #1e293b !important; color: white !important; }
+    </style></head>
+    <body><div class="container"><h2>SMC FVG 即時追蹤 - bor</h2><table class="dataframe display nowrap my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股號</th>
+      <th>股票名稱</th>
+      <th>訊號日期</th>
+      <th>缺口類型</th>
+      <th>進場參考價</th>
+      <th>止損點</th>
+      <th>目標止盈</th>
+      <th>當前狀態</th>
+      <th>建議操作</th>
+      <th>主力爆量</th>
+      <th>RSI指標</th>
+      <th>確認日期</th>
+      <th>權重</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2317</td>
+      <td>鴻海</td>
+      <td>2026-04-20</td>
+      <td>-</td>
+      <td>207.50</td>
+      <td>197.12</td>
+      <td>228.25</td>
+      <td>即時分析</td>
+      <td>🟢 續抱/買進</td>
+      <td>0</td>
+      <td>55.67</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>3702</td>
+      <td>大聯大</td>
+      <td>2026-04-20</td>
+      <td>看漲 FVG</td>
+      <td>100.50</td>
+      <td>95.47</td>
+      <td>110.55</td>
+      <td>即時分析</td>
+      <td>🎯 看漲 FVG 訊號</td>
+      <td>0</td>
+      <td>58.01</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2485</td>
+      <td>兆赫</td>
+      <td>2026-04-20</td>
+      <td>看跌 FVG</td>
+      <td>71.00</td>
+      <td>67.45</td>
+      <td>78.10</td>
+      <td>即時分析</td>
+      <td>🔴 建議賣出</td>
+      <td>1</td>
+      <td>48.49</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2367</td>
+      <td>燿華</td>
+      <td>2026-04-20</td>
+      <td>看跌 FVG</td>
+      <td>65.60</td>
+      <td>62.32</td>
+      <td>72.16</td>
+      <td>即時分析</td>
+      <td>🔴 建議賣出</td>
+      <td>0</td>
+      <td>37.31</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>4142</td>
+      <td>國光生</td>
+      <td>2026-04-20</td>
+      <td>看跌 FVG</td>
+      <td>18.05</td>
+      <td>17.15</td>
+      <td>19.86</td>
+      <td>即時分析</td>
+      <td>🔴 建議賣出</td>
+      <td>1</td>
+      <td>52.83</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>0050</td>
+      <td>元大台灣50</td>
+      <td>2026-04-20</td>
+      <td>-</td>
+      <td>84.55</td>
+      <td>80.32</td>
+      <td>93.01</td>
+      <td>即時分析</td>
+      <td>🟢 續抱/買進</td>
+      <td>0</td>
+      <td>70.52</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>0056</td>
+      <td>元大高股息</td>
+      <td>2026-04-20</td>
+      <td>看漲 FVG</td>
+      <td>41.47</td>
+      <td>39.40</td>
+      <td>45.62</td>
+      <td>即時分析</td>
+      <td>🎯 看漲 FVG 訊號</td>
+      <td>1</td>
+      <td>70.65</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>009816</td>
+      <td>凱基台灣TOP50</td>
+      <td>2026-04-20</td>
+      <td>-</td>
+      <td>12.07</td>
+      <td>11.47</td>
+      <td>13.28</td>
+      <td>即時分析</td>
+      <td>🟢 續抱/買進</td>
+      <td>0</td>
+      <td>71.53</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2009</td>
+      <td>第一銅</td>
+      <td>2026-04-20</td>
+      <td>-</td>
+      <td>39.70</td>
+      <td>37.72</td>
+      <td>43.67</td>
+      <td>即時分析</td>
+      <td>🔴 建議賣出</td>
+      <td>1</td>
+      <td>50.89</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2337</td>
+      <td>旺宏</td>
+      <td>2026-04-20</td>
+      <td>看跌 FVG</td>
+      <td>120.50</td>
+      <td>114.47</td>
+      <td>132.55</td>
+      <td>即時分析</td>
+      <td>🔴 建議賣出</td>
+      <td>1</td>
+      <td>51.52</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2352</td>
+      <td>佳世達</td>
+      <td>2026-04-20</td>
+      <td>看漲 FVG</td>
+      <td>25.65</td>
+      <td>24.37</td>
+      <td>28.21</td>
+      <td>即時分析</td>
+      <td>🎯 看漲 FVG 訊號</td>
+      <td>1</td>
+      <td>66.00</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2409</td>
+      <td>友達</td>
+      <td>2026-04-20</td>
+      <td>-</td>
+      <td>19.25</td>
+      <td>18.29</td>
+      <td>21.18</td>
+      <td>即時分析</td>
+      <td>🔴 建議賣出</td>
+      <td>0</td>
+      <td>74.16</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>3481</td>
+      <td>群創</td>
+      <td>2026-04-20</td>
+      <td>看跌 FVG</td>
+      <td>26.15</td>
+      <td>24.84</td>
+      <td>28.77</td>
+      <td>即時分析</td>
+      <td>🔴 建議賣出</td>
+      <td>0</td>
+      <td>54.29</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>6136</td>
+      <td>富爾特</td>
+      <td>2026-04-20</td>
+      <td>-</td>
+      <td>24.50</td>
+      <td>23.27</td>
+      <td>26.95</td>
+      <td>即時分析</td>
+      <td>🟡 監控中</td>
+      <td>0</td>
+      <td>51.22</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>6806</td>
+      <td>森崴能源</td>
+      <td>2026-04-20</td>
+      <td>看漲 FVG</td>
+      <td>27.10</td>
+      <td>25.75</td>
+      <td>29.81</td>
+      <td>即時分析</td>
+      <td>🎯 看漲 FVG 訊號</td>
+      <td>0</td>
+      <td>26.25</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>3105</td>
+      <td>穩懋</td>
+      <td>2026-04-20</td>
+      <td>看漲 FVG</td>
+      <td>592.00</td>
+      <td>562.40</td>
+      <td>651.20</td>
+      <td>即時分析</td>
+      <td>🎯 看漲 FVG 訊號</td>
+      <td>1</td>
+      <td>79.83</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>4966</td>
+      <td>譜瑞-KY</td>
+      <td>2026-04-20</td>
+      <td>-</td>
+      <td>532.00</td>
+      <td>505.40</td>
+      <td>585.20</td>
+      <td>即時分析</td>
+      <td>🔴 建議賣出</td>
+      <td>1</td>
+      <td>65.60</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>6188</td>
+      <td>廣明</td>
+      <td>2026-04-20</td>
+      <td>-</td>
+      <td>85.80</td>
+      <td>81.51</td>
+      <td>94.38</td>
+      <td>即時分析</td>
+      <td>🔴 建議賣出</td>
+      <td>1</td>
+      <td>37.20</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>7792</td>
+      <td>安葆</td>
+      <td>2026-04-20</td>
+      <td>-</td>
+      <td>359.50</td>
+      <td>341.52</td>
+      <td>395.45</td>
+      <td>即時分析</td>
+      <td>🔴 建議賣出</td>
+      <td>1</td>
+      <td>75.10</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2327</td>
+      <td>國巨*</td>
+      <td>2026-04-20</td>
+      <td>-</td>
+      <td>319.50</td>
+      <td>303.52</td>
+      <td>351.45</td>
+      <td>即時分析</td>
+      <td>🟢 續抱/買進</td>
+      <td>0</td>
+      <td>72.80</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>3714</td>
+      <td>富采</td>
+      <td>2026-04-20</td>
+      <td>-</td>
+      <td>77.40</td>
+      <td>73.53</td>
+      <td>85.14</td>
+      <td>即時分析</td>
+      <td>🟢 續抱/買進</td>
+      <td>0</td>
+      <td>74.56</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>1802</td>
+      <td>台玻</td>
+      <td>2026-04-20</td>
+      <td>-</td>
+      <td>70.90</td>
+      <td>67.36</td>
+      <td>77.99</td>
+      <td>即時分析</td>
+      <td>🟢 續抱/買進</td>
+      <td>1</td>
+      <td>80.83</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>1721</td>
+      <td>三晃</td>
+      <td>2026-04-20</td>
+      <td>看漲 FVG</td>
+      <td>22.55</td>
+      <td>21.42</td>
+      <td>24.81</td>
+      <td>即時分析</td>
+      <td>🎯 看漲 FVG 訊號</td>
+      <td>1</td>
+      <td>59.30</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>8104</td>
+      <td>錸寶</td>
+      <td>2026-04-20</td>
+      <td>看漲 FVG</td>
+      <td>38.70</td>
+      <td>36.77</td>
+      <td>42.57</td>
+      <td>即時分析</td>
+      <td>🎯 看漲 FVG 訊號</td>
+      <td>1</td>
+      <td>68.24</td>
+      <td>-</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table></div>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>$(document).ready(function(){ $('.my-table').DataTable({"pageLength": 50, "order": [[12, "asc"]]}); });</script>
+    </body></html>
+    
