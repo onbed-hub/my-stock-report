@@ -71,13 +71,25 @@
             const allFiles = await response.json();
 
             // 💡 核心過濾邏輯：
-            // 1. 必須是 .html 且包含 'live'
-            // 2. 使用正規表達式 /\d{8,}/ 排除檔名中包含連續 8 位數字 (時間戳記) 的檔案
             const filteredFiles = allFiles.filter(file => {
                 const nameLower = file.toLowerCase();
-                const isLiveFile = nameLower.includes('live') && nameLower.endsWith('.html');
-                const hasTimestamp = /\d{8,}/.test(file); 
-                return isLiveFile && !hasTimestamp;
+                
+                // 1. 排除數字開頭的檔案
+                const isStartWithNumber = /^\d/.test(file);
+                if (isStartWithNumber) return false;
+
+                // 2. 必須是 .html 檔案
+                const isHtml = nameLower.endsWith('.html');
+                if (!isHtml) return false;
+
+                // 3. 判定條件：
+                // (A) 包含 'live' 且不含長串時間戳記 (維持你原有的排除時間戳邏輯)
+                const isLiveFile = nameLower.includes('live') && !/\d{8,}/.test(file);
+                
+                // (B) 包含 'trend-backtest-report'
+                const isTrendBacktest = nameLower.includes('trend-backtest-report');
+
+                return isLiveFile || isTrendBacktest;
             });
 
             // 根據前綴 (第一個 "-" 之前的部分) 進行分組
