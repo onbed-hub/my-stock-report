@@ -1,0 +1,246 @@
+
+    <html><head><meta charset="UTF-8"><style>
+        body { font-family: 'Microsoft JhengHei', sans-serif; background: #f0f2f5; padding: 20px; }
+        .card { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        h2 { font-size: 2em; color: #2c3e50; border-left: 10px solid #2c3e50; padding-left: 16px; }
+        .logic-grid { display: flex; gap: 15px; margin-bottom: 25px; }
+        .logic-box { flex: 1; padding: 15px; border-radius: 8px; background: #fafbfc; border: 1px solid #eee; }
+        .logic-box h4 { font-size: 1.6em; margin: 0 0 10px 0; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th { background: #2c3e50; color: white; padding: 15px; font-size: 1.6em; }
+        td { padding: 15px; text-align: center; border-bottom: 1px solid #eee; font-size: 1.6em; color: black; }
+        .status-hold { color: #52c41a; font-weight: bold; }
+        .status-warn { color: #faad14; font-weight: bold; }
+        .status-sell { color: #ff4d4f; font-weight: bold; }
+        .status-history { color: #1890ff; font-weight: bold; }
+        .pnl-pos { color: #cf1322; font-weight: bold; }
+        .pnl-neg { color: #389e0d; font-weight: bold; }
+        .row-history { background-color: #e6f7ff; }
+    </style></head>
+    <body>
+        <div class="card">
+            <h2>🛡️ 持股監控診斷 (20260420) - bor-profile.json</h2>
+            <div class="logic-grid">
+                <div class="logic-box"><h4>🔴 全撤：破位點</h4><p style="font-size: 1.4em;">收盤破3日低或 7% 停損。</p></div>
+                <div class="logic-box"><h4>🟡 減碼：轉弱點</h4><p style="font-size: 1.4em;">RSI>75下彎或動能衰竭。</p></div>
+                <div class="logic-box"><h4>🟢 續抱：強勢區</h4><p style="font-size: 1.4em;">趨勢動能支撐，建議持有。</p></div>
+            </div>
+            <table>
+                <tr><th>代碼</th><th>名稱</th><th>天數</th><th>成本</th><th>現價</th><th>損益%</th><th>RSI</th><th>建議動作</th><th>原因</th></tr>
+    
+                <tr class="row-history">
+                    <td>2317</td><td style="font-weight:bold;">鴻海</td>
+                    <td>95</td><td>241.21</td>
+                    <td style="font-size:1.4em;"><b>206.00</b></td>
+                    <td class="pnl-neg">-14.60%</td><td>55.67</td>
+                    <td class="status-history">🔵 歷史套牢</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">歷史包袱，不建議強砍 (逾回測期)</td>
+                </tr>
+        
+                <tr class="">
+                    <td>3702</td><td style="font-weight:bold;">大聯大</td>
+                    <td>36</td><td>94.48</td>
+                    <td style="font-size:1.4em;"><b>98.80</b></td>
+                    <td class="pnl-pos">4.57%</td><td>58.01</td>
+                    <td class="status-hold">🟢 續抱</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">趨勢動能尚在 (逾回測期)</td>
+                </tr>
+        
+                <tr class="">
+                    <td>2485</td><td style="font-weight:bold;">兆赫</td>
+                    <td>36</td><td>81.37</td>
+                    <td style="font-size:1.4em;"><b>77.70</b></td>
+                    <td class="pnl-neg">-4.51%</td><td>48.49</td>
+                    <td class="status-hold">🟢 續抱</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">趨勢動能尚在 (逾回測期)</td>
+                </tr>
+        
+                <tr class="">
+                    <td>2367</td><td style="font-weight:bold;">燿華</td>
+                    <td>36</td><td>77.07</td>
+                    <td style="font-size:1.4em;"><b>68.50</b></td>
+                    <td class="pnl-neg">-11.12%</td><td>37.31</td>
+                    <td class="status-sell">🔴 全撤</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">觸及 7% 停損 (逾回測期)</td>
+                </tr>
+        
+                <tr class="row-history">
+                    <td>4142</td><td style="font-weight:bold;">國光生</td>
+                    <td>95</td><td>25.32</td>
+                    <td style="font-size:1.4em;"><b>18.50</b></td>
+                    <td class="pnl-neg">-26.94%</td><td>52.83</td>
+                    <td class="status-history">🔵 歷史套牢</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">歷史包袱，不建議強砍 | ✨ 有反彈跡象 (逾回測期)</td>
+                </tr>
+        
+                <tr class="">
+                    <td>0050</td><td style="font-weight:bold;">元大台灣50</td>
+                    <td>95</td><td>46.6</td>
+                    <td style="font-size:1.4em;"><b>84.15</b></td>
+                    <td class="pnl-pos">80.58%</td><td>70.52</td>
+                    <td class="status-hold">🟢 續抱</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">趨勢動能尚在 (逾回測期)</td>
+                </tr>
+        
+                <tr class="">
+                    <td>0056</td><td style="font-weight:bold;">元大高股息</td>
+                    <td>95</td><td>36.43</td>
+                    <td style="font-size:1.4em;"><b>40.98</b></td>
+                    <td class="pnl-pos">12.49%</td><td>70.65</td>
+                    <td class="status-hold">🟢 續抱</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">趨勢動能尚在 (逾回測期)</td>
+                </tr>
+        
+                <tr class="">
+                    <td>009816</td><td style="font-weight:bold;">凱基台灣TOP50</td>
+                    <td>95</td><td>11.01</td>
+                    <td style="font-size:1.4em;"><b>11.95</b></td>
+                    <td class="pnl-pos">8.54%</td><td>71.53</td>
+                    <td class="status-hold">🟢 續抱</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">趨勢動能尚在 (逾回測期)</td>
+                </tr>
+        
+                <tr class="row-history">
+                    <td>2009</td><td style="font-weight:bold;">第一銅</td>
+                    <td>95</td><td>50.56</td>
+                    <td style="font-size:1.4em;"><b>40.50</b></td>
+                    <td class="pnl-neg">-19.90%</td><td>50.89</td>
+                    <td class="status-history">🔵 歷史套牢</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">歷史包袱，不建議強砍 (逾回測期)</td>
+                </tr>
+        
+                <tr class="">
+                    <td>2337</td><td style="font-weight:bold;">旺宏</td>
+                    <td>95</td><td>95.28</td>
+                    <td style="font-size:1.4em;"><b>131.00</b></td>
+                    <td class="pnl-pos">37.49%</td><td>51.52</td>
+                    <td class="status-hold">🟢 續抱</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">趨勢動能尚在 (逾回測期)</td>
+                </tr>
+        
+                <tr class="">
+                    <td>2352</td><td style="font-weight:bold;">佳世達</td>
+                    <td>95</td><td>9.72</td>
+                    <td style="font-size:1.4em;"><b>25.65</b></td>
+                    <td class="pnl-pos">163.89%</td><td>66.0</td>
+                    <td class="status-hold">🟢 續抱</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">趨勢動能尚在 (逾回測期)</td>
+                </tr>
+        
+                <tr class="">
+                    <td>2409</td><td style="font-weight:bold;">友達</td>
+                    <td>95</td><td>16.21</td>
+                    <td style="font-size:1.4em;"><b>19.85</b></td>
+                    <td class="pnl-pos">22.46%</td><td>74.16</td>
+                    <td class="status-hold">🟢 續抱</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">趨勢動能尚在 (逾回測期)</td>
+                </tr>
+        
+                <tr class="">
+                    <td>3481</td><td style="font-weight:bold;">群創</td>
+                    <td>95</td><td>25.1</td>
+                    <td style="font-size:1.4em;"><b>25.90</b></td>
+                    <td class="pnl-pos">3.19%</td><td>54.29</td>
+                    <td class="status-hold">🟢 續抱</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">趨勢動能尚在 (逾回測期)</td>
+                </tr>
+        
+                <tr class="">
+                    <td>6136</td><td style="font-weight:bold;">富爾特</td>
+                    <td>95</td><td>11.46</td>
+                    <td style="font-size:1.4em;"><b>nan</b></td>
+                    <td class="pnl-neg">nan%</td><td>52.5</td>
+                    <td class="status-hold">🟢 續抱</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">趨勢動能尚在 (逾回測期)</td>
+                </tr>
+        
+                <tr class="">
+                    <td>6806</td><td style="font-weight:bold;">森崴能源</td>
+                    <td>95</td><td>45.39</td>
+                    <td style="font-size:1.4em;"><b>nan</b></td>
+                    <td class="pnl-neg">nan%</td><td>24.75</td>
+                    <td class="status-hold">🟢 續抱</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">趨勢動能尚在 (逾回測期)</td>
+                </tr>
+        
+                <tr class="">
+                    <td>3105</td><td style="font-weight:bold;">穩懋</td>
+                    <td>95</td><td>425.36</td>
+                    <td style="font-size:1.4em;"><b>539.00</b></td>
+                    <td class="pnl-pos">26.72%</td><td>79.83</td>
+                    <td class="status-hold">🟢 續抱</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">趨勢動能尚在 (逾回測期)</td>
+                </tr>
+        
+                <tr class="row-history">
+                    <td>4966</td><td style="font-weight:bold;">譜瑞-KY</td>
+                    <td>95</td><td>1921.64</td>
+                    <td style="font-size:1.4em;"><b>546.00</b></td>
+                    <td class="pnl-neg">-71.59%</td><td>65.6</td>
+                    <td class="status-history">🔵 歷史套牢</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">歷史包袱，不建議強砍 (逾回測期)</td>
+                </tr>
+        
+                <tr class="">
+                    <td>6188</td><td style="font-weight:bold;">廣明</td>
+                    <td>95</td><td>115.6</td>
+                    <td style="font-size:1.4em;"><b>nan</b></td>
+                    <td class="pnl-neg">nan%</td><td>38.12</td>
+                    <td class="status-hold">🟢 續抱</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">趨勢動能尚在 (逾回測期)</td>
+                </tr>
+        
+                <tr class="">
+                    <td>7792</td><td style="font-weight:bold;">安葆</td>
+                    <td>95</td><td>307.26</td>
+                    <td style="font-size:1.4em;"><b>nan</b></td>
+                    <td class="pnl-neg">nan%</td><td>73.91</td>
+                    <td class="status-hold">🟢 續抱</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">趨勢動能尚在 (逾回測期)</td>
+                </tr>
+        
+                <tr class="">
+                    <td>2327</td><td style="font-weight:bold;">國巨*</td>
+                    <td>92</td><td>236.2</td>
+                    <td style="font-size:1.4em;"><b>316.50</b></td>
+                    <td class="pnl-pos">34.00%</td><td>72.8</td>
+                    <td class="status-hold">🟢 續抱</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">趨勢動能尚在 (逾回測期)</td>
+                </tr>
+        
+                <tr class="">
+                    <td>3714</td><td style="font-weight:bold;">富采</td>
+                    <td>4</td><td>72.96</td>
+                    <td style="font-size:1.4em;"><b>77.90</b></td>
+                    <td class="pnl-pos">6.77%</td><td>74.56</td>
+                    <td class="status-hold">🟢 續抱</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">趨勢動能尚在</td>
+                </tr>
+        
+                <tr class="">
+                    <td>1802</td><td style="font-weight:bold;">台玻</td>
+                    <td>4</td><td>69.46</td>
+                    <td style="font-size:1.4em;"><b>74.20</b></td>
+                    <td class="pnl-pos">6.82%</td><td>80.83</td>
+                    <td class="status-hold">🟢 續抱</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">趨勢動能尚在</td>
+                </tr>
+        
+                <tr class="">
+                    <td>1721</td><td style="font-weight:bold;">三晃</td>
+                    <td>3</td><td>20.41</td>
+                    <td style="font-size:1.4em;"><b>20.50</b></td>
+                    <td class="pnl-pos">0.44%</td><td>59.3</td>
+                    <td class="status-hold">🟢 續抱</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">趨勢動能尚在</td>
+                </tr>
+        
+                <tr class="">
+                    <td>8104</td><td style="font-weight:bold;">錸寶</td>
+                    <td>3</td><td>39.8</td>
+                    <td style="font-size:1.4em;"><b>nan</b></td>
+                    <td class="pnl-neg">nan%</td><td>69.42</td>
+                    <td class="status-hold">🟢 續抱</td>
+                    <td style="text-align:left; font-size:1.3em; color:#666;">趨勢動能尚在</td>
+                </tr>
+        </table></div></body></html>
