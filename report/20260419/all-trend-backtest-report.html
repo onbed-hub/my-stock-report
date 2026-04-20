@@ -25,29 +25,30 @@
         <div style="text-align:center; font-weight:bold; color:#64748b; margin-bottom:30px;">
                 📅 回測起點：<span style="color:#2563eb;">2025-11-01</span> |
                 📅 分析日期：20260419 |
-                生成時間：2026-04-20 13:32
+                生成時間：2026-04-20 13:43
         </div>
 
         
     <div class="card">
-        <h3 style="font-size: 2.2rem; color: #1e3a8a; border-left: 10px solid #2563eb; padding-left:20px;">🛡️ V3 Pro 趨勢與動態風控準則</h3>
+        <h3 style="font-size: 2.2rem; color: #1e3a8a; border-left: 10px solid #2563eb; padding-left:20px;">🛡️ V3 Pro 趨勢與動態風控準則 (Final Balanced)</h3>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px;">
             <div>
-                <h4 style="color: #1e40af;">❶ 進場嚴選 (Entry Filter)</h4>
+                <h4 style="color: #1e40af;">❶ 量價雙規進場 (Entry Filter)</h4>
                 <ul style="font-size: 1.5rem; line-height: 2;">
-                    <li><b>均線多頭：</b> MA 5 > 10 > 20</li>
-                    <li><b>布林突破：</b> 股價觸及上軌 98%</li>
-                    <li><b>防 FOMO：</b> 20日乖離率 (BIAS) < 8.0</li>
-                    <li><b>實體辨識：</b> 紅棒實體 > 上影線 1.6 倍</li>
+                    <li><b>趨勢基礎：</b> 收盤價 > MA20 且 MACD_OSC > 0</li>
+                    <li><b>量能確認：</b> 當日成交量 > 20日均量 (VMA_20)</li>
+                    <li><b>強勢補位：</b> 若量能不足，收盤價需站上 MA20 達 <b>1.5%</b></li>
+                    <li><b>啟動邏輯：</b> 趨勢成立 且 (量能達標 或 價格夠強)</li>
                 </ul>
             </div>
             <div>
-                <h4 style="color: #b91c1c;">❷ 風控與停利 (Exit Management)</h4>
+                <h4 style="color: #b91c1c;">❷ 三段式自適應風控 (Exit Management)</h4>
                 <ul style="font-size: 1.5rem; line-height: 2;">
-                    <li><b>ATR 止損：</b> 進場點 - 2倍ATR (硬止損)</li>
-                    <li><b>趨勢雙死：</b> 收盤 < MA20 且 MACD 翻負連兩日</li>
-                    <li><b>移動停利 (Trailing)：</b> 獲利達 15% 後，若從高點回落 10% 鎖利</li>
-                    <li><b>弱勢過濾 (WeakFail)：</b> 持股 10 日未脫離成本且跌破 ATR 線</li>
+                    <li><b>防守期 (2.2x ATR)：</b> 帳面虧損 > 4% 時，縮緊止損防重傷</li>
+                    <li><b>觀察期 (2.8x ATR)：</b> 微利或小虧時，給予績優股呼吸空間</li>
+                    <li><b>收割期 (3.5x ATR)：</b> 獲利 > 12% 時，放寬止損讓獲利奔跑</li>
+                    <li><b>利潤保全：</b> 獲利達 15% 後，若從高點回落 10% 強制鎖利</li>
+                    <li><b>弱勢清理：</b> 持股 12 日未脫離成本 (PnL < 0) 則汰弱留強</li>
                 </ul>
             </div>
         </div>
