@@ -60,39 +60,36 @@
         const dateInput = document.getElementById('datePicker').value;
         const dateDir = dateInput.replace(/-/g, '');
         const displayArea = document.getElementById('dynamicContent');
-        
+
         displayArea.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:2rem;">正在讀取檔案清單...</div>';
 
         try {
-            // 讀取該日期資料夾下的 files.json
             const response = await fetch(`report/${dateDir}/files.json`);
             if (!response.ok) throw new Error('No list found');
-            
+
             const allFiles = await response.json();
 
-            // 💡 核心過濾邏輯：
+            // 💡 核心過濾邏輯更新：統一排除數字開頭與時間戳記
             const filteredFiles = allFiles.filter(file => {
                 const nameLower = file.toLowerCase();
                 
-                // 1. 排除數字開頭的檔案
-                const isStartWithNumber = /^\d/.test(file);
-                if (isStartWithNumber) return false;
+                // 1. 排除數字開頭 (例如 20260421-xxx.html)
+                if (/^\d/.test(file)) return false;
 
-                // 2. 必須是 .html 檔案
-                const isHtml = nameLower.endsWith('.html');
-                if (!isHtml) return false;
+                // 2. 必須是 HTML 檔案
+                if (!nameLower.endsWith('.html')) return false;
 
-                // 3. 判定條件：
-                // (A) 包含 'live' 且不含長串時間戳記 (維持你原有的排除時間戳邏輯)
-                const isLiveFile = nameLower.includes('live') && !/\d{8,}/.test(file);
-                
-                // (B) 包含 'trend-backtest-report'
+                // 3. 排除包含長數字時間戳記的檔案 (例如 xxx-live-12345678.html)
+                const hasTimestamp = /\d{8,}/.test(file);
+                if (hasTimestamp) return false;
+
+                // 4. 符合條件 A (live) 或 條件 B (trend-backtest-report)
+                const isLive = nameLower.includes('live');
                 const isTrendBacktest = nameLower.includes('trend-backtest-report');
 
-                return isLiveFile || isTrendBacktest;
+                return isLive || isTrendBacktest;
             });
 
-            // 根據前綴 (第一個 "-" 之前的部分) 進行分組
             const groups = {};
             filteredFiles.forEach(file => {
                 const prefix = file.split('-')[0];
@@ -100,26 +97,30 @@
                 groups[prefix].push(file);
             });
 
-            // 清空並重新渲染
             displayArea.innerHTML = '';
-            
             const sortedPrefixes = Object.keys(groups).sort();
-            
+
             if (sortedPrefixes.length === 0) {
-                displayArea.innerHTML = `<div style="text-align:center; color:#94a3b8; padding:3rem;">📅 ${dateInput} 查無「最終版」實時報表</div>`;
+                displayArea.innerHTML = `<div style="text-align:center; color:#94a3b8; padding:3rem;">📅 ${dateInput} 查無相關正式版報表</div>`;
                 return;
             }
 
             sortedPrefixes.forEach(prefix => {
                 const section = document.createElement('div');
                 section.innerHTML = `<div class="section-header">${prefix.toUpperCase()} 系列報表</div>`;
-                
+
                 const grid = document.createElement('div');
                 grid.className = 'report-grid';
 
                 groups[prefix].forEach(file => {
-                    // 自動判定檔案類型標籤
-                    const typeKey = Object.keys(typeConfig).find(k => file.toLowerCase().includes(k)) || 'live';
+                    // 自動判定標籤類型
+                    let typeKey = 'live';
+                    if (file.toLowerCase().includes('backtest')) {
+                        typeKey = 'backtest';
+                    } else {
+                        typeKey = Object.keys(typeConfig).find(k => file.toLowerCase().includes(k)) || 'live';
+                    }
+                    
                     const config = typeConfig[typeKey];
 
                     const card = document.createElement('a');
@@ -141,6 +142,7 @@
             displayArea.innerHTML = `<div style="text-align:center; color:#ef4444; padding:3rem;">⚠️ 無法讀取報表清單 (files.json 未產生或路徑錯誤)</div>`;
         }
     }
+
 </script>
 </body>
 </html>
