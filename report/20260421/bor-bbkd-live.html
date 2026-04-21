@@ -1,0 +1,366 @@
+
+    <html>
+    <head><meta charset='UTF-8'><style>
+        body { font-family: "Microsoft JhengHei", sans-serif; padding: 20px; background-color: #f8f9fa; font-size: 110%; }
+        .container { max-width: 98%; margin: auto; }
+
+        /* 頂部看板 */
+        .header-box { background-color: #2c529c; color: white; padding: 30px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .header-box h1 { margin: 0; font-size: 2.2em; }
+        .stats-period { margin-top: 10px; opacity: 0.8; font-size: 1.1em; }
+
+        /* 指標定義卡片 */
+        .indicator-def-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
+        .def-card { background: rgba(255, 255, 255, 0.15); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); }
+        .def-card b { color: #ffeb3b; font-size: 1.1em; display: block; margin-bottom: 5px; }
+        .def-card span { font-size: 0.9em; line-height: 1.4; display: block; opacity: 0.9; }
+
+        /* 邏輯與風控卡片 */
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 25px; }
+        .info-card { background: rgba(0, 0, 0, 0.2); padding: 20px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .info-card h3 { color: #ffeb3b; margin-top: 0; font-size: 1.3em; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; }
+        .info-card ul { padding-left: 20px; margin-top: 10px; }
+        .info-card li { margin-bottom: 8px; list-style: square; font-size: 0.95em; }
+
+        /* 狀態解讀區塊 */
+        .doc-section { background: white; padding: 25px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .doc-section h3 { border-left: 5px solid #2c529c; padding-left: 15px; margin-bottom: 20px; color: #333; }
+        .status-guide { width: 100%; border-collapse: collapse; line-height: 1.8; }
+        .status-guide td { padding: 8px; border: none !important; text-align: left !important; font-weight: normal !important; }
+        .memo-box { background-color: #fff9c4; padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 1.1em; color: #856404; border-left: 5px solid #fbc02d; }
+
+        /* 資料表格樣式 */
+        table.dataframe { border-collapse: collapse; width: 100%; background: white; border: 2px solid #444; margin-top: 20px; }
+        table.dataframe th { background-color: #1a237e; color: white; padding: 12px; font-size: 1.1em; border: 1px solid #444; }
+        table.dataframe td { padding: 12px; text-align: center; border: 1px solid #ddd; font-weight: bold; }
+        
+        /* 股號連結 */
+        td:nth-child(1) a { color: #2c529c; text-decoration: none; font-family: "Consolas", monospace; font-size: 1.2em; }
+        td:nth-child(1) a:hover { color: #d32f2f; text-decoration: underline; }
+
+        .price-now { font-size: 26px; color: #d32f2f; font-weight: 900; }
+        .advice-box { padding: 10px; border-radius: 8px; color: white; text-align: left; }
+        .sell-bg { background-color: #c62828; } 
+        .hold-bg { background-color: #78909c; } 
+        .buy-bg { background-color: #ef6c00; }
+        .advice-title { font-size: 18px; font-weight: 900; } 
+        .advice-reason { font-size: 14px; opacity: 0.9; }
+    </style></head>
+    <body>
+        <div class="container">
+            <div class="header-box">
+                <h1>📈 BBKD 2.0 趨勢追蹤量化系統</h1>
+                <div class="stats-period">📊 統計期間：2026-01-01 起至 2026-04-21 21:27</div>
+
+                <div class="indicator-def-grid">
+                    <div class="def-card">
+                        <b>🟢 短期指標 (3-10 DMA)</b>
+                        <span>反映極短線的動能變化。▲ 代表短線轉強，適合尋找買賣波段點。</span>
+                    </div>
+                    <div class="def-card">
+                        <b>🟡 中期指標 (5-20 DMA)</b>
+                        <span>反映月線級別的趨勢。▲ 代表中期多頭確立，是策略的主要持股參考依據。</span>
+                    </div>
+                    <div class="def-card">
+                        <b>🔴 長期指標 (10-60 DMA)</b>
+                        <span>反映季線級別的生命線。▲ 代表長線大趨勢向上，確保操作是在保護傘下進行。</span>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>核心進場邏輯 (Logic)</h3>
+                        <ul>
+                            <li><b>DMA 趨勢翻正：</b>快線穿越慢線，代表該週期動能由負轉正(轉強)。</li>
+                            <li><b>關鍵 K 線：</b>轉強當日的紅 K 高點為「景氣壓力點」，低點為「防守支撐點」。</li>
+                            <li><b>三期共振：</b>當短、中、長指標皆為 ▲ 時，代表各層級多頭同步，勝率最高。</li>
+                            <li><b>收盤突破：</b>股價須站穩關鍵紅 K 高點，方可確認買入訊號。</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3>出場與風險控制 (Exit)</h3>
+                        <ul>
+                            <li><b>趨勢反轉：</b>中期 DMA 轉為負值 (▼, 動能消失) 或跌破移動支撐位。</li>
+                            <li><b>跌破支撐：</b>收盤跌破關鍵 K 線的低點。</li>
+                            <li><b>隔日執行：</b>依據前日收盤訊號，於次日開盤執行，確保紀律完整。</li>
+                            <li><b>利潤保護：</b>獲利達 2 倍風險時，將支撐位移至成本價實施保本。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="doc-section">
+                <h3>🔍 狀態解讀 (未來操作指引)</h3>
+                <table class="status-guide">
+                    <tr><td width="180px">🚩 <span style="color:#0d47a1; font-weight:bold;">建議買入</span></td><td><b>動作：明日開盤買進。</b> 今日收盤已確認成功突破關鍵壓力。</td></tr>
+                    <tr><td>🚫 <span style="color:#b71c1c; font-weight:bold;">建議賣出</span></td><td><b>動作：明日開盤清倉。</b> 趨勢反轉或跌破移動支撐，果斷離場。</td></tr>
+                    <tr><td>🔹 <span style="color:#fbc02d; font-weight:bold;">已鎖利續抱</span></td><td><b>動作：繼續持有。</b> 已達 1:2 保護門檻，此單已立於不敗之地。</td></tr>
+                    <tr><td>🍀 <span style="color:#2e7d32; font-weight:bold;">持股中</span></td><td><b>動作：繼續持有。</b> 趨勢推升中，尚未觸發移動止損條件。</td></tr>
+                    <tr><td>⏳ <span style="color:#e65100; font-weight:bold;">觀察中</span></td><td><b>動作：列入清單。</b> DMA 已翻正，等待收盤價突破關鍵點。</td></tr>
+                    <tr><td>⚪ <span style="color:#616161; font-weight:bold;">觀望中</span></td><td><b>動作：不予理會。</b> 處於整理或空頭階段，資金應轉向其他標的。</td></tr>
+                </table>
+                <div class="memo-box">
+                    💡 備忘錄：<b>▲ 代表指標 > 0 (動能向上)</b>，<b>▼ 代表指標 < 0 (動能向下)</b>。本系統旨在捕捉波段中大型趨勢。
+                </div>
+            </div>
+
+            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股號</th>
+      <th>名稱</th>
+      <th>即時現價</th>
+      <th>累計損益</th>
+      <th>短</th>
+      <th>中</th>
+      <th>長</th>
+      <th>BBKD 專業建議</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/2317.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">2317</a></td>
+      <td>鴻海</td>
+      <td><span class='price-now'>211.0</span><br><small>損益: -12.52%</small></td>
+      <td>-5.95%</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▼</td>
+      <td><div class="advice-box buy-bg"><span class="advice-title">🚩 建議買入</span><br><span class="advice-reason">突破壓力位，指標呈 🌀 趨勢分歧震盪。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/3702.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">3702</a></td>
+      <td>大聯大</td>
+      <td><span class='price-now'>102.5</span><br><small>損益: +8.49%</small></td>
+      <td>26.22%</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">⚪ 觀望中</span><br><span class="advice-reason">指標未翻正，保持觀望。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/2485.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">2485</a></td>
+      <td>兆赫</td>
+      <td><span class='price-now'>72.3</span><br><small>損益: -11.15%</small></td>
+      <td>-40.08%</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>▲</td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">⚪ 觀望中</span><br><span class="advice-reason">指標未翻正，保持觀望。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/2367.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">2367</a></td>
+      <td>燿華</td>
+      <td><span class='price-now'>70.3</span><br><small>損益: -8.78%</small></td>
+      <td>15.59%</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>▲</td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">⚪ 觀望中</span><br><span class="advice-reason">指標未翻正，保持觀望。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/4142.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">4142</a></td>
+      <td>國光生</td>
+      <td><span class='price-now'>18.1</span><br><small>損益: -28.52%</small></td>
+      <td>19.73%</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">⚪ 觀望中</span><br><span class="advice-reason">指標未翻正，保持觀望。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/0050.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">0050</a></td>
+      <td>元大台灣50</td>
+      <td><span class='price-now'>86.0</span><br><small>損益: +84.55%</small></td>
+      <td>39.86%</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td><div class="advice-box buy-bg"><span class="advice-title">🔹 已鎖利續抱</span><br><span class="advice-reason">🚀 三期共振強勢，守穩移動支撐 85.0。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/0056.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">0056</a></td>
+      <td>元大高股息</td>
+      <td><span class='price-now'>41.97</span><br><small>損益: +15.21%</small></td>
+      <td>36.34%</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td><div class="advice-box buy-bg"><span class="advice-title">🔹 已鎖利續抱</span><br><span class="advice-reason">🚀 三期共振強勢，守穩移動支撐 41.6。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/009816.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">009816</a></td>
+      <td>凱基台灣TOP50</td>
+      <td><span class='price-now'>12.29</span><br><small>損益: +11.63%</small></td>
+      <td>0%</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▼</td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">⚪ 觀望中</span><br><span class="advice-reason">指標未翻正，保持觀望。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/2009.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">2009</a></td>
+      <td>第一銅</td>
+      <td><span class='price-now'>39.8</span><br><small>損益: -21.28%</small></td>
+      <td>52.28%</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">⚪ 觀望中</span><br><span class="advice-reason">指標未翻正，保持觀望。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/2337.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">2337</a></td>
+      <td>旺宏</td>
+      <td><span class='price-now'>132.5</span><br><small>損益: +39.06%</small></td>
+      <td>17.28%</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>▲</td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">⚪ 觀望中</span><br><span class="advice-reason">指標未翻正，保持觀望。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/2352.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">2352</a></td>
+      <td>佳世達</td>
+      <td><span class='price-now'>25.65</span><br><small>損益: +163.89%</small></td>
+      <td>34.81%</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td><div class="advice-box buy-bg"><span class="advice-title">🔹 已鎖利續抱</span><br><span class="advice-reason">🚀 三期共振強勢，守穩移動支撐 25.55。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/2409.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">2409</a></td>
+      <td>友達</td>
+      <td><span class='price-now'>18.9</span><br><small>損益: +16.59%</small></td>
+      <td>61.57%</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">⚪ 觀望中</span><br><span class="advice-reason">指標未翻正，保持觀望。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/3481.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">3481</a></td>
+      <td>群創</td>
+      <td><span class='price-now'>26.0</span><br><small>損益: +3.59%</small></td>
+      <td>33.92%</td>
+      <td>▼</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">⚪ 觀望中</span><br><span class="advice-reason">指標未翻正，保持觀望。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/6136.TWO/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">6136</a></td>
+      <td>富爾特</td>
+      <td><span class='price-now'>26.95</span><br><small>損益: +135.17%</small></td>
+      <td>-10.42%</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">⚪ 觀望中</span><br><span class="advice-reason">指標未翻正，保持觀望。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/6806.TWO/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">6806</a></td>
+      <td>森崴能源</td>
+      <td><span class='price-now'>29.8</span><br><small>損益: -34.35%</small></td>
+      <td>89.32%</td>
+      <td>▲</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">⚪ 觀望中</span><br><span class="advice-reason">指標未翻正，保持觀望。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/3105.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">3105</a></td>
+      <td>穩懋</td>
+      <td><span class='price-now'>617.0</span><br><small>損益: +45.05%</small></td>
+      <td>31.65%</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">⚪ 觀望中</span><br><span class="advice-reason">指標未翻正，保持觀望。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/4966.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">4966</a></td>
+      <td>譜瑞-KY</td>
+      <td><span class='price-now'>537.0</span><br><small>損益: -72.06%</small></td>
+      <td>3.24%</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">⚪ 觀望中</span><br><span class="advice-reason">指標未翻正，保持觀望。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/6188.TWO/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">6188</a></td>
+      <td>廣明</td>
+      <td><span class='price-now'>85.5</span><br><small>損益: -26.04%</small></td>
+      <td>58.07%</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td>▼</td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">⚪ 觀望中</span><br><span class="advice-reason">指標未翻正，保持觀望。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/7792.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">7792</a></td>
+      <td>安葆</td>
+      <td><span class='price-now'>356.0</span><br><small>損益: +15.86%</small></td>
+      <td>-0.69%</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">⚪ 觀望中</span><br><span class="advice-reason">指標未翻正，保持觀望。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/2327.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">2327</a></td>
+      <td>國巨*</td>
+      <td><span class='price-now'>323.0</span><br><small>損益: +36.75%</small></td>
+      <td>-3.47%</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td><div class="advice-box buy-bg"><span class="advice-title">🔹 已鎖利續抱</span><br><span class="advice-reason">🚀 三期共振強勢，守穩移動支撐 317.0。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/3714.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">3714</a></td>
+      <td>富采</td>
+      <td><span class='price-now'>73.6</span><br><small>損益: +0.88%</small></td>
+      <td>-12.48%</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">⚪ 觀望中</span><br><span class="advice-reason">指標未翻正，保持觀望。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/1802.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">1802</a></td>
+      <td>台玻</td>
+      <td><span class='price-now'>74.2</span><br><small>損益: +6.82%</small></td>
+      <td>28.38%</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">⚪ 觀望中</span><br><span class="advice-reason">指標未翻正，保持觀望。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/1721.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">1721</a></td>
+      <td>三晃</td>
+      <td><span class='price-now'>24.8</span><br><small>損益: +21.51%</small></td>
+      <td>65.36%</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td><div class="advice-box hold-bg"><span class="advice-title">⚪ 觀望中</span><br><span class="advice-reason">指標未翻正，保持觀望。</span></div></td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/8104.TWO/technical-analysis" target="_blank" style="text-decoration:none; color:#2c529c;">8104</a></td>
+      <td>錸寶</td>
+      <td><span class='price-now'>38.2</span><br><small>損益: -4.02%</small></td>
+      <td>41.73%</td>
+      <td>▲</td>
+      <td>▲</td>
+      <td>▼</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚫 建議賣出</span><br><span class="advice-reason">🚨 價格防衛：現價 38.2 跌破支撐 38.7。</span></div></td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </body>
+    </html>
+    
