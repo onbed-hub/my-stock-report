@@ -77,17 +77,21 @@ async function loadDynamicReports() {
             // 💡 針對你提供的 jq 輸出進行優化過濾
             const filteredFiles = allFiles.filter(file => {
                 const nameLower = file.toLowerCase();
+                
+                // 1. 必須是 .html 檔案
                 if (!nameLower.endsWith('.html')) return false;
 
-                // 排除 8 位數以上的時間戳記 (例如 202604210014)
-                // 這樣會保留 bor-trend-backtest-live-000629.html (6位數)
-                // 排除 bor-trend-backtest-live-202604210028.html (12位數)
+                // 2. 排除 all- 開頭的檔案
+                if (nameLower.startsWith('all-')) return false;
+
+                // 3. 排除 8 位數以上的時間戳記 (例如 202604210014)
                 const hasLongTimestamp = /\d{8,}/.test(file);
                 if (hasLongTimestamp) return false;
 
-                // 排除純數字開頭
+                // 4. 排除純數字開頭
                 if (/^\d/.test(file)) return false;
 
+                // 判斷是否為 live 或趨勢回測
                 const isLive = nameLower.includes('live');
                 const isTrend = nameLower.includes('trend-backtest');
 
