@@ -69,25 +69,24 @@
 
             const allFiles = await response.json();
 
-            // 💡 核心過濾邏輯更新：統一排除數字開頭與時間戳記
             const filteredFiles = allFiles.filter(file => {
                 const nameLower = file.toLowerCase();
-                
-                // 1. 排除數字開頭 (例如 20260421-xxx.html)
-                if (/^\d/.test(file)) return false;
 
-                // 2. 必須是 HTML 檔案
+                // 1. 必須是 HTML 檔案
                 if (!nameLower.endsWith('.html')) return false;
 
-                // 3. 排除包含長數字時間戳記的檔案 (例如 xxx-live-12345678.html)
-                const hasTimestamp = /\d{8,}/.test(file);
-                if (hasTimestamp) return false;
+                // 2. 排除純數字開頭的備份檔 (如 20260421.html)
+                if (/^\d{8}/.test(file)) return false;
 
-                // 4. 符合條件 A (live) 或 條件 B (trend-backtest-report)
+                // 3. 排除長達 12 位以上的精確時間戳記 (例如 202604210014)
+                // 但允許股票代號 (6位) 或 短編號
+                if (/\d{12,}/.test(file)) return false;
+
+                // 4. 符合條件：包含 'live' 或 'trend-backtest'
                 const isLive = nameLower.includes('live');
-                const isTrendBacktest = nameLower.includes('trend-backtest-report');
+                const isTrend = nameLower.includes('trend-backtest');
 
-                return isLive || isTrendBacktest;
+                return isLive || isTrend;
             });
 
             const groups = {};
@@ -139,8 +138,17 @@
             });
 
         } catch (error) {
-            displayArea.innerHTML = `<div style="text-align:center; color:#ef4444; padding:3rem;">⚠️ 無法讀取報表清單 (files.json 未產生或路徑錯誤)</div>`;
+            console.error("Fetch error:", error);
+            displayArea.innerHTML = `
+                <div style="text-align:center; color:#ef4444; padding:3rem;">
+                    ⚠️ 無法讀取報表清單<br>
+                    <small style="color:#94a3b8; display:block; margin-top:10px;">
+                        請確認是否透過伺服器開啟 (http://) 而非直接開啟檔案 (file://)<br>
+                        錯誤訊息: ${error.message}
+                    </small>
+                </div>`;
         }
+
     }
 
 </script>
