@@ -27,8 +27,18 @@ for dir_path in $(find "$SOURCE_BASE" -maxdepth 1 -type d -regextype sed -regex 
 
     # 複製該日期資料夾下的所有 html 檔案到目標
     # 使用 -u 參數：僅在來源檔案較新或目標不存在時才複製
-    cp -u "$dir_path"/*.html "$TARGET_BASE/$dir_name/" 2>/dev/null
-    cp -u "$dir_path"/*.txt "$TARGET_BASE/$dir_name/" 2>/dev/null
+#    cp -u "$dir_path"/*.html "$TARGET_BASE/$dir_name/" 2>/dev/null
+#    cp -u "$dir_path"/*.txt "$TARGET_BASE/$dir_name/" 2>/dev/null
+
+    # 修正後的篩選條件：
+    # 1. 僅限 .html 和 .txt
+    # 2. 排除包含 live-日期 格式的檔案 (! -name "*live-[0-9]*")
+    # 3. 排除數字開頭的 html (! -name "[0-9]*")
+    find "$dir_path" -maxdepth 1 -type f \( -name "*.html" -o -name "*.txt" \) \
+        ! -name "*live-[0-9]*" \
+        ! -name "[0-9]*" \
+        -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
+
 
 #    if [ $? -eq 0 ]; then
 #        echo "✅ 已更新: $TARGET_BASE/$dir_name/"
