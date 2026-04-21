@@ -31,18 +31,14 @@ for dir_path in $(find "$SOURCE_BASE" -maxdepth 1 -type d -regextype sed -regex 
 #    cp -u "$dir_path"/*.txt "$TARGET_BASE/$dir_name/" 2>/dev/null
 
     # 修正後的篩選條件：
-    # 1. 僅限 .html 和 .txt
-    # 2. 排除包含 live-日期 格式的檔案 (! -name "*live-[0-9]*")
-    # 3. 排除數字開頭的 html (! -name "[0-9]*")
-    find "$dir_path" -maxdepth 1 -type f \( -name "*.html" -o -name "*.txt" \) \
-        ! -name "*live-[0-9]*" \
-        ! -name "*-analysis-[0-9]*" \
-        ! -name "[0-9]*" \
-        -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
-
-    find "$dir_path" -maxdepth 1 -type f \( -name "*.txt" -o -name "*.txt" \) \
-        ! -name "*live-[0-9]*" \
-        ! -name "*-analysis-[0-9]*" \
+    # 1. 使用 posix-egrep 正規表達式
+    # 2. 排除包含 8 位以上數字的檔名 (時間戳記)
+    # 3. 排除純數字開頭的 html
+    find "$dir_path" -maxdepth 1 -type f \
+        -regextype posix-egrep \
+        \( -name "*.html" -o -name "*.txt" \) \
+        ! -regex ".*-[0-9]{8,}.*" \
+        ! -regex ".*/[0-9]+.*\.html" \
         -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
 
 #    if [ $? -eq 0 ]; then
