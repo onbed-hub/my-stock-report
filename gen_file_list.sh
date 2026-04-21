@@ -44,7 +44,7 @@ for dir in "$REPORT_BASE"/*/; do
         python3 -c "import sys, json; print(json.dumps([line.strip() for line in sys.stdin if line.strip()]))" > "$temp_dir/files.json"
     fi
 
-    echo "  ✅ 已產生: $temp_dir/files.json"
+#    echo "  ✅ 已產生: $temp_dir/files.json"
 done
 
 echo "---"
