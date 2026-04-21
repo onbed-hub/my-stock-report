@@ -32,19 +32,23 @@ for dir_path in $(find "$SOURCE_BASE" -maxdepth 1 -type d -regextype sed -regex 
 
     # --- 1. 處理 HTML 檔案 ---
     # 排除：
-    # (A) 只要檔名包含 "live-" 後面接著數字的 (! -name "*live-[0-9]*")
-    # (B) 數字開頭的備份檔 (! -name "[0-9]*")
+    # (A) live-後面接數字
+    # (B) analysis-後面接數字
+    # (C) 數字開頭的備份檔
     find "$dir_path" -maxdepth 1 -type f -name "*.html" \
         ! -name "*live-[0-9]*" \
+        ! -name "*analysis-[0-9]*" \
         ! -name "[0-9]*" \
         -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
 
     # --- 2. 處理 TXT 檔案 ---
     # 排除：
-    # (A) 只要檔名包含 "live-" 後面接著數字的 (! -name "*live-[0-9]*")
-    # 注意：這裡不排除數字開頭，所以 "4956-..." 會被保留
+    # (A) live-後面接數字
+    # (B) analysis-後面接數字
+    # 注意：保留數字開頭 (為了 4956-...)
     find "$dir_path" -maxdepth 1 -type f -name "*.txt" \
         ! -name "*live-[0-9]*" \
+        ! -name "*analysis-[0-9]*" \
         -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
 
 #    if [ $? -eq 0 ]; then
