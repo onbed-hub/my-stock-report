@@ -1,0 +1,165 @@
+<html><head><meta charset='UTF-8'>
+    <style>
+        /* 將基礎字型設定為預設的 1.5 倍 */
+        body { 
+            font-family: "Microsoft JhengHei", sans-serif; 
+            margin: 40px; 
+            background-color: #f4f7f9; 
+            font-size: 1.5rem; 
+        }
+        
+        h2 { 
+            font-size: 2.5rem; 
+            color: #1a237e; 
+            border-left: 15px solid #1a237e; 
+            padding-left: 20px; 
+            margin-bottom: 30px;
+        }
+        
+        table { 
+            border-collapse: collapse; 
+            width: 100%; 
+            background: white; 
+            border: 2px solid #444; 
+        }
+        
+        th { 
+            background-color: #1a237e; 
+            color: white; 
+            padding: 15px; 
+            font-size: 1.6rem; 
+            border: 2px solid #444; 
+        }
+        
+        td { 
+            padding: 15px; 
+            text-align: center; 
+            border: 1px solid #ddd; 
+            font-weight: bold; 
+            font-size: 1.5rem;
+        }
+        
+        .price-now { 
+            font-size: 2.2rem; 
+            color: #d32f2f; 
+            font-weight: 900; 
+        }
+        
+        .advice-box { 
+            padding: 15px; 
+            border-radius: 10px; 
+            color: white; 
+            text-align: left; 
+            min-width: 250px; 
+        }
+        
+        .sell-bg { background-color: #c62828; }
+        .hold-bg { background-color: #78909c; } /* 續抱/觀望改用較穩重的灰色 */
+        .buy-bg { background-color: #ef6c00; }
+        
+        .advice-title { 
+            font-size: 1.8rem; 
+            font-weight: 900; 
+            display: block; 
+            margin-bottom: 5px;
+        }
+        
+        .advice-reason { 
+            font-size: 1.2rem; 
+            opacity: 0.9;
+        }
+        
+        small { font-size: 1rem; opacity: 0.8; }
+        
+        .macd-up-attack { color: #d32f2f; } 
+        .macd-up-fade { color: #f48fb1; }
+        .macd-down-attack { color: #2e7d32; } 
+        .macd-down-fade { color: #81c784; }
+    </style>
+    </head><body><h2>📊 投資策略即時診斷報告 (2026-04-10 16:27)</h2><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股票名稱</th>
+      <th>即時現價</th>
+      <th>5日均線</th>
+      <th>月線(20MA)</th>
+      <th>量能狀況</th>
+      <th>RSI(14)</th>
+      <th>決策建議</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>運錩<br><small>2069</small></td>
+      <td><span class='price-now'>18.55</span><br><small>-0.20 (-1.07%)</small></td>
+      <td>18.62</td>
+      <td>18.72</td>
+      <td>159000<br><small>(20MA:254990)</small></td>
+      <td>50.8</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、破10MA、破月線、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td>燿華<br><small>2367</small></td>
+      <td><span class='price-now'>75.00</span><br><small>-2.50 (-3.23%)</small></td>
+      <td>74.00</td>
+      <td>74.01</td>
+      <td>110742000<br><small>(20MA:111501112)</small></td>
+      <td>54.4</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td>兆赫<br><small>2485</small></td>
+      <td><span class='price-now'>73.50</span><br><small>+3.60 (+5.15%)</small></td>
+      <td>73.60</td>
+      <td>75.05</td>
+      <td>40137000<br><small>(20MA:55722523)</small></td>
+      <td>41.5</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、破10MA、破月線、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td>精金<br><small>3049</small></td>
+      <td><span class='price-now'>11.95</span><br><small>-0.55 (-4.40%)</small></td>
+      <td>11.59</td>
+      <td>13.22</td>
+      <td>16767000<br><small>(20MA:21061146)</small></td>
+      <td>32.4</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td>群創<br><small>3481</small></td>
+      <td><span class='price-now'>26.00</span><br><small>-0.95 (-3.53%)</small></td>
+      <td>25.57</td>
+      <td>26.27</td>
+      <td>389920000<br><small>(20MA:508042694)</small></td>
+      <td>44.5</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>大聯大<br><small>3702</small></td>
+      <td><span class='price-now'>91.50</span><br><small>+0.20 (+0.22%)</small></td>
+      <td>90.36</td>
+      <td>89.10</td>
+      <td>12803000<br><small>(20MA:20721637)</small></td>
+      <td>46.8</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td>網家<br><small>8044</small></td>
+      <td><span class='price-now'>22.20</span><br><small>-0.10 (-0.45%)</small></td>
+      <td>22.36</td>
+      <td>23.00</td>
+      <td>408000<br><small>(20MA:439161)</small></td>
+      <td>41.5</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、破10MA、破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>光鋐<br><small>4956</small></td>
+      <td><span class='price-now'>35.80</span><br><small>-0.70 (-1.92%)</small></td>
+      <td>35.29</td>
+      <td>33.78</td>
+      <td>7810000<br><small>(20MA:15872027)</small></td>
+      <td>52.8</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：動能減弱</span></div></td>
+    </tr>
+  </tbody>
+</table></body></html>

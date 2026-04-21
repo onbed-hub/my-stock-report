@@ -31,18 +31,20 @@ for dir_path in $(find "$SOURCE_BASE" -maxdepth 1 -type d -regextype sed -regex 
 #    cp -u "$dir_path"/*.txt "$TARGET_BASE/$dir_name/" 2>/dev/null
 
     # --- 1. 處理 HTML 檔案 ---
-    # 排除包含 8-14 位時間戳記的檔案，且排除數字開頭的備份檔
+    # 排除：
+    # (A) 只要檔名包含 "live-" 後面接著數字的 (! -name "*live-[0-9]*")
+    # (B) 數字開頭的備份檔 (! -name "[0-9]*")
     find "$dir_path" -maxdepth 1 -type f -name "*.html" \
-        -regextype posix-egrep \
-        ! -regex ".*-[0-9]{8,14}\.html" \
+        ! -name "*live-[0-9]*" \
         ! -name "[0-9]*" \
         -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
 
     # --- 2. 處理 TXT 檔案 ---
-    # 保留數字開頭 (如 4956-xxx.txt)，僅排除檔名末端有 8-14 位時間戳記的檔案
+    # 排除：
+    # (A) 只要檔名包含 "live-" 後面接著數字的 (! -name "*live-[0-9]*")
+    # 注意：這裡不排除數字開頭，所以 "4956-..." 會被保留
     find "$dir_path" -maxdepth 1 -type f -name "*.txt" \
-        -regextype posix-egrep \
-        ! -regex ".*-[0-9]{8,14}\.txt" \
+        ! -name "*live-[0-9]*" \
         -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
 
 #    if [ $? -eq 0 ]; then

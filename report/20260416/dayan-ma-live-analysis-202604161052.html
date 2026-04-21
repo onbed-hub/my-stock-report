@@ -1,0 +1,183 @@
+<html><head><meta charset='UTF-8'>
+    <style>
+        /* 將基礎字型設定為預設的 1.5 倍 */
+        body { 
+            font-family: "Microsoft JhengHei", sans-serif; 
+            margin: 40px; 
+            background-color: #f4f7f9; 
+            font-size: 1.5rem; 
+        }
+        
+        h2 { 
+            font-size: 2.5rem; 
+            color: #1a237e; 
+            border-left: 15px solid #1a237e; 
+            padding-left: 20px; 
+            margin-bottom: 30px;
+        }
+        
+        table { 
+            border-collapse: collapse; 
+            width: 100%; 
+            background: white; 
+            border: 2px solid #444; 
+        }
+        
+        th { 
+            background-color: #1a237e; 
+            color: white; 
+            padding: 15px; 
+            font-size: 1.6rem; 
+            border: 2px solid #444; 
+        }
+        
+        td { 
+            padding: 15px; 
+            text-align: center; 
+            border: 1px solid #ddd; 
+            font-weight: bold; 
+            font-size: 1.5rem;
+        }
+        
+        .price-now { 
+            font-size: 2.2rem; 
+            color: #d32f2f; 
+            font-weight: 900; 
+        }
+        
+        .advice-box { 
+            padding: 15px; 
+            border-radius: 10px; 
+            color: white; 
+            text-align: left; 
+            min-width: 250px; 
+        }
+        
+        .sell-bg { background-color: #c62828; }
+        .hold-bg { background-color: #78909c; } /* 續抱/觀望改用較穩重的灰色 */
+        .buy-bg { background-color: #ef6c00; }
+        
+        .advice-title { 
+            font-size: 1.8rem; 
+            font-weight: 900; 
+            display: block; 
+            margin-bottom: 5px;
+        }
+        
+        .advice-reason { 
+            font-size: 1.2rem; 
+            opacity: 0.9;
+        }
+        
+        small { font-size: 1rem; opacity: 0.8; }
+        
+        .macd-up-attack { color: #d32f2f; } 
+        .macd-up-fade { color: #f48fb1; }
+        .macd-down-attack { color: #2e7d32; } 
+        .macd-down-fade { color: #81c784; }
+    </style>
+    </head><body><h2>📊 投資策略即時診斷報告 (2026-04-16 10:52)</h2><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股票名稱</th>
+      <th>即時現價</th>
+      <th>5日均線</th>
+      <th>月線(20MA)</th>
+      <th>量能狀況</th>
+      <th>RSI(14)</th>
+      <th>決策建議</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>元大台灣50<br><a href='https://tw.stock.yahoo.com/quote/0050/technical-analysis' target='_blank' title='查看 Yahoo 技術分析'><small>0050</small></a></td>
+      <td><span class='price-now'>84.35</span><br><small>+0.20 (+0.24%)</small></td>
+      <td>82.59</td>
+      <td>77.38</td>
+      <td>38292000<br><small>(20MA:117385728)</small></td>
+      <td>71.2</td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量 > 20MA..</span></div></td>
+    </tr>
+    <tr>
+      <td>廣達<br><a href='https://tw.stock.yahoo.com/quote/2382/technical-analysis' target='_blank' title='查看 Yahoo 技術分析'><small>2382</small></a></td>
+      <td><span class='price-now'>308.50</span><br><small>+0.00 (+0.00%)</small></td>
+      <td>316.10</td>
+      <td>295.50</td>
+      <td>9901000<br><small>(20MA:19445739)</small></td>
+      <td>63.0</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td>穩懋<br><a href='https://tw.stock.yahoo.com/quote/3105/technical-analysis' target='_blank' title='查看 Yahoo 技術分析'><small>3105</small></a></td>
+      <td><span class='price-now'>446.50</span><br><small>+0.00 (+0.00%)</small></td>
+      <td>454.40</td>
+      <td>389.23</td>
+      <td>35574000<br><small>(20MA:40253905)</small></td>
+      <td>72.8</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td>譜瑞-KY<br><a href='https://tw.stock.yahoo.com/quote/4966/technical-analysis' target='_blank' title='查看 Yahoo 技術分析'><small>4966</small></a></td>
+      <td><span class='price-now'>530.00</span><br><small>+0.00 (+0.00%)</small></td>
+      <td>530.40</td>
+      <td>496.85</td>
+      <td>1190000<br><small>(20MA:740673)</small></td>
+      <td>63.8</td>
+      <td><div class="advice-box buy-bg"><span class="advice-title">🔥 攻擊買點</span></div></td>
+    </tr>
+    <tr>
+      <td>期元大S&P黃金<br><a href='https://tw.stock.yahoo.com/quote/00635U/technical-analysis' target='_blank' title='查看 Yahoo 技術分析'><small>00635U</small></a></td>
+      <td><span class='price-now'>50.85</span><br><small>+0.00 (+0.00%)</small></td>
+      <td>50.34</td>
+      <td>49.26</td>
+      <td>1924000<br><small>(20MA:8564951)</small></td>
+      <td>65.1</td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：MA20 上揚, 量 > 20MA..</span></div></td>
+    </tr>
+    <tr>
+      <td>期元大道瓊白銀<br><a href='https://tw.stock.yahoo.com/quote/00738U/technical-analysis' target='_blank' title='查看 Yahoo 技術分析'><small>00738U</small></a></td>
+      <td><span class='price-now'>65.20</span><br><small>+0.55 (+0.85%)</small></td>
+      <td>62.91</td>
+      <td>60.05</td>
+      <td>2386000<br><small>(20MA:10817199)</small></td>
+      <td>61.8</td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：MA20 上揚, 量 > 20MA..</span></div></td>
+    </tr>
+    <tr>
+      <td>凱基台灣TOP50<br><a href='https://tw.stock.yahoo.com/quote/009816/technical-analysis' target='_blank' title='查看 Yahoo 技術分析'><small>009816</small></a></td>
+      <td><span class='price-now'>11.85</span><br><small>+0.00 (+0.00%)</small></td>
+      <td>11.63</td>
+      <td>10.94</td>
+      <td>72819000<br><small>(20MA:195470900)</small></td>
+      <td>70.2</td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量 > 20MA..</span></div></td>
+    </tr>
+    <tr>
+      <td>映泰<br><a href='https://tw.stock.yahoo.com/quote/2399/technical-analysis' target='_blank' title='查看 Yahoo 技術分析'><small>2399</small></a></td>
+      <td><span class='price-now'>37.05</span><br><small>+0.00 (+0.00%)</small></td>
+      <td>35.00</td>
+      <td>33.40</td>
+      <td>24782000<br><small>(20MA:15186647)</small></td>
+      <td>62.6</td>
+      <td><div class="advice-box buy-bg"><span class="advice-title">🔥 攻擊買點</span></div></td>
+    </tr>
+    <tr>
+      <td>陽明<br><a href='https://tw.stock.yahoo.com/quote/2609/technical-analysis' target='_blank' title='查看 Yahoo 技術分析'><small>2609</small></a></td>
+      <td><span class='price-now'>51.50</span><br><small>+0.00 (+0.00%)</small></td>
+      <td>51.06</td>
+      <td>52.73</td>
+      <td>5828000<br><small>(20MA:18941649)</small></td>
+      <td>34.3</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>長榮航<br><a href='https://tw.stock.yahoo.com/quote/2618/technical-analysis' target='_blank' title='查看 Yahoo 技術分析'><small>2618</small></a></td>
+      <td><span class='price-now'>34.75</span><br><small>+0.00 (+0.00%)</small></td>
+      <td>34.92</td>
+      <td>34.96</td>
+      <td>7645000<br><small>(20MA:22247398)</small></td>
+      <td>41.5</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、破10MA、破月線</span></div></td>
+    </tr>
+  </tbody>
+</table></body></html>

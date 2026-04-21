@@ -1,0 +1,248 @@
+
+    <style>
+        body { font-family: "Microsoft JhengHei", sans-serif; margin: 40px; background-color: #f4f7f9; }
+        h2 { font-size: 50px; color: #1a237e; border-left: 20px solid #1a237e; padding-left: 25px; }
+        table { border-collapse: collapse; width: 100%; background: white; font-size: 28px; border: 2px solid #444; }
+        th { background-color: #1a237e; color: white; padding: 15px; font-size: 30px; border: 2px solid #444; }
+        td { padding: 15px; text-align: center; border: 1px solid #ddd; font-weight: bold; }
+        .price-now { font-size: 45px; color: #d32f2f; font-weight: 900; }
+        .advice-box { padding: 15px; border-radius: 10px; color: white; text-align: left; min-width: 320px; }
+        .sell-bg { background-color: #c62828; }
+        .hold-bg { background-color: #2e7d32; }
+        .buy-bg { background-color: #ef6c00; }
+        .advice-title { font-size: 32px; font-weight: 900; display: block; }
+        .advice-reason { font-size: 22px; }
+        .macd-up-attack { color: #d32f2f; } .macd-up-fade { color: #f48fb1; }
+        .macd-down-attack { color: #2e7d32; } .macd-down-fade { color: #81c784; }
+    </style>
+    <h2>📊 投資策略即時診斷報告 (2026-04-01 23:59)</h2><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股票名稱</th>
+      <th>即時現價</th>
+      <th>5日均線</th>
+      <th>月線(20MA)</th>
+      <th>量能狀況</th>
+      <th>RSI(14)</th>
+      <th>決策建議</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>鴻海<br><small>2317</small></td>
+      <td><span class='price-now'>197.00</span><br><small>+9.50 (+5.07%)</small></td>
+      <td>195.70</td>
+      <td>206.55</td>
+      <td>44154000<br><small>(20MA:58959532)</small></td>
+      <td>33.0</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>大聯大<br><small>3702</small></td>
+      <td><span class='price-now'>89.90</span><br><small>+1.90 (+2.16%)</small></td>
+      <td>91.10</td>
+      <td>84.38</td>
+      <td>15847000<br><small>(20MA:20395615)</small></td>
+      <td>72.3</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、破10MA、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td>兆赫<br><small>2485</small></td>
+      <td><span class='price-now'>81.50</span><br><small>+1.90 (+2.39%)</small></td>
+      <td>79.96</td>
+      <td>69.86</td>
+      <td>7759000<br><small>(20MA:71901844)</small></td>
+      <td>74.1</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td>燿華<br><small>2367</small></td>
+      <td><span class='price-now'>74.50</span><br><small>+1.00 (+1.36%)</small></td>
+      <td>75.60</td>
+      <td>72.17</td>
+      <td>104480000<br><small>(20MA:86332830)</small></td>
+      <td>52.5</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td>國光生<br><small>4142</small></td>
+      <td><span class='price-now'>18.80</span><br><small>+0.45 (+2.45%)</small></td>
+      <td>18.50</td>
+      <td>18.08</td>
+      <td>1863000<br><small>(20MA:1385863)</small></td>
+      <td>79.6</td>
+      <td><div class="advice-box buy-bg"><span class="advice-title">🔥 攻擊買點</span></div></td>
+    </tr>
+    <tr>
+      <td>元大台灣50<br><small>0050</small></td>
+      <td><span class='price-now'>75.45</span><br><small>+3.10 (+4.28%)</small></td>
+      <td>74.50</td>
+      <td>75.65</td>
+      <td>125954000<br><small>(20MA:143918755)</small></td>
+      <td>46.3</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>元大高股息<br><small>0056</small></td>
+      <td><span class='price-now'>38.11</span><br><small>+0.98 (+2.64%)</small></td>
+      <td>38.02</td>
+      <td>38.40</td>
+      <td>48300000<br><small>(20MA:56140643)</small></td>
+      <td>46.1</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td>期元大S&P黃金<br><small>00635U</small></td>
+      <td><span class='price-now'>49.42</span><br><small>+1.18 (+2.45%)</small></td>
+      <td>47.99</td>
+      <td>51.13</td>
+      <td>9006000<br><small>(20MA:8865558)</small></td>
+      <td>33.7</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>期元大道瓊白銀<br><small>00738U</small></td>
+      <td><span class='price-now'>60.85</span><br><small>+1.90 (+3.22%)</small></td>
+      <td>58.35</td>
+      <td>63.30</td>
+      <td>10230000<br><small>(20MA:12211932)</small></td>
+      <td>37.1</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>復華台灣科技優息<br><small>00929</small></td>
+      <td><span class='price-now'>19.00</span><br><small>+0.39 (+2.10%)</small></td>
+      <td>19.11</td>
+      <td>19.37</td>
+      <td>19820000<br><small>(20MA:35491104)</small></td>
+      <td>43.6</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、破10MA、破月線、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td>凱基台灣TOP50<br><small>009816</small></td>
+      <td><span class='price-now'>10.66</span><br><small>+0.44 (+4.31%)</small></td>
+      <td>10.55</td>
+      <td>10.68</td>
+      <td>156256000<br><small>(20MA:233472095)</small></td>
+      <td>46.8</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>主動元大AI新經濟<br><small>00990A</small></td>
+      <td><span class='price-now'>11.81</span><br><small>+0.51 (+4.51%)</small></td>
+      <td>11.90</td>
+      <td>12.03</td>
+      <td>22683000<br><small>(20MA:33973880)</small></td>
+      <td>47.7</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、破10MA、破月線、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td>第一銅<br><small>2009</small></td>
+      <td><span class='price-now'>40.85</span><br><small>+1.15 (+2.90%)</small></td>
+      <td>40.31</td>
+      <td>41.78</td>
+      <td>1346000<br><small>(20MA:1585576)</small></td>
+      <td>37.1</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>旺宏<br><small>2337</small></td>
+      <td><span class='price-now'>127.00</span><br><small>+11.50 (+9.96%)</small></td>
+      <td>124.70</td>
+      <td>123.03</td>
+      <td>15001000<br><small>(20MA:98144346)</small></td>
+      <td>60.4</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td>佳世達<br><small>2352</small></td>
+      <td><span class='price-now'>23.30</span><br><small>+0.55 (+2.42%)</small></td>
+      <td>23.37</td>
+      <td>23.77</td>
+      <td>3508000<br><small>(20MA:5149445)</small></td>
+      <td>45.8</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、破10MA、破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>友達<br><small>2409</small></td>
+      <td><span class='price-now'>15.95</span><br><small>+1.45 (+10.00%)</small></td>
+      <td>14.79</td>
+      <td>15.53</td>
+      <td>205665000<br><small>(20MA:166667109)</small></td>
+      <td>39.7</td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：MA5 > MA10, RSI > 55..</span></div></td>
+    </tr>
+    <tr>
+      <td>群創<br><small>3481</small></td>
+      <td><span class='price-now'>25.05</span><br><small>+1.20 (+5.03%)</small></td>
+      <td>24.66</td>
+      <td>26.84</td>
+      <td>327551000<br><small>(20MA:666921632)</small></td>
+      <td>21.6</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td>富爾特<br><small>6136</small></td>
+      <td><span class='price-now'>24.25</span><br><small>+0.05 (+0.21%)</small></td>
+      <td>24.10</td>
+      <td>23.92</td>
+      <td>348000<br><small>(20MA:209574)</small></td>
+      <td>58.0</td>
+      <td><div class="advice-box buy-bg"><span class="advice-title">🔥 攻擊買點</span></div></td>
+    </tr>
+    <tr>
+      <td>森崴能源<br><small>6806</small></td>
+      <td><span class='price-now'>38.60</span><br><small>+1.25 (+3.35%)</small></td>
+      <td>38.57</td>
+      <td>40.18</td>
+      <td>1238000<br><small>(20MA:1315072)</small></td>
+      <td>41.8</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>穩懋<br><small>3105</small></td>
+      <td><span class='price-now'>376.50</span><br><small>+25.00 (+7.11%)</small></td>
+      <td>371.90</td>
+      <td>325.43</td>
+      <td>48828000<br><small>(20MA:26422086)</small></td>
+      <td>63.0</td>
+      <td><div class="advice-box buy-bg"><span class="advice-title">🔥 攻擊買點</span></div></td>
+    </tr>
+    <tr>
+      <td>譜瑞-KY<br><small>4966</small></td>
+      <td><span class='price-now'>482.00</span><br><small>+6.00 (+1.26%)</small></td>
+      <td>488.00</td>
+      <td>507.43</td>
+      <td>729000<br><small>(20MA:558653)</small></td>
+      <td>28.6</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、破10MA、破月線、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td>廣明<br><small>6188</small></td>
+      <td><span class='price-now'>88.40</span><br><small>+1.80 (+2.08%)</small></td>
+      <td>89.04</td>
+      <td>92.45</td>
+      <td>565000<br><small>(20MA:1245154)</small></td>
+      <td>39.9</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、破10MA、破月線、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td>安葆<br><small>7792</small></td>
+      <td><span class='price-now'>312.00</span><br><small>+12.00 (+4.00%)</small></td>
+      <td>309.90</td>
+      <td>321.60</td>
+      <td>119000<br><small>(20MA:203182)</small></td>
+      <td>39.9</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破月線</span></div></td>
+    </tr>
+    <tr>
+      <td>國巨*<br><small>2327</small></td>
+      <td><span class='price-now'>251.50</span><br><small>+8.00 (+3.29%)</small></td>
+      <td>255.00</td>
+      <td>261.23</td>
+      <td>11720000<br><small>(20MA:23183525)</small></td>
+      <td>50.0</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、破10MA、破月線、動能減弱</span></div></td>
+    </tr>
+  </tbody>
+</table>
