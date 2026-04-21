@@ -56,91 +56,103 @@
         loadDynamicReports();
     };
 
-    async function loadDynamicReports() {
+async function loadDynamicReports() {
         const dateInput = document.getElementById('datePicker').value;
         const dateDir = dateInput.replace(/-/g, '');
         const displayArea = document.getElementById('dynamicContent');
-        
+
         displayArea.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:2rem;">正在讀取檔案清單...</div>';
 
         try {
-            // 讀取該日期資料夾下的 files.json
-            const response = await fetch(`report/${dateDir}/files.json`);
-            if (!response.ok) throw new Error('No list found');
+            // 加上 t= 參數避免瀏覽器快取舊資料
+            const url = `report/${dateDir}/files.json?t=${new Date().getTime()}`;
+            const response = await fetch(url);
             
-            const allFiles = await response.json();
-
-            // 💡 核心過濾邏輯：
-            const filteredFiles = allFiles.filter(file => {
-                const nameLower = file.toLowerCase();
-                
-                // 1. 排除數字開頭的檔案
-                const isStartWithNumber = /^\d/.test(file);
-                if (isStartWithNumber) return false;
-
-                // 2. 必須是 .html 檔案
-                const isHtml = nameLower.endsWith('.html');
-                if (!isHtml) return false;
-
-                // 3. 判定條件：
-                // (A) 包含 'live' 且不含長串時間戳記 (維持你原有的排除時間戳邏輯)
-                const isLiveFile = nameLower.includes('live') && !/\d{8,}/.test(file);
-                
-                // (B) 包含 'trend-backtest-report'
-                const isTrendBacktest = nameLower.includes('trend-backtest-report');
-
-                return isLiveFile || isTrendBacktest;
-            });
-
-            // 根據前綴 (第一個 "-" 之前的部分) 進行分組
-            const groups = {};
-            filteredFiles.forEach(file => {
-                const prefix = file.split('-')[0];
-                if (!groups[prefix]) groups[prefix] = [];
-                groups[prefix].push(file);
-            });
-
-            // 清空並重新渲染
-            displayArea.innerHTML = '';
-            
-            const sortedPrefixes = Object.keys(groups).sort();
-            
-            if (sortedPrefixes.length === 0) {
-                displayArea.innerHTML = `<div style="text-align:center; color:#94a3b8; padding:3rem;">📅 ${dateInput} 查無「最終版」實時報表</div>`;
-                return;
+            if (!response.ok) {
+                throw new Error(`找不到檔案 (HTTP ${response.status})，請確認目錄 report/${dateDir} 是否存在`);
             }
 
-            sortedPrefixes.forEach(prefix => {
-                const section = document.createElement('div');
-                section.innerHTML = `<div class="section-header">${prefix.toUpperCase()} 系列報表</div>`;
-                
-                const grid = document.createElement('div');
-                grid.className = 'report-grid';
+            const allFiles = await response.json();
 
-                groups[prefix].forEach(file => {
-                    // 自動判定檔案類型標籤
-                    const typeKey = Object.keys(typeConfig).find(k => file.toLowerCase().includes(k)) || 'live';
-                    const config = typeConfig[typeKey];
+            // 💡 針對你提供的 jq 輸出進行優化過濾
+            const filteredFiles = allFiles.filter(file => {
+                const nameLower = file.toLowerCase();
+                if (!nameLower.endsWith('.html')) return false;
 
-                    const card = document.createElement('a');
-                    card.href = `report/${dateDir}/${file}`;
-                    card.className = 'card';
-                    card.innerHTML = `
-                        <span class="badge" style="background:${config.color}">${prefix} ${typeKey}</span>
-                        <span class="title">${config.label} <span class="status-ready">✅ 已就緒</span></span>
-                        <div class="file-info">📄 ${file}</div>
-                    `;
-                    grid.appendChild(card);
-                });
+                // 排除 8 位數以上的時間戳記 (例如 202604210014)
+                // 這樣會保留 bor-trend-backtest-live-000629.html (6位數)
+                // 排除 bor-trend-backtest-live-202604210028.html (12位數)
+                const hasLongTimestamp = /\d{8,}/.test(file);
+                if (hasLongTimestamp) return false;
 
-                section.appendChild(grid);
-                displayArea.appendChild(section);
+                // 排除純數字開頭
+                if (/^\d/.test(file)) return false;
+
+                const isLive = nameLower.includes('live');
+                const isTrend = nameLower.includes('trend-backtest');
+
+                return isLive || isTrend;
             });
 
+            renderGroups(filteredFiles, dateDir);
+
         } catch (error) {
-            displayArea.innerHTML = `<div style="text-align:center; color:#ef4444; padding:3rem;">⚠️ 無法讀取報表清單 (files.json 未產生或路徑錯誤)</div>`;
+            console.error("Debug info:", error);
+            displayArea.innerHTML = `
+                <div style="text-align:center; color:#ef4444; padding:2rem; border: 1px dashed #ef4444; border-radius:12px;">
+                    ⚠️ 讀取失敗<br>
+                    <small style="color:#64748b; display:block; margin-top:10px;">
+                        錯誤原因: ${error.message}<br>
+                        建議檢查: 1. 是否開啟了 Python Http Server? 2. 目錄名是否正確?
+                    </small>
+                </div>`;
         }
     }
+
+    // 抽出渲染邏輯讓代碼更乾淨
+    function renderGroups(files, dateDir) {
+        const displayArea = document.getElementById('dynamicContent');
+        const groups = {};
+        
+        files.forEach(file => {
+            const prefix = file.split('-')[0];
+            if (!groups[prefix]) groups[prefix] = [];
+            groups[prefix].push(file);
+        });
+
+        const sortedPrefixes = Object.keys(groups).sort();
+        if (sortedPrefixes.length === 0) {
+            displayArea.innerHTML = `<div style="text-align:center; color:#94a3b8; padding:3rem;">📅 查無符合條件的正式報表</div>`;
+            return;
+        }
+
+        displayArea.innerHTML = '';
+        sortedPrefixes.forEach(prefix => {
+            const section = document.createElement('div');
+            section.innerHTML = `<div class="section-header">${prefix.toUpperCase()} 系列</div>`;
+            const grid = document.createElement('div');
+            grid.className = 'report-grid';
+
+            groups[prefix].forEach(file => {
+                let typeKey = 'live';
+                if (file.includes('backtest')) typeKey = 'backtest';
+                const config = typeConfig[typeKey] || typeConfig['live'];
+
+                const card = document.createElement('a');
+                card.href = `report/${dateDir}/${file}`;
+                card.className = 'card';
+                card.innerHTML = `
+                    <span class="badge" style="background:${config.color}">${prefix}</span>
+                    <span class="title">${config.label}</span>
+                    <div class="file-info">📄 ${file}</div>
+                `;
+                grid.appendChild(card);
+            });
+            section.appendChild(grid);
+            displayArea.appendChild(section);
+        });
+    }
+
 </script>
 </body>
 </html>
