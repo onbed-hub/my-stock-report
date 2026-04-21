@@ -1,0 +1,346 @@
+
+    <html>
+    <head>
+        <meta charset='UTF-8'>
+        <title>V3 Pro Live Report - bor</title>
+        
+    <style>
+        body {
+            font-family: "Microsoft JhengHei", sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 30px;
+            font-size: 1.2rem;
+        }
+        h2 {
+            color: #38bdf8;
+            border-bottom: 3px solid #38bdf8;
+            padding-bottom: 15px;
+            font-size: 2.2rem;
+        }
+        .card {
+            background: #ffffff;
+            color: #1e293b;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin-top: 15px;
+        }
+        .rule-item h4 { margin-top: 0; color: #1e40af; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
+        .rule-item ul { font-size: 1.3rem; line-height: 1.8; padding-left: 25px; }
+
+        .search-container { margin: 30px 0; }
+        #stockSearch {
+            width: 100%; max-width: 600px; padding: 15px 25px;
+            font-size: 1.5rem; border-radius: 12px; border: 2px solid #38bdf8;
+            background: #1e293b; color: white; outline: none;
+        }
+
+        table { width: 100%; border-collapse: collapse; background: #1e293b; margin-top: 20px; }
+        th { background: #334155; color: #38bdf8; padding: 20px; font-size: 1.3rem; border: 1px solid #475569; }
+        td { padding: 20px; text-align: center; border: 1px solid #475569; font-size: 1.4rem; font-weight: bold; }
+
+        .buy { color: #4ade80; background: rgba(74, 222, 128, 0.1); padding: 5px 10px; border-radius: 6px; }
+        .sell { color: #f87171; background: rgba(248, 113, 113, 0.1); padding: 5px 10px; border-radius: 6px; }
+        a { color: #38bdf8; text-decoration: none; }
+        tr:hover { background: #334155; }
+    </style>
+    
+    </head>
+    <body>
+        <h2>🚀 V3 Pro 即時分析報告 - [bor] (11:03)</h2>
+
+        
+    <div class="card">
+        <h3 style="font-size: 2.2rem; color: #1e3a8a; border-left: 10px solid #2563eb; padding-left:20px; margin-top:0;">🛡️ V3 Pro 即時趨勢與診斷準則</h3>
+        <div class="grid-container">
+            <div class="rule-item">
+                <h4>❶ 進場嚴選 (Entry Filter)</h4>
+                <ul>
+                    <li><b>均線趨勢：</b> 價格 > MA_20 且 MACD > 0</li>
+                    <li><b>量能確認：</b> 成交量 > VMA_20 (量價配合)</li>
+                    <li><b>強勢價格：</b> 若無量，需站上 MA_20 達 1.5%</li>
+                    <li><b>實體辨識：</b> 紅棒實體需大於上影線 (避雷針過濾)</li>
+                </ul>
+            </div>
+            <div class="rule-item">
+                <h4 style="color: #b91c1c;">❷ 風控與停利 (Exit)</h4>
+                <ul>
+                    <li><b>ATR 止損：</b> 跌破 (買入價 - 2倍ATR)</li>
+                    <li><b>趨勢轉弱：</b> 價格 < MA_20 且斜率轉負 📉</li>
+                    <li><b>移動停利：</b> 高點回落 10% (獲利 15% 以上觸發)</li>
+                    <li><b>弱勢清理：</b> 持股 12 天未脫離成本區</li>
+                </ul>
+            </div>
+            <div class="rule-item" style="background: #f1f5f9; padding: 15px; border-radius: 10px;">
+                <h4 style="color: #0369a1;">📊 動能強度診斷 (Momentum)</h4>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>🚀 <b>極強：</b> MA_20 斜率向上 + MACD 加速</li>
+                    <li>📈 <b>穩定：</b> MA_20 斜率向上 (成本持續墊高)</li>
+                    <li>📉 <b>轉弱：</b> MA_20 斜率轉負 (中期支撐力道消失)</li>
+                    <li>⏳ <b>猶豫：</b> 價格震盪或動能指標出現分歧</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+
+        <div class="search-container">
+            <input type="text" id="stockSearch" onkeyup="filterTable()" placeholder="🔍 搜尋股號、名稱或強度標籤 (如: 🚀)...">
+        </div>
+
+        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>代號</th>
+      <th>名稱</th>
+      <th>現價</th>
+      <th>量(張)</th>
+      <th>V4 檢核</th>
+      <th>風控/原因</th>
+      <th>最終建議</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/2317' target='_blank'>2317</a></td>
+      <td>鴻海</td>
+      <td>207.50<small>+0.00 (+0.00%)</small></td>
+      <td>40,779</td>
+      <td><div class='check-box'>[✅多頭] [✅突破] [❌MACD] [✅乖離] [❌紅棒]</div></td>
+      <td>ATR(2.2x)</td>
+      <td><span class='sell'>[🚀 極強] 🚨 賣出</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/3702' target='_blank'>3702</a></td>
+      <td>大聯大</td>
+      <td>100.50<small>+0.00 (+0.00%)</small></td>
+      <td>5,660</td>
+      <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
+      <td>ATR: 2.8x</td>
+      <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/2485' target='_blank'>2485</a></td>
+      <td>兆赫</td>
+      <td>71.00<small>+0.00 (+0.00%)</small></td>
+      <td>24,697</td>
+      <td><div class='check-box'>[❌多頭] [❌突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
+      <td>ATR: 2.2x</td>
+      <td><span class='neutral'>[📉 轉弱] ⏳ 觀望</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/2367' target='_blank'>2367</a></td>
+      <td>燿華</td>
+      <td>65.60<small>+0.00 (+0.00%)</small></td>
+      <td>49,138</td>
+      <td><div class='check-box'>[❌多頭] [❌突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
+      <td>ATR(2.2x)</td>
+      <td><span class='sell'>[📉 轉弱] 🚨 賣出</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/4142' target='_blank'>4142</a></td>
+      <td>國光生</td>
+      <td>18.05<small>+0.00 (+0.00%)</small></td>
+      <td>646</td>
+      <td><div class='check-box'>[❌多頭] [✅突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
+      <td>ATR(2.2x)</td>
+      <td><span class='sell'>[📈 穩定] 🚨 賣出</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/0050' target='_blank'>0050</a></td>
+      <td>元大台灣50</td>
+      <td>85.90<small>+1.35 (+1.60%)</small></td>
+      <td>46,542</td>
+      <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [❌乖離] [✅紅棒]</div></td>
+      <td>ATR: 3.5x</td>
+      <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/0056' target='_blank'>0056</a></td>
+      <td>元大高股息</td>
+      <td>41.47<small>+0.00 (+0.00%)</small></td>
+      <td>47,390</td>
+      <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
+      <td>ATR: 2.8x</td>
+      <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/009816' target='_blank'>009816</a></td>
+      <td>凱基台灣TOP50</td>
+      <td>12.30<small>+0.23 (+1.91%)</small></td>
+      <td>93,223</td>
+      <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [❌乖離] [✅紅棒]</div></td>
+      <td>ATR: 2.8x</td>
+      <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/2009' target='_blank'>2009</a></td>
+      <td>第一銅</td>
+      <td>39.70<small>+0.00 (+0.00%)</small></td>
+      <td>653</td>
+      <td><div class='check-box'>[✅多頭] [✅突破] [❌MACD] [✅乖離] [❌紅棒]</div></td>
+      <td>ATR(2.2x), TrendDead</td>
+      <td><span class='sell'>[📉 轉弱] 🚨 賣出</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/2337' target='_blank'>2337</a></td>
+      <td>旺宏</td>
+      <td>120.50<small>+0.00 (+0.00%)</small></td>
+      <td>89,205</td>
+      <td><div class='check-box'>[❌多頭] [❌突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
+      <td>ATR: 3.5x</td>
+      <td><span class='neutral'>[📉 轉弱] ⏳ 觀望</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/2352' target='_blank'>2352</a></td>
+      <td>佳世達</td>
+      <td>25.70<small>+0.05 (+0.19%)</small></td>
+      <td>1,764</td>
+      <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
+      <td>ATR: 3.5x</td>
+      <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/2409' target='_blank'>2409</a></td>
+      <td>友達</td>
+      <td>19.25<small>+0.00 (+0.00%)</small></td>
+      <td>125,020</td>
+      <td><div class='check-box'>[✅多頭] [❌突破] [✅MACD] [❌乖離] [❌紅棒]</div></td>
+      <td>ATR: 3.5x</td>
+      <td><span class='neutral'>[📈 穩定] ⏳ 觀望</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/3481' target='_blank'>3481</a></td>
+      <td>群創</td>
+      <td>26.15<small>+0.00 (+0.00%)</small></td>
+      <td>100,961</td>
+      <td><div class='check-box'>[✅多頭] [❌突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
+      <td>ATR: 2.8x</td>
+      <td><span class='neutral'>[📉 轉弱] ⏳ 觀望</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/6136' target='_blank'>6136</a></td>
+      <td>富爾特</td>
+      <td>25.80<small>+1.30 (+5.31%)</small></td>
+      <td>736</td>
+      <td><div class='check-box'></div></td>
+      <td>ATR: 2.8x</td>
+      <td><span class='neutral'>[📉 轉弱] ⏳ 觀望</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/6806' target='_blank'>6806</a></td>
+      <td>森崴能源</td>
+      <td>29.80<small>+2.70 (+9.96%)</small></td>
+      <td>606</td>
+      <td><div class='check-box'></div></td>
+      <td>ATR: 2.8x</td>
+      <td><span class='neutral'>[📉 轉弱] ⏳ 觀望</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/3105' target='_blank'>3105</a></td>
+      <td>穩懋</td>
+      <td>592.00<small>+0.00 (+0.00%)</small></td>
+      <td>36,598</td>
+      <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [❌乖離] [❌紅棒]</div></td>
+      <td>ATR: 3.5x</td>
+      <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/4966' target='_blank'>4966</a></td>
+      <td>譜瑞-KY</td>
+      <td>532.00<small>+0.00 (+0.00%)</small></td>
+      <td>432</td>
+      <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
+      <td>ATR(2.2x)</td>
+      <td><span class='sell'>[🚀 極強] 🚨 賣出</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/6188' target='_blank'>6188</a></td>
+      <td>廣明</td>
+      <td>85.80<small>+0.00 (+0.00%)</small></td>
+      <td>885</td>
+      <td><div class='check-box'></div></td>
+      <td>ATR: 2.8x</td>
+      <td><span class='neutral'>[📉 轉弱] ⏳ 觀望</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/7792' target='_blank'>7792</a></td>
+      <td>安葆</td>
+      <td>359.50<small>+0.00 (+0.00%)</small></td>
+      <td>107</td>
+      <td><div class='check-box'></div></td>
+      <td>ATR: 2.8x</td>
+      <td><span class='neutral'>[📉 轉弱] ⏳ 觀望</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/2327' target='_blank'>2327</a></td>
+      <td>國巨*</td>
+      <td>319.50<small>+0.00 (+0.00%)</small></td>
+      <td>19,530</td>
+      <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [❌乖離] [❌紅棒]</div></td>
+      <td>ATR: 3.5x</td>
+      <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/3714' target='_blank'>3714</a></td>
+      <td>富采</td>
+      <td>73.40<small>-4.00 (-5.17%)</small></td>
+      <td>13,978</td>
+      <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [❌乖離] [❌紅棒]</div></td>
+      <td>ATR: 2.8x</td>
+      <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/1802' target='_blank'>1802</a></td>
+      <td>台玻</td>
+      <td>70.90<small>+0.00 (+0.00%)</small></td>
+      <td>138,554</td>
+      <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [❌乖離] [❌紅棒]</div></td>
+      <td>ATR: 2.8x</td>
+      <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/1721' target='_blank'>1721</a></td>
+      <td>三晃</td>
+      <td>22.55<small>+0.00 (+0.00%)</small></td>
+      <td>6,257</td>
+      <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [❌乖離] [❌紅棒]</div></td>
+      <td>ATR: 2.8x</td>
+      <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/8104' target='_blank'>8104</a></td>
+      <td>錸寶</td>
+      <td>38.70<small>+0.00 (+0.00%)</small></td>
+      <td>1,020</td>
+      <td><div class='check-box'></div></td>
+      <td>ATR: 2.8x</td>
+      <td><span class='neutral'>[📉 轉弱] ⏳ 觀望</span></td>
+    </tr>
+  </tbody>
+</table>
+
+        
+    <script>
+    function filterTable() {
+        let input = document.getElementById("stockSearch");
+        let filter = input.value.toUpperCase();
+        let table = document.querySelector("table");
+        let tr = table.getElementsByTagName("tr");
+        for (let i = 1; i < tr.length; i++) {
+            let txtValue = tr[i].textContent || tr[i].innerText;
+            tr[i].style.display = txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none";
+        }
+    }
+    </script>
+    
+    </body>
+    </html>
+    

@@ -30,15 +30,19 @@ for dir_path in $(find "$SOURCE_BASE" -maxdepth 1 -type d -regextype sed -regex 
 #    cp -u "$dir_path"/*.html "$TARGET_BASE/$dir_name/" 2>/dev/null
 #    cp -u "$dir_path"/*.txt "$TARGET_BASE/$dir_name/" 2>/dev/null
 
-    # 修正後的篩選條件：
-    # 1. 使用 posix-egrep 正規表達式
-    # 2. 排除包含 8 位以上數字的檔名 (時間戳記)
-    # 3. 排除純數字開頭的 html
-    find "$dir_path" -maxdepth 1 -type f \
+    # --- 1. 處理 HTML 檔案 ---
+    # 排除包含 8-14 位時間戳記的檔案，且排除數字開頭的備份檔
+    find "$dir_path" -maxdepth 1 -type f -name "*.html" \
         -regextype posix-egrep \
-        \( -name "*.html" -o -name "*.txt" \) \
-        ! -regex ".*-[0-9]{8,}.*" \
-        ! -regex ".*/[0-9]+.*\.html" \
+        ! -regex ".*-[0-9]{8,14}\.html" \
+        ! -name "[0-9]*" \
+        -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
+
+    # --- 2. 處理 TXT 檔案 ---
+    # 保留數字開頭 (如 4956-xxx.txt)，僅排除檔名末端有 8-14 位時間戳記的檔案
+    find "$dir_path" -maxdepth 1 -type f -name "*.txt" \
+        -regextype posix-egrep \
+        ! -regex ".*-[0-9]{8,14}\.txt" \
         -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
 
 #    if [ $? -eq 0 ]; then
