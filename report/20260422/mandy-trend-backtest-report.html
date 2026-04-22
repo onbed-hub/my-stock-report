@@ -1,0 +1,41 @@
+
+    <!DOCTYPE html><html><head><meta charset='utf-8'><title>分析報告</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f4f7f6; }
+        table { width: 100%; border-collapse: collapse; background: white; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: center; }
+        th { background: #2563eb; color: white; }
+        .hero { background: #fffde7; font-weight: bold; }
+        .modal { display:none; position:fixed; z-index:100; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.6); }
+        .modal-content { background:white; margin:5% auto; padding:20px; width:80%; max-height:80%; overflow-y:auto; border-radius:10px; }
+        pre { background: #1e293b; color: #e2e8f0; padding: 15px; border-radius: 5px; white-space: pre-wrap; }
+    </style>
+    </head>
+    <body>
+        <h2>📈 趨勢分析報告 (20260422)</h2>
+        <table>
+            <thead><tr><th>代號</th><th>名稱</th><th>現價</th><th>訊號</th><th>累積獲利</th><th>次數</th><th>勝率</th><th>理由</th></tr></thead>
+            <tbody><tr class='hero'><td>0050.TW</td><td><a href='javascript:void(0)' onclick='showLog("0050")'>元大台灣50</a></td><td>86.00</td><td>💎 持股</td><td>23.57%</td><td>3</td><td>66.67%</td><td>[📈 穩定] 趨勢強勁(續抱)</td></tr><tr class=''><td>00635U.TW</td><td><a href='javascript:void(0)' onclick='showLog("00635U")'>期元大S&P黃金</a></td><td>50.30</td><td>☁️ 觀望</td><td>12.52%</td><td>1</td><td>100.0%</td><td>[📈 穩定] 等待機會</td></tr><tr class=''><td>009816.TW</td><td><a href='javascript:void(0)' onclick='showLog("009816")'>凱基台灣TOP50</a></td><td>12.29</td><td>💎 持股</td><td>8.09%</td><td>1</td><td>100.0%</td><td>[📈 穩定] 趨勢強勁(續抱)</td></tr><tr class=''><td>0056.TW</td><td><a href='javascript:void(0)' onclick='showLog("0056")'>元大高股息</a></td><td>41.97</td><td>💎 持股</td><td>7.72%</td><td>4</td><td>50.0%</td><td>[🚀 極強] 趨勢強勁(續抱)</td></tr><tr class=''><td>00919.TW</td><td><a href='javascript:void(0)' onclick='showLog("00919")'>群益台灣精選高息</a></td><td>23.64</td><td>💎 持股</td><td>3.5%</td><td>3</td><td>33.33%</td><td>[📈 穩定] 趨勢強勁(續抱)</td></tr><tr class=''><td>00918.TW</td><td><a href='javascript:void(0)' onclick='showLog("00918")'>大華優利高填息30</a></td><td>23.70</td><td>💎 持股</td><td>0.27%</td><td>3</td><td>66.67%</td><td>[📈 穩定] 趨勢強勁(續抱)</td></tr></tbody>
+        </table>
+        <div id="logModal" class="modal"><div class="modal-content">
+            <span style="float:right; cursor:pointer; font-size:24px;" onclick="closeModal()">&times;</span>
+            <h3 id="logTitle"></h3><pre id="logContent"></pre>
+        </div></div>
+        <script>
+            async function showLog(pureId) {
+                const modal = document.getElementById("logModal");
+                const content = document.getElementById("logContent");
+                document.getElementById("logTitle").innerText = "交易紀錄: " + pureId;
+                modal.style.display = "block";
+                content.innerText = "讀取中...";
+                try {
+                    // 修正：直接讀取與 HTML 同目錄下的 txt 檔案
+                    let res = await fetch(pureId + "-trend-backtest-report.txt");
+                    if (res.ok) content.innerText = await res.text();
+                    else content.innerText = "找不到日誌檔案 (" + pureId + "-trend-backtest-report.txt)";
+                } catch(e) { content.innerText = "讀取失敗: " + e.message; }
+            }
+            function closeModal() { document.getElementById("logModal").style.display = "none"; }
+        </script>
+    </body></html>
+    
