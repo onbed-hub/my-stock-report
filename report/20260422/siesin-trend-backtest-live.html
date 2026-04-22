@@ -21,30 +21,50 @@
             <div class='container'>
                 <h2>📈 SIESIN 趨勢監控報告 (V3 Live)</h2>
                 <div style="text-align:center; margin-bottom:30px; color:#64748b;">
-                    📅 分析日期：20260422 | 生成時間：2026-04-22 17:45 | 起始日：2025-11-01
+                    📅 分析日期：20260422 | 生成時間：2026-04-22 17:59 | 起始日：2025-11-01
                 </div>
-                
+
                 <div class="filter-group">
                     <div style="display:flex; flex-direction:column; gap:10px;">
                         <label>🔍 搜尋股票</label>
                         <input type="text" id="searchInput" onkeyup="filter()" placeholder="股號/名稱...">
                     </div>
-                    <div style="display:flex; flex-direction:column; gap:10px;">
+                    <div class="filter-item">
                         <label>📊 獲利門檻</label>
                         <select id="pFilter" onchange="filter()">
                             <option value="-999">全部</option>
-                            <option value="0">正向收益</option>
+                            <option value="0">正向收益 (>0%)</option>
+                            <option value="15">啟動波段 (>15%)</option>
+                            <option value="20">顯著獲利 (>20%)</option>
                             <option value="-50.0" selected>當前標竿 (>-50.0%)</option>
+                            <option value="30">中堅戰力 (>30%)</option>
+                            <option value="40">強勢突破 (>40%)</option>
                             <option value="50">強勢飆股 (>50%)</option>
+                            <option value="60">旗艦領航 (>60%)</option>
+                            <option value="70">極致爆發 (>70%)</option>
+                            <option value="80">長線怪獸 (>80%)</option>
+                            <option value="90">傳奇標的 (>90%)</option>
+                            <option value="100">翻倍神股 (>100%)</option>
                         </select>
                     </div>
+                    <div class="filter-item">
+                        <label>🔥 訊號過濾</label>
+                        <select id="sFilter" onchange="filter()">
+                            <option value="all">不限訊號</option>
+                            <option value="買入">🔥 買入</option>
+                            <option value="持股">💎 持股</option>
+                            <option value="賣出">❄️ 賣出</option>
+                            <option value="觀望">⏳ 觀望</option>
+                        </select>
+                    </div>
+
                 </div>
 
                 <div class='card'><table id='stockTable'>
                     <thead><tr>
                         <th>代號</th><th>名稱</th><th>現價</th><th>訊號</th><th>累積損益</th><th>交易次數</th><th>勝率</th><th>備註</th>
                     </tr></thead>
-                    <tbody><tr class='hero'><td>2069</td><td><a href='javascript:void(0)' onclick='showLog("2069")'>運錩</a></td><td>18.95</td><td>⏳ 觀望</td><td style='color:#059669'>18.8%</td><td>3</td><td>33.3%</td><td>動態參數優化中</td></tr><tr class='hero'><td>2367</td><td><a href='javascript:void(0)' onclick='showLog("2367")'>燿華</a></td><td>67.80</td><td>⏳ 觀望</td><td style='color:#059669'>145.8%</td><td>5</td><td>80.0%</td><td>動態參數優化中</td></tr><tr class='hero'><td>2485</td><td><a href='javascript:void(0)' onclick='showLog("2485")'>兆赫</a></td><td>71.00</td><td>⏳ 觀望</td><td style='color:#059669'>81.5%</td><td>8</td><td>62.5%</td><td>動態參數優化中</td></tr><tr class='hero'><td>3049</td><td><a href='javascript:void(0)' onclick='showLog("3049")'>精金</a></td><td>13.05</td><td>⏳ 觀望</td><td style='color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>動態參數優化中</td></tr><tr class='hero'><td>3481</td><td><a href='javascript:void(0)' onclick='showLog("3481")'>群創</a></td><td>25.60</td><td>⏳ 觀望</td><td style='color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>動態參數優化中</td></tr><tr class='hero'><td>3702</td><td><a href='javascript:void(0)' onclick='showLog("3702")'>大聯大</a></td><td>101.50</td><td>💎 持股</td><td style='color:#059669'>36.2%</td><td>4</td><td>25.0%</td><td>動態參數優化中</td></tr><tr class='hero'><td>8044</td><td><a href='javascript:void(0)' onclick='showLog("8044")'>網家</a></td><td>24.90</td><td>⏳ 觀望</td><td style='color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>動態參數優化中</td></tr><tr class='hero'><td>4956</td><td><a href='javascript:void(0)' onclick='showLog("4956")'>光鋐</a></td><td>54.30</td><td>⏳ 觀望</td><td style='color:#dc2626'>-0.9%</td><td>2</td><td>50.0%</td><td>動態參數優化中</td></tr></tbody>
+                    <tbody><tr class='hero'><td>2069</td><td><a href='javascript:void(0)' onclick='showLog("2069")'>運錩</a></td><td>18.95</td><td>⏳ 觀望</td><td style='color:#059669'>18.8%</td><td>3</td><td>33.3%</td><td>動態參數優化中</td></tr><tr class='hero'><td>2367</td><td><a href='javascript:void(0)' onclick='showLog("2367")'>燿華</a></td><td>67.80</td><td>⏳ 觀望</td><td style='color:#059669'>145.8%</td><td>5</td><td>80.0%</td><td>動態參數優化中</td></tr><tr class='hero'><td>2485</td><td><a href='javascript:void(0)' onclick='showLog("2485")'>兆赫</a></td><td>71.00</td><td>⏳ 觀望</td><td style='color:#059669'>81.5%</td><td>8</td><td>62.5%</td><td>動態參數優化中</td></tr><tr class='hero'><td>3049</td><td><a href='javascript:void(0)' onclick='showLog("3049")'>精金</a></td><td>13.05</td><td>⏳ 觀望</td><td style='color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>動態參數優化中</td></tr><tr class='hero'><td>3481</td><td><a href='javascript:void(0)' onclick='showLog("3481")'>群創</a></td><td>25.60</td><td>⏳ 觀望</td><td style='color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>動態參數優化中</td></tr><tr class='hero'><td>3702</td><td><a href='javascript:void(0)' onclick='showLog("3702")'>大聯大</a></td><td>101.50</td><td>⏳ 觀望</td><td style='color:#059669'>38.2%</td><td>1</td><td>100.0%</td><td>動態參數優化中</td></tr><tr class='hero'><td>8044</td><td><a href='javascript:void(0)' onclick='showLog("8044")'>網家</a></td><td>24.90</td><td>⏳ 觀望</td><td style='color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>動態參數優化中</td></tr><tr class='hero'><td>4956</td><td><a href='javascript:void(0)' onclick='showLog("4956")'>光鋐</a></td><td>54.30</td><td>⏳ 觀望</td><td style='color:#dc2626'>-0.9%</td><td>2</td><td>50.0%</td><td>動態參數優化中</td></tr></tbody>
                 </table></div>
             </div>
 

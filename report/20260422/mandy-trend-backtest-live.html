@@ -21,23 +21,43 @@
             <div class='container'>
                 <h2>📈 MANDY 趨勢監控報告 (V3 Live)</h2>
                 <div style="text-align:center; margin-bottom:30px; color:#64748b;">
-                    📅 分析日期：20260422 | 生成時間：2026-04-22 17:45 | 起始日：2025-11-01
+                    📅 分析日期：20260422 | 生成時間：2026-04-22 17:59 | 起始日：2025-11-01
                 </div>
-                
+
                 <div class="filter-group">
                     <div style="display:flex; flex-direction:column; gap:10px;">
                         <label>🔍 搜尋股票</label>
                         <input type="text" id="searchInput" onkeyup="filter()" placeholder="股號/名稱...">
                     </div>
-                    <div style="display:flex; flex-direction:column; gap:10px;">
+                    <div class="filter-item">
                         <label>📊 獲利門檻</label>
                         <select id="pFilter" onchange="filter()">
                             <option value="-999">全部</option>
-                            <option value="0">正向收益</option>
+                            <option value="0">正向收益 (>0%)</option>
+                            <option value="15">啟動波段 (>15%)</option>
+                            <option value="20">顯著獲利 (>20%)</option>
                             <option value="-50.0" selected>當前標竿 (>-50.0%)</option>
+                            <option value="30">中堅戰力 (>30%)</option>
+                            <option value="40">強勢突破 (>40%)</option>
                             <option value="50">強勢飆股 (>50%)</option>
+                            <option value="60">旗艦領航 (>60%)</option>
+                            <option value="70">極致爆發 (>70%)</option>
+                            <option value="80">長線怪獸 (>80%)</option>
+                            <option value="90">傳奇標的 (>90%)</option>
+                            <option value="100">翻倍神股 (>100%)</option>
                         </select>
                     </div>
+                    <div class="filter-item">
+                        <label>🔥 訊號過濾</label>
+                        <select id="sFilter" onchange="filter()">
+                            <option value="all">不限訊號</option>
+                            <option value="買入">🔥 買入</option>
+                            <option value="持股">💎 持股</option>
+                            <option value="賣出">❄️ 賣出</option>
+                            <option value="觀望">⏳ 觀望</option>
+                        </select>
+                    </div>
+
                 </div>
 
                 <div class='card'><table id='stockTable'>
