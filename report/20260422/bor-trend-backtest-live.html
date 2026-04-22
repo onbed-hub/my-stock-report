@@ -1,17 +1,125 @@
 
-        <html><head><meta charset='utf-8'>
+        <!DOCTYPE html><html><head><meta charset='utf-8'><title>bor 即時監控</title>
         <style>
-            table { border-collapse: collapse; width: 100%; font-family: sans-serif; }
-            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-            th { background-color: #f2f2f2; }
-            tr:hover { background-color: #f5f5f5; }
-            a { color: #0066cc; text-decoration: none; font-weight: bold; }
-        </style></head>
-        <body>
-            <h2>策略監控報表 - 20260422</h2>
-            <table>
-                <tr><th>股號</th><th>名稱 (點擊看明細)</th><th>現價</th><th>漲跌</th><th>判定</th></tr>
-                <tr><td>2317</td><td><a href='2317-trend-backtest-live.txt' target='_blank'>鴻海</a></td><td>221.00</td><td>+4.74%</td><td>⏳ 觀望</td></tr><tr><td>3702</td><td><a href='3702-trend-backtest-live.txt' target='_blank'>大聯大</a></td><td>101.50</td><td>-0.98%</td><td>⏳ 觀望</td></tr><tr><td>2485</td><td><a href='2485-trend-backtest-live.txt' target='_blank'>兆赫</a></td><td>71.00</td><td>-1.80%</td><td>⏳ 觀望</td></tr><tr><td>2367</td><td><a href='2367-trend-backtest-live.txt' target='_blank'>燿華</a></td><td>67.80</td><td>-3.56%</td><td>⏳ 觀望</td></tr><tr><td>4142</td><td><a href='4142-trend-backtest-live.txt' target='_blank'>國光生</a></td><td>18.15</td><td>+0.28%</td><td>⏳ 觀望</td></tr><tr><td>0050</td><td><a href='0050-trend-backtest-live.txt' target='_blank'>元大台灣50</a></td><td>86.35</td><td>+0.41%</td><td>⏳ 觀望</td></tr><tr><td>0056</td><td><a href='0056-trend-backtest-live.txt' target='_blank'>元大高股息</a></td><td>42.61</td><td>+1.52%</td><td>⏳ 觀望</td></tr><tr><td>009816</td><td><a href='009816-trend-backtest-live.txt' target='_blank'>凱基台灣TOP50</a></td><td>12.42</td><td>+1.06%</td><td>⏳ 觀望</td></tr><tr><td>2009</td><td><a href='2009-trend-backtest-live.txt' target='_blank'>第一銅</a></td><td>39.50</td><td>-0.75%</td><td>⏳ 觀望</td></tr><tr><td>2337</td><td><a href='2337-trend-backtest-live.txt' target='_blank'>旺宏</a></td><td>134.50</td><td>+1.51%</td><td>⏳ 觀望</td></tr><tr><td>2352</td><td><a href='2352-trend-backtest-live.txt' target='_blank'>佳世達</a></td><td>26.00</td><td>+1.36%</td><td>🔥 買入</td></tr><tr><td>2409</td><td><a href='2409-trend-backtest-live.txt' target='_blank'>友達</a></td><td>18.55</td><td>-1.85%</td><td>⏳ 觀望</td></tr><tr><td>3481</td><td><a href='3481-trend-backtest-live.txt' target='_blank'>群創</a></td><td>25.60</td><td>-1.54%</td><td>⏳ 觀望</td></tr><tr><td>6136</td><td><a href='6136-trend-backtest-live.txt' target='_blank'>富爾特</a></td><td>27.65</td><td>+2.60%</td><td>⏳ 觀望</td></tr><tr><td>6806</td><td><a href='6806-trend-backtest-live.txt' target='_blank'>森崴能源</a></td><td>26.85</td><td>-9.90%</td><td>⏳ 觀望</td></tr><tr><td>3105</td><td><a href='3105-trend-backtest-live.txt' target='_blank'>穩懋</a></td><td>600.00</td><td>-2.76%</td><td>⏳ 觀望</td></tr><tr><td>4966</td><td><a href='4966-trend-backtest-live.txt' target='_blank'>譜瑞-KY</a></td><td>590.00</td><td>+9.87%</td><td>⏳ 觀望</td></tr><tr><td>6188</td><td><a href='6188-trend-backtest-live.txt' target='_blank'>廣明</a></td><td>88.40</td><td>+3.39%</td><td>⏳ 觀望</td></tr><tr><td>7792</td><td><a href='7792-trend-backtest-live.txt' target='_blank'>安葆</a></td><td>358.50</td><td>+0.70%</td><td>⏳ 觀望</td></tr><tr><td>2327</td><td><a href='2327-trend-backtest-live.txt' target='_blank'>國巨*</a></td><td>315.50</td><td>-2.32%</td><td>⏳ 觀望</td></tr><tr><td>3714</td><td><a href='3714-trend-backtest-live.txt' target='_blank'>富采</a></td><td>73.30</td><td>-0.41%</td><td>⏳ 觀望</td></tr><tr><td>1802</td><td><a href='1802-trend-backtest-live.txt' target='_blank'>台玻</a></td><td>70.90</td><td>-4.45%</td><td>⏳ 觀望</td></tr><tr><td>1721</td><td><a href='1721-trend-backtest-live.txt' target='_blank'>三晃</a></td><td>27.25</td><td>+9.88%</td><td>⏳ 觀望</td></tr><tr><td>8104</td><td><a href='8104-trend-backtest-live.txt' target='_blank'>錸寶</a></td><td>37.20</td><td>-2.62%</td><td>⏳ 觀望</td></tr>
-            </table>
+            body { font-family: 'Segoe UI', "PingFang TC", "Microsoft JhengHei", sans-serif; padding: 40px; background: #f1f5f9; color: #0f172a; font-size: 1.6rem; }
+            .container { max-width: 1850px; margin: auto; }
+            .card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 40px; contain: content; }
+            h2 { font-size: 3.5rem; color: #1e3a8a; text-align: center; margin-bottom: 5px; }
+            .filter-group { display: flex; gap: 30px; margin-bottom: 30px; background: #1e293b; padding: 30px; border-radius: 15px; color: white; align-items: flex-end; }
+            .filter-item { display: flex; flex-direction: column; gap: 10px; }
+            select, input { padding: 15px; font-size: 1.5rem; border-radius: 10px; border: none; }
+            table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+            th { background: #2563eb; color: white; padding: 20px; cursor: pointer; position: sticky; top: 0; z-index: 10; }
+            td { padding: 18px; border-bottom: 2px solid #f1f5f9; text-align: center; }
+            .hero { background: #fffde7 !important; border-left: 10px solid #fbbf24; font-weight: bold; }
+            .sig-buy { color: #dc2626; font-weight: bold; background: #fef2f2; padding: 5px 10px; border-radius: 5px; }
+            .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+            .modal-content { background:#fff; margin:3% auto; padding:30px; width:80%; max-height: 85%; border-radius:20px; display: flex; flex-direction: column; }
+            #logContent { background:#0f172a; color:#94a3b8; padding:25px; border-radius:12px; white-space:pre-wrap; font-family: monospace; font-size: 1.4rem; overflow-y: auto; flex-grow: 1; }
+            .close { float:right; font-size:40px; cursor:pointer; font-weight: bold; }
+        </style>
+        </head>
+        <body><div class='container'>
+            <h2>📈 BOR 趨勢監控報告 (V3 Live)</h2>
+            <div style="text-align:center; font-weight:bold; color:#64748b; margin-bottom:30px;">
+                    📅 分析日期：20260422 | 生成時間：2026-04-22 16:56
+            </div>
+            
+        <div class="card">
+            <h3 style="font-size: 2.2rem; color: #1e3a8a; border-left: 10px solid #2563eb; padding-left:20px;">🛡️ V3 Pro 即時趨勢監控準則</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px;">
+                <div>
+                    <h4 style="color: #1e40af;">❶ 進場嚴選 (Entry)</h4>
+                    <ul style="font-size: 1.5rem; line-height: 1.8;">
+                        <li><b>均線多頭：</b> MA 5 > 10 > 20</li>
+                        <li><b>布林突破：</b> 股價觸及上軌 95%</li>
+                        <li><b>防 FOMO：</b> 乖離率 (BIAS) < 8.0</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #b91c1c;">❷ 風控停損 (Exit)</h4>
+                    <ul style="font-size: 1.5rem; line-height: 1.8;">
+                        <li><b>ATR 止損：</b> 成本 - 2.8倍 ATR</li>
+                        <li><b>趨勢破壞：</b> 收盤跌破 MA20</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+            
+        <div class="filter-group">
+            <div class="filter-item">
+                <label>🔍 搜尋股號/名稱</label>
+                <input type="text" id="searchInput" onkeyup="filter()" placeholder="搜尋...">
+            </div>
+            <div class="filter-item">
+                <label>📊 累積獲利門檻</label>
+                <select id="pFilter" onchange="filter()">
+                    <option value="-999">全部</option>
+                    <option value="0">正向收益 (>0%)</option>
+                    <option value="-50.0" selected>當前標竿 (>-50.0%)</option>
+                    <option value="50">強勢飆股 (>50%)</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label>🔥 訊號篩選</label>
+                <select id="sFilter" onchange="filter()">
+                    <option value="all">不限訊號</option>
+                    <option value="買入">🔥 買入</option>
+                    <option value="持股">💎 持股</option>
+                    <option value="觀望">⏳ 觀望</option>
+                </select>
+            </div>
+        </div>
+        
+            <div class='card'><table id='stockTable'>
+                <thead><tr>
+                    <th style="width:10%">代號</th><th style="width:15%">名稱</th><th style="width:10%">現價</th>
+                    <th style="width:12%">訊號</th><th style="width:10%">累積獲利</th><th style="width:8%">次數</th>
+                    <th style="width:8%">勝率</th><th>理由</th>
+                </tr></thead>
+                <tbody><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2317'>2317</a></td><td><a href='javascript:void(0)' onclick='showLog("2317")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>鴻海</a></td><td>221.00</td><td><span class=''>⏳ 觀望</span></td><td style='font-weight:bold; color:#059669'>153.1%</td><td>92</td><td>40.2%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3702'>3702</a></td><td><a href='javascript:void(0)' onclick='showLog("3702")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>大聯大</a></td><td>101.50</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>45.2%</td><td>96</td><td>33.3%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2485'>2485</a></td><td><a href='javascript:void(0)' onclick='showLog("2485")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>兆赫</a></td><td>71.00</td><td><span class=''>⏳ 觀望</span></td><td style='font-weight:bold; color:#059669'>38.3%</td><td>76</td><td>31.6%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2367'>2367</a></td><td><a href='javascript:void(0)' onclick='showLog("2367")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>燿華</a></td><td>67.80</td><td><span class=''>⏳ 觀望</span></td><td style='font-weight:bold; color:#059669'>234.8%</td><td>85</td><td>25.9%</td><td>趨勢強勁(續抱)</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/4142'>4142</a></td><td><a href='javascript:void(0)' onclick='showLog("4142")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>國光生</a></td><td>18.15</td><td><span class=''>⏳ 觀望</span></td><td style='font-weight:bold; color:#dc2626'>-85.8%</td><td>71</td><td>22.5%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/0050'>0050</a></td><td><a href='javascript:void(0)' onclick='showLog("0050")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>元大台灣50</a></td><td>86.35</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>121.8%</td><td>94</td><td>44.7%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/0056'>0056</a></td><td><a href='javascript:void(0)' onclick='showLog("0056")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>元大高股息</a></td><td>42.61</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>119.5%</td><td>79</td><td>54.4%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/009816'>009816</a></td><td><a href='javascript:void(0)' onclick='showLog("009816")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>凱基台灣TOP50</a></td><td>12.42</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>9.2%</td><td>0</td><td>0.0%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2009'>2009</a></td><td><a href='javascript:void(0)' onclick='showLog("2009")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>第一銅</a></td><td>39.50</td><td><span class=''>⏳ 觀望</span></td><td style='font-weight:bold; color:#059669'>214.6%</td><td>67</td><td>29.9%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2337'>2337</a></td><td><a href='javascript:void(0)' onclick='showLog("2337")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>旺宏</a></td><td>134.50</td><td><span class=''>⏳ 觀望</span></td><td style='font-weight:bold; color:#059669'>284.0%</td><td>78</td><td>24.4%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2352'>2352</a></td><td><a href='javascript:void(0)' onclick='showLog("2352")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>佳世達</a></td><td>26.00</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>134.8%</td><td>81</td><td>35.8%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2409'>2409</a></td><td><a href='javascript:void(0)' onclick='showLog("2409")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>友達</a></td><td>18.55</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>79.9%</td><td>85</td><td>29.4%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3481'>3481</a></td><td><a href='javascript:void(0)' onclick='showLog("3481")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>群創</a></td><td>25.60</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>67.4%</td><td>77</td><td>29.9%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/6136'>6136</a></td><td><a href='javascript:void(0)' onclick='showLog("6136")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>富爾特</a></td><td>27.65</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>38.2%</td><td>83</td><td>41.0%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/6806'>6806</a></td><td><a href='javascript:void(0)' onclick='showLog("6806")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>森崴能源</a></td><td>26.85</td><td><span class=''>⏳ 觀望</span></td><td style='font-weight:bold; color:#059669'>65.2%</td><td>27</td><td>25.9%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3105'>3105</a></td><td><a href='javascript:void(0)' onclick='showLog("3105")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>穩懋</a></td><td>600.00</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>248.3%</td><td>72</td><td>37.5%</td><td>趨勢強勁(續抱)</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/4966'>4966</a></td><td><a href='javascript:void(0)' onclick='showLog("4966")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>譜瑞-KY</a></td><td>590.00</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#dc2626'>-93.4%</td><td>90</td><td>28.9%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/6188'>6188</a></td><td><a href='javascript:void(0)' onclick='showLog("6188")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>廣明</a></td><td>88.40</td><td><span class=''>⏳ 觀望</span></td><td style='font-weight:bold; color:#059669'>167.3%</td><td>67</td><td>34.3%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/7792'>7792</a></td><td><a href='javascript:void(0)' onclick='showLog("7792")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>安葆</a></td><td>358.50</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>34.7%</td><td>7</td><td>28.6%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2327'>2327</a></td><td><a href='javascript:void(0)' onclick='showLog("2327")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>國巨*</a></td><td>315.50</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>327.3%</td><td>81</td><td>34.6%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3714'>3714</a></td><td><a href='javascript:void(0)' onclick='showLog("3714")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>富采</a></td><td>73.30</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#dc2626'>-12.7%</td><td>35</td><td>14.3%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/1802'>1802</a></td><td><a href='javascript:void(0)' onclick='showLog("1802")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>台玻</a></td><td>70.90</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>130.9%</td><td>70</td><td>32.9%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/1721'>1721</a></td><td><a href='javascript:void(0)' onclick='showLog("1721")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>三晃</a></td><td>27.25</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>65.6%</td><td>65</td><td>29.2%</td><td>趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/8104'>8104</a></td><td><a href='javascript:void(0)' onclick='showLog("8104")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>錸寶</a></td><td>37.20</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#dc2626'>-33.3%</td><td>60</td><td>26.7%</td><td>趨勢強勁(續抱)</td></tr></tbody>
+            </table></div>
+        </div>
+        <div id="logModal" class="modal"><div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3 id="logTitle" style="color:#1e3a8a; font-size:2.2rem; margin-top:0;"></h3>
+            <pre id="logContent"></pre>
+        </div></div>
+        <script>
+        function filter() {
+            const search = document.getElementById('searchInput').value.toUpperCase();
+            const pMin = parseFloat(document.getElementById('pFilter').value);
+            const sFilter = document.getElementById('sFilter').value;
+            const rows = document.querySelectorAll('#stockTable tbody tr');
+            rows.forEach(row => {
+                const idText = row.cells[0].textContent.toUpperCase();
+                const nameText = row.cells[1].textContent.toUpperCase();
+                const signalText = row.cells[3].textContent;
+                const pnlValue = parseFloat(row.cells[4].textContent.replace('%', ''));
+                const matchSearch = idText.includes(search) || nameText.includes(search);
+                const matchPnl = pnlValue >= pMin;
+                const matchSignal = (sFilter === 'all') || (signalText.includes(sFilter));
+                row.style.display = (matchSearch && matchPnl && matchSignal) ? '' : 'none';
+            });
+        }
+        document.addEventListener('DOMContentLoaded', filter);
+        async function showLog(pureId) {
+            const modal = document.getElementById("logModal");
+            const content = document.getElementById("logContent");
+            const title = document.getElementById("logTitle");
+            title.innerText = "📄 詳細交易日誌: " + pureId;
+            modal.style.display = "block";
+            content.innerText = "讀取中...";
+            try {
+                const fileName = pureId + "-trend-backtest-live.txt";
+                let res = await fetch(fileName);
+                if (res.ok) content.innerText = await res.text();
+                else content.innerHTML = "<p style='color:#ef4444;'>⚠️ 找不到日誌檔 (" + fileName + ")</p>";
+            } catch(e) { content.innerText = "讀取錯誤: " + e.message; }
+        }
+        function closeModal() { document.getElementById("logModal").style.display = "none"; }
+        window.onclick = (e) => { if(e.target == document.getElementById("logModal")) closeModal(); }
+        </script>
         </body></html>
         
