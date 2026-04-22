@@ -1,17 +1,77 @@
 
-        <html><head><meta charset='utf-8'>
+        <!DOCTYPE html><html><head><meta charset='utf-8'>
+        <title>mandy Live 監控</title>
         <style>
-            table { border-collapse: collapse; width: 100%; font-family: sans-serif; }
-            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-            th { background-color: #f2f2f2; }
-            tr:hover { background-color: #f5f5f5; }
-            a { color: #0066cc; text-decoration: none; font-weight: bold; }
-        </style></head>
+            body { font-family: 'Segoe UI', "PingFang TC", sans-serif; padding: 40px; background: #f1f5f9; font-size: 1.6rem; }
+            .container { max-width: 1850px; margin: auto; }
+            .card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 40px; }
+            h2 { font-size: 3.5rem; color: #1e3a8a; text-align: center; }
+            .filter-group { display: flex; gap: 30px; margin-bottom: 30px; background: #1e293b; padding: 30px; border-radius: 15px; color: white; }
+            input, select { padding: 15px; font-size: 1.5rem; border-radius: 10px; border: none; }
+            table { width: 100%; border-collapse: collapse; }
+            th { background: #2563eb; color: white; padding: 20px; sticky; top: 0; }
+            td { padding: 18px; border-bottom: 2px solid #f1f5f9; text-align: center; }
+            .hero { background: #fffde7 !important; border-left: 10px solid #fbbf24; }
+            .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+            .modal-content { background:#fff; margin:3% auto; padding:30px; width:80%; max-height: 85%; border-radius:20px; display: flex; flex-direction: column; }
+            #logContent { background:#0f172a; color:#94a3b8; padding:25px; border-radius:12px; white-space:pre-wrap; font-family: monospace; overflow-y: auto; }
+        </style>
+        </head>
         <body>
-            <h2>策略監控報表 - 20260422</h2>
-            <table>
-                <tr><th>股號</th><th>名稱 (點擊看明細)</th><th>現價</th><th>漲跌</th><th>判定</th></tr>
-                <tr><td>0050</td><td><a href='0050-trend-backtest-live.txt' target='_blank'>元大台灣50</a></td><td>86.35</td><td>+0.41%</td><td>⏳ 觀望</td></tr><tr><td>0056</td><td><a href='0056-trend-backtest-live.txt' target='_blank'>元大高股息</a></td><td>42.61</td><td>+1.52%</td><td>⏳ 觀望</td></tr><tr><td>00635U</td><td><a href='00635U-trend-backtest-live.txt' target='_blank'>期元大S&P黃金</a></td><td>50.00</td><td>-0.60%</td><td>⏳ 觀望</td></tr><tr><td>00918</td><td><a href='00918-trend-backtest-live.txt' target='_blank'>大華優利高填息30</a></td><td>23.83</td><td>+0.55%</td><td>🔥 買入</td></tr><tr><td>00919</td><td><a href='00919-trend-backtest-live.txt' target='_blank'>群益台灣精選高息</a></td><td>23.94</td><td>+1.27%</td><td>🔥 買入</td></tr><tr><td>009816</td><td><a href='009816-trend-backtest-live.txt' target='_blank'>凱基台灣TOP50</a></td><td>12.42</td><td>+1.06%</td><td>⏳ 觀望</td></tr>
-            </table>
+            <div class='container'>
+                <h2>📈 MANDY 趨勢監控報告 (V3 Live)</h2>
+                <div style="text-align:center; margin-bottom:30px; color:#64748b;">
+                    📅 分析日期：20260422 | 生成時間：2026-04-22 17:45 | 起始日：2025-11-01
+                </div>
+                
+                <div class="filter-group">
+                    <div style="display:flex; flex-direction:column; gap:10px;">
+                        <label>🔍 搜尋股票</label>
+                        <input type="text" id="searchInput" onkeyup="filter()" placeholder="股號/名稱...">
+                    </div>
+                    <div style="display:flex; flex-direction:column; gap:10px;">
+                        <label>📊 獲利門檻</label>
+                        <select id="pFilter" onchange="filter()">
+                            <option value="-999">全部</option>
+                            <option value="0">正向收益</option>
+                            <option value="-50.0" selected>當前標竿 (>-50.0%)</option>
+                            <option value="50">強勢飆股 (>50%)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class='card'><table id='stockTable'>
+                    <thead><tr>
+                        <th>代號</th><th>名稱</th><th>現價</th><th>訊號</th><th>累積損益</th><th>交易次數</th><th>勝率</th><th>備註</th>
+                    </tr></thead>
+                    <tbody><tr class='hero'><td>0050</td><td><a href='javascript:void(0)' onclick='showLog("0050")'>元大台灣50</a></td><td>86.35</td><td>⏳ 觀望</td><td style='color:#059669'>14.2%</td><td>3</td><td>33.3%</td><td>動態參數優化中</td></tr><tr class='hero'><td>0056</td><td><a href='javascript:void(0)' onclick='showLog("0056")'>元大高股息</a></td><td>42.61</td><td>💎 持股</td><td style='color:#059669'>8.2%</td><td>3</td><td>66.7%</td><td>動態參數優化中</td></tr><tr class='hero'><td>00635U</td><td><a href='javascript:void(0)' onclick='showLog("00635U")'>期元大S&P黃金</a></td><td>50.00</td><td>⏳ 觀望</td><td style='color:#059669'>13.6%</td><td>2</td><td>100.0%</td><td>動態參數優化中</td></tr><tr class='hero'><td>00918</td><td><a href='javascript:void(0)' onclick='showLog("00918")'>大華優利高填息30</a></td><td>23.83</td><td>💎 持股</td><td style='color:#dc2626'>-2.2%</td><td>5</td><td>40.0%</td><td>動態參數優化中</td></tr><tr class='hero'><td>00919</td><td><a href='javascript:void(0)' onclick='showLog("00919")'>群益台灣精選高息</a></td><td>23.94</td><td>💎 持股</td><td style='color:#059669'>5.3%</td><td>4</td><td>25.0%</td><td>動態參數優化中</td></tr><tr class='hero'><td>009816</td><td><a href='javascript:void(0)' onclick='showLog("009816")'>凱基台灣TOP50</a></td><td>12.42</td><td>💎 持股</td><td style='color:#059669'>9.2%</td><td>0</td><td>0.0%</td><td>動態參數優化中</td></tr></tbody>
+                </table></div>
+            </div>
+
+            <div id="logModal" class="modal"><div class="modal-content">
+                <span style="float:right; font-size:40px; cursor:pointer;" onclick="closeModal()">&times;</span>
+                <h3 id="logTitle">詳細交易日誌</h3>
+                <pre id="logContent"></pre>
+            </div></div>
+
+            <script>
+            function filter() {
+                const search = document.getElementById('searchInput').value.toUpperCase();
+                const pMin = parseFloat(document.getElementById('pFilter').value);
+                const rows = document.querySelectorAll('#stockTable tbody tr');
+                rows.forEach(row => {
+                    const text = row.innerText.toUpperCase();
+                    const pnl = parseFloat(row.cells[4].innerText);
+                    row.style.display = (text.includes(search) && pnl >= pMin) ? '' : 'none';
+                });
+            }
+            async function showLog(pureId) {
+                document.getElementById("logModal").style.display = "block";
+                document.getElementById("logTitle").innerText = "📄 交易日誌: " + pureId;
+                const res = await fetch(pureId + "-trend-backtest-live.txt");
+                document.getElementById("logContent").innerText = res.ok ? await res.text() : "找不到日誌檔";
+            }
+            function closeModal() { document.getElementById("logModal").style.display = "none"; }
+            </script>
         </body></html>
         
