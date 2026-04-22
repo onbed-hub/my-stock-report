@@ -1,73 +1,66 @@
 #!/bin/bash
 #
 
-# --- 設定路徑 (根據你的 ll 結果修正) ---
-# 來源目錄：量化程式報表存放的總目錄
+# --- 1. 設定區 ---
+DAYS_TO_KEEP=3  # 設定要同步最近幾天的資料
+
+# 來源目錄
 SOURCE_BASE="../stock-Quantum/my-code/topology-4-20260209/report"
-# 目標目錄：GitHub 倉庫內的 report 資料夾
+# 目標目錄
 TARGET_BASE="./report"
 
-#echo "🚀 開始同步量化報表..."
+echo "🚀 開始同步最近 ${DAYS_TO_KEEP} 天的量化報表..."
+
+# 取得比對基準日（DAYS_TO_KEEP 天前的日期，格式為 YYYYMMDD）
+THRESHOLD_DATE=$(date -d "${DAYS_TO_KEEP} days ago" +%Y%m%d)
 
 # 確保本地倉庫的 report 目錄存在
 mkdir -p "$TARGET_BASE"
 
-# 遍歷來源目錄下所有 8 位數字的日期資料夾
-# 使用 find 確保只抓取目錄，避免路徑出錯
-for dir_path in $(find "$SOURCE_BASE" -maxdepth 1 -type d -regextype sed -regex ".*/[0-9]\{8\}$"); do
+# --- 2. 遍歷來源目錄 ---
+for dir_path in $(find "$SOURCE_BASE" -maxdepth 1 -type d -regextype sed -regex ".*/[0-9]\{8\}$" | sort); do
 
-    # 取得日期資料夾名稱 (例如 20260406)
+    # 取得日期資料夾名稱 (例如 20260421)
     dir_name=$(basename "$dir_path")
 
-#    echo "---------------------------------------"
-#    echo "📂 處理日期: $dir_name"
+    # 💡 核心逻辑：只有當資料夾日期 >= 基準日，才執行同步
+    if [ "$dir_name" -ge "$THRESHOLD_DATE" ]; then
+        echo "📂 處理日期資料夾 (符合日期限制): $dir_name"
 
-    # 建立目標對應的日期資料夾
-    mkdir -p "$TARGET_BASE/$dir_name"
+        # 建立目標對應的日期資料夾
+        mkdir -p "$TARGET_BASE/$dir_name"
 
-    # 複製該日期資料夾下的所有 html 檔案到目標
-    # 使用 -u 參數：僅在來源檔案較新或目標不存在時才複製
-#    cp -u "$dir_path"/*.html "$TARGET_BASE/$dir_name/" 2>/dev/null
-#    cp -u "$dir_path"/*.txt "$TARGET_BASE/$dir_name/" 2>/dev/null
+        # --- 3. 執行過濾與複製 (保持你原本的過濾邏輯) ---
+        
+        # 處理 HTML
+        find "$dir_path" -maxdepth 1 -type f -name "*.html" \
+            ! -name "*live-[0-9]*" \
+            ! -name "*analysis-[0-9]*" \
+            ! -name "[0-9]*" \
+            -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
 
-    # --- 1. 處理 HTML 檔案 ---
-    # 排除：
-    # (A) live-後面接數字
-    # (B) analysis-後面接數字
-    # (C) 數字開頭的備份檔
-    find "$dir_path" -maxdepth 1 -type f -name "*.html" \
-        ! -name "*live-[0-9]*" \
-        ! -name "*analysis-[0-9]*" \
-        ! -name "[0-9]*" \
-        -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
-
-    # --- 2. 處理 TXT 檔案 ---
-    # 排除：
-    # (A) live-後面接數字
-    # (B) analysis-後面接數字
-    # 注意：保留數字開頭 (為了 4956-...)
-    find "$dir_path" -maxdepth 1 -type f -name "*.txt" \
-        ! -name "*live-[0-9]*" \
-        ! -name "*analysis-[0-9]*" \
-        -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
-
-#    if [ $? -eq 0 ]; then
-#        echo "✅ 已更新: $TARGET_BASE/$dir_name/"
-#    else
-#        echo "⚠️  $dir_name 資料夾內無 HTML 檔案，跳過。"
-#    fi
+        # 處理 TXT
+        find "$dir_path" -maxdepth 1 -type f -name "*.txt" \
+            ! -name "*live-[0-9]*" \
+            ! -name "*analysis-[0-9]*" \
+            -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
+    else
+        # 這裡可以選擇不印出，或者用來除錯
+        # echo "⏭️ 跳過舊資料夾: $dir_name"
+        :
+    fi
 done
 
+# --- 4. 後續自動化流程 ---
 echo "產生 live-analysis.html 的即時分析 json 檔案"
 ./gen_file_list.sh
 
 echo "======================================="
 echo "☁️ 準備上傳至 GitHub..."
 
-# 執行 Git 操作
 git pull
 git add .
-git commit -m "Auto-sync reports: $(date '+%Y-%m-%d %H:%M:%S')"
+git commit -m "Auto-sync (Last $DAYS_TO_KEEP days): $(date '+%Y-%m-%d %H:%M:%S')"
 git push origin main
 
 echo "✨ 全部完成！"

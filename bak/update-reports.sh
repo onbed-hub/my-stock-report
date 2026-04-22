@@ -27,7 +27,29 @@ for dir_path in $(find "$SOURCE_BASE" -maxdepth 1 -type d -regextype sed -regex 
 
     # 複製該日期資料夾下的所有 html 檔案到目標
     # 使用 -u 參數：僅在來源檔案較新或目標不存在時才複製
-    cp -u "$dir_path"/*.html "$TARGET_BASE/$dir_name/" 2>/dev/null
+#    cp -u "$dir_path"/*.html "$TARGET_BASE/$dir_name/" 2>/dev/null
+#    cp -u "$dir_path"/*.txt "$TARGET_BASE/$dir_name/" 2>/dev/null
+
+    # --- 1. 處理 HTML 檔案 ---
+    # 排除：
+    # (A) live-後面接數字
+    # (B) analysis-後面接數字
+    # (C) 數字開頭的備份檔
+    find "$dir_path" -maxdepth 1 -type f -name "*.html" \
+        ! -name "*live-[0-9]*" \
+        ! -name "*analysis-[0-9]*" \
+        ! -name "[0-9]*" \
+        -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
+
+    # --- 2. 處理 TXT 檔案 ---
+    # 排除：
+    # (A) live-後面接數字
+    # (B) analysis-後面接數字
+    # 注意：保留數字開頭 (為了 4956-...)
+    find "$dir_path" -maxdepth 1 -type f -name "*.txt" \
+        ! -name "*live-[0-9]*" \
+        ! -name "*analysis-[0-9]*" \
+        -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
 
 #    if [ $? -eq 0 ]; then
 #        echo "✅ 已更新: $TARGET_BASE/$dir_name/"
@@ -36,17 +58,19 @@ for dir_path in $(find "$SOURCE_BASE" -maxdepth 1 -type d -regextype sed -regex 
 #    fi
 done
 
-echo "產生 live-analysis.html 的 json 檔案"
+echo "產生 live-analysis.html 的即時分析 json 檔案"
 ./gen_file_list.sh
 
 echo "======================================="
 echo "☁️ 準備上傳至 GitHub..."
 
 # 執行 Git 操作
+git pull
 git add .
 git commit -m "Auto-sync reports: $(date '+%Y-%m-%d %H:%M:%S')"
 git push origin main
 
 echo "✨ 全部完成！"
+echo "🌐 GitHub: https://github.com/onbed-hub/my-stock-report"
 echo "🌐 網址: https://onbed-hub.github.io/my-stock-report/"
 
