@@ -60,7 +60,7 @@
     
     </head>
     <body>
-        <h2>🚀 V3 Pro 即時分析報告 - [mandy] (11:52)</h2>
+        <h2>🚀 V3 Pro 即時分析報告 - [mandy] (12:25)</h2>
 
         
     <div class="card">
@@ -129,7 +129,7 @@
       <td><a href='https://tw.stock.yahoo.com/quote/0050' target='_blank'>0050</a></td>
       <td>元大台灣50</td>
       <td>86.00<small>+0.00 (+0.00%)</small></td>
-      <td>46,010</td>
+      <td>52,801</td>
       <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [❌乖離] [❌紅棒]</div></td>
       <td>ATR: 2.8x</td>
       <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
@@ -137,18 +137,18 @@
     <tr>
       <td><a href='https://tw.stock.yahoo.com/quote/0056' target='_blank'>0056</a></td>
       <td>元大高股息</td>
-      <td>41.97<small>+0.00 (+0.00%)</small></td>
-      <td>91,469</td>
-      <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
+      <td>42.47<small>+0.50 (+1.19%)</small></td>
+      <td>107,829</td>
+      <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [✅乖離] [✅紅棒]</div></td>
       <td>ATR: 2.8x</td>
-      <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
+      <td><span class='buy'>[🚀 極強] 🔥 買入</span></td>
     </tr>
     <tr>
       <td><a href='https://tw.stock.yahoo.com/quote/00635U' target='_blank'>00635U</a></td>
       <td>期元大S&P黃金</td>
-      <td>49.96<small>-0.34 (-0.68%)</small></td>
-      <td>3,476</td>
-      <td><div class='check-box'>[✅多頭] [✅突破] [❌MACD] [✅乖離] [❌紅棒]</div></td>
+      <td>50.30<small>+0.00 (+0.00%)</small></td>
+      <td>3,722</td>
+      <td><div class='check-box'>[✅多頭] [✅突破] [❌MACD] [✅乖離] [✅紅棒]</div></td>
       <td>ATR: 2.8x</td>
       <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
     </tr>
@@ -156,7 +156,7 @@
       <td><a href='https://tw.stock.yahoo.com/quote/00918' target='_blank'>00918</a></td>
       <td>大華優利高填息30</td>
       <td>23.70<small>+0.00 (+0.00%)</small></td>
-      <td>35,631</td>
+      <td>38,454</td>
       <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
       <td>ATR: 2.8x</td>
       <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
@@ -165,7 +165,7 @@
       <td><a href='https://tw.stock.yahoo.com/quote/00919' target='_blank'>00919</a></td>
       <td>群益台灣精選高息</td>
       <td>23.64<small>+0.00 (+0.00%)</small></td>
-      <td>140,407</td>
+      <td>151,541</td>
       <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
       <td>ATR: 2.8x</td>
       <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
@@ -173,9 +173,9 @@
     <tr>
       <td><a href='https://tw.stock.yahoo.com/quote/009816' target='_blank'>009816</a></td>
       <td>凱基台灣TOP50</td>
-      <td>12.44<small>+0.15 (+1.22%)</small></td>
-      <td>144,861</td>
-      <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [❌乖離] [✅紅棒]</div></td>
+      <td>12.29<small>+0.00 (+0.00%)</small></td>
+      <td>156,313</td>
+      <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [❌乖離] [❌紅棒]</div></td>
       <td>ATR: 2.8x</td>
       <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
     </tr>
@@ -206,10 +206,11 @@
     async function showLog(id) {
         const modal = document.getElementById("logModal");
         const content = document.getElementById("logContent");
-        const pureId = id.split('.')[0];
-        const fileName = `${pureId}-trend-backtest-live.txt`;
 
-        document.getElementById("logTitle").innerText = "📄 詳細交易日誌: " + pureId;
+        // 這裡改為讀取該 Profile 的總報告檔名，而不是個別股號檔名
+        const fileName = `${prefix}-trend-backtest-live.txt`;
+
+        document.getElementById("logTitle").innerText = "📄 詳細交易日誌: " + id;
         modal.style.display = "block";
         content.innerText = "讀取中...";
 
