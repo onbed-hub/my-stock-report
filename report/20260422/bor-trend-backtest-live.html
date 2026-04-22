@@ -50,11 +50,17 @@
         .sell { color: #f87171; background: rgba(248, 113, 113, 0.1); padding: 5px 10px; border-radius: 6px; }
         a { color: #38bdf8; text-decoration: none; }
         tr:hover { background: #334155; }
+
+        /* 🚀 移植 Modal 樣式 */
+        .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+        .modal-content { background:#fff; margin:3% auto; padding:30px; width:80%; max-height: 85%; border-radius:20px; display: flex; flex-direction: column; color: #1e293b; }
+        #logContent { background:#0f172a; color:#94a3b8; padding:25px; border-radius:12px; white-space:pre-wrap; font-family: monospace; font-size: 1.4rem; overflow-y: auto; flex-grow: 1; text-align: left; }
+        .close { float:right; font-size:40px; cursor:pointer; font-weight: bold; }
     </style>
     
     </head>
     <body>
-        <h2>🚀 V3 Pro 即時分析報告 - [bor] (11:27)</h2>
+        <h2>🚀 V3 Pro 即時分析報告 - [bor] (11:51)</h2>
 
         
     <div class="card">
@@ -122,9 +128,9 @@
     <tr>
       <td><a href='https://tw.stock.yahoo.com/quote/2317' target='_blank'>2317</a></td>
       <td>鴻海</td>
-      <td>211.00<small>+0.00 (+0.00%)</small></td>
-      <td>102,691</td>
-      <td><div class='check-box'>[✅多頭] [✅突破] [❌MACD] [✅乖離] [❌紅棒]</div></td>
+      <td>222.00<small>+11.00 (+5.21%)</small></td>
+      <td>105,413</td>
+      <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [❌乖離] [✅紅棒]</div></td>
       <td>ATR(2.2x)</td>
       <td><span class='sell'>[🚀 極強] 🚨 賣出</span></td>
     </tr>
@@ -132,7 +138,7 @@
       <td><a href='https://tw.stock.yahoo.com/quote/3702' target='_blank'>3702</a></td>
       <td>大聯大</td>
       <td>102.50<small>+0.00 (+0.00%)</small></td>
-      <td>6,366</td>
+      <td>7,011</td>
       <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [❌乖離] [❌紅棒]</div></td>
       <td>ATR: 2.8x</td>
       <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
@@ -141,7 +147,7 @@
       <td><a href='https://tw.stock.yahoo.com/quote/2485' target='_blank'>2485</a></td>
       <td>兆赫</td>
       <td>72.30<small>+0.00 (+0.00%)</small></td>
-      <td>12,282</td>
+      <td>12,992</td>
       <td><div class='check-box'>[❌多頭] [❌突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
       <td>ATR: 2.2x</td>
       <td><span class='neutral'>[📉 轉弱] ⏳ 觀望</span></td>
@@ -150,7 +156,7 @@
       <td><a href='https://tw.stock.yahoo.com/quote/2367' target='_blank'>2367</a></td>
       <td>燿華</td>
       <td>70.30<small>+0.00 (+0.00%)</small></td>
-      <td>40,971</td>
+      <td>42,442</td>
       <td><div class='check-box'>[❌多頭] [❌突破] [✅MACD] [✅乖離] [✅紅棒]</div></td>
       <td>ATR: 2.2x</td>
       <td><span class='neutral'>[📉 轉弱] ⏳ 觀望</span></td>
@@ -159,7 +165,7 @@
       <td><a href='https://tw.stock.yahoo.com/quote/4142' target='_blank'>4142</a></td>
       <td>國光生</td>
       <td>18.10<small>+0.00 (+0.00%)</small></td>
-      <td>461</td>
+      <td>530</td>
       <td><div class='check-box'>[❌多頭] [✅突破] [❌MACD] [✅乖離] [❌紅棒]</div></td>
       <td>ATR(2.2x), TrendDead</td>
       <td><span class='sell'>[📉 轉弱] 🚨 賣出</span></td>
@@ -168,7 +174,7 @@
       <td><a href='https://tw.stock.yahoo.com/quote/0050' target='_blank'>0050</a></td>
       <td>元大台灣50</td>
       <td>86.00<small>+0.00 (+0.00%)</small></td>
-      <td>41,569</td>
+      <td>45,899</td>
       <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [❌乖離] [❌紅棒]</div></td>
       <td>ATR: 3.5x</td>
       <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
@@ -177,7 +183,7 @@
       <td><a href='https://tw.stock.yahoo.com/quote/0056' target='_blank'>0056</a></td>
       <td>元大高股息</td>
       <td>41.97<small>+0.00 (+0.00%)</small></td>
-      <td>82,792</td>
+      <td>90,792</td>
       <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
       <td>ATR: 3.5x</td>
       <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
@@ -186,7 +192,7 @@
       <td><a href='https://tw.stock.yahoo.com/quote/009816' target='_blank'>009816</a></td>
       <td>凱基台灣TOP50</td>
       <td>12.29<small>+0.00 (+0.00%)</small></td>
-      <td>135,803</td>
+      <td>144,601</td>
       <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [❌乖離] [❌紅棒]</div></td>
       <td>ATR: 2.8x</td>
       <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
@@ -194,9 +200,9 @@
     <tr>
       <td><a href='https://tw.stock.yahoo.com/quote/2009' target='_blank'>2009</a></td>
       <td>第一銅</td>
-      <td>39.80<small>+0.00 (+0.00%)</small></td>
-      <td>1,338</td>
-      <td><div class='check-box'>[❌多頭] [✅突破] [❌MACD] [✅乖離] [❌紅棒]</div></td>
+      <td>39.40<small>-0.40 (-1.01%)</small></td>
+      <td>1,428</td>
+      <td><div class='check-box'>[❌多頭] [❌突破] [❌MACD] [✅乖離] [❌紅棒]</div></td>
       <td>ATR(2.2x), TrendDead</td>
       <td><span class='sell'>[📉 轉弱] 🚨 賣出</span></td>
     </tr>
@@ -204,7 +210,7 @@
       <td><a href='https://tw.stock.yahoo.com/quote/2337' target='_blank'>2337</a></td>
       <td>旺宏</td>
       <td>132.50<small>+0.00 (+0.00%)</small></td>
-      <td>123,281</td>
+      <td>125,869</td>
       <td><div class='check-box'>[❌多頭] [❌突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
       <td>ATR: 3.5x</td>
       <td><span class='neutral'>[📉 轉弱] ⏳ 觀望</span></td>
@@ -212,26 +218,26 @@
     <tr>
       <td><a href='https://tw.stock.yahoo.com/quote/2352' target='_blank'>2352</a></td>
       <td>佳世達</td>
-      <td>25.65<small>+0.00 (+0.00%)</small></td>
-      <td>3,257</td>
-      <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
+      <td>25.90<small>+0.25 (+0.97%)</small></td>
+      <td>3,666</td>
+      <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [✅乖離] [✅紅棒]</div></td>
       <td>ATR: 3.5x</td>
-      <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
+      <td><span class='buy'>[🚀 極強] 🔥 買入</span></td>
     </tr>
     <tr>
       <td><a href='https://tw.stock.yahoo.com/quote/2409' target='_blank'>2409</a></td>
       <td>友達</td>
-      <td>18.45<small>-0.45 (-2.38%)</small></td>
-      <td>129,208</td>
-      <td><div class='check-box'>[✅多頭] [❌突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
-      <td>ATR: 2.8x</td>
+      <td>18.90<small>+0.00 (+0.00%)</small></td>
+      <td>138,107</td>
+      <td><div class='check-box'>[✅多頭] [❌突破] [✅MACD] [❌乖離] [❌紅棒]</div></td>
+      <td>ATR: 3.5x</td>
       <td><span class='neutral'>[📈 穩定] ⏳ 觀望</span></td>
     </tr>
     <tr>
       <td><a href='https://tw.stock.yahoo.com/quote/3481' target='_blank'>3481</a></td>
       <td>群創</td>
       <td>26.00<small>+0.00 (+0.00%)</small></td>
-      <td>97,123</td>
+      <td>106,598</td>
       <td><div class='check-box'>[❌多頭] [❌突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
       <td>ATR: 2.8x</td>
       <td><span class='neutral'>[📈 穩定] ⏳ 觀望</span></td>
@@ -239,8 +245,8 @@
     <tr>
       <td><a href='https://tw.stock.yahoo.com/quote/6136' target='_blank'>6136</a></td>
       <td>富爾特</td>
-      <td>26.95<small>+0.00 (+0.00%)</small></td>
-      <td>2,711</td>
+      <td>27.65<small>+0.70 (+2.60%)</small></td>
+      <td>2,980</td>
       <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [❌乖離] [❌紅棒]</div></td>
       <td>ATR: 3.5x</td>
       <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
@@ -249,7 +255,7 @@
       <td><a href='https://tw.stock.yahoo.com/quote/6806' target='_blank'>6806</a></td>
       <td>森崴能源</td>
       <td>29.80<small>+0.00 (+0.00%)</small></td>
-      <td>881</td>
+      <td>895</td>
       <td><div class='check-box'>[❌多頭] [❌突破] [❌MACD] [✅乖離] [✅紅棒]</div></td>
       <td>ATR(2.2x), TrendDead</td>
       <td><span class='sell'>[📉 轉弱] 🚨 賣出</span></td>
@@ -258,7 +264,7 @@
       <td><a href='https://tw.stock.yahoo.com/quote/3105' target='_blank'>3105</a></td>
       <td>穩懋</td>
       <td>617.00<small>+0.00 (+0.00%)</small></td>
-      <td>19,220</td>
+      <td>19,834</td>
       <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [❌乖離] [❌紅棒]</div></td>
       <td>ATR: 3.5x</td>
       <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
@@ -267,7 +273,7 @@
       <td><a href='https://tw.stock.yahoo.com/quote/4966' target='_blank'>4966</a></td>
       <td>譜瑞-KY</td>
       <td>537.00<small>+0.00 (+0.00%)</small></td>
-      <td>3,423</td>
+      <td>3,430</td>
       <td><div class='check-box'>[✅多頭] [❌突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
       <td>ATR(2.2x)</td>
       <td><span class='sell'>[🚀 極強] 🚨 賣出</span></td>
@@ -276,7 +282,7 @@
       <td><a href='https://tw.stock.yahoo.com/quote/6188' target='_blank'>6188</a></td>
       <td>廣明</td>
       <td>85.50<small>+0.00 (+0.00%)</small></td>
-      <td>2,093</td>
+      <td>2,304</td>
       <td><div class='check-box'>[❌多頭] [❌突破] [❌MACD] [✅乖離] [❌紅棒]</div></td>
       <td>ATR(2.2x), TrendDead</td>
       <td><span class='sell'>[📉 轉弱] 🚨 賣出</span></td>
@@ -285,7 +291,7 @@
       <td><a href='https://tw.stock.yahoo.com/quote/7792' target='_blank'>7792</a></td>
       <td>安葆</td>
       <td>356.00<small>+0.00 (+0.00%)</small></td>
-      <td>275</td>
+      <td>298</td>
       <td><div class='check-box'>[✅多頭] [❌突破] [✅MACD] [✅乖離] [❌紅棒]</div></td>
       <td>ATR: 3.5x</td>
       <td><span class='neutral'>[📈 穩定] ⏳ 觀望</span></td>
@@ -294,7 +300,7 @@
       <td><a href='https://tw.stock.yahoo.com/quote/2327' target='_blank'>2327</a></td>
       <td>國巨*</td>
       <td>323.00<small>+0.00 (+0.00%)</small></td>
-      <td>18,192</td>
+      <td>19,423</td>
       <td><div class='check-box'>[✅多頭] [❌突破] [✅MACD] [❌乖離] [❌紅棒]</div></td>
       <td>ATR: 3.5x</td>
       <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
@@ -302,17 +308,17 @@
     <tr>
       <td><a href='https://tw.stock.yahoo.com/quote/3714' target='_blank'>3714</a></td>
       <td>富采</td>
-      <td>73.00<small>-0.60 (-0.82%)</small></td>
-      <td>7,647</td>
+      <td>73.60<small>+0.00 (+0.00%)</small></td>
+      <td>8,449</td>
       <td><div class='check-box'>[✅多頭] [❌突破] [✅MACD] [❌乖離] [❌紅棒]</div></td>
       <td>ATR: 2.8x</td>
-      <td><span class='neutral'>[📈 穩定] ⏳ 觀望</span></td>
+      <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
     </tr>
     <tr>
       <td><a href='https://tw.stock.yahoo.com/quote/1802' target='_blank'>1802</a></td>
       <td>台玻</td>
       <td>74.20<small>+0.00 (+0.00%)</small></td>
-      <td>140,882</td>
+      <td>145,724</td>
       <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [❌乖離] [❌紅棒]</div></td>
       <td>ATR: 2.8x</td>
       <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
@@ -321,7 +327,7 @@
       <td><a href='https://tw.stock.yahoo.com/quote/1721' target='_blank'>1721</a></td>
       <td>三晃</td>
       <td>24.80<small>+0.00 (+0.00%)</small></td>
-      <td>13,953</td>
+      <td>14,008</td>
       <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [❌乖離] [❌紅棒]</div></td>
       <td>ATR: 3.5x</td>
       <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
@@ -329,14 +335,22 @@
     <tr>
       <td><a href='https://tw.stock.yahoo.com/quote/8104' target='_blank'>8104</a></td>
       <td>錸寶</td>
-      <td>38.00<small>-0.20 (-0.52%)</small></td>
-      <td>1,149</td>
+      <td>38.20<small>+0.00 (+0.00%)</small></td>
+      <td>1,228</td>
       <td><div class='check-box'>[✅多頭] [✅突破] [✅MACD] [❌乖離] [❌紅棒]</div></td>
       <td>ATR: 2.8x</td>
       <td><span class='neutral'>[🚀 極強] ⏳ 觀望</span></td>
     </tr>
   </tbody>
 </table>
+
+        <div id="logModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h3 id="logTitle" style="color:#1e3a8a; font-size:2.2rem; margin-top:0;"></h3>
+                <pre id="logContent"></pre>
+            </div>
+        </div>
 
         
     <script>
@@ -350,6 +364,31 @@
             tr[i].style.display = txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none";
         }
     }
+
+    async function showLog(id) {
+        const modal = document.getElementById("logModal");
+        const content = document.getElementById("logContent");
+        const pureId = id.split('.')[0];
+        const fileName = `${pureId}-trend-backtest-live.txt`;
+
+        document.getElementById("logTitle").innerText = "📄 詳細交易日誌: " + pureId;
+        modal.style.display = "block";
+        content.innerText = "讀取中...";
+
+        try {
+            let res = await fetch(fileName);
+            if (res.ok) {
+                content.innerText = await res.text();
+            } else {
+                content.innerHTML = `<p style='color:#ef4444; font-weight:bold;'>⚠️ 找不到日誌檔</p>` +
+                                    `<p style='font-size:1.2rem; color:#64748b;'>嘗試讀取: ${fileName}</p>`;
+            }
+        } catch(e) {
+            content.innerText = "連線失敗: " + e.message;
+        }
+    }
+    function closeModal() { document.getElementById("logModal").style.display = "none"; }
+    window.onclick = (e) => { if(e.target == document.getElementById("logModal")) closeModal(); }
     </script>
     
     </body>
