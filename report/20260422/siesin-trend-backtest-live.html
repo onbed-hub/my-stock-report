@@ -12,6 +12,7 @@
             th { background: #2563eb; color: white; padding: 20px; sticky; top: 0; }
             td { padding: 18px; border-bottom: 2px solid #f1f5f9; text-align: center; }
             .hero { background: #fffde7 !important; border-left: 10px solid #fbbf24; }
+            .sig-buy { color: #dc2626; font-weight: bold; }
             .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
             .modal-content { background:#fff; margin:3% auto; padding:30px; width:80%; max-height: 85%; border-radius:20px; display: flex; flex-direction: column; }
             #logContent { background:#0f172a; color:#94a3b8; padding:25px; border-radius:12px; white-space:pre-wrap; font-family: monospace; overflow-y: auto; }
@@ -21,8 +22,43 @@
             <div class='container'>
                 <h2>📈 SIESIN 趨勢監控報告 (V3 Live)</h2>
                 <div style="text-align:center; margin-bottom:30px; color:#64748b;">
-                    📅 分析日期：20260422 | 生成時間：2026-04-22 18:47 | 起始日：2025-11-01
+                    📅 分析日期：20260422 | 生成時間：2026-04-22 18:57 | 起始日：2025-11-01
                 </div>
+
+                
+        <div class="card">
+            <h3 style="font-size: 2.2rem; color: #1e3a8a; border-left: 10px solid #2563eb; padding-left:20px;">🛡️ V3 Pro 趨勢與動態風控準則</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px;">
+                <div>
+                    <h4 style="color: #1e40af;">❶ 進場嚴選 (Entry Filter)</h4>
+                    <ul style="font-size: 1.5rem; line-height: 2;">
+                        <li><b>均線多頭：</b> MA 5 > 10 > 20</li>
+                        <li><b>布林突破：</b> 股價觸及上軌 98%</li>
+                        <li><b>防 FOMO：</b> 20日乖離率 (BIAS) < 8.0</li>
+                        <li><b>實體辨識：</b> 紅棒實體 > 上影線 1.6 倍</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #b91c1c;">❷ 風控與停利 (Exit Management)</h4>
+                    <ul style="font-size: 1.5rem; line-height: 2;">
+                        <li><b>ATR 止損：</b> 進場點 - 2倍ATR (硬止損)</li>
+                        <li><b>趨勢雙死：</b> 收盤 < MA20 且 MACD 翻負連兩日</li>
+                        <li><b>移動停利 (Trailing)：</b> 獲利達 15% 後，若從高點回落 10% 鎖利</li>
+                        <li><b>弱勢過濾 (WeakFail)：</b> 持股 10 日未脫離成本且跌破 ATR 線</li>
+                    </ul>
+                </div>
+                <div style="background: #f8fafc; padding: 15px; border-radius: 10px; border: 1px solid #e2e8f0;">
+                    <h4 style="color: #0369a1;">📊 動能強度診斷 (Momentum)</h4>
+                    <ul style="font-size: 1.3rem; line-height: 1.8; list-style: none; padding-left: 0;">
+                        <li>🚀 <b>極強：</b> MA_20 斜率向上 + MACD 加速</li>
+                        <li>📈 <b>穩定：</b> MA_20 斜率向上 (成本墊高中)</li>
+                        <li>📉 <b>轉弱：</b> MA_20 斜率向下 (中期趨勢反轉)</li>
+                        <li>⏳ <b>猶豫：</b> 價格震盪或動能指標出現分歧</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
 
                 <div class="filter-group">
                     <div style="display:flex; flex-direction:column; gap:10px;">
@@ -34,16 +70,8 @@
                         <select id="pFilter" onchange="filter()">
                             <option value="-999">全部</option>
                             <option value="0">正向收益 (>0%)</option>
-                            <option value="15">啟動波段 (>15%)</option>
-                            <option value="20">顯著獲利 (>20%)</option>
                             <option value="-50.0" selected>當前標竿 (>-50.0%)</option>
-                            <option value="30">中堅戰力 (>30%)</option>
-                            <option value="40">強勢突破 (>40%)</option>
                             <option value="50">強勢飆股 (>50%)</option>
-                            <option value="60">旗艦領航 (>60%)</option>
-                            <option value="70">極致爆發 (>70%)</option>
-                            <option value="80">長線怪獸 (>80%)</option>
-                            <option value="90">傳奇標的 (>90%)</option>
                             <option value="100">翻倍神股 (>100%)</option>
                         </select>
                     </div>
@@ -57,7 +85,6 @@
                             <option value="觀望">⏳ 觀望</option>
                         </select>
                     </div>
-
                 </div>
 
                 <div class='card'><table id='stockTable'>
@@ -67,22 +94,25 @@
                     <tbody><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2069'>2069</a></td><td><a href='javascript:void(0)' onclick='showLog("2069")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>運錩</a></td><td>18.95</td><td><span class=''>❄️ 賣出</span></td><td style='font-weight:bold; color:#059669'>18.8%</td><td>3</td><td>33.3%</td><td>[🚀 極強] 今日觸發停損/利</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2367'>2367</a></td><td><a href='javascript:void(0)' onclick='showLog("2367")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>燿華</a></td><td>67.80</td><td><span class=''>❄️ 賣出</span></td><td style='font-weight:bold; color:#059669'>145.8%</td><td>5</td><td>80.0%</td><td>[📉 轉弱] 今日觸發停損/利</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2485'>2485</a></td><td><a href='javascript:void(0)' onclick='showLog("2485")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>兆赫</a></td><td>71.00</td><td><span class=''>❄️ 賣出</span></td><td style='font-weight:bold; color:#059669'>81.5%</td><td>8</td><td>62.5%</td><td>[📉 轉弱] 今日觸發停損/利</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3049'>3049</a></td><td><a href='javascript:void(0)' onclick='showLog("3049")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>精金</a></td><td>13.05</td><td><span class=''>❄️ 賣出</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[📉 轉弱] 今日觸發停損/利</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3481'>3481</a></td><td><a href='javascript:void(0)' onclick='showLog("3481")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>群創</a></td><td>25.60</td><td><span class=''>❄️ 賣出</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[🚀 極強] 今日觸發停損/利</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3702'>3702</a></td><td><a href='javascript:void(0)' onclick='showLog("3702")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>大聯大</a></td><td>101.50</td><td><span class=''>❄️ 賣出</span></td><td style='font-weight:bold; color:#059669'>38.2%</td><td>1</td><td>100.0%</td><td>[🚀 極強] 今日觸發停損/利</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/8044'>8044</a></td><td><a href='javascript:void(0)' onclick='showLog("8044")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>網家</a></td><td>24.90</td><td><span class=''>❄️ 賣出</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[📈 穩定] 今日觸發停損/利</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/4956'>4956</a></td><td><a href='javascript:void(0)' onclick='showLog("4956")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>光鋐</a></td><td>54.30</td><td><span class=''>❄️ 賣出</span></td><td style='font-weight:bold; color:#dc2626'>-0.9%</td><td>2</td><td>50.0%</td><td>[🚀 極強] 今日觸發停損/利</td></tr></tbody>
                 </table></div>
             </div>
-
             <div id="logModal" class="modal"><div class="modal-content">
                 <span style="float:right; font-size:40px; cursor:pointer;" onclick="closeModal()">&times;</span>
                 <h3 id="logTitle">詳細交易日誌</h3>
                 <pre id="logContent"></pre>
             </div></div>
-
             <script>
             function filter() {
                 const search = document.getElementById('searchInput').value.toUpperCase();
                 const pMin = parseFloat(document.getElementById('pFilter').value);
+                const sType = document.getElementById('sFilter').value;
                 const rows = document.querySelectorAll('#stockTable tbody tr');
                 rows.forEach(row => {
                     const text = row.innerText.toUpperCase();
                     const pnl = parseFloat(row.cells[4].innerText);
-                    row.style.display = (text.includes(search) && pnl >= pMin) ? '' : 'none';
+                    const sig = row.cells[3].innerText;
+                    const matchSearch = text.includes(search);
+                    const matchPnl = pnl >= pMin;
+                    const matchSig = (sType === 'all' || sig.includes(sType));
+                    row.style.display = (matchSearch && matchPnl && matchSig) ? '' : 'none';
                 });
             }
             async function showLog(pureId) {
