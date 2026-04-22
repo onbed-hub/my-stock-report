@@ -1,41 +1,161 @@
 
-    <!DOCTYPE html><html><head><meta charset='utf-8'><title>分析報告</title>
+    <!DOCTYPE html><html><head><meta charset='utf-8'><title>dayan 趨勢報告</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; background: #f4f7f6; }
-        table { width: 100%; border-collapse: collapse; background: white; }
-        th, td { padding: 12px; border: 1px solid #ddd; text-align: center; }
-        th { background: #2563eb; color: white; }
-        .hero { background: #fffde7; font-weight: bold; }
-        .modal { display:none; position:fixed; z-index:100; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.6); }
-        .modal-content { background:white; margin:5% auto; padding:20px; width:80%; max-height:80%; overflow-y:auto; border-radius:10px; }
-        pre { background: #1e293b; color: #e2e8f0; padding: 15px; border-radius: 5px; white-space: pre-wrap; }
+        body { font-family: 'Segoe UI', "PingFang TC", "Microsoft JhengHei", sans-serif; padding: 40px; background: #f1f5f9; color: #0f172a; font-size: 1.6rem; }
+        .container { max-width: 1850px; margin: auto; }
+        .card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 40px; contain: content; }
+        h2 { font-size: 3.5rem; color: #1e3a8a; text-align: center; margin-bottom: 5px; }
+        .filter-group { display: flex; gap: 30px; margin-bottom: 30px; background: #1e293b; padding: 30px; border-radius: 15px; color: white; align-items: flex-end; }
+        .filter-item { display: flex; flex-direction: column; gap: 10px; }
+        select, input { padding: 15px; font-size: 1.5rem; border-radius: 10px; border: none; }
+        table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+        th { background: #2563eb; color: white; padding: 20px; cursor: pointer; position: sticky; top: 0; z-index: 10; }
+        td { padding: 18px; border-bottom: 2px solid #f1f5f9; text-align: center; }
+        .hero { background: #fffde7 !important; border-left: 10px solid #fbbf24; font-weight: bold; }
+        .sig-buy { color: #dc2626; font-weight: bold; background: #fef2f2; padding: 5px 10px; border-radius: 5px; }
+        .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+        .modal-content { background:#fff; margin:3% auto; padding:30px; width:80%; max-height: 85%; border-radius:20px; display: flex; flex-direction: column; }
+        #logContent { background:#0f172a; color:#94a3b8; padding:25px; border-radius:12px; white-space:pre-wrap; font-family: monospace; font-size: 1.4rem; overflow-y: auto; flex-grow: 1; }
+        .close { float:right; font-size:40px; cursor:pointer; font-weight: bold; }
     </style>
     </head>
-    <body>
-        <h2>📈 趨勢分析報告 (20260422)</h2>
-        <table>
-            <thead><tr><th>代號</th><th>名稱</th><th>現價</th><th>訊號</th><th>累積獲利</th><th>次數</th><th>勝率</th><th>理由</th></tr></thead>
-            <tbody><tr class='hero'><td>3105.TWO</td><td><a href='javascript:void(0)' onclick='showLog("3105")'>穩懋</a></td><td>617.00</td><td>💎 持股</td><td>100.98%</td><td>5</td><td>100.0%</td><td>[🚀 極強] 趨勢強勁(續抱)</td></tr><tr class='hero'><td>2399.TW</td><td><a href='javascript:void(0)' onclick='showLog("2399")'>映泰</a></td><td>41.95</td><td>💎 持股</td><td>24.37%</td><td>3</td><td>33.33%</td><td>[🚀 極強] 趨勢強勁(續抱)</td></tr><tr class='hero'><td>0050.TW</td><td><a href='javascript:void(0)' onclick='showLog("0050")'>元大台灣50</a></td><td>86.00</td><td>💎 持股</td><td>23.57%</td><td>3</td><td>66.67%</td><td>[📈 穩定] 趨勢強勁(續抱)</td></tr><tr class=''><td>00738U.TW</td><td><a href='javascript:void(0)' onclick='showLog("00738U")'>期元大道瓊白銀</a></td><td>64.00</td><td>💎 持股</td><td>19.48%</td><td>3</td><td>33.33%</td><td>[📈 穩定] 趨勢強勁(續抱)</td></tr><tr class=''><td>00635U.TW</td><td><a href='javascript:void(0)' onclick='showLog("00635U")'>期元大S&P黃金</a></td><td>50.30</td><td>☁️ 觀望</td><td>12.52%</td><td>1</td><td>100.0%</td><td>[📈 穩定] 等待機會</td></tr><tr class=''><td>009816.TW</td><td><a href='javascript:void(0)' onclick='showLog("009816")'>凱基台灣TOP50</a></td><td>12.29</td><td>💎 持股</td><td>8.09%</td><td>1</td><td>100.0%</td><td>[📈 穩定] 趨勢強勁(續抱)</td></tr><tr class=''><td>2618.TW</td><td><a href='javascript:void(0)' onclick='showLog("2618")'>長榮航</a></td><td>35.35</td><td>☁️ 觀望</td><td>5.87%</td><td>1</td><td>100.0%</td><td>[🚀 極強] 等待機會</td></tr><tr class=''><td>4966.TWO</td><td><a href='javascript:void(0)' onclick='showLog("4966")'>譜瑞-KY</a></td><td>537.00</td><td>☁️ 觀望</td><td>0%</td><td>0</td><td>0%</td><td>[📈 穩定] 等待機會</td></tr><tr class=''><td>2382.TW</td><td><a href='javascript:void(0)' onclick='showLog("2382")'>廣達</a></td><td>340.00</td><td>💎 持股</td><td>-3.57%</td><td>4</td><td>25.0%</td><td>[🚀 極強] 趨勢強勁(續抱)</td></tr><tr class=''><td>2609.TW</td><td><a href='javascript:void(0)' onclick='showLog("2609")'>陽明</a></td><td>50.70</td><td>☁️ 觀望</td><td>-8.67%</td><td>2</td><td>0.0%</td><td>[📉 轉弱] 等待機會</td></tr></tbody>
-        </table>
-        <div id="logModal" class="modal"><div class="modal-content">
-            <span style="float:right; cursor:pointer; font-size:24px;" onclick="closeModal()">&times;</span>
-            <h3 id="logTitle"></h3><pre id="logContent"></pre>
-        </div></div>
-        <script>
-            async function showLog(pureId) {
-                const modal = document.getElementById("logModal");
-                const content = document.getElementById("logContent");
-                document.getElementById("logTitle").innerText = "交易紀錄: " + pureId;
-                modal.style.display = "block";
-                content.innerText = "讀取中...";
-                try {
-                    // 修正：直接讀取與 HTML 同目錄下的 txt 檔案
-                    let res = await fetch(pureId + "-trend-backtest-report.txt");
-                    if (res.ok) content.innerText = await res.text();
-                    else content.innerText = "找不到日誌檔案 (" + pureId + "-trend-backtest-report.txt)";
-                } catch(e) { content.innerText = "讀取失敗: " + e.message; }
+    <body><div class='container'>
+        <h2>📈 DAYAN 趨勢回測策略報告 (V3 Pro)</h2>
+
+        <div style="text-align:center; font-weight:bold; color:#64748b; margin-bottom:30px;">
+                📅 回測起點：<span style="color:#2563eb;">2025-11-01</span> |
+                📅 分析日期：20260422 |
+                生成時間：2026-04-22 16:12
+        </div>
+
+        
+    <div class="card">
+        <h3 style="font-size: 2.2rem; color: #1e3a8a; border-left: 10px solid #2563eb; padding-left:20px;">🛡️ V3 Pro 趨勢與動態風控準則</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px;">
+            <div>
+                <h4 style="color: #1e40af;">❶ 進場嚴選 (Entry Filter)</h4>
+                <ul style="font-size: 1.5rem; line-height: 2;">
+                    <li><b>均線多頭：</b> MA 5 > 10 > 20</li>
+                    <li><b>布林突破：</b> 股價觸及上軌 98%</li>
+                    <li><b>防 FOMO：</b> 20日乖離率 (BIAS) < 8.0</li>
+                    <li><b>實體辨識：</b> 紅棒實體 > 上影線 1.6 倍</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #b91c1c;">❷ 風控與停利 (Exit Management)</h4>
+                <ul style="font-size: 1.5rem; line-height: 2;">
+                    <li><b>ATR 止損：</b> 進場點 - 2倍ATR (硬止損)</li>
+                    <li><b>趨勢雙死：</b> 收盤 < MA20 且 MACD 翻負連兩日</li>
+                    <li><b>移動停利 (Trailing)：</b> 獲利達 15% 後，若從高點回落 10% 鎖利</li>
+                    <li><b>弱勢過濾 (WeakFail)：</b> 持股 10 日未脫離成本且跌破 ATR 線</li>
+                </ul>
+            </div>
+            <div style="background: #f8fafc; padding: 15px; border-radius: 10px; border: 1px solid #e2e8f0;">
+                <h4 style="color: #0369a1;">📊 動能強度診斷 (Momentum)</h4>
+                <ul style="font-size: 1.3rem; line-height: 1.8; list-style: none; padding-left: 0;">
+                    <li>🚀 <b>極強：</b> MA_20 斜率向上 + MACD 加速</li>
+                    <li>📈 <b>穩定：</b> MA_20 斜率向上 (成本墊高中)</li>
+                    <li>📉 <b>轉弱：</b> MA_20 斜率向下 (中期趨勢反轉)</li>
+                    <li>⏳ <b>猶豫：</b> 價格震盪或動能指標出現分歧</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+        
+    <div class="filter-group">
+        <div class="filter-item">
+            <label>🔍 搜尋股號/名稱</label>
+            <input type="text" id="searchInput" onkeyup="filter()" placeholder="搜尋...">
+        </div>
+        <div class="filter-item">
+            <label>📊 累積獲利門檻</label>
+            <select id="pFilter" onchange="filter()">
+                <option value="-999">全部</option>
+                <option value="0">正向收益 (>0%)</option>
+                <option value="15">啟動波段 (>15%)</option>
+                <option value="20">顯著獲利 (>20%)</option>
+                <option value="30">中堅戰力 (>30%)</option>
+                <option value="20.0" selected>當前標竿 (>20.0%)</option>
+                <option value="40">強勢突破 (>40%)</option>
+                <option value="50">強勢飆股 (>50%)</option>
+                <option value="60">旗艦領航 (>60%)</option>
+                <option value="70">極致爆發 (>70%)</option>
+                <option value="80">長線怪獸 (>80%)</option>
+                <option value="90">傳奇標的 (>90%)</option>
+                <option value="100">翻倍神股 (>100%)</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label>🔥 今日訊號篩選</label>
+            <select id="sFilter" onchange="filter()">
+                <option value="all">不限訊號</option>
+                <option value="買入">🔥 買入</option>
+                <option value="持股">💎 持股</option>
+                <option value="賣出">❄️ 賣出</option>
+                <option value="觀望">☁️ 觀望 (Wait)</option>
+            </select>
+        </div>
+    </div>
+    
+
+        <div class='card'>
+            <table id='stockTable'>
+                <thead>
+                    <tr>
+                        <th style="width:10%">代號</th>
+                        <th style="width:15%">名稱</th>
+                        <th style="width:10%">現價</th>
+                        <th style="width:12%">訊號</th>
+                        <th style="width:10%">累積獲利</th>
+                        <th style="width:8%">次數</th>
+                        <th style="width:8%">勝率</th>
+                        <th>理由</th>
+                    </tr>
+                </thead>
+                <tbody><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3105.TWO'>3105.TWO</a></td><td><a href='javascript:void(0)' onclick='showLog("3105")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>穩懋</a></td><td>617.00</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>100.98%</td><td>5</td><td>100.0%</td><td>[🚀 極強] 趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2399.TW'>2399.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("2399")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>映泰</a></td><td>41.95</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>24.37%</td><td>3</td><td>33.33%</td><td>[🚀 極強] 趨勢強勁(續抱)</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/0050.TW'>0050.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("0050")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>元大台灣50</a></td><td>86.00</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>23.57%</td><td>3</td><td>66.67%</td><td>[📈 穩定] 趨勢強勁(續抱)</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/00738U.TW'>00738U.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("00738U")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>期元大道瓊白銀</a></td><td>64.00</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>19.48%</td><td>3</td><td>33.33%</td><td>[📈 穩定] 趨勢強勁(續抱)</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/00635U.TW'>00635U.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("00635U")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>期元大S&P黃金</a></td><td>50.30</td><td><span class=''>☁️ 觀望</span></td><td style='font-weight:bold; color:#059669'>12.52%</td><td>1</td><td>100.0%</td><td>[📈 穩定] 等待機會</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/009816.TW'>009816.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("009816")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>凱基台灣TOP50</a></td><td>12.29</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>8.09%</td><td>1</td><td>100.0%</td><td>[📈 穩定] 趨勢強勁(續抱)</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2618.TW'>2618.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("2618")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>長榮航</a></td><td>35.35</td><td><span class=''>☁️ 觀望</span></td><td style='font-weight:bold; color:#059669'>5.87%</td><td>1</td><td>100.0%</td><td>[🚀 極強] 等待機會</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/4966.TWO'>4966.TWO</a></td><td><a href='javascript:void(0)' onclick='showLog("4966")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>譜瑞-KY</a></td><td>537.00</td><td><span class=''>☁️ 觀望</span></td><td style='font-weight:bold; color:#dc2626'>0%</td><td>0</td><td>0%</td><td>[📈 穩定] 等待機會</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2382.TW'>2382.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("2382")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>廣達</a></td><td>340.00</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#dc2626'>-3.57%</td><td>4</td><td>25.0%</td><td>[🚀 極強] 趨勢強勁(續抱)</td></tr><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2609.TW'>2609.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("2609")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>陽明</a></td><td>50.70</td><td><span class=''>☁️ 觀望</span></td><td style='font-weight:bold; color:#dc2626'>-8.67%</td><td>2</td><td>0.0%</td><td>[📉 轉弱] 等待機會</td></tr></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="logModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3 id="logTitle" style="color:#1e3a8a; font-size:2.2rem; margin-top:0;"></h3>
+            <pre id="logContent"></pre>
+        </div>
+    </div>
+
+    <script>
+    // 這裡要配合 showLog 的參數
+    async function showLog(pureId) {
+        const modal = document.getElementById("logModal");
+        const content = document.getElementById("logContent");
+        const title = document.getElementById("logTitle");
+
+        title.innerText = "📄 詳細交易日誌: " + pureId;
+        modal.style.display = "block";
+        content.innerText = "讀取中...";
+
+        try {
+            // 檔名必須與 python 生成的一致：純數字-trend-backtest-report.txt
+            const fileName = pureId + "-trend-backtest-report.txt";
+            let res = await fetch(fileName);
+            if (res.ok) {
+                content.innerText = await res.text();
+            } else {
+                content.innerHTML = `<p style='color:#ef4444; font-weight:bold;'>⚠️ 找不到日誌檔</p>` +
+                                    `<p style='font-size:1.2rem; color:#64748b;'>嘗試讀取路徑: ${fileName}</p>` +
+                                    `<p style='font-size:1rem; color:#94a3b8;'>請確認執行時有下 --all_history 且獲利達門檻</p>`;
             }
-            function closeModal() { document.getElementById("logModal").style.display = "none"; }
-        </script>
+        } catch(e) {
+            content.innerText = "連線失敗: " + e.message;
+        }
+    }
+    function closeModal() { document.getElementById("logModal").style.display = "none"; }
+    window.onclick = (e) => { if(e.target == document.getElementById("logModal")) closeModal(); }
+
+    // 篩選器邏輯 (略過，請保留你原有的 filter 函數)
+    </script>
     </body></html>
     
