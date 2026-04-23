@@ -29,7 +29,7 @@
     </head>
     <body><div class='container'>
         <h2>量化獲利品質診斷報告</h2>
-        <div class='time-info'>基準日期：20260423 | 生成時間：2026-04-23 21:12</div>
+        <div class='time-info'>基準日期：20260423 | 生成時間：2026-04-23 21:23</div>
         
     <div class="card">
         <h3 style="font-size: 2.2rem; margin-bottom:20px; border-left: 10px solid #2563eb; padding-left:20px;">📊 獲利品質與估值準則</h3>
@@ -172,7 +172,22 @@
             const mSt = (stat === "all") || r.cells[15].innerText.includes(stat);
             const mAd = (adv === "all") || r.cells[16].innerText.includes(adv);
             const valExp = parseFloat(r.cells[14].innerText.replace('%','')) || 0;
-            let mEx = (exp === "all") || (exp === "p70" && valExp > 70) || (exp === "p40" && valExp > 40) || (exp === "p20" && valExp > 20) || (exp === "positive" && valExp > 0) || (exp === "negative" && valExp < 0);
+
+            // 在 JS 的 filter 函式中補上這些判斷
+            let mEx = (exp === "all") || 
+                (exp === "p110" && valExp > 110) ||
+                (exp === "p100" && valExp > 100) ||
+                (exp === "p90" && valExp > 90) ||
+                (exp === "p80" && valExp > 80) ||
+                (exp === "p70" && valExp > 70) ||
+                (exp === "p60" && valExp > 60) ||
+                (exp === "p50" && valExp > 50) ||
+                (exp === "p40" && valExp > 40) ||
+                (exp === "p30" && valExp > 30) ||
+                (exp === "p20" && valExp > 20) ||
+                (exp === "positive" && valExp > 0) ||
+                (exp === "negative" && valExp < 0) ||
+                (exp === "danger" && valExp < -10);
             return mS && mSt && mAd && mEx;
         });
         currentPage = 1; update();
