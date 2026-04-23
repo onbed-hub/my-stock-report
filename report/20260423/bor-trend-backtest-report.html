@@ -25,7 +25,7 @@
         <div style="text-align:center; font-weight:bold; color:#64748b; margin-bottom:30px;">
                 📅 回測起點：<span style="color:#2563eb;">2025-11-01</span> |
                 📅 分析日期：20260423 |
-                生成時間：2026-04-23 11:46
+                生成時間：2026-04-23 13:52
         </div>
 
         
@@ -45,19 +45,9 @@
                 <h4 style="color: #b91c1c;">❷ 風控與停利 (Exit Management)</h4>
                 <ul style="font-size: 1.5rem; line-height: 2;">
                     <li><b>ATR 止損：</b> 進場點 - 2倍ATR (硬止損)</li>
-                    <li><b>趨勢雙死：</b> 收盤 < MA20 且 MACD 翻負連兩日</li>
+                    <li><b>趨勢雙死 (TrendDead)：</b> 收盤 < MA20 且 MACD_OSC 連翻負數兩日</li>
                     <li><b>移動停利 (Trailing)：</b> 獲利達 15% 後，若從高點回落 10% 鎖利</li>
                     <li><b>弱勢過濾 (WeakFail)：</b> 持股 10 日未脫離成本且跌破 ATR 線</li>
-
-                    <li><b style="color:#ea580c;">💀 TrendDead (趨勢死亡)</b><br>
-                        <code style="background:#fff7ed; padding:2px 4px;">Close < MA20</code> 且 <br>
-                        <code style="background:#fff7ed; padding:2px 4px;">MACD_OSC < 0</code> (連兩日)<br>
-                        價格與動能同時跌破中期支撐線。</li>
-
-                    <li style="margin-top:12px;"><b style="color:#854d0e;">⏳ WeakFail (弱勢汰換)</b><br>
-                        <code style="background:#fefce8; padding:2px 4px;">HoldDays >= 12</code> 且 <br>
-                        <code style="background:#fefce8; padding:2px 4px;">Price < BuyPrice</code><br>
-                        時間換不到空間，持有兩週後若仍虧損則強制換股。</li>
                 </ul>
             </div>
             <div style="background: #f8fafc; padding: 15px; border-radius: 10px; border: 1px solid #e2e8f0;">
