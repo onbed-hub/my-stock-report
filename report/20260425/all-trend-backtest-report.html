@@ -25,7 +25,7 @@
         <div style="text-align:center; font-weight:bold; color:#64748b; margin-bottom:30px;">
                 📅 回測起點：<span style="color:#2563eb;">2025-11-01</span> |
                 📅 分析日期：20260425 |
-                生成時間：2026-04-25 08:30
+                生成時間：2026-04-25 12:11
         </div>
 
         
@@ -73,6 +73,7 @@
             <label>📊 累積獲利門檻</label>
             <select id="pFilter" onchange="filter()">
                 <option value="-999">全部</option>
+                <option value="0">負向收益 (<0%)</option>
                 <option value="0">正向收益 (>0%)</option>
                 <option value="15">啟動波段 (>15%)</option>
                 <option value="20">顯著獲利 (>20%)</option>
@@ -98,7 +99,7 @@
             </select>
         </div>
         <div class="filter-item">
-            <button onclick="resetFilters()" style="padding: 12px 20px; background: #ef4444; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; height: 46px;">
+            <button onclick="resetFilters()" style="padding: 12px 20px; background: #ef4444; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; height: 50px; margin-bottom: 2px;">
                 🧹 清除過濾
             </button>
         </div>
@@ -148,10 +149,18 @@
         });
     }
 
-    // 2. 頁面載入完成後立即過濾一次 (隱藏不滿足 args.threshold 的股票)
+    // 2. 清除過濾
+    function resetFilters() {
+        document.getElementById('searchInput').value = '';
+        document.getElementById('pFilter').value = '-999'; // 設為全部
+        document.getElementById('sFilter').value = 'all';
+        filter();
+    }
+
+    // 3. 頁面載入完成後立即過濾一次 (隱藏不滿足 args.threshold 的股票)
     document.addEventListener('DOMContentLoaded', filter);
 
-    // 3. 日誌顯示邏輯
+    // 4. 日誌顯示邏輯
     async function showLog(pureId) {
         const modal = document.getElementById("logModal");
         const content = document.getElementById("logContent");
