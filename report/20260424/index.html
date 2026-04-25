@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>量化交易策略儀表板</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
+            display: flex;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            width: 100%;
+            max-width: 680px;
+        }
+        h1 {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #1e293b;
+        }
+
+        /* 搜尋框樣式 */
+        .search-container {
+            margin-bottom: 2rem;
+        }
+        #searchInput {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            outline: none;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        #searchInput:focus {
+            border-color: #6366f1;
+        }
+
+        .section-header {
+            font-size: 1rem;
+            color: #64748b;
+            margin: 1.8rem 0 0.8rem 0;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: flex;
+            align-items: center;
+        }
+        .section-header::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+            margin-left: 15px;
+        }
+        .report-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        .card {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            padding: 1rem 1.25rem;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            transition: all 0.2s ease-out;
+        }
+        .card:hover {
+            border-color: #6366f1;
+            background: #f8fafc;
+            transform: translateX(8px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
+        }
+        .title {
+            font-weight: 600;
+            color: #334155;
+            font-size: 1.05rem;
+        }
+        .file-name {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 4px;
+            font-family: 'SFMono-Regular', Consolas, monospace;
+        }
+        .badge {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            width: fit-content;
+            font-weight: bold;
+        }
+        /* 分類標籤顏色 */
+        .bg-live { background: #ede9fe; color: #7c3aed; } /* 實時-紫色 */
+        .bg-con { background: #e0e7ff; color: #4338ca; } /* 盤整-靛色 */
+        .bg-all { background: #f1f5f9; color: #475569; } /* 全市場-灰色 */
+        .bg-high { background: #fef3c7; color: #92400e; } /* 高強度-琥珀色 */
+        
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📈 量化策略分析面板</h1>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="搜尋報表 (輸入 bor, live, ma, rsi...)" onkeyup="filterReports()">
+    </div>
+
+    <div class="report-section">
+        <div class="section-header">Summary & Consolidation</div>
+        <div class="report-grid">
+            <a href="bor-consolidation-live.html" class="card">
+                <span class="badge bg-live">LIVE</span>
+                <span class="title">BOR 盤整區間實時監控</span>
+                <span class="file-name">📄 bor-consolidation-live.html</span>
+            </a>
+            <a href="consolidation-report.html" class="card">
+                <span class="badge bg-con">CONSOLIDATION</span>
+                <span class="title">盤整區間 / 綜合彙整報表</span>
+                <span class="file-name">📄 consolidation-report.html</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="report-section">
+        <div class="section-header">All Market Reports</div>
+        <div class="report-grid">
+            <a href="all-ma-report.html" class="card">
+                <span class="badge bg-all">ALL</span>
+                <span class="title">均線扣抵全市場報表</span>
+                <span class="file-name">📄 all-ma-report.html</span>
+            </a>
+            <a href="all-rsi-dmi-obv-report.html" class="card">
+                <span class="badge bg-all">ALL</span>
+                <span class="title">RSI / DMI / OBV 綜合分析</span>
+                <span class="file-name">📄 all-rsi-dmi-obv-report.html</span>
+            </a>
+            <a href="all-fvg-summary.html" class="card">
+                <span class="badge bg-all">ALL</span>
+                <span class="title">FVG 缺口彙整摘要</span>
+                <span class="file-name">📄 all-fvg-summary.html</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="report-section">
+        <div class="section-header">High Intensity Analysis</div>
+        <div class="report-grid">
+            <a href="high-ma-report.html" class="card">
+                <span class="badge bg-high">HIGH</span>
+                <span class="title">MA 均線精選標的</span>
+                <span class="file-name">📄 high-ma-report.html</span>
+            </a>
+            <a href="high-rsi-dmi-obv-report.html" class="card">
+                <span class="badge bg-high">HIGH</span>
+                <span class="title">RSI / DMI / OBV 高強度過濾</span>
+                <span class="file-name">📄 high-rsi-dmi-obv-report.html</span>
+            </a>
+            <a href="high-fvg-summary.html" class="card">
+                <span class="badge bg-high">HIGH</span>
+                <span class="title">FVG 缺口彙整摘要</span>
+                <span class="file-name">📄 high-fvg-summary.html</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function filterReports() {
+        const input = document.getElementById('searchInput').value.toLowerCase();
+        const cards = document.querySelectorAll('.card');
+        const sections = document.querySelectorAll('.report-section');
+
+        cards.forEach(card => {
+            const text = card.textContent.toLowerCase();
+            if (text.includes(input)) {
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+
+        sections.forEach(section => {
+            const visibleCards = section.querySelectorAll('.card:not(.hidden)');
+            if (visibleCards.length === 0) {
+                section.classList.add('hidden');
+            } else {
+                section.classList.remove('hidden');
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
+
