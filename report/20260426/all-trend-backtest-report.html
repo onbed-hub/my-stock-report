@@ -64,36 +64,32 @@
             <div>
                 <h4 style="color: #1e40af; font-size: 1.8rem; margin-bottom:10px;">❶ 進場嚴選 (Entry)</h4>
                 <ul style="font-size: 1.4rem; line-height: 1.8; padding-left: 20px;">
-                    <li><b>📈 標準 V3：</b> 均線多頭排列 (5>10>20) + 布林上軌帶量突破。</li>
-                    <li><b>🚀 爆發型：</b> 脫離長期糾纏平台，5日內漲幅 > 30% 之極強勢股。</li>
-                    <li><b>⚠️ 乖離濾網：</b> 自動檢測 <code>BIAS_20</code>，若數值 > 8.0 則強制將「買入」轉為「預警」，避免在過熱區間進場。</li>
-                    <li><b>📊 量能確認：</b> 進場日成交量需大於 5 日均量 1.5 倍。</li>
+                    <li><b>📈 標準 V3：</b> 均線多頭 (5>10>20) + 布林上軌突破 (破線率參數化) + MACD 紅柱。</li>
+                    <li><b>🚀 爆發型：</b> 5日內漲幅 > 30% 且突破布林上軌，捕捉極端動能。</li>
+                    <li><b>⚠️ 乖離濾網：</b> 自動檢測 <code>BIAS_20</code>，若數值高於設定閾值則強制轉為「預警」。</li>
+                    <li><b>🏮 真紅棒過濾：</b> 排除長上影線 (避雷針)，要求實體 K 棒比例，確保收盤力道。</li>
                 </ul>
             </div>
 
             <div>
-                <h4 style="color: #0d9488; font-size: 1.8rem; margin-bottom:10px;">❷ 關鍵特徵 (Factors)</h4>
+                <h4 style="color: #0d9488; font-size: 1.8rem; margin-bottom:10px;">❷ 狀態特徵 (Factors)</h4>
                 <ul style="font-size: 1.4rem; line-height: 1.8; padding-left: 20px;">
-                    <li><b>FVG 缺口：</b> 優先挑選帶有「價格失衡缺口」之標的，代表支撐力道強。</li>
-                    <li><b>KDJ 強度：</b> K 值 > 80 進入強勢鈍化區為佳，代表動能持續。</li>
-                    <li><b>籌碼集中：</b> 針對爆發型標的，優先觀察實體紅棒收盤是否接近最高價。</li>
-                    <li><b>穩定性係數：</b> 根據日線波動率自動匹配最適 ATR 乘數。</li>
+                    <li><b>📦 盤整偵測：</b> 監控過去 20 日高低點區間，若價差 < 15% 則定義為蓄勢盤整區。</li>
+                    <li><b>⚡ 爆發預警：</b> 脫離盤整區漲幅達 5% 即觸發「預警」，追蹤噴發前兆。</li>
+                    <li><b>📊 趨勢強度：</b> 根據 MA20 斜率與 MACD 加速度自動標註「極強/穩定/轉弱」。</li>
+                    <li><b>📐 參數優化：</b> 針對不同個股自動調用最優 <code>breakout</code> 與 <code>bias</code> 閾值。</li>
                 </ul>
             </div>
 
             <div>
                 <h4 style="color: #b91c1c; font-size: 1.8rem; margin-bottom:10px;">❸ 出口管理 (Exit)</h4>
                 <ul style="font-size: 1.4rem; line-height: 1.8; padding-left: 20px;">
-                    <li><b>🛡️ 動態 ATR：</b> 獲利未達 10% 使用 2.2x ATR；獲利 > 20% 放寬至 3.5x。</li>
-                    <li><b>💀 趨勢雙死：</b> 收盤價跌破 MA20 且 MACD 柱狀體連 2 日衰退。</li>
-                    <li><b>💰 鎖利機制：</b> 獲利達 15% 觸發移動止盈，回落波段高點 10% 執行清倉。</li>
-                    <li><b>⏱️ 時間止損：</b> 若進場後 10 日內未能脫離成本區，考慮減碼。</li>
+                    <li><b>🛡️ 三階 ATR：</b> 獲利 < -5% 使用 2.2x；一般 2.8x；獲利 > 15% 擴張至 3.5x 容錯。</li>
+                    <li><b>💀 趨勢雙死：</b> 價格跌破 MA20 且 MACD 翻負，連 2 日確認即執行強制出場。</li>
+                    <li><b>💰 移動鎖利：</b> 獲利 > 15% 後，若自高點回落 10% 觸發 Trailing Stop。</li>
+                    <li><b>⏱️ 時間止損：</b> 進場 12 日後若股價仍低於成本 (WeakFail)，視為動能消失出場。</li>
                 </ul>
             </div>
-        </div>
-        
-        <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #e2e8f0; font-size: 1.2rem; color: #64748b; font-style: italic;">
-            *註：本報告基於 stock-Quantum V3 引擎運算，所有獲利皆為回測數據，應配合盤中即時量價變化決策。
         </div>
     </div>
     
