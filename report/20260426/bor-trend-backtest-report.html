@@ -84,9 +84,10 @@
             <label>🔥 今日訊號篩選</label>
             <select id="sFilter" onchange="filter()">
                 <option value="all">不限訊號</option>
-                <option value="買入">🔥 買入</option>
-                <option value="持股">💎 持股</option>
-                <option value="爆發">🚀 爆發持股</option>
+                <option value="買入">🔥 買入 (含🚀)</option>
+                <option value="持股">💎 持股 (含🚀)</option>
+                <option value="爆發">🚀 爆發訊號</option>
+                <option value="觀望">☁️ 觀望</option>
                 <option value="賣出">❄️ 賣出</option>
             </select>
         </div>
@@ -122,23 +123,34 @@
     </div></div>
 
     <script>
-    // ... JS 部分保持不變 ...
     function filter() {
         const search = document.getElementById('searchInput').value.toUpperCase();
         const pMin = parseFloat(document.getElementById('pFilter').value);
         const sFilter = document.getElementById('sFilter').value;
         const rows = document.querySelectorAll('#stockTable tbody tr');
+        
         rows.forEach(row => {
             const idText = row.cells[0].textContent.toUpperCase();
             const nameText = row.cells[1].textContent.toUpperCase();
-            const signalText = row.cells[3].textContent;
+            const signalText = row.cells[3].textContent; // 這裡會拿到如 "☁️ 觀望"
             const pnlValue = parseFloat(row.cells[4].textContent.replace('%', ''));
+            
             const matchSearch = idText.includes(search) || nameText.includes(search);
             const matchPnl = pnlValue >= pMin;
-            const matchSignal = (sFilter === 'all') || (signalText.includes(sFilter));
+            
+            // 訊號匹配邏輯：如果是 'all' 就過，否則檢查文字是否包含關鍵字 (例如 "買入" 匹配 "🔥 買入")
+            let matchSignal = false;
+            if (sFilter === 'all') {
+                matchSignal = true;
+            } else {
+                matchSignal = signalText.includes(sFilter);
+            }
+            
             row.style.display = (matchSearch && matchPnl && matchSignal) ? '' : 'none';
         });
     }
+
+    // ... sortTable, resetFilters, showLog 保持不變 ...
     function sortTable(n) {
         const table = document.getElementById("stockTable");
         let rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
