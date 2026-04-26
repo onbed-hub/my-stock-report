@@ -4,100 +4,90 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>all 趨勢報告</title>
         
     <style>
-        /* 1. 基礎設定：電腦版基準 */
-        html { font-size: 14px; } 
+        /* 1. 電腦版基準設定 (螢幕大於 768px 時生效) */
+        html { font-size: 16px; } /* 增加電腦版預設大小 */
         
         body { 
             font-family: 'Segoe UI', "PingFang TC", "Microsoft JhengHei", sans-serif; 
-            padding: 30px; 
+            padding: 40px; 
             background: #f1f5f9; 
             color: #0f172a; 
-            font-size: 1rem; 
-            line-height: 1.5;
+            line-height: 1.6;
             margin: 0;
         }
 
-        .container { width: 98%; max-width: 1850px; margin: auto; }
+        .container { width: 98%; max-width: 1900px; margin: auto; }
         
         .card { 
             background: white; 
-            padding: 25px; 
+            padding: 35px; 
             border-radius: 15px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+            margin-bottom: 30px;
             overflow: visible !important;
         }
 
-        /* 標題 */
-        h2 { font-size: 2.4rem; color: #1e3a8a; text-align: center; margin-bottom: 5px; }
-        .header-info { text-align: center; font-weight: bold; color: #64748b; margin-bottom: 25px; font-size: 1rem; }
+        /* 標題與資訊 */
+        h2 { font-size: 2.8rem; color: #1e3a8a; text-align: center; margin-bottom: 10px; }
+        .header-info { text-align: center; font-weight: bold; color: #64748b; margin-bottom: 30px; font-size: 1.1rem; }
 
-        /* 篩選區塊：電腦橫排，手機自動換行 */
-        .filter-group { 
-            display: flex; 
-            flex-wrap: wrap;
-            gap: 20px; 
-            margin-bottom: 25px; 
-            background: #1e293b; 
-            padding: 20px; 
-            border-radius: 12px; 
-            color: white; 
-            align-items: flex-end; 
-        }
-        .filter-item { flex: 1 1 200px; display: flex; flex-direction: column; gap: 8px; }
-        select, input { padding: 10px; font-size: 1rem; border-radius: 8px; border: none; }
-
-        /* 表格響應式外殼 */
+        /* 表格設定：針對電腦版優化文字大小 */
         .table-responsive {
             width: 100%;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
-            border-radius: 10px;
+            border-radius: 12px;
         }
 
-        table { width: 100%; border-collapse: collapse; min-width: 1100px; table-layout: auto; }
-        th { background: #2563eb; color: white; padding: 12px; cursor: pointer; position: sticky; top: 0; z-index: 10; white-space: nowrap; font-size: 1rem; }
-        td { padding: 12px; border-bottom: 1px solid #f1f5f9; text-align: center; vertical-align: middle; font-size: 0.95rem; }
-
-        /* 訊號標籤樣式 */
-        .sig-buy, .sig-rocket, .sig-warn { 
-            display: inline-block; 
+        table { width: 100%; border-collapse: collapse; min-width: 1200px; table-layout: auto; }
+        
+        /* 表頭：字體加粗加大 */
+        th { 
+            background: #2563eb; 
+            color: white; 
+            padding: 18px 12px; 
+            font-size: 1.15rem; 
+            font-weight: 600;
             white-space: nowrap; 
-            padding: 6px 12px; 
-            border-radius: 6px; 
+        }
+        
+        /* 表格內容：清晰易讀 */
+        td { 
+            padding: 16px 12px; 
+            border-bottom: 1px solid #f1f5f9; 
+            text-align: center; 
+            vertical-align: middle; 
+            font-size: 1.1rem; /* 電腦版字體放大到約 17-18px */
+        }
+
+        /* 訊號標籤 */
+        .sig-buy, .sig-rocket, .sig-warn { 
+            padding: 8px 16px; 
+            border-radius: 8px; 
             font-weight: bold; 
-            font-size: 0.9rem; 
-        }
-        .sig-buy { color: white; background: #dc2626; }
-        .sig-rocket { color: white; background: #f59e0b; }
-        .sig-warn { color: #1e293b; background: #fef08a; border: 1px solid #facc15; }
-
-        /* 規則說明區塊 Grid */
-        .rule-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 20px; 
+            font-size: 1rem; 
         }
 
-        /* Modal 日誌視窗樣式 */
-        .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
-        .modal-content { background:#fff; margin:2% auto; padding:25px; width:85%; max-height: 90%; border-radius:15px; display: flex; flex-direction: column; }
-        #logContent { background:#0f172a; color:#94a3b8; padding:20px; border-radius:10px; white-space:pre-wrap; font-family: monospace; font-size: 0.9rem; overflow-y: auto; flex-grow: 1; }
-        .close { float:right; font-size:30px; cursor:pointer; font-weight: bold; }
-
-        /* 特別處理最後一欄理由 */
-        th:last-child, td:last-child { text-align: left; white-space: nowrap; padding-left: 20px; }
-        .hero { background: #fffde7 !important; border-left: 5px solid #fbbf24; font-weight: bold; }
-
-        /* --- 手機版微調 --- */
+        /* --------------------------------------------------------- */
+        /* 2. 手機版專用微調 (螢幕小於 768px 時生效) */
         @media (max-width: 768px) {
-            html { font-size: 12px; } /* 手機字體基準稍微調大一點點 */
+            html { font-size: 12px; } /* 手機版自動縮小基礎字體 */
             body { padding: 15px; }
-            .card { padding: 15px; }
-            h2 { font-size: 2rem; }
+            .card { padding: 20px; }
+            h2 { font-size: 2.2rem; }
+            td, th { padding: 12px 8px; } /* 手機版縮小間距 */
             .filter-group { padding: 15px; }
-            .modal-content { width: 95%; margin: 5% auto; }
         }
+        /* --------------------------------------------------------- */
+
+        /* 篩選與其餘樣式保持一致 (注意雙大括號) */
+        .filter-group { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px; background: #1e293b; padding: 25px; border-radius: 12px; color: white; align-items: flex-end; }
+        .filter-item { flex: 1 1 200px; display: flex; flex-direction: column; gap: 10px; }
+        select, input { padding: 12px; font-size: 1.1rem; border-radius: 8px; border: none; }
+        
+        .rule-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; }
+        .modal-content { background:#fff; margin:2% auto; padding:30px; width:90%; max-height: 90%; border-radius:15px; }
+        #logContent { font-size: 1rem; padding: 25px; }
     </style>
     
     </head>
