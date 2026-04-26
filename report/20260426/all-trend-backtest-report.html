@@ -190,20 +190,6 @@
         updateDisplay();
     }
 
-    function abcfilter() {
-        const search = document.getElementById('searchInput').value.toUpperCase();
-        const pMin = parseFloat(document.getElementById('pFilter').value);
-        const sFilter = document.getElementById('sFilter').value;
-        const allRows = Array.from(document.querySelectorAll('#stockTable tbody tr'));
-        filteredRows = allRows.filter(row => {
-            const idText = row.cells[0].textContent.toUpperCase();
-            const nameText = row.cells[1].textContent.toUpperCase();
-            const signalText = row.cells[3].textContent;
-            const pnlValue = parseFloat(row.cells[4].textContent.replace('%', ''));
-            return (idText.includes(search) || nameText.includes(search)) && (pnlValue >= pMin) && (sFilter === 'all' || signalText.includes(sFilter));
-        });
-        currentPage = 1; updateDisplay();
-    }
     function updateDisplay() {
         const allRows = document.querySelectorAll('#stockTable tbody tr');
         allRows.forEach(row => row.style.display = 'none');
@@ -216,24 +202,47 @@
         document.querySelector('.table-responsive').scrollTop = 0;
     }
     function changePage(step) { currentPage += step; updateDisplay(); }
+
+    let sortDir = 1; // 1 為升冪, -1 為降冪
+    let lastSortCol = -1;
+
     function sortTable(n) {
+        // 1. 取得當前所有正在顯示/過濾後的資料行 (Array 化)
         const table = document.getElementById("stockTable");
-        let rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-        switching = true; dir = "asc";
-        while (switching) {
-            switching = false; rows = table.rows;
-            for (i = 1; i < (rows.length - 1); i++) {
-                shouldSwitch = false;
-                x = rows[i].getElementsByTagName("TD")[n]; y = rows[i + 1].getElementsByTagName("TD")[n];
-                let xVal = isNaN(parseFloat(x.innerText)) ? x.innerText.toLowerCase() : parseFloat(x.innerText.replace('%',''));
-                let yVal = isNaN(parseFloat(y.innerText)) ? y.innerText.toLowerCase() : parseFloat(y.innerText.replace('%',''));
-                if ((dir == "asc" && xVal > yVal) || (dir == "desc" && xVal < yVal)) { shouldSwitch = true; break; }
-            }
-            if (shouldSwitch) { rows[i].parentNode.insertBefore(rows[i + 1], rows[i]); switching = true; switchcount++; }
-            else if (switchcount == 0 && dir == "asc") { dir = "desc"; switching = true; }
+        const tbody = table.querySelector("tbody");
+
+        // 判定方向：點擊同一個欄位就反轉，點擊不同欄位就從大到小(desc)開始
+        if (lastSortCol === n) {
+            sortDir *= -1;
+        } else {
+            sortDir = -1; // 預設第一次點擊先從大到小，比較符合看股習慣
+            lastSortCol = n;
         }
-        filter();
+
+        // 2. 獲取所有行並進行陣列排序 (不直接動 DOM，效能才快)
+        const rowsArray = Array.from(tbody.querySelectorAll("tr"));
+
+        rowsArray.sort((a, b) => {
+            let x = a.cells[n].innerText.trim();
+            let y = b.cells[n].innerText.trim();
+
+            // 處理數字與百分比 (移除 % 並轉為浮點數)
+            let xVal = isNaN(parseFloat(x)) ? x.toLowerCase() : parseFloat(x.replace(/%/g, ''));
+            let yVal = isNaN(parseFloat(y)) ? y.toLowerCase() : parseFloat(y.replace(/%/g, ''));
+
+            if (xVal < yVal) return -1 * sortDir;
+            if (xVal > yVal) return 1 * sortDir;
+            return 0;
+        });
+
+        // 3. 關鍵修正：排序完後，必須把排好的順序重新放回 tbody
+        rowsArray.forEach(row => tbody.appendChild(row));
+
+        // 4. 關鍵修正：重新執行 filter 以更新分頁顯示的順序
+        // 這裡不需要在 filter 內重新抓 allRows，而是應該基於現有的 DOM 順序
+        filter(); 
     }
+
     function resetFilters() {
         document.getElementById('searchInput').value = ''; document.getElementById('pFilter').value = '-999';
         document.getElementById('sFilter').value = 'all'; filter();
