@@ -4,28 +4,46 @@
         body { font-family: 'Segoe UI', "PingFang TC", "Microsoft JhengHei", sans-serif; padding: 40px; background: #f1f5f9; color: #0f172a; font-size: 1.6rem; }
         .container { max-width: 1850px; margin: auto; }
         .card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 40px; }
-        
+
         /* 標題與說明區塊 */
         h2 { font-size: 3.5rem; color: #1e3a8a; text-align: center; margin-bottom: 5px; }
         .header-info { text-align: center; font-weight: bold; color: #64748b; margin-bottom: 30px; font-size: 1.4rem; }
-        
+
         /* 篩選區塊 */
         .filter-group { display: flex; gap: 30px; margin-bottom: 30px; background: #1e293b; padding: 30px; border-radius: 15px; color: white; align-items: flex-end; }
         .filter-item { display: flex; flex-direction: column; gap: 10px; }
         select, input { padding: 15px; font-size: 1.5rem; border-radius: 10px; border: none; }
-        
-        /* 表格設定：取消 fixed layout 以防止理由欄位被擠壓 */
+
+        /* 表格設定 */
         table { width: 100%; border-collapse: collapse; table-layout: auto; min-width: 1200px; }
         th { background: #2563eb; color: white; padding: 20px; cursor: pointer; position: sticky; top: 0; z-index: 10; white-space: nowrap; }
         td { padding: 18px; border-bottom: 2px solid #f1f5f9; text-align: center; vertical-align: middle; }
-        
-        /* 最後一欄理由：強制不換行，寬度自動伸展 */
+
+        /* 針對訊號欄位(第4欄)的特別處理 */
+        td:nth-child(4) {
+            min-width: 250px; /* 給予基本寬度保險 */
+        }
+
+        /* 訊號標籤：關鍵在於 white-space: nowrap */
+        .sig-buy, .sig-rocket, .sig-warn { 
+            display: inline-block;
+            white-space: nowrap;  /* 強制文字不換行 */
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            width: auto;          /* 寬度隨內容撐開 */
+        }
+
+        .sig-buy { color: white; background: #dc2626; }
+        .sig-rocket { color: white; background: #f59e0b; }
+        .sig-warn { color: #1e293b; background: #fef08a; border: 1px solid #facc15; }
+
+        /* 最後一欄理由 */
         th:last-child, td:last-child { text-align: left; white-space: nowrap; padding-left: 30px; }
 
         .hero { background: #fffde7 !important; border-left: 10px solid #fbbf24; font-weight: bold; }
-        .sig-buy { color: white; font-weight: bold; background: #dc2626; padding: 8px 15px; border-radius: 10px; }
-        .sig-rocket { color: white; font-weight: bold; background: #f59e0b; padding: 8px 15px; border-radius: 10px; }
-        
+
         /* Modal 樣式 */
         .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
         .modal-content { background:#fff; margin:3% auto; padding:30px; width:80%; max-height: 85%; border-radius:20px; display: flex; flex-direction: column; }
