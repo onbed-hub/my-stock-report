@@ -247,6 +247,7 @@
         } catch(e) { content.innerText = "讀取錯誤"; }
     }
     function closeModal() { document.getElementById("logModal").style.display = "none"; }
+    window.onclick = (e) => { if(e.target == document.getElementById("logModal")) closeModal(); }
     document.addEventListener('DOMContentLoaded', filter);
     </script></body></html>
     
