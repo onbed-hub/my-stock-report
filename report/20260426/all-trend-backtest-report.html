@@ -60,23 +60,40 @@
         
     <div class="card">
         <h3 style="font-size: 2.2rem; color: #1e3a8a; border-left: 10px solid #2563eb; padding-left:20px; margin-top:0;">🛡️ V3 Pro 趨勢與動態風控準則</h3>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; margin-top: 20px;">
             <div>
-                <h4 style="color: #1e40af; font-size: 1.8rem; margin-bottom:10px;">❶ 進場嚴選 (Entry Channels)</h4>
-                <ul style="font-size: 1.5rem; line-height: 2;">
-                    <li><b>📈 標準 V3：</b> 均線多頭 (5>10>20) + 布林突破 + 紅棒實體確認</li>
-                    <li><b>🚀 爆發型 (5D30%)：</b> 脫離均線糾纏/盤整，且 5 日內漲幅 > 30%</li>
-                    <li><b>共同濾網：</b> 20日乖離率 (BIAS) < 8.0 (防止極端追高)</li>
+                <h4 style="color: #1e40af; font-size: 1.8rem; margin-bottom:10px;">❶ 進場嚴選 (Entry)</h4>
+                <ul style="font-size: 1.4rem; line-height: 1.8; padding-left: 20px;">
+                    <li><b>📈 標準 V3：</b> 均線多頭排列 (5>10>20) + 布林上軌帶量突破。</li>
+                    <li><b>🚀 爆發型：</b> 脫離長期糾纏平台，5日內漲幅 > 30% 之極強勢股。</li>
+                    <li><b>⚠️ 乖離濾網：</b> 自動檢測 <code>BIAS_20</code>，若數值 > 8.0 則強制將「買入」轉為「預警」，避免在過熱區間進場。</li>
+                    <li><b>📊 量能確認：</b> 進場日成交量需大於 5 日均量 1.5 倍。</li>
                 </ul>
             </div>
+
             <div>
-                <h4 style="color: #b91c1c; font-size: 1.8rem; margin-bottom:10px;">❷ 風控與停利 (Exit Management)</h4>
-                <ul style="font-size: 1.5rem; line-height: 2;">
-                    <li><b>ATR 止損：</b> 根據獲利狀況動態調整 (2.2x ~ 3.5x ATR)</li>
-                    <li><b>趨勢雙死 (TrendDead)：</b> 收盤 < MA20 且 MACD_OSC 連翻負數</li>
-                    <li><b>移動停利 (Trailing)：</b> 獲利 > 15% 後，從波段高點回落 10% 鎖利</li>
+                <h4 style="color: #0d9488; font-size: 1.8rem; margin-bottom:10px;">❷ 關鍵特徵 (Factors)</h4>
+                <ul style="font-size: 1.4rem; line-height: 1.8; padding-left: 20px;">
+                    <li><b>FVG 缺口：</b> 優先挑選帶有「價格失衡缺口」之標的，代表支撐力道強。</li>
+                    <li><b>KDJ 強度：</b> K 值 > 80 進入強勢鈍化區為佳，代表動能持續。</li>
+                    <li><b>籌碼集中：</b> 針對爆發型標的，優先觀察實體紅棒收盤是否接近最高價。</li>
+                    <li><b>穩定性係數：</b> 根據日線波動率自動匹配最適 ATR 乘數。</li>
                 </ul>
             </div>
+
+            <div>
+                <h4 style="color: #b91c1c; font-size: 1.8rem; margin-bottom:10px;">❸ 出口管理 (Exit)</h4>
+                <ul style="font-size: 1.4rem; line-height: 1.8; padding-left: 20px;">
+                    <li><b>🛡️ 動態 ATR：</b> 獲利未達 10% 使用 2.2x ATR；獲利 > 20% 放寬至 3.5x。</li>
+                    <li><b>💀 趨勢雙死：</b> 收盤價跌破 MA20 且 MACD 柱狀體連 2 日衰退。</li>
+                    <li><b>💰 鎖利機制：</b> 獲利達 15% 觸發移動止盈，回落波段高點 10% 執行清倉。</li>
+                    <li><b>⏱️ 時間止損：</b> 若進場後 10 日內未能脫離成本區，考慮減碼。</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #e2e8f0; font-size: 1.2rem; color: #64748b; font-style: italic;">
+            *註：本報告基於 stock-Quantum V3 引擎運算，所有獲利皆為回測數據，應配合盤中即時量價變化決策。
         </div>
     </div>
     
@@ -98,6 +115,7 @@
                 <option value="100">翻倍神股 (>100%)</option>
             </select>
         </div>
+
         <div class="filter-item">
             <label>🔥 今日訊號篩選</label>
             <select id="sFilter" onchange="filter()">
@@ -105,10 +123,12 @@
                 <option value="買入 (🚀">🔥 買入 (🚀 爆發 5D30%)</option>
                 <option value="買入 (📈">🔥 買入 (📈 標準 V3)</option>
                 <option value="預警">🟡 預警 (🚀 爆發 5% 追蹤)</option>
+                <option value="預警">🟡 預警 (含乖離過高)</option>
                 <option value="持股">💎 持股</option>
                 <option value="賣出">❄️ 賣出</option>
             </select>
         </div>
+
         <div class="filter-item">
             <button onclick="resetFilters()" style="padding: 12px 20px; background: #ef4444; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; height: 50px; margin-bottom: 2px;">
                 Sweep 🧹 清除過濾
