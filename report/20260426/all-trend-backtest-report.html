@@ -62,8 +62,9 @@
                 <ul style="font-size: 1.4rem; line-height: 1.8; padding-left: 20px;">
                     <li><b>📈 標準 V3：</b> 均線多頭 (5>10>20) + 布林上軌突破 + MACD 紅柱。</li>
                     <li><b>🚀 爆發型：</b> 5日內漲幅 > 30% 且突破布林上軌。</li>
-                    <li><b>⚠️ 乖離濾網：</b> 自動檢測 <code>BIAS_20</code> 閾值。</li>
+                    <li><b>⚠️ 乖離濾網：</b> 自動檢測 <code>BIAS_20</code>，若數值 > 8.0 則強制將「買入」轉為「預警」，避免在過熱區間進場。</li>
                     <li><b>🏮 真紅棒過濾：</b> 排除長上影線，確保收盤力道。</li>
+                    <li><b>📊 量能確認：</b> 進場日成交量需大於 5 日均量 1.5 倍。</li>
                 </ul>
             </div>
             <div>
@@ -72,16 +73,22 @@
                     <li><b>📦 盤整偵測：</b> 監控過去 20 日高低點區間 < 15%。</li>
                     <li><b>⚡ 爆發預警：</b> 脫離盤整區漲幅達 5% 即觸發預警。</li>
                     <li><b>📊 趨勢強度：</b> 自動標註「極強/穩定/轉弱」。</li>
+                    <li><b>穩定性係數：</b> 根據日線波動率自動匹配最適 ATR 乘數。</li>
                 </ul>
             </div>
             <div>
                 <h4 style="color: #b91c1c; font-size: 1.8rem; margin-bottom:10px;">❸ 出場風控 (Exit)</h4>
                 <ul style="font-size: 1.4rem; line-height: 1.8; padding-left: 20px;">
-                    <li><b>🛡️ 三階 ATR：</b> 動態調整止損倍數。</li>
-                    <li><b>💀 趨勢雙死：</b> 破 MA20 且 MACD 翻負。</li>
-                    <li><b>💰 移動鎖利：</b> 獲利 > 15% 後回落 10% 觸發。</li>
+                    <li><b>🛡️ 動態 ATR：</b> 獲利未達 10% 使用 2.2x ATR；獲利 > 20% 放寬至 3.5x。</li>
+                    <li><b>💀 趨勢雙死：</b> 收盤價跌破 MA20 且 MACD 柱狀體連 2 日衰退。</li>
+                    <li><b>💰 鎖利機制：</b> 獲利達 15% 觸發移動止盈，回落波段高點 10% 執行清倉。</li>
+                    <li><b>⏱️ 時間止損：</b> 若進場後 10 日內未能脫離成本區，考慮減碼。</li>
                 </ul>
             </div>
+        </div>
+
+        <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #e2e8f0; font-size: 1.2rem; color: #64748b; font-style: italic;">
+            *註：本報告基於 小水鴨撰寫的引擎運算，所有獲利皆為回測數據，應配合盤中即時量價變化決策。
         </div>
     </div>
     
@@ -157,7 +164,7 @@
         <pre id="logContent"></pre>
     </div></div>
     <script>
-    let currentPage = 1; const pageSize = 50; let filteredRows = [];
+    let currentPage = 1; const pageSize = 30; let filteredRows = [];
     function filter() {
         const search = document.getElementById('searchInput').value.toUpperCase();
         const pMin = parseFloat(document.getElementById('pFilter').value);
