@@ -160,22 +160,46 @@
         document.getElementById('sFilter').value = 'all';
         filter();
     }
+
     async function showLog(pureId) {
         const modal = document.getElementById("logModal");
         const content = document.getElementById("logContent");
         const title = document.getElementById("logTitle");
+        
         title.innerText = "📄 詳細交易日誌: " + pureId;
         modal.style.display = "block";
-        content.innerText = "讀取中...";
+        content.innerText = "正在從 report 資料夾讀取中...";
+
         try {
-            const fileName = pureId + "-trend-backtest-report.txt";
+            // 1. 自動根據你 Python 定義的日期變數來組合路徑
+            // 如果你的 HTML 是在 report/日期/ 內生成的，直接用 pureId
+            // 如果 HTML 在根目錄，則需要加上路徑 prefix
+            const dateStr = "20260426"; 
+            const fileName = `report/${dateStr}/${pureId}-trend-backtest-report.txt`;
+            
+            // 備選路徑 (如果上述失敗，嘗試同層讀取)
+            const fallbackName = `${pureId}-trend-backtest-report.txt`;
+
             let res = await fetch(fileName);
-            content.innerText = res.ok ? await res.text() : "⚠️ 找不到日誌檔 (" + fileName + ")";
-        } catch(e) { content.innerText = "讀取錯誤: " + e.message; }
+            
+            // 如果主要路徑失敗，試試看同層路徑
+            if (!res.ok) {
+                res = await fetch(fallbackName);
+            }
+
+            if (res.ok) {
+                content.innerText = await res.text();
+            } else {
+                content.innerText = `⚠️ 找不到日誌檔\n\n嘗試路徑 1: ${fileName}\n嘗試路徑 2: ${fallbackName}\n\n請確認檔案是否已生成於上述位置。`;
+            }
+        } catch(e) {
+            content.innerText = "讀取過程中發生異常: " + e.message; 
+        }
     }
+
     function closeModal() { document.getElementById("logModal").style.display = "none"; }
     window.onclick = (e) => { if(e.target == document.getElementById("logModal")) closeModal(); }
-    document.addEventListener('DOMContentLoaded', filter);
+
     </script>
     </body></html>
     
