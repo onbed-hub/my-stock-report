@@ -102,7 +102,7 @@
             <label>📊 累積獲利門檻</label>
             <select id="pFilter" onchange="filter()">
                 <option value="-999">全部</option>
-                <option value="0">負向收益 (<0%)</option>
+                <option value="loss">負向收益 (<0%)</option>
                 <option value="0">正向收益 (>0%)</option>
                 <option value="15">啟動波段 (>15%)</option>
                 <option value="20">顯著獲利 (>20%)</option>
@@ -179,11 +179,17 @@
             const pnlValue = parseFloat(row.cells[4].textContent.replace('%', ''));
 
             const matchSearch = idText.includes(search) || nameText.includes(search);
-            const matchPnl = pnlValue >= pMin;
+
+            // --- 修正後的損益過濾邏輯 ---
+            let matchPnl = true;
+            if (pFilterVal === "loss") {
+                matchPnl = pnlValue < 0; // 負向收益
+            } else if (pFilterVal !== "-999") {
+                matchPnl = pnlValue >= parseFloat(pFilterVal); // 其他數值門檻
+            }
 
             // 訊號匹配：只要文字中「包含」你設定的 value (如 "預警 (乖離") 就過關
             let matchSignal = (sFilter === 'all') ? true : signalText.includes(sFilter);
-
             return matchSearch && matchPnl && matchSignal;
         });
         currentPage = 1;
