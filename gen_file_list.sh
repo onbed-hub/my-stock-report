@@ -1,4 +1,5 @@
 #!/bin/bash
+# 接收參數，例如 report/20260428
 TARGET_DIR=${1:-"report/$(date +%Y%m%d)"}
 
 if [ ! -d "$TARGET_DIR" ]; then
@@ -6,17 +7,13 @@ if [ ! -d "$TARGET_DIR" ]; then
     exit 1
 fi
 
-echo "🔍 正在掃描 $TARGET_DIR 及其子目錄..."
+echo "🔍 正在掃描 $TARGET_DIR 內的檔案..."
 
-# 使用 find 掃描兩層子目錄，並紀錄相對路徑
-# 例如輸出：live/0/2330-live.txt
-cd "$TARGET_DIR"
-find . -maxdepth 3 -type f \( -name "*.html" -o -name "*.txt" \) \
+# 修正重點：從根目錄出發，並使用 -printf "%P\n" 
+# 這樣輸出的路徑會是 "bor-live.html" 或 "live/0/2330.txt"
+# 但這些路徑是相對於 $TARGET_DIR 的
+find "$TARGET_DIR" -maxdepth 3 -type f \( -name "*.html" -o -name "*.txt" \) \
     ! -name "files.json" -printf "%P\n" | \
-    jq -R . | jq -s . > "files.json"
+    jq -R . | jq -s . > "$TARGET_DIR/files.json"
 
-echo "✅ files.json 產生完成 (含子目錄路徑)。"
-
-echo "---"
-echo "全部處理完成！"
-
+echo "✅ files.json 已更新於 $TARGET_DIR"
