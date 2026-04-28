@@ -189,13 +189,13 @@
                 }
 
                 card.innerHTML = `
-                    <a href="report/${dateDir}/${displayFile}" target="_blank" class="card-main-link">
+                    <a href="report/${dateDir}/${displayFile}" target="_blank" class="card-main-link" onclick="console.log('正在跳轉至: report/${dateDir}/${displayFile}')">
                         <div class="card-header">
                             <span class="badge" style="background:${config.color}">${config.label}</span>
                             <span class="status-dot">最新</span>
                         </div>
                         <span class="title">${base.toUpperCase()}</span>
-                        <div class="file-info">當前檔案: ${displayFile}</div>
+                        <div class="file-info">📄 ${displayFile}</div>
                     </a>
                     ${historySelect}
                 `;
