@@ -1,69 +1,43 @@
 #!/bin/bash
 
-# 取得日期參數，預設為當天 (例如 20260428)
-DATE_DIR=${1:-"$(date +%Y%m%d)"}
+# 設定日期
+CURR_D=$(date +%Y%m%d)
+SOURCE_DIR="../stock-Quantum/my-code/topology-4-20260209/report/$CURR_D"
+TARGET_DIR="./report/$CURR_D"
 
-# --- 1. 設定區 ---
-# 💡 修正關鍵：來源路徑必須包含日期資料夾
-SOURCE_BASE="../stock-Quantum/my-code/topology-4-20260209/report"
-SOURCE_DIR="$SOURCE_BASE/$DATE_DIR"
+echo "🚀 開始執行深度分流同步 (日期: $CURR_D)..."
 
-# 目標目錄
-TARGET_BASE="./report"
-TARGET_PATH="$TARGET_BASE/$DATE_DIR"
-
-# 建立目標基礎目錄
-mkdir -p "$TARGET_PATH"
-
-echo "🚀 開始執行深度分流同步 (日期: $DATE_DIR)..."
-echo "📂 來源: $SOURCE_DIR"
-echo "📂 目標: $TARGET_PATH"
-
-# --- 2. 檢查來源目錄 ---
+# 檢查來源是否存在
 if [ ! -d "$SOURCE_DIR" ]; then
-    echo "❌ 錯誤: 找不到來源目錄 $SOURCE_DIR"
+    echo "❌ 找不到來源目錄: $SOURCE_DIR"
     exit 1
 fi
 
-# --- 3. 搬移 HTML 檔案 ---
-echo "正在搬移 HTML 報表..."
-# 這裡使用 cp -f 確保覆蓋最新版，! -name "[0-9]*" 排除純數字檔名
-find "$SOURCE_DIR" -maxdepth 1 -type f -name "*.html" \
-    ! -name "[0-9]*" \
-    -exec cp -f {} "$TARGET_PATH/" \;
+# 建立目標目錄
+mkdir -p "$TARGET_DIR"
 
-# --- 4. 搬移 TXT 檔案並執行「末碼分流」 ---
-echo "正在進行個股 TXT 分流..."
-# 確保目錄存在
-mkdir -p "$TARGET_PATH/live"
+# --- 核心修正點：使用遞迴複製 ---
+echo "📂 正在從 $SOURCE_DIR 同步完整目錄結構至 $TARGET_DIR ..."
 
-for txt_file in "$SOURCE_DIR"/*.txt; do
-    [ -e "$txt_file" ] || continue
-    filename=$(basename "$txt_file")
+# 使用 cp -a (archive 模式，包含子目錄且保留權限)
+cp -a "$SOURCE_DIR/." "$TARGET_DIR/"
 
-    # 擷取股票代號末碼 (例如 2330-live.txt -> 0)
-    last_digit=$(echo "$filename" | cut -d'-' -f1 | sed 's/.*\(.\)$/\1/')
+# 或者使用更專業的 rsync (推薦)
+# rsync -av --delete "$SOURCE_DIR/" "$TARGET_DIR/"
 
-    # 防呆：非數字或特殊格式則放入 other
-    if [[ ! "$last_digit" =~ [0-9] ]]; then
-        last_digit="other"
-    fi
+# --- 重新產生 files.json (確保路徑掃描深度足夠) ---
+echo "🔍 正在更新檔案清單 (掃描深度 3)..."
+# 確保找得到 live/6/xxx.txt 這種三層結構
+find "$TARGET_DIR" -maxdepth 4 -type f \( -name "*.html" -o -name "*.txt" \) \
+    ! -name "files.json" -printf "%P\n" | \
+    jq -R . | jq -s . > "$TARGET_DIR/files.json"
 
-    dest_dir="$TARGET_PATH/live/$last_digit"
-    mkdir -p "$dest_dir"
-    cp -f "$txt_file" "$dest_dir/"
-done
+echo "✅ files.json 更新完成"
 
-# --- 5. 呼叫清單產生器 ---
-if [ -f "./gen_file_list.sh" ]; then
-    ./gen_file_list.sh "$TARGET_PATH"
-fi
-
-# --- 6. Git 推送 ---
-echo "正在同步至 GitHub..."
+# --- Git 同步 ---
 git add .
-git commit -m "Update: Structured reports for $DATE_DIR ($(date +%H:%M:%S))"
+git commit -m "Update: Recursive reports for $CURR_D ($(date +%H:%M:%S))"
 git push origin main
 
-echo "✨ 全部處理完成！"
+echo "✨ 完整同步完成！"
 
