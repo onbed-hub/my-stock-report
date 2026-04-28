@@ -57,7 +57,7 @@ done
 
 # --- 4. 後續自動化流程 ---
 echo "產生 live-analysis.html 的即時分析 json 檔案"
-#./gen_file_list.sh
+./gen_file_list.sh
 
 echo "======================================="
 echo "☁️ 準備上傳至 GitHub..."
