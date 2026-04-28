@@ -33,17 +33,15 @@ for dir_path in $(find "$SOURCE_BASE" -maxdepth 1 -type d -regextype sed -regex 
         # --- 3. 執行過濾與複製 (保持你原本的過濾邏輯) ---
         
         # 處理 HTML
-        find "$dir_path" -maxdepth 1 -type f -name "*.html" \
+#        find "$dir_path" -maxdepth 1 -type f -name "*.html" \
 #            ! -name "*live-[0-9]*" \
 #            ! -name "*analysis-[0-9]*" \
-            ! -name "[0-9]*" \
-            -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
-
-        # 處理 HTML (放寬限制，允許帶有時間戳的 live 檔案)
-#        find "$dir_path" -maxdepth 1 -type f -name "*.html" \
-#            ! -name "all-*" \
 #            ! -name "[0-9]*" \
 #            -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
+
+        find "$dir_path" -maxdepth 1 -type f \( -name "*.html" -o -name "*.txt" \) \
+	    ! -name "[0-9]*" \
+	    -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
 
         # 處理 TXT
         find "$dir_path" -maxdepth 1 -type f -name "*.txt" \
