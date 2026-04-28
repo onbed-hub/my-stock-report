@@ -89,71 +89,110 @@
         const displayArea = document.getElementById('dynamicContent');
         const groups = {}; 
 
+        // --- 1. 資料聚合處理 ---
         files.forEach(file => {
-            const tsMatch = file.match(/\d{8,12}/);
+            const fileName = file.split('/').pop();
+            const tsMatch = fileName.match(/\d{8,12}/);
             const isHistory = !!tsMatch;
-            let baseName = file.replace('.html', '');
-            if (isHistory) baseName = baseName.replace(`-${tsMatch[0]}`, '');
+            
+            let baseName = fileName.replace('.html', '');
+            if (isHistory) {
+                // 強制去掉 "-時間戳記" 尾綴來找尋群組
+                baseName = baseName.replace(`-${tsMatch[0]}`, '');
+            }
 
-            if (!groups[baseName]) groups[baseName] = { main: null, history: [] };
-            if (isHistory) groups[baseName].history.push(file);
-            else groups[baseName].main = file;
+            if (!groups[baseName]) {
+                groups[baseName] = { main: null, history: [] };
+            }
+
+            if (isHistory) {
+                groups[baseName].history.push(file);
+            } else {
+                groups[baseName].main = file;
+            }
         });
+
+        // Debug 用：在 Console 看看群組有沒有成功
+        console.log("群組化結果:", groups);
+
+        const sortedBases = Object.keys(groups).sort();
+        if (sortedBases.length === 0) {
+            displayArea.innerHTML = `<div style="padding:2rem; text-align:center; color:#64748b;">📅 該目錄無 HTML 報告</div>`;
+            return;
+        }
 
         displayArea.innerHTML = '';
-        
-        // 按系列分組 (BOR, DAYAN...)
-        const sortedBases = Object.keys(groups).sort();
+
+        // --- 2. 恢復分類標題 (BOR 系列, DAYAN 系列...) ---
         const prefixGroups = {};
-        sortedBases.forEach(b => {
-            const p = b.split('-')[0].toUpperCase();
-            if (!prefixGroups[p]) prefixGroups[p] = [];
-            prefixGroups[p].push(b);
+        sortedBases.forEach(base => {
+            const prefix = base.split('-')[0].toUpperCase();
+            if (!prefixGroups[prefix]) prefixGroups[prefix] = [];
+            prefixGroups[prefix].push(base);
         });
 
-        Object.keys(prefixGroups).forEach(prefix => {
+        Object.keys(prefixGroups).sort().forEach(prefix => {
+            // 建立系列標題區塊
             const section = document.createElement('div');
-            section.innerHTML = `<div class="section-header">${prefix} 系列</div>`;
+            section.innerHTML = `<div class="section-header" style="font-size: 1.1rem; color: #1e3a8a; margin: 2rem 0 1rem 0; font-weight: 900; text-transform: uppercase; letter-spacing: 0.15em; display: flex; align-items: center;">${prefix} 系列</div>`;
+            
             const grid = document.createElement('div');
             grid.className = 'report-grid';
+            grid.style.display = 'grid';
+            grid.style.gridTemplateColumns = '1fr';
+            grid.style.gap = '20px';
 
             prefixGroups[prefix].forEach(base => {
                 const item = groups[base];
+                // 決定卡片主連結：有固定檔就用固定檔，否則用最新的歷史檔
                 const displayFile = item.main || item.history.sort().reverse()[0];
+                const finalPath = `report/${dateDir}/${displayFile}`;
+                
                 const typeKey = base.includes('report') ? 'trend' : 'live';
                 const config = typeConfig[typeKey] || typeConfig['default'];
 
                 const card = document.createElement('div');
                 card.className = 'card';
 
-                let historySelect = '';
+                // --- 3. 歷史資料下拉選單渲染 ---
+                let historyHtml = '';
                 if (item.history.length > 0) {
                     const options = item.history.sort().reverse().map(h => {
                         const ts = h.match(/\d{8,12}/)[0];
                         const displayTs = ts.length === 12 
                             ? `${ts.substring(4,6)}/${ts.substring(6,8)} ${ts.substring(8,10)}:${ts.substring(10,12)}`
                             : ts;
-                        return `<option value="report/${dateDir}/${h}">🕒 ${displayTs}</option>`;
+                        return `<option value="report/${dateDir}/${h}">🕒 歷史紀錄: ${displayTs}</option>`;
                     }).join('');
-                    historySelect = `<div class="history-area"><select class="history-select" onchange="if(this.value) window.open(this.value, '_blank')"><option value="">📜 查看歷史紀錄 (${item.history.length})</option>${options}</select></div>`;
+                    
+                    historyHtml = `
+                        <div class="history-area" style="border-top: 1px solid #f1f5f9; margin-top: 15px; padding-top: 15px;">
+                            <select class="history-select" onchange="if(this.value) window.open(this.value, '_blank')" style="width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #e2e8f0; background: #fff; font-weight: 600;">
+                                <option value="">📜 查看歷史版本 (${item.history.length})</option>
+                                ${options}
+                            </select>
+                        </div>
+                    `;
                 }
 
                 card.innerHTML = `
-                    <a href="report/${dateDir}/${displayFile}" target="_blank" class="card-main-link">
-                        <div class="card-header">
-                            <span class="badge" style="background:${config.color}">${config.label}</span>
-                            <span class="status-dot">最新</span>
+                    <a href="${finalPath}" target="_blank" class="card-main-link" style="text-decoration: none; color: inherit;">
+                        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span class="badge" style="background:${config.color}; font-size: 0.75rem; padding: 4px 12px; border-radius: 8px; font-weight: 800; color: white;">${config.label}</span>
+                            <span class="status-dot" style="color: #10b981; font-weight: bold; display: flex; align-items: center; gap: 6px;">● 最新</span>
                         </div>
-                        <span class="title">${base.toUpperCase()}</span>
-                        <div class="file-info">📄 ${displayFile}</div>
+                        <span class="title" style="font-weight: 900; color: #0f172a; font-size: 1.4rem; display: block; margin: 10px 0;">${base.toUpperCase()}</span>
+                        <div class="file-info" style="font-size: 0.85rem; color: #64748b; font-family: monospace; background: #f1f5f9; padding: 6px 12px; border-radius: 8px;">📄 ${displayFile}</div>
                     </a>
-                    ${historySelect}`;
+                    ${historyHtml}
+                `;
                 grid.appendChild(card);
             });
             section.appendChild(grid);
             displayArea.appendChild(section);
         });
     }
+
 </script>
 </body>
 </html>
