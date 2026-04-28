@@ -34,8 +34,8 @@ for dir_path in $(find "$SOURCE_BASE" -maxdepth 1 -type d -regextype sed -regex 
         
         # 處理 HTML
         find "$dir_path" -maxdepth 1 -type f -name "*.html" \
-            ! -name "*live-[0-9]*" \
-            ! -name "*analysis-[0-9]*" \
+#            ! -name "*live-[0-9]*" \
+#            ! -name "*analysis-[0-9]*" \
             ! -name "[0-9]*" \
             -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
 
