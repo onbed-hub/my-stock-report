@@ -33,11 +33,15 @@ for dir_path in $(find "$SOURCE_BASE" -maxdepth 1 -type d -regextype sed -regex 
         # --- 3. 執行過濾與複製 (保持你原本的過濾邏輯) ---
         
         # 處理 HTML
-        find "$dir_path" -maxdepth 1 -type f -name "*.html" \
-            ! -name "*live-[0-9]*" \
-            ! -name "*analysis-[0-9]*" \
-            ! -name "[0-9]*" \
-            -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
+#        find "$dir_path" -maxdepth 1 -type f -name "*.html" \
+#            ! -name "*live-[0-9]*" \
+#            ! -name "*analysis-[0-9]*" \
+#            ! -name "[0-9]*" \
+#            -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
+
+        find "$dir_path" -maxdepth 1 -type f \( -name "*.html" -o -name "*.txt" \) \
+	    ! -name "[0-9]*" \
+	    -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
 
         # 處理 TXT
         find "$dir_path" -maxdepth 1 -type f -name "*.txt" \
@@ -58,7 +62,7 @@ echo "產生 live-analysis.html 的即時分析 json 檔案"
 echo "======================================="
 echo "☁️ 準備上傳至 GitHub..."
 
-git pull
+#git pull
 git add .
 git commit -m "Auto-sync (Last $DAYS_TO_KEEP days): $(date '+%Y-%m-%d %H:%M:%S')"
 git push origin main

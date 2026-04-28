@@ -1,6 +1,8 @@
 #!/bin/bash
 #
 
+DATE_DIR=${1:-"$(date +%Y%m%d)"}
+
 # --- 1. 設定區 ---
 DAYS_TO_KEEP=2  # 設定要同步最近幾天的資料
 
@@ -9,62 +11,46 @@ SOURCE_BASE="../stock-Quantum/my-code/topology-4-20260209/report"
 # 目標目錄
 TARGET_BASE="./report"
 
-echo "🚀 開始同步最近 ${DAYS_TO_KEEP} 天的量化報表..."
+#DATE_DIR=$(date +%Y%m%d)
+TARGET_PATH="$TARGET_BASE/$DATE_DIR"
 
-# 取得比對基準日（DAYS_TO_KEEP 天前的日期，格式為 YYYYMMDD）
-THRESHOLD_DATE=$(date -d "${DAYS_TO_KEEP} days ago" +%Y%m%d)
+# 1. 建立基礎目錄
+mkdir -p "$TARGET_PATH"
 
-# 確保本地倉庫的 report 目錄存在
-mkdir -p "$TARGET_BASE"
+echo "🚀 開始執行深度分流同步..."
 
-# --- 2. 遍歷來源目錄 ---
-for dir_path in $(find "$SOURCE_BASE" -maxdepth 1 -type d -regextype sed -regex ".*/[0-9]\{8\}$" | sort); do
+# 2. 搬移 HTML 檔案 (保持在根目錄，檔案數通常不多)
+find "$SOURCE_DIR" -maxdepth 1 -type f -name "*.html" \
+#    ! -name "all-*" \
+    ! -name "[0-9]*" \
+    -exec cp -f {} "$TARGET_PATH/" \;
 
-    # 取得日期資料夾名稱 (例如 20260421)
-    dir_name=$(basename "$dir_path")
-
-    # 💡 核心逻辑：只有當資料夾日期 >= 基準日，才執行同步
-    if [ "$dir_name" -ge "$THRESHOLD_DATE" ]; then
-        echo "📂 處理日期資料夾 (符合日期限制): $dir_name"
-
-        # 建立目標對應的日期資料夾
-        mkdir -p "$TARGET_BASE/$dir_name"
-
-        # --- 3. 執行過濾與複製 (保持你原本的過濾邏輯) ---
-        
-        # 處理 HTML
-#        find "$dir_path" -maxdepth 1 -type f -name "*.html" \
-#            ! -name "*live-[0-9]*" \
-#            ! -name "*analysis-[0-9]*" \
-#            ! -name "[0-9]*" \
-#            -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
-
-        find "$dir_path" -maxdepth 1 -type f \( -name "*.html" -o -name "*.txt" \) \
-	    ! -name "[0-9]*" \
-	    -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
-
-        # 處理 TXT
-        find "$dir_path" -maxdepth 1 -type f -name "*.txt" \
-            ! -name "*live-[0-9]*" \
-            ! -name "*analysis-[0-9]*" \
-            -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
-    else
-        # 這裡可以選擇不印出，或者用來除錯
-        # echo "⏭️ 跳過舊資料夾: $dir_name"
-        :
+# 3. 搬移 TXT 檔案並執行「末碼分流」
+# 假設檔名格式如 2330-live.txt 或 6152-live.txt
+for txt_file in "$SOURCE_DIR"/*.txt; do
+    [ -e "$txt_file" ] || continue
+    filename=$(basename "$txt_file")
+    
+    # 擷取檔名中「第一個連字號前」的最後一個字元 (通常是股票代號末碼)
+    # 例如 2330-live.txt -> 抓 0
+    last_digit=$(echo "$filename" | cut -d'-' -f1 | sed 's/.*\(.\)$/\1/')
+    
+    # 如果不是數字（防呆），就放進 'other' 目錄
+    if [[ ! "$last_digit" =~ [0-9] ]]; then
+        last_digit="other"
     fi
+
+    dest_dir="$TARGET_PATH/live/$last_digit"
+    mkdir -p "$dest_dir"
+    cp -f "$txt_file" "$dest_dir/"
 done
 
-# --- 4. 後續自動化流程 ---
-echo "產生 live-analysis.html 的即時分析 json 檔案"
-./gen_file_list.sh
+# 4. 呼叫清單產生器
+./gen_file_list.sh "$TARGET_PATH"
 
-echo "======================================="
-echo "☁️ 準備上傳至 GitHub..."
-
-#git pull
+# 5. Git 推送
 git add .
-git commit -m "Auto-sync (Last $DAYS_TO_KEEP days): $(date '+%Y-%m-%d %H:%M:%S')"
+git commit -m "Cleanup and Restructure: Multi-directory distribution for $DATE_DIR"
 git push origin main
 
 echo "✨ 全部完成！"
