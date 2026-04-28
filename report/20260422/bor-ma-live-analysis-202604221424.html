@@ -1,0 +1,313 @@
+<html><head><meta charset='UTF-8'>
+    <style>
+        /* 基礎字型設定為預設 1.5 倍 */
+        body { font-family: "Microsoft JhengHei", sans-serif; margin: 40px; background-color: #f4f7f9; font-size: 1.5rem; }
+        h2 { font-size: 2.5rem; color: #1a237e; border-left: 15px solid #1a237e; padding-left: 20px; margin: 30px 0; }
+        
+        /* 交易規則區塊樣式 */
+        .rules-box { 
+            background: white; padding: 25px; border-radius: 15px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 40px; border: 1px solid #e0e0e0;
+        }
+        .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .rule-card { background: #fafafa; padding: 20px; border-radius: 10px; border-top: 5px solid #ccc; }
+        .rule-card ul { margin-top: 15px; padding-left: 25px; }
+        .rule-card li { margin-bottom: 10px; }
+        
+        /* 表格樣式 */
+        table { border-collapse: collapse; width: 100%; background: white; border: 2px solid #444; }
+        th { background-color: #1a237e; color: white; padding: 15px; font-size: 1.6rem; border: 2px solid #444; }
+        td { padding: 15px; text-align: center; border: 1px solid #ddd; font-weight: bold; font-size: 1.5rem; }
+        
+        /* 股號連結樣式 */
+        a { color: #1565c0; text-decoration: none; border-bottom: 1px solid #1565c0; }
+        a:hover { color: #d32f2f; border-bottom: 2px solid #d32f2f; }
+
+        .price-now { font-size: 2.2rem; color: #d32f2f; font-weight: 900; }
+        .advice-box { padding: 15px; border-radius: 10px; color: white; text-align: left; min-width: 250px; }
+        .sell-bg { background-color: #c62828; }
+        .hold-bg { background-color: #78909c; }
+        .buy-bg { background-color: #ef6c00; }
+        .advice-title { font-size: 1.8rem; font-weight: 900; display: block; margin-bottom: 5px; }
+        .advice-reason { font-size: 1.2rem; opacity: 0.9; }
+        small { font-size: 1rem; opacity: 0.8; }
+    </style>
+    </head><body>
+    <div class="rules-box">
+        <h2>📈 核心交易規則說明</h2>
+        <div class="rules-grid">
+            <div class="rule-card" style="border-top-color: #2e7d32;">
+                <b style="color: #2e7d32; font-size: 1.8rem;">🟢 進場買入條件</b>
+                <ul>
+                    <li><b>多頭結構：</b>股價 > MA5, MA10, MA20 + 量價爆發</li>
+                    <li><b>趨勢確認：</b>月線斜率向上 (MA20 上揚)</li>
+                    <li><b>短線轉強：</b>5日均線勾頭向上 (Slope > 0)</li>
+                    <li><b>動能指標：</b>RSI > 55 (強勢區)</li>
+                </ul>
+            </div>
+            <div class="rule-card" style="border-top-color: #d32f2f;">
+                <b style="color: #d32f2f; font-size: 1.8rem;">🔴 出場賣出條件</b>
+                <ul>
+                    <li><b>短線止損：</b>股價跌破 10日均線</li>
+                    <li><b>趨勢止損：</b>股價跌破 20日均線 (月線)</li>
+                    <li><b>盤整警示：</b>均線糾結且結構轉弱時觀望</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <h2>📊 投資策略即時診斷報告 (2026-04-22 14:24)</h2><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股號</th>
+      <th>股票名稱</th>
+      <th>即時現價</th>
+      <th>5日均線</th>
+      <th>月線(20MA)</th>
+      <th>量能狀況</th>
+      <th>RSI(14)</th>
+      <th>決策建議</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/2317/technical-analysis' target='_blank'>2317</a></td>
+      <td>鴻海</td>
+      <td><span class='price-now'>221.00</span><br><small>+10.00 (+4.74%)</small></td>
+      <td>210.50</td>
+      <td>201.40</td>
+      <td>135667000<br><small>(20MA:52869883)</small></td>
+      <td>83.2</td>
+      <td><div class="advice-box buy-bg"><span class="advice-title">🔥 攻擊買點</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/3702/technical-analysis' target='_blank'>3702</a></td>
+      <td>大聯大</td>
+      <td><span class='price-now'>101.50</span><br><small>-1.00 (-0.98%)</small></td>
+      <td>100.30</td>
+      <td>94.30</td>
+      <td>12850000<br><small>(20MA:19468658)</small></td>
+      <td>82.6</td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量 > 20MA..</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/2485/technical-analysis' target='_blank'>2485</a></td>
+      <td>兆赫</td>
+      <td><span class='price-now'>71.00</span><br><small>-1.30 (-1.80%)</small></td>
+      <td>74.22</td>
+      <td>76.65</td>
+      <td>21109000<br><small>(20MA:32501756)</small></td>
+      <td>39.3</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、破10MA、破月線、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/2367/technical-analysis' target='_blank'>2367</a></td>
+      <td>燿華</td>
+      <td><span class='price-now'>67.80</span><br><small>-2.50 (-3.56%)</small></td>
+      <td>68.52</td>
+      <td>72.61</td>
+      <td>63281000<br><small>(20MA:109807121)</small></td>
+      <td>40.3</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、破10MA、破月線、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/4142/technical-analysis' target='_blank'>4142</a></td>
+      <td>國光生</td>
+      <td><span class='price-now'>18.15</span><br><small>+0.05 (+0.28%)</small></td>
+      <td>18.30</td>
+      <td>18.39</td>
+      <td>752000<br><small>(20MA:1399841)</small></td>
+      <td>46.6</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、破10MA、破月線、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/0050/technical-analysis' target='_blank'>0050</a></td>
+      <td>元大台灣50</td>
+      <td><span class='price-now'>86.35</span><br><small>+0.35 (+0.41%)</small></td>
+      <td>85.21</td>
+      <td>79.27</td>
+      <td>63906000<br><small>(20MA:111542394)</small></td>
+      <td>86.6</td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量 > 20MA..</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/0056/technical-analysis' target='_blank'>0056</a></td>
+      <td>元大高股息</td>
+      <td><span class='price-now'>42.61</span><br><small>+0.64 (+1.52%)</small></td>
+      <td>41.57</td>
+      <td>39.38</td>
+      <td>142700000<br><small>(20MA:71890335)</small></td>
+      <td>95.2</td>
+      <td><div class="advice-box buy-bg"><span class="advice-title">🔥 攻擊買點</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/009816/technical-analysis' target='_blank'>009816</a></td>
+      <td>凱基台灣TOP50</td>
+      <td><span class='price-now'>12.42</span><br><small>+0.13 (+1.06%)</small></td>
+      <td>12.15</td>
+      <td>11.23</td>
+      <td>184913000<br><small>(20MA:193043105)</small></td>
+      <td>89.9</td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量 > 20MA..</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/2009/technical-analysis' target='_blank'>2009</a></td>
+      <td>第一銅</td>
+      <td><span class='price-now'>39.50</span><br><small>-0.30 (-0.75%)</small></td>
+      <td>40.15</td>
+      <td>40.39</td>
+      <td>2116000<br><small>(20MA:1575062)</small></td>
+      <td>48.9</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、破10MA、破月線、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/2337/technical-analysis' target='_blank'>2337</a></td>
+      <td>旺宏</td>
+      <td><span class='price-now'>134.50</span><br><small>+2.00 (+1.51%)</small></td>
+      <td>131.50</td>
+      <td>135.40</td>
+      <td>161598000<br><small>(20MA:98374091)</small></td>
+      <td>59.0</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破10MA、破月線、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/2352/technical-analysis' target='_blank'>2352</a></td>
+      <td>佳世達</td>
+      <td><span class='price-now'>26.00</span><br><small>+0.35 (+1.36%)</small></td>
+      <td>25.64</td>
+      <td>24.21</td>
+      <td>5718000<br><small>(20MA:4345500)</small></td>
+      <td>90.1</td>
+      <td><div class="advice-box buy-bg"><span class="advice-title">🔥 攻擊買點</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/2409/technical-analysis' target='_blank'>2409</a></td>
+      <td>友達</td>
+      <td><span class='price-now'>18.55</span><br><small>-0.35 (-1.85%)</small></td>
+      <td>19.45</td>
+      <td>17.29</td>
+      <td>190067000<br><small>(20MA:338137056)</small></td>
+      <td>68.3</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、破10MA、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/3481/technical-analysis' target='_blank'>3481</a></td>
+      <td>群創</td>
+      <td><span class='price-now'>25.60</span><br><small>-0.40 (-1.54%)</small></td>
+      <td>26.18</td>
+      <td>25.67</td>
+      <td>162973000<br><small>(20MA:313532847)</small></td>
+      <td>58.6</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、破10MA、破月線、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/6136/technical-analysis' target='_blank'>6136</a></td>
+      <td>富爾特</td>
+      <td><span class='price-now'>27.65</span><br><small>+0.70 (+2.60%)</small></td>
+      <td>25.51</td>
+      <td>24.62</td>
+      <td>3913000<br><small>(20MA:468219)</small></td>
+      <td>84.8</td>
+      <td><div class="advice-box buy-bg"><span class="advice-title">🔥 攻擊買點</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/6806/technical-analysis' target='_blank'>6806</a></td>
+      <td>森崴能源</td>
+      <td><span class='price-now'>26.85</span><br><small>-2.95 (-9.90%)</small></td>
+      <td>26.17</td>
+      <td>30.16</td>
+      <td>1032000<br><small>(20MA:1539270)</small></td>
+      <td>35.2</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破月線</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/3105/technical-analysis' target='_blank'>3105</a></td>
+      <td>穩懋</td>
+      <td><span class='price-now'>600.00</span><br><small>-17.00 (-2.76%)</small></td>
+      <td>567.70</td>
+      <td>442.02</td>
+      <td>27353000<br><small>(20MA:40779052)</small></td>
+      <td>88.1</td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：量 > 20MA..</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/4966/technical-analysis' target='_blank'>4966</a></td>
+      <td>譜瑞-KY</td>
+      <td><span class='price-now'>590.00</span><br><small>+53.00 (+9.87%)</small></td>
+      <td>552.00</td>
+      <td>508.38</td>
+      <td>3482000<br><small>(20MA:986703)</small></td>
+      <td>76.5</td>
+      <td><div class="advice-box buy-bg"><span class="advice-title">🔥 攻擊買點</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/6188/technical-analysis' target='_blank'>6188</a></td>
+      <td>廣明</td>
+      <td><span class='price-now'>88.40</span><br><small>+2.90 (+3.39%)</small></td>
+      <td>86.70</td>
+      <td>88.10</td>
+      <td>3114000<br><small>(20MA:1606078)</small></td>
+      <td>54.6</td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：MA20 上揚, MA5 > MA10..</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/7792/technical-analysis' target='_blank'>7792</a></td>
+      <td>安葆</td>
+      <td><span class='price-now'>358.50</span><br><small>+2.50 (+0.70%)</small></td>
+      <td>360.10</td>
+      <td>335.65</td>
+      <td>399000<br><small>(20MA:339340)</small></td>
+      <td>75.5</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/2327/technical-analysis' target='_blank'>2327</a></td>
+      <td>國巨*</td>
+      <td><span class='price-now'>315.50</span><br><small>-7.50 (-2.32%)</small></td>
+      <td>319.90</td>
+      <td>283.12</td>
+      <td>28939000<br><small>(20MA:33158659)</small></td>
+      <td>81.3</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/3714/technical-analysis' target='_blank'>3714</a></td>
+      <td>富采</td>
+      <td><span class='price-now'>73.30</span><br><small>-0.30 (-0.41%)</small></td>
+      <td>75.64</td>
+      <td>58.46</td>
+      <td>12238000<br><small>(20MA:41889099)</small></td>
+      <td>74.5</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA、動能減弱</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/1802/technical-analysis' target='_blank'>1802</a></td>
+      <td>台玻</td>
+      <td><span class='price-now'>70.90</span><br><small>-3.30 (-4.45%)</small></td>
+      <td>72.02</td>
+      <td>60.88</td>
+      <td>199565000<br><small>(20MA:140411578)</small></td>
+      <td>74.2</td>
+      <td><div class="advice-box buy-bg"><span class="advice-title">🔥 攻擊買點</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/1721/technical-analysis' target='_blank'>1721</a></td>
+      <td>三晃</td>
+      <td><span class='price-now'>27.25</span><br><small>+2.45 (+9.88%)</small></td>
+      <td>22.75</td>
+      <td>19.22</td>
+      <td>14492000<br><small>(20MA:3596579)</small></td>
+      <td>83.0</td>
+      <td><div class="advice-box buy-bg"><span class="advice-title">🔥 攻擊買點</span></div></td>
+    </tr>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/8104/technical-analysis' target='_blank'>8104</a></td>
+      <td>錸寶</td>
+      <td><span class='price-now'>37.20</span><br><small>-1.00 (-2.62%)</small></td>
+      <td>38.42</td>
+      <td>34.44</td>
+      <td>1875000<br><small>(20MA:1922959)</small></td>
+      <td>65.6</td>
+      <td><div class="advice-box sell-bg"><span class="advice-title">🚨 建議賣出</span><br><span class="advice-reason">原因：破5MA</span></div></td>
+    </tr>
+  </tbody>
+</table></body></html>
