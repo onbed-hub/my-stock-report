@@ -3,35 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>實時監控入口 - 全自動掃描版</title>
+    <title>實時監控入口</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f8fafc; color: #0f172a; display: flex; justify-content: center; padding: 2rem 1.5rem; margin: 0; }
-        .container { background: white; padding: 2.5rem; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); width: 100%; max-width: 680px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f1f5f9; color: #0f172a; display: flex; justify-content: center; padding: 2rem 1.5rem; margin: 0; }
+        .container { background: white; padding: 2.5rem; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); width: 100%; max-width: 760px; }
         .back-link { text-decoration: none; color: #6366f1; font-weight: bold; font-size: 0.9rem; display: inline-block; margin-bottom: 1rem; }
         h1 { font-size: 1.8rem; margin-bottom: 1.5rem; color: #1e293b; text-align: center; }
-        .controls { margin-bottom: 2rem; }
-        .control-group label { display: block; font-size: 0.85rem; font-weight: 700; color: #64748b; margin-bottom: 5px; }
-        input { width: 100%; padding: 12px 15px; font-size: 1rem; border: 2px solid #e2e8f0; border-radius: 12px; outline: none; box-sizing: border-box; }
-        .section-header { font-size: 1rem; color: #64748b; margin: 2rem 0 1rem 0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; }
-        .section-header::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; margin-left: 15px; }
-        .report-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 2rem; }
-        .card { display: flex; flex-direction: column; text-decoration: none; padding: 1.2rem 1.5rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; transition: all 0.2s ease-out; position: relative; }
-        .card:hover { border-color: #6366f1; transform: translateX(8px); background: #f8fafc; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1); }
-        .title { font-weight: 600; color: #334155; font-size: 1.05rem; }
-        .badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 6px; margin-bottom: 8px; width: fit-content; font-weight: bold; color: white; text-transform: uppercase; }
-        .file-info { font-size: 0.75rem; color: #94a3b8; font-family: monospace; margin-top: 5px; }
-        .status-ready { color: #10b981; font-size: 0.75rem; font-weight: bold; margin-left: 8px; }
+        .controls { margin-bottom: 2rem; background: #f8fafc; padding: 20px; border-radius: 16px; border: 1px solid #e2e8f0; }
+        .control-group label { display: block; font-size: 0.85rem; font-weight: 700; color: #64748b; margin-bottom: 8px; }
+        input[type="date"] { width: 100%; padding: 12px; font-size: 1rem; border: 2px solid #e2e8f0; border-radius: 12px; outline: none; }
+
+        /* 系列分組標題 */
+        .section-header { font-size: 1rem; color: #1e3a8a; margin: 2rem 0 1rem 0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; }
+        .section-header::after { content: ""; flex: 1; height: 1px; background: #cbd5e1; margin-left: 15px; }
+
+        .report-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 2rem; }
+        .card { display: flex; flex-direction: column; padding: 1.5rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; transition: all 0.2s ease; }
+        .card:hover { border-color: #6366f1; box-shadow: 0 12px 24px rgba(99, 102, 241, 0.08); }
+        .card-main-link { text-decoration: none; display: block; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; }
+        .title { font-weight: 800; color: #0f172a; font-size: 1.25rem; display: block; margin: 8px 0; }
+        .badge { font-size: 0.7rem; padding: 3px 10px; border-radius: 8px; font-weight: 800; color: white; text-transform: uppercase; }
+        .file-info { font-size: 0.8rem; color: #94a3b8; font-family: monospace; background: #f8fafc; padding: 4px 8px; border-radius: 6px; display: inline-block; }
+        .status-dot { color: #10b981; font-size: 0.8rem; font-weight: bold; display: flex; align-items: center; gap: 4px; }
+        .status-dot::before { content: "●"; }
+
+        /* 歷史選單樣式 */
+        .history-area { border-top: 1px solid #f1f5f9; margin-top: 15px; padding-top: 12px; }
+        .history-select { width: 100%; padding: 10px; font-size: 0.85rem; border-radius: 10px; border: 1px solid #e2e8f0; background: #f8fafc; color: #475569; cursor: pointer; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <a href="index.html" class="back-link">← 返回主儀表板</a>
+    <a href="index.html" class="back-link">← 返回儀表板</a>
     <h1>🛰️ 實時監控入口</h1>
 
     <div class="controls">
         <div class="control-group">
-            <label>📅 選擇報告日期</label>
+            <label>📅 報告日期目錄</label>
             <input type="date" id="datePicker" onchange="loadDynamicReports()">
         </div>
     </div>
@@ -40,13 +50,10 @@
 </div>
 
 <script>
-    // 💡 類型對應的顯示名稱與顏色 (可以自由擴充)
     const typeConfig = {
-        'ma': { label: '均線分析', color: '#7c3aed' },
-        'rsi': { label: '強弱指標', color: '#10b981' },
-        'fvg': { label: '缺口偵測', color: '#f59e0b' },
-        'profile': { label: '輪廓分析', color: '#6366f1' },
-        'live': { label: '實時監控', color: '#64748b' }
+        'trend': { label: '回測報告', color: '#8b5cf6' },
+        'live': { label: '實時監控', color: '#10b981' },
+        'default': { label: '數據報告', color: '#64748b' }
     };
 
     window.onload = function() {
@@ -56,99 +63,128 @@
         loadDynamicReports();
     };
 
-async function loadDynamicReports() {
+    async function loadDynamicReports() {
         const dateInput = document.getElementById('datePicker').value;
         const dateDir = dateInput.replace(/-/g, '');
         const displayArea = document.getElementById('dynamicContent');
-
-        displayArea.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:2rem;">正在讀取檔案清單...</div>';
+        displayArea.innerHTML = '正在掃描檔案...';
 
         try {
-            // 加上 t= 參數避免瀏覽器快取舊資料
             const url = `report/${dateDir}/files.json?t=${new Date().getTime()}`;
             const response = await fetch(url);
-            
-            if (!response.ok) {
-                throw new Error(`找不到檔案 (HTTP ${response.status})，請確認目錄 report/${dateDir} 是否存在`);
-            }
+            if (!response.ok) throw new Error('尚未生成報告');
 
             const allFiles = await response.json();
-
-            // 💡 針對你提供的 jq 輸出進行優化過濾
-            const filteredFiles = allFiles.filter(file => {
-                const nameLower = file.toLowerCase();
-                
-                // 1. 必須是 .html 檔案
-                if (!nameLower.endsWith('.html')) return false;
-
-                // 2. 排除 all- 開頭的檔案
-                if (nameLower.startsWith('all-')) return false;
-
-                // 3. 排除 8 位數以上的時間戳記 (例如 202604210014)
-                const hasLongTimestamp = /\d{8,}/.test(file);
-                if (hasLongTimestamp) return false;
-
-                // 4. 排除純數字開頭
-                if (/^\d/.test(file)) return false;
-
-                // 判斷是否為 live 或趨勢回測
-                const isLive = nameLower.includes('live');
-                const isTrend = nameLower.includes('trend-backtest');
-
-                return isLive || isTrend;
-            });
-
-            renderGroups(filteredFiles, dateDir);
-
-        } catch (error) {
-            console.error("Debug info:", error);
-            displayArea.innerHTML = `
-                <div style="text-align:center; color:#ef4444; padding:2rem; border: 1px dashed #ef4444; border-radius:12px;">
-                    ⚠️ 讀取失敗<br>
-                    <small style="color:#64748b; display:block; margin-top:10px;">
-                        錯誤原因: ${error.message}<br>
-                        建議檢查: 1. 是否開啟了 Python Http Server? 2. 目錄名是否正確?
-                    </small>
-                </div>`;
+            
+            // 💡 過濾：排除 all- 開頭，且只抓 HTML
+            const filtered = allFiles.filter(f => f.endsWith('.html') && !f.startsWith('all-'));
+            
+            renderSmartGroups(filtered, dateDir);
+        } catch (e) {
+            displayArea.innerHTML = `<div style="text-align:center;color:#ef4444;">⚠️ ${e.message}</div>`;
         }
     }
 
-    // 抽出渲染邏輯讓代碼更乾淨
-    function renderGroups(files, dateDir) {
+    function renderSmartGroups(files, dateDir) {
         const displayArea = document.getElementById('dynamicContent');
-        const groups = {};
-        
+        const groups = {}; 
+
+        // --- 1. 資料聚合處理 ---
         files.forEach(file => {
-            const prefix = file.split('-')[0];
-            if (!groups[prefix]) groups[prefix] = [];
-            groups[prefix].push(file);
+            const fileName = file.split('/').pop();
+            const tsMatch = fileName.match(/\d{8,12}/);
+            const isHistory = !!tsMatch;
+            
+            let baseName = fileName.replace('.html', '');
+            if (isHistory) {
+                // 強制去掉 "-時間戳記" 尾綴來找尋群組
+                baseName = baseName.replace(`-${tsMatch[0]}`, '');
+            }
+
+            if (!groups[baseName]) {
+                groups[baseName] = { main: null, history: [] };
+            }
+
+            if (isHistory) {
+                groups[baseName].history.push(file);
+            } else {
+                groups[baseName].main = file;
+            }
         });
 
-        const sortedPrefixes = Object.keys(groups).sort();
-        if (sortedPrefixes.length === 0) {
-            displayArea.innerHTML = `<div style="text-align:center; color:#94a3b8; padding:3rem;">📅 查無符合條件的正式報表</div>`;
+        // Debug 用：在 Console 看看群組有沒有成功
+        console.log("群組化結果:", groups);
+
+        const sortedBases = Object.keys(groups).sort();
+        if (sortedBases.length === 0) {
+            displayArea.innerHTML = `<div style="padding:2rem; text-align:center; color:#64748b;">📅 該目錄無 HTML 報告</div>`;
             return;
         }
 
         displayArea.innerHTML = '';
-        sortedPrefixes.forEach(prefix => {
+
+        // --- 2. 恢復分類標題 (BOR 系列, DAYAN 系列...) ---
+        const prefixGroups = {};
+        sortedBases.forEach(base => {
+            const prefix = base.split('-')[0].toUpperCase();
+            if (!prefixGroups[prefix]) prefixGroups[prefix] = [];
+            prefixGroups[prefix].push(base);
+        });
+
+        Object.keys(prefixGroups).sort().forEach(prefix => {
+            // 建立系列標題區塊
             const section = document.createElement('div');
-            section.innerHTML = `<div class="section-header">${prefix.toUpperCase()} 系列</div>`;
+            section.innerHTML = `<div class="section-header" style="font-size: 1.1rem; color: #1e3a8a; margin: 2rem 0 1rem 0; font-weight: 900; text-transform: uppercase; letter-spacing: 0.15em; display: flex; align-items: center;">${prefix} 系列</div>`;
+            
             const grid = document.createElement('div');
             grid.className = 'report-grid';
+            grid.style.display = 'grid';
+            grid.style.gridTemplateColumns = '1fr';
+            grid.style.gap = '20px';
 
-            groups[prefix].forEach(file => {
-                let typeKey = 'live';
-                if (file.includes('backtest')) typeKey = 'backtest';
-                const config = typeConfig[typeKey] || typeConfig['live'];
+            prefixGroups[prefix].forEach(base => {
+                const item = groups[base];
+                // 決定卡片主連結：有固定檔就用固定檔，否則用最新的歷史檔
+                const displayFile = item.main || item.history.sort().reverse()[0];
+                const finalPath = `report/${dateDir}/${displayFile}`;
+                
+                const typeKey = base.includes('report') ? 'trend' : 'live';
+                const config = typeConfig[typeKey] || typeConfig['default'];
 
-                const card = document.createElement('a');
-                card.href = `report/${dateDir}/${file}`;
+                const card = document.createElement('div');
                 card.className = 'card';
+
+                // --- 3. 歷史資料下拉選單渲染 ---
+                let historyHtml = '';
+                if (item.history.length > 0) {
+                    const options = item.history.sort().reverse().map(h => {
+                        const ts = h.match(/\d{8,12}/)[0];
+                        const displayTs = ts.length === 12 
+                            ? `${ts.substring(4,6)}/${ts.substring(6,8)} ${ts.substring(8,10)}:${ts.substring(10,12)}`
+                            : ts;
+                        return `<option value="report/${dateDir}/${h}">🕒 歷史紀錄: ${displayTs}</option>`;
+                    }).join('');
+                    
+                    historyHtml = `
+                        <div class="history-area" style="border-top: 1px solid #f1f5f9; margin-top: 15px; padding-top: 15px;">
+                            <select class="history-select" onchange="if(this.value) window.open(this.value, '_blank')" style="width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #e2e8f0; background: #fff; font-weight: 600;">
+                                <option value="">📜 查看歷史版本 (${item.history.length})</option>
+                                ${options}
+                            </select>
+                        </div>
+                    `;
+                }
+
                 card.innerHTML = `
-                    <span class="badge" style="background:${config.color}">${prefix}</span>
-                    <span class="title">${config.label}</span>
-                    <div class="file-info">📄 ${file}</div>
+                    <a href="${finalPath}" target="_blank" class="card-main-link" style="text-decoration: none; color: inherit;">
+                        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span class="badge" style="background:${config.color}; font-size: 0.75rem; padding: 4px 12px; border-radius: 8px; font-weight: 800; color: white;">${config.label}</span>
+                            <span class="status-dot" style="color: #10b981; font-weight: bold; display: flex; align-items: center; gap: 6px;">● 最新</span>
+                        </div>
+                        <span class="title" style="font-weight: 900; color: #0f172a; font-size: 1.4rem; display: block; margin: 10px 0;">${base.toUpperCase()}</span>
+                        <div class="file-info" style="font-size: 0.85rem; color: #64748b; font-family: monospace; background: #f1f5f9; padding: 6px 12px; border-radius: 8px;">📄 ${displayFile}</div>
+                    </a>
+                    ${historyHtml}
                 `;
                 grid.appendChild(card);
             });
