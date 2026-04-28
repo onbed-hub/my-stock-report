@@ -168,6 +168,37 @@
     let currentPage = 1; const pageSize = 30; let filteredRows = [];
     function filter() {
         const search = document.getElementById('searchInput').value.toUpperCase();
+        const pFilterVal = document.getElementById('pFilter').value; // 修正變數名稱
+        const sFilter = document.getElementById('sFilter').value;
+        const allRows = Array.from(document.querySelectorAll('#stockTable tbody tr'));
+
+        filteredRows = allRows.filter(row => {
+            const idText = row.cells[0].textContent.toUpperCase();
+            const nameText = row.cells[1].textContent.toUpperCase();
+            const signalText = row.cells[3].textContent; 
+            const pnlValue = parseFloat(row.cells[4].textContent.replace('%', ''));
+
+            const matchSearch = idText.includes(search) || nameText.includes(search);
+
+            // 修正後的損益過濾邏輯
+            let matchPnl = true;
+            if (pFilterVal === "loss") {
+                matchPnl = pnlValue < 0;
+            } else if (pFilterVal !== "-999") {
+                matchPnl = pnlValue >= parseFloat(pFilterVal);
+            }
+
+            // 訊號匹配
+            let matchSignal = (sFilter === 'all') ? true : signalText.includes(sFilter);
+            
+            return matchSearch && matchPnl && matchSignal;
+        });
+        currentPage = 1;
+        updateDisplay();
+    }
+
+    function aaaafilter() {
+        const search = document.getElementById('searchInput').value.toUpperCase();
         const pMin = parseFloat(document.getElementById('pFilter').value);
         const sFilter = document.getElementById('sFilter').value;
         const allRows = Array.from(document.querySelectorAll('#stockTable tbody tr'));
