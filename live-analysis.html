@@ -123,7 +123,7 @@
         const groups = {}; 
 
         files.forEach(file => {
-            const tsMatch = file.match(/\d{8,12}/); // 抓取日期或時間戳
+            const tsMatch = file.match(/\d{8,12}/);
             const isHistory = !!tsMatch;
             let baseName = file.replace('.html', '');
             if (isHistory) {
@@ -139,72 +139,61 @@
 
         const sortedBases = Object.keys(groups).sort();
         if (sortedBases.length === 0) {
-            displayArea.innerHTML = `<div style="text-align:center; color:#94a3b8; padding:3rem;">📅 該日期目錄下無報告檔案</div>`;
+            displayArea.innerHTML = `<div style="text-align:center; color:#94a3b8; padding:3rem;">📅 無報告檔案</div>`;
             return;
         }
 
         displayArea.innerHTML = '';
 
-        // 依照前綴分組 (如 BOR, DAYAN)
-        const prefixGroups = {};
-        sortedBases.forEach(base => {
-            const prefix = base.split('-')[0];
-            if (!prefixGroups[prefix]) prefixGroups[prefix] = [];
-            prefixGroups[prefix].push(base);
-        });
+        Object.keys(groups).forEach(base => {
+            const item = groups[base];
+            const displayFile = item.main || item.history.sort().reverse()[0];
+            
+            // --- 核心路徑修正：如果是在本地測試，確保路徑正確 ---
+            const finalPath = `report/${dateDir}/${displayFile}`;
+            
+            const typeKey = base.includes('report') ? 'trend' : 'live';
+            const config = typeConfig[typeKey] || typeConfig['default'];
 
-        Object.keys(prefixGroups).sort().forEach(prefix => {
-            const section = document.createElement('div');
-            section.innerHTML = `<div class="section-header">${prefix.toUpperCase()} 分析系列</div>`;
-            const grid = document.createElement('div');
-            grid.className = 'report-grid';
+            const card = document.createElement('div');
+            card.className = 'card';
 
-            prefixGroups[prefix].forEach(base => {
-                const item = groups[base];
-                const displayFile = item.main || item.history.sort().reverse()[0];
-                const typeKey = base.includes('report') ? 'trend' : 'live';
-                const config = typeConfig[typeKey] || typeConfig['default'];
-
-                const card = document.createElement('div');
-                card.className = 'card';
-
-                let historySelect = '';
-                if (item.history.length > 0) {
-                    const options = item.history.sort().reverse().map(h => {
-                        const ts = h.match(/\d{8,12}/)[0];
-                        const displayTs = ts.length === 12 
-                            ? `${ts.substring(4,6)}/${ts.substring(6,8)} ${ts.substring(8,10)}:${ts.substring(10,12)}`
-                            : `${ts.substring(4,6)}/${ts.substring(6,8)}`;
-                        return `<option value="report/${dateDir}/${h}">🕒 歷史紀錄: ${displayTs}</option>`;
-                    }).join('');
-                    
-                    historySelect = `
-                        <div class="history-area">
-                            <select class="history-select" onchange="if(this.value) window.open(this.value, '_blank')">
-                                <option value="">📜 查看其它時間版本 (${item.history.length})</option>
-                                ${options}
-                            </select>
-                        </div>
-                    `;
-                }
-
-                card.innerHTML = `
-                    <a href="report/${dateDir}/${displayFile}" target="_blank" class="card-main-link" onclick="console.log('正在跳轉至: report/${dateDir}/${displayFile}')">
-                        <div class="card-header">
-                            <span class="badge" style="background:${config.color}">${config.label}</span>
-                            <span class="status-dot">最新</span>
-                        </div>
-                        <span class="title">${base.toUpperCase()}</span>
-                        <div class="file-info">📄 ${displayFile}</div>
-                    </a>
-                    ${historySelect}
+            let historySelect = '';
+            if (item.history.length > 0) {
+                const options = item.history.sort().reverse().map(h => {
+                    const ts = h.match(/\d{8,12}/)[0];
+                    const displayTs = ts.length === 12 
+                        ? `${ts.substring(4,6)}/${ts.substring(6,8)} ${ts.substring(8,10)}:${ts.substring(10,12)}`
+                        : `${ts.substring(4,6)}/${ts.substring(6,8)}`;
+                    return `<option value="report/${dateDir}/${h}">🕒 歷史版本: ${displayTs}</option>`;
+                }).join('');
+                
+                historySelect = `
+                    <div class="history-area">
+                        <select class="history-select" onchange="if(this.value) { console.log('開啟歷史:', this.value); window.open(this.value, '_blank'); }">
+                            <option value="">📜 查看歷史紀錄 (${item.history.length})</option>
+                            ${options}
+                        </select>
+                    </div>
                 `;
-                grid.appendChild(card);
-            });
-            section.appendChild(grid);
-            displayArea.appendChild(section);
+            }
+
+            // ⚠️ 這裡將 <a> 標籤加上 onclick debug
+            card.innerHTML = `
+                <a href="${finalPath}" target="_blank" class="card-main-link" onclick="console.log('正在嘗試開啟檔案:', '${finalPath}')">
+                    <div class="card-header">
+                        <span class="badge" style="background:${config.color}">${config.label}</span>
+                        <span class="status-dot">最新</span>
+                    </div>
+                    <span class="title">${base.toUpperCase()}</span>
+                    <div class="file-info">📄 ${displayFile}</div>
+                </a>
+                ${historySelect}
+            `;
+            displayArea.appendChild(card);
         });
     }
+
 </script>
 </body>
 </html>
