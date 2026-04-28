@@ -1,0 +1,83 @@
+<html><head><meta charset='UTF-8'>
+    <style>
+        /* 基礎字型設定為預設 1.5 倍 */
+        body { font-family: "Microsoft JhengHei", sans-serif; margin: 40px; background-color: #f4f7f9; font-size: 1.5rem; }
+        h2 { font-size: 2.5rem; color: #1a237e; border-left: 15px solid #1a237e; padding-left: 20px; margin: 30px 0; }
+        
+        /* 交易規則區塊樣式 */
+        .rules-box { 
+            background: white; padding: 25px; border-radius: 15px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 40px; border: 1px solid #e0e0e0;
+        }
+        .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .rule-card { background: #fafafa; padding: 20px; border-radius: 10px; border-top: 5px solid #ccc; }
+        .rule-card ul { margin-top: 15px; padding-left: 25px; }
+        .rule-card li { margin-bottom: 10px; }
+        
+        /* 表格樣式 */
+        table { border-collapse: collapse; width: 100%; background: white; border: 2px solid #444; }
+        th { background-color: #1a237e; color: white; padding: 15px; font-size: 1.6rem; border: 2px solid #444; }
+        td { padding: 15px; text-align: center; border: 1px solid #ddd; font-weight: bold; font-size: 1.5rem; }
+        
+        /* 股號連結樣式 */
+        a { color: #1565c0; text-decoration: none; border-bottom: 1px solid #1565c0; }
+        a:hover { color: #d32f2f; border-bottom: 2px solid #d32f2f; }
+
+        .price-now { font-size: 2.2rem; color: #d32f2f; font-weight: 900; }
+        .advice-box { padding: 15px; border-radius: 10px; color: white; text-align: left; min-width: 250px; }
+        .sell-bg { background-color: #c62828; }
+        .hold-bg { background-color: #78909c; }
+        .buy-bg { background-color: #ef6c00; }
+        .advice-title { font-size: 1.8rem; font-weight: 900; display: block; margin-bottom: 5px; }
+        .advice-reason { font-size: 1.2rem; opacity: 0.9; }
+        small { font-size: 1rem; opacity: 0.8; }
+    </style>
+    </head><body>
+    <div class="rules-box">
+        <h2>📈 核心交易規則說明</h2>
+        <div class="rules-grid">
+            <div class="rule-card" style="border-top-color: #2e7d32;">
+                <b style="color: #2e7d32; font-size: 1.8rem;">🟢 進場買入條件</b>
+                <ul>
+                    <li><b>多頭結構：</b>股價 > MA5, MA10, MA20 + 量價爆發</li>
+                    <li><b>趨勢確認：</b>月線斜率向上 (MA20 上揚)</li>
+                    <li><b>短線轉強：</b>5日均線勾頭向上 (Slope > 0)</li>
+                    <li><b>動能指標：</b>RSI > 55 (強勢區)</li>
+                </ul>
+            </div>
+            <div class="rule-card" style="border-top-color: #d32f2f;">
+                <b style="color: #d32f2f; font-size: 1.8rem;">🔴 出場賣出條件</b>
+                <ul>
+                    <li><b>短線止損：</b>股價跌破 10日均線</li>
+                    <li><b>趨勢止損：</b>股價跌破 20日均線 (月線)</li>
+                    <li><b>盤整警示：</b>均線糾結且結構轉弱時觀望</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <h2>📊 投資策略即時診斷報告 (2026-04-21 00:14)</h2><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股號</th>
+      <th>股票名稱</th>
+      <th>即時現價</th>
+      <th>5日均線</th>
+      <th>月線(20MA)</th>
+      <th>量能狀況</th>
+      <th>RSI(14)</th>
+      <th>決策建議</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/6789/technical-analysis' target='_blank'>6789</a></td>
+      <td>采鈺</td>
+      <td><span class='price-now'>473.00</span><br><small>+43.00 (+10.00%)</small></td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>1970000<br><small>(20MA:nan)</small></td>
+      <td>81.4</td>
+      <td><div class="advice-box hold-bg" style="background-color:#78909c;"><span class="advice-title">⏳ 觀望中</span><br><span class="advice-reason">缺：價 > MA20, MA20 上揚..</span></div></td>
+    </tr>
+  </tbody>
+</table></body></html>

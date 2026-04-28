@@ -2,7 +2,7 @@
 #
 
 # --- 1. 設定區 ---
-DAYS_TO_KEEP=6  # 設定要同步最近幾天的資料
+DAYS_TO_KEEP=30  # 設定要同步最近幾天的資料
 
 # 來源目錄
 SOURCE_BASE="../stock-Quantum/my-code/topology-4-20260209/report"

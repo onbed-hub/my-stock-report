@@ -1,0 +1,362 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <title>即時盤整監控 - 20260416</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+        <style>
+            body { 
+                font-family: "Microsoft JhengHei", "PingFang TC", sans-serif; 
+                margin: 40px; 
+                font-size: 1.5em; 
+                background-color: #f4f7f9; 
+                color: #333; 
+                line-height: 1.6;
+            }
+            .container { 
+                background: white; 
+                padding: 40px; 
+                border-radius: 20px; 
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+                max-width: 95%; 
+                margin: auto; 
+            }
+            h2 { font-size: 2.2em; margin-bottom: 25px; color: #1a237e; border-bottom: 3px solid #1a237e; padding-bottom: 10px; }
+
+            /* 詳細說明區塊樣式 */
+            .guide-section { 
+                background: #e3f2fd; 
+                border-left: 10px solid #1e88e5; 
+                padding: 30px; 
+                margin-bottom: 40px; 
+                border-radius: 12px; 
+            }
+            .guide-section h3 { font-size: 1.5em; margin-top: 0; color: #0d47a1; }
+            .guide-grid { 
+                display: grid; 
+                grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); 
+                gap: 25px; 
+                font-size: 0.95em; 
+            }
+            .guide-item b { color: #b71c1c; font-size: 1.1em; }
+            .guide-item p { margin: 8px 0; color: #444; }
+
+            .controls { 
+                display: flex; 
+                flex-wrap: wrap; 
+                gap: 30px; 
+                background: #f8f9fa; 
+                padding: 25px; 
+                border-radius: 12px; 
+                margin-bottom: 30px; 
+                align-items: center; 
+                border: 1px solid #dee2e6; 
+            }
+            .filter-label { font-weight: bold; font-size: 1.1em; }
+            input, select { 
+                font-size: 1em; 
+                padding: 12px 20px; 
+                border-radius: 10px; 
+                border: 2px solid #bbb; 
+                background: white; 
+                outline: none;
+            }
+            input:focus, select:focus { border-color: #1e88e5; }
+
+            table.dataTable { width: 100% !important; margin-top: 20px; }
+            table.dataTable thead th { background-color: #263238; color: white; padding: 22px 15px; text-align: left; }
+            table.dataTable tbody td { padding: 20px 15px; border-bottom: 1px solid #eee; }
+            .status-arrow { color: #78909c; font-weight: normal; margin: 0 10px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>📈 即時盤整監控報表 (13:38:17)</h2>
+
+            <div class="guide-section">
+                <h3>📘 報表使用說明與技術指標定義</h3>
+                <div class="guide-grid">
+                    <div class="guide-item">
+                        <b>● 均線糾撐 (MA Compression)</b>
+                        <p>條件：5MA、10MA、20MA 之標準差除以 20MA < 1.5%。</p>
+                        <p>意義：市場短期、中期、長期成本高度一致，通常為大行情噴發前兆。</p>
+                    </div>
+                    <div class="guide-item">
+                        <b>● 進入盤整 (Quiet Market)</b>
+                        <p>條件：平均趨勢指標 ADX < 20。</p>
+                        <p>意義：目前處於低波動或無方向階段，建議觀望或採區間操作邏輯。</p>
+                    </div>
+                    <div class="guide-item">
+                        <b>● 離開盤整 (Breakout/Breakdown)</b>
+                        <p>條件：現價高於布林通道上軌（向上）或低於下軌（向下）。</p>
+                        <p>意義：盤整區間已被打破，新一波趨勢動能可能正在成形。</p>
+                    </div>
+                    <div class="guide-item">
+                        <b>● 狀態變更 (Status Change)</b>
+                        <p>標示：顯示為 「前一狀態 -> 當前狀態」。</p>
+                        <p>意義：提醒使用者該標的在今日盤中發生了邏輯上的關鍵轉變。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <div>
+                    <span class="filter-label">🔍 搜尋：</span>
+                    <input type="text" id="customSearch" placeholder="輸入股號或名稱...">
+                </div>
+                <div>
+                    <span class="filter-label">🎯 狀態篩選：</span>
+                    <select id="statusFilter">
+                        <option value="">-- 顯示全部標的 --</option>
+                        <optgroup label="核心狀態">
+                            <option value="均線糾撐">均線糾撐</option>
+                            <option value="進入盤整">進入盤整</option>
+                            <option value="離開盤整 (向上)">離開盤整 (向上)</option>
+                            <option value="離開盤整 (向下)">離開盤整 (向下)</option>
+                            <option value="趨勢運行">趨勢運行</option>
+                        </optgroup>
+                        <optgroup label="動態監控">
+                            <option value="->">僅顯示狀態發生變動者</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+
+            <table border="1" class="dataframe display" id="main_table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股號</th>
+      <th>名稱</th>
+      <th>現價</th>
+      <th>漲跌</th>
+      <th>狀態</th>
+      <th>說明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/2317.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">2317</a></td>
+      <td>鴻海</td>
+      <td><b>207.00</b></td>
+      <td><span style='color:green'>-0.50 (-0.24%)</span></td>
+      <td><b>均線糾撐</b></td>
+      <td>乖離率 1.02%</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/3702.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">3702</a></td>
+      <td>大聯大</td>
+      <td><b>98.20</b></td>
+      <td><span style='color:red'>+0.70 (+0.72%)</span></td>
+      <td><b>均線糾撐 -> 趨勢運行</b></td>
+      <td>方向明確</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/2485.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">2485</a></td>
+      <td>兆赫</td>
+      <td><b>79.10</b></td>
+      <td><span style='color:green'>-0.80 (-1.00%)</span></td>
+      <td><b>均線糾撐</b></td>
+      <td>乖離率 0.82%</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/2367.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">2367</a></td>
+      <td>燿華</td>
+      <td><b>70.40</b></td>
+      <td><span style='color:green'>-1.70 (-2.36%)</span></td>
+      <td><b>均線糾撐</b></td>
+      <td>乖離率 0.52%</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/4142.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">4142</a></td>
+      <td>國光生</td>
+      <td><b>18.70</b></td>
+      <td><span style='color:red'>+0.25 (+1.36%)</span></td>
+      <td><b>均線糾撐</b></td>
+      <td>乖離率 0.12%</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/0050.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">0050</a></td>
+      <td>元大台灣50</td>
+      <td><b>85.00</b></td>
+      <td><span style='color:red'>+0.85 (+1.01%)</span></td>
+      <td><b>離開盤整 (向上)</b></td>
+      <td>突破布林上軌</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/0056.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">0056</a></td>
+      <td>元大高股息</td>
+      <td><b>40.80</b></td>
+      <td><span style='color:red'>+0.55 (+1.37%)</span></td>
+      <td><b>均線糾撐</b></td>
+      <td>乖離率 1.29%</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/00635U.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">00635U</a></td>
+      <td>期元大S&P黃金</td>
+      <td><b>50.80</b></td>
+      <td><span style='color:green'>-0.05 (-0.10%)</span></td>
+      <td><b>均線糾撐</b></td>
+      <td>乖離率 0.91%</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/00738U.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">00738U</a></td>
+      <td>期元大道瓊白銀</td>
+      <td><b>65.55</b></td>
+      <td><span style='color:red'>+0.90 (+1.39%)</span></td>
+      <td><b>均線糾撐 -> 趨勢運行</b></td>
+      <td>方向明確</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/00929.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">00929</a></td>
+      <td>復華台灣科技優息</td>
+      <td><b>21.05</b></td>
+      <td><span style='color:red'>+0.39 (+1.89%)</span></td>
+      <td><b>均線糾撐 -> 離開盤整 (向上)</b></td>
+      <td>突破布林上軌</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/009816.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">009816</a></td>
+      <td>凱基台灣TOP50</td>
+      <td><b>12.00</b></td>
+      <td><span style='color:red'>+0.15 (+1.27%)</span></td>
+      <td><b>離開盤整 (向上)</b></td>
+      <td>突破布林上軌</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/00990A.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">00990A</a></td>
+      <td>主動元大AI新經濟</td>
+      <td><b>14.57</b></td>
+      <td><span style='color:red'>+0.02 (+0.14%)</span></td>
+      <td><b>趨勢運行</b></td>
+      <td>方向明確</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/2009.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">2009</a></td>
+      <td>第一銅</td>
+      <td><b>41.25</b></td>
+      <td><span style='color:red'>+0.35 (+0.86%)</span></td>
+      <td><b>均線糾撐</b></td>
+      <td>乖離率 0.45%</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/2337.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">2337</a></td>
+      <td>旺宏</td>
+      <td><b>139.00</b></td>
+      <td><span style='color:green'>-3.00 (-2.11%)</span></td>
+      <td><b>進入盤整 -> 趨勢運行</b></td>
+      <td>方向明確</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/2352.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">2352</a></td>
+      <td>佳世達</td>
+      <td><b>25.25</b></td>
+      <td><span style='color:red'>+0.55 (+2.23%)</span></td>
+      <td><b>均線糾撐</b></td>
+      <td>乖離率 0.98%</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/2409.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">2409</a></td>
+      <td>友達</td>
+      <td><b>20.70</b></td>
+      <td><span style='color:red'>+0.65 (+3.24%)</span></td>
+      <td><b>離開盤整 (向上)</b></td>
+      <td>突破布林上軌</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/3481.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">3481</a></td>
+      <td>群創</td>
+      <td><b>27.25</b></td>
+      <td><span style='color:green'>-0.35 (-1.27%)</span></td>
+      <td><b>趨勢運行</b></td>
+      <td>方向明確</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/6136.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">6136</a></td>
+      <td>富爾特</td>
+      <td><b>24.00</b></td>
+      <td><span style='color:green'>-0.60 (-2.44%)</span></td>
+      <td><b>均線糾撐</b></td>
+      <td>乖離率 0.28%</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/6806.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">6806</a></td>
+      <td>森崴能源</td>
+      <td><b>22.45</b></td>
+      <td><span style='color:red'>+2.00 (+9.78%)</span></td>
+      <td><b>趨勢運行</b></td>
+      <td>方向明確</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/3105.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">3105</a></td>
+      <td>穩懋</td>
+      <td><b>490.50</b></td>
+      <td><span style='color:red'>+44.00 (+9.85%)</span></td>
+      <td><b>進入盤整 -> 趨勢運行</b></td>
+      <td>方向明確</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/4966.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">4966</a></td>
+      <td>譜瑞-KY</td>
+      <td><b>555.00</b></td>
+      <td><span style='color:red'>+25.00 (+4.72%)</span></td>
+      <td><b>趨勢運行 -> 離開盤整 (向上)</b></td>
+      <td>突破布林上軌</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/6188.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">6188</a></td>
+      <td>廣明</td>
+      <td><b>87.50</b></td>
+      <td><span style='color:red'>+0.90 (+1.04%)</span></td>
+      <td><b>趨勢運行 -> 均線糾撐</b></td>
+      <td>乖離率 1.41%</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/7792.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">7792</a></td>
+      <td>安葆</td>
+      <td><b>357.50</b></td>
+      <td><span style='color:green'>-5.00 (-1.38%)</span></td>
+      <td><b>趨勢運行</b></td>
+      <td>方向明確</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/2327.TW/technical-analysis" target="_blank" style="text-decoration:none; color:#1e88e5; font-weight:bold;">2327</a></td>
+      <td>國巨*</td>
+      <td><b>325.00</b></td>
+      <td><span style='color:red'>+3.00 (+0.93%)</span></td>
+      <td><b>進入盤整 -> 離開盤整 (向上)</b></td>
+      <td>突破布林上軌</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                var table = $('#main_table').DataTable({
+                    "pageLength": 50,
+                    "dom": 'ltip',
+                    "order": [[ 4, "desc" ]],
+                    "language": {
+                        "info": "目前顯示第 _START_ 到 _END_ 筆，共 _TOTAL_ 筆資料",
+                        "zeroRecords": "找不到符合條件的股票"
+                    }
+                });
+
+                // 搜尋框連動
+                $('#customSearch').on('input', function() {
+                    table.search(this.value).draw();
+                });
+
+                // 下拉選單連動 (模糊搜尋以相容 -> 變動)
+                $('#statusFilter').on('change', function() {
+                    var val = $(this).val();
+                    table.column(4).search(val).draw();
+                });
+            });
+        </script>
+    </body>
+    </html>
+    

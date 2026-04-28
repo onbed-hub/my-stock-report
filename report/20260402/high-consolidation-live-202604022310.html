@@ -1,0 +1,155 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <title>即時掃描 - 20260402</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+        <style>
+            body { font-family: "Microsoft JhengHei", sans-serif; margin: 30px; font-size: 1.2em; background-color: #f4f7f9; }
+            .container { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+            input, select { font-size: 1em; padding: 8px; border-radius: 8px; border: 1px solid #ccc; }
+            table.dataTable thead { background-color: #1565c0; color: white; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>📈 即時盤整監控 (精簡狀態版)</h2>
+            <div class="controls">
+                <div>🔍 搜尋：<input type="text" id="customSearch"></div>
+            </div>
+            <table border="1" class="dataframe display" id="main_table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股號</th>
+      <th>名稱</th>
+      <th>行情詳情</th>
+      <th>現價</th>
+      <th>漲跌</th>
+      <th>狀態</th>
+      <th>說明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2409.TW</td>
+      <td>友達</td>
+      <td>開:16.50 / 高:17.40 / 低:16.40</td>
+      <td><b>16.85</b></td>
+      <td><span style='color:red'>+0.90 (+5.64%)</span></td>
+      <td><b>趨勢運行 -> 均線糾撐</b></td>
+      <td>乖離率 1.41%</td>
+    </tr>
+    <tr>
+      <td>6147.TWO</td>
+      <td>頎邦</td>
+      <td>開:80.00 / 高:84.00 / 低:79.70</td>
+      <td><b>84.00</b></td>
+      <td><span style='color:red'>+7.60 (+9.95%)</span></td>
+      <td><b>進入盤整 -> 趨勢運行</b></td>
+      <td>方向明確</td>
+    </tr>
+    <tr>
+      <td>1309.TW</td>
+      <td>台達化</td>
+      <td>開:23.10 / 高:25.95 / 低:22.15</td>
+      <td><b>25.95</b></td>
+      <td><span style='color:red'>+2.35 (+9.96%)</span></td>
+      <td><b>趨勢運行</b></td>
+      <td>方向明確</td>
+    </tr>
+    <tr>
+      <td>3037.TW</td>
+      <td>欣興</td>
+      <td>開:535.00 / 高:537.00 / 低:515.00</td>
+      <td><b>519.00</b></td>
+      <td><span style='color:red'>+30.50 (+6.24%)</span></td>
+      <td><b>均線糾撐</b></td>
+      <td>乖離率 0.63%</td>
+    </tr>
+    <tr>
+      <td>3714.TW</td>
+      <td>富采</td>
+      <td>開:51.70 / 高:54.20 / 低:50.00</td>
+      <td><b>54.20</b></td>
+      <td><span style='color:red'>+4.90 (+9.94%)</span></td>
+      <td><b>進入盤整 -> 趨勢運行</b></td>
+      <td>方向明確</td>
+    </tr>
+    <tr>
+      <td>1305.TW</td>
+      <td>華夏</td>
+      <td>開:16.30 / 高:18.10 / 低:15.85</td>
+      <td><b>17.95</b></td>
+      <td><span style='color:red'>+1.05 (+6.21%)</span></td>
+      <td><b>趨勢運行</b></td>
+      <td>方向明確</td>
+    </tr>
+    <tr>
+      <td>2481.TW</td>
+      <td>強茂</td>
+      <td>開:90.60 / 高:96.90 / 低:90.60</td>
+      <td><b>95.10</b></td>
+      <td><span style='color:red'>+6.50 (+7.34%)</span></td>
+      <td><b>均線糾撐</b></td>
+      <td>乖離率 1.45%</td>
+    </tr>
+    <tr>
+      <td>5243.TW</td>
+      <td>乙盛-KY</td>
+      <td>開:90.00 / 高:97.20 / 低:89.40</td>
+      <td><b>93.70</b></td>
+      <td><span style='color:red'>+4.80 (+5.40%)</span></td>
+      <td><b>進入盤整 -> 離開盤整 (向上)</b></td>
+      <td>突破布林上軌</td>
+    </tr>
+    <tr>
+      <td>8039.TW</td>
+      <td>台虹</td>
+      <td>開:111.50 / 高:122.00 / 低:111.50</td>
+      <td><b>122.00</b></td>
+      <td><span style='color:red'>+11.00 (+9.91%)</span></td>
+      <td><b>均線糾撐</b></td>
+      <td>乖離率 0.59%</td>
+    </tr>
+    <tr>
+      <td>6168.TW</td>
+      <td>宏齊</td>
+      <td>開:24.10 / 高:26.00 / 低:23.20</td>
+      <td><b>26.00</b></td>
+      <td><span style='color:red'>+2.35 (+9.94%)</span></td>
+      <td><b>趨勢運行</b></td>
+      <td>方向明確</td>
+    </tr>
+    <tr>
+      <td>3167.TW</td>
+      <td>大量</td>
+      <td>開:418.00 / 高:445.50 / 低:416.00</td>
+      <td><b>445.50</b></td>
+      <td><span style='color:red'>+40.50 (+10.00%)</span></td>
+      <td><b>進入盤整 -> 離開盤整 (向上)</b></td>
+      <td>突破布林上軌</td>
+    </tr>
+    <tr>
+      <td>2426.TW</td>
+      <td>鼎元</td>
+      <td>開:38.30 / 高:38.30 / 低:38.30</td>
+      <td><b>38.30</b></td>
+      <td><span style='color:red'>+3.45 (+9.90%)</span></td>
+      <td><b>進入盤整 -> 趨勢運行</b></td>
+      <td>方向明確</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#main_table').DataTable({ "pageLength": 50, "dom": 'ltip' });
+                $('#customSearch').on('input', function() { $('#main_table').DataTable().search(this.value).draw(); });
+            });
+        </script>
+    </body>
+    </html>
+    
