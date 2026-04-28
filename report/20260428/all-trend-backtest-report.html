@@ -141,7 +141,7 @@
     </div>
     
         <div class='card' style="padding: 0; overflow: hidden; border-radius: 20px;">
-            <div class="table-responsive"> 
+            <div class="table-responsive">
                 <table id='stockTable'>
                     <thead><tr>
                         <th onclick="sortTable(0)">代號 ↕️</th><th onclick="sortTable(1)">名稱 ↕️</th>
@@ -168,32 +168,23 @@
     let currentPage = 1; const pageSize = 30; let filteredRows = [];
     function filter() {
         const search = document.getElementById('searchInput').value.toUpperCase();
-        const pMin = parseFloat(document.getElementById('pFilter').value);
+        const pFilterVal = document.getElementById('pFilter').value;
         const sFilter = document.getElementById('sFilter').value;
         const allRows = Array.from(document.querySelectorAll('#stockTable tbody tr'));
 
         filteredRows = allRows.filter(row => {
             const idText = row.cells[0].textContent.toUpperCase();
             const nameText = row.cells[1].textContent.toUpperCase();
-            const signalText = row.cells[3].textContent; // 抓取「訊號」欄位的文字
+            const signalText = row.cells[3].textContent;
             const pnlValue = parseFloat(row.cells[4].textContent.replace('%', ''));
-
             const matchSearch = idText.includes(search) || nameText.includes(search);
-
-            // --- 修正後的損益過濾邏輯 ---
             let matchPnl = true;
-            if (pFilterVal === "loss") {
-                matchPnl = pnlValue < 0; // 負向收益
-            } else if (pFilterVal !== "-999") {
-                matchPnl = pnlValue >= parseFloat(pFilterVal); // 其他數值門檻
-            }
-
-            // 訊號匹配：只要文字中「包含」你設定的 value (如 "預警 (乖離") 就過關
+            if (pFilterVal === "loss") { matchPnl = pnlValue < 0; } 
+            else if (pFilterVal !== "-999") { matchPnl = pnlValue >= parseFloat(pFilterVal); }
             let matchSignal = (sFilter === 'all') ? true : signalText.includes(sFilter);
             return matchSearch && matchPnl && matchSignal;
         });
-        currentPage = 1;
-        updateDisplay();
+        currentPage = 1; updateDisplay();
     }
 
     function updateDisplay() {
@@ -205,48 +196,23 @@
         document.getElementById('pageInfo').innerText = `第 ${currentPage} / ${totalPages} 頁 (共 ${filteredRows.length} 檔)`;
         document.getElementById('prevBtn').disabled = (currentPage === 1);
         document.getElementById('nextBtn').disabled = (currentPage === totalPages);
-        document.querySelector('.table-responsive').scrollTop = 0;
     }
     function changePage(step) { currentPage += step; updateDisplay(); }
 
-    let sortDir = 1; // 1 為升冪, -1 為降冪
-    let lastSortCol = -1;
-
+    let sortDir = 1; let lastSortCol = -1;
     function sortTable(n) {
-        // 1. 取得當前所有正在顯示/過濾後的資料行 (Array 化)
         const table = document.getElementById("stockTable");
         const tbody = table.querySelector("tbody");
-
-        // 判定方向：點擊同一個欄位就反轉，點擊不同欄位就從大到小(desc)開始
-        if (lastSortCol === n) {
-            sortDir *= -1;
-        } else {
-            sortDir = -1; // 預設第一次點擊先從大到小，比較符合看股習慣
-            lastSortCol = n;
-        }
-
-        // 2. 獲取所有行並進行陣列排序 (不直接動 DOM，效能才快)
+        if (lastSortCol === n) { sortDir *= -1; } else { sortDir = -1; lastSortCol = n; }
         const rowsArray = Array.from(tbody.querySelectorAll("tr"));
-
         rowsArray.sort((a, b) => {
-            let x = a.cells[n].innerText.trim();
-            let y = b.cells[n].innerText.trim();
-
-            // 處理數字與百分比 (移除 % 並轉為浮點數)
-            let xVal = isNaN(parseFloat(x)) ? x.toLowerCase() : parseFloat(x.replace(/%/g, ''));
-            let yVal = isNaN(parseFloat(y)) ? y.toLowerCase() : parseFloat(y.replace(/%/g, ''));
-
-            if (xVal < yVal) return -1 * sortDir;
-            if (xVal > yVal) return 1 * sortDir;
-            return 0;
+            let x = a.cells[n].innerText.trim(); let y = b.cells[n].innerText.trim();
+            let xVal = isNaN(parseFloat(x.replace(/%/g,''))) ? x.toLowerCase() : parseFloat(x.replace(/%/g,''));
+            let yVal = isNaN(parseFloat(y.replace(/%/g,''))) ? y.toLowerCase() : parseFloat(y.replace(/%/g,''));
+            return xVal < yVal ? -1 * sortDir : (xVal > yVal ? 1 * sortDir : 0);
         });
-
-        // 3. 關鍵修正：排序完後，必須把排好的順序重新放回 tbody
         rowsArray.forEach(row => tbody.appendChild(row));
-
-        // 4. 關鍵修正：重新執行 filter 以更新分頁顯示的順序
-        // 這裡不需要在 filter 內重新抓 allRows，而是應該基於現有的 DOM 順序
-        filter(); 
+        filter();
     }
 
     function resetFilters() {
