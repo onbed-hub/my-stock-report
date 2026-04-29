@@ -49,6 +49,17 @@
     <div id="dynamicContent"></div>
 </div>
 
+<div class="controls" id="quickNav" style="display:none;">
+    <div class="control-group">
+        <label>🔍 個股報告快速跳轉</label>
+        <select id="stockSelector" class="history-select" style="background: #fff; border: 2px solid #6366f1; font-weight: bold;" onchange="if(this.value) window.open(this.value, '_blank')">
+            <option value="">請選擇股號...</option>
+        </select>
+    </div>
+</div>
+
+<div id="dynamicContent"></div>
+
 <script>
     const typeConfig = {
         'trend': { label: '回測報告', color: '#8b5cf6' },
@@ -67,7 +78,9 @@
         const dateInput = document.getElementById('datePicker').value;
         const dateDir = dateInput.replace(/-/g, '');
         const displayArea = document.getElementById('dynamicContent');
+        const quickNav = document.getElementById('quickNav');
         displayArea.innerHTML = '正在掃描檔案...';
+        quickNav.style.display = 'none';
 
         try {
             const url = `report/${dateDir}/files.json?t=${new Date().getTime()}`;
@@ -75,10 +88,12 @@
             if (!response.ok) throw new Error('尚未生成報告');
 
             const allFiles = await response.json();
-            
-            // 💡 過濾：排除 all- 開頭，且只抓 HTML
-            const filtered = allFiles.filter(f => f.endsWith('.html') && !f.startsWith('all-'));
-            
+
+            // 💡 過濾：排除 all- 開頭，抓取 .html 或新架構下的 .txt
+            const filtered = allFiles.filter(f => 
+                (f.endsWith('.html') || f.endsWith('.txt')) && !f.startsWith('all-')
+            );
+
             renderSmartGroups(filtered, dateDir);
         } catch (e) {
             displayArea.innerHTML = `<div style="text-align:center;color:#ef4444;">⚠️ ${e.message}</div>`;
@@ -87,31 +102,25 @@
 
     function renderSmartGroups(files, dateDir) {
         const displayArea = document.getElementById('dynamicContent');
+        const stockSelector = document.getElementById('stockSelector');
+        const quickNav = document.getElementById('quickNav');
         const groups = {};
 
-        // --- 1. 資料聚合處理 ---
+        // 重置下拉選單
+        stockSelector.innerHTML = '<option value="">請選擇股號 (HTML 報告)...</option>';
+
         files.forEach(file => {
-            // 💡 關鍵：file 現在可能是 "live/0/2330-live.txt"
-            // 我們只取最後一節檔名來判斷，例如 "2330-live.txt"
             const fileName = file.split('/').pop();
-            
-            // 判斷是否為歷史檔案（含 8-12 位數字）
             const tsMatch = fileName.match(/\d{8,12}/);
             const isHistory = !!tsMatch;
-
-            // 取得基準名稱 (去掉副檔名)
-            let baseName = fileName.replace('.html', '').replace('.txt', '');
             
-            if (isHistory) {
-                // 如果是歷史檔，去掉 "-時間戳記" 來找尋群組
-                baseName = baseName.replace(`-${tsMatch[0]}`, '');
-            }
+            let baseName = fileName.replace('.html', '').replace('.txt', '');
+            if (isHistory) baseName = baseName.replace(`-${tsMatch[0]}`, '');
 
             if (!groups[baseName]) {
-                groups[baseName] = { main: null, history: [] };
+                groups[baseName] = { main: null, history: [], type: '' };
             }
 
-            // 儲存完整路徑，連結才打得開
             if (isHistory) {
                 groups[baseName].history.push(file);
             } else {
@@ -125,12 +134,26 @@
             return;
         }
 
+        // --- 核心修改：填入下拉選單 (只收錄 HTML 報告) ---
+        let hasHtmlReports = false;
+        sortedBases.forEach(base => {
+            const item = groups[base];
+            const targetFile = item.main || item.history[0];
+            if (targetFile.endsWith('.html')) {
+                const opt = document.createElement('option');
+                opt.value = `report/${dateDir}/${targetFile}`;
+                opt.textContent = `📈 ${base.toUpperCase()}`;
+                stockSelector.appendChild(opt);
+                hasHtmlReports = true;
+            }
+        });
+        if (hasHtmlReports) quickNav.style.display = 'block';
+
         displayArea.innerHTML = '';
 
-        // --- 2. 恢復分類標題 (BOR, DAYAN, 以及個股代號...) ---
+        // --- 分類與卡片渲染 (保持原有邏輯，但優化路徑) ---
         const prefixGroups = {};
         sortedBases.forEach(base => {
-            // 取第一段作為系列名稱（例如 2330-live 取 2330, BOR-trend 取 BOR）
             const prefix = base.split('-')[0].toUpperCase();
             if (!prefixGroups[prefix]) prefixGroups[prefix] = [];
             prefixGroups[prefix].push(base);
@@ -139,18 +162,14 @@
         Object.keys(prefixGroups).sort().forEach(prefix => {
             const section = document.createElement('div');
             section.innerHTML = `<div class="section-header">${prefix} 系列</div>`;
-
             const grid = document.createElement('div');
             grid.className = 'report-grid';
 
             prefixGroups[prefix].forEach(base => {
                 const item = groups[base];
-                
-                // 決定主連結檔案：有固定檔就用固定檔，否則用最新的歷史檔
                 const displayFile = item.main || item.history.sort().reverse()[0];
                 const finalPath = `report/${dateDir}/${displayFile}`;
 
-                // 設定樣式：.txt 用數據報告顏色，.html 依名稱判斷
                 let typeKey = 'default';
                 if (displayFile.endsWith('.html')) {
                     typeKey = base.includes('report') ? 'trend' : 'live';
@@ -159,27 +178,15 @@
 
                 const card = document.createElement('div');
                 card.className = 'card';
-
-                // --- 3. 歷史資料下拉選單 ---
+                
+                // 下拉歷史選單邏輯 (如果是個股且有歷史紀錄)
                 let historyHtml = '';
                 if (item.history.length > 0) {
                     const options = item.history.sort().reverse().map(h => {
-                        const hFileName = h.split('/').pop();
-                        const ts = hFileName.match(/\d{8,12}/)[0];
-                        const displayTs = ts.length === 12
-                            ? `${ts.substring(4,6)}/${ts.substring(6,8)} ${ts.substring(8,10)}:${ts.substring(10,12)}`
-                            : ts;
-                        return `<option value="report/${dateDir}/${h}">🕒 歷史紀錄: ${displayTs}</option>`;
+                        const ts = h.match(/\d{8,12}/)[0];
+                        return `<option value="report/${dateDir}/${h}">🕒 ${ts}</option>`;
                     }).join('');
-
-                    historyHtml = `
-                        <div class="history-area">
-                            <select class="history-select" onchange="if(this.value) window.open(this.value, '_blank')">
-                                <option value="">📜 查看歷史版本 (${item.history.length})</option>
-                                ${options}
-                            </select>
-                        </div>
-                    `;
+                    historyHtml = `<div class="history-area"><select class="history-select" onchange="if(this.value) window.open(this.value, '_blank')"><option value="">📜 歷史版本 (${item.history.length})</option>${options}</select></div>`;
                 }
 
                 card.innerHTML = `
@@ -199,6 +206,7 @@
             displayArea.appendChild(section);
         });
     }
+
 
 </script>
 </body>
