@@ -1,0 +1,239 @@
+
+    <!DOCTYPE html><html><head><meta charset='utf-8'><title>bor 獲利診斷</title>
+    <style>
+        body { font-family: 'Segoe UI', system-ui, sans-serif; padding: 50px; background: #f1f5f9; color: #0f172a; font-size: 1.8rem; }
+        .container { max-width: 2200px; margin: auto; } /* 加寬容器以容納更多欄位 */
+        .card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 40px; }
+        h2 { font-size: 3.5rem; color: #1e3a8a; text-align: center; margin-bottom: 5px; }
+        .time-info { text-align: center; color: #64748b; font-size: 1.5rem; margin-bottom: 30px; font-weight: bold; }
+        .rule-table { width: 100%; border-collapse: collapse; font-size: 1.5rem; margin-bottom: 20px; }
+        .rule-table th { background: #e2e8f0; padding: 20px; text-align: left; border: 1px solid #cbd5e1; }
+        .rule-table td { border: 1px solid #e2e8f0; padding: 20px; line-height: 1.5; }
+        .filter-group { display: flex; gap: 30px; margin-bottom: 30px; background: #1e293b; padding: 30px; border-radius: 15px; color: white; align-items: flex-end; }
+        .filter-item { display: flex; flex-direction: column; gap: 10px; }
+        select, input { padding: 15px; font-size: 1.6rem; border-radius: 10px; border: none; outline: none; }
+        input { min-width: 300px; background: white; color: #0f172a; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 1.6rem; }
+        .data-table th { background: #2563eb; color: white; padding: 25px 15px; cursor: pointer; position: sticky; top: 0; z-index: 10; }
+        .data-table td { padding: 25px 15px; border-bottom: 2px solid #f1f5f9; text-align: center; }
+        .tag-link { font-weight: bold; padding: 8px 15px; border-radius: 8px; background: #f8fafc; border: 1px solid #cbd5e1; text-decoration: none; color: #2563eb; }
+        .stock-name { font-weight: bold; color: #334155; font-size: 1.7rem; }
+        .price-val { font-weight: bold; color: #059669; }
+        .pagination { display: flex; justify-content: center; align-items: center; margin: 40px 0; gap: 15px; }
+        .page-btn { padding: 12px 25px; background: #1e293b; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1.6rem; }
+        .page-btn:disabled { background: #cbd5e1; }
+        .prev-col { background: #f8fafc; color: #64748b; font-size: 1.4rem; } /* 前年資料的專用樣式 */
+    </style>
+    </head>
+    <body><div class='container'>
+        <h2>量化獲利品質診斷報告</h2>
+        <div class='time-info'>📅 基準日期：20260423 | 生成時間：2026-04-23 13:44</div>
+        
+    <div class="card">
+        <h3 style="font-size: 2.2rem; margin-bottom:20px; border-left: 10px solid #2563eb; padding-left:20px;">📊 獲利品質與估值準則</h3>
+
+        <h4 style="font-size: 1.8rem; color: #1e40af; margin: 20px 0 10px 0;">❶ 估值參考指標</h4>
+        <table class="rule-table" style="margin-bottom: 30px;">
+            <thead>
+                <tr style="font-weight:bold; background: #f8fafc;">
+                    <th>指標名稱</th>
+                    <th>計算邏輯</th>
+                    <th>判讀方式</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="font-weight:bold;">本益比 (PE)</td>
+                    <td>現價 / 近四季 EPS 總和</td>
+                    <td>反映回本年數。15 倍為合理中軸，低於 12 倍相對便宜。</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold; color:#2563eb;">15X 推估價</td>
+                    <td>近四季 EPS 總和 × 15</td>
+                    <td>量化合理價基準。若目前股價低於此值，代表具備估值優勢。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4 style="font-size: 1.8rem; color: #b91c1c; margin: 20px 0 10px 0;">💡 關鍵計算：利潤空間 (Profit Expansion)</h4>
+        <div style="background: #fff5f5; border: 1px solid #fecaca; padding: 20px; border-radius: 10px; margin-bottom: 30px; line-height: 1.8;">
+            <p style="margin: 0;"><b>算法：</b> <code style="background: #fee2e2; padding: 2px 8px; border-radius: 4px;">利潤空間 = EPS 年增率 (YoY) - 營收年增率 (YoY)</code></p>
+            <p style="margin: 10px 0 0 0; color: #475569;">
+                <b>解釋：</b> 此指標用來衡量「獲利成長是否跑贏營收成長」。<br>
+                • <b>大於 0% (正值)：</b> 代表「獲利品質提升」。可能是毛利率拉高、費用率降低或具備規模經濟優勢。<br>
+                • <b>小於 0% (負值)：</b> 代表「獲利遭到侵蝕」。生意雖然變大，但被成本、費用或低價競爭吃掉利潤。
+            </p>
+        </div>
+
+        <h4 style="font-size: 1.8rem; color: #1e40af; margin: 20px 0 10px 0;">❷ 經營策略深度解析</h4>
+        <table class="rule-table" style="margin-bottom: 30px;">
+            <thead>
+                <tr style="font-weight:bold; background: #f8fafc;">
+                    <th>診斷標籤</th>
+                    <th>數學模型</th>
+                    <th>經營策略深度解析</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>🚀 利潤擴張</td><td>ΔEPS > ΔRev > 0</td><td>規模經濟優化：獲利動能領先營收。代表產品具定價權或固定成本大幅攤提。</td></tr>
+                <tr><td>📈 穩健同步</td><td>ΔRev ≈ ΔEPS > 0</td><td>健康營運：獲利隨業務等比例增加，經營效能維持在穩定水位。</td></tr>
+                <tr><td>⚠️ 獲利稀釋</td><td>ΔRev > ΔEPS > 0</td><td>效率警訊：生意變大但利潤成長跟不上，受成本上升或削價競爭影響。</td></tr>
+                <tr><td>📉 獲利侵蝕</td><td>ΔRev > 0 且 ΔEPS < 0</td><td>邊際貢獻崩壞：營收增、獲利跌。經營陷入「白忙一場」的結構性惡化。</td></tr>
+                <tr><td>🧐 疑業外收益</td><td>ΔRev < 0 且 ΔEPS > 0</td><td>獲利虛胖：本業衰退但EPS上升。需嚴防資產處分或匯兌收益一次性干擾。</td></tr>
+                <tr><td>🔄 轉虧為盈</td><td>Prev EPS < 0 < EPS</td><td>基期反轉：從虧損轉為獲利，需觀察獲利是否具備續航力。</td></tr>
+                <tr><td>🌑 雙重衰退</td><td>ΔRev < 0 且 ΔEPS < 0</td><td>衰退警訊：營收與獲利同步縮減。</td></tr>
+            </tbody>
+        </table>
+
+        <h4 style="font-size: 1.8rem; color: #059669; margin: 20px 0 10px 0;">❸ 操作建議標籤說明 (Advice Logic)</h4>
+        <table class="rule-table">
+            <thead>
+                <tr style="font-weight:bold; background: #f8fafc;">
+                    <th>建議標籤</th>
+                    <th>適用情境 (EPS 成長 & 估值)</th>
+                    <th>操作說明與風險提示</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>💎 強力關注</b></td>
+                    <td>利潤空間 > 10% 且 PE < 12</td>
+                    <td><b>低估成長股：</b> 獲利爆發但股價尚未反應，具備戴維斯雙擊潛力。</td>
+                </tr>
+                <tr>
+                    <td><b>✅ 穩健價值</b></td>
+                    <td>利潤空間 > 0% 且 PE < 16</td>
+                    <td><b>體質優化：</b> 獲利穩定墊高且估值合理，適合中長線分批布局。</td>
+                </tr>
+                <tr>
+                    <td><b>📈 轉機確認</b></td>
+                    <td>利潤空間由負轉正 (轉虧為盈)</td>
+                    <td><b>基本面拐點：</b> 營運脫離谷底，初期 PE 雖高但具備強烈反彈動能。</td>
+                </tr>
+                <tr>
+                    <td><b>⚠️ 成長趨緩</b></td>
+                    <td>利潤空間 -5% ~ 0% 或 PE 18-22</td>
+                    <td><b>動能轉弱：</b> 獲利開始縮水，若股價在高點需防範修正。</td>
+                </tr>
+                <tr>
+                    <td><b>❌ 價值陷阱</b></td>
+                    <td>利潤空間 < -10% 但 PE < 8</td>
+                    <td><b>假便宜：</b> 獲利大幅萎縮中，低 PE 僅是過往表現的錯覺。</td>
+                </tr>
+                <tr>
+                    <td><b>🚫 泡沫風險</b></td>
+                    <td>利潤空間 < 0% 且 PE > 25</td>
+                    <td><b>嚴重高估：</b> 獲利倒退且股價過貴，應避開追高風險。</td>
+                </tr>
+                <tr>
+                    <td><b>⚪ 中性觀察</b></td>
+                    <td>不符合上述任一條件</td>
+                    <td><b>表現平淡：</b> 獲利與估值處於常態區間，缺乏明確訊號。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+        
+    <div class="filter-group">
+        <div class="filter-item"><label>🔍 搜尋股號或名稱</label><input type="text" id="searchInput" onkeyup="filter()" placeholder="輸入關鍵字..."></div>
+        <div class="filter-item"><label>🔎 狀態篩選</label>
+            <select id="statusSelect" onchange="filter()">
+                <option value="all">顯示全部</option>
+                <option value="🚀">🚀 利潤擴張</option><option value="📈">📈 穩健同步</option>
+                <option value="⚠️">⚠️ 獲利稀釋</option><option value="📉">📉 獲利侵蝕</option>
+                <option value="🧐">🧐 疑業外收益</option><option value="🔄">🔄 轉虧為盈</option>
+                <option value="🌑">🌑 雙重衰退</option>
+            </select>
+        </div>
+        <div class="filter-item"><label>📊 利潤空間</label>
+            <select id="expSelect" onchange="filter()">
+                <option value="all">不限</option>
+                <option value="p70">極致爆發 (>70%)</option><option value="p60">超高成長 (>60%)</option>
+                <option value="p50">卓越成長 (>50%)</option><option value="p40">強勁成長 (>40%)</option>
+                <option value="p30">高速成長 (>30%)</option><option value="p20">極高成長 (>20%)</option>
+                <option value="positive">獲利優化 (>0%)</option><option value="negative">獲利衰退 (<0%)</option>
+                <option value="danger">嚴重侵蝕 (<-10%)</option>
+            </select>
+        </div>
+        <div class="filter-item"><label>💡 建議篩選</label>
+            <select id="adviceSelect" onchange="filter()">
+                <option value="all">顯示全部建議</option>
+                <option value="強力關注">💎 強力關注</option><option value="穩健價值">✅ 穩健價值</option>
+                <option value="追價風險">⚠️ 追價風險</option><option value="暫避觀望">❌ 暫避觀望</option>
+            </select>
+        </div>
+    </div>
+    
+        <div class='card'>
+            <table class='data-table' id='stockTable' data-order='desc'>
+                <thead><tr>
+                    <th onclick='sortTable(0,false)'>代號</th>
+                    <th onclick='sortTable(1,false)'>名稱</th>
+                    <th onclick='sortTable(2,true)'>收盤價</th>
+                    <th onclick='sortTable(3,true)'>本益比 PE</th>
+                    <th onclick='sortTable(4,true)'>15X推估</th>
+                    <th onclick='sortTable(5,false)'>月份</th>
+                    <th onclick='sortTable(6,true)'>EPS</th>
+                    <th onclick='sortTable(7,true)'>EPS YOY</th>
+                    <th onclick='sortTable(8,true)'>營收 YOY</th>
+                    <th onclick='sortTable(9,false)'>前年度</th>
+                    <th onclick='sortTable(10,true)'>前年EPS</th>
+                    <th onclick='sortTable(11,true)'>前年EPS YoY</th>
+                    <th onclick='sortTable(12,true)'>前年營收 YoY</th>
+                    <th onclick='sortTable(13,true)'>利潤空間</th>
+                    <th onclick='sortTable(14,false)'>診斷狀態</th>
+                    <th onclick='sortTable(15,false)'>操作建議</th>
+                </tr></thead>
+                <tbody><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2409.TW/technical-analysis'>2409.TW</a></td><td><span class='stock-name'>友達</span></td><td class='price-val'>18.55</td><td style='color:#1e40af'>7.30</td><td style='color:#2563eb; font-weight:bold'>38.10</td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>0.90</td><td>327.50%</td><td>0.41%</td><td class='prev-col'>2025</td><td class='prev-col'>0.52</td><td class='prev-col'>185.25%</td><td class='prev-col'>-0.15%</td><td style='color:#b91c1c; font-weight:bold'>327.09%</td><td>🚀 利潤擴張</td><td><span style='padding:5px 10px; border-radius:8px; background:#fef3c7; color:#92400e; font-weight:bold; font-size:1.4rem;'>💎 強力關注</span></td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/1802.TW/technical-analysis'>1802.TW</a></td><td><span class='stock-name'>台玻</span></td><td class='price-val'>70.90</td><td style='color:#1e40af'>0.00</td><td style='color:#2563eb; font-weight:bold'>-16.35</td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>-0.20</td><td>62.96%</td><td>-2.37%</td><td class='prev-col'>2025</td><td class='prev-col'>-0.33</td><td class='prev-col'>36.54%</td><td class='prev-col'>-0.78%</td><td style='color:#b91c1c; font-weight:bold'>65.33%</td><td>🧐 疑業外收益</td><td><span style='padding:5px 10px; border-radius:8px; background:#fef3c7; color:#92400e; font-weight:bold; font-size:1.4rem;'>⚪ 數據不足</span></td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2485.TW/technical-analysis'>2485.TW</a></td><td><span class='stock-name'>兆赫</span></td><td class='price-val'>71.00</td><td style='color:#1e40af'>0.00</td><td style='color:#2563eb; font-weight:bold'>-62.70</td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>-0.96</td><td>57.52%</td><td>-0.05%</td><td class='prev-col'>2025</td><td class='prev-col'>-1.33</td><td class='prev-col'>11.92%</td><td class='prev-col'>-24.95%</td><td style='color:#b91c1c; font-weight:bold'>57.57%</td><td>🧐 疑業外收益</td><td><span style='padding:5px 10px; border-radius:8px; background:#fef3c7; color:#92400e; font-weight:bold; font-size:1.4rem;'>⚪ 數據不足</span></td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/3702.TW/technical-analysis'>3702.TW</a></td><td><span class='stock-name'>大聯大</span></td><td class='price-val'>101.50</td><td style='color:#1e40af'>7.72</td><td style='color:#2563eb; font-weight:bold'>197.25</td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>5.77</td><td>39.35%</td><td>13.46%</td><td class='prev-col'>2025</td><td class='prev-col'>4.07</td><td class='prev-col'>44.82%</td><td class='prev-col'>14.61%</td><td style='color:#b91c1c; font-weight:bold'>25.89%</td><td>🚀 利潤擴張</td><td><span style='padding:5px 10px; border-radius:8px; background:#fef3c7; color:#92400e; font-weight:bold; font-size:1.4rem;'>💎 強力關注</span></td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/4142.TW/technical-analysis'>4142.TW</a></td><td><span class='stock-name'>國光生</span></td><td class='price-val'>18.15</td><td style='color:#1e40af'>0.00</td><td style='color:#2563eb; font-weight:bold'>-48.60</td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>-0.57</td><td>1.75%</td><td>-9.99%</td><td class='prev-col'>2025</td><td class='prev-col'>-1.09</td><td class='prev-col'>-137.78%</td><td class='prev-col'>-35.17%</td><td style='color:#b91c1c; font-weight:bold'>11.74%</td><td>🧐 疑業外收益</td><td><span style='padding:5px 10px; border-radius:8px; background:#fef3c7; color:#92400e; font-weight:bold; font-size:1.4rem;'>⚪ 數據不足</span></td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2317.TW/technical-analysis'>2317.TW</a></td><td><span class='stock-name'>鴻海</span></td><td class='price-val'>221.00</td><td style='color:#1e40af'>6.65</td><td style='color:#2563eb; font-weight:bold'>498.75</td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>13.61</td><td>23.02%</td><td>18.13%</td><td class='prev-col'>2025</td><td class='prev-col'>10.38</td><td class='prev-col'>34.73%</td><td class='prev-col'>16.23%</td><td style='color:#b91c1c; font-weight:bold'>4.89%</td><td>🚀 利潤擴張</td><td><span style='padding:5px 10px; border-radius:8px; background:#fef3c7; color:#92400e; font-weight:bold; font-size:1.4rem;'>✅ 穩健價值</span></td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2337.TW/technical-analysis'>2337.TW</a></td><td><span class='stock-name'>旺宏</span></td><td class='price-val'>134.50</td><td style='color:#1e40af'>0.00</td><td style='color:#2563eb; font-weight:bold'>-75.30</td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>-1.77</td><td>1.16%</td><td>11.58%</td><td class='prev-col'>2025</td><td class='prev-col'>-1.62</td><td class='prev-col'>-80.00%</td><td class='prev-col'>5.91%</td><td style='color:#b91c1c; font-weight:bold'>-10.42%</td><td>⚠️ 獲利稀釋</td><td><span style='padding:5px 10px; border-radius:8px; background:#fef3c7; color:#92400e; font-weight:bold; font-size:1.4rem;'>⚪ 數據不足</span></td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/6136.TW/technical-analysis'>6136.TW</a></td><td><span class='stock-name'>富爾特</span></td><td class='price-val'>27.65</td><td style='color:#1e40af'>13.96</td><td style='color:#2563eb; font-weight:bold'>29.70</td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>0.89</td><td>-1.11%</td><td>29.83%</td><td class='prev-col'>2025</td><td class='prev-col'>0.95</td><td class='prev-col'>15.85%</td><td class='prev-col'>26.89%</td><td style='color:#b91c1c; font-weight:bold'>-30.94%</td><td>📉 獲利侵蝕</td><td><span style='padding:5px 10px; border-radius:8px; background:#fef3c7; color:#92400e; font-weight:bold; font-size:1.4rem;'>⚪ 中性觀察</span></td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2352.TW/technical-analysis'>2352.TW</a></td><td><span class='stock-name'>佳世達</span></td><td class='price-val'>26.00</td><td style='color:#1e40af'>13.54</td><td style='color:#2563eb; font-weight:bold'>28.80</td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>0.64</td><td>-35.71%</td><td>3.09%</td><td class='prev-col'>2025</td><td class='prev-col'>0.59</td><td class='prev-col'>-31.00%</td><td class='prev-col'>5.54%</td><td style='color:#b91c1c; font-weight:bold'>-38.80%</td><td>📉 獲利侵蝕</td><td><span style='padding:5px 10px; border-radius:8px; background:#fef3c7; color:#92400e; font-weight:bold; font-size:1.4rem;'>⚪ 中性觀察</span></td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2009.TW/technical-analysis'>2009.TW</a></td><td><span class='stock-name'>第一銅</span></td><td class='price-val'>39.50</td><td style='color:#1e40af'>87.78</td><td style='color:#2563eb; font-weight:bold'>6.75</td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>0.34</td><td>-54.05%</td><td>-7.12%</td><td class='prev-col'>2025</td><td class='prev-col'>0.34</td><td class='prev-col'>-54.67%</td><td class='prev-col'>-5.98%</td><td style='color:#b91c1c; font-weight:bold'>-46.93%</td><td>🌑 雙重衰退</td><td><span style='padding:5px 10px; border-radius:8px; background:#fef3c7; color:#92400e; font-weight:bold; font-size:1.4rem;'>❌ 暫避觀望</span></td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2367.TW/technical-analysis'>2367.TW</a></td><td><span class='stock-name'>燿華</span></td><td class='price-val'>67.80</td><td style='color:#1e40af'>25.20</td><td style='color:#2563eb; font-weight:bold'>40.35</td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>0.68</td><td>-69.20%</td><td>-12.33%</td><td class='prev-col'>2025</td><td class='prev-col'>0.71</td><td class='prev-col'>-59.32%</td><td class='prev-col'>-10.77%</td><td style='color:#b91c1c; font-weight:bold'>-56.87%</td><td>🌑 雙重衰退</td><td><span style='padding:5px 10px; border-radius:8px; background:#fef3c7; color:#92400e; font-weight:bold; font-size:1.4rem;'>❌ 暫避觀望</span></td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/1721.TW/technical-analysis'>1721.TW</a></td><td><span class='stock-name'>三晃</span></td><td class='price-val'>27.25</td><td style='color:#1e40af'>0.00</td><td style='color:#2563eb; font-weight:bold'>-61.35</td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>-1.84</td><td>-85.86%</td><td>-22.39%</td><td class='prev-col'>2025</td><td class='prev-col'>-1.12</td><td class='prev-col'>-45.45%</td><td class='prev-col'>-23.51%</td><td style='color:#b91c1c; font-weight:bold'>-63.47%</td><td>🌑 雙重衰退</td><td><span style='padding:5px 10px; border-radius:8px; background:#fef3c7; color:#92400e; font-weight:bold; font-size:1.4rem;'>⚪ 數據不足</span></td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/2327.TW/technical-analysis'>2327.TW</a></td><td><span class='stock-name'>國巨*</span></td><td class='price-val'>315.50</td><td style='color:#1e40af'>6.19</td><td style='color:#2563eb; font-weight:bold'>765.15</td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>11.51</td><td>-69.45%</td><td>9.26%</td><td class='prev-col'>2025</td><td class='prev-col'>8.22</td><td class='prev-col'>-73.12%</td><td class='prev-col'>5.78%</td><td style='color:#b91c1c; font-weight:bold'>-78.71%</td><td>📉 獲利侵蝕</td><td><span style='padding:5px 10px; border-radius:8px; background:#fef3c7; color:#92400e; font-weight:bold; font-size:1.4rem;'>⚪ 中性觀察</span></td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/3714.TW/technical-analysis'>3714.TW</a></td><td><span class='stock-name'>富采</span></td><td class='price-val'>73.30</td><td style='color:#1e40af'>0.00</td><td style='color:#2563eb; font-weight:bold'>-130.50</td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>-3.69</td><td>-95.74%</td><td>-9.04%</td><td class='prev-col'>2025</td><td class='prev-col'>-2.62</td><td class='prev-col'>-154.37%</td><td class='prev-col'>-10.09%</td><td style='color:#b91c1c; font-weight:bold'>-86.70%</td><td>🌑 雙重衰退</td><td><span style='padding:5px 10px; border-radius:8px; background:#fef3c7; color:#92400e; font-weight:bold; font-size:1.4rem;'>⚪ 數據不足</span></td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/3481.TW/technical-analysis'>3481.TW</a></td><td><span class='stock-name'>群創</span></td><td class='price-val'>25.60</td><td style='color:#1e40af'>121.90</td><td style='color:#2563eb; font-weight:bold'>3.15</td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>0.03</td><td>-96.30%</td><td>4.72%</td><td class='prev-col'>2025</td><td class='prev-col'>0.03</td><td class='prev-col'>109.38%</td><td class='prev-col'>4.39%</td><td style='color:#b91c1c; font-weight:bold'>-101.02%</td><td>📉 獲利侵蝕</td><td><span style='padding:5px 10px; border-radius:8px; background:#fef3c7; color:#92400e; font-weight:bold; font-size:1.4rem;'>❌ 暫避觀望</span></td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/8104.TW/technical-analysis'>8104.TW</a></td><td><span class='stock-name'>錸寶</span></td><td class='price-val'>37.20</td><td style='color:#1e40af'>0.00</td><td style='color:#2563eb; font-weight:bold'>-7.05</td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>-0.55</td><td>-433.33%</td><td>54.84%</td><td class='prev-col'>2025</td><td class='prev-col'>0.14</td><td class='prev-col'>-75.00%</td><td class='prev-col'>72.94%</td><td style='color:#b91c1c; font-weight:bold'>-488.17%</td><td>📉 獲利侵蝕</td><td><span style='padding:5px 10px; border-radius:8px; background:#fef3c7; color:#92400e; font-weight:bold; font-size:1.4rem;'>⚪ 數據不足</span></td></tr><tr><td><a class='tag-link' target='_blank' href='https://tw.stock.yahoo.com/quote/6806.TW/technical-analysis'>6806.TW</a></td><td><span class='stock-name'>森崴能源</span></td><td class='price-val'>26.85</td><td style='color:#1e40af'>0.00</td><td style='color:#2563eb; font-weight:bold'>-1843.20</td><td>2025-12</td><td style='font-weight:bold; color:#1e40af'>-60.00</td><td>-1744.48%</td><td>32.68%</td><td class='prev-col'>2025</td><td class='prev-col'>-46.34</td><td class='prev-col'>-2508.70%</td><td class='prev-col'>115.52%</td><td style='color:#b91c1c; font-weight:bold'>-1777.16%</td><td>📉 獲利侵蝕</td><td><span style='padding:5px 10px; border-radius:8px; background:#fef3c7; color:#92400e; font-weight:bold; font-size:1.4rem;'>⚪ 數據不足</span></td></tr></tbody>
+            </table>
+        </div>
+        <div class="pagination"><button id="prevBtn" class="page-btn" onclick="changePage(-1)">⬅️ 上一頁</button><span id="pageInfo"></span><button id="nextBtn" class="page-btn" onclick="changePage(1)">下一頁 ➡️</button></div>
+    </div>
+    <script>
+    let currentPage = 1; const pageSize = 50; let filteredRows = [];
+    function init() { filteredRows = Array.from(document.getElementById("stockTable").tBodies[0].rows); update(); }
+    function update() {
+        const tbody = document.getElementById("stockTable").tBodies[0];
+        const total = Math.ceil(filteredRows.length / pageSize) || 1;
+        Array.from(tbody.rows).forEach(r => r.style.display = "none");
+        filteredRows.slice((currentPage-1)*pageSize, currentPage*pageSize).forEach(r => r.style.display = "");
+        document.getElementById("pageInfo").innerText = `第 ${currentPage} / ${total} 頁 (符合: ${filteredRows.length} 檔)`;
+        document.getElementById("prevBtn").disabled = (currentPage === 1);
+        document.getElementById("nextBtn").disabled = (currentPage === total);
+    }
+    function changePage(s) { currentPage += s; update(); window.scrollTo(0, 0); }
+    function filter() {
+        const sVal = document.getElementById("searchInput").value.toUpperCase();
+        const stat = document.getElementById("statusSelect").value;
+        const exp = document.getElementById("expSelect").value;
+        const adv = document.getElementById("adviceSelect").value;
+        const all = Array.from(document.getElementById("stockTable").tBodies[0].rows);
+        filteredRows = all.filter(r => {
+            const mS = r.cells[0].innerText.toUpperCase().includes(sVal) || r.cells[1].innerText.toUpperCase().includes(sVal);
+            const valExp = parseFloat(r.cells[13].innerText);
+            let mEx = (exp === "all") || (exp === "p70" && valExp > 70) || (exp === "p20" && valExp > 20) || (exp === "positive" && valExp > 0) || (exp === "negative" && valExp < 0);
+            const mSt = (stat === "all") || r.cells[14].innerText.includes(stat);
+            const mAd = (adv === "all") || r.cells[15].innerText.includes(adv);
+            return mS && mSt && mEx && mAd;
+        });
+        currentPage = 1; update();
+    }
+    function sortTable(n, isNum) {
+        const table = document.getElementById("stockTable");
+        const tbody = table.tBodies[0];
+        const rows = Array.from(tbody.rows);
+        const dir = table.getAttribute("data-order") === "asc" ? "desc" : "asc";
+        table.setAttribute("data-order", dir);
+        rows.sort((a, b) => {
+            let x = a.cells[n].innerText.replace(/[%,]/g,'');
+            let y = b.cells[n].innerText.replace(/[%,]/g,'');
+            if(isNum) return dir === "asc" ? (parseFloat(x)-parseFloat(y)) : (parseFloat(y)-parseFloat(x));
+            return dir === "asc" ? x.localeCompare(y) : y.localeCompare(x);
+        });
+        rows.forEach(r => tbody.appendChild(r)); filter();
+    }
+    window.onload = init;
+    </script>
+    </body></html>
+    
