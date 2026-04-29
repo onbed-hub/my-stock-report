@@ -24,8 +24,8 @@
 
         <div style="text-align:center; font-weight:bold; color:#64748b; margin-bottom:30px;">
                 📅 回測起點：<span style="color:#2563eb;">2025-11-01</span> |
-                📅 分析日期：20260420 |
-                生成時間：2026-04-20 17:14
+                📅 分析日期：20260421 |
+                生成時間：2026-04-22 11:37
         </div>
 
         
@@ -50,6 +50,15 @@
                     <li><b>弱勢過濾 (WeakFail)：</b> 持股 10 日未脫離成本且跌破 ATR 線</li>
                 </ul>
             </div>
+            <div style="background: #f8fafc; padding: 15px; border-radius: 10px; border: 1px solid #e2e8f0;">
+                <h4 style="color: #0369a1;">📊 動能強度診斷 (Momentum)</h4>
+                <ul style="font-size: 1.3rem; line-height: 1.8; list-style: none; padding-left: 0;">
+                    <li>🚀 <b>極強：</b> MA_20 斜率向上 + MACD 加速</li>
+                    <li>📈 <b>穩定：</b> MA_20 斜率向上 (成本墊高中)</li>
+                    <li>📉 <b>轉弱：</b> MA_20 斜率向下 (中期趨勢反轉)</li>
+                    <li>⏳ <b>猶豫：</b> 價格震盪或動能指標出現分歧</li>
+                </ul>
+            </div>
         </div>
     </div>
     
@@ -63,11 +72,16 @@
             <label>📊 累積獲利門檻</label>
             <select id="pFilter" onchange="filter()">
                 <option value="-999">全部</option>
-                <option value="0">正收益 (>0%)</option>
+                <option value="0">正向收益 (>0%)</option>
+                <option value="15">啟動波段 (>15%)</option>
                 <option value="20">顯著獲利 (>20%)</option>
-                <option value="20.0" selected>英雄榜 (>20.0%)</option>
+                <option value="30">中堅戰力 (>30%)</option>
+                <option value="20.0" selected>當前標竿 (>20.0%)</option>
+                <option value="40">強勢突破 (>40%)</option>
                 <option value="50">強勢飆股 (>50%)</option>
+                <option value="60">旗艦領航 (>60%)</option>
                 <option value="70">極致爆發 (>70%)</option>
+                <option value="80">長線怪獸 (>80%)</option>
                 <option value="90">傳奇標的 (>90%)</option>
                 <option value="100">翻倍神股 (>100%)</option>
             </select>
@@ -91,7 +105,7 @@
                 <th style="width:12%">訊號</th><th style="width:10%">累積獲利</th><th style="width:8%">次數</th>
                 <th style="width:8%">勝率</th><th>理由</th>
             </tr></thead>
-            <tbody><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2382.TW'>2382.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("2382.TW")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>廣達</a></td><td>323.00</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#dc2626'>-9.15%</td><td>4</td><td>25.0%</td><td>[📈 穩定] 趨勢強勁(續抱)</td></tr></tbody>
+            <tbody><tr class=''><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2382.TW'>2382.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("2382.TW")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>廣達</a></td><td>340.00</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#dc2626'>-3.57%</td><td>4</td><td>25.0%</td><td>[🚀 極強] 趨勢強勁(續抱) (P:0.97/7)</td></tr></tbody>
         </table></div>
     </div>
 
@@ -112,7 +126,7 @@
             const s = document.getElementById("searchInput").value.toUpperCase();
             const p = parseFloat(document.getElementById("pFilter").value);
             const sig = document.getElementById("sFilter").value;
-            
+
             cachedRows.forEach(r => {
                 const mText = r.cells[0].innerText.includes(s) || r.cells[1].innerText.includes(s);
                 const mPnl = parseFloat(r.cells[4].innerText.replace('%','')) >= p;
@@ -124,11 +138,11 @@
     async function showLog(id) {
         const modal = document.getElementById("logModal");
         const content = document.getElementById("logContent");
-        
+
         // 修正：對接檔名，移除 .TW 等後綴
         const pureId = id.split('.')[0];
         const fileName = `${pureId}-trend-backtest-report.txt`;
-        
+
         document.getElementById("logTitle").innerText = "📄 詳細交易日誌: " + pureId;
         modal.style.display = "block";
         content.innerText = "讀取中...";

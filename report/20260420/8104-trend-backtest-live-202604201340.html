@@ -1,0 +1,127 @@
+
+    <html>
+    <head>
+        <meta charset='UTF-8'>
+        <title>V3 Pro Live Report</title>
+        
+    <style>
+        body { 
+            font-family: "Microsoft JhengHei", sans-serif; 
+            background: #0f172a; 
+            color: #e2e8f0; 
+            padding: 30px; 
+            font-size: 1.2rem; /* 放大基礎字體 */
+        }
+        h2 { 
+            color: #38bdf8; 
+            border-bottom: 3px solid #38bdf8; 
+            padding-bottom: 15px; 
+            font-size: 2.2rem; /* 標題放大 */
+        }
+        /* 搜尋框樣式 */
+        .search-container {
+            margin: 30px 0;
+            text-align: left;
+        }
+        #stockSearch {
+            width: 100%;
+            max-width: 600px;
+            padding: 15px 25px;
+            font-size: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid #38bdf8;
+            background: #1e293b;
+            color: white;
+            outline: none;
+        }
+        #stockSearch:focus {
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+        }
+        /* 表格樣式放大 */
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            background: #1e293b; 
+            margin-top: 20px; 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+        th { 
+            background: #334155; 
+            color: #38bdf8; 
+            padding: 20px; 
+            border: 1px solid #475569; 
+            font-size: 1.3rem; 
+        }
+        td { 
+            padding: 20px; 
+            text-align: center; 
+            border: 1px solid #475569; 
+            font-weight: bold; 
+            font-size: 1.4rem; /* 內容放大 */
+        }
+        .buy { color: #4ade80; background: rgba(74, 222, 128, 0.1); padding: 5px 10px; border-radius: 6px; }
+        .sell { color: #f87171; background: rgba(248, 113, 113, 0.1); padding: 5px 10px; border-radius: 6px; }
+        a { color: #38bdf8; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        tr:hover { background: #334155; }
+    </style>
+    
+    </head>
+    <body>
+        <h2>🚀 V3 Pro 即時分析報告 - [8104] (13:40)</h2>
+        
+        <div class="search-container">
+            <input type="text" id="stockSearch" onkeyup="filterTable()" placeholder="🔍 快速搜尋股號或名稱...">
+        </div>
+
+        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>代號</th>
+      <th>名稱</th>
+      <th>現價</th>
+      <th>開/高/低</th>
+      <th>量(張)</th>
+      <th>檢核結果</th>
+      <th>最終建議</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href='https://tw.stock.yahoo.com/quote/8104' target='_blank'>8104</a></td>
+      <td>錸寶</td>
+      <td>38.70<br><small>-1.30 (-3.25%)</small></td>
+      <td>40.25/40.85/38.7</td>
+      <td>3,130</td>
+      <td>[✅多頭] [✅突破] [✅紅柱] [❌冷靜] [❌實體]</td>
+      <td><span class=''>⏳ 觀望</span></td>
+    </tr>
+  </tbody>
+</table>
+        
+        
+    <script>
+    function filterTable() {
+        let input = document.getElementById("stockSearch");
+        let filter = input.value.toUpperCase();
+        let table = document.querySelector("table");
+        let tr = table.getElementsByTagName("tr");
+
+        for (let i = 1; i < tr.length; i++) {
+            let tdId = tr[i].getElementsByTagName("td")[0]; // 代號欄位
+            let tdName = tr[i].getElementsByTagName("td")[1]; // 名稱欄位
+            if (tdId || tdName) {
+                let txtValue = (tdId.textContent || tdId.innerText) + (tdName.textContent || tdName.innerText);
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+    </script>
+    
+    </body>
+    </html>
+    
