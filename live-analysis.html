@@ -11,9 +11,9 @@
         h1 { font-size: 1.8rem; margin-bottom: 1.5rem; color: #1e293b; text-align: center; }
         .controls { margin-bottom: 2rem; background: #f8fafc; padding: 20px; border-radius: 16px; border: 1px solid #e2e8f0; }
         .control-group label { display: block; font-size: 0.85rem; font-weight: 700; color: #64748b; margin-bottom: 8px; }
-        input[type="date"] { width: 100%; padding: 12px; font-size: 1rem; border: 2px solid #e2e8f0; border-radius: 12px; outline: none; }
+        input[type="date"], .history-select { width: 100%; padding: 12px; font-size: 1rem; border: 2px solid #e2e8f0; border-radius: 12px; outline: none; transition: border-color 0.2s; }
+        input[type="date"]:focus, .history-select:focus { border-color: #6366f1; }
 
-        /* 系列分組標題 */
         .section-header { font-size: 1rem; color: #1e3a8a; margin: 2rem 0 1rem 0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; }
         .section-header::after { content: ""; flex: 1; height: 1px; background: #cbd5e1; margin-left: 15px; }
 
@@ -28,9 +28,8 @@
         .status-dot { color: #10b981; font-size: 0.8rem; font-weight: bold; display: flex; align-items: center; gap: 4px; }
         .status-dot::before { content: "●"; }
 
-        /* 歷史選單樣式 */
         .history-area { border-top: 1px solid #f1f5f9; margin-top: 15px; padding-top: 12px; }
-        .history-select { width: 100%; padding: 10px; font-size: 0.85rem; border-radius: 10px; border: 1px solid #e2e8f0; background: #f8fafc; color: #475569; cursor: pointer; }
+        .history-select.sub { padding: 8px; font-size: 0.85rem; border-radius: 10px; background: #f8fafc; color: #475569; border-width: 1px; }
     </style>
 </head>
 <body>
@@ -40,25 +39,21 @@
     <h1>🛰️ 實時監控入口</h1>
 
     <div class="controls">
-        <div class="control-group">
+        <div class="control-group" style="margin-bottom: 15px;">
             <label>📅 報告日期目錄</label>
             <input type="date" id="datePicker" onchange="loadDynamicReports()">
+        </div>
+
+        <div class="control-group" id="quickNav" style="display:none;">
+            <label>🔍 個股報告選單 (僅限 HTML)</label>
+            <select id="stockSelector" class="history-select" style="border: 2px solid #6366f1; font-weight: bold;" onchange="if(this.value) window.open(this.value, '_blank')">
+                <option value="">請選擇股號...</option>
+            </select>
         </div>
     </div>
 
     <div id="dynamicContent"></div>
 </div>
-
-<div class="controls" id="quickNav" style="display:none;">
-    <div class="control-group">
-        <label>🔍 個股報告快速跳轉</label>
-        <select id="stockSelector" class="history-select" style="background: #fff; border: 2px solid #6366f1; font-weight: bold;" onchange="if(this.value) window.open(this.value, '_blank')">
-            <option value="">請選擇股號...</option>
-        </select>
-    </div>
-</div>
-
-<div id="dynamicContent"></div>
 
 <script>
     const typeConfig = {
@@ -88,15 +83,11 @@
             if (!response.ok) throw new Error('尚未生成報告');
 
             const allFiles = await response.json();
-
-            // 💡 過濾：排除 all- 開頭，抓取 .html 或新架構下的 .txt
-            const filtered = allFiles.filter(f => 
-                (f.endsWith('.html') || f.endsWith('.txt')) && !f.startsWith('all-')
-            );
-
+            // 抓取 html 與新架構 txt
+            const filtered = allFiles.filter(f => (f.endsWith('.html') || f.endsWith('.txt')) && !f.startsWith('all-'));
             renderSmartGroups(filtered, dateDir);
         } catch (e) {
-            displayArea.innerHTML = `<div style="text-align:center;color:#ef4444;">⚠️ ${e.message}</div>`;
+            displayArea.innerHTML = `<div style="text-align:center;color:#ef4444;margin-top:20px;">⚠️ ${e.message}</div>`;
         }
     }
 
@@ -106,55 +97,52 @@
         const quickNav = document.getElementById('quickNav');
         const groups = {};
 
-        // 重置下拉選單
-        stockSelector.innerHTML = '<option value="">請選擇股號 (HTML 報告)...</option>';
+        stockSelector.innerHTML = '<option value="">請選擇股號 (快速跳轉)...</option>';
 
+        // 1. 檔案聚合
         files.forEach(file => {
             const fileName = file.split('/').pop();
             const tsMatch = fileName.match(/\d{8,12}/);
             const isHistory = !!tsMatch;
-            
             let baseName = fileName.replace('.html', '').replace('.txt', '');
             if (isHistory) baseName = baseName.replace(`-${tsMatch[0]}`, '');
 
-            if (!groups[baseName]) {
-                groups[baseName] = { main: null, history: [], type: '' };
-            }
-
-            if (isHistory) {
-                groups[baseName].history.push(file);
-            } else {
-                groups[baseName].main = file;
-            }
+            if (!groups[baseName]) groups[baseName] = { main: null, history: [] };
+            if (isHistory) groups[baseName].history.push(file);
+            else groups[baseName].main = file;
         });
 
         const sortedBases = Object.keys(groups).sort();
-        if (sortedBases.length === 0) {
-            displayArea.innerHTML = `<div style="padding:2rem; text-align:center; color:#64748b;">📅 該目錄無符合條件之報告</div>`;
-            return;
-        }
+        let hasStockHtml = false;
 
-        // --- 核心修改：填入下拉選單 (只收錄 HTML 報告) ---
-        let hasHtmlReports = false;
+        // 2. 處理下拉選單 (純數字股號的 HTML)
         sortedBases.forEach(base => {
             const item = groups[base];
             const targetFile = item.main || item.history[0];
-            if (targetFile.endsWith('.html')) {
+            const prefix = base.split('-')[0];
+            
+            // 判斷是否為純數字股號 (例如 8028)
+            const isStockId = /^\d+$/.test(prefix);
+
+            if (isStockId && targetFile.endsWith('.html')) {
                 const opt = document.createElement('option');
                 opt.value = `report/${dateDir}/${targetFile}`;
                 opt.textContent = `📈 ${base.toUpperCase()}`;
                 stockSelector.appendChild(opt);
-                hasHtmlReports = true;
+                hasStockHtml = true;
             }
         });
-        if (hasHtmlReports) quickNav.style.display = 'block';
+        if (hasStockHtml) quickNav.style.display = 'block';
 
         displayArea.innerHTML = '';
 
-        // --- 分類與卡片渲染 (保持原有邏輯，但優化路徑) ---
+        // 3. 處理系列卡片 (排除純數字股號)
         const prefixGroups = {};
         sortedBases.forEach(base => {
             const prefix = base.split('-')[0].toUpperCase();
+            // 💡 關鍵：如果 prefix 是純數字，就不要產卡片
+            if (/^\d+$/.test(prefix)) return; 
+
             if (!prefixGroups[prefix]) prefixGroups[prefix] = [];
             prefixGroups[prefix].push(base);
         });
@@ -170,23 +158,19 @@
                 const displayFile = item.main || item.history.sort().reverse()[0];
                 const finalPath = `report/${dateDir}/${displayFile}`;
 
-                let typeKey = 'default';
-                if (displayFile.endsWith('.html')) {
-                    typeKey = base.includes('report') ? 'trend' : 'live';
-                }
-                const config = typeConfig[typeKey] || typeConfig['default'];
+                let typeKey = displayFile.endsWith('.html') ? (base.includes('report') ? 'trend' : 'live') : 'default';
+                const config = typeConfig[typeKey];
 
                 const card = document.createElement('div');
                 card.className = 'card';
                 
-                // 下拉歷史選單邏輯 (如果是個股且有歷史紀錄)
                 let historyHtml = '';
                 if (item.history.length > 0) {
                     const options = item.history.sort().reverse().map(h => {
                         const ts = h.match(/\d{8,12}/)[0];
                         return `<option value="report/${dateDir}/${h}">🕒 ${ts}</option>`;
                     }).join('');
-                    historyHtml = `<div class="history-area"><select class="history-select" onchange="if(this.value) window.open(this.value, '_blank')"><option value="">📜 歷史版本 (${item.history.length})</option>${options}</select></div>`;
+                    historyHtml = `<div class="history-area"><select class="history-select sub" onchange="if(this.value) window.open(this.value, '_blank')"><option value="">📜 歷史版本 (${item.history.length})</option>${options}</select></div>`;
                 }
 
                 card.innerHTML = `
@@ -202,12 +186,10 @@
                 `;
                 grid.appendChild(card);
             });
-            section.appendChild(grid);
             displayArea.appendChild(section);
+            section.appendChild(grid);
         });
     }
-
-
 </script>
 </body>
 </html>
