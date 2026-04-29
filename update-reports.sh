@@ -1,7 +1,10 @@
 #!/bin/bash
 
+# 接收參數，例如 report/20260428
+CURR_D=${1:-"$(date +%Y%m%d)"}
+
 # 設定日期
-CURR_D=$(date +%Y%m%d)
+#CURR_D=$(date +%Y%m%d)
 SOURCE_DIR="../stock-Quantum/my-code/topology-4-20260209/report/$CURR_D"
 TARGET_DIR="./report/$CURR_D"
 
