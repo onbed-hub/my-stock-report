@@ -46,7 +46,8 @@ done
 echo "------------------------------------------"
 echo "🔄 正在上傳至 GitHub..."
 git add .
-git commit -m "Update: Recursive reports for last $DAYS_TO_UPDATE days ($(date +%Y-%m-%d %H:%M:%S))"
+COMMIT_TIME=$(date "+%Y-%m-%d %H:%M:%S")
+git commit -m "Update: Recursive reports for last $DAYS_TO_UPDATE days ($COMMIT_TIME)"
 git push origin main
 
 echo "✨ 全部完成！"
