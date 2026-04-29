@@ -140,8 +140,8 @@
         const prefixGroups = {};
         sortedBases.forEach(base => {
             const prefix = base.split('-')[0].toUpperCase();
-            // 💡 關鍵：如果 prefix 是純數字，就不要產卡片
-            if (/^\d+$/.test(prefix)) return; 
+            // 如果開頭是數字，就不要產卡片，直接跳過
+            if (/^\d/.test(prefix)) return;
 
             if (!prefixGroups[prefix]) prefixGroups[prefix] = [];
             prefixGroups[prefix].push(base);
