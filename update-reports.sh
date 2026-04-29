@@ -30,7 +30,7 @@ cp -a "$SOURCE_DIR/." "$TARGET_DIR/"
 
 # --- 重新產生 files.json (確保路徑掃描深度足夠) ---
 echo "🔍 正在更新檔案清單 (掃描深度 3)..."
-# 確保找得到 live/6/xxx.txt 這種三層結構
+# 確保找得到 data/6/xxx.txt 這種三層結構
 find "$TARGET_DIR" -maxdepth 4 -type f \( -name "*.html" -o -name "*.txt" \) \
     ! -name "files.json" -printf "%P\n" | \
     jq -R . | jq -s . > "$TARGET_DIR/files.json"
@@ -42,5 +42,7 @@ git add .
 git commit -m "Update: Recursive reports for $CURR_D ($(date +%H:%M:%S))"
 git push origin main
 
-echo "✨ 完整同步完成！"
+echo "✨ 全部完成！"
+echo "🌐 GitHub: https://github.com/onbed-hub/my-stock-report"
+echo "🌐 網址: https://onbed-hub.github.io/my-stock-report/"
 
