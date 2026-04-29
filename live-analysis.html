@@ -84,11 +84,11 @@
 
             const allFiles = await response.json();
 
-            // 💡 過濾：排除 all- 開頭，且只抓 HTML
-            const filtered = allFiles.filter(f => f.endsWith('.html') && !f.startsWith('all-'));
-
-            // 抓取 html 與新架構 txt
-            const filtered = allFiles.filter(f => (f.endsWith('.html') || f.endsWith('.txt')) && !f.startsWith('all-'));
+            // ✅ 修正點：只保留一個 filtered 宣告，並包含 html 與 txt
+            const filtered = allFiles.filter(f => 
+                (f.endsWith('.html') || f.endsWith('.txt')) && !f.startsWith('all-')
+            );
+            
             renderSmartGroups(filtered, dateDir);
         } catch (e) {
             displayArea.innerHTML = `<div style="text-align:center;color:#ef4444;margin-top:20px;">⚠️ ${e.message}</div>`;
