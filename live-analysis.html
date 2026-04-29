@@ -115,6 +115,7 @@
 
         stockSelector.innerHTML = '<option value="">請選擇股號 (快速跳轉)...</option>';
 
+
         files.forEach(file => {
             const fileName = file.split('/').pop();
             const tsMatch = fileName.match(/\d{8,12}/);
@@ -139,21 +140,25 @@
             }
         });
 
-        const sortedBases = Object.keys(groups).sort();
-        let hasStockHtml = false;
-
-        // 2. 下拉選單：只要 isStock 為 true 且是 HTML 就進來
+        // 3. 處理系列卡片 (排除數字開頭的個股)
+        const prefixGroups = {};
         sortedBases.forEach(base => {
             const item = groups[base];
-            const targetFile = item.main || item.history[0];
-            if (item.isStock && targetFile.endsWith('.html')) {
-                const opt = document.createElement('option');
-                opt.value = `report/${dateDir}/${targetFile}`;
-                opt.textContent = `📈 ${base.toUpperCase()}`;
-                stockSelector.appendChild(opt);
-                hasStockHtml = true;
-            }
+            
+            // 🛑 修正點 1：如果這個項目沒有 HTML 主檔案，直接跳過，不產生卡片
+            if (!item.main || !item.main.endsWith('.html')) return;
+
+            // 🛑 修正點 2：排除 ALL 系列
+            if (base.toUpperCase().startsWith('ALL')) return; 
+
+            // 排除個股 (已進入下拉選單)
+            if (item.isStock) return; 
+
+            const prefix = base.split('-')[0].toUpperCase();
+            if (!prefixGroups[prefix]) prefixGroups[prefix] = [];
+            prefixGroups[prefix].push(base);
         });
+
         if (hasStockHtml) quickNav.style.display = 'block';
 
         displayArea.innerHTML = '';
