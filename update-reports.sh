@@ -1,45 +1,52 @@
 #!/bin/bash
 
-# 接收參數，例如 report/20260428
-CURR_D=${1:-"$(date +%Y%m%d)"}
+#!/bin/bash
 
-# 設定日期
-#CURR_D=$(date +%Y%m%d)
-SOURCE_DIR="../stock-Quantum/my-code/topology-4-20260209/report/$CURR_D"
-TARGET_DIR="./report/$CURR_D"
+# 設定要更新的天數，預設為 1 (只更新今天)
+# 你可以在執行時輸入參數，例如: ./update-reports.sh 2
+DAYS_TO_UPDATE=${1:-1}
 
-echo "🚀 開始執行深度分流同步 (日期: $CURR_D)..."
+echo "📅 準備更新過去 $DAYS_TO_UPDATE 天的報告..."
 
-# 檢查來源是否存在
-if [ ! -d "$SOURCE_DIR" ]; then
-    echo "❌ 找不到來源目錄: $SOURCE_DIR"
-    exit 1
-fi
+# 迴圈處理日期
+for (( i=0; i<$DAYS_TO_UPDATE; i++ ))
+do
+    # 計算日期 (例如 0 代表今天, 1 代表昨天)
+    CURR_D=$(date -d "$i days ago" +%Y%m%d)
+    
+    SOURCE_DIR="../stock-Quantum/my-code/topology-4-20260209/report/$CURR_D"
+    TARGET_DIR="./report/$CURR_D"
 
-# 建立目標目錄
-mkdir -p "$TARGET_DIR"
+    echo "------------------------------------------"
+    echo "🚀 處理日期: $CURR_D ($((i+1))/$DAYS_TO_UPDATE)"
 
-# --- 核心修正點：使用遞迴複製 ---
-echo "📂 正在從 $SOURCE_DIR 同步完整目錄結構至 $TARGET_DIR ..."
+    # 檢查來源是否存在
+    if [ ! -d "$SOURCE_DIR" ]; then
+        echo "⚠️  跳過：找不到來源目錄 $SOURCE_DIR"
+        continue
+    fi
 
-# 使用 cp -a (archive 模式，包含子目錄且保留權限)
-cp -a "$SOURCE_DIR/." "$TARGET_DIR/"
+    # 建立目標目錄
+    mkdir -p "$TARGET_DIR"
 
-# 或者使用更專業的 rsync (推薦)
-# rsync -av --delete "$SOURCE_DIR/" "$TARGET_DIR/"
+    # 同步目錄結構 (包含 data 子目錄)
+    echo "📂 正在同步目錄結構..."
+    cp -a "$SOURCE_DIR/." "$TARGET_DIR/"
 
-# --- 重新產生 files.json (確保路徑掃描深度足夠) ---
-echo "🔍 正在更新檔案清單 (掃描深度 3)..."
-# 確保找得到 data/6/xxx.txt 這種三層結構
-find "$TARGET_DIR" -maxdepth 4 -type f \( -name "*.html" -o -name "*.txt" \) \
-    ! -name "files.json" -printf "%P\n" | \
-    jq -R . | jq -s . > "$TARGET_DIR/files.json"
+    # 重新產生 files.json
+    echo "🔍 更新檔案清單 (掃描深度 4)..."
+    find "$TARGET_DIR" -maxdepth 4 -type f \( -name "*.html" -o -name "*.txt" \) \
+        ! -name "files.json" -printf "%P\n" | \
+        jq -R . | jq -s . > "$TARGET_DIR/files.json"
+    
+    echo "✅ $CURR_D 處理完成"
+done
 
-echo "✅ files.json 更新完成"
-
-# --- Git 同步 ---
+# --- Git 同步 (全部日期處理完後再一次 Push) ---
+echo "------------------------------------------"
+echo "🔄 正在上傳至 GitHub..."
 git add .
-git commit -m "Update: Recursive reports for $CURR_D ($(date +%H:%M:%S))"
+git commit -m "Update: Recursive reports for last $DAYS_TO_UPDATE days ($(date +%Y-%m-%d %H:%M:%S))"
 git push origin main
 
 echo "✨ 全部完成！"
