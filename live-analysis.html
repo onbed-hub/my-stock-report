@@ -111,15 +111,21 @@
             let baseName = fileName.replace('.html', '').replace('.txt', '');
             if (isHistory) baseName = baseName.replace(`-${tsMatch[0]}`, '');
 
-            // --- 修正點：統一從檔名第一個字判斷 ---
-            const isStock = /^\d/.test(fileName); 
+            const isStock = /^\d/.test(fileName);
 
             if (!groups[baseName]) {
                 groups[baseName] = { main: null, history: [], isStock: isStock };
             }
 
-            if (isHistory) groups[baseName].history.push(file);
-            else groups[baseName].main = file;
+            if (isHistory) {
+                groups[baseName].history.push(file);
+            } else {
+                // ✨ 修正點：如果已經有 .html 就不要被 .txt 蓋掉
+                // 如果目前是空的，或者新檔案是 .html，才更新 main
+                if (!groups[baseName].main || file.endsWith('.html')) {
+                    groups[baseName].main = file;
+                }
+            }
         });
 
         const sortedBases = Object.keys(groups).sort();
@@ -157,14 +163,19 @@
             const grid = document.createElement('div');
             grid.className = 'report-grid';
 
+
             prefixGroups[prefix].forEach(base => {
                 const item = groups[base];
+                
+                // ✨ 修正點：優先找 main，如果 main 是 txt 但 history 有 html，也可以考慮切換
+                // 但最簡單的做法是確保上面的 main 已經選了 html
                 const displayFile = item.main || item.history.sort().reverse()[0];
                 const finalPath = `report/${dateDir}/${displayFile}`;
 
+                // 根據副檔名決定標籤顏色
                 let typeKey = displayFile.endsWith('.html') ? (base.includes('report') ? 'trend' : 'live') : 'default';
                 const config = typeConfig[typeKey];
-
+                
                 const card = document.createElement('div');
                 card.className = 'card';
                 
