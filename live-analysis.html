@@ -84,20 +84,15 @@
 
             const allFiles = await response.json();
 
-            // ✨ 優化後的過濾邏輯：
+            // 過濾：排除 all- 系列，保留 HTML 和 data/ 內的 TXT
             const filtered = allFiles.filter(f => {
                 const isHtml = f.endsWith('.html');
                 const isTxt = f.endsWith('.txt');
                 const isInDataDir = f.includes('data/');
                 const isAllFile = f.toLowerCase().includes('all-');
-
-                if (isAllFile) return false; // 排除 all- 系列
-                
-                if (isHtml) return true;    // HTML 檔案一律保留 (無論在哪)
-                
-                // 💡 關鍵：如果是 .txt，必須位在 data/ 目錄內才顯示
-                if (isTxt && isInDataDir) return true; 
-
+                if (isAllFile) return false;
+                if (isHtml) return true;
+                if (isTxt && isInDataDir) return true;
                 return false;
             });
 
@@ -116,6 +111,7 @@
         stockSelector.innerHTML = '<option value="">請選擇股號 (快速跳轉)...</option>';
 
 
+        // 1. 檔案聚合邏輯
         files.forEach(file => {
             const fileName = file.split('/').pop();
             const tsMatch = fileName.match(/\d{8,12}/);
@@ -132,81 +128,67 @@
             if (isHistory) {
                 groups[baseName].history.push(file);
             } else {
-                // ✨ 修正點：如果已經有 .html 就不要被 .txt 蓋掉
-                // 如果目前是空的，或者新檔案是 .html，才更新 main
+                // 優先使用 HTML 作為主要檔案
                 if (!groups[baseName].main || file.endsWith('.html')) {
                     groups[baseName].main = file;
                 }
             }
         });
 
-        // 3. 處理系列卡片 (排除數字開頭的個股)
+        const sortedBases = Object.keys(groups).sort();
+        let hasStockHtml = false;
+
+        // 2. 生成個股下拉選單
+        sortedBases.forEach(base => {
+            const item = groups[base];
+            if (item.isStock && item.main && item.main.endsWith('.html')) {
+                const opt = document.createElement('option');
+                opt.value = `report/${dateDir}/${item.main}`;
+                opt.textContent = `📈 ${base.toUpperCase()}`;
+                stockSelector.appendChild(opt);
+                hasStockHtml = true;
+            }
+        });
+        if (hasStockHtml) quickNav.style.display = 'block';
+
+        // 3. 處理系列卡片 (篩選出非個股且必須有 HTML 的項目)
         const prefixGroups = {};
         sortedBases.forEach(base => {
             const item = groups[base];
-            
-            // 🛑 修正點 1：如果這個項目沒有 HTML 主檔案，直接跳過，不產生卡片
-            if (!item.main || !item.main.endsWith('.html')) return;
-
-            // 🛑 修正點 2：排除 ALL 系列
-            if (base.toUpperCase().startsWith('ALL')) return; 
-
-            // 排除個股 (已進入下拉選單)
-            if (item.isStock) return; 
-
-            const prefix = base.split('-')[0].toUpperCase();
-            if (!prefixGroups[prefix]) prefixGroups[prefix] = [];
-            prefixGroups[prefix].push(base);
+            // 關鍵：不是個股、且主檔案必須是 HTML 才能出現在卡片區
+            if (!item.isStock && item.main && item.main.endsWith('.html')) {
+                const prefix = base.split('-')[0].toUpperCase();
+                if (!prefixGroups[prefix]) prefixGroups[prefix] = [];
+                prefixGroups[prefix].push(base);
+            }
         });
 
-        if (hasStockHtml) quickNav.style.display = 'block';
-
-        displayArea.innerHTML = '';
-
-        // 3. 處理系列卡片：排除所有標記為 isStock 的項目
-        const prefixGroups = {};
-        sortedBases.forEach(base => {
-            if (groups[base].isStock) return; // 👈 這裡最保險，直接排除
-
-            const prefix = base.split('-')[0].toUpperCase();
-            if (!prefixGroups[prefix]) prefixGroups[prefix] = [];
-            prefixGroups[prefix].push(base);
-        });
-
+        // 4. 渲染卡片
         Object.keys(prefixGroups).sort().forEach(prefix => {
             const section = document.createElement('div');
             section.innerHTML = `<div class="section-header">${prefix} 系列</div>`;
             const grid = document.createElement('div');
             grid.className = 'report-grid';
 
-
             prefixGroups[prefix].forEach(base => {
                 const item = groups[base];
-                
-                // ✨ 修正點：優先找 main，如果 main 是 txt 但 history 有 html，也可以考慮切換
-                // 但最簡單的做法是確保上面的 main 已經選了 html
-                const displayFile = item.main || item.history.sort().reverse()[0];
+                const displayFile = item.main;
                 const finalPath = `report/${dateDir}/${displayFile}`;
+                let typeKey = base.includes('report') ? 'trend' : 'live';
+                const config = typeConfig[typeKey] || typeConfig['default'];
 
-                // 根據副檔名決定標籤顏色
-                let typeKey = displayFile.endsWith('.html') ? (base.includes('report') ? 'trend' : 'live') : 'default';
-                const config = typeConfig[typeKey];
-                
                 const card = document.createElement('div');
                 card.className = 'card';
-                
-                let historyHtml = '';
-                if (item.history.length > 0) {
 
-                const options = item.history
-                    .filter(h => h.endsWith('.html')) // 👈 只留下 HTML 的歷史紀錄
-                    .sort()
-                    .reverse()
-                    .map(h => {
+                // 歷史版本過濾：只顯示 HTML
+                let historyHtml = '';
+                const htmlHistory = item.history.filter(h => h.endsWith('.html')).sort().reverse();
+                if (htmlHistory.length > 0) {
+                    const options = htmlHistory.map(h => {
                         const ts = h.match(/\d{8,12}/)[0];
                         return `<option value="report/${dateDir}/${h}">🕒 ${ts}</option>`;
                     }).join('');
-                    historyHtml = `<div class="history-area"><select class="history-select sub" onchange="if(this.value) window.open(this.value, '_blank')"><option value="">📜 歷史版本 (${item.history.length})</option>${options}</select></div>`;
+                    historyHtml = `<div class="history-area"><select class="history-select sub" onchange="if(this.value) window.open(this.value, '_blank')"><option value="">📜 歷史版本 (${htmlHistory.length})</option>${options}</select></div>`;
                 }
 
                 card.innerHTML = `
@@ -216,16 +198,17 @@
                             <span class="status-dot">● 最新</span>
                         </div>
                         <span class="title">${base.toUpperCase()}</span>
-                        <div class="file-info">📄 ${displayFile.split('/').pop()}</div>
+                        <div class="file-info">📄 ${displayFile}</div>
                     </a>
                     ${historyHtml}
                 `;
                 grid.appendChild(card);
             });
-            displayArea.appendChild(section);
             section.appendChild(grid);
+            displayArea.appendChild(section);
         });
     }
+
 </script>
 </body>
 </html>
