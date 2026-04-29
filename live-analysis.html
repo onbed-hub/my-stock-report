@@ -86,9 +86,10 @@
 
             // ✅ 修正點：只保留一個 filtered 宣告，並包含 html 與 txt
             const filtered = allFiles.filter(f => 
-                (f.endsWith('.html') || f.endsWith('.txt')) && !f.startsWith('all-')
+                (f.endsWith('.html') || f.endsWith('.txt')) && 
+                !f.toLowerCase().includes('all-')
             );
-            
+
             renderSmartGroups(filtered, dateDir);
         } catch (e) {
             displayArea.innerHTML = `<div style="text-align:center;color:#ef4444;margin-top:20px;">⚠️ ${e.message}</div>`;
