@@ -99,7 +99,6 @@
 
         stockSelector.innerHTML = '<option value="">請選擇股號 (快速跳轉)...</option>';
 
-        // 1. 檔案聚合
         files.forEach(file => {
             const fileName = file.split('/').pop();
             const tsMatch = fileName.match(/\d{8,12}/);
@@ -107,7 +106,13 @@
             let baseName = fileName.replace('.html', '').replace('.txt', '');
             if (isHistory) baseName = baseName.replace(`-${tsMatch[0]}`, '');
 
-            if (!groups[baseName]) groups[baseName] = { main: null, history: [] };
+            // --- 修正點：統一從檔名第一個字判斷 ---
+            const isStock = /^\d/.test(fileName); 
+
+            if (!groups[baseName]) {
+                groups[baseName] = { main: null, history: [], isStock: isStock };
+            }
+
             if (isHistory) groups[baseName].history.push(file);
             else groups[baseName].main = file;
         });
@@ -115,16 +120,11 @@
         const sortedBases = Object.keys(groups).sort();
         let hasStockHtml = false;
 
-        // 2. 處理下拉選單 (純數字股號的 HTML)
+        // 2. 下拉選單：只要 isStock 為 true 且是 HTML 就進來
         sortedBases.forEach(base => {
             const item = groups[base];
             const targetFile = item.main || item.history[0];
-            const prefix = base.split('-')[0];
-            
-            // 判斷是否為數字開頭 (例如 8028, 00631L, 0050)
-            const isStockId = /^\d/.test(prefix);
-
-            if (isStockId && targetFile.endsWith('.html')) {
+            if (item.isStock && targetFile.endsWith('.html')) {
                 const opt = document.createElement('option');
                 opt.value = `report/${dateDir}/${targetFile}`;
                 opt.textContent = `📈 ${base.toUpperCase()}`;
@@ -136,13 +136,12 @@
 
         displayArea.innerHTML = '';
 
-        // 3. 處理系列卡片 (排除純數字股號)
+        // 3. 處理系列卡片：排除所有標記為 isStock 的項目
         const prefixGroups = {};
         sortedBases.forEach(base => {
-            const prefix = base.split('-')[0].toUpperCase();
-            // 如果開頭是數字，就不要產卡片，直接跳過
-            if (/^\d/.test(prefix)) return;
+            if (groups[base].isStock) return; // 👈 這裡最保險，直接排除
 
+            const prefix = base.split('-')[0].toUpperCase();
             if (!prefixGroups[prefix]) prefixGroups[prefix] = [];
             prefixGroups[prefix].push(base);
         });
