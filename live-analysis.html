@@ -121,8 +121,8 @@
             const targetFile = item.main || item.history[0];
             const prefix = base.split('-')[0];
             
-            // 判斷是否為純數字股號 (例如 8028)
-            const isStockId = /^\d+$/.test(prefix);
+            // 判斷是否為數字開頭 (例如 8028, 00631L, 0050)
+            const isStockId = /^\d/.test(prefix);
 
             if (isStockId && targetFile.endsWith('.html')) {
                 const opt = document.createElement('option');
