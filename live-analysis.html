@@ -83,6 +83,10 @@
             if (!response.ok) throw new Error('尚未生成報告');
 
             const allFiles = await response.json();
+
+            // 💡 過濾：排除 all- 開頭，且只抓 HTML
+            const filtered = allFiles.filter(f => f.endsWith('.html') && !f.startsWith('all-'));
+
             // 抓取 html 與新架構 txt
             const filtered = allFiles.filter(f => (f.endsWith('.html') || f.endsWith('.txt')) && !f.startsWith('all-'));
             renderSmartGroups(filtered, dateDir);
