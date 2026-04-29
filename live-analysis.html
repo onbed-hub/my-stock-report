@@ -84,11 +84,22 @@
 
             const allFiles = await response.json();
 
-            // ✅ 修正點：只保留一個 filtered 宣告，並包含 html 與 txt
-            const filtered = allFiles.filter(f => 
-                (f.endsWith('.html') || f.endsWith('.txt')) && 
-                !f.toLowerCase().includes('all-')
-            );
+            // ✨ 優化後的過濾邏輯：
+            const filtered = allFiles.filter(f => {
+                const isHtml = f.endsWith('.html');
+                const isTxt = f.endsWith('.txt');
+                const isInDataDir = f.includes('data/');
+                const isAllFile = f.toLowerCase().includes('all-');
+
+                if (isAllFile) return false; // 排除 all- 系列
+                
+                if (isHtml) return true;    // HTML 檔案一律保留 (無論在哪)
+                
+                // 💡 關鍵：如果是 .txt，必須位在 data/ 目錄內才顯示
+                if (isTxt && isInDataDir) return true; 
+
+                return false;
+            });
 
             renderSmartGroups(filtered, dateDir);
         } catch (e) {
