@@ -169,7 +169,12 @@
                 
                 let historyHtml = '';
                 if (item.history.length > 0) {
-                    const options = item.history.sort().reverse().map(h => {
+
+                const options = item.history
+                    .filter(h => h.endsWith('.html')) // 👈 只留下 HTML 的歷史紀錄
+                    .sort()
+                    .reverse()
+                    .map(h => {
                         const ts = h.match(/\d{8,12}/)[0];
                         return `<option value="report/${dateDir}/${h}">🕒 ${ts}</option>`;
                     }).join('');
