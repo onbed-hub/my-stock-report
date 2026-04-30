@@ -1,70 +1,57 @@
 #!/bin/bash
-#
 
-# --- 1. 設定區 ---
-DAYS_TO_KEEP=2  # 設定要同步最近幾天的資料
+# 設定要更新的天數，預設為 1 (只更新今天)
+DAYS_TO_UPDATE=${1:-1}
 
-# 來源目錄
-SOURCE_BASE="../stock-Quantum/my-code/topology-4-20260209/report"
-# 目標目錄
-TARGET_BASE="./report"
+echo "📅 準備更新過去 $DAYS_TO_UPDATE 天的報告..."
 
-echo "🚀 開始同步最近 ${DAYS_TO_KEEP} 天的量化報表..."
+# 迴圈處理日期
+for (( i=0; i<$DAYS_TO_UPDATE; i++ ))
+do
+    # 計算日期 (自動處理跨月)
+    CURR_D=$(date -d "$i days ago" +%Y%m%d)
 
-# 取得比對基準日（DAYS_TO_KEEP 天前的日期，格式為 YYYYMMDD）
-THRESHOLD_DATE=$(date -d "${DAYS_TO_KEEP} days ago" +%Y%m%d)
+    # 來源路徑：指向 stock-Quantum 產出的原始報告
+    SOURCE_DIR="../stock-Quantum/my-code/topology-4-20260209/report/$CURR_D"
+    # 目標路徑：目前所在的 GitHub Pages 專案目錄
+    TARGET_DIR="./report/$CURR_D"
 
-# 確保本地倉庫的 report 目錄存在
-mkdir -p "$TARGET_BASE"
+    echo "------------------------------------------"
+    echo "🚀 處理日期: $CURR_D ($((i+1))/$DAYS_TO_UPDATE)"
 
-# --- 2. 遍歷來源目錄 ---
-for dir_path in $(find "$SOURCE_BASE" -maxdepth 1 -type d -regextype sed -regex ".*/[0-9]\{8\}$" | sort); do
-
-    # 取得日期資料夾名稱 (例如 20260421)
-    dir_name=$(basename "$dir_path")
-
-    # 💡 核心逻辑：只有當資料夾日期 >= 基準日，才執行同步
-    if [ "$dir_name" -ge "$THRESHOLD_DATE" ]; then
-        echo "📂 處理日期資料夾 (符合日期限制): $dir_name"
-
-        # 建立目標對應的日期資料夾
-        mkdir -p "$TARGET_BASE/$dir_name"
-
-        # --- 3. 執行過濾與複製 (保持你原本的過濾邏輯) ---
-        
-        # 處理 HTML
-#        find "$dir_path" -maxdepth 1 -type f -name "*.html" \
-#            ! -name "*live-[0-9]*" \
-#            ! -name "*analysis-[0-9]*" \
-#            ! -name "[0-9]*" \
-#            -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
-
-        find "$dir_path" -maxdepth 1 -type f \( -name "*.html" -o -name "*.txt" \) \
-	    ! -name "[0-9]*" \
-	    -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
-
-        # 處理 TXT
-        find "$dir_path" -maxdepth 1 -type f -name "*.txt" \
-            ! -name "*live-[0-9]*" \
-            ! -name "*analysis-[0-9]*" \
-            -exec cp -u {} "$TARGET_BASE/$dir_name/" \; 2>/dev/null
-    else
-        # 這裡可以選擇不印出，或者用來除錯
-        # echo "⏭️ 跳過舊資料夾: $dir_name"
-        :
+    # 檢查來源是否存在
+    if [ ! -d "$SOURCE_DIR" ]; then
+        echo "⚠️  跳過：找不到來源目錄 $SOURCE_DIR"
+        continue
     fi
+
+    # 建立目標目錄 (包含父目錄 report/)
+    mkdir -p "$TARGET_DIR"
+
+    # 📂 核心同步：這裡會連同 data/ 子目錄一起複製過去
+    echo "📂 正在同步完整目錄結構 (含 data/)..."
+    cp -a "$SOURCE_DIR/." "$TARGET_DIR/"
+
+    # 🔍 重新產生 files.json
+    # 設定 -maxdepth 4 是為了抓到 report/日期/data/數字/股號.txt
+    echo "🔍 更新檔案清單 (掃描深度 4)..."
+    find "$TARGET_DIR" -maxdepth 4 -type f \( -name "*.html" -o -name "*.txt" \) \
+        ! -name "files.json" -printf "%P\n" | \
+        jq -R . | jq -s . > "$TARGET_DIR/files.json"
+
+    echo "✅ $CURR_D 處理完成"
 done
 
-# --- 4. 後續自動化流程 ---
-echo "產生 live-analysis.html 的即時分析 json 檔案"
 ./gen_file_list.sh
 
-echo "======================================="
-echo "☁️ 準備上傳至 GitHub..."
-
-#git pull
+# --- Git 同步 (全部日期處理完後再一次 Push) ---
+echo "------------------------------------------"
+echo "🔄 正在上傳至 GitHub..."
 git add .
-git commit -m "Auto-sync (Last $DAYS_TO_KEEP days): $(date '+%Y-%m-%d %H:%M:%S')"
+
+# 修正 date 格式字串的引號問題
+COMMIT_TIME=$(date "+%Y-%m-%d %H:%M:%S")
+git commit -m "Update: Recursive reports for last $DAYS_TO_UPDATE days ($COMMIT_TIME)"
 git push origin main
 
 echo "✨ 全部完成！"
