@@ -86,6 +86,7 @@
 
             // 過濾：排除 all- 系列，保留 HTML 和 data/ 內的 TXT
             const filtered = allFiles.filter(f => {
+                const fileNameLower = f.toLowerCase();
                 const isHtml = f.endsWith('.html');
                 const isTxt = f.endsWith('.txt');
                 const isInDataDir = f.includes('data/');
