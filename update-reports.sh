@@ -42,6 +42,8 @@ do
     echo "✅ $CURR_D 處理完成"
 done
 
+./gen_file_list.sh
+
 # --- Git 同步 (全部日期處理完後再一次 Push) ---
 echo "------------------------------------------"
 echo "🔄 正在上傳至 GitHub..."
