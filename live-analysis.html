@@ -84,19 +84,25 @@
 
             const allFiles = await response.json();
 
+            // ✨ 排除特定關鍵字，並根據副檔名與目錄決定保留哪些檔案
             // 過濾：排除 all- 系列，保留 HTML 和 data/ 內的 TXT
             const filtered = allFiles.filter(f => {
+                // 1. 宣告變數 (解決 fileNameLower is not defined)
                 const fileNameLower = f.toLowerCase();
                 const isHtml = f.endsWith('.html');
                 const isTxt = f.endsWith('.txt');
                 const isInDataDir = f.includes('data/');
 
-                // 🛑 排除清單：只要包含這些關鍵字就不要
+                // 2. 統一排除邏輯：包含 'all-' 或 'vietnam-' 的檔案一律剔除
                 const shouldExclude = fileNameLower.includes('all-') || 
                                     fileNameLower.includes('vietnam-');
-                if (isAllFile) return false;
+
+                if (shouldExclude) return false;
+                
+                // 3. 保留規則：HTML 直接通過，TXT 則必須在 data/ 目錄內
                 if (isHtml) return true;
                 if (isTxt && isInDataDir) return true;
+                
                 return false;
             });
 
