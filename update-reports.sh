@@ -6,7 +6,7 @@ DAYS_TO_UPDATE=${1:-1}
 # 1. ✨ 定義多個來源目錄 (在這裡新增你的路徑)
 SOURCES=(
     "../stock-Quantum/my-code/topology-4-20260209/report"
-    "../stock-Quantum/my-code/vietman/report"
+    "../stock-Quantum/my-code/vietnam/report"
 )
 
 echo "📅 準備更新過去 $DAYS_TO_UPDATE 天的報告..."
