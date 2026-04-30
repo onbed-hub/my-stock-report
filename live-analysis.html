@@ -89,7 +89,10 @@
                 const isHtml = f.endsWith('.html');
                 const isTxt = f.endsWith('.txt');
                 const isInDataDir = f.includes('data/');
-                const isAllFile = f.toLowerCase().includes('all-');
+
+                // 🛑 排除清單：只要包含這些關鍵字就不要
+                const shouldExclude = fileNameLower.includes('all-') || 
+                                    fileNameLower.includes('vietnam-');
                 if (isAllFile) return false;
                 if (isHtml) return true;
                 if (isTxt && isInDataDir) return true;
