@@ -55,33 +55,34 @@
         <div class="header-info">📅 回測起點：<span style="color:#2563eb;">2025-11-01</span> | 📅 分析日期：20260429</div>
         
     <div class="card">
-        <h3 style="font-size: 2.2rem; color: #1e3a8a; border-left: 10px solid #2563eb; padding-left:20px; margin-top:0;">🛡️ V3 Pro 趨勢與動態風控準則</h3>
+        <h3 style="font-size: 2.2rem; color: #1e3a8a; border-left: 10px solid #2563eb; padding-left:20px; margin-top:0;">🛡️ V3 Pro 趨勢與動態風控準則 (2026.Q2 優化版)</h3>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px;">
             <div>
-                <h4 style="color: #1e40af; font-size: 1.8rem; margin-bottom:10px;">❶ 進場雙軌判斷 (Entry)</h4>
+                <h4 style="color: #1e40af; font-size: 1.8rem; margin-bottom:10px;">❶ 進場雙軌與預警 (Entry)</h4>
                 <ul style="font-size: 1.3rem; line-height: 1.7; padding-left: 20px;">
                     <li><b>📈 標準 V3：</b> 均線多頭 (5>10>20) + 布林突破 (0.95x) + MACD 紅柱 + 實體紅棒。</li>
-                    <li><b>🚀 爆發 5D30%：</b> 5日內漲幅 &ge; 30% 並突破軌道，捕捉極端噴發動能（無視均線排列）。</li>
-                    <li><b>🟡 預警 (動能初現)：</b> 突破 10 日高點 + 今日漲幅 > 5% + 站上 MA20，偵測起漲第一根。</li>
-                    <li><b>⚠️ 乖離濾網：</b> <code>BIAS_20</code> &gt; 8.0 則強制轉預警，防止追高。</li>
+                    <li><b>🚀 爆發 5D30%：</b> 5日內漲幅 ≥ 30% 並突破軌道，捕捉極端噴發動能（無視均線排列）。</li>
+                    <li><b>🟡 預警 (動能初現)：</b> 突破 10 日高點 + 今日漲幅 > 4% + 帶量 (1.5x 均量)，偵測<b>起漲第一根</b>。</li>
+                    <li><b>⚡ 預警 (糾結噴發)：</b> 均線糾結 (MA5/20 距離 < 2%) + 帶量紅棒，捕捉盤整後的轉強點。</li>
+                    <li><b>⚠️ 乖離濾網：</b> <code>BIAS_20</code> > 8.0 則強制轉預警，防止追高。</li>
                 </ul>
             </div>
             <div>
-                <h4 style="color: #0d9488; font-size: 1.8rem; margin-bottom:10px;">❷ 趨勢強度特徵 (Status)</h4>
+                <h4 style="color: #0d9488; font-size: 1.8rem; margin-bottom:10px;">❷ 趨勢強度與狀態 (Status)</h4>
                 <ul style="font-size: 1.3rem; line-height: 1.7; padding-left: 20px;">
-                    <li><b>📦 盤整定義：</b> 過去 20 日價格波動區間 &lt; 15%，蓄勢待發狀態。</li>
+                    <li><b>📦 盤整定義：</b> 過去 20 日價格波動區間 < 15%，視為蓄勢待發狀態。</li>
                     <li><b>🚀 極強動能：</b> MA20 斜率向上 <b>且</b> MACD 紅柱持續增長 (加速度正向)。</li>
-                    <li><b>📉 趨勢轉弱：</b> MA20 走平下彎或 MACD 動能衰退。</li>
-                    <li><b>📊 自動參數：</b> 依據各股最優化 Result 自動載入個股最佳布林/乖離門檻。</li>
+                    <li><b>📉 趨勢轉弱：</b> MA20 走平下彎或 MACD 動能衰退，此時不開新倉。</li>
+                    <li><b>📊 自動參數：</b> 系統依據回測結果，自動為各股載入專屬布林/乖離門檻，達到動態適應。</li>
                 </ul>
             </div>
             <div>
                 <h4 style="color: #b91c1c; font-size: 1.8rem; margin-bottom:10px;">❸ 三階動態風控 (Exit)</h4>
                 <ul style="font-size: 1.3rem; line-height: 1.7; padding-left: 20px;">
                     <li><b>🛡️ 心理分級止損 (ATR)：</b>
-                        <br>▫️ <b>獲利 > 15%：</b> 寬鬆 (3.5x ATR) ── 給予大波段震盪空間。
-                        <br>▫️ <b>一般狀態：</b> 標準 (2.8x ATR) ── 程式預設緩衝。
-                        <br>▫️ <b>虧損 < -5%：</b> 緊縮 (2.2x ATR) ── 偵測弱勢快速砍倉。
+                        <br>▫️ <b>獲利 > 15%：</b> 寬鬆 (3.5x ATR) ── 給予大波段震盪空間，降低洗盤離場機率。
+                        <br>▫️ <b>一般狀態：</b> 標準 (2.8x ATR) ── 系統平衡參數。
+                        <br>▫️ <b>虧損 < -5%：</b> 緊縮 (2.2x ATR) ── 偵測弱勢快速砍倉，保護原始本金。
                     </li>
                     <li><b>💀 趨勢雙死 (TrendDead)：</b> 收盤 < MA20 且 MACD 翻負，連兩日確認即清倉。</li>
                     <li><b>💰 移動鎖利 (Trailing)：</b> 獲利達 15% 後，若自高點回落 10% 執行入袋為安。</li>
@@ -90,7 +91,7 @@
             </div>
         </div>
         <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #e2e8f0; font-size: 1.2rem; color: #64748b; font-style: italic;">
-            *註：本報告由小水鴨策略引擎自動生成。判斷準則結合了價格行為 (Price Action) 與波動率 (ATR) 動態調整。
+            *註：本報告由 stock-Quantum 引擎自動生成。策略結合價格行為 (Price Action) 與波動率 (ATR) 動態調整。
         </div>
     </div>
     
