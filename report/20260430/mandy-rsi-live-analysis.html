@@ -1,0 +1,91 @@
+
+    <html><head><meta charset="UTF-8"><title>📊 MANDY 即時分析</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style>
+        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; padding: 20px; background: #f1f5f9; font-size: 20px; }
+        .container { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        h2 { color: #1e293b; text-align: center; font-size: 32px; margin-bottom: 20px; }
+        table.dataTable thead th { background: #1e293b !important; color: white !important; font-size: 20px; }
+        table.dataTable tbody td { font-size: 20px; padding: 10px !important; text-align: center; border-bottom: 1px solid #eee; }
+    </style></head>
+    <body><div class="container"><h2>📊 MANDY 即時分析</h2><table class="dataframe display nowrap my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>代碼</th>
+      <th>名稱</th>
+      <th>現價</th>
+      <th>幅度</th>
+      <th>狀態</th>
+      <th>RSI</th>
+      <th>量(張)</th>
+      <th>診斷</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/0050/technical-analysis" target="_blank" style="text-decoration:none; color:#1e293b; font-weight:bold;">0050</a></td>
+      <td>元大台灣50</td>
+      <td>83.10</td>
+      <td>+0.00%</td>
+      <td>WAIT</td>
+      <td>72.0</td>
+      <td>62227</td>
+      <td>✅|❌|❌|✅|❌</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/0056/technical-analysis" target="_blank" style="text-decoration:none; color:#1e293b; font-weight:bold;">0056</a></td>
+      <td>元大高股息</td>
+      <td>39.97</td>
+      <td>+0.00%</td>
+      <td>WAIT</td>
+      <td>67.8</td>
+      <td>52949</td>
+      <td>✅|❌|❌|❌|❌</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/00635U/technical-analysis" target="_blank" style="text-decoration:none; color:#1e293b; font-weight:bold;">00635U</a></td>
+      <td>期元大S&P黃金</td>
+      <td>50.15</td>
+      <td>+0.00%</td>
+      <td>WAIT</td>
+      <td>70.6</td>
+      <td>3963</td>
+      <td>✅|❌|❌|✅|❌</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/00918/technical-analysis" target="_blank" style="text-decoration:none; color:#1e293b; font-weight:bold;">00918</a></td>
+      <td>大華優利高填息30</td>
+      <td>22.80</td>
+      <td>+0.00%</td>
+      <td>WAIT</td>
+      <td>64.0</td>
+      <td>24433</td>
+      <td>✅|❌|❌|✅|❌</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/00919/technical-analysis" target="_blank" style="text-decoration:none; color:#1e293b; font-weight:bold;">00919</a></td>
+      <td>群益台灣精選高息</td>
+      <td>22.91</td>
+      <td>+0.00%</td>
+      <td>WAIT</td>
+      <td>58.1</td>
+      <td>71041</td>
+      <td>✅|❌|❌|✅|❌</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/009816/technical-analysis" target="_blank" style="text-decoration:none; color:#1e293b; font-weight:bold;">009816</a></td>
+      <td>凱基台灣TOP50</td>
+      <td>11.94</td>
+      <td>+2.31%</td>
+      <td>WAIT</td>
+      <td>74.0</td>
+      <td>115256</td>
+      <td>✅|❌|❌|❌|✅</td>
+    </tr>
+  </tbody>
+</table></div>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>$(document).ready(function(){ $('.my-table').DataTable({"pageLength": 50, "language": {"search": "過濾："} }); });</script>
+    </body></html>
+    

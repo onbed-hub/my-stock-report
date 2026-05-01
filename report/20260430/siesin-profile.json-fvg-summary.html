@@ -1,0 +1,245 @@
+
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>SMC 核心追蹤 (siesin-profile.json)</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+        <style>
+            body { font-family: "PingFang TC", sans-serif; padding: 20px; background-color: #f8fafc; font-size: 20px; }
+            .container { max-width: 1850px; margin: auto; background: white; padding: 40px; border-radius: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+            h2 { text-align: center; font-size: 52px; margin-bottom: 40px; font-weight: 800; }
+            
+            .rule-header { display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; margin-bottom: 40px; padding: 35px; border: 2px solid #e2e8f0; border-radius: 20px; }
+            .rule-box { padding: 25px; border-radius: 15px; }
+            .rule-box.logic { background-color: #f0f9ff; border-left: 12px solid #0ea5e9; }
+            .rule-box.strategy { background-color: #fff7ed; border-left: 12px solid #f97316; }
+            .rule-box h3 { margin-top: 0; font-size: 32px; }
+            .rule-box p { font-size: 20px; color: #475569; margin: 5px 0; }
+
+            .dashboard { display: flex; gap: 20px; margin-bottom: 30px; }
+            .stat-card { flex: 1; padding: 35px; border-radius: 20px; color: white; text-align: center; font-weight: bold; font-size: 36px; }
+            .bg-bull { background: linear-gradient(135deg, #22c55e, #16a34a); } 
+            .bg-bear { background: linear-gradient(135deg, #ef4444, #dc2626); } 
+            .bg-neut { background: linear-gradient(135deg, #94a3b8, #64748b); }
+
+            .filter-toolbox { display: flex; gap: 40px; margin-bottom: 30px; padding: 30px; background: #f1f5f9; border-radius: 20px; justify-content: center; align-items: center; }
+            .filter-label { font-weight: 700; font-size: 26px; }
+            .filter-select { padding: 12px; border-radius: 10px; font-size: 24px; min-width: 250px; }
+
+            table.dataTable thead th { background-color: #1e293b !important; color: white !important; padding: 25px !important; font-size: 22px; }
+            table.dataTable tbody td { padding: 20px !important; background: #fff; border-bottom: 1px solid #e2e8f0; font-size: 22px; }
+            .action-buy { color: #15803d !important; font-weight: 800; background-color: #f0fdf4 !important; border-left: 10px solid #22c55e !important; }
+            .action-sell { color: #b91c1c !important; font-weight: 800; background-color: #fef2f2 !important; border-left: 10px solid #ef4444 !important; }
+            .status-fail { color: #94a3b8 !important; text-decoration: line-through; opacity: 0.5; }
+            .dataTables_filter input { padding: 15px; font-size: 24px; width: 400px; border-radius: 15px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>📈 SMC 核心追蹤 (siesin-profile.json)</h2>
+            <div class="rule-header">
+                <div class="rule-box logic">
+                    <h3>🔍 核心量化邏輯</h3>
+                    <ul>
+                        <li>
+                            <b>1. FVG 失衡區 (Fair Value Gap)</b>
+                            <p>主力介入導致的價格斷層。看漲(第1根高 < 第3根低)；看跌(第1根低 > 第3根高)。這是主力的「意圖區」。</p>
+                        </li>
+                        <li>
+                            <b>2. CE 中線 (Consequent Encroachment)</b>
+                            <p>FVG 缺口的 50% 處。這是多空強弱的最核心分水嶺，實體 K 線不應輕易跌破或超越此線。</p>
+                        </li>
+                        <li>
+                            <b>3. MSB 結構突破 (Market Structure Break)</b>
+                            <p>收盤價突破過去 10 根 K 線的極值。這代表趨勢「真的動起來了」，不是區間內的隨機震盪。</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="rule-box strategy">
+                    <h3>⚔️ 實戰交易規則</h3>
+                    <ul>
+                        <li>
+                            <b>🛡️ 站穩確認 (Validation)</b>
+                            <p>影線回踩 FVG 或 CE 缺口後彈起，且收盤守住中線，為「高勝率」進場點 (LFED)。</p>
+                        </li>
+                        <li>
+                            <b>🔥 過熱警示 (Exhaustion)</b>
+                            <p>乖離率 (BIAS) > 12%。此時即便出現 FVG，也極大機率是「末端缺口」，不宜追價，應等大幅回檔。</p>
+                        </li>
+                        <li>
+                            <b>🚨 失效離場 (Invalidation)</b>
+                            <p>當「實體」K 線收盤價穿透中線 (CE) 時，原有的看多或看空偏見即刻取消，必須無條件撤退。</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dashboard">
+                <div class="stat-card bg-bull">🟢 買進: 1 </div>
+                <div class="stat-card bg-bear">🔴 放空: 0 </div>
+                <div class="stat-card bg-neut">⚪ 失效: 2 </div>
+            </div>
+            <div class="filter-toolbox">
+                <div class="filter-group"><span class="filter-label">🎯 類型:</span><div id="filter-type"></div></div>
+                <div class="filter-group"><span class="filter-label">📊 狀態:</span><div id="filter-status"></div></div>
+                <div class="filter-group"><span class="filter-label">⚡ 操作:</span><div id="filter-action"></div></div>
+            </div>
+            <table class="dataframe display nowrap my-report-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股號</th>
+      <th>股票名稱</th>
+      <th>訊號日期</th>
+      <th>缺口類型</th>
+      <th>進場參考價</th>
+      <th>止損點</th>
+      <th>目標止盈</th>
+      <th>當前狀態</th>
+      <th>建議操作</th>
+      <th>主力爆量</th>
+      <th>RSI指標</th>
+      <th>確認日期</th>
+      <th>權重</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/3702.TW/technical-analysis" target="_blank" class="stock-link">3702.TW</a></td>
+      <td>大聯大</td>
+      <td>2026-04-13</td>
+      <td>看漲 FVG</td>
+      <td>96.00</td>
+      <td>94.53</td>
+      <td>100.80</td>
+      <td>⏳ 待回測</td>
+      <td>⚡結構突破</td>
+      <td>1</td>
+      <td>59.56</td>
+      <td>-</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/2069.TW/technical-analysis" target="_blank" class="stock-link">2069.TW</a></td>
+      <td>運錩</td>
+      <td>2026-04-07</td>
+      <td>看漲 FVG</td>
+      <td>18.65</td>
+      <td>18.46</td>
+      <td>19.58</td>
+      <td>❌ 已失效</td>
+      <td>實體破中線</td>
+      <td>0</td>
+      <td>44.78</td>
+      <td>2026-04-09</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/2485.TW/technical-analysis" target="_blank" class="stock-link">2485.TW</a></td>
+      <td>兆赫</td>
+      <td>2026-04-13</td>
+      <td>看漲 FVG</td>
+      <td>76.90</td>
+      <td>75.02</td>
+      <td>80.75</td>
+      <td>💰 已達標</td>
+      <td>獲利點</td>
+      <td>0</td>
+      <td>58.65</td>
+      <td>-</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/3049.TW/technical-analysis" target="_blank" class="stock-link">3049.TW</a></td>
+      <td>精金</td>
+      <td>2026-04-09</td>
+      <td>看漲 FVG</td>
+      <td>11.70</td>
+      <td>11.44</td>
+      <td>12.29</td>
+      <td>✅ 已站穩</td>
+      <td>🟢 買進</td>
+      <td>0</td>
+      <td>40.96</td>
+      <td>2026-04-13</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/8044.TWO/technical-analysis" target="_blank" class="stock-link">8044.TWO</a></td>
+      <td>網家</td>
+      <td>2026-04-14</td>
+      <td>看漲 FVG</td>
+      <td>22.90</td>
+      <td>22.39</td>
+      <td>24.04</td>
+      <td>⏳ 待回測</td>
+      <td>監控中</td>
+      <td>1</td>
+      <td>46.74</td>
+      <td>-</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/2367.TW/technical-analysis" target="_blank" class="stock-link">2367.TW</a></td>
+      <td>燿華</td>
+      <td>2026-03-16</td>
+      <td>看漲 FVG</td>
+      <td>75.60</td>
+      <td>73.43</td>
+      <td>79.38</td>
+      <td>❌ 已失效</td>
+      <td>實體破中線</td>
+      <td>0</td>
+      <td>70.47</td>
+      <td>2026-03-18</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td><a href="https://tw.stock.yahoo.com/quote/4956.TW/technical-analysis" target="_blank" class="stock-link">4956.TW</a></td>
+      <td>光鋐</td>
+      <td>2026-04-14</td>
+      <td>看漲 FVG</td>
+      <td>44.30</td>
+      <td>38.01</td>
+      <td>46.52</td>
+      <td>⏳ 待回測</td>
+      <td>⚡結構突破 ⚠️過熱</td>
+      <td>1</td>
+      <td>67.48</td>
+      <td>-</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                var table = $('.my-report-table').DataTable({
+                    "pageLength": 100, "order": [[ 12, "asc" ]],
+                    "columnDefs": [{ "targets": [-1], "visible": false }],
+                    "rowCallback": function(row, data) {
+                        if (data[data.length-1] === "True" || data[data.length-1] === true) {
+                            $('td:eq(1)', row).prepend('<span style="color:red; font-size:28px;">🔥</span>');
+                            $(row).css({ 'border-left': '15px solid #ffd700', 'background-color': '#fffdec' });
+                        }
+                        if (data[8].includes('買進')) $('td:eq(8)', row).addClass('action-buy');
+                        if (data[8].includes('放空')) $('td:eq(8)', row).addClass('action-sell');
+                        if (data[7].includes('失效')) $(row).addClass('status-fail');
+                    },
+                    initComplete: function () {
+                        this.api().columns([3, 7, 8]).every( function (i) {
+                            var column = this;
+                            var targetId = i==3 ? '#filter-type' : (i==7 ? '#filter-status' : '#filter-action');
+                            var select = $('<select class="filter-select"><option value="">-- 全部 --</option></select>')
+                                .appendTo( $(targetId) ).on( 'change', function () {
+                                    column.search( $(this).val() ? '^'+$(this).val()+'$' : '', true, false ).draw();
+                                });
+                            column.data().unique().sort().each( function ( d ) { if(d) select.append('<option value="'+d+'">'+d+'</option>') });
+                        });
+                    }
+                });
+            });
+        </script>
+    </body>
+    </html>
+    
