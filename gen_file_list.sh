@@ -1,6 +1,8 @@
 #!/bin/bash
 # 接收參數，例如 report/20260428
-TARGET_DIR=${1:-"report/$(date +%Y%m%d)"}
+TARGET_DATE=${1:-"$(date +%Y%m%d)"}
+
+TARGET_DIR="report/$TARGET_DATE"
 
 if [ ! -d "$TARGET_DIR" ]; then
     echo "❌ 錯誤: 目錄 $TARGET_DIR 不存在"
