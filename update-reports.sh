@@ -59,4 +59,6 @@ git commit -m "Update: Combined reports from multiple sources ($COMMIT_TIME)"
 git push origin main
 
 echo "✨ 全部完成！"
+echo "🌐 GitHub: https://github.com/onbed-hub/my-stock-report"
+echo "🌐 網址: https://onbed-hub.github.io/my-stock-report/"
 
