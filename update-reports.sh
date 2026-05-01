@@ -41,13 +41,20 @@ do
     echo "🧹 清理根目錄下冗餘的股號 TXT..."
     find "$TARGET_DIR" -maxdepth 1 -type f -name "[0-9]*.txt" -delete
 
-    # 4. 重新產生 files.json
+    # 4. 重新產生 files.json (增加防錯機制)
     echo "🔍 更新檔案清單 (掃描深度 4)..."
-    find "$TARGET_DIR" -maxdepth 4 -type f \( -name "*.html" -o -name "*.txt" \) \
-        ! -name "files.json" -printf "%P\n" | \
-        jq -R . | jq -s . > "$TARGET_DIR/files.json"
-
+    
+    # 先將結果存入變數，確認有抓到東西
+    FILE_LIST=$(find "$TARGET_DIR" -maxdepth 4 -type f \( -name "*.html" -o -name "*.txt" \) ! -name "files.json" -printf "%P\n")
+    
+    if [ -z "$FILE_LIST" ]; then
+        echo "⚠️  警告: 在 $TARGET_DIR 沒找到任何 HTML 或 TXT 檔案，產出空陣列。"
+        echo "[]" > "$TARGET_DIR/files.json"
+    else
+        echo "$FILE_LIST" | jq -R . | jq -s . > "$TARGET_DIR/files.json"
+    fi
     echo "✅ $CURR_D 處理完成"
+
 done
 
 # --- Git 同步 ---
