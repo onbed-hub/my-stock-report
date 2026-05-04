@@ -11,6 +11,12 @@ SOURCES=(
 
 echo "📅 準備更新過去 $DAYS_TO_UPDATE 天的報告..."
 
+# 1. 確保 Cron 能找到 jq 和其他指令
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+# 2. 指定 jq 的絕對路徑 (更保險)
+JQ_CMD="/usr/local/bin/jq"
+
 for (( i=0; i<$DAYS_TO_UPDATE; i++ ))
 do
     CURR_D=$(date -d "$i days ago" +%Y%m%d)
@@ -34,6 +40,7 @@ do
         else
             echo "⚠️  跳過來源：找不到 $SOURCE_PATH"
         fi
+
     done
 
     # 3. ✨ 清理邏輯：刪除根目錄下數字開頭的 .txt (保留 data/ 目錄)
@@ -43,16 +50,17 @@ do
 
     # 4. 重新產生 files.json (增加防錯機制)
     echo "🔍 更新檔案清單 (掃描深度 4)..."
-    
-    # 先將結果存入變數，確認有抓到東西
-    FILE_LIST=$(find "$TARGET_DIR" -maxdepth 4 -type f \( -name "*.html" -o -name "*.txt" \) ! -name "files.json" -printf "%P\n")
-    
-    if [ -z "$FILE_LIST" ]; then
-        echo "⚠️  警告: 在 $TARGET_DIR 沒找到任何 HTML 或 TXT 檔案，產出空陣列。"
+
+# 使用變數暫存 find 的結果
+    FILE_DATA=$(find "$TARGET_DIR" -maxdepth 4 -type f \( -name "*.html" -o -name "*.txt" \) ! -name "files.json" -printf "%P\n")
+
+    if [ -z "$FILE_DATA" ]; then
         echo "[]" > "$TARGET_DIR/files.json"
     else
-        echo "$FILE_LIST" | jq -R . | jq -s . > "$TARGET_DIR/files.json"
+        # 使用絕對路徑的 JQ 處理
+        echo "$FILE_DATA" | $JQ_CMD -R . | $JQ_CMD -s . > "$TARGET_DIR/files.json"
     fi
+
     echo "✅ $CURR_D 處理完成"
 
 done
