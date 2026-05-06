@@ -68,7 +68,7 @@ done
 # --- Git 同步 ---
 echo "------------------------------------------"
 echo "🔄 正在上傳至 GitHub..."
-git add .
+git add -A
 COMMIT_TIME=$(date "+%Y-%m-%d %H:%M:%S")
 git commit -m "Update: Combined reports from multiple sources ($COMMIT_TIME)"
 git push origin main
