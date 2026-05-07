@@ -151,22 +151,5 @@ VJC.VN     | VJC.VN     | 182000.00  | 💎 持股       |   69.20% |      3 |  
 股號         | 名稱         | 收盤       | 今日訊號       |     累積收益 |   次數 |     勝率 | 理由
 --------------------------------------------------------------------------------------------------------------
 VNM.VN     | VNM.VN     | 61500.00   | ☁️ 觀望      |    0.00% |      0 |    0.00% | [P:1.01/5.0] [🚀 極強] 等待機會
-Error processing VNM.VN-stock-indicators.json: name 'base64' is not defined
-Error processing VNM.VN-stock-indicators.json: name 'base64' is not defined
-Error processing VNM.VN-stock-indicators.json: name 'base64' is not defined
-Error processing VNM.VN-stock-indicators.json: name 'base64' is not defined
-Error processing VNM.VN-stock-indicators.json: name 'base64' is not defined
-Error processing VNM.VN-stock-indicators.json: name 'base64' is not defined
-Error processing VNM.VN-stock-indicators.json: name 'base64' is not defined
-Error processing VNM.VN-stock-indicators.json: name 'base64' is not defined
-Error processing VNM.VN-stock-indicators.json: name 'base64' is not defined
-Error processing VNM.VN-stock-indicators.json: name 'base64' is not defined
-Error processing VNM.VN-stock-indicators.json: name 'base64' is not defined
-Error processing VNM.VN-stock-indicators.json: name 'base64' is not defined
-Error processing VNM.VN-stock-indicators.json: name 'base64' is not defined
-Error processing VNM.VN-stock-indicators.json: name 'base64' is not defined
-Error processing VNM.VN-stock-indicators.json: name 'base64' is not defined
-Error processing VNM.VN-stock-indicators.json: name 'base64' is not defined
-Error processing VNM.VN-stock-indicators.json: name 'base64' is not defined
 
 ✅ 完成！報告位於: report/20260507/vietnam-trend-backtest-report.html
