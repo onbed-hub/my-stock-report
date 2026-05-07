@@ -237,8 +237,8 @@
 
     function showChartInline(element, symbol) {
         const titleObj = document.getElementById('logTitle');
-        const logContent = document.getElementById('logContent');
         const container = document.getElementById('chartContainer');
+        const logContent = document.getElementById('logContent');
         const modal = document.getElementById('logModal');
 
         titleObj.innerText = '📊 技術分析: ' + symbol;
@@ -246,20 +246,17 @@
         container.style.display = 'block';
         container.innerHTML = ''; 
         modal.style.display = 'block';
+
         const b64Data = element.getAttribute('data-chart');
+
         if (!b64Data || b64Data.length < 10) {
-            container.innerHTML = '<div style="padding:20px; color:orange;">⚠️ 此代號無 K 線數據 (或 Base64 格式錯誤)</div>';
+            container.innerHTML = '<div style="padding:20px; color:orange;">⚠️ 資料嵌入失敗</div>';
             return;
         }
 
         try {
             const jsonStr = atob(b64Data);
             const rawData = JSON.parse(jsonStr);
-            if (rawData.length === 0) {
-                container.innerHTML = '<div style="padding:20px; color:orange;">⚠️ 數據內容為空</div>';
-                return;
-            }
-
             const chart = LightweightCharts.createChart(container, {
                 layout: { textColor: '#333', background: { type: 'solid', color: '#fff' } },
                 width: container.clientWidth,
@@ -267,33 +264,39 @@
                 timeScale: { borderColor: '#D1D4DC', barSpacing: 10 }
             });
 
+            // 修正點：使用通用 addSeries 語法確保相容性
             const candleSeries = chart.addCandlestickSeries({
                 upColor: '#ef5350', downColor: '#26a69a', 
                 borderVisible: false, wickUpColor: '#ef5350', wickDownColor: '#26a69a'
             });
 
             const candleData = rawData.map(d => ({
-                time: d.d, open: d.o, high: d.h, low: d.l, close: d.c
+                time: d.d, 
+                open: parseFloat(d.o), 
+                high: parseFloat(d.h), 
+                low: parseFloat(d.l), 
+                close: parseFloat(d.c)
             }));
 
             candleSeries.setData(candleData);
 
-            if (rawData.length > 0 && rawData[0].m !== undefined) {
+            if (rawData.length > 0 && rawData[0].m !== undefined && rawData[0].m !== null) {
                 const maSeries = chart.addLineSeries({ color: '#2196F3', lineWidth: 2, title: 'MA20' });
                 const maData = rawData.filter(d => d.m !== null).map(d => ({
-                    time: d.d, value: d.m
+                    time: d.d, value: parseFloat(d.m)
                 }));
+
                 maSeries.setData(maData);
             }
 
             chart.timeScale().fitContent();
-
-            if (window.currentChart) { window.currentChart.remove(); }
-
+            if (window.currentChart) {
+                try { window.currentChart.remove(); } catch(e) {} 
+            }
             window.currentChart = chart;
 
         } catch (e) {
-            container.innerHTML = '<div style="padding:20px; color:red;">❌ 數據解析錯誤: ' + e.message + '</div>';
+            container.innerHTML = '<div style="padding:20px; color:red;">❌ 繪圖組件錯誤: ' + e.message + '</div>';
             console.error(e);
         }
 
