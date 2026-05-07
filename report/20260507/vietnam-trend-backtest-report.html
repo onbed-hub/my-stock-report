@@ -236,53 +236,60 @@
     }
 
     function showChartInline(element, symbol) {
-        document.getElementById('logTitle').innerText = '📊 技術分析: ' + symbol;
+        const titleObj = document.getElementById('logTitle');
         const logContent = document.getElementById('logContent');
         const container = document.getElementById('chartContainer');
+        const modal = document.getElementById('logModal');
 
+        titleObj.innerText = '📊 技術分析: ' + symbol;
         logContent.style.display = 'none';
         container.style.display = 'block';
-        container.innerHTML = '';
-        document.getElementById('logModal').style.display = 'block';
+        container.innerHTML = ''; 
+        modal.style.display = 'block';
 
-        // 從 element 的 data-chart 屬性抓資料
-        const rawData = JSON.parse(element.getAttribute('data-chart'));
-        if (!rawData || rawData.length === 0) {
-            container.innerHTML = '<div style="padding:20px;">⚠️ 無內嵌數據 (請檢查 JSON 檔案)</div>';
+        const attrData = element.getAttribute('data-chart');
+
+        if (!attrData || attrData === '[]') {
+            container.innerHTML = '<div style="padding:20px; color:orange;">⚠️ 此代號無 K 線數據</div>';
             return;
         }
 
-        // 建立圖表
-        const chart = LightweightCharts.createChart(container, {
-            layout: { textColor: '#333', background: { type: 'solid', color: '#fff' } },
-            width: container.clientWidth,
-            height: 500,
-            timeScale: { barSpacing: 10 }
-        });
+        try {
+            const rawData = JSON.parse(attrData);
+            const chart = LightweightCharts.createChart(container, {
+                layout: { textColor: '#333', background: { type: 'solid', color: '#fff' } },
+                width: container.clientWidth,
+                height: 500,
+                timeScale: { borderColor: '#D1D4DC', barSpacing: 10 }
+            });
 
-        const candleSeries = chart.addCandlestickSeries({
-            upColor: '#ef5350', downColor: '#26a69a', 
-            borderVisible: false, wickUpColor: '#ef5350', wickDownColor: '#26a69a'
-        });
+            const candleSeries = chart.addCandlestickSeries({
+                upColor: '#ef5350', downColor: '#26a69a', 
+                borderVisible: false, wickUpColor: '#ef5350', wickDownColor: '#26a69a'
+            });
 
-        // 對應 Python 精簡過的 Key (d, o, h, l, c, m)
-        candleSeries.setData(rawData.map(d => ({
-            time: d.d, open: d.o, high: d.h, low: d.l, close: d.c
-        })));
+            const candleData = rawData.map(d => ({
+                time: d.d, open: d.o, high: d.h, low: d.l, close: d.c
+            }));
 
-        if (rawData[0].m !== undefined) {
-            const maSeries = chart.addLineSeries({ color: '#2196F3', lineWidth: 2, title: 'MA20' });
-            maSeries.setData(rawData.filter(d => d.m).map(d => ({
-                time: d.d, value: d.m
-            })));
+            candleSeries.setData(candleData);
+
+            if (rawData.length > 0 && rawData[0].m !== undefined) {
+                const maSeries = chart.addLineSeries({ color: '#2196F3', lineWidth: 2, title: 'MA20' });
+                const maData = rawData.filter(d => d.m !== null).map(d => ({
+                    time: d.d, value: d.m
+                }));
+                maSeries.setData(maData);
+            }
+
+            chart.timeScale().fitContent();
+            window.currentChart = chart;
+
+        } catch (e) {
+            container.innerHTML = '<div style="padding:20px; color:red;">❌ 數據解析錯誤</div>';
+            console.error(e);
         }
 
-        chart.timeScale().fitContent();
-
-        // 視窗縮放時自動調整圖表寬度
-        window.onresize = () => {
-            chart.applyOptions({ width: container.clientWidth });
-        };
     }
 
     function showLog(pureId, subDir) {
