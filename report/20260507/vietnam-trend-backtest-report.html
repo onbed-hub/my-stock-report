@@ -198,7 +198,6 @@
         modal.style.display = 'block';
     }
 
-    // 顯示 TXT 交易明細
     function showLog(pureId, subDir) {
         const titleObj = document.getElementById('logTitle');
         const frame = document.getElementById('analysisFrame');
@@ -206,17 +205,28 @@
         const modal = document.getElementById('logModal');
 
         titleObj.innerText = '📜 交易明細: ' + pureId;
+    
+        // 關鍵：先隱藏 iframe，顯示 pre
         frame.style.display = 'none';
-        frame.src = '';
-        logContent.style.display = 'block';
+        frame.src = ''; 
+        logContent.style.display = 'block'; 
         logContent.innerText = '載入中...';
         modal.style.display = 'block';
 
+        // 檢查這裡的路徑是否正確
         var logPath = 'data/' + subDir + '/' + pureId + '-trend-backtest-report.txt';
+    
         fetch(logPath)
-            .then(res => { if(!res.ok) throw new Error(); return res.text(); })
-            .then(data => { logContent.innerText = data; })
-            .catch(() => { logContent.innerText = '❌ 無法讀取明細: ' + logPath; });
+            .then(res => {
+                if(!res.ok) throw new Error('找不到檔案');
+                return res.text();
+            })
+            .then(data => {
+                logContent.innerText = data; // 填入內容
+            })
+            .catch(err => {
+                logContent.innerText = '❌ 無法讀取明細，請檢查路徑：' + logPath;
+            });
     }
 
     function closeModal() {
