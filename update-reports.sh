@@ -3,18 +3,16 @@
 # 設定要更新的天數，預設為 1
 DAYS_TO_UPDATE=${1:-1}
 
-# 1. ✨ 定義多個來源目錄 (在這裡新增你的路徑)
+# 1. ✨ 定義多個來源目錄 (包含你產出 HTML 的路徑)
 SOURCES=(
     "../stock-Quantum/my-code/topology-4-20260209/report"
     "../stock-Quantum/my-code/vietnam/report"
 )
 
-echo "📅 準備更新過去 $DAYS_TO_UPDATE 天的報告..."
+echo "📅 準備同步過去 $DAYS_TO_UPDATE 天的報告..."
 
-# 1. 確保 Cron 能找到 jq 和其他指令
+# 1. 確保 Cron 能找到指令
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-
-# 2. 指定 jq 的絕對路徑 (更保險)
 JQ_CMD="/usr/local/bin/jq"
 
 for (( i=0; i<$DAYS_TO_UPDATE; i++ ))
@@ -28,36 +26,37 @@ do
     # 建立目標目錄
     mkdir -p "$TARGET_DIR"
 
-    # 2. ✨ 內層迴圈：處理每一個來源
+    # 2. ✨ 同步來源：處理每一個來源路徑
     for src_base in "${SOURCES[@]}"
     do
         SOURCE_PATH="$src_base/$CURR_D"
 
         if [ -d "$SOURCE_PATH" ]; then
-            echo "📂 正在從 $SOURCE_PATH 同步..."
-            # 使用 cp -a 覆蓋同步，同名的檔案會以最後一個來源為準
+            echo "📂 正在從 $SOURCE_PATH 同步 (包含分流目錄)..."
+            # 使用 cp -a 保持目錄結構與屬性
+            # 這會把原始路徑下的 stock-analysis/0/ 等子目錄完整複製過來
             cp -a "$SOURCE_PATH/." "$TARGET_DIR/"
         else
             echo "⚠️  跳過來源：找不到 $SOURCE_PATH"
         fi
-
     done
 
-    # 3. ✨ 清理邏輯：刪除根目錄下數字開頭的 .txt (保留 data/ 目錄)
-    # 這是你剛才要求的：只刪除 report/日期/ 底下的股號 txt
+    # 3. ✨ 清理邏輯：刪除根目錄下數字開頭的 .txt (保留資料夾內的檔案)
     echo "🧹 清理根目錄下冗餘的股號 TXT..."
     find "$TARGET_DIR" -maxdepth 1 -type f -name "[0-9]*.txt" -delete
 
-    # 4. 重新產生 files.json (增加防錯機制)
-    echo "🔍 更新檔案清單 (掃描深度 4)..."
+    # 4. 重新產生 files.json (掃描深度 4 以支援分流目錄)
+    echo "🔍 更新檔案清單 (深度 4)..."
 
-# 使用變數暫存 find 的結果
+    # 這裡會抓到：
+    # - report/日期/stock-analysis/0/2330.TW-stock-analysis.html
+    # - 以及其他你在來源路徑產出的檔案
     FILE_DATA=$(find "$TARGET_DIR" -maxdepth 4 -type f \( -name "*.html" -o -name "*.txt" \) ! -name "files.json" -printf "%P\n")
 
     if [ -z "$FILE_DATA" ]; then
         echo "[]" > "$TARGET_DIR/files.json"
     else
-        # 使用絕對路徑的 JQ 處理
+        # 轉成 JSON 陣列存檔
         echo "$FILE_DATA" | $JQ_CMD -R . | $JQ_CMD -s . > "$TARGET_DIR/files.json"
     fi
 
@@ -70,7 +69,7 @@ echo "------------------------------------------"
 echo "🔄 正在上傳至 GitHub..."
 git add -A
 COMMIT_TIME=$(date "+%Y-%m-%d %H:%M:%S")
-git commit -m "Update: Combined reports from multiple sources ($COMMIT_TIME)"
+git commit -m "Update: Combined reports and sub-dir sync ($COMMIT_TIME)"
 git push origin main
 
 echo "✨ 全部完成！"
