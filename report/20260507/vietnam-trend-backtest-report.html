@@ -4,14 +4,14 @@
         <title>vietnam 趨勢報告</title>
     <style>
         html { font-size: 16px; }
-        body { 
-            font-family: 'Segoe UI', "PingFang TC", "Microsoft JhengHei", sans-serif; 
+        body {
+            font-family: 'Segoe UI', "PingFang TC", "Microsoft JhengHei", sans-serif;
             padding: 30px; background: #f8fafc; color: #0f172a; margin: 0;
             -webkit-font-smoothing: antialiased;
         }
         .container { width: 98%; max-width: 1900px; margin: auto; }
-        .card { 
-            background: white; padding: 30px; border-radius: 12px; 
+        .card {
+            background: white; padding: 30px; border-radius: 12px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 25px;
         }
         h2 { font-size: 2.6rem; color: #1e3a8a; text-align: center; margin-bottom: 10px; }
@@ -26,7 +26,6 @@
         th { background: #2563eb; color: white; padding: 18px 12px; font-size: 1.15rem; position: sticky; top: 0; z-index: 5; cursor: pointer; }
         td { padding: 16px 12px; border-bottom: 1px solid #f1f5f9; font-size: 1.15rem; text-align: center; }
 
-        /* 分頁樣式 */
         #pagination { display: flex; justify-content: center; align-items: center; gap: 20px; padding: 20px; background: #f8fafc; border-top: 1px solid #e2e8f0; }
         .page-btn { padding: 10px 25px; cursor: pointer; border-radius: 8px; border: 1px solid #cbd5e1; background: white; font-weight: bold; font-size: 1.1rem; }
         .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
@@ -36,10 +35,12 @@
         .sig-warn { color: #1e293b; background: #fef08a; padding: 8px 16px; border-radius: 8px; border: 1px solid #facc15; font-weight: bold; }
         .hero { background: #fffde7 !important; font-weight: bold; }
 
+        /* Modal 修正版 */
         .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background: rgba(0,0,0,0.7); }
-        .modal-content { background:#fff; margin:2% auto; padding:30px; width:90%; max-height: 90%; border-radius:15px; display:flex; flex-direction:column; }
+        .modal-content { background:#fff; margin:2% auto; padding:20px; width:95%; max-width:1400px; height: 90vh; border-radius:15px; display:flex; flex-direction:column; position: relative; }
         #logContent { background:#0f172a; color:#94a3b8; padding:25px; border-radius:10px; overflow-y:auto; flex-grow:1; font-family:monospace; font-size: 1rem; white-space: pre-wrap; }
-        .close { float:right; font-size:30px; cursor:pointer; font-weight: bold; }
+        #analysisFrame { width: 100%; flex-grow: 1; border: none; border-radius: 8px; background: #fff; }
+        .close { position: absolute; right: 20px; top: 10px; font-size: 35px; cursor: pointer; font-weight: bold; z-index: 1001; color: #64748b; }
 
         @media (max-width: 768px) {
             html { font-size: 13px; }
@@ -49,11 +50,6 @@
         }
     </style>
     
-        <style>
-            .modal-content { width: 95%; max-width: 1400px; height: 90vh; }
-            #analysisFrame { width: 100%; height: 100%; border: none; border-radius: 8px; }
-            #logModal .modal-content { display: flex; flex-direction: column; }
-        </style>
     </head>
     <body><div class='container'>
         <h2>📈 VIETNAM 趨勢回測策略報告 (V3 Pro)</h2>
@@ -173,7 +169,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="logModal" class="modal"><div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
         <h3 id="logTitle" style="color:#1e3a8a; font-size:1.8rem; margin:0 0 15px 0;"></h3>
@@ -182,14 +178,13 @@
     </div></div>
 
     <script>
-    // 1. 全域變數宣告 (只宣告一次)
-    let currentPage = 1; 
-    const pageSize = 30; 
+    let currentPage = 1;
+    const pageSize = 30;
     let filteredRows = [];
-    let sortDir = 1; 
+    let sortDir = 1;
     let lastSortCol = -1;
 
-    // 2. 顯示詳細分析報告 (股號點擊)
+    // 顯示 HTML 圖表分析
     function showAnalysis(url, symbol) {
         const titleObj = document.getElementById('logTitle');
         const frame = document.getElementById('analysisFrame');
@@ -199,11 +194,11 @@
         titleObj.innerText = '🔍 技術分析報告: ' + symbol;
         logContent.style.display = 'none';
         frame.style.display = 'block';
-        frame.src = url; 
+        frame.src = url;
         modal.style.display = 'block';
     }
 
-    // 3. 顯示交易明細 (名稱點擊)
+    // 顯示 TXT 交易明細
     function showLog(pureId, subDir) {
         const titleObj = document.getElementById('logTitle');
         const frame = document.getElementById('analysisFrame');
@@ -224,13 +219,11 @@
             .catch(() => { logContent.innerText = '❌ 無法讀取明細: ' + logPath; });
     }
 
-    // 4. 關閉 Modal (修正版：移除 chart 殘留判斷)
     function closeModal() {
         document.getElementById("logModal").style.display = "none";
-        document.getElementById("analysisFrame").src = ""; 
+        document.getElementById("analysisFrame").src = "";
     }
 
-    // 5. 分頁與篩選邏輯
     function filter() {
         const search = document.getElementById('searchInput').value.toUpperCase();
         const pFilterVal = document.getElementById('pFilter').value;
@@ -243,43 +236,36 @@
             const signalText = row.cells[3].textContent;
             const pnlValue = parseFloat(row.cells[4].textContent.replace('%', ''));
             const matchSearch = idText.includes(search) || nameText.includes(search);
-            
+
             let matchPnl = true;
             if (pFilterVal === "loss") { matchPnl = pnlValue < 0; }
             else if (pFilterVal !== "-999") { matchPnl = pnlValue >= parseFloat(pFilterVal); }
-            
+
             let matchSignal = (sFilter === 'all') ? true : signalText.includes(sFilter);
             return matchSearch && matchPnl && matchSignal;
         });
-        currentPage = 1; 
+        currentPage = 1;
         updateDisplay();
     }
 
     function updateDisplay() {
         const allRows = document.querySelectorAll('#stockTable tbody tr');
         allRows.forEach(row => row.style.display = 'none');
-        
         const totalPages = Math.ceil(filteredRows.length / pageSize) || 1;
         const start = (currentPage - 1) * pageSize;
-        
         filteredRows.slice(start, start + pageSize).forEach(row => row.style.display = '');
-        
-        // 修正：使用更安全的字串組合法
+
         document.getElementById('pageInfo').innerText = '第 ' + currentPage + ' / ' + totalPages + ' 頁 (共 ' + filteredRows.length + ' 檔)';
         document.getElementById('prevBtn').disabled = (currentPage === 1);
         document.getElementById('nextBtn').disabled = (currentPage === totalPages);
     }
 
-    function changePage(step) {
-        currentPage += step; 
-        updateDisplay(); 
-    }
+    function changePage(step) { currentPage += step; updateDisplay(); }
 
     function sortTable(n) {
         const table = document.getElementById("stockTable");
         const tbody = table.querySelector("tbody");
         if (lastSortCol === n) { sortDir *= -1; } else { sortDir = -1; lastSortCol = n; }
-        
         const rowsArray = Array.from(tbody.querySelectorAll("tr"));
         rowsArray.sort((a, b) => {
             let x = a.cells[n].innerText.trim();
@@ -293,14 +279,13 @@
     }
 
     function resetFilters() {
-        document.getElementById('searchInput').value = ''; 
+        document.getElementById('searchInput').value = '';
         document.getElementById('pFilter').value = '-999';
-        document.getElementById('sFilter').value = 'all'; 
+        document.getElementById('sFilter').value = 'all';
         filter();
     }
 
-    // 事件監聽
     window.onclick = (e) => { if(e.target == document.getElementById("logModal")) closeModal(); }
     document.addEventListener('DOMContentLoaded', filter);
-    </script>
+    </script></body></html>
     
