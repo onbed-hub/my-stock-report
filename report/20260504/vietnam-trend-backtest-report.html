@@ -49,6 +49,11 @@
         }
     </style>
     
+        <style>
+            .modal-content { width: 95%; max-width: 1400px; height: 90vh; }
+            #analysisFrame { width: 100%; height: 100%; border: none; border-radius: 8px; }
+            #logModal .modal-content { display: flex; flex-direction: column; }
+        </style>
     </head>
     <body><div class='container'>
         <h2>📈 VIETNAM 趨勢回測策略報告 (V3 Pro)</h2>
@@ -158,7 +163,7 @@
                         <th onclick="sortTable(4)">累積獲利 ↕️</th><th onclick="sortTable(5)">次數 ↕️</th>
                         <th onclick="sortTable(6)">勝率 ↕️</th><th>進場管道 & 狀態理由 ↕️</th>
                     </tr></thead>
-                    <tbody><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/VJC.VN/technical-analysis'>VJC.VN</a></td><td><a href='javascript:void(0)' onclick='showLog("VJC", "other")'>VJC.VN</a></td><td>179900.00</td><td><span class="">💎 持股</span></td><td style='font-weight:bold; color:#dc2626'>56.62%</td><td>4</td><td>50.00%</td><td>[P:0.95/8.0] [📈 穩定] 趨勢維持</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/VHM.VN/technical-analysis'>VHM.VN</a></td><td><a href='javascript:void(0)' onclick='showLog("VHM", "other")'>VHM.VN</a></td><td>142000.00</td><td><span class="sig-warn">🟡 預警 (⚠️ 乖離過高)</span></td><td style='font-weight:bold; color:#dc2626'>49.28%</td><td>3</td><td>100.00%</td><td>[P:0.8/5.0] [📈 穩定] 乖離率 6.2% 謹慎追價</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/GMD.VN/technical-analysis'>GMD.VN</a></td><td><a href='javascript:void(0)' onclick='showLog("GMD", "other")'>GMD.VN</a></td><td>75100.00</td><td><span class="sig-rocket">🟡 預警 (🚀 盤整突破)</span></td><td style='font-weight:bold; color:#dc2626'>41.09%</td><td>4</td><td>75.00%</td><td>[P:0.95/8.0] [📉 轉弱] 離開盤整區</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/BID.VN/technical-analysis'>BID.VN</a></td><td><a href='javascript:void(0)' onclick='showLog("BID", "other")'>BID.VN</a></td><td>40850.00</td><td><span class="">☁️ 觀望</span></td><td style='font-weight:bold; color:#dc2626'>39.02%</td><td>3</td><td>100.00%</td><td>[P:0.97/5.0] [🚀 極強] 等待機會</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/MBB.VN/technical-analysis'>MBB.VN</a></td><td><a href='javascript:void(0)' onclick='showLog("MBB", "other")'>MBB.VN</a></td><td>26100.00</td><td><span class="">☁️ 觀望</span></td><td style='font-weight:bold; color:#dc2626'>37.67%</td><td>6</td><td>66.67%</td><td>[P:0.95/8.0] [📉 轉弱] 等待機會</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/E1VFVN30.VN/technical-analysis'>E1VFVN30.VN</a></td><td><a href='javascript:void(0)' onclick='showLog("E1VFVN30", "other")'>E1VFVN30.VN</a></td><td>35870.00</td><td><span class="">💎 持股</span></td><td style='font-weight:bold; color:#dc2626'>34.03%</td><td>7</td><td>57.14%</td><td>[P:0.8/5.0] [📈 穩定] 趨勢維持</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/VCB.VN/technical-analysis'>VCB.VN</a></td><td><a href='javascript:void(0)' onclick='showLog("VCB", "other")'>VCB.VN</a></td><td>60700.00</td><td><span class="sig-rocket">🟡 預警 (🚀 盤整突破)</span></td><td style='font-weight:bold; color:#dc2626'>16.90%</td><td>2</td><td>100.00%</td><td>[P:1.0/5.0] [🚀 極強] 離開盤整區</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/FUEVFVND.VN/technical-analysis'>FUEVFVND.VN</a></td><td><a href='javascript:void(0)' onclick='showLog("FUEVFVND", "other")'>FUEVFVND.VN</a></td><td>37100.00</td><td><span class="">💎 持股</span></td><td style='font-weight:bold; color:#dc2626'>13.42%</td><td>7</td><td>57.14%</td><td>[P:0.8/5.0] [📉 轉弱] 趨勢維持</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/HVN.VN/technical-analysis'>HVN.VN</a></td><td><a href='javascript:void(0)' onclick='showLog("HVN", "other")'>HVN.VN</a></td><td>22650.00</td><td><span class="">💎 持股</span></td><td style='font-weight:bold; color:#dc2626'>4.47%</td><td>4</td><td>75.00%</td><td>[P:0.95/8.0] [🚀 極強] 趨勢維持</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/BCM.VN/technical-analysis'>BCM.VN</a></td><td><a href='javascript:void(0)' onclick='showLog("BCM", "other")'>BCM.VN</a></td><td>53400.00</td><td><span class="">☁️ 觀望</span></td><td style='font-weight:bold; color:#dc2626'>3.56%</td><td>5</td><td>40.00%</td><td>[P:0.95/8.0] [📉 轉弱] 等待機會</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/SSI.VN/technical-analysis'>SSI.VN</a></td><td><a href='javascript:void(0)' onclick='showLog("SSI", "other")'>SSI.VN</a></td><td>27700.00</td><td><span class="">☁️ 觀望</span></td><td style='font-weight:bold; color:#dc2626'>3.54%</td><td>1</td><td>100.00%</td><td>[P:0.99/5.0] [📉 轉弱] 等待機會</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/FPT.VN/technical-analysis'>FPT.VN</a></td><td><a href='javascript:void(0)' onclick='showLog("FPT", "other")'>FPT.VN</a></td><td>73700.00</td><td><span class="">☁️ 觀望</span></td><td style='font-weight:bold; color:#059669'>-1.91%</td><td>2</td><td>0.00%</td><td>[P:0.99/5.0] [📉 轉弱] 等待機會</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/VHC.VN/technical-analysis'>VHC.VN</a></td><td><a href='javascript:void(0)' onclick='showLog("VHC", "other")'>VHC.VN</a></td><td>61700.00</td><td><span class="">💎 持股</span></td><td style='font-weight:bold; color:#059669'>-3.41%</td><td>7</td><td>28.57%</td><td>[P:0.95/8.0] [📈 穩定] 趨勢維持</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/HPG.VN/technical-analysis'>HPG.VN</a></td><td><a href='javascript:void(0)' onclick='showLog("HPG", "other")'>HPG.VN</a></td><td>27600.00</td><td><span class="">☁️ 觀望</span></td><td style='font-weight:bold; color:#059669'>-5.05%</td><td>4</td><td>25.00%</td><td>[P:1.0/5.0] [📈 穩定] 等待機會</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/VNM.VN/technical-analysis'>VNM.VN</a></td><td><a href='javascript:void(0)' onclick='showLog("VNM", "other")'>VNM.VN</a></td><td>60900.00</td><td><span class="">❄️ 賣出</span></td><td style='font-weight:bold; color:#059669'>-12.10%</td><td>7</td><td>28.57%</td><td>[P:0.95/8.0] [📉 轉弱] 今日觸發 TrendDead</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/MWG.VN/technical-analysis'>MWG.VN</a></td><td><a href='javascript:void(0)' onclick='showLog("MWG", "other")'>MWG.VN</a></td><td>84900.00</td><td><span class="">💎 持股</span></td><td style='font-weight:bold; color:#059669'>-20.70%</td><td>11</td><td>27.27%</td><td>[P:0.95/8.0] [📈 穩定] 趨勢維持</td></tr></tbody>
+                    <tbody><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold; cursor:pointer;' onclick='showAnalysis("stock-analysis/other/VJC.VN-stock-analysis.html", "VJC.VN")'>VJC.VN</a></td><td><a href='javascript:void(0)' style='text-decoration:none; color:inherit; border-bottom:1px dashed #64748b;' onclick='showLog("VJC", "other")'>VJC.VN</a></td><td>179900.00</td><td><span class="">💎 持股</span></td><td style='font-weight:bold; color:#dc2626'>56.62%</td><td>4</td><td>50.00%</td><td>[P:0.95/8.0] [📈 穩定] 趨勢維持</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold; cursor:pointer;' onclick='showAnalysis("stock-analysis/other/VHM.VN-stock-analysis.html", "VHM.VN")'>VHM.VN</a></td><td><a href='javascript:void(0)' style='text-decoration:none; color:inherit; border-bottom:1px dashed #64748b;' onclick='showLog("VHM", "other")'>VHM.VN</a></td><td>142000.00</td><td><span class="sig-warn">🟡 預警 (⚠️ 乖離過高)</span></td><td style='font-weight:bold; color:#dc2626'>49.28%</td><td>3</td><td>100.00%</td><td>[P:0.8/5.0] [📈 穩定] 乖離率 6.2% 謹慎追價</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold; cursor:pointer;' onclick='showAnalysis("stock-analysis/other/GMD.VN-stock-analysis.html", "GMD.VN")'>GMD.VN</a></td><td><a href='javascript:void(0)' style='text-decoration:none; color:inherit; border-bottom:1px dashed #64748b;' onclick='showLog("GMD", "other")'>GMD.VN</a></td><td>75100.00</td><td><span class="sig-rocket">🟡 預警 (🚀 盤整突破)</span></td><td style='font-weight:bold; color:#dc2626'>41.09%</td><td>4</td><td>75.00%</td><td>[P:0.95/8.0] [📉 轉弱] 離開盤整區</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold; cursor:pointer;' onclick='showAnalysis("stock-analysis/other/BID.VN-stock-analysis.html", "BID.VN")'>BID.VN</a></td><td><a href='javascript:void(0)' style='text-decoration:none; color:inherit; border-bottom:1px dashed #64748b;' onclick='showLog("BID", "other")'>BID.VN</a></td><td>40850.00</td><td><span class="">☁️ 觀望</span></td><td style='font-weight:bold; color:#dc2626'>39.02%</td><td>3</td><td>100.00%</td><td>[P:0.97/5.0] [🚀 極強] 等待機會</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold; cursor:pointer;' onclick='showAnalysis("stock-analysis/other/MBB.VN-stock-analysis.html", "MBB.VN")'>MBB.VN</a></td><td><a href='javascript:void(0)' style='text-decoration:none; color:inherit; border-bottom:1px dashed #64748b;' onclick='showLog("MBB", "other")'>MBB.VN</a></td><td>26100.00</td><td><span class="">☁️ 觀望</span></td><td style='font-weight:bold; color:#dc2626'>37.67%</td><td>6</td><td>66.67%</td><td>[P:0.95/8.0] [📉 轉弱] 等待機會</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold; cursor:pointer;' onclick='showAnalysis("stock-analysis/other/E1VFVN30.VN-stock-analysis.html", "E1VFVN30.VN")'>E1VFVN30.VN</a></td><td><a href='javascript:void(0)' style='text-decoration:none; color:inherit; border-bottom:1px dashed #64748b;' onclick='showLog("E1VFVN30", "other")'>E1VFVN30.VN</a></td><td>35870.00</td><td><span class="">💎 持股</span></td><td style='font-weight:bold; color:#dc2626'>34.03%</td><td>7</td><td>57.14%</td><td>[P:0.8/5.0] [📈 穩定] 趨勢維持</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold; cursor:pointer;' onclick='showAnalysis("stock-analysis/other/VCB.VN-stock-analysis.html", "VCB.VN")'>VCB.VN</a></td><td><a href='javascript:void(0)' style='text-decoration:none; color:inherit; border-bottom:1px dashed #64748b;' onclick='showLog("VCB", "other")'>VCB.VN</a></td><td>60700.00</td><td><span class="sig-rocket">🟡 預警 (🚀 盤整突破)</span></td><td style='font-weight:bold; color:#dc2626'>16.90%</td><td>2</td><td>100.00%</td><td>[P:1.0/5.0] [🚀 極強] 離開盤整區</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold; cursor:pointer;' onclick='showAnalysis("stock-analysis/other/FUEVFVND.VN-stock-analysis.html", "FUEVFVND.VN")'>FUEVFVND.VN</a></td><td><a href='javascript:void(0)' style='text-decoration:none; color:inherit; border-bottom:1px dashed #64748b;' onclick='showLog("FUEVFVND", "other")'>FUEVFVND.VN</a></td><td>37100.00</td><td><span class="">💎 持股</span></td><td style='font-weight:bold; color:#dc2626'>13.42%</td><td>7</td><td>57.14%</td><td>[P:0.8/5.0] [📉 轉弱] 趨勢維持</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold; cursor:pointer;' onclick='showAnalysis("stock-analysis/other/HVN.VN-stock-analysis.html", "HVN.VN")'>HVN.VN</a></td><td><a href='javascript:void(0)' style='text-decoration:none; color:inherit; border-bottom:1px dashed #64748b;' onclick='showLog("HVN", "other")'>HVN.VN</a></td><td>22650.00</td><td><span class="">💎 持股</span></td><td style='font-weight:bold; color:#dc2626'>4.47%</td><td>4</td><td>75.00%</td><td>[P:0.95/8.0] [🚀 極強] 趨勢維持</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold; cursor:pointer;' onclick='showAnalysis("stock-analysis/other/BCM.VN-stock-analysis.html", "BCM.VN")'>BCM.VN</a></td><td><a href='javascript:void(0)' style='text-decoration:none; color:inherit; border-bottom:1px dashed #64748b;' onclick='showLog("BCM", "other")'>BCM.VN</a></td><td>53400.00</td><td><span class="">☁️ 觀望</span></td><td style='font-weight:bold; color:#dc2626'>3.56%</td><td>5</td><td>40.00%</td><td>[P:0.95/8.0] [📉 轉弱] 等待機會</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold; cursor:pointer;' onclick='showAnalysis("stock-analysis/other/SSI.VN-stock-analysis.html", "SSI.VN")'>SSI.VN</a></td><td><a href='javascript:void(0)' style='text-decoration:none; color:inherit; border-bottom:1px dashed #64748b;' onclick='showLog("SSI", "other")'>SSI.VN</a></td><td>27700.00</td><td><span class="">☁️ 觀望</span></td><td style='font-weight:bold; color:#dc2626'>3.54%</td><td>1</td><td>100.00%</td><td>[P:0.99/5.0] [📉 轉弱] 等待機會</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold; cursor:pointer;' onclick='showAnalysis("stock-analysis/other/FPT.VN-stock-analysis.html", "FPT.VN")'>FPT.VN</a></td><td><a href='javascript:void(0)' style='text-decoration:none; color:inherit; border-bottom:1px dashed #64748b;' onclick='showLog("FPT", "other")'>FPT.VN</a></td><td>73700.00</td><td><span class="">☁️ 觀望</span></td><td style='font-weight:bold; color:#059669'>-1.91%</td><td>2</td><td>0.00%</td><td>[P:0.99/5.0] [📉 轉弱] 等待機會</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold; cursor:pointer;' onclick='showAnalysis("stock-analysis/other/GEE.VN-stock-analysis.html", "GEE.VN")'>GEE.VN</a></td><td><a href='javascript:void(0)' style='text-decoration:none; color:inherit; border-bottom:1px dashed #64748b;' onclick='showLog("GEE", "other")'>GEE.VN</a></td><td>99885.71</td><td><span class="">☁️ 觀望</span></td><td style='font-weight:bold; color:#059669'>-2.28%</td><td>1</td><td>0.00%</td><td>[P:0.95/8.0] [📉 轉弱] 等待機會</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold; cursor:pointer;' onclick='showAnalysis("stock-analysis/other/VHC.VN-stock-analysis.html", "VHC.VN")'>VHC.VN</a></td><td><a href='javascript:void(0)' style='text-decoration:none; color:inherit; border-bottom:1px dashed #64748b;' onclick='showLog("VHC", "other")'>VHC.VN</a></td><td>61700.00</td><td><span class="">💎 持股</span></td><td style='font-weight:bold; color:#059669'>-3.41%</td><td>7</td><td>28.57%</td><td>[P:0.95/8.0] [📈 穩定] 趨勢維持</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold; cursor:pointer;' onclick='showAnalysis("stock-analysis/other/HPG.VN-stock-analysis.html", "HPG.VN")'>HPG.VN</a></td><td><a href='javascript:void(0)' style='text-decoration:none; color:inherit; border-bottom:1px dashed #64748b;' onclick='showLog("HPG", "other")'>HPG.VN</a></td><td>27600.00</td><td><span class="">☁️ 觀望</span></td><td style='font-weight:bold; color:#059669'>-5.05%</td><td>4</td><td>25.00%</td><td>[P:1.0/5.0] [📈 穩定] 等待機會</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold; cursor:pointer;' onclick='showAnalysis("stock-analysis/other/VNM.VN-stock-analysis.html", "VNM.VN")'>VNM.VN</a></td><td><a href='javascript:void(0)' style='text-decoration:none; color:inherit; border-bottom:1px dashed #64748b;' onclick='showLog("VNM", "other")'>VNM.VN</a></td><td>60900.00</td><td><span class="">❄️ 賣出</span></td><td style='font-weight:bold; color:#059669'>-12.10%</td><td>7</td><td>28.57%</td><td>[P:0.95/8.0] [📉 轉弱] 今日觸發 TrendDead</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold; cursor:pointer;' onclick='showAnalysis("stock-analysis/other/MWG.VN-stock-analysis.html", "MWG.VN")'>MWG.VN</a></td><td><a href='javascript:void(0)' style='text-decoration:none; color:inherit; border-bottom:1px dashed #64748b;' onclick='showLog("MWG", "other")'>MWG.VN</a></td><td>84900.00</td><td><span class="">💎 持股</span></td><td style='font-weight:bold; color:#059669'>-20.70%</td><td>11</td><td>27.27%</td><td>[P:0.95/8.0] [📈 穩定] 趨勢維持</td></tr></tbody>
                 </table>
             </div>
             <div id="pagination">
@@ -168,13 +173,64 @@
             </div>
         </div>
     </div>
+    
     <div id="logModal" class="modal"><div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <h3 id="logTitle" style="color:#1e3a8a; font-size:2.2rem; margin-top:0;"></h3>
-        <pre id="logContent"></pre>
+        <h3 id="logTitle" style="color:#1e3a8a; font-size:1.8rem; margin:0 0 15px 0;"></h3>
+        <iframe id="analysisFrame" style="display:none;"></iframe>
+        <pre id="logContent" style="display:none;"></pre>
     </div></div>
+
     <script>
-    let currentPage = 1; const pageSize = 30; let filteredRows = [];
+    // 1. 全域變數宣告 (只宣告一次)
+    let currentPage = 1; 
+    const pageSize = 30; 
+    let filteredRows = [];
+    let sortDir = 1; 
+    let lastSortCol = -1;
+
+    // 2. 顯示詳細分析報告 (股號點擊)
+    function showAnalysis(url, symbol) {
+        const titleObj = document.getElementById('logTitle');
+        const frame = document.getElementById('analysisFrame');
+        const logContent = document.getElementById('logContent');
+        const modal = document.getElementById('logModal');
+
+        titleObj.innerText = '🔍 技術分析報告: ' + symbol;
+        logContent.style.display = 'none';
+        frame.style.display = 'block';
+        frame.src = url; 
+        modal.style.display = 'block';
+    }
+
+    // 3. 顯示交易明細 (名稱點擊)
+    function showLog(pureId, subDir) {
+        const titleObj = document.getElementById('logTitle');
+        const frame = document.getElementById('analysisFrame');
+        const logContent = document.getElementById('logContent');
+        const modal = document.getElementById('logModal');
+
+        titleObj.innerText = '📜 交易明細: ' + pureId;
+        frame.style.display = 'none';
+        frame.src = '';
+        logContent.style.display = 'block';
+        logContent.innerText = '載入中...';
+        modal.style.display = 'block';
+
+        var logPath = 'data/' + subDir + '/' + pureId + '-trend-backtest-report.txt';
+        fetch(logPath)
+            .then(res => { if(!res.ok) throw new Error(); return res.text(); })
+            .then(data => { logContent.innerText = data; })
+            .catch(() => { logContent.innerText = '❌ 無法讀取明細: ' + logPath; });
+    }
+
+    // 4. 關閉 Modal (修正版：移除 chart 殘留判斷)
+    function closeModal() {
+        document.getElementById("logModal").style.display = "none";
+        document.getElementById("analysisFrame").src = ""; 
+    }
+
+    // 5. 分頁與篩選邏輯
     function filter() {
         const search = document.getElementById('searchInput').value.toUpperCase();
         const pFilterVal = document.getElementById('pFilter').value;
@@ -187,35 +243,47 @@
             const signalText = row.cells[3].textContent;
             const pnlValue = parseFloat(row.cells[4].textContent.replace('%', ''));
             const matchSearch = idText.includes(search) || nameText.includes(search);
+            
             let matchPnl = true;
-            if (pFilterVal === "loss") { matchPnl = pnlValue < 0; } 
+            if (pFilterVal === "loss") { matchPnl = pnlValue < 0; }
             else if (pFilterVal !== "-999") { matchPnl = pnlValue >= parseFloat(pFilterVal); }
+            
             let matchSignal = (sFilter === 'all') ? true : signalText.includes(sFilter);
             return matchSearch && matchPnl && matchSignal;
         });
-        currentPage = 1; updateDisplay();
+        currentPage = 1; 
+        updateDisplay();
     }
 
     function updateDisplay() {
         const allRows = document.querySelectorAll('#stockTable tbody tr');
         allRows.forEach(row => row.style.display = 'none');
+        
         const totalPages = Math.ceil(filteredRows.length / pageSize) || 1;
         const start = (currentPage - 1) * pageSize;
+        
         filteredRows.slice(start, start + pageSize).forEach(row => row.style.display = '');
-        document.getElementById('pageInfo').innerText = `第 ${currentPage} / ${totalPages} 頁 (共 ${filteredRows.length} 檔)`;
+        
+        // 修正：使用更安全的字串組合法
+        document.getElementById('pageInfo').innerText = '第 ' + currentPage + ' / ' + totalPages + ' 頁 (共 ' + filteredRows.length + ' 檔)';
         document.getElementById('prevBtn').disabled = (currentPage === 1);
         document.getElementById('nextBtn').disabled = (currentPage === totalPages);
     }
-    function changePage(step) { currentPage += step; updateDisplay(); }
 
-    let sortDir = 1; let lastSortCol = -1;
+    function changePage(step) {
+        currentPage += step; 
+        updateDisplay(); 
+    }
+
     function sortTable(n) {
         const table = document.getElementById("stockTable");
         const tbody = table.querySelector("tbody");
         if (lastSortCol === n) { sortDir *= -1; } else { sortDir = -1; lastSortCol = n; }
+        
         const rowsArray = Array.from(tbody.querySelectorAll("tr"));
         rowsArray.sort((a, b) => {
-            let x = a.cells[n].innerText.trim(); let y = b.cells[n].innerText.trim();
+            let x = a.cells[n].innerText.trim();
+            let y = b.cells[n].innerText.trim();
             let xVal = isNaN(parseFloat(x.replace(/%/g,''))) ? x.toLowerCase() : parseFloat(x.replace(/%/g,''));
             let yVal = isNaN(parseFloat(y.replace(/%/g,''))) ? y.toLowerCase() : parseFloat(y.replace(/%/g,''));
             return xVal < yVal ? -1 * sortDir : (xVal > yVal ? 1 * sortDir : 0);
@@ -225,32 +293,14 @@
     }
 
     function resetFilters() {
-        document.getElementById('searchInput').value = ''; document.getElementById('pFilter').value = '-999';
-        document.getElementById('sFilter').value = 'all'; filter();
+        document.getElementById('searchInput').value = ''; 
+        document.getElementById('pFilter').value = '-999';
+        document.getElementById('sFilter').value = 'all'; 
+        filter();
     }
 
-    function showLog(pureId, subDir) {
-        var logPath = 'data/' + subDir + '/' + pureId + '-trend-backtest-report.txt';
-
-        document.getElementById('logTitle').innerText = '📜 交易明細: ' + pureId;
-        document.getElementById('logContent').innerText = '載入中...';
-        document.getElementById('logModal').style.display = 'block';
-
-        fetch(logPath)
-            .then(function(response) {
-                if (!response.ok) throw new Error('File not found');
-                return response.text();
-            })
-            .then(function(data) {
-                document.getElementById('logContent').innerText = data;
-            })
-            .catch(function(err) {
-                document.getElementById('logContent').innerText = '❌ 無法讀取明細，路徑為: ' + logPath;
-            });
-    }
-
-    function closeModal() { document.getElementById("logModal").style.display = "none"; }
+    // 事件監聽
     window.onclick = (e) => { if(e.target == document.getElementById("logModal")) closeModal(); }
     document.addEventListener('DOMContentLoaded', filter);
-    </script></body></html>
+    </script>
     
