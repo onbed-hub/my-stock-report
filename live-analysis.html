@@ -95,7 +95,8 @@
 
                 // 2. 統一排除邏輯：包含 'all-' 或 'vietnam-' 的檔案一律剔除
                 const shouldExclude = fileNameLower.includes('all-') || 
-                                    fileNameLower.includes('vietnam-');
+                                    fileNameLower.includes('vietnam-') ||
+                                    fileNameLower.includes('.vn'); // 避開 vnm.vn 等格式
 
                 if (shouldExclude) return false;
                 
