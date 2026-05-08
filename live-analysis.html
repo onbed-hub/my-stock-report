@@ -87,19 +87,23 @@
             // ✨ 排除特定關鍵字，並根據副檔名與目錄決定保留哪些檔案
             // 過濾：排除 all- 系列，保留 HTML 和 data/ 內的 TXT
             const filtered = allFiles.filter(f => {
-                // 1. 宣告變數 (解決 fileNameLower is not defined)
-                const fileNameLower = f.toLowerCase();
+                // 1. 全部轉小寫進行比對
+                const pathLower = f.toLowerCase();
+                const fileName = f.split('/').pop().toLowerCase();
+
                 const isHtml = f.endsWith('.html');
                 const isTxt = f.endsWith('.txt');
                 const isInDataDir = f.includes('data/');
 
-                // 2. 統一排除邏輯：包含 'all-' 或 'vietnam-' 的檔案一律剔除
-                const shouldExclude = fileNameLower.includes('all-') || 
-                                    fileNameLower.includes('vietnam-') ||
-                                    fileNameLower.includes('.VN'); // 避開 vnm.vn 等格式
+                // 2. 建立排除清單 (包含目錄名與檔名)
+                const shouldExclude =
+                    pathLower.includes('vietnam-') ||
+                    pathLower.includes('.vn') ||       // 擋掉 BCM.VN, BID.VN
+                    pathLower.includes('all-') ||
+                    pathLower.includes('/vn/');        // 預防未來有 vn/ 目錄
 
                 if (shouldExclude) return false;
-                
+
                 // 3. 保留規則：HTML 直接通過，TXT 則必須在 data/ 目錄內
                 if (isHtml) return true;
                 if (isTxt && isInDataDir) return true;
