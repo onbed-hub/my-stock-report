@@ -6,7 +6,9 @@ DAYS_TO_UPDATE=${1:-1}
 # 1. ✨ 定義多個來源目錄 (包含你產出 HTML 的路徑)
 SOURCES=(
     "../stock-Quantum/my-code/topology-4-20260209/report"
+    "../stock-Quantum/my-code/topology-4-20260209/basic_data/balance-sheet"
     "../stock-Quantum/my-code/vietnam/report"
+
 )
 
 echo "📅 準備同步過去 $DAYS_TO_UPDATE 天的報告..."
