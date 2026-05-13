@@ -21,7 +21,7 @@ JQ_CMD="/usr/local/bin/jq"
 
 # --- A. 同步基礎資料到「本地根目錄」(僅限 TXT) ---
 if [ -d "$STATIC_BASE_SRC" ]; then
-    echo "📂 正在同步 balance-sheet TXT 至本地根目錄: $STATIC_TARGET_DIR"
+    echo "📂 正在同步 basic_data/balance-sheet TXT 至本地根目錄: $STATIC_TARGET_DIR"
     mkdir -p "$STATIC_TARGET_DIR"
 
     # 用 rsync 精確同步 TXT，這不會動到 report 目錄
@@ -69,6 +69,10 @@ do
 done
 
 echo "------------------------------------------"
+
+# 在腳本的 git add -A 之前加入
+find ./report -name "basic_data" -type d -exec rm -rf {} +
+
 echo "🔄 正在上傳至 GitHub..."
 git add -A
 COMMIT_TIME=$(date "+%Y-%m-%d %H:%M:%S")
