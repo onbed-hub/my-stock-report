@@ -366,6 +366,16 @@
             })
             .then(function(data) {
                 document.getElementById('logContent').innerText = data;
+                // --- 加上這段自動校正 ---
+                // 假設你的資料第一行是 "產業分類: 半導體"
+                var matched = data.match(/產業分類:\s*(.+)/);
+                if (matched && matched[1]) {{
+                    var realIndustry = matched[1].trim();
+                    // 找到該股票在表格中的產業欄位並更新它
+                    // 假設你的產業欄位有特定的 ID 或 Class
+                    var industryCell = document.querySelector('td[data-stock="' + fullId + '"]');
+                    if (industryCell) industryCell.innerText = realIndustry;
+                }}
             })
             .catch(function(err) {
                 document.getElementById('logContent').innerText = '❌ 無法讀取明細，路徑為: ' + logPath;
