@@ -1,3 +1,0 @@
-股票代碼: 8054.TW
-產業分類: 櫃半導體
-主要業務: 特殊應用積體電路 (Application Specific IC, ASIC) 設計服務 系統單晶片(System-on-Chip; SoC)設計服務
