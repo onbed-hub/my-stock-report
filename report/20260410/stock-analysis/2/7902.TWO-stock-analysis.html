@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7902.TWO - 20260410</title>
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+    <style>
+        body { font-family: -apple-system, "Segoe UI", sans-serif; margin: 0; background: #f4f7f9; color: #334155; }
+        .container { max-width: 1100px; margin: 10px auto; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        
+        /* 標題與日期 */
+        h3 { margin-top: 0; color: #1e293b; border-left: 4px solid #2563eb; padding-left: 10px; }
+
+        /* 控制按鈕區 */
+        .controls { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+        .btn { 
+            padding: 6px 14px; border: 1px solid #e2e8f0; background: white; color: #64748b; 
+            border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn.active { background: #2563eb; color: white; border-color: #2563eb; }
+
+        /* 圖例說明區 (Legend Card) */
+        .legend-box { 
+            display: flex; gap: 12px; flex-wrap: wrap; 
+            background: #f8fafc; padding: 10px; border-radius: 8px; 
+            margin-bottom: 15px; font-size: 12px; border: 1px solid #f1f5f9;
+        }
+        .leg-item { display: flex; align-items: center; gap: 4px; font-weight: 500; }
+        .dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+
+        #plot { width: 100%; height: 65vh; min-height: 420px; }
+
+        @media (max-width: 600px) {
+            .container { margin: 0; border-radius: 0; padding: 10px; }
+            h3 { font-size: 1rem; }
+            .legend-box { gap: 8px; padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>7902.TWO 技術分析 (20260410)</h3>
+        
+        <div class="controls">
+            <button class="btn" onclick="updateRange(20, this)">20天</button>
+            <button class="btn" onclick="updateRange(60, this)">60天</button>
+            <button class="btn active" onclick="updateRange(150, this)">全部</button>
+        </div>
+
+        <div class="legend-box">
+            <div class="leg-item"><span class="dot" style="background:#ffa726"></span> MA5</div>
+            <div class="leg-item"><span class="dot" style="background:#2196f3"></span> MA10</div>
+            <div class="leg-item"><span class="dot" style="background:#9c27b0"></span> MA20</div>
+            <div class="leg-item"><span class="dot" style="background:#ccc; border:1px dashed #999"></span> 布林通道 (上下軌)</div>
+            <div class="leg-item"><span class="dot" style="background:#ef5350"></span> 漲</div>
+            <div class="leg-item"><span class="dot" style="background:#26a69a"></span> 跌</div>
+        </div>
+
+        <div id="plot"></div>
+    </div>
+
+    <script>
+        const rawData = [{"Date": "2026-01-22", "Open": 7.8000001907, "High": 40.6500015259, "Low": 7.8000001907, "Close": 27.6000003815, "Volume": 4314742, "MA_5": 0, "MA_10": 0, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-01-23", "Open": 26.1499996185, "High": 30, "Low": 21, "Close": 25.3500003815, "Volume": 1748920, "MA_5": 0, "MA_10": 0, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-01-26", "Open": 24.7000007629, "High": 25.8500003815, "Low": 22.3999996185, "Close": 25.1499996185, "Volume": 761524, "MA_5": 0, "MA_10": 0, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-01-27", "Open": 25.1499996185, "High": 29.4500007629, "Low": 24.5, "Close": 27.4500007629, "Volume": 1061076, "MA_5": 0, "MA_10": 0, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-01-28", "Open": 26.2000007629, "High": 29, "Low": 25.0499992371, "Close": 26.5, "Volume": 1234728, "MA_5": 26.4100002289, "MA_10": 0, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-01-29", "Open": 26.6499996185, "High": 27.9500007629, "Low": 25, "Close": 27, "Volume": 647398, "MA_5": 26.2900001526, "MA_10": 0, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-01-30", "Open": 27, "High": 28.1000003815, "Low": 26.2000007629, "Close": 27.75, "Volume": 634252, "MA_5": 26.7700000763, "MA_10": 0, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-02-02", "Open": 27.75, "High": 31.8999996185, "Low": 27.5, "Close": 31.2999992371, "Volume": 1440431, "MA_5": 28, "MA_10": 0, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-02-03", "Open": 31.25, "High": 34.7000007629, "Low": 30.9500007629, "Close": 32.9000015259, "Volume": 1151292, "MA_5": 29.0900001526, "MA_10": 0, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-02-04", "Open": 32.9000015259, "High": 34.7000007629, "Low": 30.3999996185, "Close": 33.7000007629, "Volume": 666218, "MA_5": 30.5300003052, "MA_10": 28.470000267, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-02-05", "Open": 33.7000007629, "High": 34.5, "Low": 32, "Close": 34.5, "Volume": 802868, "MA_5": 32.0300003052, "MA_10": 29.1600002289, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-02-06", "Open": 32.9000015259, "High": 34, "Low": 31.3500003815, "Close": 33.5999984741, "Volume": 920023, "MA_5": 33.2, "MA_10": 29.9850000381, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-02-09", "Open": 33.5999984741, "High": 34.0999984741, "Low": 32.2000007629, "Close": 33.3499984741, "Volume": 587282, "MA_5": 33.6099998474, "MA_10": 30.8049999237, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-02-10", "Open": 32.8499984741, "High": 34.4500007629, "Low": 32.8499984741, "Close": 33.5, "Volume": 463216, "MA_5": 33.7299995422, "MA_10": 31.4099998474, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-02-11", "Open": 33.0999984741, "High": 34.9500007629, "Low": 33.0999984741, "Close": 33.7000007629, "Volume": 679507, "MA_5": 33.7299995422, "MA_10": 32.1299999237, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-02-23", "Open": 34.75, "High": 43.75, "Low": 34, "Close": 43.5499992371, "Volume": 2901255, "MA_5": 35.5399993896, "MA_10": 33.7849998474, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-02-24", "Open": 43.5499992371, "High": 50.5999984741, "Low": 43, "Close": 50.5, "Volume": 3349701, "MA_5": 38.9199996948, "MA_10": 36.0599998474, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-02-25", "Open": 50.5999984741, "High": 51.5, "Low": 45.9000015259, "Close": 49.9500007629, "Volume": 2130180, "MA_5": 42.2400001526, "MA_10": 37.925, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-02-26", "Open": 49.9500007629, "High": 49.9500007629, "Low": 44.9000015259, "Close": 46, "Volume": 1843206, "MA_5": 44.7400001526, "MA_10": 39.2349998474, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-03-02", "Open": 45.5, "High": 47.2999992371, "Low": 44.6500015259, "Close": 44.75, "Volume": 782553, "MA_5": 46.95, "MA_10": 40.3399997711, "MA_20": 34.4050000191, "Upper_Band": 50.7256004839, "Lower_Band": 18.0843995542, "BOLL": 34.4050000191}, {"Date": "2026-03-03", "Open": 45.4500007629, "High": 45.5, "Low": 41.5999984741, "Close": 41.75, "Volume": 1133156, "MA_5": 46.5900001526, "MA_10": 41.0649997711, "MA_20": 35.1125, "Upper_Band": 51.4178067111, "Lower_Band": 18.8071932889, "BOLL": 35.1125}, {"Date": "2026-03-04", "Open": 42, "High": 42, "Low": 36.2999992371, "Close": 39.25, "Volume": 884267, "MA_5": 44.3400001526, "MA_10": 41.6299999237, "MA_20": 35.8074999809, "Upper_Band": 51.5354595699, "Lower_Band": 20.079540392, "BOLL": 35.8074999809}, {"Date": "2026-03-05", "Open": 39.5999984741, "High": 44.2000007629, "Low": 39.5999984741, "Close": 42.2000007629, "Volume": 435786, "MA_5": 42.7900001526, "MA_10": 42.5150001526, "MA_20": 36.6600000381, "Upper_Band": 51.792732155, "Lower_Band": 21.5272679213, "BOLL": 36.6600000381}, {"Date": "2026-03-06", "Open": 41.3499984741, "High": 45.4500007629, "Low": 41.3499984741, "Close": 44.0999984741, "Volume": 850175, "MA_5": 42.4099998474, "MA_10": 43.575, "MA_20": 37.4924999237, "Upper_Band": 52.3207544625, "Lower_Band": 22.6642453849, "BOLL": 37.4924999237}, {"Date": "2026-03-09", "Open": 44, "High": 44.2999992371, "Low": 38, "Close": 44.2999992371, "Volume": 440464, "MA_5": 42.3199996948, "MA_10": 44.6349998474, "MA_20": 38.3824998856, "Upper_Band": 52.5549815525, "Lower_Band": 24.2100182186, "BOLL": 38.3824998856}, {"Date": "2026-03-10", "Open": 42.8499984741, "High": 46.7999992371, "Low": 42.8499984741, "Close": 44, "Volume": 450591, "MA_5": 42.7699996948, "MA_10": 44.6799999237, "MA_20": 39.2324998856, "Upper_Band": 52.5435667315, "Lower_Band": 25.9214330396, "BOLL": 39.2324998856}, {"Date": "2026-03-11", "Open": 44.9500007629, "High": 45.0999984741, "Low": 43.9000015259, "Close": 44.4500007629, "Volume": 267965, "MA_5": 43.8099998474, "MA_10": 44.075, "MA_20": 40.0674999237, "Upper_Band": 52.4053440436, "Lower_Band": 27.7296558038, "BOLL": 40.0674999237}, {"Date": "2026-03-12", "Open": 44.4500007629, "High": 44.5, "Low": 41.8499984741, "Close": 43.2999992371, "Volume": 224220, "MA_5": 44.0299995422, "MA_10": 43.4099998474, "MA_20": 40.6674999237, "Upper_Band": 52.3603800945, "Lower_Band": 28.9746197529, "BOLL": 40.6674999237}, {"Date": "2026-03-13", "Open": 43, "High": 43.9500007629, "Low": 41, "Close": 42, "Volume": 239317, "MA_5": 43.6099998474, "MA_10": 43.0099998474, "MA_20": 41.1224998474, "Upper_Band": 52.2366198211, "Lower_Band": 30.0083798737, "BOLL": 41.1224998474}, {"Date": "2026-03-16", "Open": 42.5999984741, "High": 43, "Low": 40.9000015259, "Close": 42.4500007629, "Volume": 143287, "MA_5": 43.2400001526, "MA_10": 42.7799999237, "MA_20": 41.5599998474, "Upper_Band": 52.1188877402, "Lower_Band": 31.0011119547, "BOLL": 41.5599998474}, {"Date": "2026-03-17", "Open": 41.5499992371, "High": 43.6500015259, "Low": 41.3499984741, "Close": 41.3499984741, "Volume": 306271, "MA_5": 42.7099998474, "MA_10": 42.7399997711, "MA_20": 41.9024997711, "Upper_Band": 51.9280714761, "Lower_Band": 31.8769280662, "BOLL": 41.9024997711}, {"Date": "2026-03-18", "Open": 41.0499992371, "High": 43.1500015259, "Low": 38.6500015259, "Close": 40, "Volume": 430535, "MA_5": 41.8199996948, "MA_10": 42.8149997711, "MA_20": 42.2224998474, "Upper_Band": 51.5139491669, "Lower_Band": 32.9310505279, "BOLL": 42.2224998474}, {"Date": "2026-03-19", "Open": 39, "High": 40.9500007629, "Low": 38.8499984741, "Close": 39.75, "Volume": 427595, "MA_5": 41.1099998474, "MA_10": 42.5699996948, "MA_20": 42.5424999237, "Upper_Band": 50.9457119483, "Lower_Band": 34.1392878991, "BOLL": 42.5424999237}, {"Date": "2026-03-20", "Open": 39.75, "High": 41, "Low": 38.25, "Close": 39.0499992371, "Volume": 276408, "MA_5": 40.5199996948, "MA_10": 42.0649997711, "MA_20": 42.8199998856, "Upper_Band": 50.2794622645, "Lower_Band": 35.3605375066, "BOLL": 42.8199998856}, {"Date": "2026-03-23", "Open": 39.0499992371, "High": 41, "Low": 38.9000015259, "Close": 40.1500015259, "Volume": 262345, "MA_5": 40.0599998474, "MA_10": 41.65, "MA_20": 43.1424999237, "Upper_Band": 49.4031772356, "Lower_Band": 36.8818226118, "BOLL": 43.1424999237}, {"Date": "2026-03-24", "Open": 39.4000015259, "High": 41, "Low": 37.7999992371, "Close": 41, "Volume": 142285, "MA_5": 39.9900001526, "MA_10": 41.35, "MA_20": 43.0149999619, "Upper_Band": 49.344222203, "Lower_Band": 36.6857777207, "BOLL": 43.0149999619}, {"Date": "2026-03-25", "Open": 39.0499992371, "High": 41, "Low": 39.0499992371, "Close": 40.1500015259, "Volume": 162082, "MA_5": 40.0200004578, "MA_10": 40.9200000763, "MA_20": 42.4975000381, "Upper_Band": 47.8700888367, "Lower_Band": 37.1249112396, "BOLL": 42.4975000381}, {"Date": "2026-03-26", "Open": 40.1500015259, "High": 41, "Low": 39, "Close": 39.7999992371, "Volume": 299228, "MA_5": 40.0300003052, "MA_10": 40.5700000763, "MA_20": 41.9899999619, "Upper_Band": 46.1875679636, "Lower_Band": 37.7924319601, "BOLL": 41.9899999619}, {"Date": "2026-03-27", "Open": 38.5, "High": 40.0999984741, "Low": 38.2000007629, "Close": 40.0999984741, "Volume": 145358, "MA_5": 40.2400001526, "MA_10": 40.3799999237, "MA_20": 41.6949998856, "Upper_Band": 45.5185968634, "Lower_Band": 37.8714029078, "BOLL": 41.6949998856}, {"Date": "2026-03-30", "Open": 38.2000007629, "High": 40.0999984741, "Low": 38, "Close": 39.9500007629, "Volume": 199231, "MA_5": 40.2, "MA_10": 40.1299999237, "MA_20": 41.4549999237, "Upper_Band": 45.0679734006, "Lower_Band": 37.8420264469, "BOLL": 41.4549999237}, {"Date": "2026-03-31", "Open": 38.0499992371, "High": 39.9500007629, "Low": 37, "Close": 38.8499984741, "Volume": 261626, "MA_5": 39.7699996948, "MA_10": 39.8799999237, "MA_20": 41.3099998474, "Upper_Band": 45.1014861398, "Lower_Band": 37.518513555, "BOLL": 41.3099998474}, {"Date": "2026-04-01", "Open": 37.4500007629, "High": 40.5999984741, "Low": 37.2999992371, "Close": 40, "Volume": 117191, "MA_5": 39.7399993896, "MA_10": 39.8799999237, "MA_20": 41.3474998474, "Upper_Band": 45.0673576455, "Lower_Band": 37.6276420493, "BOLL": 41.3474998474}, {"Date": "2026-04-02", "Open": 38.0999984741, "High": 39.9000015259, "Low": 36.9000015259, "Close": 38.75, "Volume": 325311, "MA_5": 39.5299995422, "MA_10": 39.7799999237, "MA_20": 41.1749998093, "Upper_Band": 45.0453322324, "Lower_Band": 37.3046673861, "BOLL": 41.1749998093}, {"Date": "2026-04-07", "Open": 38.75, "High": 38.75, "Low": 37.4000015259, "Close": 38.1500015259, "Volume": 277521, "MA_5": 39.1400001526, "MA_10": 39.6900001526, "MA_20": 40.8774999619, "Upper_Band": 44.715738903, "Lower_Band": 37.0392610207, "BOLL": 40.8774999619}, {"Date": "2026-04-08", "Open": 37.5, "High": 40, "Low": 37.5, "Close": 39, "Volume": 347342, "MA_5": 38.95, "MA_10": 39.575, "MA_20": 40.6125, "Upper_Band": 44.1779593423, "Lower_Band": 37.0470406577, "BOLL": 40.6125}, {"Date": "2026-04-09", "Open": 39, "High": 41, "Low": 38.5, "Close": 39.1500015259, "Volume": 298236, "MA_5": 39.0100006104, "MA_10": 39.3900001526, "MA_20": 40.3700000763, "Upper_Band": 43.6102728979, "Lower_Band": 37.1297272547, "BOLL": 40.3700000763}, {"Date": "2026-04-10", "Open": 38.7000007629, "High": 40.5999984741, "Low": 37.2999992371, "Close": 39.1500015259, "Volume": 209898, "MA_5": 38.8400009155, "MA_10": 39.2900001526, "MA_20": 40.1050001144, "Upper_Band": 42.753117184, "Lower_Band": 37.4568830449, "BOLL": 40.1050001144}];
+
+        function drawPlot(displayCount) {
+            const data = rawData.slice(-displayCount);
+            const x = data.map(d => d.Date);
+            
+            // 數據定義與原版相同...
+            const candle = { x: x, open: data.map(d => d.Open), high: data.map(d => d.High), low: data.map(d => d.Low), close: data.map(d => d.Close), type: 'candlestick', name: 'K線', yaxis: 'y2', increasing: {line: {color: '#ef5350'}}, decreasing: {line: {color: '#26a69a'}} };
+            const ma5 = { x: x, y: data.map(d => d.MA_5), name: 'MA5', type: 'scatter', mode: 'lines', yaxis: 'y2', line: {color: '#ffa726', width: 1.2} };
+            const ma10 = { x: x, y: data.map(d => d.MA_10), name: 'MA10', type: 'scatter', mode: 'lines', yaxis: 'y2', line: {color: '#2196f3', width: 1.2} };
+            const ma20 = { x: x, y: data.map(d => d.MA_20), name: 'MA20', type: 'scatter', mode: 'lines', yaxis: 'y2', line: {color: '#9c27b0', width: 2} };
+            const bUp = { x: x, y: data.map(d => d.Upper_Band), name: '上軌', type: 'scatter', mode: 'lines', yaxis: 'y2', line: {color: '#ccc', dash: 'dot', width: 1} };
+            const bLo = { x: x, y: data.map(d => d.Lower_Band), name: '下軌', type: 'scatter', mode: 'lines', yaxis: 'y2', line: {color: '#ccc', dash: 'dot', width: 1}, fill: 'tonexty', fillcolor: 'rgba(200,200,200,0.05)' };
+            const vol = { x: x, y: data.map(d => d.Volume), type: 'bar', name: '量', yaxis: 'y', marker: { color: data.map(d => d.Close >= d.Open ? '#ef5350' : '#26a69a') } };
+            
+            const layout = {
+                xaxis: { type: 'category', rangeslider: { visible: false }, tickfont: { size: 10 } },
+                yaxis: { domain: [0, 0.15], showgrid: false },
+                yaxis2: { domain: [0.2, 1] },
+                hovermode: 'x unified',
+                showlegend: false, // 既然上面有說明卡了，這裡關掉讓畫面更寬
+                margin: { t: 10, b: 30, l: 40, r: 10 },
+                template: 'plotly_white'
+            };
+
+            Plotly.newPlot('plot', [vol, bUp, bLo, candle, ma5, ma10, ma20], layout, { responsive: true, displayModeBar: false });
+        }
+
+        function updateRange(days, btn) {
+            document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            drawPlot(days);
+        }
+
+        // 初始偵測
+        const initCount = window.innerWidth < 600 ? 30 : 150;
+        if(window.innerWidth < 600) {
+             document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+             document.querySelectorAll('.btn')[0].classList.add('active'); // 預設 20天
+             drawPlot(20);
+        } else {
+             drawPlot(150);
+        }
+    </script>
+</body>
+</html>
+            
