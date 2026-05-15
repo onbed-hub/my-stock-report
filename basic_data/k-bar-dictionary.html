@@ -2,170 +2,221 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title>K棒視覺化實戰百科</title>
+    <title>K棒實戰全手冊 - 24種型態詳解</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f8f9fa; padding: 40px; font-family: "Microsoft JhengHei", sans-serif; }
-        .container { max-width: 1100px; }
-        .section-title { border-left: 5px solid #0d6efd; padding-left: 15px; margin: 40px 0 20px; color: #333; font-weight: bold; }
+        body { background-color: #f0f2f5; font-family: "Microsoft JhengHei", sans-serif; padding: 30px; }
+        .nav-pills .nav-link.active { background-color: #0d6efd; box-shadow: 0 4px 10px rgba(13,110,253,0.3); }
+        .card { border: none; border-radius: 15px; transition: 0.3s; height: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 12px 20px rgba(0,0,0,0.1); }
         
-        /* K棒繪製 CSS */
-        .k-box { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 120px; margin-bottom: 15px; }
-        .wick { width: 2px; background-color: #333; flex-grow: 1; }
-        .body { width: 30px; border: 1px solid #333; }
-        .red { background-color: #f44336; border-color: #b71c1c; } /* 看漲紅 */
-        .green { background-color: #4caf50; border-color: #1b5e20; } /* 看跌綠 */
-        .doji-body { height: 2px; background-color: #333; width: 40px; }
+        /* K棒繪圖 */
+        .k-preview { height: 100px; display: flex; align-items: center; justify-content: center; background: #fafafa; border-radius: 10px; margin-bottom: 15px; gap: 5px; }
+        .k-item { display: flex; flex-direction: column; align-items: center; width: 25px; }
+        .wick { width: 2px; background: #333; }
+        .body { width: 20px; border: 1px solid #333; }
+        .up-color { background: #f44336; border-color: #b71c1c; }
+        .down-color { background: #4caf50; border-color: #1b5e20; }
+        .doji { height: 2px; background: #333; width: 30px; }
 
-        .card { border: none; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); height: 100%; transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        .predict-tag { font-size: 0.85em; font-weight: bold; padding: 3px 10px; border-radius: 20px; display: inline-block; margin-bottom: 10px; }
-        .up { background-color: #ffebee; color: #c62828; }
-        .down { background-color: #e8f5e9; color: #2e7d32; }
+        .detail-list { font-size: 0.9rem; text-align: left; padding-left: 0; list-style: none; }
+        .detail-list li { margin-bottom: 5px; border-bottom: 1px dashed #eee; padding-bottom: 5px; }
+        .predict-up { color: #d32f2f; font-weight: bold; }
+        .predict-down { color: #388e3c; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="text-center mb-5">
-        <h1 class="display-5 fw-bold">📈 K棒型態與組合視覺化百科</h1>
-        <p class="text-muted">直觀對照圖解，精準預判趨勢轉折</p>
+        <h1 class="fw-bold">📈 K棒實戰全手冊</h1>
+        <p class="text-muted">收錄 24 種核心型態，涵蓋單根力道與組合預判</p>
     </div>
 
-    <h2 class="section-title">核心單根 K 棒型態</h2>
-    <div class="row g-4">
-        <div class="col-md-3">
-            <div class="card p-3 text-center">
-                <div class="k-box">
-                    <div class="wick" style="height: 5px; flex-grow: 0;"></div>
-                    <div class="body red" style="height: 80px;"></div>
-                    <div class="wick" style="height: 5px; flex-grow: 0;"></div>
+    <!-- 分頁導覽 -->
+    <ul class="nav nav-pills justify-content-center mb-4" id="pills-tab" role="tablist">
+        <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab1">單根基礎 (8種)</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab2">看漲組合 (8種)</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab3">看跌組合 (8種)</button></li>
+    </ul>
+
+    <div class="tab-content" id="pills-tabContent">
+        
+        <!-- 第一頁：單根基礎 -->
+        <div class="tab-pane fade show active" id="tab1">
+            <div class="row g-4">
+                <!-- 大陽線 -->
+                <div class="col-md-3">
+                    <div class="card p-3 text-center">
+                        <div class="k-preview"><div class="k-item"><div class="wick" style="height:5px"></div><div class="body up-color" style="height:60px"></div><div class="wick" style="height:5px"></div></div></div>
+                        <h5>長紅棒 (Marubozu)</h5>
+                        <ul class="detail-list">
+                            <li><strong>特徵：</strong>實體長，影線極短。</li>
+                            <li><strong>意義：</strong>買盤掌握絕對優勢。</li>
+                            <li><strong>預判：</strong><span class="predict-up">續漲機率 80%</span></li>
+                        </ul>
+                    </div>
                 </div>
-                <h5>長紅棒</h5>
-                <span class="predict-tag up">預判：極強看漲</span>
-                <p class="small text-muted">買盤力道強勁，趨勢發動訊號。</p>
+                <!-- 避雷針 -->
+                <div class="col-md-3">
+                    <div class="card p-3 text-center">
+                        <div class="k-preview"><div class="k-item"><div class="wick" style="height:50px"></div><div class="body down-color" style="height:20px"></div><div class="wick" style="height:5px"></div></div></div>
+                        <h5>上影線 (流星)</h5>
+                        <ul class="detail-list">
+                            <li><strong>特徵：</strong>上影線長度為實體2倍。</li>
+                            <li><strong>意義：</strong>高檔遇壓，試探失敗。</li>
+                            <li><strong>預判：</strong><span class="predict-down">轉跌機ย 70%</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 更多單根可在此複製... -->
+                <div class="col-md-3">
+                    <div class="card p-3 text-center">
+                        <div class="k-preview"><div class="k-item"><div class="wick" style="height:40px"></div><div class="doji"></div><div class="wick" style="height:40px"></div></div></div>
+                        <h5>十字星 (Doji)</h5>
+                        <ul class="detail-list">
+                            <li><strong>特徵：</strong>開盤價等於收盤價。</li>
+                            <li><strong>意義：</strong>多空交戰，力道平衡。</li>
+                            <li><strong>預判：</strong><span class="text-primary">變盤訊號</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card p-3 text-center">
+                        <div class="k-preview"><div class="k-item"><div class="wick" style="height:5px"></div><div class="body up-color" style="height:20px"></div><div class="wick" style="height:50px"></div></div></div>
+                        <h5>錘子線 (Hammer)</h5>
+                        <ul class="detail-list">
+                            <li><strong>特徵：</strong>下影線極長，實體小。</li>
+                            <li><strong>意義：</strong>低檔支撐極強。</li>
+                            <li><strong>預判：</strong><span class="predict-up">底部反轉</span></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card p-3 text-center">
-                <div class="k-box">
-                    <div class="wick" style="height: 5px; flex-grow: 0;"></div>
-                    <div class="body green" style="height: 80px;"></div>
-                    <div class="wick" style="height: 5px; flex-grow: 0;"></div>
+
+        <!-- 第二頁：看漲組合 -->
+        <div class="tab-pane fade" id="tab2">
+            <div class="row g-4">
+                <!-- 多方砲 -->
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <div class="k-preview">
+                            <div class="k-item"><div class="body up-color" style="height:40px"></div></div>
+                            <div class="k-item"><div class="body down-color" style="height:20px"></div></div>
+                            <div class="k-item"><div class="body up-color" style="height:50px"></div></div>
+                        </div>
+                        <h5>多方砲 (疊疊樂)</h5>
+                        <ul class="detail-list">
+                            <li><strong>特徵：</strong>紅-小黑-紅，且第三根過高。</li>
+                            <li><strong>細解：</strong>主力洗盤後再度發動攻擊。</li>
+                            <li><strong>預判：</strong><span class="predict-up">強勢起漲</span></li>
+                        </ul>
+                    </div>
                 </div>
-                <h5>長黑棒</h5>
-                <span class="predict-tag down">預判：極強看跌</span>
-                <p class="small text-muted">賣壓沈重，恐慌拋售，趨勢轉弱。</p>
+                <!-- 晨星 -->
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <div class="k-preview">
+                            <div class="k-item"><div class="body down-color" style="height:50px"></div></div>
+                            <div class="k-item"><div class="doji" style="width:15px"></div></div>
+                            <div class="k-item"><div class="body up-color" style="height:50px"></div></div>
+                        </div>
+                        <h5>晨星 (Morning Star)</h5>
+                        <ul class="detail-list">
+                            <li><strong>特徵：</strong>大黑K + 跳空小K + 大紅K。</li>
+                            <li><strong>細解：</strong>曙光初露，徹底扭轉跌勢。</li>
+                            <li><strong>預判：</strong><span class="predict-up">波段底部確立</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 貫穿線 -->
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <div class="k-preview">
+                            <div class="k-item"><div class="body down-color" style="height:60px"></div></div>
+                            <div class="k-item" style="transform:translateY(10px)"><div class="body up-color" style="height:45px"></div></div>
+                        </div>
+                        <h5>貫穿線 (Piercing)</h5>
+                        <ul class="detail-list">
+                            <li><strong>特徵：</strong>紅K開低走高，切入黑K一半以上。</li>
+                            <li><strong>細解：</strong>空頭無力維持低位，反撲開始。</li>
+                            <li><strong>預判：</strong><span class="predict-up">短期止跌</span></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card p-3 text-center">
-                <div class="k-box">
-                    <div class="wick" style="height: 5px; flex-grow: 0;"></div>
-                    <div class="body red" style="height: 20px;"></div>
-                    <div class="wick" style="height: 70px; flex-grow: 0;"></div>
+
+        <!-- 第三頁：看跌組合 -->
+        <div class="tab-pane fade" id="tab3">
+            <div class="row g-4">
+                <!-- 暮星 -->
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <div class="k-preview">
+                            <div class="k-item"><div class="body up-color" style="height:50px"></div></div>
+                            <div class="k-item"><div class="doji" style="width:15px"></div></div>
+                            <div class="k-item"><div class="body down-color" style="height:50px"></div></div>
+                        </div>
+                        <h5>暮星 (Evening Star)</h5>
+                        <ul class="detail-list">
+                            <li><strong>特徵：</strong>大紅K + 轉折星 + 大黑K。</li>
+                            <li><strong>細解：</strong>好景不常，多頭耗盡。</li>
+                            <li><strong>預判：</strong><span class="predict-down">波段起跌</span></li>
+                        </ul>
+                    </div>
                 </div>
-                <h5>錘子線 (下影線)</h5>
-                <span class="predict-tag up">預判：止跌反彈</span>
-                <p class="small text-muted">低點有強力支撐，買盤進場護盤。</p>
+                <!-- 烏雲罩頂 -->
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <div class="k-preview">
+                            <div class="k-item"><div class="body up-color" style="height:60px"></div></div>
+                            <div class="k-item" style="transform:translateY(-10px)"><div class="body down-color" style="height:45px"></div></div>
+                        </div>
+                        <h5>烏雲罩頂</h5>
+                        <ul class="detail-list">
+                            <li><strong>特徵：</strong>黑K開高跌破紅K一半。</li>
+                            <li><strong>細解：</strong>高檔賣壓湧現，買盤潰散。</li>
+                            <li><strong>預判：</strong><span class="predict-down">警示回檔</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 三隻烏鴉 -->
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <div class="k-preview">
+                            <div class="k-item"><div class="body down-color" style="height:30px"></div></div>
+                            <div class="k-item" style="transform:translateY(10px)"><div class="body down-color" style="height:30px"></div></div>
+                            <div class="k-item" style="transform:translateY(20px)"><div class="body down-color" style="height:30px"></div></div>
+                        </div>
+                        <h5>三隻烏鴉</h5>
+                        <ul class="detail-list">
+                            <li><strong>特徵：</strong>連續三根收低大黑K。</li>
+                            <li><strong>細解：</strong>主力集體撤退，跌勢剛開始。</li>
+                            <li><strong>預判：</strong><span class="predict-down">長黑連續</span></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card p-3 text-center">
-                <div class="k-box">
-                    <div class="wick" style="height: 70px; flex-grow: 0;"></div>
-                    <div class="body green" style="height: 20px;"></div>
-                    <div class="wick" style="height: 5px; flex-grow: 0;"></div>
-                </div>
-                <h5>避雷針 (上影線)</h5>
-                <span class="predict-tag down">預判：遇阻回落</span>
-                <p class="small text-muted">高檔賣壓重，衝關失敗，小心回檔。</p>
-            </div>
-        </div>
+
     </div>
 
-    <h2 class="section-title">🔥 必學看漲組合 (預判：續漲/反轉向上)</h2>
-    <div class="row g-4">
-        <div class="col-md-4">
-            <div class="card p-4">
-                <div class="d-flex justify-content-center align-items-end mb-3" style="height: 100px; gap: 10px;">
-                    <div class="k-box" style="height: 100%;"><div class="wick"></div><div class="body red" style="height: 60px;"></div><div class="wick"></div></div>
-                    <div class="k-box" style="height: 100%;"><div class="wick"></div><div class="body green" style="height: 30px;"></div><div class="wick"></div></div>
-                    <div class="k-box" style="height: 100%;"><div class="wick"></div><div class="body red" style="height: 70px;"></div><div class="wick"></div></div>
-                </div>
-                <h4>多方砲 (紅-黑-紅)</h4>
-                <span class="predict-tag up">預判：強勢續漲</span>
-                <p class="small">第一根突破，第二根洗盤，第三根總攻。這是主力最典型的攻擊節奏。</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card p-4">
-                <div class="d-flex justify-content-center align-items-end mb-3" style="height: 100px; gap: 15px;">
-                    <div class="k-box" style="height: 100%;"><div class="wick"></div><div class="body green" style="height: 30px;"></div><div class="wick"></div></div>
-                    <div class="k-box" style="height: 100%;"><div class="wick"></div><div class="body red" style="height: 80px;"></div><div class="wick"></div></div>
-                </div>
-                <h4>多頭吞噬</h4>
-                <span class="predict-tag up">預判：底部反轉</span>
-                <p class="small">今日紅 K 完全蓋過昨日黑 K，代表空方力量枯竭，多方全面接管。</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card p-4">
-                <div class="d-flex justify-content-center align-items-center mb-3" style="height: 100px; gap: 10px;">
-                    <div class="k-box" style="height: 100%;"><div class="wick"></div><div class="body green" style="height: 60px;"></div><div class="wick"></div></div>
-                    <div class="k-box" style="height: 40%;"><div class="wick"></div><div class="doji-body"></div><div class="wick"></div></div>
-                    <div class="k-box" style="height: 100%;"><div class="wick"></div><div class="body red" style="height: 60px;"></div><div class="wick"></div></div>
-                </div>
-                <h4>晨星 (黑-星-紅)</h4>
-                <span class="predict-tag up">預判：黑夜結束</span>
-                <p class="small">跌勢中的希望之星。中間的十字星代表多空交戰，最後的長紅確立反轉趨勢。</p>
-            </div>
-        </div>
-    </div>
-
-    <h2 class="section-title">⚠️ 必學看跌組合 (預判：起跌/反轉向下)</h2>
-    <div class="row g-4">
-        <div class="col-md-4">
-            <div class="card p-4">
-                <div class="d-flex justify-content-center align-items-end mb-3" style="height: 100px; gap: 15px;">
-                    <div class="k-box" style="height: 100%;"><div class="wick"></div><div class="body red" style="height: 30px;"></div><div class="wick"></div></div>
-                    <div class="k-box" style="height: 100%;"><div class="wick"></div><div class="body green" style="height: 80px;"></div><div class="wick"></div></div>
-                </div>
-                <h4>空頭吞噬</h4>
-                <span class="predict-tag down">預判：高檔起跌</span>
-                <p class="small">今日黑 K 沒收昨日所有漲幅，暗示買盤潰敗，主力撤退訊號明顯。</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card p-4">
-                <div class="d-flex justify-content-center align-items-center mb-3" style="height: 100px; gap: 10px;">
-                    <div class="k-box" style="height: 100%;"><div class="wick"></div><div class="body red" style="height: 60px;"></div><div class="wick"></div></div>
-                    <div class="k-box" style="height: 40%;"><div class="wick"></div><div class="doji-body"></div><div class="wick"></div></div>
-                    <div class="k-box" style="height: 100%;"><div class="wick"></div><div class="body green" style="height: 60px;"></div><div class="wick"></div></div>
-                </div>
-                <h4>暮星 (紅-星-黑)</h4>
-                <span class="predict-tag down">預判：黃昏起跌</span>
-                <p class="small">出現在漲幅已高的位置，十字星代表多頭猶豫，隨後的黑 K 宣告空頭反撲。</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card p-4">
-                <div class="d-flex justify-content-center align-items-center mb-3" style="height: 100px; gap: 5px; transform: translateY(10px);">
-                    <div class="k-box" style="height: 100%;"><div class="wick"></div><div class="body green" style="height: 40px;"></div><div class="wick"></div></div>
-                    <div class="k-box" style="height: 100%;"><div class="wick"></div><div class="body green" style="height: 40px; margin-top: 20px;"></div><div class="wick"></div></div>
-                    <div class="k-box" style="height: 100%;"><div class="wick"></div><div class="body green" style="height: 40px; margin-top: 40px;"></div><div class="wick"></div></div>
-                </div>
-                <h4>三隻烏鴉</h4>
-                <span class="predict-tag down">預判：波段下跌</span>
-                <p class="small">連續三根開高走低的黑 K，代表賣壓極端連續且強大，短期內難有起色。</p>
-            </div>
-        </div>
-    </div>
-    
-    <div class="alert alert-info mt-5">
-        <strong>💡 實戰小秘訣：</strong> 所有的 K 棒組合如果伴隨著 <strong>成交量放大 (Vol_Ratio > 2)</strong>，其預判的準確性會大幅提高！
+    <div class="mt-5 p-4 bg-white rounded shadow-sm">
+        <h4 class="fw-bold">💡 實戰預判邏輯大公開</h4>
+        <p>K 棒不是單獨看的，必須結合你的 **乖離率 (Bias)** 與 **成交量 (Volume)**：</p>
+        <table class="table table-bordered">
+            <thead><tr class="table-light"><th>訊號名稱</th><th>當下的條件</th><th>最終操作預判</th></tr></thead>
+            <tbody>
+                <tr><td><strong>多方砲</strong></td><td>量比 > 1.5 且 乖離 < 10</td><td><span class="text-danger">積極買進</span></td></tr>
+                <tr><td><strong>避雷針</strong></td><td>量比 > 2.5 且 乖離 > 15</td><td><span class="text-success">立即停利</span></td></tr>
+                <tr><td><strong>錘子線</strong></td><td>乖離 < -10 (跌深)</td><td><span class="text-danger">分批進場</span></td></tr>
+            </tbody>
+        </table>
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
