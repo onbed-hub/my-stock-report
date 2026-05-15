@@ -1,0 +1,256 @@
+
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>📊 VIETNAM- 戰術掃描</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+        <style>
+            body { font-family: "Microsoft JhengHei", sans-serif; margin: 20px; background: #f8f9fa; font-size: 20px; } /* 回歸基礎 20px */
+            .header { background: #1a237e; color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+            h1 { font-size: 36px; margin: 0; }
+            
+            .rules-box { background: white; padding: 25px; border-radius: 10px; margin-bottom: 20px; border-left: 10px solid #fbc02d; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+            .rules-box h2 { font-size: 28px; margin-top: 0; color: #1a237e; padding-bottom: 10px; border-bottom: 2px solid #eee; }
+            .rules-grid { display: flex; gap: 30px; margin-top: 20px; }
+            .rule-card { flex: 1; font-size: 18px; line-height: 1.6; }
+            .rule-card b { font-size: 22px; display: block; margin-bottom: 10px; }
+            
+            .filter-area { background: #e8eaf6; padding: 15px; border-radius: 10px; margin-bottom: 20px; font-size: 20px; border: 2px solid #283593; }
+            table.dataTable thead th { background: #283593 !important; color: white; font-size: 22px; padding: 12px !important; }
+            table.dataTable tbody td { font-size: 22px; padding: 12px !important; font-weight: 500; border-bottom: 1px solid #ddd; }
+            select { font-size: 18px; padding: 8px; margin-right: 15px; border-radius: 8px; }
+            
+            .gold-row { background-color: #fff9db !important; }
+            .fire { color: #d32f2f; font-weight: bold; animation: blink 2s infinite; }
+            @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>📊 VIETNAM- 強勢量能戰術掃描</h1>
+            <p style="font-size: 22px;">生成日期：2026-05-15 | 統計起點：2026-01-01</p>
+        </div>
+
+        <div class="rules-box">
+            <h2>📈 核心戰術規則 (🔥 訊號觸發)</h2>
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <b style="color: #2e7d32;">🎯 進場條件</b>
+                    <ul style="padding-left: 25px;">
+                        <li><b>量能突破：</b>OBV 指標創下 20 日新高，且當日成交量大於 10 日均量的 1.3 倍。</li>
+                        <li><b>趨勢確認：</b>DMI 指標中 DI+ > DI-，且 ADX > 20，代表上升趨勢已正式成形。</li>
+                        <li><b>K線型態：</b>必須為「紅K」且「收盤價 > 昨日收盤價」，確保多頭動能延續。</li>
+                        <li><b>流動性過濾：</b>10 日平均成交量需大於 500 張，排除低流動性殭屍股。</li>
+                    </ul>
+                </div>
+                <div class="rule-card">
+                    <b style="color: #1565c0;">🏷️ 標籤定義 (5日統計)</b>
+                    <ul style="padding-left: 25px;">
+                        <li>🟢 黃金：勝率 > 55% & 收益 > 3%</li>
+                        <li>🔵 穩健：勝率 > 55% & 收益 0~1%</li>
+                        <li>🟡 妖股：勝率 < 45% & 收益 > 3%</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-area" id="filter-area">🔍 快速過濾：</div>
+        <table id="stockTable" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>代碼</th><th>名稱</th><th>狀態</th><th>收盤</th><th>RSI</th><th>標籤</th>
+                    <th>隔天</th><th>五日</th><th>收益</th><th>建議買進</th><th>次數</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+                <tr class="gold-row">
+                    <td><a href="https://tw.stock.yahoo.com/quote/VHM.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">VHM.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>158000.00</td><td>55.72</td><td>🟢 黃金標的</td>
+                    <td>33.33%</td><td>100.00%</td><td>8.40%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>3</td>
+                </tr>
+                <tr class="gold-row">
+                    <td><a href="https://tw.stock.yahoo.com/quote/VIC.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">VIC.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>228000.00</td><td>65.71</td><td>🟢 黃金標的</td>
+                    <td>42.86%</td><td>85.71%</td><td>9.23%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>7</td>
+                </tr>
+                <tr class="gold-row">
+                    <td><a href="https://tw.stock.yahoo.com/quote/BID.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">BID.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>42950.00</td><td>64.36</td><td>🟢 黃金標的</td>
+                    <td>62.50%</td><td>62.50%</td><td>8.88%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>8</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/GMD.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">GMD.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>79900.00</td><td>76.23</td><td>🔵 穩健標的</td>
+                    <td>71.43%</td><td>57.14%</td><td>0.69%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>7</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/BCM.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">BCM.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>54000.00</td><td>40.91</td><td>⚪ 一般監控</td>
+                    <td>0.00%</td><td>50.00%</td><td>1.49%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>4</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/VCB.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">VCB.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>60700.00</td><td>55.65</td><td>⚪ 一般監控</td>
+                    <td>66.67%</td><td>50.00%</td><td>6.49%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>6</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/FPT.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">FPT.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>72900.00</td><td>44.3</td><td>⚪ 一般監控</td>
+                    <td>50.00%</td><td>50.00%</td><td>0.56%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>2</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/HPG.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">HPG.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>26550.00</td><td>29.72</td><td>⚪ 一般監控</td>
+                    <td>50.00%</td><td>50.00%</td><td>0.09%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>2</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/VPB.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">VPB.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>27550.00</td><td>55.19</td><td>⚪ 一般監控</td>
+                    <td>0.00%</td><td>0.00%</td><td>0.00%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>0</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/MBB.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">MBB.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>25650.00</td><td>33.33</td><td>⚪ 一般監控</td>
+                    <td>0.00%</td><td>0.00%</td><td>0.00%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>0</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/VID.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">VID.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>4830.00</td><td>43.04</td><td>⚪ 一般監控</td>
+                    <td>0.00%</td><td>0.00%</td><td>0.00%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>0</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/FUEVFVND.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">FUEVFVND.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>36650.00</td><td>39.58</td><td>⚪ 一般監控</td>
+                    <td>0.00%</td><td>0.00%</td><td>0.00%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>0</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/VJC.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">VJC.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>171300.00</td><td>42.99</td><td>⚪ 一般監控</td>
+                    <td>0.00%</td><td>0.00%</td><td>0.00%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>0</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/E1VFVN30.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">E1VFVN30.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>36520.00</td><td>69.62</td><td>🔴 空頭陷阱</td>
+                    <td>100.00%</td><td>75.00%</td><td>-0.18%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>4</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/SSI.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">SSI.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>27900.00</td><td>46.27</td><td>🔴 空頭陷阱</td>
+                    <td>66.67%</td><td>66.67%</td><td>-1.29%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>3</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/VHC.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">VHC.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>60000.00</td><td>34.29</td><td>🔴 空頭陷阱</td>
+                    <td>25.00%</td><td>25.00%</td><td>-2.78%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>4</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/MWG.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">MWG.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>82000.00</td><td>34.72</td><td>🔴 空頭陷阱</td>
+                    <td>33.33%</td><td>0.00%</td><td>-4.59%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>3</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/GEE.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">GEE.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>121000.00</td><td>64.88</td><td>🔴 空頭陷阱</td>
+                    <td>60.00%</td><td>0.00%</td><td>-6.59%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>5</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/VNM.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">VNM.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>59800.00</td><td>30.77</td><td>🔴 空頭陷阱</td>
+                    <td>0.00%</td><td>0.00%</td><td>-10.24%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>1</td>
+                </tr>
+                <tr >
+                    <td><a href="https://tw.stock.yahoo.com/quote/HVN.VN/technical-analysis" target="_blank" style="text-decoration:none; color:#1a237e; font-weight:bold;">HVN.VN</a></td>
+                    <td>未知</td>
+                    <td >無</td>
+                    <td>21350.00</td><td>26.23</td><td>🔴 空頭陷阱</td>
+                    <td>100.00%</td><td>0.00%</td><td>-4.38%</td>
+                    <td style="background:#e3f2fd; font-weight:bold;">0.00</td><td>1</td>
+                </tr>
+            </tbody>
+        </table>
+        <script>
+            $(document).ready( function () {
+                $('#stockTable').DataTable({
+                    "pageLength": 50, "order": [[ 2, "desc" ], [ 8, "desc" ]],
+                    "language": { "search": "搜尋標的:" },
+                    initComplete: function () {
+                        this.api().columns([2, 5]).every( function () {
+                            var column = this;
+                            var select = $('<select><option value="">全部' + $(column.header()).text() + '</option></select>')
+                                .appendTo('#filter-area')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                                    column.search(val ? '^' + val + '$' : '', true, false).draw();
+                                });
+                            column.data().unique().sort().each( function (d) {
+                                var cleanText = d.replace(/<[^>]*>?/gm, '').trim();
+                                if(cleanText) select.append('<option value="' + cleanText + '">' + cleanText + '</option>')
+                            });
+                        });
+                    }
+                });
+            });
+        </script>
+    </body>
+    </html>
+    
