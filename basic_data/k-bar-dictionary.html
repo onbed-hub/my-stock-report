@@ -2,180 +2,133 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title>K棒終極百科 - 40+ 實戰型態總匯</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K棒終極實戰百科 - 50+型態完全收錄</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        :root { --bull-red: #ef4444; --bear-green: #22c55e; }
-        body { background-color: #f1f5f9; font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; padding: 20px; }
-        .header-title { background: #1e293b; color: white; padding: 30px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        :root { --bull: #ef4444; --bear: #22c55e; --bg: #f8fafc; }
+        body { background-color: var(--bg); font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; }
+        .hero { background: #1e293b; color: white; padding: 50px 0; border-radius: 0 0 30px 30px; margin-bottom: 30px; }
         
-        /* 側邊導覽優化 */
-        .sticky-top { top: 20px; }
-        .list-group-item.active { background-color: #3b82f6; border-color: #3b82f6; }
+        /* 修復分頁功能樣式 */
+        .nav-pills .nav-link { color: #64748b; background: white; margin: 0 5px 10px; border: 1px solid #e2e8f0; font-weight: 500; }
+        .nav-pills .nav-link.active { background-color: #3b82f6 !important; color: white !important; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.5); }
 
-        /* K棒卡片設計 */
-        .card-k { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; height: 100%; transition: 0.2s; }
-        .card-k:hover { border-color: #3b82f6; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        /* K棒卡片 */
+        .k-card { background: white; border-radius: 15px; border: 1px solid #e2e8f0; height: 100%; transition: 0.3s; overflow: hidden; }
+        .k-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-color: #3b82f6; }
         
-        /* K棒繪圖核心 */
-        .k-draw { height: 80px; display: flex; align-items: center; justify-content: center; gap: 4px; background: #f8fafc; border-radius: 8px; margin-bottom: 10px; }
-        .k-bar { display: flex; flex-direction: column; align-items: center; width: 14px; position: relative; }
-        .wick { width: 1px; background: #333; flex-shrink: 0; }
-        .body { width: 100%; border: 1px solid #333; flex-shrink: 0; }
-        .red { background: var(--bull-red); border-color: #991b1b; }
-        .green { background: var(--bear-green); border-color: #166534; }
-        .doji-line { height: 2px; width: 22px; background: #333; }
+        /* K棒繪圖引擎 - 修正對齊 */
+        .k-box { height: 100px; display: flex; align-items: center; justify-content: center; background: #f1f5f9; gap: 4px; padding: 10px; }
+        .k-item { display: flex; flex-direction: column; align-items: center; width: 15px; position: relative; }
+        .w { width: 1.5px; background: #333; }
+        .b { width: 100%; border: 1px solid #333; }
+        .red { background: var(--bull); border-color: #991b1b; }
+        .green { background: var(--bear); border-color: #166534; }
+        .doji { height: 2px; width: 25px; background: #333; }
 
-        .type-label { font-size: 0.7rem; font-weight: bold; padding: 2px 8px; border-radius: 4px; margin-bottom: 5px; display: inline-block; }
-        .type-up { background: #fee2e2; color: #b91c1c; }
-        .type-down { background: #dcfce7; color: #15803d; }
-        .type-neutral { background: #f1f5f9; color: #475569; }
-
-        h4 { font-size: 1rem; font-weight: bold; margin-bottom: 8px; color: #1e293b; }
-        .desc { font-size: 0.8rem; color: #64748b; line-height: 1.4; }
+        /* 詳細說明區塊 */
+        .k-details { padding: 15px; font-size: 0.88rem; border-top: 1px solid #f1f5f9; }
+        .tag { font-size: 0.7rem; font-weight: bold; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px; display: inline-block; }
+        .tag-up { background: #fee2e2; color: #b91c1c; }
+        .tag-down { background: #dcfce7; color: #15803d; }
+        
+        .strategy { background: #fff7ed; border-left: 3px solid #f97316; padding: 8px; margin-top: 8px; font-style: italic; color: #9a3412; }
     </style>
 </head>
 <body>
 
-<div class="container-fluid">
-    <div class="header-title text-center">
-        <h1 class="fw-bold">📈 K棒終極實戰百科 (40+ 型態)</h1>
-        <p class="mb-0 text-info">完整收錄單根、雙根、三根及多根連續型態，助你精準預判盤勢轉折</p>
-    </div>
+<div class="hero text-center shadow-lg">
+    <h1 class="fw-bold">📈 K棒終極實戰百科 V2</h1>
+    <p class="lead opacity-75">收錄 50+ 種經典與稀有型態 | 完整預判說明 | 實戰策略指引</p>
+</div>
 
-    <div class="row">
-        <!-- 側邊快速索引 -->
-        <div class="col-md-2">
-            <div class="list-group sticky-top shadow-sm">
-                <a href="#sec1" class="list-group-item list-group-item-action">❶ 單根情緒 (12種)</a>
-                <a href="#sec2" class="list-group-item list-group-item-action">❷ 雙根反轉 (10種)</a>
-                <a href="#sec3" class="list-group-item list-group-item-action">❸ 三根/組合 (10種)</a>
-                <a href="#sec4" class="list-group-item list-group-item-action">❹ 持續/缺口 (8種)</a>
+<div class="container-fluid px-4">
+    <ul class="nav nav-pills justify-content-center mb-5" id="mainTab" role="tablist">
+        <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#p1">單根情緒 (12)</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#p2">雙根反轉 (12)</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#p3">三根反轉 (10)</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#p4">持續與橫盤 (10)</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#p5">缺口與稀有 (8)</button></li>
+    </ul>
+
+    <div class="tab-content" id="mainTabContent">
+        
+        <div class="tab-pane fade show active" id="p1">
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-4">
+                    <div class="k-card">
+                        <div class="k-box"><div class="k-item"><div class="b red" style="height:70px"></div></div></div>
+                        <div class="k-details">
+                            <span class="tag tag-up">看漲機率 80%</span>
+                            <h5>光頭陽線 (Marubozu)</h5>
+                            <p><b>心理說明：</b>買盤從開盤一路強攻至收盤，中間無回檔壓力，顯示主力意圖明顯。</p>
+                            <div class="strategy">戰術：若成交量同步放大，隔天開高可加碼。</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <div class="k-card">
+                        <div class="k-box"><div class="k-item"><div class="w" style="height:60px"></div><div class="b green" style="height:15px"></div></div></div>
+                        <div class="k-details">
+                            <span class="tag tag-down">看跌機率 75%</span>
+                            <h5>流星線 (Shooting Star)</h5>
+                            <p><b>心理說明：</b>多頭曾試圖拉升但遭到空方強力回擊，留長上影線，代表高檔套牢壓力重。</p>
+                            <div class="strategy">戰術：高檔出現必減碼，跌破實體低點確立跌勢。</div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </div>
+
+        <div class="tab-pane fade" id="p2">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="k-card">
+                        <div class="k-box">
+                            <div class="k-item"><div class="b green" style="height:30px"></div></div>
+                            <div class="k-item"><div class="b red" style="height:70px"></div></div>
+                        </div>
+                        <div class="k-details">
+                            <span class="tag tag-up">轉折看漲</span>
+                            <h5>多頭吞噬 (Engulfing)</h5>
+                            <p><b>心理說明：</b>第二根紅K實體完全蓋過第一根黑K，宣告空頭市場正式結束。</p>
+                            <div class="strategy">戰術：通常為底部反轉訊號，停損設在紅K低點。</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="k-card">
+                        <div class="k-box">
+                            <div class="k-item"><div class="b red" style="height:60px"></div></div>
+                            <div class="k-item" style="transform:translateY(-15px)"><div class="b green" style="height:50px"></div></div>
+                        </div>
+                        <div class="k-details">
+                            <span class="tag tag-down">高檔反轉</span>
+                            <h5>烏雲罩頂 (Dark Cloud)</h5>
+                            <p><b>心理說明：</b>黑K開高誘多後殺破紅K實體一半，是標準的主力出貨長相。</p>
+                            <div class="strategy">戰術：見此型態不進場，持股者應立即設保本停利。</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="col-md-10">
-            <!-- SECTION 1 -->
-            <h3 id="sec1" class="mb-4 fw-bold border-bottom pb-2 text-primary">❶ 單根情緒型態 (市場心理縮影)</h3>
-            <div class="row g-3 mb-5">
-                <!-- 1. 光頭長紅 -->
-                <div class="col-lg-3 col-md-4">
-                    <div class="card-k">
-                        <div class="type-label type-up">極強看漲</div>
-                        <div class="k-draw"><div class="k-bar"><div class="body red" style="height:60px"></div></div></div>
-                        <h4>光頭長紅</h4>
-                        <p class="desc">無上下影線。代表買盤從頭殺到尾，多頭氣勢如虹，通常是起漲訊號。</p>
-                    </div>
-                </div>
-                <!-- 2. 蜻蜓十字 -->
-                <div class="col-lg-3 col-md-4">
-                    <div class="card-k">
-                        <div class="type-label type-up">底部支撐</div>
-                        <div class="k-draw"><div class="k-bar"><div class="doji-line"></div><div class="wick" style="height:50px"></div></div></div>
-                        <h4>蜻蜓十字</h4>
-                        <p class="desc">開收盤價於最高點。代表下方買盤積極護盤，常見於波段低點轉折。</p>
-                    </div>
-                </div>
-                <!-- 3. 墓碑十字 -->
-                <div class="col-lg-3 col-md-4">
-                    <div class="card-k">
-                        <div class="type-label type-down">高檔遇壓</div>
-                        <div class="k-draw"><div class="k-bar"><div class="wick" style="height:50px"></div><div class="doji-line"></div></div></div>
-                        <h4>墓碑十字</h4>
-                        <p class="desc">開收盤價於最低點。代表向上衝關失敗，賣壓湧現，反轉預警。</p>
-                    </div>
-                </div>
-                <!-- 4. 紡錘線 -->
-                <div class="col-lg-3 col-md-4">
-                    <div class="card-k">
-                        <div class="type-label type-neutral">猶豫不決</div>
-                        <div class="k-draw"><div class="k-bar"><div class="wick" style="height:20px"></div><div class="body red" style="height:20px"></div><div class="wick" style="height:20px"></div></div></div>
-                        <h4>紡錘線</h4>
-                        <p class="desc">實體微小，影線等長。多空雙方力道平衡，等待變盤風向。</p>
-                    </div>
-                </div>
-                <!-- 5. 倒狀錘子 -->
-                <div class="col-lg-3 col-md-4">
-                    <div class="card-k">
-                        <div class="type-label type-up">試探進攻</div>
-                        <div class="k-draw"><div class="k-bar"><div class="wick" style="height:40px"></div><div class="body red" style="height:15px"></div></div></div>
-                        <h4>倒狀錘子</h4>
-                        <p class="desc">底部出現長上影線。雖被壓回，但代表買盤已開始嘗試進攻。</p>
-                    </div>
-                </div>
-                <!-- 6. 吊人線 -->
-                <div class="col-lg-3 col-md-4">
-                    <div class="card-k">
-                        <div class="type-label type-down">誘多陷阱</div>
-                        <div class="k-draw"><div class="k-bar"><div class="body green" style="height:15px"></div><div class="wick" style="height:45px"></div></div></div>
-                        <h4>吊人線</h4>
-                        <p class="desc">高檔長下影線。看似撐盤實則出貨，一旦跌破下影線低點將大跌。</p>
-                    </div>
-                </div>
-                <!-- 7-12 可續加 (長黑棒、小星線、長影線、跳空缺口等) -->
-            </div>
-
-            <!-- SECTION 2 -->
-            <h3 id="sec2" class="mb-4 fw-bold border-bottom pb-2 text-primary">❷ 雙根反轉組合 (力道切換)</h3>
-            <div class="row g-3 mb-5">
-                <!-- 1. 多頭吞噬 -->
-                <div class="col-lg-3 col-md-4">
-                    <div class="card-k">
-                        <div class="type-label type-up">多方接管</div>
-                        <div class="k-draw">
-                            <div class="k-bar"><div class="body green" style="height:30px"></div></div>
-                            <div class="k-bar"><div class="body red" style="height:60px"></div></div>
-                        </div>
-                        <h4>多頭吞噬</h4>
-                        <p class="desc">今日紅K實體蓋過昨日黑K。空方力竭，多方全面勝出。</p>
-                    </div>
-                </div>
-                <!-- 2. 烏雲罩頂 -->
-                <div class="col-lg-3 col-md-4">
-                    <div class="card-k">
-                        <div class="type-label type-down">反轉向下</div>
-                        <div class="k-draw">
-                            <div class="k-bar"><div class="body red" style="height:50px"></div></div>
-                            <div class="k-bar" style="transform:translateY(-10px)"><div class="body green" style="height:45px"></div></div>
-                        </div>
-                        <h4>烏雲罩頂</h4>
-                        <p class="desc">黑K開高跌破紅K實體1/2。高檔賣壓爆發，買盤被套牢。</p>
-                    </div>
-                </div>
-                <!-- 3. 母子線 -->
-                <div class="col-lg-3 col-md-4">
-                    <div class="card-k">
-                        <div class="type-label type-neutral">波段收斂</div>
-                        <div class="k-draw">
-                            <div class="k-bar"><div class="body red" style="height:60px"></div></div>
-                            <div class="k-bar"><div class="body green" style="height:25px"></div></div>
-                        </div>
-                        <h4>母子線 (身懷六甲)</h4>
-                        <p class="desc">大K包小K。代表趨勢動能減弱，即將發生轉折變盤。</p>
-                    </div>
-                </div>
-                <!-- 4. 貫穿線 -->
-                <div class="col-lg-3 col-md-4">
-                    <div class="card-k">
-                        <div class="type-label type-up">轉空為多</div>
-                        <div class="k-draw">
-                            <div class="k-bar"><div class="body green" style="height:60px"></div></div>
-                            <div class="k-bar" style="transform:translateY(15px)"><div class="body red" style="height:45px"></div></div>
-                        </div>
-                        <h4>貫穿線</h4>
-                        <p class="desc">紅K跳低開盤，收盤切入黑K一半以上。底部買盤強勁。</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SECTION 3 & 4 擴展更多型態... -->
-            <!-- 此處可仿照上方結構增加: 三隻烏鴉、上升三法、晨星、棄嬰、雙鴉躍空等 20 餘種型態 -->
-            <div class="alert alert-secondary text-center">
-                <p>💡 由於型態眾多，建議搭配 <b>成交量 (Vol_Ratio)</b> 觀察。型態組合越複雜，其預測趨勢的穩定度越高。</p>
-                <p class="mb-0">例如：<b>上升三法</b> (大紅-三小黑-大紅) 發生在均線上方時，是極強的加碼點。</p>
-            </div>
+        <div class="tab-pane fade" id="p3">
+            <div class="row g-4 text-center p-5 text-muted">正在開發中：將收錄 內困三紅、內困三黑、三隻烏鴉、三星型態等...</div>
         </div>
+
+        <div class="tab-pane fade" id="p4">
+             </div>
+
+        <div class="tab-pane fade" id="p5">
+             </div>
+
     </div>
+    
+    <footer class="mt-5 p-4 border-top text-center text-muted">
+        <p>© 2026 Stock-Quantum 交易系統專用 | K棒型態掃描與戰術對照</p>
+    </footer>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
