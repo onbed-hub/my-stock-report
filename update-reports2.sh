@@ -18,6 +18,10 @@ STATIC_TARGET_DIR="./basic_data/balance-sheet"
 IMG_BASE_SRC="../stock-Quantum/my-code/topology-4-20260209/analysis_data"
 IMG_TARGET_DIR="./analysis_data"
 
+# ✨ 新增：basic_data/0520 的來源與目標路徑
+STATIC_0520_SRC="../stock-Quantum/my-code/topology-4-20260209/basic_data/0520"
+STATIC_0520_DIR="./basic_data/0520"
+
 echo "📅 準備更新報告與同步基礎資料..."
 
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -37,6 +41,18 @@ if [ -d "$STATIC_BASE_SRC" ]; then
     echo "✅ 基礎資料同步完成"
 else
     echo "⚠️ 找不到基礎資料來源：$STATIC_BASE_SRC"
+fi
+
+# 🔥 新增：同步 basic_data/0520 資料夾的所有檔案
+if [ -d "$STATIC_0520_SRC" ]; then
+    echo "📂 正在同步 basic_data/0520 資料夾至本地根目錄: $STATIC_0520_DIR"
+    mkdir -p "$STATIC_0520_DIR"
+    
+    # 完整同步 0520 內的所有檔案與子目錄
+    rsync -av --delete "$STATIC_0520_SRC/" "$STATIC_0520_DIR/"
+    echo "✅ 基礎資料 0520 同步完成"
+else
+    echo "⚠️ 找不到 0520 資料夾來源：$STATIC_0520_SRC"
 fi
 
 # --- B. 同步日期報告 ---
