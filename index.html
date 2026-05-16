@@ -122,12 +122,50 @@
         const dateInput = document.getElementById('datePicker').value;
         if (!dateInput) return;
         const dateDir = dateInput.replace(/-/g, '');
+        
+        // ========================================================
+        // ✨ 優先處理大圖：搬到最前面，絕對不被下面的卡片報錯干擾
+        // ========================================================
+        try {
+            const imageSection = document.getElementById('imageSection');
+            const combinedImg = document.getElementById('combinedImg');
+            const imgLink = document.getElementById('imgLink');
+            const imageDateLabel = document.getElementById('imageDateLabel');
+
+            const imgFileName = `summary_combined_${dateDir}.png`;
+            const finalImgUrl = `analysis_data/${imgFileName}?t=${Date.now()}`;
+
+            imageSection.classList.add('hidden');
+
+            combinedImg.onload = function() {
+                const formattedDate = `${dateDir.substring(0,4)}-${dateDir.substring(4,6)}-${dateDir.substring(6,8)}`;
+                imageDateLabel.textContent = `📅 資料日期: ${formattedDate}`;
+                imageSection.classList.remove('hidden'); 
+            };
+
+            combinedImg.onerror = function() {
+                imageSection.classList.add('hidden'); 
+            };
+
+            combinedImg.src = finalImgUrl;
+            imgLink.href = finalImgUrl;
+        } catch (imgError) {
+            console.error("大圖載入發生錯誤:", imgError);
+        }
+
+        // ========================================================
+        // 🎴 處理報告卡片 (加入安全防禦，避免 null 造成 JS 崩潰)
+        // ========================================================
         const cards = document.querySelectorAll('.card');
 
         for (const card of cards) {
+            // 安全防禦：如果是入口卡片，直接跳過
             if (card.classList.contains('portal-card')) continue;
 
             const fileName = card.getAttribute('data-base');
+            // 安全防禦：如果卡片沒有定義 data-base，跳過不處理，避免程式崩潰
+            if (!fileName) continue; 
+
             const newHref = `report/${dateDir}/${fileName}?t=${Date.now()}`;
             const statusBadge = card.querySelector('.status-badge');
 
@@ -135,50 +173,22 @@
 
             try {
                 const response = await fetch(newHref, { method: 'HEAD' });
-                if (response.ok) {
-                    statusBadge.textContent = "✅ 已就緒";
-                    statusBadge.className = "status-badge status-ok";
-                    card.classList.remove('missing');
-                } else {
-                    statusBadge.textContent = "⚠️ 無資料";
-                    statusBadge.className = "status-badge status-missing";
-                    card.classList.add('missing');
+                if (statusBadge) {
+                    if (response.ok) {
+                        statusBadge.textContent = "✅ 已就緒";
+                        statusBadge.className = "status-badge status-ok";
+                        card.classList.remove('missing');
+                    } else {
+                        statusBadge.textContent = "⚠️ 無資料";
+                        statusBadge.className = "status-badge status-missing";
+                        card.classList.add('missing');
+                    }
                 }
             } catch (error) {
-                statusBadge.textContent = "⚠️ 無資料";
+                if (statusBadge) statusBadge.textContent = "⚠️ 無資料";
                 card.classList.add('missing');
             }
         }
-
-        // --- B. 動態處理分析大圖 (使用傳統 onload 偵測，100% 不會被 GitHub 伺服器阻擋) ---
-        const imageSection = document.getElementById('imageSection');
-        const combinedImg = document.getElementById('combinedImg');
-        const imgLink = document.getElementById('imgLink');
-        const imageDateLabel = document.getElementById('imageDateLabel');
-
-        const imgFileName = `summary_combined_${dateDir}.png`;
-        const finalImgUrl = `analysis_data/${imgFileName}?t=${Date.now()}`;
-
-        // 先把區塊隱藏，交給瀏覽器在背景默默載入圖片
-        imageSection.classList.add('hidden');
-
-        // 當圖片成功下載完成時觸發
-        combinedImg.onload = function() {
-            const formattedDate = `${dateDir.substring(0,4)}-${dateDir.substring(4,6)}-${dateDir.substring(6,8)}`;
-            imageDateLabel.textContent = `📅 資料日期: ${formattedDate}`;
-            imageSection.classList.remove('hidden'); // 順利載入，讓區塊現形！
-        };
-
-        // 當圖片不存在 (404) 或載入失敗時觸發
-        combinedImg.onerror = function() {
-            imageSection.classList.add('hidden'); // 確保沒圖時維持隱藏，不留破圖外框
-        };
-
-        // 賦值網址，正式啟動載入機制
-        combinedImg.src = finalImgUrl;
-        imgLink.href = finalImgUrl;
-
-
     }
 
     function filterReports() {
@@ -187,7 +197,7 @@
         const sections = document.querySelectorAll('.report-section');
 
         cards.forEach(card => {
-            const text = card.textContent.toLowerCase();
+            const text = card.textContent ? card.textContent.toLowerCase() : '';
             const isSecret = card.classList.contains('is-secret');
 
             if (isSecret) {
@@ -206,6 +216,7 @@
             section.classList.toggle('hidden', visibleCards.length === 0);
         });
     }
+
 </script>
 </body>
 </html>
