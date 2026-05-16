@@ -63,7 +63,8 @@ do
     # 2. ✨ 新增：同步對應日期的 summary_combined_*.png 圖片
     # 使用前一天的日期來對應（例如 16 號處理 15 號的圖片）
     # 如果你的圖片命名邏輯跟 CURR_D 是一致的，請把下面的 PREV_D 直接改成 CURR_D 即可
-    PREV_D=$(date -d "$i+1 days ago" +%Y%m%d)
+    DAYS_AGO=$((i + 1))
+    PREV_D=$(date -d "$DAYS_AGO days ago" +%Y%m%d)
     IMG_NAME="summary_combined_${PREV_D}.png"
     SRC_IMG_PATH="$IMG_BASE_SRC/$IMG_NAME"
 
@@ -73,7 +74,7 @@ do
         cp -a "$SRC_IMG_PATH" "$IMG_TARGET_DIR/"
         echo "✅ 圖片 $IMG_NAME 同步成功"
     else
-        echo "ℹ️ 未發現對應圖片: $IMG_NAME (跳過)"
+        echo "ℹ️ 未發現對應圖片: $SRC_IMG_PATH (跳過)"
     fi
 
     # 3. 額外清理：萬一之前留下了錯誤的目錄，直接砍掉
