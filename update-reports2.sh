@@ -14,6 +14,10 @@ STATIC_BASE_SRC="../stock-Quantum/my-code/topology-4-20260209/basic_data/balance
 # 基礎資料目標 (Local 根目錄)
 STATIC_TARGET_DIR="./basic_data/balance-sheet"
 
+# ✨ 新增：圖片來源與目標根目錄
+IMG_BASE_SRC="../stock-Quantum/my-code/topology-4-20260209/analysis_data"
+IMG_TARGET_DIR="./analysis_data"
+
 echo "📅 準備更新報告與同步基礎資料..."
 
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -55,6 +59,22 @@ do
             rsync -av --exclude="basic_data" --exclude="balance-sheet" "$SOURCE_PATH/" "$TARGET_DIR/"
         fi
     done
+
+    # 2. ✨ 新增：同步對應日期的 summary_combined_*.png 圖片
+    # 使用前一天的日期來對應（例如 16 號處理 15 號的圖片）
+    # 如果你的圖片命名邏輯跟 CURR_D 是一致的，請把下面的 PREV_D 直接改成 CURR_D 即可
+    PREV_D=$(date -d "$i+1 days ago" +%Y%m%d)
+    IMG_NAME="summary_combined_${PREV_D}.png"
+    SRC_IMG_PATH="$IMG_BASE_SRC/$IMG_NAME"
+
+    if [ -f "$SRC_IMG_PATH" ]; then
+        echo "📸 發現分析圖片，正在複製到本地 analysis_data/ 目錄..."
+        mkdir -p "$IMG_TARGET_DIR"
+        cp -a "$SRC_IMG_PATH" "$IMG_TARGET_DIR/"
+        echo "✅ 圖片 $IMG_NAME 同步成功"
+    else
+        echo "ℹ️ 未發現對應圖片: $IMG_NAME (跳過)"
+    fi
 
     # 3. 額外清理：萬一之前留下了錯誤的目錄，直接砍掉
     rm -rf "$TARGET_DIR/balance-sheet"
