@@ -104,8 +104,15 @@
 
                 if (shouldExclude) return false;
 
-                // 3. 保留規則：HTML 直接通過，TXT 則必須在 data/ 目錄內
-                if (isHtml) return true;
+                // 3. ✨ 新增條件：HTML 必須包含 'live' 或 'invest' 字眼才保留
+                if (isHtml) {
+                    const hasLiveOrInvest = pathLower.includes('live') || pathLower.includes('invest');
+                    return hasLiveOrInvest; // 只有含有這兩個字眼才回傳 true，其餘 HTML 擋掉
+                }
+
+                // 4. 保留規則：TXT 則必須在 data/ 目錄內
+                if (isTxt && isInDataDir) return true;
+
                 if (isTxt && isInDataDir) return true;
                 
                 return false;
