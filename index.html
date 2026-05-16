@@ -150,50 +150,36 @@
             }
         }
 
-        // --- B. 動態處理分析大圖 (對接前一天日期) ---
+        // --- B. 動態處理分析大圖 (直接精確對接所選日期) ---
         const imageSection = document.getElementById('imageSection');
         const combinedImg = document.getElementById('combinedImg');
         const imgLink = document.getElementById('imgLink');
         const imageDateLabel = document.getElementById('imageDateLabel');
 
-        const parts = dateInput.split('-');
-        const selectedDate = new Date(parts[0], parts[1] - 1, parts[2]);
-        selectedDate.setDate(selectedDate.getDate() - 1);
-
-        const year = selectedDate.getFullYear();
-        const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
-        const day = String(selectedDate.getDate()).padStart(2, '0');
-        const prevDateStr = `${year}${month}${day}`;
-
-        const imgFileName = `summary_combined_${prevDateStr}.png`;
+        // 💡 修正點：不再減一天，直接拿選定的日期（例如 20260515）
+        const imgFileName = `summary_combined_${dateDir}.png`;
         const pureImgUrl = `analysis_data/${imgFileName}`; // 探測用乾淨路徑
-
-        // 📝 網頁端 Debug 紀錄：看看程式算出來的路徑對不對
-        console.log(`[Debug] 正在探測分析大圖，目標路徑為: ${pureImgUrl}`);
 
         try {
             // 用乾淨路徑去 HEAD 探測是否存在
             const imgCheck = await fetch(pureImgUrl, { method: 'HEAD' });
-            
-            console.log(`[Debug] 伺服器回應狀態碼: ${imgCheck.status}`);
-
             if (imgCheck.ok) {
-                // 渲染與超連結時，再塞入隨機時間戳，完美避開快取
+                // 渲染與超連結時，塞入隨機時間戳防快取
                 const finalImgUrl = `${pureImgUrl}?t=${Date.now()}`;
                 combinedImg.src = finalImgUrl;
                 imgLink.href = finalImgUrl;
-                imageDateLabel.textContent = `📅 資料日期: ${year}-${month}-${day}`;
-                imageSection.classList.remove('hidden'); 
-                console.log(`[Debug] 🎉 圖片存在，已成功顯示大圖區塊！`);
+                
+                // 格式化顯示在畫面上的日期標籤 (將 YYYYMMDD 轉為 YYYY-MM-DD)
+                const formattedDate = `${dateDir.substring(0,4)}-${dateDir.substring(4,6)}-${dateDir.substring(6,8)}`;
+                imageDateLabel.textContent = `📅 資料日期: ${formattedDate}`;
+                
+                imageSection.classList.remove('hidden'); // 發現檔案，秀出區塊
             } else {
-                imageSection.classList.add('hidden'); 
-                console.log(`[Debug] ⚠️ 伺服器回傳檔案不存在 (404)，隱藏大圖區塊。`);
+                imageSection.classList.add('hidden'); // 沒檔案就藏起來
             }
         } catch (e) {
             imageSection.classList.add('hidden');
-            console.error(`[Debug] ❌ Fetch 發生異常錯誤:`, e);
         }
-
     }
 
     function filterReports() {
