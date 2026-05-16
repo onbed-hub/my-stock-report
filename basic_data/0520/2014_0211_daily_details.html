@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>2014年 2/11 前後一週每日漲跌明細</title>
+    
+    <style>
+        body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; margin: 20px; background-color: #f9f9f9; }
+        h2 { color: #333; text-align: center; margin-bottom: 5px; }
+        .search-container { text-align: center; margin: 20px auto; width: 90%; }
+        .search-box { width: 300px; padding: 10px 15px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); }
+        .search-box:focus { border-color: #4CAF50; outline: none; }
+        table { border-collapse: collapse; width: 90%; margin: 10px auto 30px auto; background-color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        th, td { border: 1px solid #dddddd; text-align: center; padding: 10px; }
+        th { background-color: #4CAF50; color: white; position: sticky; top: 0; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        tr:hover { background-color: #ddd; }
+        .summary-row { background-color: #fff9c4 !important; font-weight: bold; color: #b71c1c; }
+    </style>
+    
+</head>
+<body>
+    <h2>📊 2014年 2/11 前後一週 每日個股漲跌幅明細表</h2>
+    
+    <div class="search-container">
+        <input type="text" id="stockSearch" class="search-box" onkeyup="filterStock()" placeholder="🔍 輸入股票代號 (如: 2330)...">
+    </div>
+
+    <table border="1" class="dataframe table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>股票代號</th>
+      <th>前第5天</th>
+      <th>前第4天</th>
+      <th>前第3天</th>
+      <th>前第2天</th>
+      <th>前第1天</th>
+      <th>後第1天</th>
+      <th>後第2天</th>
+      <th>後第3+天</th>
+      <th>後第4天</th>
+      <th>後第5天</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TXF.TW</td>
+      <td>-2.56%</td>
+      <td>+0.55%</td>
+      <td>+0.77%</td>
+      <td>+0.19%</td>
+      <td>+0.71%</td>
+      <td>+0.71%</td>
+      <td>+0.80%</td>
+      <td>-0.45%</td>
+      <td>+0.77%</td>
+      <td>+0.24%</td>
+    </tr>
+    <tr class="summary-row">
+      <td>當年度平均</td>
+      <td>-2.56%</td>
+      <td>+0.55%</td>
+      <td>+0.77%</td>
+      <td>+0.19%</td>
+      <td>+0.71%</td>
+      <td>+0.71%</td>
+      <td>+0.80%</td>
+      <td>-0.45%</td>
+      <td>+0.77%</td>
+      <td>+0.24%</td>
+    </tr>
+  </tbody>
+</table>
+
+    
+    <script>
+    function filterStock() {
+        var input = document.getElementById("stockSearch");
+        var filter = input.value.toUpperCase();
+        var table = document.querySelector("table");
+        var tr = table.getElementsByTagName("tr");
+
+        for (var i = 1; i < tr.length - 1; i++) {
+            var td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                var txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+    </script>
+    
+</body>
+</html>
