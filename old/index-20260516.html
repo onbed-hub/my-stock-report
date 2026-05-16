@@ -48,16 +48,6 @@
         </div>
     </div>
 
-    <div id="imageSection" class="image-section hidden">
-        <div class="image-title">
-            <span>📊 綜合分析大圖 (Summary Chart)</span>
-            <span id="imageDateLabel" style="color: #6366f1;"></span>
-        </div>
-        <a id="imgLink" href="#" target="_blank">
-            <img id="combinedImg" src="" alt="分析綜合圖" class="combined-img">
-        </a>
-    </div>
-
     <div class="report-section">
         <div class="section-header">摘要 & 盤整/均線糾纏 分析</div>
         <div class="report-grid">
@@ -143,41 +133,6 @@
                 card.classList.add('missing');
             }
         }
-        // --- B. ✨ 新增：動態處理分析大圖 (對接前一天日期) ---
-        const imageSection = document.getElementById('imageSection');
-        const combinedImg = document.getElementById('combinedImg');
-        const imgLink = document.getElementById('imgLink');
-        const imageDateLabel = document.getElementById('imageDateLabel');
-
-        // 計算選定日期的前一天
-        const parts = dateInput.split('-');
-        const selectedDate = new Date(parts[0], parts[1] - 1, parts[2]);
-        selectedDate.setDate(selectedDate.getDate() - 1);
-        
-        // 轉回 YYYYMMDD 格式
-        const year = selectedDate.getFullYear();
-        const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
-        const day = String(selectedDate.getDate()).padStart(2, '0');
-        const prevDateStr = `${year}${month}${day}`;
-
-        const imgFileName = `summary_combined_${prevDateStr}.png`;
-        const imgUrl = `analysis_data/${imgFileName}?t=${Date.now()}`; // 加上防快取尾巴
-
-        try {
-            // 利用 HEAD 請求探測 GitHub Pages 上有沒有這張前一天的圖片
-            const imgCheck = await fetch(imgUrl, { method: 'HEAD' });
-            if (imgCheck.ok) {
-                combinedImg.src = imgUrl;
-                imgLink.href = imgUrl;
-                imageDateLabel.textContent = `📅 資料日期: ${year}-${month}-${day}`;
-                imageSection.classList.remove('hidden'); // 發現檔案，打開區塊展示
-            } else {
-                imageSection.classList.add('hidden'); // 沒檔案就藏起來，不留破圖外框
-            }
-        } catch (e) {
-            imageSection.classList.add('hidden');
-        }
-
     }
 
     function filterReports() {
