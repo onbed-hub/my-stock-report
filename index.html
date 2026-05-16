@@ -33,10 +33,22 @@
         .bg-all { background: #f1f5f9; color: #475569; }
         .hidden { display: none !important; }
 
-        /* ✨ 綜合分析大圖專用樣式區 */
-        .image-section { margin-bottom: 1.5rem; background: #f8fafc; padding: 12px; border-radius: 16px; border: 1px solid #e2e8f0; text-align: center; }
-        .image-title { font-size: 0.85rem; font-weight: 700; color: #475569; margin-bottom: 8px; text-align: left; display: flex; justify-content: space-between; }
-        .combined-img { width: 100%; max-width: 100%; height: auto; border-radius: 10px; border: 1px solid #cbd5e1; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        /* 📊 縮圖預覽區樣式 */
+        .image-preview-box { background: #f8fafc; padding: 15px; border-radius: 16px; margin-bottom: 2rem; border: 1px solid #e2e8f0; }
+        .preview-header { font-size: 0.85rem; font-weight: 700; color: #475569; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .preview-body { text-align: center; cursor: pointer; position: relative; overflow: hidden; border-radius: 8px; border: 1px solid #cbd5e1; max-height: 180px; background: #fff; }
+        .preview-body img { width: 100%; height: auto; max-height: 180px; object-fit: cover; object-position: top; transition: transform 0.2s; }
+        .preview-body:hover img { transform: scale(1.02); }
+        .preview-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.4); color: white; display: flex; justify-content: center; align-items: center; font-size: 0.9rem; font-weight: 600; opacity: 0; transition: opacity 0.2s; }
+        .preview-body:hover .preview-overlay { opacity: 1; }
+
+        /* 🪟 全螢幕彈出視窗 (Modal) 樣式 */
+        .modal { display: flex; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.75); backdrop-filter: blur(4px); align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
+        .modal.active { opacity: 1; pointer-events: auto; }
+        .modal-wrapper { position: relative; max-width: 90%; max-height: 90%; background: white; padding: 10px; border-radius: 16px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); display: flex; flex-direction: column; }
+        .modal-close { position: absolute; top: -45px; right: 0; color: #fff; font-size: 32px; font-weight: bold; cursor: pointer; background: none; border: none; outline: none; }
+        .modal-close:hover { color: #cbd5e1; }
+        .modal-content { width: 100%; height: auto; max-height: 80vh; object-fit: contain; border-radius: 8px; }
     </style>
 </head>
 <body>
@@ -55,14 +67,15 @@
         </div>
     </div>
 
-    <div id="imageSection" class="image-section hidden">
-        <div class="image-title">
-            <span>📊 綜合分析大圖 (Summary Chart)</span>
+    <div id="imagePreviewBox" class="image-preview-box hidden">
+        <div class="preview-header">
+            <span>📊 綜合分析圖摘要 (點擊大圖檢視細節)</span>
             <span id="imageDateLabel" style="color: #6366f1;"></span>
         </div>
-        <a id="imgLink" href="#" target="_blank">
-            <img id="combinedImg" src="" alt="分析綜合圖" class="combined-img">
-        </a>
+        <div class="preview-body" onclick="openModal()">
+            <img id="combinedImg" src="" alt="分析綜合圖">
+            <div class="preview-overlay">🔍 點擊放大查看完整數據圖</div>
+        </div>
     </div>
 
     <div class="report-section">
@@ -109,12 +122,21 @@
     </div>
 </div>
 
+<div id="imageModal" class="modal" onclick="closeModal()">
+    <div class="modal-wrapper" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <img id="modalImg" src="" alt="完整分析圖" class="modal-content">
+    </div>
+</div>
+
 <script>
     window.onload = function() {
-        // 固定預設日期為 2026-05-15（精確與你的報告大圖對接）
+        // 預設切換到有資料的 2026-05-15
         document.getElementById('datePicker').value = "2026-05-15";
         updateReportPaths();
     };
+
+    let currentImgUrl = ""; // 儲存當前成功的圖片網址
 
     function updateReportPaths() {
         const dateInput = document.getElementById('datePicker').value;
@@ -122,33 +144,35 @@
         const dateDir = dateInput.replace(/-/g, '');
 
         // ----------------------------------------------------
-        // 軌道一：獨立且優先處理大圖載入（100% 傳統 onload 事件阻斷機制）
+        // 軌道一：動態載入綜合分析圖（伴隨緩存清除機制）
         // ----------------------------------------------------
-        const imageSection = document.getElementById('imageSection');
+        const imagePreviewBox = document.getElementById('imagePreviewBox');
         const combinedImg = document.getElementById('combinedImg');
-        const imgLink = document.getElementById('imgLink');
         const imageDateLabel = document.getElementById('imageDateLabel');
 
         const imgFileName = `summary_combined_${dateDir}.png`;
         const finalImgUrl = `analysis_data/${imgFileName}?t=${Date.now()}`;
 
-        imageSection.classList.add('hidden');
-
         combinedImg.onload = function() {
-            const formattedDate = `${dateDir.substring(0,4)}-${dateDir.substring(4,6)}-${dateDir.substring(6,8)}`;
-            imageDateLabel.textContent = `📅 資料日期: ${formattedDate}`;
-            imageSection.classList.remove('hidden'); 
+            const formattedDate = `${dateDir.substring(0,4)}-${dateDir.substring(4,6)}-${dateDir.substring(4,6)}`;
+            // 修正顯示格式
+            const yr = dateDir.substring(0,4);
+            const mo = dateDir.substring(4,6);
+            const dy = dateDir.substring(6,8);
+            imageDateLabel.textContent = `📅 資料日期: ${yr}/${mo}/${dy}`;
+            imagePreviewBox.classList.remove('hidden'); 
+            currentImgUrl = finalImgUrl; // 記錄成功網址供 Modal 使用
         };
 
         combinedImg.onerror = function() {
-            imageSection.classList.add('hidden'); 
+            imagePreviewBox.classList.add('hidden'); 
+            currentImgUrl = "";
         };
 
         combinedImg.src = finalImgUrl;
-        imgLink.href = finalImgUrl;
 
         // ----------------------------------------------------
-        // 軌道二：非同步處理下方報告卡片狀態（絕不干擾上方大圖）
+        // 軌道二：非同步處理下方報告卡片狀態
         // ----------------------------------------------------
         setTimeout(async () => {
             const cards = document.querySelectorAll('.card');
@@ -183,6 +207,27 @@
             }
         }, 50);
     }
+
+    // 🪟 Modal 控制邏輯
+    function openModal() {
+        if (!currentImgUrl) return;
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImg');
+        modalImg.src = currentImgUrl;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // 鎖定背景捲軸
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('imageModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = ''; // 恢復背景捲軸
+    }
+
+    // ESC 鍵關閉視窗
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+    });
 
     function filterReports() {
         const input = document.getElementById('searchInput').value.toLowerCase();
