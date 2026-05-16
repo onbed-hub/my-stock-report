@@ -150,36 +150,35 @@
             }
         }
 
-        // --- B. 動態處理分析大圖 (直接精確對接所選日期) ---
+        // --- B. 動態處理分析大圖 (使用傳統 onload 偵測，100% 不會被 GitHub 伺服器阻擋) ---
         const imageSection = document.getElementById('imageSection');
         const combinedImg = document.getElementById('combinedImg');
         const imgLink = document.getElementById('imgLink');
         const imageDateLabel = document.getElementById('imageDateLabel');
 
-        // 💡 修正點：不再減一天，直接拿選定的日期（例如 20260515）
         const imgFileName = `summary_combined_${dateDir}.png`;
-        const pureImgUrl = `analysis_data/${imgFileName}`; // 探測用乾淨路徑
+        const finalImgUrl = `analysis_data/${imgFileName}?t=${Date.now()}`;
 
-        try {
-            // 用乾淨路徑去 HEAD 探測是否存在
-            const imgCheck = await fetch(pureImgUrl, { method: 'HEAD' });
-            if (imgCheck.ok) {
-                // 渲染與超連結時，塞入隨機時間戳防快取
-                const finalImgUrl = `${pureImgUrl}?t=${Date.now()}`;
-                combinedImg.src = finalImgUrl;
-                imgLink.href = finalImgUrl;
-                
-                // 格式化顯示在畫面上的日期標籤 (將 YYYYMMDD 轉為 YYYY-MM-DD)
-                const formattedDate = `${dateDir.substring(0,4)}-${dateDir.substring(4,6)}-${dateDir.substring(6,8)}`;
-                imageDateLabel.textContent = `📅 資料日期: ${formattedDate}`;
-                
-                imageSection.classList.remove('hidden'); // 發現檔案，秀出區塊
-            } else {
-                imageSection.classList.add('hidden'); // 沒檔案就藏起來
-            }
-        } catch (e) {
-            imageSection.classList.add('hidden');
-        }
+        // 先把區塊隱藏，交給瀏覽器在背景默默載入圖片
+        imageSection.classList.add('hidden');
+
+        // 當圖片成功下載完成時觸發
+        combinedImg.onload = function() {
+            const formattedDate = `${dateDir.substring(0,4)}-${dateDir.substring(4,6)}-${dateDir.substring(6,8)}`;
+            imageDateLabel.textContent = `📅 資料日期: ${formattedDate}`;
+            imageSection.classList.remove('hidden'); // 順利載入，讓區塊現形！
+        };
+
+        // 當圖片不存在 (404) 或載入失敗時觸發
+        combinedImg.onerror = function() {
+            imageSection.classList.add('hidden'); // 確保沒圖時維持隱藏，不留破圖外框
+        };
+
+        // 賦值網址，正式啟動載入機制
+        combinedImg.src = finalImgUrl;
+        imgLink.href = finalImgUrl;
+
+
     }
 
     function filterReports() {
