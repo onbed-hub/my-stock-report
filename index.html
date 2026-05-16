@@ -122,7 +122,7 @@
             if (card.classList.contains('portal-card')) continue;
 
             const fileName = card.getAttribute('data-base');
-            const newHref = `report/${dateDir}/${fileName}`;
+            const newHref = `report/${dateDir}/${fileName}?t=${Date.now()}`;
             const statusBadge = card.querySelector('.status-badge');
 
             card.setAttribute('href', newHref);
