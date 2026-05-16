@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>實時監控入口</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f1f5f9; color: #0f172a; display: flex; justify-content: center; padding: 2rem 1.5rem; margin: 0; }
@@ -24,10 +27,10 @@
         .card-header { display: flex; justify-content: space-between; align-items: center; }
         .title { font-weight: 800; color: #0f172a; font-size: 1.25rem; display: block; margin: 8px 0; }
         .badge { font-size: 0.7rem; padding: 3px 10px; border-radius: 8px; font-weight: 800; color: white; text-transform: uppercase; }
-        .file-info { font-size: 0.8rem; color: #94a3b8; font-family: monospace; background: #f8fafc; padding: 4px 8px; border-radius: 6px; display: inline-block; }
         .status-dot { color: #10b981; font-size: 0.8rem; font-weight: bold; display: flex; align-items: center; gap: 4px; }
-        .status-dot::before { content: "●"; }
+        .status-dot::before { content: "●"; } /* 已保留偽元素圓點 */
 
+        .file-info { font-size: 0.8rem; color: #94a3b8; font-family: monospace; background: #f8fafc; padding: 4px 8px; border-radius: 6px; display: inline-block; }
         .history-area { border-top: 1px solid #f1f5f9; margin-top: 15px; padding-top: 12px; }
         .history-select.sub { padding: 8px; font-size: 0.85rem; border-radius: 10px; background: #f8fafc; color: #475569; border-width: 1px; }
     </style>
@@ -46,7 +49,7 @@
 
         <div class="control-group" id="quickNav" style="display:none;">
             <label>🔍 個股報告選單 (僅限 HTML)</label>
-            <select id="stockSelector" class="history-select" style="border: 2px solid #6366f1; font-weight: bold;" onchange="if(this.value) window.open(this.value, '_blank')">
+            <select id="stockSelector" class="history-select" style="border: 2px solid #6366f1; font-weight: bold;" onchange="if(this.value) window.open(this.value + '?t=' + Date.now(), '_blank')">
                 <option value="">請選擇股號...</option>
             </select>
         </div>
@@ -78,49 +81,49 @@
         quickNav.style.display = 'none';
 
         try {
-            const url = `report/${dateDir}/files.json?t=${new Date().getTime()}`;
+            // 1. 抓取 files.json 帶上時間戳記
+            const url = `report/${dateDir}/files.json?t=${Date.now()}`;
             const response = await fetch(url);
             if (!response.ok) throw new Error('尚未生成報告');
 
             const allFiles = await response.json();
 
-            // ✨ 排除特定關鍵字，並根據副檔名與目錄決定保留哪些檔案
-            // 過濾：排除 all- 系列，保留 HTML 和 data/ 內的 TXT
+            // 2. 篩選檔案 (保留含有 live, invest 的 HTML 與 data/ 內的 TXT)
             const filtered = allFiles.filter(f => {
-                // 1. 全部轉小寫進行比對
                 const pathLower = f.toLowerCase();
-                const fileName = f.split('/').pop().toLowerCase();
 
                 const isHtml = f.endsWith('.html');
                 const isTxt = f.endsWith('.txt');
                 const isInDataDir = f.includes('data/');
 
-                // 2. 建立排除清單 (包含目錄名與檔名)
                 const shouldExclude =
                     pathLower.includes('vietnam-') ||
-                    pathLower.includes('.vn') ||       // 擋掉 BCM.VN, BID.VN
+                    pathLower.includes('.vn') ||       
                     pathLower.includes('all-') ||
-                    pathLower.includes('/vn/');        // 預防未來有 vn/ 目錄
+                    pathLower.includes('/vn/');        
 
                 if (shouldExclude) return false;
 
-                // 3. ✨ 新增條件：HTML 必須包含 'live' 或 'invest' 字眼才保留
                 if (isHtml) {
-                    const hasLiveOrInvest = pathLower.includes('live') || pathLower.includes('invest');
-                    return hasLiveOrInvest; // 只有含有這兩個字眼才回傳 true，其餘 HTML 擋掉
+                    return pathLower.includes('live') || pathLower.includes('invest');
                 }
 
-                // 4. 保留規則：TXT 則必須在 data/ 目錄內
                 if (isTxt && isInDataDir) return true;
 
-                if (isTxt && isInDataDir) return true;
-                
                 return false;
             });
 
             renderSmartGroups(filtered, dateDir);
         } catch (e) {
             displayArea.innerHTML = `<div style="text-align:center;color:#ef4444;margin-top:20px;">⚠️ ${e.message}</div>`;
+        }
+    }
+
+    // ✨ 修改：全域歷史跳轉防快取處理器
+    function openHistory(selectEl) {
+        if (selectEl.value) {
+            window.open(selectEl.value + '?t=' + Date.now(), '_blank');
+            selectEl.selectedIndex = 0; // 重設選單
         }
     }
 
@@ -132,7 +135,6 @@
 
         stockSelector.innerHTML = '<option value="">請選擇股號 (快速跳轉)...</option>';
 
-        // 1. 檔案聚合邏輯
         files.forEach(file => {
             const fileName = file.split('/').pop();
             const tsMatch = fileName.match(/\d{8,12}/);
@@ -149,7 +151,6 @@
             if (isHistory) {
                 groups[baseName].history.push(file);
             } else {
-                // 優先使用 HTML 作為主要檔案
                 if (!groups[baseName].main || file.endsWith('.html')) {
                     groups[baseName].main = file;
                 }
@@ -159,12 +160,11 @@
         const sortedBases = Object.keys(groups).sort();
         let hasStockHtml = false;
 
-        // 2. 生成個股下拉選單
         sortedBases.forEach(base => {
             const item = groups[base];
             if (item.isStock && item.main && item.main.endsWith('.html')) {
                 const opt = document.createElement('option');
-                opt.value = `report/${dateDir}/${item.main}`;
+                opt.value = `report/${dateDir}/${item.main}`; // 點擊時才會補上時間戳
                 opt.textContent = `📈 ${base.toUpperCase()}`;
                 stockSelector.appendChild(opt);
                 hasStockHtml = true;
@@ -172,11 +172,9 @@
         });
         if (hasStockHtml) quickNav.style.display = 'block';
 
-        // 3. 處理系列卡片 (篩選出非個股且必須有 HTML 的項目)
         const prefixGroups = {};
         sortedBases.forEach(base => {
             const item = groups[base];
-            // 關鍵：不是個股、且主檔案必須是 HTML 才能出現在卡片區
             if (!item.isStock && item.main && item.main.endsWith('.html')) {
                 const prefix = base.split('-')[0].toUpperCase();
                 if (!prefixGroups[prefix]) prefixGroups[prefix] = [];
@@ -184,7 +182,6 @@
             }
         });
 
-        // 4. 渲染卡片
         Object.keys(prefixGroups).sort().forEach(prefix => {
             const section = document.createElement('div');
             section.innerHTML = `<div class="section-header">${prefix} 系列</div>`;
@@ -194,14 +191,14 @@
             prefixGroups[prefix].forEach(base => {
                 const item = groups[base];
                 const displayFile = item.main;
-                const finalPath = `report/${dateDir}/${displayFile}`;
+                // ✨ 主要報告連結：加上時間戳
+                const finalPath = `report/${dateDir}/${displayFile}?t=${Date.now()}`;
                 let typeKey = base.includes('report') ? 'trend' : 'live';
                 const config = typeConfig[typeKey] || typeConfig['default'];
 
                 const card = document.createElement('div');
                 card.className = 'card';
 
-                // 歷史版本過濾：只顯示 HTML
                 let historyHtml = '';
                 const htmlHistory = item.history.filter(h => h.endsWith('.html')).sort().reverse();
                 if (htmlHistory.length > 0) {
@@ -209,15 +206,15 @@
                         const ts = h.match(/\d{8,12}/)[0];
                         return `<option value="report/${dateDir}/${h}">🕒 ${ts}</option>`;
                     }).join('');
-                    historyHtml = `<div class="history-area"><select class="history-select sub" onchange="if(this.value) window.open(this.value, '_blank')"><option value="">📜 歷史版本 (${htmlHistory.length})</option>${options}</select></div>`;
+                    // ✨ 歷史選單修改：切換時改調用全域 openHistory() 防快取
+                    historyHtml = `<div class="history-area"><select class="history-select sub" onchange="openHistory(this)"><option value="">📜 歷史版本 (${htmlHistory.length})</option>${options}</select></div>`;
                 }
 
                 card.innerHTML = `
                     <a href="${finalPath}" target="_blank" class="card-main-link">
                         <div class="card-header">
                             <span class="badge" style="background:${config.color}">${config.label}</span>
-                            <span class="status-dot">● 最新</span>
-                        </div>
+                            <span class="status-dot">最新</span> </div>
                         <span class="title">${base.toUpperCase()}</span>
                         <div class="file-info">📄 ${displayFile}</div>
                     </a>
@@ -229,7 +226,6 @@
             displayArea.appendChild(section);
         });
     }
-
 </script>
 </body>
 </html>

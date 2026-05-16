@@ -14,7 +14,7 @@
         h1 { font-size: 1.8rem; margin-bottom: 1.5rem; color: #1e293b; text-align: center; }
         .controls { margin-bottom: 2rem; background: #f8fafc; padding: 20px; border-radius: 16px; border: 1px solid #e2e8f0; }
         .control-group label { display: block; font-size: 0.85rem; font-weight: 700; color: #64748b; margin-bottom: 8px; }
-        input[type="date"], .history-select { width: 100%; padding: 12px; font-size: 1rem; border: 2px solid #e2e8f0; border-radius: 12px; outline: none; transition: border-color 0.2s; }
+        input[type="date"], .history-select { width: 100%; padding: 12px; font-size: 1rem; border: 2px solid #e2e8f0; border-radius: 12px; outline: none; transition: border-color 0.2s; box-sizing: border-box; }
         input[type="date"]:focus, .history-select:focus { border-color: #6366f1; }
 
         .section-header { font-size: 1rem; color: #1e3a8a; margin: 2rem 0 1rem 0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; }
@@ -28,11 +28,24 @@
         .title { font-weight: 800; color: #0f172a; font-size: 1.25rem; display: block; margin: 8px 0; }
         .badge { font-size: 0.7rem; padding: 3px 10px; border-radius: 8px; font-weight: 800; color: white; text-transform: uppercase; }
         .status-dot { color: #10b981; font-size: 0.8rem; font-weight: bold; display: flex; align-items: center; gap: 4px; }
-        .status-dot::before { content: "●"; } /* 已保留偽元素圓點 */
+        .status-dot::before { content: "●"; }
 
         .file-info { font-size: 0.8rem; color: #94a3b8; font-family: monospace; background: #f8fafc; padding: 4px 8px; border-radius: 6px; display: inline-block; }
         .history-area { border-top: 1px solid #f1f5f9; margin-top: 15px; padding-top: 12px; }
         .history-select.sub { padding: 8px; font-size: 0.85rem; border-radius: 10px; background: #f8fafc; color: #475569; border-width: 1px; }
+
+        /* 📁 歷史基期大數據資料庫新樣式 */
+        .static-database-section { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 20px; padding: 20px; margin-top: 3rem; }
+        .db-header { font-size: 1.1rem; color: #1e293b; font-weight: bold; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .db-folder-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
+        .db-folder-title { padding: 14px 20px; background: #f1f5f9; font-weight: bold; color: #334155; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; transition: background 0.2s; }
+        .db-folder-title:hover { background: #e2e8f0; }
+        .db-folder-content { display: none; padding: 15px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; background: #fff; border-top: 1px solid #e2e8f0; }
+        .db-folder-card.active .db-folder-content { display: grid; }
+        .db-folder-title::after { content: "▼"; font-size: 0.75rem; color: #64748b; transition: transform 0.2s; }
+        .db-folder-card.active .db-folder-title::after { content: "▲"; }
+        .db-file-link { display: flex; align-items: center; justify-content: center; padding: 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.9rem; font-weight: 600; color: #475569; text-decoration: none; transition: all 0.2s; text-align: center; }
+        .db-file-link:hover { background: #6366f1; color: white; border-color: #6366f1; transform: translateY(-2px); }
     </style>
 </head>
 <body>
@@ -56,6 +69,11 @@
     </div>
 
     <div id="dynamicContent"></div>
+
+    <div class="static-database-section">
+        <div class="db-header">📁 歷史基期大數據對比庫 (basic_data/0520)</div>
+        <div id="staticDatabaseContent">正在讀取大數據資料夾...</div>
+    </div>
 </div>
 
 <script>
@@ -70,8 +88,10 @@
         let dateVal = urlParams.get('date') || new Date().toISOString().split('T')[0];
         document.getElementById('datePicker').value = dateVal;
         loadDynamicReports();
+        loadStaticDatabase(); // ✨ 初始化讀取基期資料庫
     };
 
+    // 1. 原有的動態日期報告讀取機制
     async function loadDynamicReports() {
         const dateInput = document.getElementById('datePicker').value;
         const dateDir = dateInput.replace(/-/g, '');
@@ -81,35 +101,27 @@
         quickNav.style.display = 'none';
 
         try {
-            // 1. 抓取 files.json 帶上時間戳記
             const url = `report/${dateDir}/files.json?t=${Date.now()}`;
             const response = await fetch(url);
             if (!response.ok) throw new Error('尚未生成報告');
 
             const allFiles = await response.json();
 
-            // 2. 篩選檔案 (保留含有 live, invest 的 HTML 與 data/ 內的 TXT)
             const filtered = allFiles.filter(f => {
                 const pathLower = f.toLowerCase();
-
                 const isHtml = f.endsWith('.html');
                 const isTxt = f.endsWith('.txt');
                 const isInDataDir = f.includes('data/');
 
                 const shouldExclude =
                     pathLower.includes('vietnam-') ||
-                    pathLower.includes('.vn') ||       
+                    pathLower.includes('.vn') ||
                     pathLower.includes('all-') ||
-                    pathLower.includes('/vn/');        
+                    pathLower.includes('/vn/');
 
                 if (shouldExclude) return false;
-
-                if (isHtml) {
-                    return pathLower.includes('live') || pathLower.includes('invest');
-                }
-
+                if (isHtml) return pathLower.includes('live') || pathLower.includes('invest');
                 if (isTxt && isInDataDir) return true;
-
                 return false;
             });
 
@@ -119,11 +131,10 @@
         }
     }
 
-    // ✨ 修改：全域歷史跳轉防快取處理器
     function openHistory(selectEl) {
         if (selectEl.value) {
             window.open(selectEl.value + '?t=' + Date.now(), '_blank');
-            selectEl.selectedIndex = 0; // 重設選單
+            selectEl.selectedIndex = 0;
         }
     }
 
@@ -164,7 +175,7 @@
             const item = groups[base];
             if (item.isStock && item.main && item.main.endsWith('.html')) {
                 const opt = document.createElement('option');
-                opt.value = `report/${dateDir}/${item.main}`; // 點擊時才會補上時間戳
+                opt.value = `report/${dateDir}/${item.main}`;
                 opt.textContent = `📈 ${base.toUpperCase()}`;
                 stockSelector.appendChild(opt);
                 hasStockHtml = true;
@@ -182,6 +193,7 @@
             }
         });
 
+        displayArea.innerHTML = '';
         Object.keys(prefixGroups).sort().forEach(prefix => {
             const section = document.createElement('div');
             section.innerHTML = `<div class="section-header">${prefix} 系列</div>`;
@@ -191,7 +203,6 @@
             prefixGroups[prefix].forEach(base => {
                 const item = groups[base];
                 const displayFile = item.main;
-                // ✨ 主要報告連結：加上時間戳
                 const finalPath = `report/${dateDir}/${displayFile}?t=${Date.now()}`;
                 let typeKey = base.includes('report') ? 'trend' : 'live';
                 const config = typeConfig[typeKey] || typeConfig['default'];
@@ -206,7 +217,6 @@
                         const ts = h.match(/\d{8,12}/)[0];
                         return `<option value="report/${dateDir}/${h}">🕒 ${ts}</option>`;
                     }).join('');
-                    // ✨ 歷史選單修改：切換時改調用全域 openHistory() 防快取
                     historyHtml = `<div class="history-area"><select class="history-select sub" onchange="openHistory(this)"><option value="">📜 歷史版本 (${htmlHistory.length})</option>${options}</select></div>`;
                 }
 
@@ -214,7 +224,8 @@
                     <a href="${finalPath}" target="_blank" class="card-main-link">
                         <div class="card-header">
                             <span class="badge" style="background:${config.color}">${config.label}</span>
-                            <span class="status-dot">最新</span> </div>
+                            <span class="status-dot">最新</span>
+                        </div>
                         <span class="title">${base.toUpperCase()}</span>
                         <div class="file-info">📄 ${displayFile}</div>
                     </a>
@@ -224,6 +235,61 @@
             });
             section.appendChild(grid);
             displayArea.appendChild(section);
+        });
+    }
+
+    // 2. ✨ 新增：基期資料庫自動分析與渲染機制
+    async function loadStaticDatabase() {
+        const dbContainer = document.getElementById('staticDatabaseContent');
+        
+        // 由於 basic_data 資料夾內沒有特定的 json 索引，我們直接寫一個智能掃描清單
+        // 這邊列出你擁有的關鍵基期節點 (0211 與 0520)
+        const targetDates = ["0211", "0520"];
+        const startYear = 2014;
+        const endYear = 2026;
+        
+        dbContainer.innerHTML = '';
+        
+        targetDates.forEach(md => {
+            const folderCard = document.createElement('div');
+            folderCard.className = 'db-folder-card';
+            
+            // 建立月份大標題外觀
+            const titleEl = document.createElement('div');
+            titleEl.className = 'db-folder-title';
+            // 將 0520 轉換成較好讀的 "05/20 基期"
+            const formattedMD = `${md.substring(0,2)}/${md.substring(2,4)}`;
+            titleEl.innerHTML = `<span>📅 歷史對比對象：<b>${formattedMD} 節點</b></span>`;
+            
+            // 點擊展開/收合
+            titleEl.onclick = function() {
+                folderCard.classList.toggle('active');
+            };
+            
+            const contentEl = document.createElement('div');
+            contentEl.className = 'db-folder-content';
+            
+            let hasFiles = false;
+            
+            // 迴圈由新到舊生成 2026 -> 2014 的 HTML 連結
+            for (let yr = endYear; yr >= startYear; yr--) {
+                const fileName = `${yr}_${md}_daily_details.html`;
+                const filePath = `basic_data/0520/${fileName}`;
+                
+                // 建立每一年份的快捷按鈕
+                const fileLink = document.createElement('a');
+                fileLink.href = `${filePath}?t=${Date.now()}`;
+                fileLink.target = '_blank';
+                fileLink.className = 'db-file-link';
+                fileLink.textContent = `${yr} 年`;
+                
+                contentEl.appendChild(fileLink);
+                hasFiles = true;
+            }
+            
+            folderCard.appendChild(titleEl);
+            folderCard.appendChild(contentEl);
+            dbContainer.appendChild(folderCard);
         });
     }
 </script>
