@@ -404,8 +404,61 @@
     }
 
     function showBalanceSheetModal(fullId, subDir) {
-        var bsPath = '../../basic_data/balance-sheet/' + subDir + '/' + fullId + '-balance-sheet.html';
-        applyIframeModalStyle('📊 資產負債表財務結構: ' + fullId, '92%', '1450px', '78vh', bsPath);
+        // 1. 標準路徑 (例如: /my-stock-report/basic_data/balance-sheet/5/3595.TWO-balance-sheet.html)
+        var bsPath = '/my-stock-report/basic_data/balance-sheet/' + subDir + '/' + fullId + '-balance-sheet.html';
+        
+        // 2. 備用路徑 (萬一你的後端產檔時把副檔名轉成了小寫 .two)
+        var pureId = fullId.split('.')[0];
+        var ext = fullId.split('.')[1] ? fullId.split('.')[1].toLowerCase() : '';
+        var altFullId = ext ? (pureId + '.' + ext) : fullId;
+        var altBsPath = '/my-stock-report/basic_data/balance-sheet/' + subDir + '/' + altFullId + '-balance-sheet.html';
+
+        var modalContent = document.querySelector('.modal-content');
+        var logContent = document.getElementById('logContent');
+        var logTitle = document.getElementById('logTitle');
+
+        // 調整彈窗外觀為符合財務報表的大寬幅樣式
+        if (modalContent) {
+            modalContent.style.background = '#f8fafc';
+            modalContent.style.width = '92%';
+            modalContent.style.maxWidth = '1450px';
+            modalContent.style.margin = '1.5% auto';
+            modalContent.style.padding = '20px 25px';
+            modalContent.style.borderRadius = '16px';
+            modalContent.style.border = '1px solid #e2e8f0';
+        }
+        if (logContent) {
+            logContent.style.background = 'transparent';
+            logContent.style.padding = '0px';
+            logContent.style.marginTop = '15px';
+            logContent.style.fontFamily = 'inherit';
+            logContent.style.whiteSpace = 'normal';
+        }
+        if (logTitle) {
+            logTitle.innerHTML = '<span style="color:#2563eb; font-weight:bold; font-size:1.6rem;">📊 資產負債表財務結構: ' + fullId + '</span>';
+        }
+
+        // 先用標準路徑載入 iframe
+        logContent.innerHTML = '<iframe id="bsIframe" src="' + bsPath + '" style="width:100%; height:78vh; border:none; background:white; display:block; border-radius:12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);"></iframe>';
+        document.getElementById('logModal').style.display = 'block';
+
+        // 🛡️ 自動防錯機制：如果標準路徑 404 碎掉，自動切換至備用小寫後綴路徑
+        var iframe = document.getElementById('bsIframe');
+        if (iframe) {
+            iframe.onerror = function() {
+                this.src = altBsPath;
+            };
+            // 針對某些瀏覽器不觸發 iframe onerror 的雙重保險
+            setTimeout(function() {
+                try {
+                    if (iframe.contentWindow && iframe.contentWindow.location.href === "about:blank") {
+                        iframe.src = altBsPath;
+                    }
+                } catch(e) {
+                    // 跨網域安全限制忽略
+                }
+            }, 500);
+        }
     }
 
     function applyIframeModalStyle(titleText, widthStr, maxWidthStr, heightStr, srcPath) {
