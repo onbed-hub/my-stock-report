@@ -132,7 +132,10 @@
 <script>
     window.onload = function() {
         // 預設切換到有資料的 2026-05-15
-        document.getElementById('datePicker').value = "2026-05-15";
+//        document.getElementById('datePicker').value = "2026-05-15";
+//        updateReportPaths();
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('datePicker').value = today;
         updateReportPaths();
     };
 
