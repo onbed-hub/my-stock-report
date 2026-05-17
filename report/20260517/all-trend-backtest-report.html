@@ -404,10 +404,9 @@
     }
 
     function showBalanceSheetModal(fullId, subDir) {
-        // 1. 標準絕對路徑
+        // 1. 定義標準路徑與備用路徑
         var bsPath = '/my-stock-report/basic_data/balance-sheet/' + subDir + '/' + fullId + '-balance-sheet.html';
         
-        // 2. 備用絕對路徑
         var pureId = fullId.split('.')[0];
         var ext = fullId.split('.')[1] ? fullId.split('.')[1].toLowerCase() : '';
         var altFullId = ext ? (pureId + '.' + ext) : fullId;
@@ -417,49 +416,76 @@
         var logContent = document.getElementById('logContent');
         var logTitle = document.getElementById('logTitle');
 
-        // 🌟 切換成適用於 HTML 財報圖表的高質感大寬幅樣式
+        // 設定緊湊的外框樣式
         if (modalContent) {
             modalContent.style.background = '#f8fafc';
-            modalContent.style.width = '92%';
-            modalContent.style.maxWidth = '1450px';
-            modalContent.style.margin = '1.5% auto';
-            modalContent.style.padding = '20px 25px';
+            modalContent.style.width = '85%';
+            modalContent.style.maxWidth = '920px';
+            modalContent.style.margin = '2% auto';
+            modalContent.style.padding = '20px 24px';
             modalContent.style.borderRadius = '16px';
             modalContent.style.border = '1px solid #e2e8f0';
-            modalContent.style.boxShadow = '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)';
+            modalContent.style.boxShadow = '0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)';
         }
         if (logContent) {
             logContent.style.background = 'transparent';
             logContent.style.padding = '0px';
-            logContent.style.marginTop = '15px';
+            logContent.style.marginTop = '12px';
             logContent.style.fontFamily = 'inherit';
             logContent.style.whiteSpace = 'normal';
         }
         if (logTitle) {
-            logTitle.innerHTML = '<span style="color:#2563eb; font-weight:bold; font-size:1.6rem;">📊 資產負債表財務結構: ' + fullId + '</span>';
+            logTitle.innerHTML = '<span style="color:#2563eb; font-weight:bold; font-size:1.5rem;">📊 資產負債表財務結構: ' + fullId + '</span>';
             logTitle.style.margin = '0';
         }
 
-        // 先以標準路徑渲染 Iframe
-        logContent.innerHTML = '<iframe id="bsIframe" src="' + bsPath + '" style="width:100%; height:78vh; border:none; background:white; display:block; border-radius:12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);"></iframe>';
+        // 先顯示讀取中狀態
+        logContent.innerHTML = '<div id="bsLoading" style="text-align:center; padding: 40px; color:#64748b; font-size:1.1rem;">🔍 正在檢查財報資料庫...</div>';
         document.getElementById('logModal').style.display = 'block';
 
-        // 🛡️ 防碎裂機制：如果標準路徑載入失敗，自動切換成小寫後綴路徑
-        var iframe = document.getElementById('bsIframe');
-        if (iframe) {
-            iframe.onerror = function() {
-                this.src = altBsPath;
-            };
-            // 雙重保險限制（避免部分瀏覽器不觸發 iframe.onerror）
-            setTimeout(function() {
-                try {
-                    if (iframe.contentWindow && iframe.contentWindow.location.href === "about:blank") {
-                        iframe.src = altBsPath;
-                    }
-                } catch(e) {
-                    // 跨網域安全限制忽略
+        // 🎯 核心分辨機制：先用 fetch 檢查標準路徑是否存在
+        fetch(bsPath, { method: 'HEAD' })
+            .then(function(res) {
+                if (res.ok) {
+                    // A方案：標準路徑檔案存在，直接用 iframe 載入
+                    loadIframe(bsPath);
+                } else {
+                    // 如果標準路徑失敗，再戳戳看備用小寫路徑
+                    return fetch(altBsPath, { method: 'HEAD' });
                 }
-            }, 500);
+            })
+            .then(function(res2) {
+                if (res2) {
+                    if (res2.ok) {
+                        // B方案：備用路徑檔案存在，用 iframe 載入備用路徑
+                        loadIframe(altBsPath);
+                    } else {
+                        // C方案：兩個路徑都找不到 (404)，精美提示「無此報表」
+                        showNoReportMessage();
+                    }
+                }
+            })
+            .catch(function(err) {
+                // 發生網路錯誤或跨網域問題時的保險：直接盲開標準路徑
+                loadIframe(bsPath);
+            });
+
+        // 封裝：成功載入 iframe 的函式
+        function loadIframe(targetPath) {
+            logContent.innerHTML = '<iframe src="' + targetPath + '" style="width:100%; height:74vh; border:none; background:#ffffff; display:block; border-radius:12px; box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.06);"></iframe>';
+        }
+
+        // 封裝：顯示明確「沒有報表」的提示
+        function showNoReportMessage() {
+            logContent.innerHTML = `
+                <div style="text-align: center; padding: 60px 20px; background: white; border-radius: 12px; border: 1px dashed #cbd5e1; margin-top: 15px;">
+                    <div style="font-size: 3.5rem; margin-bottom: 15px;">⚠️</div>
+                    <h4 style="color: #334155; font-size: 1.4rem; margin: 0 0 10px 0; font-weight: 600;">暫無財報數據</h4>
+                    <p style="color: #64748b; font-size: 1rem; margin: 0;">
+                        代號 <span style="color: #0f172a; font-weight: bold;">${fullId}</span> 目前在 <code>basic_data/balance-sheet/${subDir}/</code> 資料夾中尚未生成對應的 HTML 報表。
+                    </p>
+                </div>
+            `;
         }
     }
 
