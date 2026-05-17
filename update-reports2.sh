@@ -36,6 +36,7 @@ if [ -d "$STATIC_BASE_SRC" ]; then
     rsync -av --delete \
           --include="*/" \
           --include="*.txt" \
+          --include="*.html" \
           --exclude="*" \
           "$STATIC_BASE_SRC/" "$STATIC_TARGET_DIR/"
     echo "✅ 基礎資料同步完成"
