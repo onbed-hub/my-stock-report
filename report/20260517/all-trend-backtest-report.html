@@ -511,11 +511,11 @@
         }
     }
 
+    // 🚪 關閉彈窗時全面初始化，洗掉任何殘留樣式並重置標題
     function closeModal() {
         document.getElementById("logModal").style.display = "none";
         document.getElementById('logContent').innerHTML = '';
         
-        // 🔄 徹底還原標題狀態，避免 display: none 殘留
         var logTitle = document.getElementById('logTitle');
         if (logTitle) {
             logTitle.style.display = ''; 
@@ -523,7 +523,6 @@
             logTitle.innerText = '';
         }
 
-        // 🔄 還原彈窗基礎容器預設值（給技術分析與產業結構乾淨的起點）
         var modalContent = document.querySelector('.modal-content');
         if (modalContent) {
             modalContent.style.background = '#fff';
@@ -536,10 +535,19 @@
         }
     }
 
-    window.onclick = (e) => { if(e.target == document.getElementById("logModal")) closeModal(); }
+    // 🎯 核心修正：確保這行全域點擊事件獨立在外，沒有被包進別的 function 裡！
+    window.onclick = function(e) {
+        var modal = document.getElementById("logModal");
+        if (e.target == modal) {
+            closeModal();
+        }
+    };
+
+    // 頁面載入完成後的初始化
     document.addEventListener('DOMContentLoaded', () => {
         initSectorFilter();
         filter();
     });
+
     </script></body></html>
     
