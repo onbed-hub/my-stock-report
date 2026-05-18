@@ -416,30 +416,31 @@
         var logContent = document.getElementById('logContent');
         var logTitle = document.getElementById('logTitle');
 
-        // 設定緊湊的外框樣式
+        // 🎯 修正點 1：緊湊縮減外框，消滅灰白大空白，並完全移除標題！
         if (modalContent) {
             modalContent.style.background = '#f8fafc';
-            modalContent.style.width = '85%';
-            modalContent.style.maxWidth = '920px';
+            modalContent.style.width = '85%';            // 縮減拉近比例
+            modalContent.style.maxWidth = '920px';       // 剛好包覆財報卡片的黃金寬度
             modalContent.style.margin = '2% auto';
-            modalContent.style.padding = '20px 24px';
+            modalContent.style.padding = '0';            // 徹底移除內邊距，消除空白
             modalContent.style.borderRadius = '16px';
             modalContent.style.border = '1px solid #e2e8f0';
             modalContent.style.boxShadow = '0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)';
+            modalContent.style.overflow = 'hidden';      // 確保iframe和圓角貼合
         }
         if (logContent) {
             logContent.style.background = 'transparent';
             logContent.style.padding = '0px';
-            logContent.style.marginTop = '12px';
+            logContent.style.margin = '0px';             // 移除上邊距
             logContent.style.fontFamily = 'inherit';
             logContent.style.whiteSpace = 'normal';
         }
         if (logTitle) {
-            logTitle.innerHTML = '<span style="color:#2563eb; font-weight:bold; font-size:1.5rem;">📊 資產負債表財務結構: ' + fullId + '</span>';
-            logTitle.style.margin = '0';
+            // 🎯 修正點 2：徹底隱藏標題，不佔空間
+            logTitle.style.display = 'none';
         }
 
-        // 先顯示讀取中狀態
+        // 先顯示讀取中狀態（與Modal貼合）
         logContent.innerHTML = '<div id="bsLoading" style="text-align:center; padding: 40px; color:#64748b; font-size:1.1rem;">🔍 正在檢查財報資料庫...</div>';
         document.getElementById('logModal').style.display = 'block';
 
@@ -472,13 +473,14 @@
 
         // 封裝：成功載入 iframe 的函式
         function loadIframe(targetPath) {
-            logContent.innerHTML = '<iframe src="' + targetPath + '" style="width:100%; height:74vh; border:none; background:#ffffff; display:block; border-radius:12px; box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.06);"></iframe>';
+            // 🚀 微調 iframe 樣式，使其無縫貼合外框
+            logContent.innerHTML = '<iframe id="bsIframe" src="' + targetPath + '" style="width:100%; height:74vh; border:none; background:#ffffff; display:block; margin:0; padding:0;"></iframe>';
         }
 
-        // 封裝：顯示明確「沒有報表」的提示
+        // 封裝：顯示明確「沒有報表」的提示（也保持貼合）
         function showNoReportMessage() {
             logContent.innerHTML = `
-                <div style="text-align: center; padding: 60px 20px; background: white; border-radius: 12px; border: 1px dashed #cbd5e1; margin-top: 15px;">
+                <div style="text-align: center; padding: 60px 20px; background: white; border-radius: 12px; border: 1px dashed #cbd5e1; margin: 0;">
                     <div style="font-size: 3.5rem; margin-bottom: 15px;">⚠️</div>
                     <h4 style="color: #334155; font-size: 1.4rem; margin: 0 0 10px 0; font-weight: 600;">暫無財報數據</h4>
                     <p style="color: #64748b; font-size: 1rem; margin: 0;">
