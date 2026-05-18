@@ -416,71 +416,64 @@
         var logContent = document.getElementById('logContent');
         var logTitle = document.getElementById('logTitle');
 
-        // 🎯 修正點 1：緊湊縮減外框，消滅灰白大空白，並完全移除標題！
+        // 🎯 專屬修正：僅在此彈窗縮減外框、徹底移除內邊距並隱藏標題，無縫貼合！
         if (modalContent) {
             modalContent.style.background = '#f8fafc';
-            modalContent.style.width = '85%';            // 縮減拉近比例
-            modalContent.style.maxWidth = '920px';       // 剛好包覆財報卡片的黃金寬度
+            modalContent.style.width = '85%';            // 縮減外框寬度
+            modalContent.style.maxWidth = '920px';       // 貼合財報卡片寬度
             modalContent.style.margin = '2% auto';
-            modalContent.style.padding = '0';            // 徹底移除內邊距，消除空白
+            modalContent.style.padding = '0px';          // 移除所有內邊距，消除白邊
             modalContent.style.borderRadius = '16px';
             modalContent.style.border = '1px solid #e2e8f0';
             modalContent.style.boxShadow = '0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)';
-            modalContent.style.overflow = 'hidden';      // 確保iframe和圓角貼合
+            modalContent.style.overflow = 'hidden';      // 確保內部 iframe 完美貼合外框圓角
         }
         if (logContent) {
             logContent.style.background = 'transparent';
             logContent.style.padding = '0px';
-            logContent.style.margin = '0px';             // 移除上邊距
+            logContent.style.margin = '0px';
             logContent.style.fontFamily = 'inherit';
             logContent.style.whiteSpace = 'normal';
         }
         if (logTitle) {
-            // 🎯 修正點 2：徹底隱藏標題，不佔空間
+            // 🎯 隱藏最外圈的標題文字，不佔空間
             logTitle.style.display = 'none';
         }
 
-        // 先顯示讀取中狀態（與Modal貼合）
-        logContent.innerHTML = '<div id="bsLoading" style="text-align:center; padding: 40px; color:#64748b; font-size:1.1rem;">🔍 正在檢查財報資料庫...</div>';
+        // 先顯示讀取中狀態（與圓角緊密貼合）
+        logContent.innerHTML = '<div id="bsLoading" style="text-align:center; padding: 40px; color:#64748b; font-size:1.1rem; background:#ffffff;">🔍 正在檢查財報資料庫...</div>';
         document.getElementById('logModal').style.display = 'block';
 
-        // 🎯 核心分辨機制：先用 fetch 檢查標準路徑是否存在
+        // 核心偵測機制：檢查檔案是否存在
         fetch(bsPath, { method: 'HEAD' })
             .then(function(res) {
                 if (res.ok) {
-                    // A方案：標準路徑檔案存在，直接用 iframe 載入
                     loadIframe(bsPath);
                 } else {
-                    // 如果標準路徑失敗，再戳戳看備用小寫路徑
                     return fetch(altBsPath, { method: 'HEAD' });
                 }
             })
             .then(function(res2) {
                 if (res2) {
                     if (res2.ok) {
-                        // B方案：備用路徑檔案存在，用 iframe 載入備用路徑
                         loadIframe(altBsPath);
                     } else {
-                        // C方案：兩個路徑都找不到 (404)，精美提示「無此報表」
                         showNoReportMessage();
                     }
                 }
             })
             .catch(function(err) {
-                // 發生網路錯誤或跨網域問題時的保險：直接盲開標準路徑
                 loadIframe(bsPath);
             });
 
-        // 封裝：成功載入 iframe 的函式
         function loadIframe(targetPath) {
-            // 🚀 微調 iframe 樣式，使其無縫貼合外框
-            logContent.innerHTML = '<iframe id="bsIframe" src="' + targetPath + '" style="width:100%; height:74vh; border:none; background:#ffffff; display:block; margin:0; padding:0;"></iframe>';
+            // Iframe 無縫貼合外框，高度微調為 75vh 更加緊湊
+            logContent.innerHTML = '<iframe id="bsIframe" src="' + targetPath + '" style="width:100%; height:75vh; border:none; background:#ffffff; display:block; margin:0; padding:0;"></iframe>';
         }
 
-        // 封裝：顯示明確「沒有報表」的提示（也保持貼合）
         function showNoReportMessage() {
             logContent.innerHTML = `
-                <div style="text-align: center; padding: 60px 20px; background: white; border-radius: 12px; border: 1px dashed #cbd5e1; margin: 0;">
+                <div style="text-align: center; padding: 60px 20px; background: white; border-radius: 0px; margin: 0;">
                     <div style="font-size: 3.5rem; margin-bottom: 15px;">⚠️</div>
                     <h4 style="color: #334155; font-size: 1.4rem; margin: 0 0 10px 0; font-weight: 600;">暫無財報數據</h4>
                     <p style="color: #64748b; font-size: 1rem; margin: 0;">
