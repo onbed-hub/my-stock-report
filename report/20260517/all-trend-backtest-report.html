@@ -378,35 +378,38 @@
             });
     }
 
+    // 1. 名稱彈窗 (技術分析) -> 保留大寬幅與標題
+    function showAnalysisModal(fullId, subDir) {
+        var analysisPath = 'stock-analysis/' + subDir + '/' + fullId + '-stock-analysis.html';
+        
+        // 確保標題與樣式正確顯示
+        var logTitle = document.getElementById('logTitle');
+        if (logTitle) { logTitle.style.display = ''; } // 強制顯示標題
+        
+        applyIframeModalStyle('🔍 技術分析圖表: ' + fullId, '85%', '1200px', '75vh', analysisPath);
+    }
+
+    // 2. 分類彈窗 (產業與營收結構) -> 保留大寬幅與標題
     function showBusinessLog(fullId, subDir) {
         var bizPath = '/my-stock-report/basic_data/balance-sheet/' + subDir + '/' + fullId + '-industry-business.txt?v=' + new Date().getTime();
+        
+        var logTitle = document.getElementById('logTitle');
+        if (logTitle) { logTitle.style.display = ''; } // 強制顯示標題
+        
         resetModalStyleForText();
         document.getElementById('logTitle').innerText = '🏭 產業與營收結構: ' + fullId;
         document.getElementById('logContent').innerText = '讀取中...';
         document.getElementById('logModal').style.display = 'block';
 
         fetch(bizPath)
-            .then(function(response) {
-                if (!response.ok) throw new Error('HTTP ' + response.status + ' (找不到檔案)');
-                return response.text();
-            })
-            .then(function(data) {
-                document.getElementById('logContent').innerText = data;
-            })
-            .catch(function(err) {
-                document.getElementById('logContent').innerHTML = '<div style="color:#f87171; padding:20px;">❌ 無法讀取產業資料</div>';
-            });
+            .then(function(response) { return response.text(); })
+            .then(function(data) { document.getElementById('logContent').innerText = data; })
+            .catch(function(err) { document.getElementById('logContent').innerHTML = '❌ 無法讀取產業資料'; });
     }
 
-    function showAnalysisModal(fullId, subDir) {
-        var analysisPath = 'stock-analysis/' + subDir + '/' + fullId + '-stock-analysis.html';
-        applyIframeModalStyle('🔍 技術分析圖表: ' + fullId, '85%', '1200px', '75vh', analysisPath);
-    }
-
+    // 3. 訊號 / 現價彈窗 (資產負債表) -> 專屬緊湊樣式，隱藏外圈標題
     function showBalanceSheetModal(fullId, subDir) {
-        // 1. 定義標準路徑與備用路徑
         var bsPath = '/my-stock-report/basic_data/balance-sheet/' + subDir + '/' + fullId + '-balance-sheet.html';
-        
         var pureId = fullId.split('.')[0];
         var ext = fullId.split('.')[1] ? fullId.split('.')[1].toLowerCase() : '';
         var altFullId = ext ? (pureId + '.' + ext) : fullId;
@@ -416,58 +419,34 @@
         var logContent = document.getElementById('logContent');
         var logTitle = document.getElementById('logTitle');
 
-        // 🎯 專屬修正：僅在此彈窗縮減外框、徹底移除內邊距並隱藏標題，無縫貼合！
+        // 訊號專用緊湊面板配置
         if (modalContent) {
             modalContent.style.background = '#f8fafc';
-            modalContent.style.width = '85%';            // 縮減外框寬度
-            modalContent.style.maxWidth = '920px';       // 貼合財報卡片寬度
+            modalContent.style.width = '85%';
+            modalContent.style.maxWidth = '920px';
             modalContent.style.margin = '2% auto';
-            modalContent.style.padding = '0px';          // 移除所有內邊距，消除白邊
+            modalContent.style.padding = '0px';          // 移除白邊
             modalContent.style.borderRadius = '16px';
-            modalContent.style.border = '1px solid #e2e8f0';
-            modalContent.style.boxShadow = '0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)';
-            modalContent.style.overflow = 'hidden';      // 確保內部 iframe 完美貼合外框圓角
+            modalContent.style.overflow = 'hidden';
         }
         if (logContent) {
             logContent.style.background = 'transparent';
             logContent.style.padding = '0px';
             logContent.style.margin = '0px';
-            logContent.style.fontFamily = 'inherit';
-            logContent.style.whiteSpace = 'normal';
         }
         if (logTitle) {
-            // 🎯 隱藏最外圈的標題文字，不佔空間
-            logTitle.style.display = 'none';
+            logTitle.style.display = 'none';             // 訊號彈窗才需要隱藏此標題
         }
 
-        // 先顯示讀取中狀態（與圓角緊密貼合）
         logContent.innerHTML = '<div id="bsLoading" style="text-align:center; padding: 40px; color:#64748b; font-size:1.1rem; background:#ffffff;">🔍 正在檢查財報資料庫...</div>';
         document.getElementById('logModal').style.display = 'block';
 
-        // 核心偵測機制：檢查檔案是否存在
         fetch(bsPath, { method: 'HEAD' })
-            .then(function(res) {
-                if (res.ok) {
-                    loadIframe(bsPath);
-                } else {
-                    return fetch(altBsPath, { method: 'HEAD' });
-                }
-            })
-            .then(function(res2) {
-                if (res2) {
-                    if (res2.ok) {
-                        loadIframe(altBsPath);
-                    } else {
-                        showNoReportMessage();
-                    }
-                }
-            })
-            .catch(function(err) {
-                loadIframe(bsPath);
-            });
+            .then(function(res) { if (res.ok) { loadIframe(bsPath); } else { return fetch(altBsPath, { method: 'HEAD' }); } })
+            .then(function(res2) { if (res2) { if (res2.ok) { loadIframe(altBsPath); } else { showNoReportMessage(); } } })
+            .catch(function(err) { loadIframe(bsPath); });
 
         function loadIframe(targetPath) {
-            // Iframe 無縫貼合外框，高度微調為 75vh 更加緊湊
             logContent.innerHTML = '<iframe id="bsIframe" src="' + targetPath + '" style="width:100%; height:75vh; border:none; background:#ffffff; display:block; margin:0; padding:0;"></iframe>';
         }
 
@@ -535,7 +514,26 @@
     function closeModal() {
         document.getElementById("logModal").style.display = "none";
         document.getElementById('logContent').innerHTML = '';
-        resetModalStyleForText();
+        
+        // 🔄 徹底還原標題狀態，避免 display: none 殘留
+        var logTitle = document.getElementById('logTitle');
+        if (logTitle) {
+            logTitle.style.display = ''; 
+            logTitle.style.margin = '';
+            logTitle.innerText = '';
+        }
+
+        // 🔄 還原彈窗基礎容器預設值（給技術分析與產業結構乾淨的起點）
+        var modalContent = document.querySelector('.modal-content');
+        if (modalContent) {
+            modalContent.style.background = '#fff';
+            modalContent.style.width = '90%';
+            modalContent.style.maxWidth = 'none';
+            modalContent.style.margin = '2% auto';
+            modalContent.style.padding = '30px';
+            modalContent.style.borderRadius = '15px';
+            modalContent.style.overflow = '';
+        }
     }
 
     window.onclick = (e) => { if(e.target == document.getElementById("logModal")) closeModal(); }
