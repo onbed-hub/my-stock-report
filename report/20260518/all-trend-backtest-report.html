@@ -366,9 +366,20 @@
         filter();
     }
 
+
     function showLog(pureId, subDir) {
         var logPath = 'data/' + subDir + '/' + pureId + '-trend-backtest-report.txt';
+        var modalContent = document.querySelector('.modal-content');
+
         resetModalStyleForText();
+
+        // 🎯 關鍵修正：限制交易明細外殼的黃金寬度，不再任由它暴長到 90% 寬度
+        if (modalContent) {
+            modalContent.style.width = '85%';
+            modalContent.style.maxWidth = '1050px';      // 剛好能完美包覆深色交易明細的寬度
+            modalContent.style.padding = '25px';          // 保持舒服的四邊留白
+        }
+
         document.getElementById('logTitle').innerText = '📜 交易明細: ' + pureId;
         document.getElementById('logContent').innerText = '載入中...';
         document.getElementById('logModal').style.display = 'block';
@@ -519,6 +530,8 @@
             logContent.style.borderRadius = '10px';
             logContent.style.fontFamily = 'monospace';
             logContent.style.whiteSpace = 'pre-wrap';
+            logContent.style.width = '100%';             // 🎯 確保深色背景容器橫向 100% 撐滿
+            logContent.style.boxSizing = 'border-box';    // 防止 padding 撐破佈局
         }
     }
 
