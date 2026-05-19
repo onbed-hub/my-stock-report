@@ -366,7 +366,6 @@
         filter();
     }
 
-
     function showLog(pureId, subDir) {
         var logPath = 'data/' + subDir + '/' + pureId + '-trend-backtest-report.txt';
         var modalContent = document.querySelector('.modal-content');
@@ -408,14 +407,23 @@
         applyIframeModalStyle('🔍 技術分析圖表: ' + fullId, '85%', '1200px', '75vh', analysisPath);
     }
 
-    // 2. 分類彈窗 (產業與營收結構) -> 保留大寬幅與標題
+    // 2. 分類彈窗 (產業與營收結構) -> 專屬寬度優化，消滅右邊死白
     function showBusinessLog(fullId, subDir) {
         var bizPath = '/my-stock-report/basic_data/balance-sheet/' + subDir + '/' + fullId + '-industry-business.txt?v=' + new Date().getTime();
-        
+        var modalContent = document.querySelector('.modal-content');
         var logTitle = document.getElementById('logTitle');
-        if (logTitle) { logTitle.style.display = ''; } // 強制顯示標題
         
+        if (logTitle) { logTitle.style.display = ''; } // 強制顯示標題
+
         resetModalStyleForText();
+        
+        // 🎯 關鍵修正：限制產業結構外殼的黃金寬度，使其緊湊精美
+        if (modalContent) {
+            modalContent.style.width = '85%';
+            modalContent.style.maxWidth = '950px';       // 鎖定最適合閱讀產業文字的寬度
+            modalContent.style.padding = '25px';          // 舒服的內邊距
+        }
+
         document.getElementById('logTitle').innerText = '🏭 產業與營收結構: ' + fullId;
         document.getElementById('logContent').innerText = '讀取中...';
         document.getElementById('logModal').style.display = 'block';
