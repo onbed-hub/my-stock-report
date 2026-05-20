@@ -1,3 +1,0 @@
-股票代碼: 4980.TWO
-產業分類: 興電子零組件
-主要業務: 工規及車規無線模組、物聯網無線感測模組及無線媒體串流模組 行動媒體處理器模組(Application Processor Module) 穿戴式裝置(Wearable Device)及多晶片SiP整合性系統模組化(SoM)
