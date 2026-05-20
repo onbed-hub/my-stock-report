@@ -9,6 +9,29 @@
             padding: 30px; background: #f8fafc; color: #0f172a; margin: 0;
             -webkit-font-smoothing: antialiased;
         }
+        /* 新增：返回儀表板按鈕樣式 */
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            color: #334155;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+            margin-bottom: 20px;
+        }
+        .btn-back:hover {
+            background-color: #f8fafc;
+            color: #1e40af;
+            border-color: #3b82f6;
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
+        }
         .container { width: 98%; max-width: 1900px; margin: auto; }
         .card {
             background: white; padding: 30px; border-radius: 12px;
@@ -82,6 +105,9 @@
     
     </head>
     <body><div class='container'>
+        <!-- 新增：返回主儀表板連結 -->
+        <a href="../../index.html" class="btn-back">← 返回儀表板</a>
+
         <h2>📈 VIETNAM 趨勢回測策略報告 (V3 Pro)</h2>
         <div class="header-info">📅 回測起點：2025-01-01 | 📅 分析日期：20260520</div>
         
