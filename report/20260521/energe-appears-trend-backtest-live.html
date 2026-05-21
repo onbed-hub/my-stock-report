@@ -1,0 +1,160 @@
+
+        <!DOCTYPE html><html><head><meta charset='utf-8'>
+        <title>energe-appears Live 監控</title>
+        <style>
+            body { font-family: 'Segoe UI', "PingFang TC", sans-serif; padding: 40px; background: #f1f5f9; font-size: 1.6rem; }
+            .container { max-width: 1850px; margin: auto; }
+            .card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 40px; }
+            h2 { font-size: 3.5rem; color: #1e3a8a; text-align: center; }
+            .filter-group { display: flex; gap: 30px; margin-bottom: 30px; background: #1e293b; padding: 30px; border-radius: 15px; color: white; }
+            input, select { padding: 15px; font-size: 1.5rem; border-radius: 10px; border: none; }
+            table { width: 100%; border-collapse: collapse; }
+            th { background: #2563eb; color: white; padding: 20px; sticky; top: 0; }
+            td { padding: 18px; border-bottom: 2px solid #f1f5f9; text-align: center; }
+            .hero { background: #fffde7 !important; border-left: 10px solid #fbbf24; }
+            .sig-buy { color: #dc2626; font-weight: bold; }
+            .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+            .modal-content { background:#fff; margin:3% auto; padding:30px; width:80%; max-height: 85%; border-radius:20px; display: flex; flex-direction: column; }
+            #logContent { background:#0f172a; color:#94a3b8; padding:25px; border-radius:12px; white-space:pre-wrap; font-family: monospace; overflow-y: auto; }
+            .sig-run { color: #ffffff; background-color: #ef4444; padding: 4px 8px; border-radius: 4px; font-weight: bold; } 
+            .sig-warn { color: #b45309; background-color: #fef3c7; padding: 4px 8px; border-radius: 4px; font-weight: bold; } 
+            .sig-watch { color: #2563eb; font-weight: bold; } 
+        </style>
+        </head>
+        <body>
+            <div class='container'>
+                <h2>📈 ENERGE-APPEARS 趨勢監控報告 (V3 Live)</h2>
+                <div style="text-align:center; margin-bottom:30px; color:#64748b;">
+                    📅 分析日期：20260521 | 生成時間：2026-05-21 18:15 | 起始日：2025-11-01
+                </div>
+
+                
+        <div class="card">
+            <h3 style="font-size: 2.2rem; color: #1e3a8a; border-left: 10px solid #2563eb; padding-left:20px; margin-bottom:25px;">🛡️ V3 Pro 趨勢防衛與即時控盤準則</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px;">
+                <div style="background: #f0fdf4; padding: 20px; border-radius: 15px; border: 1px solid #bbf7d0;">
+                    <h4 style="color: #166534; border-bottom: 2px solid #bbf7d0; padding-bottom: 10px;">🟢 進場嚴選 (Entry)</h4>
+                    <ul style="font-size: 1.3rem; line-height: 1.8; padding-left: 20px; margin-top: 15px;">
+                        <li><b>均線多頭：</b> MA_5 &gt; 10 &gt; 20 (短中長期成本支撐)</li>
+                        <li><b>布林突破：</b> 股價觸及上軌 95%~98% (動能爆發)</li>
+                        <li><b>實體辨識：</b> 必須為「真紅棒」(上影線 &lt; 實體 0.6 倍)</li>
+                        <li><b>爆發模式：</b> 5日內漲幅 &gt; 30% 自動啟動強勢跟蹤</li>
+                        <li><b>防追高：</b> 20日乖離率 (BIAS) &lt; 8.0 避免過熱</li>
+                    </ul>
+                </div>
+                <div style="background: #fffbeb; padding: 20px; border-radius: 15px; border: 1px solid #fef3c7;">
+                    <h4 style="color: #92400e; border-bottom: 2px solid #fef3c7; padding-bottom: 10px;">🟡 即時防衛 (Defensive)</h4>
+                    <ul style="font-size: 1.3rem; line-height: 1.8; padding-left: 20px; margin-top: 15px;">
+                        <li><span class="sig-warn">🟡 預警 (扣抵)</span>：現價低於<b> 4 天前收盤</b>，預判明日 MA5 下彎。</li>
+                        <li><span class="sig-run" style="background:#f59e0b">🚨 跑路 (MA5)</span>：MA5 斜率轉負 ＋ 股價跌破 MA5。</li>
+                        <li><b>保命價 (Critical)：</b> 4 天前收盤價，跌破此價位短線轉弱。</li>
+                        <li><b>乖離預警：</b> BIAS 過高提示潛在回檔風險。</li>
+                    </ul>
+                </div>
+                <div style="background: #fef2f2; padding: 20px; border-radius: 15px; border: 1px solid #fecaca;">
+                    <h4 style="color: #991b1b; border-bottom: 2px solid #fecaca; padding-bottom: 10px;">🔴 趨勢終結 (Exit)</h4>
+                    <ul style="font-size: 1.3rem; line-height: 1.8; padding-left: 20px; margin-top: 15px;">
+                        <li><span class="sig-run">❄️ 賣出 (破月線)</span>：收盤跌破 MA20，中期趨勢瓦解。</li>
+                        <li><b>ATR 止損：</b> 跌破「進場價 - 2~3.5倍 ATR」硬止損。</li>
+                        <li><b>移動鎖利：</b> 獲利達 15% 後，從最高點回落 10% 觸發。</li>
+                        <li><b>時間止損：</b> 持股 12 日漲幅 &lt; 2% (換股操作)。</li>
+                        <li><b>趨勢雙死：</b> 跌破 MA20 且 MACD 翻負。</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="margin-top: 25px; padding: 15px; background: #f8fafc; border-radius: 10px; font-size: 1.2rem; color: #475569; border: 1px solid #e2e8f0;">
+                💡 <b>核心邏輯：</b> 程式會在盤中利用即時現價與 <b>MA5 扣抵值</b> 進行預算。若現價低於保命價，代表明日均線將走平或下彎，系統會提前發出 <span style="color:#ef4444; font-weight:bold;">🚨 跑路</span> 訊號，幫助你在收盤大跌前提早避險。
+            </div>
+        </div>
+        
+
+                <div class="filter-group">
+                    <div style="display:flex; flex-direction:column; gap:10px;">
+                        <label>🔍 搜尋股票</label>
+                        <input type="text" id="searchInput" onkeyup="filter()" placeholder="股號/名稱...">
+                    </div>
+                    <div class="filter-item">
+                        <label>📊 獲利門檻</label>
+                        <select id="pFilter" onchange="filter()">
+                            <option value="-999">全部</option>
+                            <option value="0">正向收益 (&gt;0%)</option>
+                            <option value="15">啟動波段 (&gt;15%)</option>
+                            <option value="20">顯著獲利 (&gt;20%)</option>
+                            <option value="-50.0" selected>當前標竿 (&gt;-50.0%)</option>
+                            <option value="30">中堅戰力 (&gt;30%)</option>
+                            <option value="40">強勢突破 (&gt;40%)</option>
+                            <option value="50">強勢飆股 (&gt;50%)</option>
+                            <option value="60">旗艦領航 (&gt;60%)</option>
+                            <option value="70">極致爆發 (&gt;70%)</option>
+                            <option value="80">長線怪獸 (&gt;80%)</option>
+                            <option value="90">傳奇標的 (&gt;90%)</option>
+                            <option value="100">翻倍神股 (&gt;100%)</option>
+                            <option value="120">狂翻倍神股 (&gt;120%)</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label>🔥 訊號過濾</label>
+                        <select id="sFilter" onchange="filter()">
+                            <option value="all">不限訊號</option>
+                            <option value="🚨">🆘 緊急跑路單 (所有🚨訊號)</option>
+                            <option value="買入">🔥 買入 (進場訊號)</option>
+                            <option value="持股">💎 持股 (續抱中)</option>
+                            <option value="跑路">🚨 跑路 (MA5轉弱 - 優先處理)</option>
+                            <option value="預警">🟡 預警 (注意扣抵/乖離)</option>
+                            <option value="賣出">❄️ 賣出 (破月線/趨勢轉空)</option>
+                            <option value="關注">👀 關注 (低位轉強中/止跌訊號)</option>
+                            <option value="觀望">⏳ 觀望 (等待發動)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class='card'><table id='stockTable'>
+                    <thead><tr>
+                        <th style="width:7%">代號</th>
+                        <th style="width:10%">名稱</th>
+                        <th style="width:7%">現價</th>
+                        <th style="width:10%">訊號</th>
+                        <th style="width:8%">累積損益</th>
+                        <th style="width:6%">次數</th>
+                        <th style="width:6%">勝率</th>
+                        <th>備註 (參數/動能/狀態/指引)</th> </tr></thead>
+                    <tbody><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/1710.TW/technical-analysis'>1710.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("1710", "0")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>東聯</a></td><td>13.10</td><td><span class=''>⏳ 觀望</span></td><td style='font-weight:bold; color:#059669'>0.8%</td><td>1</td><td>100.0%</td><td>[P:0.98/5.0] [📈 穩定] 未達買入標準 | 💡開盤指引: (-1.5%) ⚠️主力出貨，建議果斷離場</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2061.TWO/technical-analysis'>2061.TWO</a></td><td><a href='javascript:void(0)' onclick='showLog("2061", "1")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>風青</a></td><td>22.30</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:1.01/5.0] [🚀 極強] BIAS(9.5)過高 | 💡開盤指引: (9.9%) 🔥搶籌強烈，未跌破 3% 續抱</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2073.TWO/technical-analysis'>2073.TWO</a></td><td><a href='javascript:void(0)' onclick='showLog("2073", "3")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>雄順</a></td><td>25.90</td><td><span class=''>⏳ 觀望</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:1.01/5.0] [📈 穩定] 等待趨勢發動 | 💡開盤指引: (0.0%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2314.TW/technical-analysis'>2314.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("2314", "4")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>台揚</a></td><td>16.05</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:0.94/5.0] [📈 穩定] BIAS(16.0)過高 | 💡開盤指引: (9.6%) 🔥搶籌強烈，未跌破 3% 續抱</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2388.TW/technical-analysis'>2388.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("2388", "8")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>威盛</a></td><td>86.00</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:1.0/5.0] [🚀 極強] BIAS(11.8)過高 | 💡開盤指引: (0.6%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2401.TW/technical-analysis'>2401.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("2401", "1")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>凌陽</a></td><td>29.55</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:0.94/5.0] [🚀 極強] BIAS(17.6)過高 | 💡開盤指引: (1.5%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2484.TW/technical-analysis'>2484.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("2484", "4")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>希華</a></td><td>44.85</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:0.85/5.0] [📈 穩定] BIAS(10.1)過高 | 💡開盤指引: (1.6%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/2495.TW/technical-analysis'>2495.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("2495", "5")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>普安</a></td><td>40.65</td><td><span class=''>⏳ 觀望</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:0.85/5.0] [📈 穩定] 未達買入標準 | 💡開盤指引: (2.9%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3031.TW/technical-analysis'>3031.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("3031", "1")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>佰鴻</a></td><td>33.60</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:1.01/5.0] [🚀 極強] BIAS(9.2)過高 | 💡開盤指引: (2.3%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3043.TW/technical-analysis'>3043.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("3043", "3")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>科風</a></td><td>21.25</td><td><span class=''>⏳ 觀望</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:0.85/5.0] [📈 穩定] 等待趨勢發動 | 💡開盤指引: (-1.9%) ⚠️主力出貨，建議果斷離場</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3066.TWO/technical-analysis'>3066.TWO</a></td><td><a href='javascript:void(0)' onclick='showLog("3066", "6")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>李洲</a></td><td>20.70</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:0.99/5.0] [🚀 極強] BIAS(10.2)過高 | 💡開盤指引: (2.9%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3128.TWO/technical-analysis'>3128.TWO</a></td><td><a href='javascript:void(0)' onclick='showLog("3128", "8")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>昇銳</a></td><td>23.75</td><td><span class=''>⏳ 觀望</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:0.96/5.0] [📈 穩定] 等待趨勢發動 | 💡開盤指引: (2.6%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3221.TWO/technical-analysis'>3221.TWO</a></td><td><a href='javascript:void(0)' onclick='showLog("3221", "1")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>台嘉碩</a></td><td>51.30</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:0.85/5.0] [🚀 極強] BIAS(15.8)過高 | 💡開盤指引: (6.3%) 🔥搶籌強烈，未跌破 3% 續抱</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3284.TWO/technical-analysis'>3284.TWO</a></td><td><a href='javascript:void(0)' onclick='showLog("3284", "4")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>太普高</a></td><td>16.90</td><td><span class=''>⏳ 觀望</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:0.97/5.0] [📈 穩定] 未達買入標準 | 💡開盤指引: (-3.6%) ⚠️主力出貨，建議果斷離場</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3694.TW/technical-analysis'>3694.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("3694", "4")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>海華</a></td><td>71.80</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:0.96/5.0] [🚀 極強] BIAS(17.5)過高 | 💡開盤指引: (0.0%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3708.TW/technical-analysis'>3708.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("3708", "8")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>上緯投控</a></td><td>126.50</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#059669'>1.7%</td><td>1</td><td>100.0%</td><td>[P:0.85/5.0] [📈 穩定] BIAS(5.9)過高 | 💡開盤指引: (1.3%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/3709.TWO/technical-analysis'>3709.TWO</a></td><td><a href='javascript:void(0)' onclick='showLog("3709", "9")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>鑫聯大投控</a></td><td>87.00</td><td><span class=''>⏳ 觀望</span></td><td style='font-weight:bold; color:#059669'>16.6%</td><td>1</td><td>100.0%</td><td>[P:0.85/5.0] [🚀 極強] 未達買入標準 | 💡開盤指引: (0.8%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/4108.TW/technical-analysis'>4108.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("4108", "8")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>懷特</a></td><td>12.00</td><td><span class=''>⏳ 觀望</span></td><td style='font-weight:bold; color:#059669'>1.1%</td><td>1</td><td>100.0%</td><td>[P:0.85/5.0] [📈 穩定] 等待趨勢發動 | 💡開盤指引: (0.8%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/4908.TWO/technical-analysis'>4908.TWO</a></td><td><a href='javascript:void(0)' onclick='showLog("4908", "8")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>前鼎</a></td><td>243.00</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:1.0/5.0] [🚀 極強] BIAS(9.4)過高 | 💡開盤指引: (2.2%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/4933.TWO/technical-analysis'>4933.TWO</a></td><td><a href='javascript:void(0)' onclick='showLog("4933", "3")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>友輝</a></td><td>73.50</td><td><span class=''>💎 持股</span></td><td style='font-weight:bold; color:#059669'>3.6%</td><td>2</td><td>0.0%</td><td>[P:0.99/5.0] [🚀 極強] 趨勢穩健 (支撐:69.80) | 💡開盤指引: (2.1%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/5546.TW/technical-analysis'>5546.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("5546", "6")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>永固-KY</a></td><td>17.05</td><td><span class=''>⏳ 觀望</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:1.0/5.0] [📈 穩定] 未達買入標準 | 💡開盤指引: (-0.3%) ⚠️主力出貨，建議果斷離場</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/6127.TWO/technical-analysis'>6127.TWO</a></td><td><a href='javascript:void(0)' onclick='showLog("6127", "7")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>九豪</a></td><td>53.00</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:1.01/5.0] [🚀 極強] BIAS(11.8)過高 | 💡開盤指引: (1.2%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/6155.TW/technical-analysis'>6155.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("6155", "5")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>鈞寶</a></td><td>59.40</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:1.01/5.0] [🚀 極強] BIAS(19.2)過高 | 💡開盤指引: (1.1%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/6182.TWO/technical-analysis'>6182.TWO</a></td><td><a href='javascript:void(0)' onclick='showLog("6182", "2")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>合晶</a></td><td>63.60</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:0.85/5.0] [🚀 極強] BIAS(25.8)過高 | 💡開盤指引: (8.5%) 🔥搶籌強烈，未跌破 3% 續抱</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/6202.TW/technical-analysis'>6202.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("6202", "2")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>盛群</a></td><td>58.90</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:1.01/5.0] [📈 穩定] BIAS(5.8)過高 | 💡開盤指引: (2.5%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/6224.TW/technical-analysis'>6224.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("6224", "4")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>聚鼎</a></td><td>83.40</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>-9.1%</td><td>2</td><td>0.0%</td><td>[P:0.96/5.0] [🚀 極強] BIAS(13.4)過高 | 💡開盤指引: (7.5%) 🔥搶籌強烈，未跌破 3% 續抱</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/6558.TW/technical-analysis'>6558.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("6558", "8")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>興能高</a></td><td>31.85</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>-5.9%</td><td>1</td><td>0.0%</td><td>[P:0.85/5.0] [🚀 極強] BIAS(6.1)過高 | 💡開盤指引: (0.5%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/6561.TWO/technical-analysis'>6561.TWO</a></td><td><a href='javascript:void(0)' onclick='showLog("6561", "1")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>是方</a></td><td>355.00</td><td><span class=''>⏳ 觀望</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:1.01/5.0] [📈 穩定] 等待趨勢發動 | 💡開盤指引: (-0.1%) ⚠️主力出貨，建議果斷離場</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/6578.TWO/technical-analysis'>6578.TWO</a></td><td><a href='javascript:void(0)' onclick='showLog("6578", "8")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>達邦蛋白</a></td><td>17.20</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>-1.7%</td><td>1</td><td>0.0%</td><td>[P:0.98/5.0] [📈 穩定] BIAS(8.6)過高 | 💡開盤指引: (-0.3%) ⚠️主力出貨，建議果斷離場</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/6612.TWO/technical-analysis'>6612.TWO</a></td><td><a href='javascript:void(0)' onclick='showLog("6612", "2")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>奈米醫材</a></td><td>77.00</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:0.98/5.0] [🚀 極強] BIAS(12.4)過高 | 💡開盤指引: (-4.5%) ⚠️主力出貨，建議果斷離場</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/6716.TWO/technical-analysis'>6716.TWO</a></td><td><a href='javascript:void(0)' onclick='showLog("6716", "6")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>應廣</a></td><td>99.80</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:0.99/5.0] [🚀 極強] BIAS(11.1)過高 | 💡開盤指引: (1.7%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/8067.TWO/technical-analysis'>8067.TWO</a></td><td><a href='javascript:void(0)' onclick='showLog("8067", "7")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>志旭</a></td><td>14.85</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:0.99/5.0] [📈 穩定] BIAS(13.9)過高 | 💡開盤指引: (1.1%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/8081.TW/technical-analysis'>8081.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("8081", "1")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>致新</a></td><td>274.00</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:1.01/5.0] [🚀 極強] BIAS(5.6)過高 | 💡開盤指引: (1.7%) ⏳弱勢表現，半小時不放量則出局</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/8109.TWO/technical-analysis'>8109.TWO</a></td><td><a href='javascript:void(0)' onclick='showLog("8109", "9")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>博大</a></td><td>127.50</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#059669'>0.5%</td><td>1</td><td>100.0%</td><td>[P:0.99/5.0] [🚀 極強] BIAS(6.7)過高 | 💡開盤指引: (3.2%) ✅走勢健康，衝高 6% 減半鎖利</td></tr><tr class='hero'><td><a style='text-decoration:none; color:#2563eb; font-weight:bold;' target='_blank' href='https://tw.stock.yahoo.com/quote/8473.TW/technical-analysis'>8473.TW</a></td><td><a href='javascript:void(0)' onclick='showLog("8473", "3")' style='text-decoration:none; color:#1e293b; border-bottom:1px dashed #64748b;'>山林水</a></td><td>40.70</td><td><span class='sig-warn'>🟡 預警 (乖離)</span></td><td style='font-weight:bold; color:#dc2626'>0.0%</td><td>0</td><td>0.0%</td><td>[P:0.85/5.0] [🚀 極強] BIAS(13.5)過高 | 💡開盤指引: (3.1%) ✅走勢健康，衝高 6% 減半鎖利</td></tr></tbody>
+                </table></div>
+            </div>
+            <div id="logModal" class="modal"><div class="modal-content">
+                <span style="float:right; font-size:40px; cursor:pointer;" onclick="closeModal()">&times;</span>
+                <h3 id="logTitle">詳細交易日誌</h3>
+                <pre id="logContent"></pre>
+            </div></div>
+            <script>
+            function filter() {
+                const search = document.getElementById('searchInput').value.toUpperCase();
+                const pMin = parseFloat(document.getElementById('pFilter').value);
+                const sType = document.getElementById('sFilter').value;
+                const rows = document.querySelectorAll('#stockTable tbody tr');
+                rows.forEach(row => {
+                    const text = row.innerText.toUpperCase();
+                    const pnl = parseFloat(row.cells[4].innerText);
+                    const sig = row.cells[3].innerText;
+                    const matchSearch = text.includes(search);
+                    const matchPnl = pnl >= pMin;
+                    const matchSig = (sType === 'all' || sig.includes(sType));
+                    row.style.display = (matchSearch && matchPnl && matchSig) ? '' : 'none';
+                });
+            }
+            async function showLog(pureId, subDir) {
+                document.getElementById("logModal").style.display = "block";
+                document.getElementById("logTitle").innerText = "📄 交易日誌: " + pureId;
+                const logPath = "data/" + subDir + "/" + pureId + "-trend-backtest-live.txt";
+                console.log("正在讀取日誌:", logPath);
+                const res = await fetch(logPath);
+                document.getElementById("logContent").innerText = res.ok ? await res.text() : "找不到日誌檔 (路徑: " + logPath + ")";
+            }
+            function closeModal() { document.getElementById("logModal").style.display = "none"; }
+            window.onclick = (e) => {
+                const modal = document.getElementById("logModal");
+                if (e.target === modal) { closeModal(); }
+            };
+            </script>
+        </body></html>
+        
