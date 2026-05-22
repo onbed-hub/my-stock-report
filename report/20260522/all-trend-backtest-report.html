@@ -487,24 +487,27 @@
         var logContent = document.getElementById('logContent');
         var logTitle = document.getElementById('logTitle');
 
+        // 訊號專用緊湊面板配置
         if (modalContent) {
-            modalContent.style.background = '#ffffff';
+            modalContent.style.background = '#ffffff';  
             modalContent.style.width = '90%';
-            modalContent.style.maxWidth = '820px';
-            modalContent.style.margin = '3% auto';
+            modalContent.style.maxWidth = '820px';       
+            modalContent.style.margin = '5% auto';       
             modalContent.style.padding = '0px';
             modalContent.style.borderRadius = '12px';
             modalContent.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
             modalContent.style.overflow = 'hidden';
+            modalContent.style.height = 'auto';          
         }
 
         if (logContent) {
             logContent.style.background = 'transparent';
             logContent.style.padding = '0px';
             logContent.style.margin = '0px';
+            logContent.style.height = 'auto';            
         }
         if (logTitle) {
-            logTitle.style.display = 'none';
+            logTitle.style.display = 'none';             
         }
 
         logContent.innerHTML = '<div id="bsLoading" style="text-align:center; padding: 40px; color:#64748b; font-size:1.1rem; background:#ffffff;">🔍 正在檢查財報資料庫...</div>';
@@ -516,11 +519,11 @@
             .catch(function(err) { loadIframe(bsPath); });
 
         function loadIframe(targetPath) {
-            logContent.innerHTML = '<iframe id="bsIframe" src="' + targetPath + '" style="width:100%; height:80vh; border:none; background:#ffffff; display:block; margin:0; padding:0;"></iframe>';
+            logContent.innerHTML = '<iframe id="bsIframe" src="' + targetPath + '" style="width:100%; height:55vh; border:none; background:#ffffff; display:block; margin:0; padding:0;" onload="resizeIframe(this)"></iframe>';
         }
 
         function showNoReportMessage() {
-            // 🎯 修正：將此處 innerHTML 內的 JavaScript 變數改為雙大括號，防止 Python 解析錯誤
+            // 🎯 修正：徹底移除反斜線，改用雙大括號包裹，讓 Python 安全過關，網頁端正常讀取變數
             logContent.innerHTML = `
                 <div style="text-align: center; padding: 60px 20px; background: white; border-radius: 0px; margin: 0;">
                     <div style="font-size: 3.5rem; margin-bottom: 15px;">⚠️</div>
@@ -530,6 +533,33 @@
                     </p>
                 </div>
             `;
+        }
+    }
+
+    // 高度自動縮放工具（解決底部空白問題）
+    function resizeIframe(obj) {
+        try {
+            const internalHeight = obj.contentWindow.document.documentElement.scrollHeight;
+            if (internalHeight > 0) {
+                obj.style.height = (internalHeight + 10) + 'px';
+            }
+        } catch (e) {
+            obj.style.height = '520px'; 
+        }
+    }
+
+    // 🎯 新增：高度自動縮放工具型函數 (解決死白的核心)
+    function resizeIframe(obj) {
+        try {
+            // 取得 iframe 內頁的實際總高度
+            const internalHeight = obj.contentWindow.document.documentElement.scrollHeight;
+            // 如果拉取成功，動態設定高度（多加 10px 防止出現邊緣微小捲軸）
+            if (internalHeight > 0) {
+                obj.style.height = (internalHeight + 10) + 'px';
+            }
+        } catch (e) {
+            // 如果跨域或者禁止讀取，則維持原來的 55vh 或調整成適合安全高度
+            obj.style.height = '520px'; 
         }
     }
 
