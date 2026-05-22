@@ -569,14 +569,22 @@
         }
     }
 
-    // 🚪 關閉彈窗時全面初始化，洗掉任何殘留樣式並重置標題
+    // 🎯 新增：點擊模態框外部可以關閉
+    window.onclick = function(event) {
+        var modal = document.getElementById('logModal');
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+
     function closeModal() {
         document.getElementById("logModal").style.display = "none";
         document.getElementById('logContent').innerHTML = '';
-        
+
+        // 🛡️ 釋放記憶體之餘，必須把被魔改的標題與外殼還原成預設值，否則下一個彈窗會變形
         var logTitle = document.getElementById('logTitle');
         if (logTitle) {
-            logTitle.style.display = ''; 
+            logTitle.style.display = '';
             logTitle.style.margin = '';
             logTitle.innerText = '';
         }
@@ -602,9 +610,12 @@
     };
 
     // 頁面載入完成後的初始化
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener("DOMContentLoaded", function() {
+        // 1. 抓取動態產業分類，並生成產業 HTML 標籤
         initSectorFilter();
-        filter();
+
+        // 2. 執行一次全面過濾，初始化 filteredRows 陣列並啟動分頁
+        filter(); 
     });
 
     </script></body></html>
