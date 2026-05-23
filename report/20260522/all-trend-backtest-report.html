@@ -489,15 +489,15 @@
 
         // 訊號專用緊湊面板配置
         if (modalContent) {
-            modalContent.style.background = '#ffffff';  
-            modalContent.style.width = '90%';
-            modalContent.style.maxWidth = '820px';       
-            modalContent.style.margin = '5% auto';       
-            modalContent.style.padding = '0px';
+            modalContent.style.background = '#ffffff';  // 純白底
+            modalContent.style.width = '85%';           // 精緻寬度
+            modalContent.style.maxWidth = '740px';       // 鎖定黃金橫寬
+            modalContent.style.margin = '4% auto';       // 上下外留白適中，讓彈窗置中偏上
+            modalContent.style.padding = '0px';          // 清空外殼內邊距
             modalContent.style.borderRadius = '12px';
-            modalContent.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
+            modalContent.style.boxShadow = '0 20px 40px -10px rgba(0, 0, 0, 0.25)';
             modalContent.style.overflow = 'hidden';
-            modalContent.style.height = 'auto';          
+            modalContent.style.height = 'auto';          // 🎯 外殼自動緊抱內裝
         }
 
         if (logContent) {
@@ -507,7 +507,7 @@
             logContent.style.height = 'auto';            
         }
         if (logTitle) {
-            logTitle.style.display = 'none';             
+            logTitle.style.display = 'none';             // 隱藏原生大標題
         }
 
         logContent.innerHTML = '<div id="bsLoading" style="text-align:center; padding: 40px; color:#64748b; font-size:1.1rem; background:#ffffff;">🔍 正在檢查財報資料庫...</div>';
@@ -519,11 +519,12 @@
             .catch(function(err) { loadIframe(bsPath); });
 
         function loadIframe(targetPath) {
-            logContent.innerHTML = '<iframe id="bsIframe" src="' + targetPath + '" style="width:100%; height:55vh; border:none; background:#ffffff; display:block; margin:0; padding:0;" onload="resizeIframe(this)"></iframe>';
+            // 🎯 核心修正：拋棄動態 onload 計算，直接給 iframe 一個精準不灌水的固定高度 510px
+            // 這樣在任何解析度下，它都會跟你的表格、公式與底部註解完美貼合，多餘空白直接消失！
+            logContent.innerHTML = '<iframe id="bsIframe" src="' + targetPath + '" style="width:100%; height:510px; border:none; background:#ffffff; display:block; margin:0; padding:0;"></iframe>';
         }
 
         function showNoReportMessage() {
-            // 🎯 修正：徹底移除反斜線，改用雙大括號包裹，讓 Python 安全過關，網頁端正常讀取變數
             logContent.innerHTML = `
                 <div style="text-align: center; padding: 60px 20px; background: white; border-radius: 0px; margin: 0;">
                     <div style="font-size: 3.5rem; margin-bottom: 15px;">⚠️</div>
