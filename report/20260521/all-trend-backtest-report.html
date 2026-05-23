@@ -107,7 +107,23 @@
     
     </head>
     <body><div class='container'>
-        <a href="../../index.html" class="btn-back">← 返回儀表板</a>
+        <a href="../../index.html" class="btn-back" style="
+            display: inline-block;
+            padding: 10px 18px;
+            background-color: #f1f5f9;
+            color: #334155;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border: 1px solid #cbd5e1;
+            transition: all 0.2s;
+            position: relative;
+            z-index: 10;
+        " onmouseover="this.style.backgroundColor='#e2e8f0'" onmouseout="this.style.backgroundColor='#f1f5f9'">
+            ← 返回儀表板
+        </a>
 
         <h2>📈 ALL 趨勢回測策略報告 (V3 Pro)</h2>
         <div class="header-info">📅 回測起點：<span style="color:#2563eb;">2025-01-01</span> | 📅 分析日期：20260521</div>
@@ -281,8 +297,8 @@
 
     let currentPage = 1;
     const pageSize = 30;
-    
-    // 🎯 修正：開局直接拉取 DOM 陣列打底，確保過濾與分頁功能不崩潰
+
+    // 🎯 修正：改用開局直接拉取 DOM 陣列打底，避免初始化過濾真空
     let filteredRows = Array.from(document.querySelectorAll('#stockTable tbody tr'));
     const markLists = {"mandy": ["0050", "0056", "00635U", "00918", "00919", "009816", "00403A"], "bor": ["6127", "3026", "6789", "2330", "5474", "2313", "6239", "6789", "6849", "7853", "0050", "0056", "00635U", "00738U", "00929", "009816", "00981A", "00990A", "2009", "2317", "2337", "2352", "2367", "2409", "2485", "3481", "4142", "6136", "6806", "3105", "4966", "5276", "6188", "6261", "00999A", "00403A", "00405A", "00877", "00935", "00947", "00735", "00984A", "3354", "3122", "6224", "3380", "2436", "3227", "2340", "3550", "3265", "2338", "3016", "006208", "00403A"], "dayan": ["0050", "2382", "3105", "4966", "00635U", "00738U", "009816", "1540", "2399", "2609", "2618", "3008", "3363", "3450", "3711", "6515", "8028", "1560", "6789", "2449", "6239", "2317", "2383", "2412", "2454", "00981A", "00992A", "00988A", "3491", "1519", "00991A", "2330", "00403A"], "siesin": ["2069", "2367", "2485", "3049", "3481", "3702", "8044", "4956", "6407", "6849", "7853", "2313", "00403A"]};
 
@@ -333,7 +349,7 @@
             const rowSector = row.getAttribute('data-sector');
             const rowType = row.getAttribute('data-type');
 
-            // 🎯 防禦性保護，避免 cells 索引缺漏或 PnL 欄位包含非數字髒數據
+            // 🎯 防禦性保護，避免缺漏或非數字髒數據導致崩潰
             const signalText = row.cells[4] ? row.cells[4].textContent : '';
             let rawPnl = row.cells[5] ? row.cells[5].textContent.replace('%', '') : '0';
             const pnlValue = isNaN(parseFloat(rawPnl)) ? 0 : parseFloat(rawPnl);
@@ -360,7 +376,7 @@
         const start = (currentPage - 1) * pageSize;
         filteredRows.slice(start, start + pageSize).forEach(row => row.style.display = '');
 
-        // 🎯 修正：這裡因為是在 Python 的 f-string 中，必須用雙大括號來留給網頁 JS 解析
+        // 🎯 修正：確保 JS 的字串變數使用雙大括號進行轉義
         document.getElementById('pageInfo').innerText = `第 ${currentPage} / ${totalPages} 頁 (共 ${filteredRows.length} 檔)`;
         document.getElementById('prevBtn').disabled = (currentPage === 1);
         document.getElementById('nextBtn').disabled = (currentPage === totalPages);
@@ -372,18 +388,16 @@
         const table = document.getElementById("stockTable");
         const tbody = table.querySelector("tbody");
         if (lastSortCol === n) { sortDir *= -1; } else { sortDir = -1; lastSortCol = n; }
-        
-        // 🎯 修正：排序對象改為全域當前的 filteredRows，確保分頁與過濾邏輯聯動
+
+        // 🎯 修正：排序對象統一改為當前的全域 filteredRows，確保分頁連動不脫節
         filteredRows.sort((a, b) => {
             let x = a.cells[n].innerText.trim(); let y = b.cells[n].innerText.trim();
             let xVal = isNaN(parseFloat(x.replace(/%/g,''))) ? x.toLowerCase() : parseFloat(x.replace(/%/g,''));
             let yVal = isNaN(parseFloat(y.replace(/%/g,''))) ? y.toLowerCase() : parseFloat(y.replace(/%/g,''));
             return xVal < yVal ? -1 * sortDir : (xVal > yVal ? 1 * sortDir : 0);
         });
-        
-        // 將重新排序後的 DOM 節點渲染回 tbody 中
         filteredRows.forEach(row => tbody.appendChild(row));
-        
+
         currentPage = 1;
         updateDisplay();
     }
@@ -404,16 +418,25 @@
         var logPath = 'data/' + subDir + '/' + pureId + '-trend-backtest-report.txt';
         var modalContent = document.querySelector('.modal-content');
 
-        resetModalStyleForText();
+        // 如果存在財報補丁，切換到其他普通文字彈窗時先拔除
+        var patch = document.getElementById('bs-style-patch');
+        if (patch) patch.remove();
 
         if (modalContent) {
             modalContent.style.width = '85%';
             modalContent.style.maxWidth = '1050px';
             modalContent.style.padding = '25px';
+            modalContent.style.margin = '2% auto';
+            modalContent.style.background = '#ffffff';
+            modalContent.style.borderRadius = '15px';
+            modalContent.style.overflow = '';
         }
 
+        document.getElementById('logTitle').style.display = '';
         document.getElementById('logTitle').innerText = '📜 交易明細: ' + pureId;
         document.getElementById('logContent').innerText = '載入中...';
+        document.getElementById('logContent').style.background = '#0f172a';
+        document.getElementById('logContent').style.padding = '25px';
         document.getElementById('logModal').style.display = 'block';
 
         fetch(logPath)
@@ -430,30 +453,60 @@
     }
 
     function showAnalysisModal(fullId, subDir) {
-        var analysisPath = 'stock-analysis/' + subDir + '/' + fullId + '-stock-analysis.html';
-        var logTitle = document.getElementById('logTitle');
-        if (logTitle) { logTitle.style.display = ''; }
+        var patch = document.getElementById('bs-style-patch');
+        if (patch) patch.remove();
 
-        applyIframeModalStyle('🔍 技術分析圖表: ' + fullId, '85%', '1200px', '75vh', analysisPath);
+        var modalContent = document.querySelector('.modal-content');
+        if (modalContent) {
+            modalContent.style.width = '85%';
+            modalContent.style.maxWidth = '1200px';
+            modalContent.style.padding = '25px';
+            modalContent.style.margin = '2% auto';
+            modalContent.style.background = '#ffffff';
+            modalContent.style.borderRadius = '15px';
+            modalContent.style.overflow = '';
+        }
+
+        var logTitle = document.getElementById('logTitle');
+        if (logTitle) { 
+            logTitle.style.display = ''; 
+            logTitle.innerText = '🔍 技術分析圖表: ' + fullId;
+        }
+
+        var analysisPath = 'stock-analysis/' + subDir + '/' + fullId + '-stock-analysis.html';
+        var logContent = document.getElementById('logContent');
+        if (logContent) {
+            logContent.style.background = 'transparent';
+            logContent.style.padding = '0px';
+            logContent.innerHTML = `<iframe src="${analysisPath}" style="width:100%; height:75vh; border:none; background:#ffffff; display:block;"></iframe>`;
+        }
+        document.getElementById('logModal').style.display = 'block';
     }
 
     function showBusinessLog(fullId, subDir) {
+        var patch = document.getElementById('bs-style-patch');
+        if (patch) patch.remove();
+
         var bizPath = '/my-stock-report/basic_data/balance-sheet/' + subDir + '/' + fullId + '-industry-business.txt?v=' + new Date().getTime();
         var modalContent = document.querySelector('.modal-content');
         var logTitle = document.getElementById('logTitle');
 
         if (logTitle) { logTitle.style.display = ''; }
 
-        resetModalStyleForText();
-
         if (modalContent) {
             modalContent.style.width = '85%';
             modalContent.style.maxWidth = '950px';
             modalContent.style.padding = '25px';
+            modalContent.style.margin = '2% auto';
+            modalContent.style.background = '#ffffff';
+            modalContent.style.borderRadius = '15px';
+            modalContent.style.overflow = '';
         }
 
         document.getElementById('logTitle').innerText = '🏭 產業與營收結構: ' + fullId;
         document.getElementById('logContent').innerText = '讀取中...';
+        document.getElementById('logContent').style.background = '#0f172a';
+        document.getElementById('logContent').style.padding = '25px';
         document.getElementById('logModal').style.display = 'block';
 
         fetch(bizPath)
@@ -473,22 +526,38 @@
         var logContent = document.getElementById('logContent');
         var logTitle = document.getElementById('logTitle');
 
+        // 1. 🎯 注入動態最高權重 CSS 補丁：強制抹除主框架自帶的所有內邊距，實現上下無縫貼邊
+        var stylePatch = document.getElementById('bs-style-patch');
+        if (!stylePatch) {
+            stylePatch = document.createElement('style');
+            stylePatch.id = 'bs-style-patch';
+            stylePatch.innerHTML = `
+                .modal-content { 
+                    padding: 0px !important; 
+                    margin: 1.5% auto !important;
+                    height: auto !important;
+                    max-height: 95vh !important;
+                }
+                #logContent { padding: 0px !important; margin: 0px !important; }
+            `;
+            document.head.appendChild(stylePatch);
+        }
+
+        // 2. 專屬財報精緻窄邊框外殼基礎配置
         if (modalContent) {
             modalContent.style.background = '#ffffff';
-            modalContent.style.width = '90%';
-            modalContent.style.maxWidth = '820px';
-            modalContent.style.margin = '3% auto';
-            modalContent.style.padding = '0px';
+            modalContent.style.width = '85%';
+            modalContent.style.maxWidth = '740px';
             modalContent.style.borderRadius = '12px';
-            modalContent.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
+            modalContent.style.boxShadow = '0 20px 40px -10px rgba(0, 0, 0, 0.25)';
             modalContent.style.overflow = 'hidden';
         }
 
         if (logContent) {
             logContent.style.background = 'transparent';
-            logContent.style.padding = '0px';
-            logContent.style.margin = '0px';
+            logContent.style.height = 'auto';
         }
+
         if (logTitle) {
             logTitle.style.display = 'none';
         }
@@ -502,7 +571,38 @@
             .catch(function(err) { loadIframe(bsPath); });
 
         function loadIframe(targetPath) {
-            logContent.innerHTML = '<iframe id="bsIframe" src="' + targetPath + '" style="width:100%; height:80vh; border:none; background:#ffffff; display:block; margin:0; padding:0;"></iframe>';
+            // 3. 🎯 高度設定為 540px，配合上面 padding 被歸零，大白殼會完美卡死在 540px 底線上，毫無死白外露！
+            logContent.innerHTML = `
+                <div style="width:100%; height:auto; overflow:visible; background:#ffffff; margin:0; padding:0;">
+                    <iframe id="bsIframe" src="${targetPath}" style="width:100%; height:540px; border:none; background:#ffffff; display:block; margin:0; padding:0;"></iframe>
+                </div>
+            `;
+
+            // 4. 🎯 安全銷毀與還原機制：點擊 X 或者外部按鈕關閉時，將樣式徹徹底底洗乾淨
+            var closeBtn = document.querySelector('#logModal .close') || document.querySelector('#logModal [onclick*="display:'none'"]');
+            if (closeBtn) {
+                var originalClick = closeBtn.onclick;
+                closeBtn.onclick = function(e) {
+                    var patch = document.getElementById('bs-style-patch');
+                    if (patch) patch.remove(); // 拔掉財報專屬 CSS
+
+                    if (modalContent) {
+                        modalContent.style.width = '';
+                        modalContent.style.maxWidth = '';
+                        modalContent.style.margin = '';
+                        modalContent.style.borderRadius = '';
+                        modalContent.style.boxShadow = '';
+                        modalContent.style.overflow = '';
+                    }
+                    if (logTitle) logTitle.style.display = '';
+
+                    if (typeof originalClick === 'function') {
+                        originalClick.call(this, e);
+                    } else {
+                        document.getElementById('logModal').style.display = 'none';
+                    }
+                };
+            }
         }
 
         function showNoReportMessage() {
@@ -518,90 +618,36 @@
         }
     }
 
-    function applyIframeModalStyle(titleText, widthStr, maxWidthStr, heightStr, srcPath) {
-        var modalContent = document.querySelector('.modal-content');
-        var logContent = document.getElementById('logContent');
-        var logTitle = document.getElementById('logTitle');
-
-        if (modalContent) {
-            modalContent.style.background = '#f8fafc';
-            modalContent.style.width = widthStr;
-            modalContent.style.maxWidth = maxWidthStr;
-            modalContent.style.margin = '1.5% auto';
-            modalContent.style.padding = '20px 25px';
-            modalContent.style.borderRadius = '16px';
-            modalContent.style.border = '1px solid #e2e8f0';
-        }
-        if (logContent) {
-            logContent.style.background = 'transparent';
-            logContent.style.padding = '0px';
-            logContent.style.marginTop = '15px';
-            logContent.style.fontFamily = 'inherit';
-            logContent.style.whiteSpace = 'normal';
-        }
-        if (logTitle) {
-            logTitle.innerHTML = '<span style="color:#2563eb; font-weight:bold; font-size:1.6rem;">' + titleText + '</span>';
-        }
-        logContent.innerHTML = '<iframe src="' + srcPath + '" style="width:100%; height:' + heightStr + '; border:none; background:white; display:block; border-radius:12px;"></iframe>';
-        document.getElementById('logModal').style.display = 'block';
-    }
-
-    function resetModalStyleForText() {
-        var modalContent = document.querySelector('.modal-content');
-        var logContent = document.getElementById('logContent');
-        if (modalContent) {
-            modalContent.style.background = '#fff';
-            modalContent.style.width = '90%';
-            modalContent.style.maxWidth = 'none';
-            modalContent.style.margin = '2% auto';
-            modalContent.style.padding = '30px';
-            modalContent.style.borderRadius = '15px';
-        }
-        if (logContent) {
-            logContent.style.background = '#0f172a';
-            logContent.style.padding = '25px';
-            logContent.style.borderRadius = '10px';
-            logContent.style.fontFamily = 'monospace';
-            logContent.style.whiteSpace = 'pre-wrap';
-            logContent.style.width = '100%';
-            logContent.style.boxSizing = 'border-box';
-        }
-    }
-
     function closeModal() {
-        document.getElementById("logModal").style.display = "none";
-        document.getElementById('logContent').innerHTML = '';
-
-        var logTitle = document.getElementById('logTitle');
-        if (logTitle) {
-            logTitle.style.display = '';
-            logTitle.style.margin = '';
-            logTitle.innerText = '';
-        }
+        var patch = document.getElementById('bs-style-patch');
+        if (patch) patch.remove(); // 確保點擊原生關閉按鈕時也拔除補丁
 
         var modalContent = document.querySelector('.modal-content');
         if (modalContent) {
-            modalContent.style.background = '#fff';
-            modalContent.style.width = '90%';
-            modalContent.style.maxWidth = 'none';
-            modalContent.style.margin = '2% auto';
-            modalContent.style.padding = '30px';
-            modalContent.style.borderRadius = '15px';
+            modalContent.style.width = '';
+            modalContent.style.maxWidth = '';
+            modalContent.style.margin = '';
+            modalContent.style.borderRadius = '';
+            modalContent.style.boxShadow = '';
             modalContent.style.overflow = '';
         }
+        var logTitle = document.getElementById('logTitle');
+        if (logTitle) logTitle.style.display = '';
+
+        document.getElementById('logModal').style.display = 'none';
     }
 
-    window.onclick = function(e) {
-        var modal = document.getElementById("logModal");
-        if (e.target == modal) {
+    // 點擊 Modal 外部邊緣關閉安全機制
+    window.onclick = function(event) {
+        var modal = document.getElementById('logModal');
+        if (event.target == modal) {
             closeModal();
         }
-    };
+    }
 
-    document.addEventListener("DOMContentLoaded", function() {
-        initSectorFilter();
-        filter();
-    });
-
-    </script></body></html>
+    // 初始化產業標籤與數據顯示
+    initSectorFilter();
+    filter();
+    </script>
+    </body></html>
     
