@@ -532,11 +532,20 @@
         }
     }
 
+    // 當使用者點擊小視窗以外的任何地方時，自動關閉小視窗
+    window.onclick = function(event) {
+        const modal = document.getElementById('logModal');
+        // 如果點擊的目標剛好是外層的背景遮罩（logModal），而不是白色的內容區，就執行關閉
+        if (event.target === modal) {
+            closeModal();
+        }
+    }
+
     // 🚀 網頁載入完成後自動初始化產業分類標籤並執行初次過濾
-    window.onload = function() {
-        initSectorFilter();
-        filter();
-    };
+//    window.onload = function() {
+//        initSectorFilter();
+//        filter();
+//    };
     </script>
     </body></html>
     
