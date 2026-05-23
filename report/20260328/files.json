@@ -1,1 +1,17 @@
-["all-rsi-dmi-obv-report.html", "bor-fvg-summary.html", "bor-rsi-dmi-obv-report.html", "high-rsi-dmi-obv-report.html", "monitor_bor_portfolio.html", "monitor-result.html", "monitor-rsi-dmi-obv-sell-stock_bor_portfolio.html", "monitor_siesin_portfolio.html", "monitor_supersize.html", "siesin-fvg-summary.html", "siesin-rsi-dmi-obv-report.html"]
+[
+  "high-rsi-dmi-obv-report.html",
+  "siesin-level_1_watch.txt",
+  "siesin-rsi-dmi-obv-report.html",
+  "siesin-fvg-summary.html",
+  "monitor_siesin_portfolio.html",
+  "all-level_1_watch.txt",
+  "bor-level_1_watch.txt",
+  "high-level_1_watch.txt",
+  "all-rsi-dmi-obv-report.html",
+  "monitor-rsi-dmi-obv-sell-stock_bor_portfolio.html",
+  "monitor-result.html",
+  "monitor_supersize.html",
+  "bor-rsi-dmi-obv-report.html",
+  "monitor_bor_portfolio.html",
+  "bor-fvg-summary.html"
+]
