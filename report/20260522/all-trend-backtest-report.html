@@ -487,19 +487,19 @@
         var logContent = document.getElementById('logContent');
         var logTitle = document.getElementById('logTitle');
 
-        // 訊號專用緊湊面板配置
+        // ⭕ 恢復原本的安全設定，不綁死高度，不影響其他連結
         if (modalContent) {
-            modalContent.style.background = '#ffffff';  // 純白底
-            modalContent.style.width = '85%';           // 精緻寬度
-            modalContent.style.maxWidth = '740px';       // 鎖定黃金橫寬
-            modalContent.style.margin = '4% auto';       // 上下外留白適中，讓彈窗置中偏上
-            modalContent.style.padding = '0px';          // 清空外殼內邊距
+            modalContent.style.background = '#ffffff';  
+            modalContent.style.width = '85%';           
+            modalContent.style.maxWidth = '740px';       
+            modalContent.style.margin = '4% auto';       
+            modalContent.style.padding = '0px';          
             modalContent.style.borderRadius = '12px';
             modalContent.style.boxShadow = '0 20px 40px -10px rgba(0, 0, 0, 0.25)';
             modalContent.style.overflow = 'hidden';
-            modalContent.style.height = '680px';          
-            modalContent.style.minHeight = '680px';      // 防止被主網頁的 min-height 蓋掉
-            modalContent.style.maxHeight = '680px';
+            modalContent.style.height = 'auto';          // 恢復 auto
+            modalContent.style.minHeight = '';          // 清空強制設定
+            modalContent.style.maxHeight = '';          // 清空強制設定
         }
 
         if (logContent) {
@@ -509,7 +509,7 @@
             logContent.style.height = 'auto';            
         }
         if (logTitle) {
-            logTitle.style.display = 'none';             // 隱藏原生大標題
+            logTitle.style.display = 'none';             
         }
 
         logContent.innerHTML = '<div id="bsLoading" style="text-align:center; padding: 40px; color:#64748b; font-size:1.1rem; background:#ffffff;">🔍 正在檢查財報資料庫...</div>';
@@ -521,9 +521,15 @@
             .catch(function(err) { loadIframe(bsPath); });
 
         function loadIframe(targetPath) {
-            // 🎯 核心修正：拋棄動態 onload 計算，直接給 iframe 一個精準不灌水的固定高度 510px
-            // 這樣在任何解析度下，它都會跟你的表格、公式與底部註解完美貼合，多餘空白直接消失！
-            logContent.innerHTML = '<iframe id="bsIframe" src="' + targetPath + '" style="width:100%; height:680px; border:none; background:#ffffff; display:block; margin:0; padding:0;"></iframe>';
+            // 🎯 終極修正：將 iframe 包裹在一個固定高度、超出隱藏的 wrapper 容器裡！
+            // 高度設為 480px，並且 overflow: hidden。這相當於給財報套一個 480px 的精緻外框，
+            // 隨便它裡面多高、有多少空白，一律在 480px 的地方被切齊。
+            // 這樣做完全不需要修改外層的 modalContent，其他連結點開依然是完美的！
+            logContent.innerHTML = `
+                <div style="width:100%; height:480px; overflow:hidden; background:#ffffff; margin:0; padding:0;">
+                    <iframe id="bsIframe" src="${targetPath}" style="width:100%; height:100%; border:none; background:#ffffff; display:block; margin:0; padding:0;"></iframe>
+                </div>
+            `;
         }
 
         function showNoReportMessage() {
