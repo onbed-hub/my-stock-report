@@ -487,29 +487,31 @@
         var logContent = document.getElementById('logContent');
         var logTitle = document.getElementById('logTitle');
 
-        // ⭕ 恢復原本的安全設定，不綁死高度，不影響其他連結
+        // ⭕ 專屬財報配置：調整外殼與內邊距，消除頂部空白
         if (modalContent) {
             modalContent.style.background = '#ffffff';  
             modalContent.style.width = '85%';           
             modalContent.style.maxWidth = '740px';       
-            modalContent.style.margin = '4% auto';       
-            modalContent.style.padding = '0px';          
+            modalContent.style.margin = '1.5% auto';     // 🎯 修正：從 4% 降到 1.5%，讓彈窗更往上靠
+            modalContent.style.paddingTop = '10px';      // 🎯 修正：強行壓縮外殼可能自帶的巨大上方內邊距
             modalContent.style.borderRadius = '12px';
             modalContent.style.boxShadow = '0 20px 40px -10px rgba(0, 0, 0, 0.25)';
             modalContent.style.overflow = 'hidden';
-            modalContent.style.height = 'auto';          // 恢復 auto
-            modalContent.style.minHeight = '';          // 清空強制設定
-            modalContent.style.maxHeight = '';          // 清空強制設定
+            modalContent.style.height = 'auto';          
+            modalContent.style.minHeight = '';          
+            modalContent.style.maxHeight = '';          
         }
 
         if (logContent) {
             logContent.style.background = 'transparent';
             logContent.style.padding = '0px';
-            logContent.style.margin = '0px';
+            logContent.style.margin = '0px';             // 🎯 修正：確保內容容器上方無外邊距
             logContent.style.height = 'auto';            
         }
         if (logTitle) {
             logTitle.style.display = 'none';             
+            logTitle.style.marginTop = '0px';            // 🎯 修正：抹平被隱藏標題的殘留邊距
+            logTitle.style.paddingTop = '0px';
         }
 
         logContent.innerHTML = '<div id="bsLoading" style="text-align:center; padding: 40px; color:#64748b; font-size:1.1rem; background:#ffffff;">🔍 正在檢查財報資料庫...</div>';
@@ -521,15 +523,39 @@
             .catch(function(err) { loadIframe(bsPath); });
 
         function loadIframe(targetPath) {
-            // 🎯 終極修正：將 iframe 包裹在一個固定高度、超出隱藏的 wrapper 容器裡！
-            // 高度設為 480px，並且 overflow: hidden。這相當於給財報套一個 480px 的精緻外框，
-            // 隨便它裡面多高、有多少空白，一律在 480px 的地方被切齊。
-            // 這樣做完全不需要修改外層的 modalContent，其他連結點開依然是完美的！
+            // 🎯 保持放寬到 580px - 600px 之間確保底部不噴捲軸，只修理上方空白
             logContent.innerHTML = `
                 <div style="width:100%; height:580px; overflow:hidden; background:#ffffff; margin:0; padding:0;">
                     <iframe id="bsIframe" src="${targetPath}" style="width:100%; height:100%; border:none; background:#ffffff; display:block; margin:0; padding:0;"></iframe>
                 </div>
             `;
+
+            // 🎯 安全還原防禦機制：點擊 X 關閉時，把被改掉的樣式全部洗掉，不影響其他功能
+            var closeBtn = document.querySelector('#logModal .close') || document.querySelector('#logModal [onclick*="display:'none'"]');
+            if (closeBtn) {
+                var originalClick = closeBtn.onclick;
+                closeBtn.onclick = function(e) {
+                    if (modalContent) {
+                        modalContent.style.width = '';      
+                        modalContent.style.maxWidth = '';   
+                        modalContent.style.margin = '';     
+                        modalContent.style.paddingTop = '';  // 還原頂部內邊距
+                        modalContent.style.borderRadius = '';
+                        modalContent.style.boxShadow = '';
+                    }
+                    if (logTitle) {
+                        logTitle.style.display = ''; 
+                        logTitle.style.marginTop = '';
+                        logTitle.style.paddingTop = '';
+                    }
+                    
+                    if (typeof originalClick === 'function') {
+                        originalClick.call(this, e);
+                    } else {
+                        document.getElementById('logModal').style.display = 'none';
+                    }
+                };
+            }
         }
 
         function showNoReportMessage() {
