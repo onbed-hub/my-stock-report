@@ -497,7 +497,9 @@
             modalContent.style.borderRadius = '12px';
             modalContent.style.boxShadow = '0 20px 40px -10px rgba(0, 0, 0, 0.25)';
             modalContent.style.overflow = 'hidden';
-            modalContent.style.height = 'auto';          // 🎯 外殼自動緊抱內裝
+            modalContent.style.height = '520px';          
+            modalContent.style.minHeight = '520px';      // 防止被主網頁的 min-height 蓋掉
+            modalContent.style.maxHeight = '520px';
         }
 
         if (logContent) {
@@ -522,6 +524,7 @@
             // 🎯 核心修正：拋棄動態 onload 計算，直接給 iframe 一個精準不灌水的固定高度 510px
             // 這樣在任何解析度下，它都會跟你的表格、公式與底部註解完美貼合，多餘空白直接消失！
             logContent.innerHTML = '<iframe id="bsIframe" src="' + targetPath + '" style="width:100%; height:510px; border:none; background:#ffffff; display:block; margin:0; padding:0;"></iframe>';
+            logContent.innerHTML = '<iframe id="bsIframe" src="' + targetPath + '" style="width:100%; height:520px; border:none; background:#ffffff; display:block; margin:0; padding:0;"></iframe>';
         }
 
         function showNoReportMessage() {
