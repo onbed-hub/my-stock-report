@@ -182,7 +182,7 @@
             <label>📌 自定義清單 (Mark)</label>
             <select id="mFilter" onchange="filter()">
                 <option value="all">-- 全部標的 --</option>
-                <option value="mandy">mandy-mark</option> <option value="bor">bor-mark</option> <option value="ai-electricity">ai-electricity-mark</option> <option value="glass-substrate">glass-substrate-mark</option> <option value="dayan">dayan-mark</option> <option value="siesin">siesin-mark</option> <option value="copos-cowos">copos-cowos-mark</option>
+                <option value="mandy">mandy-mark</option> <option value="bor">bor-mark</option> <option value="ai-electricity">ai-electricity-mark</option> <option value="glass-substrate">glass-substrate-mark</option> <option value="dayan">dayan-mark</option> <option value="siesin">siesin-mark</option> <option value="ai">ai-mark</option> <option value="copos-cowos">copos-cowos-mark</option>
             </select>
         </div>
 
@@ -265,6 +265,27 @@
     let filteredRows = Array.from(document.querySelectorAll('#stockTable tbody tr'));
     // 💡 使用 JSON.parse 做防禦性載入，避免 Python 渲染出的字串格式與 JS 衝突
     const markLists = JSON.parse('{"ai": ["1503", "1504", "1513", "1514", "1519", "1787", "1802", "2059", "2301", "2303", "2308", "2312", "2313", "2314", "2317", "2327", "2330", "2367", "2368", "2382", "2383", "2395", "2404", "2417", "2449", "2454", "2455", "2457", "2467", "2485", "3006", "3013", "3017", "3037", "3062", "3105", "3131", "3189", "3211", "3231", "3324", "3481", "3491", "3661", "3711", "4958", "5274", "5443", "5607", "6117", "6166", "6187", "6213", "6239", "6271", "6282", "6285", "6443", "6640", "6669", "6781", "8046", "8358"], "mandy": ["0050", "0056", "00635U", "00918", "00919", "009816", "00403A"], "bor": ["6127", "3026", "6789", "2330", "5474", "2313", "6239", "6789", "6849", "7853", "0050", "0056", "00635U", "00738U", "00929", "009816", "00981A", "00990A", "2009", "2317", "2337", "2352", "2367", "2409", "2485", "3481", "4142", "6136", "6806", "3105", "4966", "5276", "6188", "6261", "00999A", "00403A", "00405A", "00877", "00935", "00947", "00735", "00984A", "3354", "3122", "6224", "3380", "2436", "3227", "2340", "3550", "3265", "2338", "3016", "006208", "00403A"], "dayan": ["0050", "2382", "3105", "4966", "00635U", "00738U", "009816", "1540", "2399", "2609", "2618", "3008", "3363", "3450", "3711", "6515", "8028", "1560", "6789", "2449", "6239", "2317", "2383", "2412", "2454", "00981A", "00992A", "00988A", "3491", "1519", "00991A", "2330", "00403A"], "siesin": ["2069", "2367", "2485", "3049", "3481", "3702", "8044", "4956", "6407", "6849", "7853", "2313", "00403A"]}');
+<script>
+    /* DYNAMIC_MARK_LIST_INIT */
+    document.addEventListener("DOMContentLoaded", function() {
+        const selectEl = document.getElementById("markSelect");
+        if (!selectEl || typeof markLists === "undefined") return;
+        
+        // 清空並保留初始選項
+        selectEl.innerHTML = '<option value="">-- 請選擇標記清單 --</option>';
+        
+        // 動態由 markLists 的鍵值建立選項
+        Object.keys(markLists).forEach(key => {
+            const opt = document.createElement("option");
+            opt.value = key;
+            opt.textContent = key + "-mark";
+            selectEl.appendChild(opt);
+        });
+        
+        // 保持網頁原本可能有的變更事件綁定 (如果原本是用 addeventlistener)
+        // 這裡確保如果原網頁有 changeMarkList 函數可以正常運作
+    });
+    </script>
 
     let selectedSectors = new Set();
 
