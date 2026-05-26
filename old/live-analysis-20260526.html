@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>實時監控入口</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f1f5f9; color: #0f172a; display: flex; justify-content: center; padding: 2rem 1.5rem; margin: 0; }
+        .container { background: white; padding: 2.5rem; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); width: 100%; max-width: 760px; }
+        .back-link { text-decoration: none; color: #6366f1; font-weight: bold; font-size: 0.9rem; display: inline-block; margin-bottom: 1rem; }
+        h1 { font-size: 1.8rem; margin-bottom: 1.5rem; color: #1e293b; text-align: center; }
+        .controls { margin-bottom: 2rem; background: #f8fafc; padding: 20px; border-radius: 16px; border: 1px solid #e2e8f0; }
+        .control-group label { display: block; font-size: 0.85rem; font-weight: 700; color: #64748b; margin-bottom: 8px; }
+        input[type="date"], .history-select { width: 100%; padding: 12px; font-size: 1rem; border: 2px solid #e2e8f0; border-radius: 12px; outline: none; transition: border-color 0.2s; box-sizing: border-box; }
+        input[type="date"]:focus, .history-select:focus { border-color: #6366f1; }
+
+        .section-header { font-size: 1rem; color: #1e3a8a; margin: 2rem 0 1rem 0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; }
+        .section-header::after { content: ""; flex: 1; height: 1px; background: #cbd5e1; margin-left: 15px; }
+
+        .report-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 2rem; }
+        .card { display: flex; flex-direction: column; padding: 1.5rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; transition: all 0.2s ease; }
+        .card:hover { border-color: #6366f1; box-shadow: 0 12px 24px rgba(99, 102, 241, 0.08); }
+        .card-main-link { text-decoration: none; display: block; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; }
+        .title { font-weight: 800; color: #0f172a; font-size: 1.25rem; display: block; margin: 8px 0; }
+        .badge { font-size: 0.7rem; padding: 3px 10px; border-radius: 8px; font-weight: 800; color: white; text-transform: uppercase; }
+        .status-dot { color: #10b981; font-size: 0.8rem; font-weight: bold; display: flex; align-items: center; gap: 4px; }
+        .status-dot::before { content: "●"; }
+
+        .file-info { font-size: 0.8rem; color: #94a3b8; font-family: monospace; background: #f8fafc; padding: 4px 8px; border-radius: 6px; display: inline-block; }
+        .history-area { border-top: 1px solid #f1f5f9; margin-top: 15px; padding-top: 12px; }
+        .history-select.sub { padding: 8px; font-size: 0.85rem; border-radius: 10px; background: #f8fafc; color: #475569; border-width: 1px; }
+
+        /* 📁 歷史基期大數據資料庫新樣式 */
+        .static-database-section { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 20px; padding: 20px; margin-top: 3rem; }
+        .db-header { font-size: 1.1rem; color: #1e293b; font-weight: bold; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .db-folder-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
+        .db-folder-title { padding: 14px 20px; background: #f1f5f9; font-weight: bold; color: #334155; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; transition: background 0.2s; }
+        .db-folder-title:hover { background: #e2e8f0; }
+        .db-folder-content { display: none; padding: 15px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; background: #fff; border-top: 1px solid #e2e8f0; }
+        .db-folder-card.active .db-folder-content { display: grid; }
+        .db-folder-title::after { content: "▼"; font-size: 0.75rem; color: #64748b; transition: transform 0.2s; }
+        .db-folder-card.active .db-folder-title::after { content: "▲"; }
+        .db-file-link { display: flex; align-items: center; justify-content: center; padding: 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.9rem; font-weight: 600; color: #475569; text-decoration: none; transition: all 0.2s; text-align: center; }
+        .db-file-link:hover { background: #6366f1; color: white; border-color: #6366f1; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="back-link">← 返回儀表板</a>
+    <h1>🛰️ 實時監控入口</h1>
+
+    <div class="controls">
+        <div class="control-group" style="margin-bottom: 15px;">
+            <label>📅 報告日期目錄</label>
+            <input type="date" id="datePicker" onchange="loadDynamicReports()">
+        </div>
+
+        <div class="control-group" id="quickNav" style="display:none;">
+            <label>🔍 個股報告選單 (僅限 HTML)</label>
+            <select id="stockSelector" class="history-select" style="border: 2px solid #6366f1; font-weight: bold;" onchange="if(this.value) window.open(this.value + '?t=' + Date.now(), '_blank')">
+                <option value="">請選擇股號...</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="dynamicContent"></div>
+
+    <div class="static-database-section">
+        <div class="db-header">📁 歷史基期大數據對比庫 (5/20)</div>
+        <div id="staticDatabaseContent">正在讀取大數據資料夾...</div>
+    </div>
+</div>
+
+<script>
+    const typeConfig = {
+        'trend': { label: '回測報告', color: '#8b5cf6' },
+        'live': { label: '即時監控', color: '#10b981' },
+        'default': { label: '數據報告', color: '#64748b' }
+    };
+
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        let dateVal = urlParams.get('date') || new Date().toISOString().split('T')[0];
+        document.getElementById('datePicker').value = dateVal;
+        loadDynamicReports();
+        loadStaticDatabase(); // ✨ 初始化讀取基期資料庫
+    };
+
+    // 1. 原有的動態日期報告讀取機制
+    async function loadDynamicReports() {
+        const dateInput = document.getElementById('datePicker').value;
+        const dateDir = dateInput.replace(/-/g, '');
+        const displayArea = document.getElementById('dynamicContent');
+        const quickNav = document.getElementById('quickNav');
+        displayArea.innerHTML = '正在掃描檔案...';
+        quickNav.style.display = 'none';
+
+        try {
+            const url = `report/${dateDir}/files.json?t=${Date.now()}`;
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('尚未生成報告');
+
+            const allFiles = await response.json();
+
+            const filtered = allFiles.filter(f => {
+                const pathLower = f.toLowerCase();
+                const isHtml = f.endsWith('.html');
+                const isTxt = f.endsWith('.txt');
+                const isInDataDir = f.includes('data/');
+
+                const shouldExclude =
+                    pathLower.includes('vietnam-') ||
+                    pathLower.includes('.vn') ||
+                    pathLower.includes('all-') ||
+                    pathLower.includes('/vn/');
+
+                if (shouldExclude) return false;
+                if (isHtml) return pathLower.includes('live') || pathLower.includes('invest');
+                if (isTxt && isInDataDir) return true;
+                return false;
+            });
+
+            renderSmartGroups(filtered, dateDir);
+        } catch (e) {
+            displayArea.innerHTML = `<div style="text-align:center;color:#ef4444;margin-top:20px;">⚠️ ${e.message}</div>`;
+        }
+    }
+
+    function openHistory(selectEl) {
+        if (selectEl.value) {
+            window.open(selectEl.value + '?t=' + Date.now(), '_blank');
+            selectEl.selectedIndex = 0;
+        }
+    }
+
+    function renderSmartGroups(files, dateDir) {
+        const displayArea = document.getElementById('dynamicContent');
+        const stockSelector = document.getElementById('stockSelector');
+        const quickNav = document.getElementById('quickNav');
+        const groups = {};
+
+        stockSelector.innerHTML = '<option value="">請選擇股號 (快速跳轉)...</option>';
+
+        files.forEach(file => {
+            const fileName = file.split('/').pop();
+            const tsMatch = fileName.match(/\d{8,12}/);
+            const isHistory = !!tsMatch;
+            let baseName = fileName.replace('.html', '').replace('.txt', '');
+            if (isHistory) baseName = baseName.replace(`-${tsMatch[0]}`, '');
+
+            const isStock = /^\d/.test(fileName);
+
+            if (!groups[baseName]) {
+                groups[baseName] = { main: null, history: [], isStock: isStock };
+            }
+
+            if (isHistory) {
+                groups[baseName].history.push(file);
+            } else {
+                if (!groups[baseName].main || file.endsWith('.html')) {
+                    groups[baseName].main = file;
+                }
+            }
+        });
+
+        const sortedBases = Object.keys(groups).sort();
+        let hasStockHtml = false;
+
+        sortedBases.forEach(base => {
+            const item = groups[base];
+            if (item.isStock && item.main && item.main.endsWith('.html')) {
+                const opt = document.createElement('option');
+                opt.value = `report/${dateDir}/${item.main}`;
+                opt.textContent = `📈 ${base.toUpperCase()}`;
+                stockSelector.appendChild(opt);
+                hasStockHtml = true;
+            }
+        });
+        if (hasStockHtml) quickNav.style.display = 'block';
+
+        const prefixGroups = {};
+        sortedBases.forEach(base => {
+            const item = groups[base];
+            if (!item.isStock && item.main && item.main.endsWith('.html')) {
+                const prefix = base.split('-')[0].toUpperCase();
+                if (!prefixGroups[prefix]) prefixGroups[prefix] = [];
+                prefixGroups[prefix].push(base);
+            }
+        });
+
+        displayArea.innerHTML = '';
+        Object.keys(prefixGroups).sort().forEach(prefix => {
+            const section = document.createElement('div');
+            section.innerHTML = `<div class="section-header">${prefix} 系列</div>`;
+            const grid = document.createElement('div');
+            grid.className = 'report-grid';
+
+            prefixGroups[prefix].forEach(base => {
+                const item = groups[base];
+                const displayFile = item.main;
+                const finalPath = `report/${dateDir}/${displayFile}?t=${Date.now()}`;
+                let typeKey = base.includes('report') ? 'trend' : 'live';
+                const config = typeConfig[typeKey] || typeConfig['default'];
+
+                const card = document.createElement('div');
+                card.className = 'card';
+
+                let historyHtml = '';
+                const htmlHistory = item.history.filter(h => h.endsWith('.html')).sort().reverse();
+                if (htmlHistory.length > 0) {
+                    const options = htmlHistory.map(h => {
+                        const ts = h.match(/\d{8,12}/)[0];
+                        return `<option value="report/${dateDir}/${h}">🕒 ${ts}</option>`;
+                    }).join('');
+                    historyHtml = `<div class="history-area"><select class="history-select sub" onchange="openHistory(this)"><option value="">📜 歷史版本 (${htmlHistory.length})</option>${options}</select></div>`;
+                }
+
+                card.innerHTML = `
+                    <a href="${finalPath}" target="_blank" class="card-main-link">
+                        <div class="card-header">
+                            <span class="badge" style="background:${config.color}">${config.label}</span>
+                            <span class="status-dot">最新</span>
+                        </div>
+                        <span class="title">${base.toUpperCase()}</span>
+                        <div class="file-info">📄 ${displayFile}</div>
+                    </a>
+                    ${historyHtml}
+                `;
+                grid.appendChild(card);
+            });
+            section.appendChild(grid);
+            displayArea.appendChild(section);
+        });
+    }
+
+    // 2. ✨ 新增：基期資料庫自動分析與渲染機制
+    async function loadStaticDatabase() {
+        const dbContainer = document.getElementById('staticDatabaseContent');
+        
+        // 由於 basic_data 資料夾內沒有特定的 json 索引，我們直接寫一個智能掃描清單
+        // 這邊列出你擁有的關鍵基期節點 (0211 與 0520)
+        const targetDates = ["0211", "0520"];
+        const startYear = 2014;
+        const endYear = 2026;
+        
+        dbContainer.innerHTML = '';
+        
+        targetDates.forEach(md => {
+            const folderCard = document.createElement('div');
+            folderCard.className = 'db-folder-card';
+            
+            // 建立月份大標題外觀
+            const titleEl = document.createElement('div');
+            titleEl.className = 'db-folder-title';
+            // 將 0520 轉換成較好讀的 "05/20 基期"
+            const formattedMD = `${md.substring(0,2)}/${md.substring(2,4)}`;
+            titleEl.innerHTML = `<span>📅 歷史對比對象：<b>${formattedMD} 節點</b></span>`;
+            
+            // 點擊展開/收合
+            titleEl.onclick = function() {
+                folderCard.classList.toggle('active');
+            };
+            
+            const contentEl = document.createElement('div');
+            contentEl.className = 'db-folder-content';
+            
+            let hasFiles = false;
+            
+            // 迴圈由新到舊生成 2026 -> 2014 的 HTML 連結
+            for (let yr = endYear; yr >= startYear; yr--) {
+                const fileName = `${yr}_${md}_daily_details.html`;
+                const filePath = `basic_data/0520/${fileName}`;
+                
+                // 建立每一年份的快捷按鈕
+                const fileLink = document.createElement('a');
+                fileLink.href = `${filePath}?t=${Date.now()}`;
+                fileLink.target = '_blank';
+                fileLink.className = 'db-file-link';
+                fileLink.textContent = `${yr} 年`;
+                
+                contentEl.appendChild(fileLink);
+                hasFiles = true;
+            }
+            
+            folderCard.appendChild(titleEl);
+            folderCard.appendChild(contentEl);
+            dbContainer.appendChild(folderCard);
+        });
+    }
+</script>
+</body>
+</html>
