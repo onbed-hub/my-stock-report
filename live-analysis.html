@@ -83,6 +83,14 @@
         'default': { label: '數據報告', color: '#64748b' }
     };
 
+    // ✨ 新增：自訂標題映射表 (有對應到的就會自動替換，沒對應到的維持原樣)
+    const customTitles = {
+        // 格式 -> '原本分類或檔名關鍵字': '你想要的自訂中文標題'
+        'ENERGE': '🔋預警 (🚀 動能初現) / 🔥 買入 (🚀 爆發 5D30%) 即時監控',
+        'AI': '🤖 AI 核心與半導體供應鏈',
+        'COPOS': '⚡ CoPoS 先進封裝監控'
+    };
+
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
         let dateVal = urlParams.get('date') || new Date().toISOString().split('T')[0];
@@ -196,7 +204,11 @@
         displayArea.innerHTML = '';
         Object.keys(prefixGroups).sort().forEach(prefix => {
             const section = document.createElement('div');
-            section.innerHTML = `<div class="section-header">${prefix} 系列</div>`;
+
+            // ✅ 改成這樣：如果 customTitles 有定義就用定義的，沒有就用預設的
+            const sectionTitle = customTitles[prefix] ? customTitles[prefix] : `${prefix} 系列`;
+            section.innerHTML = `<div class="section-header">${sectionTitle}</div>`;
+
             const grid = document.createElement('div');
             grid.className = 'report-grid';
 
@@ -220,13 +232,23 @@
                     historyHtml = `<div class="history-area"><select class="history-select sub" onchange="openHistory(this)"><option value="">📜 歷史版本 (${htmlHistory.length})</option>${options}</select></div>`;
                 }
 
+                // ✅ 改成這樣：優先檢查有沒有這張卡片的完整自訂名稱
+                const upperBase = base.toUpperCase();
+                let cardTitle = upperBase;
+                if (customTitles[upperBase]) {
+                    cardTitle = customTitles[upperBase];
+                } else if (customTitles[prefix]) {
+                    // 如果大分類有自訂，卡片名字自動縮短 (例如去背、去掉重複字)
+                    cardTitle = upperBase.replace(prefix, customTitles[prefix].replace(/[\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDC00-\uDFFF]/g, '').trim());
+                }
+
                 card.innerHTML = `
                     <a href="${finalPath}" target="_blank" class="card-main-link">
                         <div class="card-header">
                             <span class="badge" style="background:${config.color}">${config.label}</span>
                             <span class="status-dot">最新</span>
                         </div>
-                        <span class="title">${base.toUpperCase()}</span>
+                        <span class="title">${cardTitle}</span>
                         <div class="file-info">📄 ${displayFile}</div>
                     </a>
                     ${historyHtml}
