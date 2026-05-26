@@ -86,9 +86,16 @@
     // ✨ 新增：自訂標題映射表 (有對應到的就會自動替換，沒對應到的維持原樣)
     const customTitles = {
         // 格式 -> '原本分類或檔名關鍵字': '你想要的自訂中文標題'
+        // 1. 這是大分類系列標題 (對應 prefix)
         'ENERGE': '🔋預警 (🚀 動能初現) / 🔥 買入 (🚀 爆發 5D30%) 即時監控',
         'AI': '🤖 AI 核心與半導體供應鏈',
         'COPOS': '⚡ CoPoS 先進封裝監控'
+
+        // 2. 這是特定卡片的完整自訂標題 (完全對應 base 檔名)
+        // 只要這裡有寫，卡片大字就會完全依照這裡顯示，不會再去黏後綴！
+        'AI-TREND-BACKTEST-LIVE': '🤖 AI 核心群組實時監控',
+        'ENERGE-TREND-BACKTEST-LIVE': '🔋 綠能儲能實時監控 (最新策略)',
+        'BOR-TREND-BACKTEST-LIVE': '💼 Bor 帳戶專屬監控組合'
     };
 
     window.onload = function() {
@@ -232,14 +239,17 @@
                     historyHtml = `<div class="history-area"><select class="history-select sub" onchange="openHistory(this)"><option value="">📜 歷史版本 (${htmlHistory.length})</option>${options}</select></div>`;
                 }
 
-                // ✅ 改成這樣：優先檢查有沒有這張卡片的完整自訂名稱
+                // ✅ 完美的標題指派邏輯
                 const upperBase = base.toUpperCase();
-                let cardTitle = upperBase;
+                let cardTitle = upperBase; // 預設：維持原本英文 (如: AI-TREND-BACKTEST-LIVE)
+
                 if (customTitles[upperBase]) {
+                    // 優先 1：如果字典裡有定義這張卡片的「完整名稱」，直接用定義的文字！
                     cardTitle = customTitles[upperBase];
                 } else if (customTitles[prefix]) {
-                    // 如果大分類有自訂，卡片名字自動縮短 (例如去背、去掉重複字)
-                    cardTitle = upperBase.replace(prefix, customTitles[prefix].replace(/[\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDC00-\uDFFF]/g, '').trim());
+                    // 優先 2：如果只有定義大系列名稱，卡片標題就幫你稍微修飾
+                    // 把生硬的 "AI-TREND-BACKTEST-LIVE" 換成 "AI 系列-TREND-BACKTEST-LIVE"
+                    cardTitle = upperBase.replace(prefix, `${prefix} 系列`);
                 }
 
                 card.innerHTML = `
