@@ -83,19 +83,19 @@
         'default': { label: '數據報告', color: '#64748b' }
     };
 
-    // ✨ 新增：自訂標題映射表 (有對應到的就會自動替換，沒對應到的維持原樣)
+    // ✨ 這裡是可以自由調整的「自訂標題字典」
     const customTitles = {
-        // 格式 -> '原本分類或檔名關鍵字': '你想要的自訂中文標題'
-        // 1. 這是大分類系列標題 (對應 prefix)
-        'ENERGE': '🔋預警 (🚀 動能初現) / 🔥 買入 (🚀 爆發 5D30%) 即時監控',
+        // 1. 系列大標題對照 (有對應到的英文就會換成中文系列大標題)
         'AI': '🤖 AI 核心與半導體供應鏈',
-        'COPOS': '⚡ CoPoS 先進封裝監控'
+        'ENERGE': '🔋預警 (🚀 動能初現) / 🔥 買入 (🚀 爆發 5D30%) 即時監控',
+        'COPOS': '⚡ CoWoS / CoPoS 先進封裝監控',
+        'BOR': '💼 Bor 帳戶專屬監控組合',
 
-        // 2. 這是特定卡片的完整自訂標題 (完全對應 base 檔名)
-        // 只要這裡有寫，卡片大字就會完全依照這裡顯示，不會再去黏後綴！
+        // 2. 個別卡片標題精準對照 (直接改變卡片裡的大字，後面不會再黏生硬的英文)
         'AI-TREND-BACKTEST-LIVE': '🤖 AI 核心群組實時監控',
         'ENERGE-TREND-BACKTEST-LIVE': '🔋 綠能儲能實時監控 (最新策略)',
-        'BOR-TREND-BACKTEST-LIVE': '💼 Bor 帳戶專屬監控組合'
+        'BOR-TREND-BACKTEST-LIVE': '💼 Bor 策略實時監控系統',
+        'COPOS-TREND-BACKTEST-LIVE': '⚡ Advanced Packaging 實時監控'
     };
 
     window.onload = function() {
@@ -239,16 +239,13 @@
                     historyHtml = `<div class="history-area"><select class="history-select sub" onchange="openHistory(this)"><option value="">📜 歷史版本 (${htmlHistory.length})</option>${options}</select></div>`;
                 }
 
-                // ✅ 完美的標題指派邏輯
+                // ✅ 卡片標題自訂邏輯 (已修正變數錯誤)
                 const upperBase = base.toUpperCase();
-                let cardTitle = upperBase; // 預設：維持原本英文 (如: AI-TREND-BACKTEST-LIVE)
+                let cardTitle = upperBase; 
 
                 if (customTitles[upperBase]) {
-                    // 優先 1：如果字典裡有定義這張卡片的「完整名稱」，直接用定義的文字！
                     cardTitle = customTitles[upperBase];
                 } else if (customTitles[prefix]) {
-                    // 優先 2：如果只有定義大系列名稱，卡片標題就幫你稍微修飾
-                    // 把生硬的 "AI-TREND-BACKTEST-LIVE" 換成 "AI 系列-TREND-BACKTEST-LIVE"
                     cardTitle = upperBase.replace(prefix, `${prefix} 系列`);
                 }
 
