@@ -1,0 +1,2811 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>外資籌碼加速度監控報告</title>
+        
+        <meta charset="utf-8">
+        <style>
+            body {
+                font-family: "Helvetica Neue", Arial, "PingFang TC", sans-serif;
+                font-size: 26px;
+                color: #333333;
+                padding: 20px;
+            }
+            .filter-container {
+                margin: 25px 0;
+                display: flex;
+                gap: 15px;
+                align-items: center;
+            }
+            .search-input {
+                font-size: 22px;
+                padding: 10px 15px;
+                width: 400px;
+                border: 2px solid #0052cc;
+                border-radius: 5px;
+            }
+            .filter-select {
+                font-size: 22px;
+                padding: 10px 15px;
+                border: 2px solid #0052cc;
+                border-radius: 5px;
+                background-color: white;
+                cursor: pointer;
+            }
+            .reset-btn {
+                font-size: 22px;
+                padding: 10px 20px;
+                border: 2px solid #666666;
+                border-radius: 5px;
+                background-color: #f0f0f0;
+                color: #333333;
+                cursor: pointer;
+                font-weight: bold;
+                transition: all 0.2s;
+            }
+            .reset-btn:hover {
+                background-color: #666666;
+                color: white;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 22px;
+                margin-top: 15px;
+            }
+            th {
+                background-color: #0052cc;
+                color: white;
+                padding: 12px 10px;
+                font-weight: bold;
+                cursor: pointer;
+                user-select: none;
+                position: relative;
+            }
+            th:hover {
+                background-color: #0043a8;
+            }
+            th::after {
+                content: ' ↕';
+                font-size: 16px;
+                color: #b3d4ff;
+                opacity: 0.8;
+                padding-left: 5px;
+            }
+            td {
+                padding: 12px 10px;
+                border: 1px solid #ececec;
+            }
+            th:nth-child(1), td:nth-child(1),
+            th:nth-child(2), td:nth-child(2),
+            th:last-child, td:last-child {
+                text-align: left;
+            }
+            th, td {
+                text-align: right;
+            }
+            table tr:nth-child(even) {
+                background-color: #f9fbfd;
+            }
+        </style>
+    
+    </head>
+    <body>
+        <h2>外資籌碼動態【量能乘積】進貨監控報表</h2>
+        <div class="sub-title">基準日期：20260528 ｜ 排列順序：依據「淨增進貨(張)」由大到小排序</div>
+
+        <div class="instruction-box" style="background-color: #f8f9fa; border-left: 8px solid #0052cc; padding: 15px 20px; margin-bottom: 20px; font-size: 24px;">
+            <h3> 指標定義與邏輯說明 (💡 提示：點擊下方表格欄位標頭，可直接進行大小排序)</h3>
+            <ul>
+                <li><strong>這週估買 / 上週估買 (張)</strong>：利用每日交易量與外資持股比例變化推估之。</li>
+                <li><strong>淨增進貨 (張)</strong>：【這週估買】 減去 【上週估買】。代表外資近 5 日進貨的「絕對加速度增量」。</li>
+                <li><strong>增長倍數</strong>：本週進貨與上週的對比。若上週無動作而本週突發買進，會顯示 <strong>[新進貨]</strong> 或 <strong>[轉買進]</strong>。</li>
+                <li><strong>狀態分類判斷</strong>：當【淨增進貨 > 0】且【這週估買 > 0】時：
+                    <ul>
+                        <li><span style="color: #cc0000; font-weight: bold;">★ 壓低偷買</span>：近 5 日股價漲幅 <strong>&lt; 0.5%</strong>。外資大敲籌碼但股價沒拉高，屬於核心潛伏吸籌訊號。</li>
+                        <li><span style="color: #0066cc; font-weight: bold;">▲ 順勢追意</span>：近 5 日股價漲幅 <strong>&ge; 0.5%</strong>。外資進貨同步帶動股價上攻</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="filter-container">
+            <input type="text" id="searchInput" onkeyup="applyFilters()" class="search-input" placeholder="🔍 輸入股號或名稱過濾...">
+            
+            <select id="statusSelect" onchange="applyFilters()" class="filter-select">
+                <option value="ALL">全部標的 (無篩選)</option>
+                <optgroup label="【型態與訊號】">
+                    <option value="★ 壓低偷買">★ 壓低偷買</option>
+                    <option value="▲ 順勢追意">▲ 順勢追意</option>
+                    <option value="無">無狀態</option>
+                </optgroup>
+                <optgroup label="【籌碼突變】">
+                    <option value="STATUS_NEW">顯示：[新進貨]</option>
+                    <option value="STATUS_TURN">顯示：[轉買進]</option>
+                    <option value="RATIO_30">增長倍數 ＞ 30x</option>
+                    <option value="RATIO_50">增長倍數 ＞ 50x</option>
+                </optgroup>
+                <optgroup label="【股價表現】">
+                    <option value="RETURN_GT_0">5D股價漲跌 ＞ 0% (上漲)</option>
+                    <option value="RETURN_LT_0">5D股價漲跌 ＜ 0% (下跌)</option>
+                </optgroup>
+            </select>
+
+            <button onclick="resetFilters()" class="reset-btn">🔄 清除重設</button>
+        </div>
+
+        <style type="text/css">
+#T_a2e55_row0_col8, #T_a2e55_row1_col8, #T_a2e55_row2_col8, #T_a2e55_row3_col8, #T_a2e55_row4_col8, #T_a2e55_row5_col8, #T_a2e55_row6_col8, #T_a2e55_row7_col8, #T_a2e55_row9_col8, #T_a2e55_row11_col8, #T_a2e55_row12_col8, #T_a2e55_row13_col8, #T_a2e55_row14_col8, #T_a2e55_row16_col8, #T_a2e55_row17_col8, #T_a2e55_row18_col8, #T_a2e55_row19_col8, #T_a2e55_row21_col8, #T_a2e55_row22_col8, #T_a2e55_row23_col8, #T_a2e55_row24_col8, #T_a2e55_row26_col8, #T_a2e55_row27_col8, #T_a2e55_row30_col8, #T_a2e55_row31_col8, #T_a2e55_row32_col8, #T_a2e55_row33_col8, #T_a2e55_row35_col8, #T_a2e55_row36_col8, #T_a2e55_row37_col8, #T_a2e55_row38_col8, #T_a2e55_row39_col8, #T_a2e55_row45_col8, #T_a2e55_row47_col8, #T_a2e55_row48_col8, #T_a2e55_row53_col8, #T_a2e55_row54_col8, #T_a2e55_row55_col8, #T_a2e55_row56_col8, #T_a2e55_row57_col8, #T_a2e55_row58_col8, #T_a2e55_row60_col8, #T_a2e55_row61_col8, #T_a2e55_row62_col8, #T_a2e55_row63_col8, #T_a2e55_row64_col8, #T_a2e55_row65_col8, #T_a2e55_row66_col8, #T_a2e55_row67_col8, #T_a2e55_row68_col8, #T_a2e55_row70_col8, #T_a2e55_row71_col8, #T_a2e55_row72_col8, #T_a2e55_row73_col8, #T_a2e55_row75_col8, #T_a2e55_row77_col8, #T_a2e55_row78_col8, #T_a2e55_row80_col8, #T_a2e55_row81_col8, #T_a2e55_row82_col8, #T_a2e55_row86_col8, #T_a2e55_row90_col8, #T_a2e55_row91_col8, #T_a2e55_row92_col8, #T_a2e55_row93_col8, #T_a2e55_row94_col8, #T_a2e55_row96_col8, #T_a2e55_row97_col8, #T_a2e55_row98_col8, #T_a2e55_row99_col8, #T_a2e55_row100_col8, #T_a2e55_row106_col8, #T_a2e55_row112_col8, #T_a2e55_row113_col8, #T_a2e55_row119_col8, #T_a2e55_row120_col8, #T_a2e55_row121_col8, #T_a2e55_row122_col8, #T_a2e55_row124_col8, #T_a2e55_row125_col8, #T_a2e55_row126_col8, #T_a2e55_row130_col8, #T_a2e55_row139_col8, #T_a2e55_row146_col8, #T_a2e55_row150_col8, #T_a2e55_row153_col8, #T_a2e55_row156_col8, #T_a2e55_row158_col8, #T_a2e55_row161_col8, #T_a2e55_row162_col8, #T_a2e55_row166_col8, #T_a2e55_row168_col8, #T_a2e55_row173_col8, #T_a2e55_row175_col8, #T_a2e55_row177_col8, #T_a2e55_row178_col8, #T_a2e55_row180_col8, #T_a2e55_row183_col8, #T_a2e55_row184_col8, #T_a2e55_row185_col8, #T_a2e55_row186_col8, #T_a2e55_row188_col8, #T_a2e55_row191_col8, #T_a2e55_row192_col8, #T_a2e55_row194_col8, #T_a2e55_row195_col8, #T_a2e55_row198_col8, #T_a2e55_row214_col8, #T_a2e55_row215_col8, #T_a2e55_row220_col8 {
+  background-color: #e6f2ff;
+  color: #0066cc;
+  font-weight: bold;
+}
+#T_a2e55_row15_col8, #T_a2e55_row20_col8, #T_a2e55_row25_col8, #T_a2e55_row28_col8, #T_a2e55_row29_col8, #T_a2e55_row40_col8, #T_a2e55_row41_col8, #T_a2e55_row42_col8, #T_a2e55_row43_col8, #T_a2e55_row50_col8, #T_a2e55_row51_col8, #T_a2e55_row52_col8, #T_a2e55_row69_col8, #T_a2e55_row74_col8, #T_a2e55_row83_col8, #T_a2e55_row85_col8, #T_a2e55_row88_col8, #T_a2e55_row103_col8, #T_a2e55_row104_col8, #T_a2e55_row105_col8, #T_a2e55_row108_col8, #T_a2e55_row111_col8, #T_a2e55_row114_col8, #T_a2e55_row115_col8, #T_a2e55_row118_col8, #T_a2e55_row127_col8, #T_a2e55_row128_col8, #T_a2e55_row129_col8, #T_a2e55_row131_col8, #T_a2e55_row132_col8, #T_a2e55_row133_col8, #T_a2e55_row134_col8, #T_a2e55_row136_col8, #T_a2e55_row137_col8, #T_a2e55_row140_col8, #T_a2e55_row142_col8, #T_a2e55_row143_col8, #T_a2e55_row144_col8, #T_a2e55_row145_col8, #T_a2e55_row147_col8, #T_a2e55_row148_col8, #T_a2e55_row149_col8, #T_a2e55_row152_col8, #T_a2e55_row154_col8, #T_a2e55_row157_col8, #T_a2e55_row159_col8, #T_a2e55_row160_col8, #T_a2e55_row163_col8, #T_a2e55_row164_col8, #T_a2e55_row165_col8, #T_a2e55_row167_col8, #T_a2e55_row169_col8, #T_a2e55_row170_col8, #T_a2e55_row171_col8, #T_a2e55_row172_col8, #T_a2e55_row174_col8, #T_a2e55_row179_col8, #T_a2e55_row181_col8, #T_a2e55_row182_col8, #T_a2e55_row189_col8, #T_a2e55_row193_col8, #T_a2e55_row196_col8, #T_a2e55_row199_col8, #T_a2e55_row200_col8, #T_a2e55_row201_col8, #T_a2e55_row202_col8, #T_a2e55_row203_col8, #T_a2e55_row204_col8, #T_a2e55_row205_col8, #T_a2e55_row206_col8, #T_a2e55_row207_col8, #T_a2e55_row209_col8, #T_a2e55_row210_col8, #T_a2e55_row211_col8, #T_a2e55_row216_col8, #T_a2e55_row219_col8, #T_a2e55_row221_col8, #T_a2e55_row223_col8, #T_a2e55_row224_col8, #T_a2e55_row225_col8, #T_a2e55_row226_col8, #T_a2e55_row229_col8, #T_a2e55_row231_col8 {
+  background-color: #ffcccc;
+  color: #cc0000;
+  font-weight: bold;
+}
+</style>
+<table id="T_a2e55">
+  <thead>
+    <tr>
+      <th id="T_a2e55_level0_col0" class="col_heading level0 col0" >Stock</th>
+      <th id="T_a2e55_level0_col1" class="col_heading level0 col1" >Name</th>
+      <th id="T_a2e55_level0_col2" class="col_heading level0 col2" >Close</th>
+      <th id="T_a2e55_level0_col3" class="col_heading level0 col3" >上週估買(張)</th>
+      <th id="T_a2e55_level0_col4" class="col_heading level0 col4" >這週估買(張)</th>
+      <th id="T_a2e55_level0_col5" class="col_heading level0 col5" >淨增進貨(張)</th>
+      <th id="T_a2e55_level0_col6" class="col_heading level0 col6" >增長倍數</th>
+      <th id="T_a2e55_level0_col7" class="col_heading level0 col7" >5D股價漲跌</th>
+      <th id="T_a2e55_level0_col8" class="col_heading level0 col8" >狀態</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_a2e55_row0_col0" class="data row0 col0" >6770.TW</td>
+      <td id="T_a2e55_row0_col1" class="data row0 col1" >力積電</td>
+      <td id="T_a2e55_row0_col2" class="data row0 col2" >80.70</td>
+      <td id="T_a2e55_row0_col3" class="data row0 col3" >399061</td>
+      <td id="T_a2e55_row0_col4" class="data row0 col4" >4366839</td>
+      <td id="T_a2e55_row0_col5" class="data row0 col5" >3967778</td>
+      <td id="T_a2e55_row0_col6" class="data row0 col6" >10.9x</td>
+      <td id="T_a2e55_row0_col7" class="data row0 col7" >36.55%</td>
+      <td id="T_a2e55_row0_col8" class="data row0 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row1_col0" class="data row1 col0" >2337.TW</td>
+      <td id="T_a2e55_row1_col1" class="data row1 col1" >旺宏</td>
+      <td id="T_a2e55_row1_col2" class="data row1 col2" >160.00</td>
+      <td id="T_a2e55_row1_col3" class="data row1 col3" >-381804</td>
+      <td id="T_a2e55_row1_col4" class="data row1 col4" >734503</td>
+      <td id="T_a2e55_row1_col5" class="data row1 col5" >1116307</td>
+      <td id="T_a2e55_row1_col6" class="data row1 col6" >-1.9x</td>
+      <td id="T_a2e55_row1_col7" class="data row1 col7" >13.48%</td>
+      <td id="T_a2e55_row1_col8" class="data row1 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row2_col0" class="data row2 col0" >6282.TW</td>
+      <td id="T_a2e55_row2_col1" class="data row2 col1" >康舒</td>
+      <td id="T_a2e55_row2_col2" class="data row2 col2" >57.70</td>
+      <td id="T_a2e55_row2_col3" class="data row2 col3" >106240</td>
+      <td id="T_a2e55_row2_col4" class="data row2 col4" >282814</td>
+      <td id="T_a2e55_row2_col5" class="data row2 col5" >176573</td>
+      <td id="T_a2e55_row2_col6" class="data row2 col6" >2.7x</td>
+      <td id="T_a2e55_row2_col7" class="data row2 col7" >7.65%</td>
+      <td id="T_a2e55_row2_col8" class="data row2 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row3_col0" class="data row3 col0" >8150.TW</td>
+      <td id="T_a2e55_row3_col1" class="data row3 col1" >南茂</td>
+      <td id="T_a2e55_row3_col2" class="data row3 col2" >103.00</td>
+      <td id="T_a2e55_row3_col3" class="data row3 col3" >-23113</td>
+      <td id="T_a2e55_row3_col4" class="data row3 col4" >117363</td>
+      <td id="T_a2e55_row3_col5" class="data row3 col5" >140477</td>
+      <td id="T_a2e55_row3_col6" class="data row3 col6" >-5.1x</td>
+      <td id="T_a2e55_row3_col7" class="data row3 col7" >35.70%</td>
+      <td id="T_a2e55_row3_col8" class="data row3 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row4_col0" class="data row4 col0" >6265.TWO</td>
+      <td id="T_a2e55_row4_col1" class="data row4 col1" >方土昶</td>
+      <td id="T_a2e55_row4_col2" class="data row4 col2" >53.80</td>
+      <td id="T_a2e55_row4_col3" class="data row4 col3" >-29886</td>
+      <td id="T_a2e55_row4_col4" class="data row4 col4" >108538</td>
+      <td id="T_a2e55_row4_col5" class="data row4 col5" >138425</td>
+      <td id="T_a2e55_row4_col6" class="data row4 col6" >-3.6x</td>
+      <td id="T_a2e55_row4_col7" class="data row4 col7" >22.97%</td>
+      <td id="T_a2e55_row4_col8" class="data row4 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row5_col0" class="data row5 col0" >8039.TW</td>
+      <td id="T_a2e55_row5_col1" class="data row5 col1" >台虹</td>
+      <td id="T_a2e55_row5_col2" class="data row5 col2" >153.50</td>
+      <td id="T_a2e55_row5_col3" class="data row5 col3" >-37763</td>
+      <td id="T_a2e55_row5_col4" class="data row5 col4" >62688</td>
+      <td id="T_a2e55_row5_col5" class="data row5 col5" >100452</td>
+      <td id="T_a2e55_row5_col6" class="data row5 col6" >-1.7x</td>
+      <td id="T_a2e55_row5_col7" class="data row5 col7" >10.43%</td>
+      <td id="T_a2e55_row5_col8" class="data row5 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row6_col0" class="data row6 col0" >3231.TW</td>
+      <td id="T_a2e55_row6_col1" class="data row6 col1" >緯創</td>
+      <td id="T_a2e55_row6_col2" class="data row6 col2" >144.50</td>
+      <td id="T_a2e55_row6_col3" class="data row6 col3" >17060</td>
+      <td id="T_a2e55_row6_col4" class="data row6 col4" >82369</td>
+      <td id="T_a2e55_row6_col5" class="data row6 col5" >65308</td>
+      <td id="T_a2e55_row6_col6" class="data row6 col6" >4.8x</td>
+      <td id="T_a2e55_row6_col7" class="data row6 col7" >3.21%</td>
+      <td id="T_a2e55_row6_col8" class="data row6 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row7_col0" class="data row7 col0" >6548.TWO</td>
+      <td id="T_a2e55_row7_col1" class="data row7 col1" >長科*</td>
+      <td id="T_a2e55_row7_col2" class="data row7 col2" >66.40</td>
+      <td id="T_a2e55_row7_col3" class="data row7 col3" >1039</td>
+      <td id="T_a2e55_row7_col4" class="data row7 col4" >61275</td>
+      <td id="T_a2e55_row7_col5" class="data row7 col5" >60235</td>
+      <td id="T_a2e55_row7_col6" class="data row7 col6" >59.0x</td>
+      <td id="T_a2e55_row7_col7" class="data row7 col7" >29.18%</td>
+      <td id="T_a2e55_row7_col8" class="data row7 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row8_col0" class="data row8 col0" >6278.TW</td>
+      <td id="T_a2e55_row8_col1" class="data row8 col1" >台表科</td>
+      <td id="T_a2e55_row8_col2" class="data row8 col2" >222.50</td>
+      <td id="T_a2e55_row8_col3" class="data row8 col3" >-85243</td>
+      <td id="T_a2e55_row8_col4" class="data row8 col4" >-32473</td>
+      <td id="T_a2e55_row8_col5" class="data row8 col5" >52769</td>
+      <td id="T_a2e55_row8_col6" class="data row8 col6" >0.4x</td>
+      <td id="T_a2e55_row8_col7" class="data row8 col7" >-0.22%</td>
+      <td id="T_a2e55_row8_col8" class="data row8 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row9_col0" class="data row9 col0" >6290.TWO</td>
+      <td id="T_a2e55_row9_col1" class="data row9 col1" >良維</td>
+      <td id="T_a2e55_row9_col2" class="data row9 col2" >336.00</td>
+      <td id="T_a2e55_row9_col3" class="data row9 col3" >-4747</td>
+      <td id="T_a2e55_row9_col4" class="data row9 col4" >40047</td>
+      <td id="T_a2e55_row9_col5" class="data row9 col5" >44795</td>
+      <td id="T_a2e55_row9_col6" class="data row9 col6" >-8.4x</td>
+      <td id="T_a2e55_row9_col7" class="data row9 col7" >23.30%</td>
+      <td id="T_a2e55_row9_col8" class="data row9 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row10_col0" class="data row10 col0" >8064.TWO</td>
+      <td id="T_a2e55_row10_col1" class="data row10 col1" >東捷</td>
+      <td id="T_a2e55_row10_col2" class="data row10 col2" >133.00</td>
+      <td id="T_a2e55_row10_col3" class="data row10 col3" >-48518</td>
+      <td id="T_a2e55_row10_col4" class="data row10 col4" >-5708</td>
+      <td id="T_a2e55_row10_col5" class="data row10 col5" >42810</td>
+      <td id="T_a2e55_row10_col6" class="data row10 col6" >0.1x</td>
+      <td id="T_a2e55_row10_col7" class="data row10 col7" >10.37%</td>
+      <td id="T_a2e55_row10_col8" class="data row10 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row11_col0" class="data row11 col0" >6285.TW</td>
+      <td id="T_a2e55_row11_col1" class="data row11 col1" >啟碁</td>
+      <td id="T_a2e55_row11_col2" class="data row11 col2" >304.00</td>
+      <td id="T_a2e55_row11_col3" class="data row11 col3" >7696</td>
+      <td id="T_a2e55_row11_col4" class="data row11 col4" >49046</td>
+      <td id="T_a2e55_row11_col5" class="data row11 col5" >41350</td>
+      <td id="T_a2e55_row11_col6" class="data row11 col6" >6.4x</td>
+      <td id="T_a2e55_row11_col7" class="data row11 col7" >8.38%</td>
+      <td id="T_a2e55_row11_col8" class="data row11 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row12_col0" class="data row12 col0" >6239.TW</td>
+      <td id="T_a2e55_row12_col1" class="data row12 col1" >力成</td>
+      <td id="T_a2e55_row12_col2" class="data row12 col2" >357.50</td>
+      <td id="T_a2e55_row12_col3" class="data row12 col3" >84524</td>
+      <td id="T_a2e55_row12_col4" class="data row12 col4" >114978</td>
+      <td id="T_a2e55_row12_col5" class="data row12 col5" >30453</td>
+      <td id="T_a2e55_row12_col6" class="data row12 col6" >1.4x</td>
+      <td id="T_a2e55_row12_col7" class="data row12 col7" >38.83%</td>
+      <td id="T_a2e55_row12_col8" class="data row12 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row13_col0" class="data row13 col0" >6531.TW</td>
+      <td id="T_a2e55_row13_col1" class="data row13 col1" >愛普*</td>
+      <td id="T_a2e55_row13_col2" class="data row13 col2" >1095.00</td>
+      <td id="T_a2e55_row13_col3" class="data row13 col3" >-23072</td>
+      <td id="T_a2e55_row13_col4" class="data row13 col4" >6647</td>
+      <td id="T_a2e55_row13_col5" class="data row13 col5" >29719</td>
+      <td id="T_a2e55_row13_col6" class="data row13 col6" >-0.3x</td>
+      <td id="T_a2e55_row13_col7" class="data row13 col7" >25.00%</td>
+      <td id="T_a2e55_row13_col8" class="data row13 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row14_col0" class="data row14 col0" >6664.TWO</td>
+      <td id="T_a2e55_row14_col1" class="data row14 col1" >群翊</td>
+      <td id="T_a2e55_row14_col2" class="data row14 col2" >441.00</td>
+      <td id="T_a2e55_row14_col3" class="data row14 col3" >-26876</td>
+      <td id="T_a2e55_row14_col4" class="data row14 col4" >2366</td>
+      <td id="T_a2e55_row14_col5" class="data row14 col5" >29243</td>
+      <td id="T_a2e55_row14_col6" class="data row14 col6" >-0.1x</td>
+      <td id="T_a2e55_row14_col7" class="data row14 col7" >8.62%</td>
+      <td id="T_a2e55_row14_col8" class="data row14 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row15_col0" class="data row15 col0" >6215.TW</td>
+      <td id="T_a2e55_row15_col1" class="data row15 col1" >和椿</td>
+      <td id="T_a2e55_row15_col2" class="data row15 col2" >124.50</td>
+      <td id="T_a2e55_row15_col3" class="data row15 col3" >-10156</td>
+      <td id="T_a2e55_row15_col4" class="data row15 col4" >14678</td>
+      <td id="T_a2e55_row15_col5" class="data row15 col5" >24835</td>
+      <td id="T_a2e55_row15_col6" class="data row15 col6" >-1.4x</td>
+      <td id="T_a2e55_row15_col7" class="data row15 col7" >-1.19%</td>
+      <td id="T_a2e55_row15_col8" class="data row15 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row16_col0" class="data row16 col0" >8021.TW</td>
+      <td id="T_a2e55_row16_col1" class="data row16 col1" >尖點</td>
+      <td id="T_a2e55_row16_col2" class="data row16 col2" >418.00</td>
+      <td id="T_a2e55_row16_col3" class="data row16 col3" >-3106</td>
+      <td id="T_a2e55_row16_col4" class="data row16 col4" >18028</td>
+      <td id="T_a2e55_row16_col5" class="data row16 col5" >21134</td>
+      <td id="T_a2e55_row16_col6" class="data row16 col6" >-5.8x</td>
+      <td id="T_a2e55_row16_col7" class="data row16 col7" >8.85%</td>
+      <td id="T_a2e55_row16_col8" class="data row16 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row17_col0" class="data row17 col0" >8131.TW</td>
+      <td id="T_a2e55_row17_col1" class="data row17 col1" >福懋科</td>
+      <td id="T_a2e55_row17_col2" class="data row17 col2" >69.20</td>
+      <td id="T_a2e55_row17_col3" class="data row17 col3" >-2334</td>
+      <td id="T_a2e55_row17_col4" class="data row17 col4" >18063</td>
+      <td id="T_a2e55_row17_col5" class="data row17 col5" >20397</td>
+      <td id="T_a2e55_row17_col6" class="data row17 col6" >-7.7x</td>
+      <td id="T_a2e55_row17_col7" class="data row17 col7" >11.25%</td>
+      <td id="T_a2e55_row17_col8" class="data row17 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row18_col0" class="data row18 col0" >6224.TW</td>
+      <td id="T_a2e55_row18_col1" class="data row18 col1" >聚鼎</td>
+      <td id="T_a2e55_row18_col2" class="data row18 col2" >88.70</td>
+      <td id="T_a2e55_row18_col3" class="data row18 col3" >-8746</td>
+      <td id="T_a2e55_row18_col4" class="data row18 col4" >8618</td>
+      <td id="T_a2e55_row18_col5" class="data row18 col5" >17364</td>
+      <td id="T_a2e55_row18_col6" class="data row18 col6" >-1.0x</td>
+      <td id="T_a2e55_row18_col7" class="data row18 col7" >6.35%</td>
+      <td id="T_a2e55_row18_col8" class="data row18 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row19_col0" class="data row19 col0" >6244.TWO</td>
+      <td id="T_a2e55_row19_col1" class="data row19 col1" >茂迪</td>
+      <td id="T_a2e55_row19_col2" class="data row19 col2" >30.10</td>
+      <td id="T_a2e55_row19_col3" class="data row19 col3" >3497</td>
+      <td id="T_a2e55_row19_col4" class="data row19 col4" >18154</td>
+      <td id="T_a2e55_row19_col5" class="data row19 col5" >14657</td>
+      <td id="T_a2e55_row19_col6" class="data row19 col6" >5.2x</td>
+      <td id="T_a2e55_row19_col7" class="data row19 col7" >6.17%</td>
+      <td id="T_a2e55_row19_col8" class="data row19 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row20_col0" class="data row20 col0" >6510.TWO</td>
+      <td id="T_a2e55_row20_col1" class="data row20 col1" >精測</td>
+      <td id="T_a2e55_row20_col2" class="data row20 col2" >3280.00</td>
+      <td id="T_a2e55_row20_col3" class="data row20 col3" >-13281</td>
+      <td id="T_a2e55_row20_col4" class="data row20 col4" >283</td>
+      <td id="T_a2e55_row20_col5" class="data row20 col5" >13565</td>
+      <td id="T_a2e55_row20_col6" class="data row20 col6" >-0.0x</td>
+      <td id="T_a2e55_row20_col7" class="data row20 col7" >-2.09%</td>
+      <td id="T_a2e55_row20_col8" class="data row20 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row21_col0" class="data row21 col0" >8070.TW</td>
+      <td id="T_a2e55_row21_col1" class="data row21 col1" >長華*</td>
+      <td id="T_a2e55_row21_col2" class="data row21 col2" >50.90</td>
+      <td id="T_a2e55_row21_col3" class="data row21 col3" >-1986</td>
+      <td id="T_a2e55_row21_col4" class="data row21 col4" >11443</td>
+      <td id="T_a2e55_row21_col5" class="data row21 col5" >13430</td>
+      <td id="T_a2e55_row21_col6" class="data row21 col6" >-5.8x</td>
+      <td id="T_a2e55_row21_col7" class="data row21 col7" >15.29%</td>
+      <td id="T_a2e55_row21_col8" class="data row21 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row22_col0" class="data row22 col0" >6695.TW</td>
+      <td id="T_a2e55_row22_col1" class="data row22 col1" >芯鼎</td>
+      <td id="T_a2e55_row22_col2" class="data row22 col2" >57.80</td>
+      <td id="T_a2e55_row22_col3" class="data row22 col3" >302</td>
+      <td id="T_a2e55_row22_col4" class="data row22 col4" >13203</td>
+      <td id="T_a2e55_row22_col5" class="data row22 col5" >12901</td>
+      <td id="T_a2e55_row22_col6" class="data row22 col6" >43.7x</td>
+      <td id="T_a2e55_row22_col7" class="data row22 col7" >12.23%</td>
+      <td id="T_a2e55_row22_col8" class="data row22 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row23_col0" class="data row23 col0" >6217.TWO</td>
+      <td id="T_a2e55_row23_col1" class="data row23 col1" >中探針</td>
+      <td id="T_a2e55_row23_col2" class="data row23 col2" >275.00</td>
+      <td id="T_a2e55_row23_col3" class="data row23 col3" >-10164</td>
+      <td id="T_a2e55_row23_col4" class="data row23 col4" >959</td>
+      <td id="T_a2e55_row23_col5" class="data row23 col5" >11124</td>
+      <td id="T_a2e55_row23_col6" class="data row23 col6" >-0.1x</td>
+      <td id="T_a2e55_row23_col7" class="data row23 col7" >11.11%</td>
+      <td id="T_a2e55_row23_col8" class="data row23 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row24_col0" class="data row24 col0" >6761.TWO</td>
+      <td id="T_a2e55_row24_col1" class="data row24 col1" >穩得</td>
+      <td id="T_a2e55_row24_col2" class="data row24 col2" >223.00</td>
+      <td id="T_a2e55_row24_col3" class="data row24 col3" >452</td>
+      <td id="T_a2e55_row24_col4" class="data row24 col4" >11199</td>
+      <td id="T_a2e55_row24_col5" class="data row24 col5" >10747</td>
+      <td id="T_a2e55_row24_col6" class="data row24 col6" >24.8x</td>
+      <td id="T_a2e55_row24_col7" class="data row24 col7" >14.07%</td>
+      <td id="T_a2e55_row24_col8" class="data row24 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row25_col0" class="data row25 col0" >8054.TWO</td>
+      <td id="T_a2e55_row25_col1" class="data row25 col1" >安國</td>
+      <td id="T_a2e55_row25_col2" class="data row25 col2" >103.50</td>
+      <td id="T_a2e55_row25_col3" class="data row25 col3" >2431</td>
+      <td id="T_a2e55_row25_col4" class="data row25 col4" >12937</td>
+      <td id="T_a2e55_row25_col5" class="data row25 col5" >10505</td>
+      <td id="T_a2e55_row25_col6" class="data row25 col6" >5.3x</td>
+      <td id="T_a2e55_row25_col7" class="data row25 col7" >-5.48%</td>
+      <td id="T_a2e55_row25_col8" class="data row25 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row26_col0" class="data row26 col0" >7777.TWO</td>
+      <td id="T_a2e55_row26_col1" class="data row26 col1" >能率亞洲</td>
+      <td id="T_a2e55_row26_col2" class="data row26 col2" >37.90</td>
+      <td id="T_a2e55_row26_col3" class="data row26 col3" >-4740</td>
+      <td id="T_a2e55_row26_col4" class="data row26 col4" >5555</td>
+      <td id="T_a2e55_row26_col5" class="data row26 col5" >10295</td>
+      <td id="T_a2e55_row26_col6" class="data row26 col6" >-1.2x</td>
+      <td id="T_a2e55_row26_col7" class="data row26 col7" >15.37%</td>
+      <td id="T_a2e55_row26_col8" class="data row26 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row27_col0" class="data row27 col0" >8936.TWO</td>
+      <td id="T_a2e55_row27_col1" class="data row27 col1" >國統</td>
+      <td id="T_a2e55_row27_col2" class="data row27 col2" >51.30</td>
+      <td id="T_a2e55_row27_col3" class="data row27 col3" >-3291</td>
+      <td id="T_a2e55_row27_col4" class="data row27 col4" >6613</td>
+      <td id="T_a2e55_row27_col5" class="data row27 col5" >9905</td>
+      <td id="T_a2e55_row27_col6" class="data row27 col6" >-2.0x</td>
+      <td id="T_a2e55_row27_col7" class="data row27 col7" >2.60%</td>
+      <td id="T_a2e55_row27_col8" class="data row27 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row28_col0" class="data row28 col0" >8071.TWO</td>
+      <td id="T_a2e55_row28_col1" class="data row28 col1" >能率網通</td>
+      <td id="T_a2e55_row28_col2" class="data row28 col2" >19.85</td>
+      <td id="T_a2e55_row28_col3" class="data row28 col3" >-7035</td>
+      <td id="T_a2e55_row28_col4" class="data row28 col4" >1251</td>
+      <td id="T_a2e55_row28_col5" class="data row28 col5" >8286</td>
+      <td id="T_a2e55_row28_col6" class="data row28 col6" >-0.2x</td>
+      <td id="T_a2e55_row28_col7" class="data row28 col7" >-0.25%</td>
+      <td id="T_a2e55_row28_col8" class="data row28 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row29_col0" class="data row29 col0" >6202.TW</td>
+      <td id="T_a2e55_row29_col1" class="data row29 col1" >盛群</td>
+      <td id="T_a2e55_row29_col2" class="data row29 col2" >59.10</td>
+      <td id="T_a2e55_row29_col3" class="data row29 col3" >7524</td>
+      <td id="T_a2e55_row29_col4" class="data row29 col4" >15664</td>
+      <td id="T_a2e55_row29_col5" class="data row29 col5" >8140</td>
+      <td id="T_a2e55_row29_col6" class="data row29 col6" >2.1x</td>
+      <td id="T_a2e55_row29_col7" class="data row29 col7" >0.34%</td>
+      <td id="T_a2e55_row29_col8" class="data row29 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row30_col0" class="data row30 col0" >6206.TW</td>
+      <td id="T_a2e55_row30_col1" class="data row30 col1" >飛捷</td>
+      <td id="T_a2e55_row30_col2" class="data row30 col2" >138.50</td>
+      <td id="T_a2e55_row30_col3" class="data row30 col3" >-604</td>
+      <td id="T_a2e55_row30_col4" class="data row30 col4" >7312</td>
+      <td id="T_a2e55_row30_col5" class="data row30 col5" >7916</td>
+      <td id="T_a2e55_row30_col6" class="data row30 col6" >-12.1x</td>
+      <td id="T_a2e55_row30_col7" class="data row30 col7" >1.09%</td>
+      <td id="T_a2e55_row30_col8" class="data row30 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row31_col0" class="data row31 col0" >8182.TWO</td>
+      <td id="T_a2e55_row31_col1" class="data row31 col1" >加高</td>
+      <td id="T_a2e55_row31_col2" class="data row31 col2" >47.50</td>
+      <td id="T_a2e55_row31_col3" class="data row31 col3" >1110</td>
+      <td id="T_a2e55_row31_col4" class="data row31 col4" >8755</td>
+      <td id="T_a2e55_row31_col5" class="data row31 col5" >7645</td>
+      <td id="T_a2e55_row31_col6" class="data row31 col6" >7.9x</td>
+      <td id="T_a2e55_row31_col7" class="data row31 col7" >26.33%</td>
+      <td id="T_a2e55_row31_col8" class="data row31 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row32_col0" class="data row32 col0" >6291.TWO</td>
+      <td id="T_a2e55_row32_col1" class="data row32 col1" >沛亨</td>
+      <td id="T_a2e55_row32_col2" class="data row32 col2" >654.00</td>
+      <td id="T_a2e55_row32_col3" class="data row32 col3" >-568</td>
+      <td id="T_a2e55_row32_col4" class="data row32 col4" >6869</td>
+      <td id="T_a2e55_row32_col5" class="data row32 col5" >7437</td>
+      <td id="T_a2e55_row32_col6" class="data row32 col6" >-12.1x</td>
+      <td id="T_a2e55_row32_col7" class="data row32 col7" >32.93%</td>
+      <td id="T_a2e55_row32_col8" class="data row32 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row33_col0" class="data row33 col0" >6903.TWO</td>
+      <td id="T_a2e55_row33_col1" class="data row33 col1" >巨漢</td>
+      <td id="T_a2e55_row33_col2" class="data row33 col2" >399.50</td>
+      <td id="T_a2e55_row33_col3" class="data row33 col3" >-2989</td>
+      <td id="T_a2e55_row33_col4" class="data row33 col4" >4222</td>
+      <td id="T_a2e55_row33_col5" class="data row33 col5" >7212</td>
+      <td id="T_a2e55_row33_col6" class="data row33 col6" >-1.4x</td>
+      <td id="T_a2e55_row33_col7" class="data row33 col7" >3.63%</td>
+      <td id="T_a2e55_row33_col8" class="data row33 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row34_col0" class="data row34 col0" >8299.TWO</td>
+      <td id="T_a2e55_row34_col1" class="data row34 col1" >群聯</td>
+      <td id="T_a2e55_row34_col2" class="data row34 col2" >2450.00</td>
+      <td id="T_a2e55_row34_col3" class="data row34 col3" >-19657</td>
+      <td id="T_a2e55_row34_col4" class="data row34 col4" >-12621</td>
+      <td id="T_a2e55_row34_col5" class="data row34 col5" >7036</td>
+      <td id="T_a2e55_row34_col6" class="data row34 col6" >0.6x</td>
+      <td id="T_a2e55_row34_col7" class="data row34 col7" >4.93%</td>
+      <td id="T_a2e55_row34_col8" class="data row34 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row35_col0" class="data row35 col0" >6862.TW</td>
+      <td id="T_a2e55_row35_col1" class="data row35 col1" >三集瑞-KY</td>
+      <td id="T_a2e55_row35_col2" class="data row35 col2" >204.50</td>
+      <td id="T_a2e55_row35_col3" class="data row35 col3" >820</td>
+      <td id="T_a2e55_row35_col4" class="data row35 col4" >7417</td>
+      <td id="T_a2e55_row35_col5" class="data row35 col5" >6597</td>
+      <td id="T_a2e55_row35_col6" class="data row35 col6" >9.0x</td>
+      <td id="T_a2e55_row35_col7" class="data row35 col7" >12.05%</td>
+      <td id="T_a2e55_row35_col8" class="data row35 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row36_col0" class="data row36 col0" >8215.TW</td>
+      <td id="T_a2e55_row36_col1" class="data row36 col1" >明基材</td>
+      <td id="T_a2e55_row36_col2" class="data row36 col2" >28.70</td>
+      <td id="T_a2e55_row36_col3" class="data row36 col3" >-2529</td>
+      <td id="T_a2e55_row36_col4" class="data row36 col4" >3695</td>
+      <td id="T_a2e55_row36_col5" class="data row36 col5" >6224</td>
+      <td id="T_a2e55_row36_col6" class="data row36 col6" >-1.5x</td>
+      <td id="T_a2e55_row36_col7" class="data row36 col7" >3.24%</td>
+      <td id="T_a2e55_row36_col8" class="data row36 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row37_col0" class="data row37 col0" >6269.TW</td>
+      <td id="T_a2e55_row37_col1" class="data row37 col1" >台郡</td>
+      <td id="T_a2e55_row37_col2" class="data row37 col2" >60.80</td>
+      <td id="T_a2e55_row37_col3" class="data row37 col3" >-1148</td>
+      <td id="T_a2e55_row37_col4" class="data row37 col4" >3824</td>
+      <td id="T_a2e55_row37_col5" class="data row37 col5" >4972</td>
+      <td id="T_a2e55_row37_col6" class="data row37 col6" >-3.3x</td>
+      <td id="T_a2e55_row37_col7" class="data row37 col7" >3.58%</td>
+      <td id="T_a2e55_row37_col8" class="data row37 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row38_col0" class="data row38 col0" >6558.TW</td>
+      <td id="T_a2e55_row38_col1" class="data row38 col1" >興能高</td>
+      <td id="T_a2e55_row38_col2" class="data row38 col2" >32.30</td>
+      <td id="T_a2e55_row38_col3" class="data row38 col3" >-3318</td>
+      <td id="T_a2e55_row38_col4" class="data row38 col4" >1606</td>
+      <td id="T_a2e55_row38_col5" class="data row38 col5" >4924</td>
+      <td id="T_a2e55_row38_col6" class="data row38 col6" >-0.5x</td>
+      <td id="T_a2e55_row38_col7" class="data row38 col7" >1.41%</td>
+      <td id="T_a2e55_row38_col8" class="data row38 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row39_col0" class="data row39 col0" >8104.TW</td>
+      <td id="T_a2e55_row39_col1" class="data row39 col1" >錸寶</td>
+      <td id="T_a2e55_row39_col2" class="data row39 col2" >40.95</td>
+      <td id="T_a2e55_row39_col3" class="data row39 col3" >332</td>
+      <td id="T_a2e55_row39_col4" class="data row39 col4" >4895</td>
+      <td id="T_a2e55_row39_col5" class="data row39 col5" >4562</td>
+      <td id="T_a2e55_row39_col6" class="data row39 col6" >14.7x</td>
+      <td id="T_a2e55_row39_col7" class="data row39 col7" >18.70%</td>
+      <td id="T_a2e55_row39_col8" class="data row39 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row40_col0" class="data row40 col0" >9958.TW</td>
+      <td id="T_a2e55_row40_col1" class="data row40 col1" >世紀鋼</td>
+      <td id="T_a2e55_row40_col2" class="data row40 col2" >103.00</td>
+      <td id="T_a2e55_row40_col3" class="data row40 col3" >-3851</td>
+      <td id="T_a2e55_row40_col4" class="data row40 col4" >658</td>
+      <td id="T_a2e55_row40_col5" class="data row40 col5" >4510</td>
+      <td id="T_a2e55_row40_col6" class="data row40 col6" >-0.2x</td>
+      <td id="T_a2e55_row40_col7" class="data row40 col7" >0.00%</td>
+      <td id="T_a2e55_row40_col8" class="data row40 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row41_col0" class="data row41 col0" >6538.TWO</td>
+      <td id="T_a2e55_row41_col1" class="data row41 col1" >倉和</td>
+      <td id="T_a2e55_row41_col2" class="data row41 col2" >112.50</td>
+      <td id="T_a2e55_row41_col3" class="data row41 col3" >-3202</td>
+      <td id="T_a2e55_row41_col4" class="data row41 col4" >1176</td>
+      <td id="T_a2e55_row41_col5" class="data row41 col5" >4378</td>
+      <td id="T_a2e55_row41_col6" class="data row41 col6" >-0.4x</td>
+      <td id="T_a2e55_row41_col7" class="data row41 col7" >-3.85%</td>
+      <td id="T_a2e55_row41_col8" class="data row41 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row42_col0" class="data row42 col0" >6805.TW</td>
+      <td id="T_a2e55_row42_col1" class="data row42 col1" >富世達</td>
+      <td id="T_a2e55_row42_col2" class="data row42 col2" >1765.00</td>
+      <td id="T_a2e55_row42_col3" class="data row42 col3" >45</td>
+      <td id="T_a2e55_row42_col4" class="data row42 col4" >4342</td>
+      <td id="T_a2e55_row42_col5" class="data row42 col5" >4297</td>
+      <td id="T_a2e55_row42_col6" class="data row42 col6" >96.3x</td>
+      <td id="T_a2e55_row42_col7" class="data row42 col7" >-2.49%</td>
+      <td id="T_a2e55_row42_col8" class="data row42 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row43_col0" class="data row43 col0" >8033.TW</td>
+      <td id="T_a2e55_row43_col1" class="data row43 col1" >雷虎</td>
+      <td id="T_a2e55_row43_col2" class="data row43 col2" >135.00</td>
+      <td id="T_a2e55_row43_col3" class="data row43 col3" >-4055</td>
+      <td id="T_a2e55_row43_col4" class="data row43 col4" >208</td>
+      <td id="T_a2e55_row43_col5" class="data row43 col5" >4264</td>
+      <td id="T_a2e55_row43_col6" class="data row43 col6" >-0.1x</td>
+      <td id="T_a2e55_row43_col7" class="data row43 col7" >-0.37%</td>
+      <td id="T_a2e55_row43_col8" class="data row43 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row44_col0" class="data row44 col0" >2330.TW</td>
+      <td id="T_a2e55_row44_col1" class="data row44 col1" >台積電</td>
+      <td id="T_a2e55_row44_col2" class="data row44 col2" >2295.00</td>
+      <td id="T_a2e55_row44_col3" class="data row44 col3" >-4944</td>
+      <td id="T_a2e55_row44_col4" class="data row44 col4" >-746</td>
+      <td id="T_a2e55_row44_col5" class="data row44 col5" >4198</td>
+      <td id="T_a2e55_row44_col6" class="data row44 col6" >0.2x</td>
+      <td id="T_a2e55_row44_col7" class="data row44 col7" >2.91%</td>
+      <td id="T_a2e55_row44_col8" class="data row44 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row45_col0" class="data row45 col0" >6284.TWO</td>
+      <td id="T_a2e55_row45_col1" class="data row45 col1" >佳邦</td>
+      <td id="T_a2e55_row45_col2" class="data row45 col2" >124.00</td>
+      <td id="T_a2e55_row45_col3" class="data row45 col3" >25322</td>
+      <td id="T_a2e55_row45_col4" class="data row45 col4" >29357</td>
+      <td id="T_a2e55_row45_col5" class="data row45 col5" >4035</td>
+      <td id="T_a2e55_row45_col6" class="data row45 col6" >1.2x</td>
+      <td id="T_a2e55_row45_col7" class="data row45 col7" >32.76%</td>
+      <td id="T_a2e55_row45_col8" class="data row45 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row46_col0" class="data row46 col0" >6658.TW</td>
+      <td id="T_a2e55_row46_col1" class="data row46 col1" >聯策</td>
+      <td id="T_a2e55_row46_col2" class="data row46 col2" >216.50</td>
+      <td id="T_a2e55_row46_col3" class="data row46 col3" >-5429</td>
+      <td id="T_a2e55_row46_col4" class="data row46 col4" >-1465</td>
+      <td id="T_a2e55_row46_col5" class="data row46 col5" >3964</td>
+      <td id="T_a2e55_row46_col6" class="data row46 col6" >0.3x</td>
+      <td id="T_a2e55_row46_col7" class="data row46 col7" >23.36%</td>
+      <td id="T_a2e55_row46_col8" class="data row46 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row47_col0" class="data row47 col0" >6411.TWO</td>
+      <td id="T_a2e55_row47_col1" class="data row47 col1" >晶焱</td>
+      <td id="T_a2e55_row47_col2" class="data row47 col2" >111.00</td>
+      <td id="T_a2e55_row47_col3" class="data row47 col3" >1684</td>
+      <td id="T_a2e55_row47_col4" class="data row47 col4" >5611</td>
+      <td id="T_a2e55_row47_col5" class="data row47 col5" >3927</td>
+      <td id="T_a2e55_row47_col6" class="data row47 col6" >3.3x</td>
+      <td id="T_a2e55_row47_col7" class="data row47 col7" >17.34%</td>
+      <td id="T_a2e55_row47_col8" class="data row47 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row48_col0" class="data row48 col0" >8249.TW</td>
+      <td id="T_a2e55_row48_col1" class="data row48 col1" >菱光</td>
+      <td id="T_a2e55_row48_col2" class="data row48 col2" >54.80</td>
+      <td id="T_a2e55_row48_col3" class="data row48 col3" >-3834</td>
+      <td id="T_a2e55_row48_col4" class="data row48 col4" >87</td>
+      <td id="T_a2e55_row48_col5" class="data row48 col5" >3922</td>
+      <td id="T_a2e55_row48_col6" class="data row48 col6" >-0.0x</td>
+      <td id="T_a2e55_row48_col7" class="data row48 col7" >4.98%</td>
+      <td id="T_a2e55_row48_col8" class="data row48 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row49_col0" class="data row49 col0" >8112.TW</td>
+      <td id="T_a2e55_row49_col1" class="data row49 col1" >至上</td>
+      <td id="T_a2e55_row49_col2" class="data row49 col2" >86.00</td>
+      <td id="T_a2e55_row49_col3" class="data row49 col3" >-34399</td>
+      <td id="T_a2e55_row49_col4" class="data row49 col4" >-30619</td>
+      <td id="T_a2e55_row49_col5" class="data row49 col5" >3779</td>
+      <td id="T_a2e55_row49_col6" class="data row49 col6" >0.9x</td>
+      <td id="T_a2e55_row49_col7" class="data row49 col7" >0.58%</td>
+      <td id="T_a2e55_row49_col8" class="data row49 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row50_col0" class="data row50 col0" >6550.TW</td>
+      <td id="T_a2e55_row50_col1" class="data row50 col1" >北極星藥業-KY</td>
+      <td id="T_a2e55_row50_col2" class="data row50 col2" >14.20</td>
+      <td id="T_a2e55_row50_col3" class="data row50 col3" >-244</td>
+      <td id="T_a2e55_row50_col4" class="data row50 col4" >3462</td>
+      <td id="T_a2e55_row50_col5" class="data row50 col5" >3706</td>
+      <td id="T_a2e55_row50_col6" class="data row50 col6" >-14.1x</td>
+      <td id="T_a2e55_row50_col7" class="data row50 col7" >-11.80%</td>
+      <td id="T_a2e55_row50_col8" class="data row50 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row51_col0" class="data row51 col0" >6499.TWO</td>
+      <td id="T_a2e55_row51_col1" class="data row51 col1" >益安</td>
+      <td id="T_a2e55_row51_col2" class="data row51 col2" >86.30</td>
+      <td id="T_a2e55_row51_col3" class="data row51 col3" >-3176</td>
+      <td id="T_a2e55_row51_col4" class="data row51 col4" >467</td>
+      <td id="T_a2e55_row51_col5" class="data row51 col5" >3643</td>
+      <td id="T_a2e55_row51_col6" class="data row51 col6" >-0.1x</td>
+      <td id="T_a2e55_row51_col7" class="data row51 col7" >-9.06%</td>
+      <td id="T_a2e55_row51_col8" class="data row51 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row52_col0" class="data row52 col0" >6517.TWO</td>
+      <td id="T_a2e55_row52_col1" class="data row52 col1" >保勝光學</td>
+      <td id="T_a2e55_row52_col2" class="data row52 col2" >57.60</td>
+      <td id="T_a2e55_row52_col3" class="data row52 col3" >-3276</td>
+      <td id="T_a2e55_row52_col4" class="data row52 col4" >268</td>
+      <td id="T_a2e55_row52_col5" class="data row52 col5" >3545</td>
+      <td id="T_a2e55_row52_col6" class="data row52 col6" >-0.1x</td>
+      <td id="T_a2e55_row52_col7" class="data row52 col7" >-6.80%</td>
+      <td id="T_a2e55_row52_col8" class="data row52 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row53_col0" class="data row53 col0" >6204.TWO</td>
+      <td id="T_a2e55_row53_col1" class="data row53 col1" >艾華</td>
+      <td id="T_a2e55_row53_col2" class="data row53 col2" >91.50</td>
+      <td id="T_a2e55_row53_col3" class="data row53 col3" >-2859</td>
+      <td id="T_a2e55_row53_col4" class="data row53 col4" >438</td>
+      <td id="T_a2e55_row53_col5" class="data row53 col5" >3298</td>
+      <td id="T_a2e55_row53_col6" class="data row53 col6" >-0.2x</td>
+      <td id="T_a2e55_row53_col7" class="data row53 col7" >8.03%</td>
+      <td id="T_a2e55_row53_col8" class="data row53 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row54_col0" class="data row54 col0" >6451.TW</td>
+      <td id="T_a2e55_row54_col1" class="data row54 col1" >訊芯-KY</td>
+      <td id="T_a2e55_row54_col2" class="data row54 col2" >569.00</td>
+      <td id="T_a2e55_row54_col3" class="data row54 col3" >1405</td>
+      <td id="T_a2e55_row54_col4" class="data row54 col4" >4578</td>
+      <td id="T_a2e55_row54_col5" class="data row54 col5" >3172</td>
+      <td id="T_a2e55_row54_col6" class="data row54 col6" >3.3x</td>
+      <td id="T_a2e55_row54_col7" class="data row54 col7" >14.03%</td>
+      <td id="T_a2e55_row54_col8" class="data row54 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row55_col0" class="data row55 col0" >8926.TW</td>
+      <td id="T_a2e55_row55_col1" class="data row55 col1" >台汽電</td>
+      <td id="T_a2e55_row55_col2" class="data row55 col2" >67.30</td>
+      <td id="T_a2e55_row55_col3" class="data row55 col3" >475</td>
+      <td id="T_a2e55_row55_col4" class="data row55 col4" >3394</td>
+      <td id="T_a2e55_row55_col5" class="data row55 col5" >2918</td>
+      <td id="T_a2e55_row55_col6" class="data row55 col6" >7.1x</td>
+      <td id="T_a2e55_row55_col7" class="data row55 col7" >10.33%</td>
+      <td id="T_a2e55_row55_col8" class="data row55 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row56_col0" class="data row56 col0" >6546.TWO</td>
+      <td id="T_a2e55_row56_col1" class="data row56 col1" >正基</td>
+      <td id="T_a2e55_row56_col2" class="data row56 col2" >80.80</td>
+      <td id="T_a2e55_row56_col3" class="data row56 col3" >1099</td>
+      <td id="T_a2e55_row56_col4" class="data row56 col4" >4000</td>
+      <td id="T_a2e55_row56_col5" class="data row56 col5" >2900</td>
+      <td id="T_a2e55_row56_col6" class="data row56 col6" >3.6x</td>
+      <td id="T_a2e55_row56_col7" class="data row56 col7" >6.88%</td>
+      <td id="T_a2e55_row56_col8" class="data row56 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row57_col0" class="data row57 col0" >8081.TW</td>
+      <td id="T_a2e55_row57_col1" class="data row57 col1" >致新</td>
+      <td id="T_a2e55_row57_col2" class="data row57 col2" >286.50</td>
+      <td id="T_a2e55_row57_col3" class="data row57 col3" >-2868</td>
+      <td id="T_a2e55_row57_col4" class="data row57 col4" >22</td>
+      <td id="T_a2e55_row57_col5" class="data row57 col5" >2890</td>
+      <td id="T_a2e55_row57_col6" class="data row57 col6" >-0.0x</td>
+      <td id="T_a2e55_row57_col7" class="data row57 col7" >4.56%</td>
+      <td id="T_a2e55_row57_col8" class="data row57 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row58_col0" class="data row58 col0" >8234.TWO</td>
+      <td id="T_a2e55_row58_col1" class="data row58 col1" >新漢</td>
+      <td id="T_a2e55_row58_col2" class="data row58 col2" >68.20</td>
+      <td id="T_a2e55_row58_col3" class="data row58 col3" >-2238</td>
+      <td id="T_a2e55_row58_col4" class="data row58 col4" >476</td>
+      <td id="T_a2e55_row58_col5" class="data row58 col5" >2714</td>
+      <td id="T_a2e55_row58_col6" class="data row58 col6" >-0.2x</td>
+      <td id="T_a2e55_row58_col7" class="data row58 col7" >0.89%</td>
+      <td id="T_a2e55_row58_col8" class="data row58 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row59_col0" class="data row59 col0" >6532.TWO</td>
+      <td id="T_a2e55_row59_col1" class="data row59 col1" >瑞耘</td>
+      <td id="T_a2e55_row59_col2" class="data row59 col2" >96.20</td>
+      <td id="T_a2e55_row59_col3" class="data row59 col3" >-2754</td>
+      <td id="T_a2e55_row59_col4" class="data row59 col4" >-115</td>
+      <td id="T_a2e55_row59_col5" class="data row59 col5" >2638</td>
+      <td id="T_a2e55_row59_col6" class="data row59 col6" >0.0x</td>
+      <td id="T_a2e55_row59_col7" class="data row59 col7" >-2.34%</td>
+      <td id="T_a2e55_row59_col8" class="data row59 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row60_col0" class="data row60 col0" >6693.TWO</td>
+      <td id="T_a2e55_row60_col1" class="data row60 col1" >廣閎科</td>
+      <td id="T_a2e55_row60_col2" class="data row60 col2" >150.00</td>
+      <td id="T_a2e55_row60_col3" class="data row60 col3" >-8</td>
+      <td id="T_a2e55_row60_col4" class="data row60 col4" >2618</td>
+      <td id="T_a2e55_row60_col5" class="data row60 col5" >2626</td>
+      <td id="T_a2e55_row60_col6" class="data row60 col6" >-323.1x</td>
+      <td id="T_a2e55_row60_col7" class="data row60 col7" >5.63%</td>
+      <td id="T_a2e55_row60_col8" class="data row60 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row61_col0" class="data row61 col0" >6442.TW</td>
+      <td id="T_a2e55_row61_col1" class="data row61 col1" >光聖</td>
+      <td id="T_a2e55_row61_col2" class="data row61 col2" >1895.00</td>
+      <td id="T_a2e55_row61_col3" class="data row61 col3" >-1698</td>
+      <td id="T_a2e55_row61_col4" class="data row61 col4" >853</td>
+      <td id="T_a2e55_row61_col5" class="data row61 col5" >2551</td>
+      <td id="T_a2e55_row61_col6" class="data row61 col6" >-0.5x</td>
+      <td id="T_a2e55_row61_col7" class="data row61 col7" >6.16%</td>
+      <td id="T_a2e55_row61_col8" class="data row61 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row62_col0" class="data row62 col0" >6667.TWO</td>
+      <td id="T_a2e55_row62_col1" class="data row62 col1" >信紘科</td>
+      <td id="T_a2e55_row62_col2" class="data row62 col2" >268.00</td>
+      <td id="T_a2e55_row62_col3" class="data row62 col3" >-7</td>
+      <td id="T_a2e55_row62_col4" class="data row62 col4" >2534</td>
+      <td id="T_a2e55_row62_col5" class="data row62 col5" >2542</td>
+      <td id="T_a2e55_row62_col6" class="data row62 col6" >-331.4x</td>
+      <td id="T_a2e55_row62_col7" class="data row62 col7" >5.51%</td>
+      <td id="T_a2e55_row62_col8" class="data row62 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row63_col0" class="data row63 col0" >6716.TWO</td>
+      <td id="T_a2e55_row63_col1" class="data row63 col1" >應廣</td>
+      <td id="T_a2e55_row63_col2" class="data row63 col2" >117.50</td>
+      <td id="T_a2e55_row63_col3" class="data row63 col3" >6</td>
+      <td id="T_a2e55_row63_col4" class="data row63 col4" >2471</td>
+      <td id="T_a2e55_row63_col5" class="data row63 col5" >2465</td>
+      <td id="T_a2e55_row63_col6" class="data row63 col6" >408.9x</td>
+      <td id="T_a2e55_row63_col7" class="data row63 col7" >17.74%</td>
+      <td id="T_a2e55_row63_col8" class="data row63 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row64_col0" class="data row64 col0" >7795.TW</td>
+      <td id="T_a2e55_row64_col1" class="data row64 col1" >長廣</td>
+      <td id="T_a2e55_row64_col2" class="data row64 col2" >400.50</td>
+      <td id="T_a2e55_row64_col3" class="data row64 col3" >52</td>
+      <td id="T_a2e55_row64_col4" class="data row64 col4" >2322</td>
+      <td id="T_a2e55_row64_col5" class="data row64 col5" >2270</td>
+      <td id="T_a2e55_row64_col6" class="data row64 col6" >44.2x</td>
+      <td id="T_a2e55_row64_col7" class="data row64 col7" >5.53%</td>
+      <td id="T_a2e55_row64_col8" class="data row64 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row65_col0" class="data row65 col0" >6552.TW</td>
+      <td id="T_a2e55_row65_col1" class="data row65 col1" >易華電</td>
+      <td id="T_a2e55_row65_col2" class="data row65 col2" >34.10</td>
+      <td id="T_a2e55_row65_col3" class="data row65 col3" >-3</td>
+      <td id="T_a2e55_row65_col4" class="data row65 col4" >2124</td>
+      <td id="T_a2e55_row65_col5" class="data row65 col5" >2128</td>
+      <td id="T_a2e55_row65_col6" class="data row65 col6" >新進貨</td>
+      <td id="T_a2e55_row65_col7" class="data row65 col7" >18.82%</td>
+      <td id="T_a2e55_row65_col8" class="data row65 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row66_col0" class="data row66 col0" >8271.TW</td>
+      <td id="T_a2e55_row66_col1" class="data row66 col1" >宇瞻</td>
+      <td id="T_a2e55_row66_col2" class="data row66 col2" >237.00</td>
+      <td id="T_a2e55_row66_col3" class="data row66 col3" >-1957</td>
+      <td id="T_a2e55_row66_col4" class="data row66 col4" >83</td>
+      <td id="T_a2e55_row66_col5" class="data row66 col5" >2040</td>
+      <td id="T_a2e55_row66_col6" class="data row66 col6" >-0.0x</td>
+      <td id="T_a2e55_row66_col7" class="data row66 col7" >7.73%</td>
+      <td id="T_a2e55_row66_col8" class="data row66 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row67_col0" class="data row67 col0" >6937.TW</td>
+      <td id="T_a2e55_row67_col1" class="data row67 col1" >天虹</td>
+      <td id="T_a2e55_row67_col2" class="data row67 col2" >308.00</td>
+      <td id="T_a2e55_row67_col3" class="data row67 col3" >45</td>
+      <td id="T_a2e55_row67_col4" class="data row67 col4" >2060</td>
+      <td id="T_a2e55_row67_col5" class="data row67 col5" >2014</td>
+      <td id="T_a2e55_row67_col6" class="data row67 col6" >45.0x</td>
+      <td id="T_a2e55_row67_col7" class="data row67 col7" >4.58%</td>
+      <td id="T_a2e55_row67_col8" class="data row67 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row68_col0" class="data row68 col0" >6226.TW</td>
+      <td id="T_a2e55_row68_col1" class="data row68 col1" >光鼎</td>
+      <td id="T_a2e55_row68_col2" class="data row68 col2" >13.05</td>
+      <td id="T_a2e55_row68_col3" class="data row68 col3" >401</td>
+      <td id="T_a2e55_row68_col4" class="data row68 col4" >2357</td>
+      <td id="T_a2e55_row68_col5" class="data row68 col5" >1955</td>
+      <td id="T_a2e55_row68_col6" class="data row68 col6" >5.9x</td>
+      <td id="T_a2e55_row68_col7" class="data row68 col7" >4.40%</td>
+      <td id="T_a2e55_row68_col8" class="data row68 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row69_col0" class="data row69 col0" >8932.TWO</td>
+      <td id="T_a2e55_row69_col1" class="data row69 col1" >智通*</td>
+      <td id="T_a2e55_row69_col2" class="data row69 col2" >97.00</td>
+      <td id="T_a2e55_row69_col3" class="data row69 col3" >-1845</td>
+      <td id="T_a2e55_row69_col4" class="data row69 col4" >10</td>
+      <td id="T_a2e55_row69_col5" class="data row69 col5" >1856</td>
+      <td id="T_a2e55_row69_col6" class="data row69 col6" >-0.0x</td>
+      <td id="T_a2e55_row69_col7" class="data row69 col7" >-3.00%</td>
+      <td id="T_a2e55_row69_col8" class="data row69 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row70_col0" class="data row70 col0" >6415.TW</td>
+      <td id="T_a2e55_row70_col1" class="data row70 col1" >矽力*-KY</td>
+      <td id="T_a2e55_row70_col2" class="data row70 col2" >620.00</td>
+      <td id="T_a2e55_row70_col3" class="data row70 col3" >-949</td>
+      <td id="T_a2e55_row70_col4" class="data row70 col4" >688</td>
+      <td id="T_a2e55_row70_col5" class="data row70 col5" >1637</td>
+      <td id="T_a2e55_row70_col6" class="data row70 col6" >-0.7x</td>
+      <td id="T_a2e55_row70_col7" class="data row70 col7" >11.31%</td>
+      <td id="T_a2e55_row70_col8" class="data row70 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row71_col0" class="data row71 col0" >8255.TWO</td>
+      <td id="T_a2e55_row71_col1" class="data row71 col1" >朋程</td>
+      <td id="T_a2e55_row71_col2" class="data row71 col2" >184.50</td>
+      <td id="T_a2e55_row71_col3" class="data row71 col3" >-821</td>
+      <td id="T_a2e55_row71_col4" class="data row71 col4" >779</td>
+      <td id="T_a2e55_row71_col5" class="data row71 col5" >1600</td>
+      <td id="T_a2e55_row71_col6" class="data row71 col6" >-0.9x</td>
+      <td id="T_a2e55_row71_col7" class="data row71 col7" >19.42%</td>
+      <td id="T_a2e55_row71_col8" class="data row71 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row72_col0" class="data row72 col0" >6438.TW</td>
+      <td id="T_a2e55_row72_col1" class="data row72 col1" >迅得</td>
+      <td id="T_a2e55_row72_col2" class="data row72 col2" >174.50</td>
+      <td id="T_a2e55_row72_col3" class="data row72 col3" >-75</td>
+      <td id="T_a2e55_row72_col4" class="data row72 col4" >1472</td>
+      <td id="T_a2e55_row72_col5" class="data row72 col5" >1547</td>
+      <td id="T_a2e55_row72_col6" class="data row72 col6" >-19.6x</td>
+      <td id="T_a2e55_row72_col7" class="data row72 col7" >6.40%</td>
+      <td id="T_a2e55_row72_col8" class="data row72 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row73_col0" class="data row73 col0" >6435.TWO</td>
+      <td id="T_a2e55_row73_col1" class="data row73 col1" >大中</td>
+      <td id="T_a2e55_row73_col2" class="data row73 col2" >278.00</td>
+      <td id="T_a2e55_row73_col3" class="data row73 col3" >129</td>
+      <td id="T_a2e55_row73_col4" class="data row73 col4" >1657</td>
+      <td id="T_a2e55_row73_col5" class="data row73 col5" >1528</td>
+      <td id="T_a2e55_row73_col6" class="data row73 col6" >12.8x</td>
+      <td id="T_a2e55_row73_col7" class="data row73 col7" >20.61%</td>
+      <td id="T_a2e55_row73_col8" class="data row73 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row74_col0" class="data row74 col0" >6679.TWO</td>
+      <td id="T_a2e55_row74_col1" class="data row74 col1" >鈺太</td>
+      <td id="T_a2e55_row74_col2" class="data row74 col2" >316.50</td>
+      <td id="T_a2e55_row74_col3" class="data row74 col3" >-761</td>
+      <td id="T_a2e55_row74_col4" class="data row74 col4" >734</td>
+      <td id="T_a2e55_row74_col5" class="data row74 col5" >1495</td>
+      <td id="T_a2e55_row74_col6" class="data row74 col6" >-1.0x</td>
+      <td id="T_a2e55_row74_col7" class="data row74 col7" >-3.70%</td>
+      <td id="T_a2e55_row74_col8" class="data row74 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row75_col0" class="data row75 col0" >6491.TW</td>
+      <td id="T_a2e55_row75_col1" class="data row75 col1" >晶碩</td>
+      <td id="T_a2e55_row75_col2" class="data row75 col2" >319.00</td>
+      <td id="T_a2e55_row75_col3" class="data row75 col3" >-203</td>
+      <td id="T_a2e55_row75_col4" class="data row75 col4" >1286</td>
+      <td id="T_a2e55_row75_col5" class="data row75 col5" >1490</td>
+      <td id="T_a2e55_row75_col6" class="data row75 col6" >-6.3x</td>
+      <td id="T_a2e55_row75_col7" class="data row75 col7" >3.91%</td>
+      <td id="T_a2e55_row75_col8" class="data row75 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row76_col0" class="data row76 col0" >8044.TWO</td>
+      <td id="T_a2e55_row76_col1" class="data row76 col1" >網家</td>
+      <td id="T_a2e55_row76_col2" class="data row76 col2" >28.85</td>
+      <td id="T_a2e55_row76_col3" class="data row76 col3" >-1637</td>
+      <td id="T_a2e55_row76_col4" class="data row76 col4" >-177</td>
+      <td id="T_a2e55_row76_col5" class="data row76 col5" >1459</td>
+      <td id="T_a2e55_row76_col6" class="data row76 col6" >0.1x</td>
+      <td id="T_a2e55_row76_col7" class="data row76 col7" >0.17%</td>
+      <td id="T_a2e55_row76_col8" class="data row76 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row77_col0" class="data row77 col0" >6412.TW</td>
+      <td id="T_a2e55_row77_col1" class="data row77 col1" >群電</td>
+      <td id="T_a2e55_row77_col2" class="data row77 col2" >98.80</td>
+      <td id="T_a2e55_row77_col3" class="data row77 col3" >876</td>
+      <td id="T_a2e55_row77_col4" class="data row77 col4" >2330</td>
+      <td id="T_a2e55_row77_col5" class="data row77 col5" >1454</td>
+      <td id="T_a2e55_row77_col6" class="data row77 col6" >2.7x</td>
+      <td id="T_a2e55_row77_col7" class="data row77 col7" >1.75%</td>
+      <td id="T_a2e55_row77_col8" class="data row77 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row78_col0" class="data row78 col0" >6259.TWO</td>
+      <td id="T_a2e55_row78_col1" class="data row78 col1" >百徽</td>
+      <td id="T_a2e55_row78_col2" class="data row78 col2" >27.00</td>
+      <td id="T_a2e55_row78_col3" class="data row78 col3" >-560</td>
+      <td id="T_a2e55_row78_col4" class="data row78 col4" >871</td>
+      <td id="T_a2e55_row78_col5" class="data row78 col5" >1432</td>
+      <td id="T_a2e55_row78_col6" class="data row78 col6" >-1.6x</td>
+      <td id="T_a2e55_row78_col7" class="data row78 col7" >9.31%</td>
+      <td id="T_a2e55_row78_col8" class="data row78 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row79_col0" class="data row79 col0" >8240.TWO</td>
+      <td id="T_a2e55_row79_col1" class="data row79 col1" >華宏</td>
+      <td id="T_a2e55_row79_col2" class="data row79 col2" >63.80</td>
+      <td id="T_a2e55_row79_col3" class="data row79 col3" >-2305</td>
+      <td id="T_a2e55_row79_col4" class="data row79 col4" >-926</td>
+      <td id="T_a2e55_row79_col5" class="data row79 col5" >1379</td>
+      <td id="T_a2e55_row79_col6" class="data row79 col6" >0.4x</td>
+      <td id="T_a2e55_row79_col7" class="data row79 col7" >1.11%</td>
+      <td id="T_a2e55_row79_col8" class="data row79 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row80_col0" class="data row80 col0" >9136.TW</td>
+      <td id="T_a2e55_row80_col1" class="data row80 col1" >巨騰-DR</td>
+      <td id="T_a2e55_row80_col2" class="data row80 col2" >11.15</td>
+      <td id="T_a2e55_row80_col3" class="data row80 col3" >-988</td>
+      <td id="T_a2e55_row80_col4" class="data row80 col4" >255</td>
+      <td id="T_a2e55_row80_col5" class="data row80 col5" >1244</td>
+      <td id="T_a2e55_row80_col6" class="data row80 col6" >-0.3x</td>
+      <td id="T_a2e55_row80_col7" class="data row80 col7" >4.21%</td>
+      <td id="T_a2e55_row80_col8" class="data row80 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row81_col0" class="data row81 col0" >8111.TWO</td>
+      <td id="T_a2e55_row81_col1" class="data row81 col1" >立��</td>
+      <td id="T_a2e55_row81_col2" class="data row81 col2" >64.40</td>
+      <td id="T_a2e55_row81_col3" class="data row81 col3" >28</td>
+      <td id="T_a2e55_row81_col4" class="data row81 col4" >1248</td>
+      <td id="T_a2e55_row81_col5" class="data row81 col5" >1219</td>
+      <td id="T_a2e55_row81_col6" class="data row81 col6" >44.0x</td>
+      <td id="T_a2e55_row81_col7" class="data row81 col7" >3.04%</td>
+      <td id="T_a2e55_row81_col8" class="data row81 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row82_col0" class="data row82 col0" >8213.TW</td>
+      <td id="T_a2e55_row82_col1" class="data row82 col1" >志超</td>
+      <td id="T_a2e55_row82_col2" class="data row82 col2" >38.90</td>
+      <td id="T_a2e55_row82_col3" class="data row82 col3" >-155</td>
+      <td id="T_a2e55_row82_col4" class="data row82 col4" >921</td>
+      <td id="T_a2e55_row82_col5" class="data row82 col5" >1076</td>
+      <td id="T_a2e55_row82_col6" class="data row82 col6" >-5.9x</td>
+      <td id="T_a2e55_row82_col7" class="data row82 col7" >3.18%</td>
+      <td id="T_a2e55_row82_col8" class="data row82 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row83_col0" class="data row83 col0" >6588.TWO</td>
+      <td id="T_a2e55_row83_col1" class="data row83 col1" >東典光電</td>
+      <td id="T_a2e55_row83_col2" class="data row83 col2" >115.50</td>
+      <td id="T_a2e55_row83_col3" class="data row83 col3" >-302</td>
+      <td id="T_a2e55_row83_col4" class="data row83 col4" >743</td>
+      <td id="T_a2e55_row83_col5" class="data row83 col5" >1045</td>
+      <td id="T_a2e55_row83_col6" class="data row83 col6" >-2.5x</td>
+      <td id="T_a2e55_row83_col7" class="data row83 col7" >-8.33%</td>
+      <td id="T_a2e55_row83_col8" class="data row83 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row84_col0" class="data row84 col0" >6589.TW</td>
+      <td id="T_a2e55_row84_col1" class="data row84 col1" >台康生技</td>
+      <td id="T_a2e55_row84_col2" class="data row84 col2" >41.50</td>
+      <td id="T_a2e55_row84_col3" class="data row84 col3" >-2120</td>
+      <td id="T_a2e55_row84_col4" class="data row84 col4" >-1091</td>
+      <td id="T_a2e55_row84_col5" class="data row84 col5" >1029</td>
+      <td id="T_a2e55_row84_col6" class="data row84 col6" >0.5x</td>
+      <td id="T_a2e55_row84_col7" class="data row84 col7" >-4.93%</td>
+      <td id="T_a2e55_row84_col8" class="data row84 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row85_col0" class="data row85 col0" >8109.TWO</td>
+      <td id="T_a2e55_row85_col1" class="data row85 col1" >博大</td>
+      <td id="T_a2e55_row85_col2" class="data row85 col2" >126.00</td>
+      <td id="T_a2e55_row85_col3" class="data row85 col3" >-873</td>
+      <td id="T_a2e55_row85_col4" class="data row85 col4" >148</td>
+      <td id="T_a2e55_row85_col5" class="data row85 col5" >1021</td>
+      <td id="T_a2e55_row85_col6" class="data row85 col6" >-0.2x</td>
+      <td id="T_a2e55_row85_col7" class="data row85 col7" >-1.18%</td>
+      <td id="T_a2e55_row85_col8" class="data row85 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row86_col0" class="data row86 col0" >7740.TW</td>
+      <td id="T_a2e55_row86_col1" class="data row86 col1" >熙特爾-創</td>
+      <td id="T_a2e55_row86_col2" class="data row86 col2" >179.00</td>
+      <td id="T_a2e55_row86_col3" class="data row86 col3" >-6</td>
+      <td id="T_a2e55_row86_col4" class="data row86 col4" >984</td>
+      <td id="T_a2e55_row86_col5" class="data row86 col5" >991</td>
+      <td id="T_a2e55_row86_col6" class="data row86 col6" >-145.8x</td>
+      <td id="T_a2e55_row86_col7" class="data row86 col7" >1.70%</td>
+      <td id="T_a2e55_row86_col8" class="data row86 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row87_col0" class="data row87 col0" >6877.TWO</td>
+      <td id="T_a2e55_row87_col1" class="data row87 col1" >鏵友益</td>
+      <td id="T_a2e55_row87_col2" class="data row87 col2" >165.00</td>
+      <td id="T_a2e55_row87_col3" class="data row87 col3" >-1204</td>
+      <td id="T_a2e55_row87_col4" class="data row87 col4" >-275</td>
+      <td id="T_a2e55_row87_col5" class="data row87 col5" >929</td>
+      <td id="T_a2e55_row87_col6" class="data row87 col6" >0.2x</td>
+      <td id="T_a2e55_row87_col7" class="data row87 col7" >8.55%</td>
+      <td id="T_a2e55_row87_col8" class="data row87 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row88_col0" class="data row88 col0" >6218.TWO</td>
+      <td id="T_a2e55_row88_col1" class="data row88 col1" >豪勉</td>
+      <td id="T_a2e55_row88_col2" class="data row88 col2" >39.50</td>
+      <td id="T_a2e55_row88_col3" class="data row88 col3" >-754</td>
+      <td id="T_a2e55_row88_col4" class="data row88 col4" >164</td>
+      <td id="T_a2e55_row88_col5" class="data row88 col5" >919</td>
+      <td id="T_a2e55_row88_col6" class="data row88 col6" >-0.2x</td>
+      <td id="T_a2e55_row88_col7" class="data row88 col7" >-0.13%</td>
+      <td id="T_a2e55_row88_col8" class="data row88 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row89_col0" class="data row89 col0" >6596.TWO</td>
+      <td id="T_a2e55_row89_col1" class="data row89 col1" >寬宏藝術</td>
+      <td id="T_a2e55_row89_col2" class="data row89 col2" >96.00</td>
+      <td id="T_a2e55_row89_col3" class="data row89 col3" >-929</td>
+      <td id="T_a2e55_row89_col4" class="data row89 col4" >-42</td>
+      <td id="T_a2e55_row89_col5" class="data row89 col5" >887</td>
+      <td id="T_a2e55_row89_col6" class="data row89 col6" >0.0x</td>
+      <td id="T_a2e55_row89_col7" class="data row89 col7" >-1.94%</td>
+      <td id="T_a2e55_row89_col8" class="data row89 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row90_col0" class="data row90 col0" >8374.TW</td>
+      <td id="T_a2e55_row90_col1" class="data row90 col1" >羅昇</td>
+      <td id="T_a2e55_row90_col2" class="data row90 col2" >102.00</td>
+      <td id="T_a2e55_row90_col3" class="data row90 col3" >621</td>
+      <td id="T_a2e55_row90_col4" class="data row90 col4" >1486</td>
+      <td id="T_a2e55_row90_col5" class="data row90 col5" >865</td>
+      <td id="T_a2e55_row90_col6" class="data row90 col6" >2.4x</td>
+      <td id="T_a2e55_row90_col7" class="data row90 col7" >2.93%</td>
+      <td id="T_a2e55_row90_col8" class="data row90 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row91_col0" class="data row91 col0" >6405.TW</td>
+      <td id="T_a2e55_row91_col1" class="data row91 col1" >悅城</td>
+      <td id="T_a2e55_row91_col2" class="data row91 col2" >76.90</td>
+      <td id="T_a2e55_row91_col3" class="data row91 col3" >-15</td>
+      <td id="T_a2e55_row91_col4" class="data row91 col4" >759</td>
+      <td id="T_a2e55_row91_col5" class="data row91 col5" >774</td>
+      <td id="T_a2e55_row91_col6" class="data row91 col6" >-48.8x</td>
+      <td id="T_a2e55_row91_col7" class="data row91 col7" >34.68%</td>
+      <td id="T_a2e55_row91_col8" class="data row91 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row92_col0" class="data row92 col0" >6214.TW</td>
+      <td id="T_a2e55_row92_col1" class="data row92 col1" >精誠</td>
+      <td id="T_a2e55_row92_col2" class="data row92 col2" >129.00</td>
+      <td id="T_a2e55_row92_col3" class="data row92 col3" >640</td>
+      <td id="T_a2e55_row92_col4" class="data row92 col4" >1404</td>
+      <td id="T_a2e55_row92_col5" class="data row92 col5" >764</td>
+      <td id="T_a2e55_row92_col6" class="data row92 col6" >2.2x</td>
+      <td id="T_a2e55_row92_col7" class="data row92 col7" >1.18%</td>
+      <td id="T_a2e55_row92_col8" class="data row92 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row93_col0" class="data row93 col0" >6781.TW</td>
+      <td id="T_a2e55_row93_col1" class="data row93 col1" >AES-KY</td>
+      <td id="T_a2e55_row93_col2" class="data row93 col2" >1160.00</td>
+      <td id="T_a2e55_row93_col3" class="data row93 col3" >68</td>
+      <td id="T_a2e55_row93_col4" class="data row93 col4" >828</td>
+      <td id="T_a2e55_row93_col5" class="data row93 col5" >760</td>
+      <td id="T_a2e55_row93_col6" class="data row93 col6" >12.1x</td>
+      <td id="T_a2e55_row93_col7" class="data row93 col7" >1.75%</td>
+      <td id="T_a2e55_row93_col8" class="data row93 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row94_col0" class="data row94 col0" >6603.TWO</td>
+      <td id="T_a2e55_row94_col1" class="data row94 col1" >富強鑫</td>
+      <td id="T_a2e55_row94_col2" class="data row94 col2" >24.55</td>
+      <td id="T_a2e55_row94_col3" class="data row94 col3" >-205</td>
+      <td id="T_a2e55_row94_col4" class="data row94 col4" >483</td>
+      <td id="T_a2e55_row94_col5" class="data row94 col5" >689</td>
+      <td id="T_a2e55_row94_col6" class="data row94 col6" >-2.4x</td>
+      <td id="T_a2e55_row94_col7" class="data row94 col7" >9.84%</td>
+      <td id="T_a2e55_row94_col8" class="data row94 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row95_col0" class="data row95 col0" >9907.TW</td>
+      <td id="T_a2e55_row95_col1" class="data row95 col1" >統一實</td>
+      <td id="T_a2e55_row95_col2" class="data row95 col2" >15.80</td>
+      <td id="T_a2e55_row95_col3" class="data row95 col3" >-2189</td>
+      <td id="T_a2e55_row95_col4" class="data row95 col4" >-1516</td>
+      <td id="T_a2e55_row95_col5" class="data row95 col5" >673</td>
+      <td id="T_a2e55_row95_col6" class="data row95 col6" >0.7x</td>
+      <td id="T_a2e55_row95_col7" class="data row95 col7" >-1.56%</td>
+      <td id="T_a2e55_row95_col8" class="data row95 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row96_col0" class="data row96 col0" >6757.TW</td>
+      <td id="T_a2e55_row96_col1" class="data row96 col1" >台灣虎航</td>
+      <td id="T_a2e55_row96_col2" class="data row96 col2" >54.80</td>
+      <td id="T_a2e55_row96_col3" class="data row96 col3" >25</td>
+      <td id="T_a2e55_row96_col4" class="data row96 col4" >674</td>
+      <td id="T_a2e55_row96_col5" class="data row96 col5" >648</td>
+      <td id="T_a2e55_row96_col6" class="data row96 col6" >26.4x</td>
+      <td id="T_a2e55_row96_col7" class="data row96 col7" >1.11%</td>
+      <td id="T_a2e55_row96_col8" class="data row96 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row97_col0" class="data row97 col0" >6409.TW</td>
+      <td id="T_a2e55_row97_col1" class="data row97 col1" >旭隼</td>
+      <td id="T_a2e55_row97_col2" class="data row97 col2" >699.00</td>
+      <td id="T_a2e55_row97_col3" class="data row97 col3" >-594</td>
+      <td id="T_a2e55_row97_col4" class="data row97 col4" >24</td>
+      <td id="T_a2e55_row97_col5" class="data row97 col5" >619</td>
+      <td id="T_a2e55_row97_col6" class="data row97 col6" >-0.0x</td>
+      <td id="T_a2e55_row97_col7" class="data row97 col7" >5.43%</td>
+      <td id="T_a2e55_row97_col8" class="data row97 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row98_col0" class="data row98 col0" >6691.TW</td>
+      <td id="T_a2e55_row98_col1" class="data row98 col1" >洋基工程</td>
+      <td id="T_a2e55_row98_col2" class="data row98 col2" >638.00</td>
+      <td id="T_a2e55_row98_col3" class="data row98 col3" >-70</td>
+      <td id="T_a2e55_row98_col4" class="data row98 col4" >545</td>
+      <td id="T_a2e55_row98_col5" class="data row98 col5" >615</td>
+      <td id="T_a2e55_row98_col6" class="data row98 col6" >-7.8x</td>
+      <td id="T_a2e55_row98_col7" class="data row98 col7" >2.74%</td>
+      <td id="T_a2e55_row98_col8" class="data row98 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row99_col0" class="data row99 col0" >7610.TW</td>
+      <td id="T_a2e55_row99_col1" class="data row99 col1" >聯友金屬-創</td>
+      <td id="T_a2e55_row99_col2" class="data row99 col2" >1345.00</td>
+      <td id="T_a2e55_row99_col3" class="data row99 col3" >-117</td>
+      <td id="T_a2e55_row99_col4" class="data row99 col4" >447</td>
+      <td id="T_a2e55_row99_col5" class="data row99 col5" >565</td>
+      <td id="T_a2e55_row99_col6" class="data row99 col6" >-3.8x</td>
+      <td id="T_a2e55_row99_col7" class="data row99 col7" >9.35%</td>
+      <td id="T_a2e55_row99_col8" class="data row99 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row100_col0" class="data row100 col0" >6913.TWO</td>
+      <td id="T_a2e55_row100_col1" class="data row100 col1" >鴻呈</td>
+      <td id="T_a2e55_row100_col2" class="data row100 col2" >142.00</td>
+      <td id="T_a2e55_row100_col3" class="data row100 col3" >676</td>
+      <td id="T_a2e55_row100_col4" class="data row100 col4" >1213</td>
+      <td id="T_a2e55_row100_col5" class="data row100 col5" >537</td>
+      <td id="T_a2e55_row100_col6" class="data row100 col6" >1.8x</td>
+      <td id="T_a2e55_row100_col7" class="data row100 col7" >3.65%</td>
+      <td id="T_a2e55_row100_col8" class="data row100 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row101_col0" class="data row101 col0" >8438.TW</td>
+      <td id="T_a2e55_row101_col1" class="data row101 col1" >昶昕</td>
+      <td id="T_a2e55_row101_col2" class="data row101 col2" >86.00</td>
+      <td id="T_a2e55_row101_col3" class="data row101 col3" >-835</td>
+      <td id="T_a2e55_row101_col4" class="data row101 col4" >-329</td>
+      <td id="T_a2e55_row101_col5" class="data row101 col5" >506</td>
+      <td id="T_a2e55_row101_col6" class="data row101 col6" >0.4x</td>
+      <td id="T_a2e55_row101_col7" class="data row101 col7" >-2.38%</td>
+      <td id="T_a2e55_row101_col8" class="data row101 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row102_col0" class="data row102 col0" >8938.TWO</td>
+      <td id="T_a2e55_row102_col1" class="data row102 col1" >明安</td>
+      <td id="T_a2e55_row102_col2" class="data row102 col2" >52.60</td>
+      <td id="T_a2e55_row102_col3" class="data row102 col3" >-511</td>
+      <td id="T_a2e55_row102_col4" class="data row102 col4" >-20</td>
+      <td id="T_a2e55_row102_col5" class="data row102 col5" >491</td>
+      <td id="T_a2e55_row102_col6" class="data row102 col6" >0.0x</td>
+      <td id="T_a2e55_row102_col7" class="data row102 col7" >-2.77%</td>
+      <td id="T_a2e55_row102_col8" class="data row102 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row103_col0" class="data row103 col0" >6492.TWO</td>
+      <td id="T_a2e55_row103_col1" class="data row103 col1" >生華科</td>
+      <td id="T_a2e55_row103_col2" class="data row103 col2" >44.00</td>
+      <td id="T_a2e55_row103_col3" class="data row103 col3" >-430</td>
+      <td id="T_a2e55_row103_col4" class="data row103 col4" >56</td>
+      <td id="T_a2e55_row103_col5" class="data row103 col5" >487</td>
+      <td id="T_a2e55_row103_col6" class="data row103 col6" >-0.1x</td>
+      <td id="T_a2e55_row103_col7" class="data row103 col7" >-5.07%</td>
+      <td id="T_a2e55_row103_col8" class="data row103 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row104_col0" class="data row104 col0" >6243.TW</td>
+      <td id="T_a2e55_row104_col1" class="data row104 col1" >迅杰</td>
+      <td id="T_a2e55_row104_col2" class="data row104 col2" >33.70</td>
+      <td id="T_a2e55_row104_col3" class="data row104 col3" >126</td>
+      <td id="T_a2e55_row104_col4" class="data row104 col4" >596</td>
+      <td id="T_a2e55_row104_col5" class="data row104 col5" >469</td>
+      <td id="T_a2e55_row104_col6" class="data row104 col6" >4.7x</td>
+      <td id="T_a2e55_row104_col7" class="data row104 col7" >-1.89%</td>
+      <td id="T_a2e55_row104_col8" class="data row104 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row105_col0" class="data row105 col0" >6515.TW</td>
+      <td id="T_a2e55_row105_col1" class="data row105 col1" >穎崴</td>
+      <td id="T_a2e55_row105_col2" class="data row105 col2" >9120.00</td>
+      <td id="T_a2e55_row105_col3" class="data row105 col3" >-222</td>
+      <td id="T_a2e55_row105_col4" class="data row105 col4" >204</td>
+      <td id="T_a2e55_row105_col5" class="data row105 col5" >427</td>
+      <td id="T_a2e55_row105_col6" class="data row105 col6" >-0.9x</td>
+      <td id="T_a2e55_row105_col7" class="data row105 col7" >-4.10%</td>
+      <td id="T_a2e55_row105_col8" class="data row105 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row106_col0" class="data row106 col0" >7721.TW</td>
+      <td id="T_a2e55_row106_col1" class="data row106 col1" >微程式</td>
+      <td id="T_a2e55_row106_col2" class="data row106 col2" >73.90</td>
+      <td id="T_a2e55_row106_col3" class="data row106 col3" >57</td>
+      <td id="T_a2e55_row106_col4" class="data row106 col4" >453</td>
+      <td id="T_a2e55_row106_col5" class="data row106 col5" >396</td>
+      <td id="T_a2e55_row106_col6" class="data row106 col6" >7.9x</td>
+      <td id="T_a2e55_row106_col7" class="data row106 col7" >1.51%</td>
+      <td id="T_a2e55_row106_col8" class="data row106 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row107_col0" class="data row107 col0" >6419.TWO</td>
+      <td id="T_a2e55_row107_col1" class="data row107 col1" >京晨科</td>
+      <td id="T_a2e55_row107_col2" class="data row107 col2" >140.00</td>
+      <td id="T_a2e55_row107_col3" class="data row107 col3" >-2477</td>
+      <td id="T_a2e55_row107_col4" class="data row107 col4" >-2080</td>
+      <td id="T_a2e55_row107_col5" class="data row107 col5" >396</td>
+      <td id="T_a2e55_row107_col6" class="data row107 col6" >0.8x</td>
+      <td id="T_a2e55_row107_col7" class="data row107 col7" >-3.45%</td>
+      <td id="T_a2e55_row107_col8" class="data row107 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row108_col0" class="data row108 col0" >6996.TWO</td>
+      <td id="T_a2e55_row108_col1" class="data row108 col1" >力領科技</td>
+      <td id="T_a2e55_row108_col2" class="data row108 col2" >189.00</td>
+      <td id="T_a2e55_row108_col3" class="data row108 col3" >-305</td>
+      <td id="T_a2e55_row108_col4" class="data row108 col4" >80</td>
+      <td id="T_a2e55_row108_col5" class="data row108 col5" >386</td>
+      <td id="T_a2e55_row108_col6" class="data row108 col6" >-0.3x</td>
+      <td id="T_a2e55_row108_col7" class="data row108 col7" >-4.55%</td>
+      <td id="T_a2e55_row108_col8" class="data row108 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row109_col0" class="data row109 col0" >6782.TW</td>
+      <td id="T_a2e55_row109_col1" class="data row109 col1" >視陽</td>
+      <td id="T_a2e55_row109_col2" class="data row109 col2" >190.00</td>
+      <td id="T_a2e55_row109_col3" class="data row109 col3" >-455</td>
+      <td id="T_a2e55_row109_col4" class="data row109 col4" >-79</td>
+      <td id="T_a2e55_row109_col5" class="data row109 col5" >375</td>
+      <td id="T_a2e55_row109_col6" class="data row109 col6" >0.2x</td>
+      <td id="T_a2e55_row109_col7" class="data row109 col7" >-0.52%</td>
+      <td id="T_a2e55_row109_col8" class="data row109 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row110_col0" class="data row110 col0" >6753.TW</td>
+      <td id="T_a2e55_row110_col1" class="data row110 col1" >龍德造船</td>
+      <td id="T_a2e55_row110_col2" class="data row110 col2" >124.00</td>
+      <td id="T_a2e55_row110_col3" class="data row110 col3" >-1318</td>
+      <td id="T_a2e55_row110_col4" class="data row110 col4" >-943</td>
+      <td id="T_a2e55_row110_col5" class="data row110 col5" >374</td>
+      <td id="T_a2e55_row110_col6" class="data row110 col6" >0.7x</td>
+      <td id="T_a2e55_row110_col7" class="data row110 col7" >-3.88%</td>
+      <td id="T_a2e55_row110_col8" class="data row110 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row111_col0" class="data row111 col0" >8092.TWO</td>
+      <td id="T_a2e55_row111_col1" class="data row111 col1" >建暐</td>
+      <td id="T_a2e55_row111_col2" class="data row111 col2" >17.60</td>
+      <td id="T_a2e55_row111_col3" class="data row111 col3" >-354</td>
+      <td id="T_a2e55_row111_col4" class="data row111 col4" >5</td>
+      <td id="T_a2e55_row111_col5" class="data row111 col5" >360</td>
+      <td id="T_a2e55_row111_col6" class="data row111 col6" >-0.0x</td>
+      <td id="T_a2e55_row111_col7" class="data row111 col7" >-3.30%</td>
+      <td id="T_a2e55_row111_col8" class="data row111 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row112_col0" class="data row112 col0" >7828.TWO</td>
+      <td id="T_a2e55_row112_col1" class="data row112 col1" >創新服務</td>
+      <td id="T_a2e55_row112_col2" class="data row112 col2" >1400.00</td>
+      <td id="T_a2e55_row112_col3" class="data row112 col3" >102</td>
+      <td id="T_a2e55_row112_col4" class="data row112 col4" >453</td>
+      <td id="T_a2e55_row112_col5" class="data row112 col5" >351</td>
+      <td id="T_a2e55_row112_col6" class="data row112 col6" >4.4x</td>
+      <td id="T_a2e55_row112_col7" class="data row112 col7" >32.08%</td>
+      <td id="T_a2e55_row112_col8" class="data row112 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row113_col0" class="data row113 col0" >8454.TW</td>
+      <td id="T_a2e55_row113_col1" class="data row113 col1" >富邦媒</td>
+      <td id="T_a2e55_row113_col2" class="data row113 col2" >210.00</td>
+      <td id="T_a2e55_row113_col3" class="data row113 col3" >-243</td>
+      <td id="T_a2e55_row113_col4" class="data row113 col4" >91</td>
+      <td id="T_a2e55_row113_col5" class="data row113 col5" >335</td>
+      <td id="T_a2e55_row113_col6" class="data row113 col6" >-0.4x</td>
+      <td id="T_a2e55_row113_col7" class="data row113 col7" >9.95%</td>
+      <td id="T_a2e55_row113_col8" class="data row113 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row114_col0" class="data row114 col0" >6919.TW</td>
+      <td id="T_a2e55_row114_col1" class="data row114 col1" >康霈*</td>
+      <td id="T_a2e55_row114_col2" class="data row114 col2" >98.00</td>
+      <td id="T_a2e55_row114_col3" class="data row114 col3" >201</td>
+      <td id="T_a2e55_row114_col4" class="data row114 col4" >537</td>
+      <td id="T_a2e55_row114_col5" class="data row114 col5" >335</td>
+      <td id="T_a2e55_row114_col6" class="data row114 col6" >2.7x</td>
+      <td id="T_a2e55_row114_col7" class="data row114 col7" >-3.45%</td>
+      <td id="T_a2e55_row114_col8" class="data row114 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row115_col0" class="data row115 col0" >6854.TW</td>
+      <td id="T_a2e55_row115_col1" class="data row115 col1" >錼創科技-KY創</td>
+      <td id="T_a2e55_row115_col2" class="data row115 col2" >152.00</td>
+      <td id="T_a2e55_row115_col3" class="data row115 col3" >175</td>
+      <td id="T_a2e55_row115_col4" class="data row115 col4" >477</td>
+      <td id="T_a2e55_row115_col5" class="data row115 col5" >302</td>
+      <td id="T_a2e55_row115_col6" class="data row115 col6" >2.7x</td>
+      <td id="T_a2e55_row115_col7" class="data row115 col7" >-4.10%</td>
+      <td id="T_a2e55_row115_col8" class="data row115 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row116_col0" class="data row116 col0" >6741.TWO</td>
+      <td id="T_a2e55_row116_col1" class="data row116 col1" >91APP*-KY</td>
+      <td id="T_a2e55_row116_col2" class="data row116 col2" >62.90</td>
+      <td id="T_a2e55_row116_col3" class="data row116 col3" >-926</td>
+      <td id="T_a2e55_row116_col4" class="data row116 col4" >-632</td>
+      <td id="T_a2e55_row116_col5" class="data row116 col5" >294</td>
+      <td id="T_a2e55_row116_col6" class="data row116 col6" >0.7x</td>
+      <td id="T_a2e55_row116_col7" class="data row116 col7" >0.00%</td>
+      <td id="T_a2e55_row116_col8" class="data row116 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row117_col0" class="data row117 col0" >8996.TW</td>
+      <td id="T_a2e55_row117_col1" class="data row117 col1" >高力</td>
+      <td id="T_a2e55_row117_col2" class="data row117 col2" >1095.00</td>
+      <td id="T_a2e55_row117_col3" class="data row117 col3" >-525</td>
+      <td id="T_a2e55_row117_col4" class="data row117 col4" >-261</td>
+      <td id="T_a2e55_row117_col5" class="data row117 col5" >263</td>
+      <td id="T_a2e55_row117_col6" class="data row117 col6" >0.5x</td>
+      <td id="T_a2e55_row117_col7" class="data row117 col7" >2.82%</td>
+      <td id="T_a2e55_row117_col8" class="data row117 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row118_col0" class="data row118 col0" >6498.TWO</td>
+      <td id="T_a2e55_row118_col1" class="data row118 col1" >久禾光</td>
+      <td id="T_a2e55_row118_col2" class="data row118 col2" >101.50</td>
+      <td id="T_a2e55_row118_col3" class="data row118 col3" >-130</td>
+      <td id="T_a2e55_row118_col4" class="data row118 col4" >116</td>
+      <td id="T_a2e55_row118_col5" class="data row118 col5" >247</td>
+      <td id="T_a2e55_row118_col6" class="data row118 col6" >-0.9x</td>
+      <td id="T_a2e55_row118_col7" class="data row118 col7" >-4.69%</td>
+      <td id="T_a2e55_row118_col8" class="data row118 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row119_col0" class="data row119 col0" >8383.TWO</td>
+      <td id="T_a2e55_row119_col1" class="data row119 col1" >千附</td>
+      <td id="T_a2e55_row119_col2" class="data row119 col2" >60.00</td>
+      <td id="T_a2e55_row119_col3" class="data row119 col3" >169</td>
+      <td id="T_a2e55_row119_col4" class="data row119 col4" >410</td>
+      <td id="T_a2e55_row119_col5" class="data row119 col5" >240</td>
+      <td id="T_a2e55_row119_col6" class="data row119 col6" >2.4x</td>
+      <td id="T_a2e55_row119_col7" class="data row119 col7" >6.01%</td>
+      <td id="T_a2e55_row119_col8" class="data row119 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row120_col0" class="data row120 col0" >8499.TW</td>
+      <td id="T_a2e55_row120_col1" class="data row120 col1" >鼎炫-KY</td>
+      <td id="T_a2e55_row120_col2" class="data row120 col2" >314.00</td>
+      <td id="T_a2e55_row120_col3" class="data row120 col3" >-21</td>
+      <td id="T_a2e55_row120_col4" class="data row120 col4" >208</td>
+      <td id="T_a2e55_row120_col5" class="data row120 col5" >230</td>
+      <td id="T_a2e55_row120_col6" class="data row120 col6" >-9.7x</td>
+      <td id="T_a2e55_row120_col7" class="data row120 col7" >8.65%</td>
+      <td id="T_a2e55_row120_col8" class="data row120 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row121_col0" class="data row121 col0" >6270.TWO</td>
+      <td id="T_a2e55_row121_col1" class="data row121 col1" >倍微</td>
+      <td id="T_a2e55_row121_col2" class="data row121 col2" >27.05</td>
+      <td id="T_a2e55_row121_col3" class="data row121 col3" >166</td>
+      <td id="T_a2e55_row121_col4" class="data row121 col4" >386</td>
+      <td id="T_a2e55_row121_col5" class="data row121 col5" >219</td>
+      <td id="T_a2e55_row121_col6" class="data row121 col6" >2.3x</td>
+      <td id="T_a2e55_row121_col7" class="data row121 col7" >0.93%</td>
+      <td id="T_a2e55_row121_col8" class="data row121 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row122_col0" class="data row122 col0" >7805.TWO</td>
+      <td id="T_a2e55_row122_col1" class="data row122 col1" >威聯通</td>
+      <td id="T_a2e55_row122_col2" class="data row122 col2" >785.00</td>
+      <td id="T_a2e55_row122_col3" class="data row122 col3" >30</td>
+      <td id="T_a2e55_row122_col4" class="data row122 col4" >235</td>
+      <td id="T_a2e55_row122_col5" class="data row122 col5" >204</td>
+      <td id="T_a2e55_row122_col6" class="data row122 col6" >7.6x</td>
+      <td id="T_a2e55_row122_col7" class="data row122 col7" >9.33%</td>
+      <td id="T_a2e55_row122_col8" class="data row122 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row123_col0" class="data row123 col0" >6640.TWO</td>
+      <td id="T_a2e55_row123_col1" class="data row123 col1" >均華</td>
+      <td id="T_a2e55_row123_col2" class="data row123 col2" >1340.00</td>
+      <td id="T_a2e55_row123_col3" class="data row123 col3" >-214</td>
+      <td id="T_a2e55_row123_col4" class="data row123 col4" >-9</td>
+      <td id="T_a2e55_row123_col5" class="data row123 col5" >204</td>
+      <td id="T_a2e55_row123_col6" class="data row123 col6" >0.0x</td>
+      <td id="T_a2e55_row123_col7" class="data row123 col7" >-2.55%</td>
+      <td id="T_a2e55_row123_col8" class="data row123 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row124_col0" class="data row124 col0" >6907.TWO</td>
+      <td id="T_a2e55_row124_col1" class="data row124 col1" >雅特力-KY</td>
+      <td id="T_a2e55_row124_col2" class="data row124 col2" >117.50</td>
+      <td id="T_a2e55_row124_col3" class="data row124 col3" >49</td>
+      <td id="T_a2e55_row124_col4" class="data row124 col4" >244</td>
+      <td id="T_a2e55_row124_col5" class="data row124 col5" >194</td>
+      <td id="T_a2e55_row124_col6" class="data row124 col6" >4.9x</td>
+      <td id="T_a2e55_row124_col7" class="data row124 col7" >3.07%</td>
+      <td id="T_a2e55_row124_col8" class="data row124 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row125_col0" class="data row125 col0" >6944.TW</td>
+      <td id="T_a2e55_row125_col1" class="data row125 col1" >兆聯實業</td>
+      <td id="T_a2e55_row125_col2" class="data row125 col2" >924.00</td>
+      <td id="T_a2e55_row125_col3" class="data row125 col3" >227</td>
+      <td id="T_a2e55_row125_col4" class="data row125 col4" >420</td>
+      <td id="T_a2e55_row125_col5" class="data row125 col5" >192</td>
+      <td id="T_a2e55_row125_col6" class="data row125 col6" >1.8x</td>
+      <td id="T_a2e55_row125_col7" class="data row125 col7" >0.54%</td>
+      <td id="T_a2e55_row125_col8" class="data row125 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row126_col0" class="data row126 col0" >6573.TW</td>
+      <td id="T_a2e55_row126_col1" class="data row126 col1" >虹揚-KY</td>
+      <td id="T_a2e55_row126_col2" class="data row126 col2" >14.85</td>
+      <td id="T_a2e55_row126_col3" class="data row126 col3" >-19</td>
+      <td id="T_a2e55_row126_col4" class="data row126 col4" >166</td>
+      <td id="T_a2e55_row126_col5" class="data row126 col5" >186</td>
+      <td id="T_a2e55_row126_col6" class="data row126 col6" >-8.4x</td>
+      <td id="T_a2e55_row126_col7" class="data row126 col7" >12.93%</td>
+      <td id="T_a2e55_row126_col8" class="data row126 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row127_col0" class="data row127 col0" >7730.TW</td>
+      <td id="T_a2e55_row127_col1" class="data row127 col1" >暉盛-創</td>
+      <td id="T_a2e55_row127_col2" class="data row127 col2" >214.00</td>
+      <td id="T_a2e55_row127_col3" class="data row127 col3" >4</td>
+      <td id="T_a2e55_row127_col4" class="data row127 col4" >178</td>
+      <td id="T_a2e55_row127_col5" class="data row127 col5" >174</td>
+      <td id="T_a2e55_row127_col6" class="data row127 col6" >新進貨</td>
+      <td id="T_a2e55_row127_col7" class="data row127 col7" >-3.82%</td>
+      <td id="T_a2e55_row127_col8" class="data row127 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row128_col0" class="data row128 col0" >6669.TW</td>
+      <td id="T_a2e55_row128_col1" class="data row128 col1" >緯穎</td>
+      <td id="T_a2e55_row128_col2" class="data row128 col2" >4950.00</td>
+      <td id="T_a2e55_row128_col3" class="data row128 col3" >175</td>
+      <td id="T_a2e55_row128_col4" class="data row128 col4" >345</td>
+      <td id="T_a2e55_row128_col5" class="data row128 col5" >170</td>
+      <td id="T_a2e55_row128_col6" class="data row128 col6" >2.0x</td>
+      <td id="T_a2e55_row128_col7" class="data row128 col7" >-7.39%</td>
+      <td id="T_a2e55_row128_col8" class="data row128 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row129_col0" class="data row129 col0" >6283.TW</td>
+      <td id="T_a2e55_row129_col1" class="data row129 col1" >淳安</td>
+      <td id="T_a2e55_row129_col2" class="data row129 col2" >23.70</td>
+      <td id="T_a2e55_row129_col3" class="data row129 col3" >-36</td>
+      <td id="T_a2e55_row129_col4" class="data row129 col4" >125</td>
+      <td id="T_a2e55_row129_col5" class="data row129 col5" >162</td>
+      <td id="T_a2e55_row129_col6" class="data row129 col6" >-3.4x</td>
+      <td id="T_a2e55_row129_col7" class="data row129 col7" >-3.85%</td>
+      <td id="T_a2e55_row129_col8" class="data row129 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row130_col0" class="data row130 col0" >7728.TWO</td>
+      <td id="T_a2e55_row130_col1" class="data row130 col1" >光焱科技</td>
+      <td id="T_a2e55_row130_col2" class="data row130 col2" >778.00</td>
+      <td id="T_a2e55_row130_col3" class="data row130 col3" >-31</td>
+      <td id="T_a2e55_row130_col4" class="data row130 col4" >130</td>
+      <td id="T_a2e55_row130_col5" class="data row130 col5" >162</td>
+      <td id="T_a2e55_row130_col6" class="data row130 col6" >-4.1x</td>
+      <td id="T_a2e55_row130_col7" class="data row130 col7" >8.36%</td>
+      <td id="T_a2e55_row130_col8" class="data row130 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row131_col0" class="data row131 col0" >912000.TW</td>
+      <td id="T_a2e55_row131_col1" class="data row131 col1" >晨訊科-DR</td>
+      <td id="T_a2e55_row131_col2" class="data row131 col2" >2.40</td>
+      <td id="T_a2e55_row131_col3" class="data row131 col3" >-54</td>
+      <td id="T_a2e55_row131_col4" class="data row131 col4" >106</td>
+      <td id="T_a2e55_row131_col5" class="data row131 col5" >160</td>
+      <td id="T_a2e55_row131_col6" class="data row131 col6" >-2.0x</td>
+      <td id="T_a2e55_row131_col7" class="data row131 col7" >0.00%</td>
+      <td id="T_a2e55_row131_col8" class="data row131 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row132_col0" class="data row132 col0" >6477.TW</td>
+      <td id="T_a2e55_row132_col1" class="data row132 col1" >安集</td>
+      <td id="T_a2e55_row132_col2" class="data row132 col2" >33.25</td>
+      <td id="T_a2e55_row132_col3" class="data row132 col3" >-4</td>
+      <td id="T_a2e55_row132_col4" class="data row132 col4" >148</td>
+      <td id="T_a2e55_row132_col5" class="data row132 col5" >152</td>
+      <td id="T_a2e55_row132_col6" class="data row132 col6" >新進貨</td>
+      <td id="T_a2e55_row132_col7" class="data row132 col7" >-3.48%</td>
+      <td id="T_a2e55_row132_col8" class="data row132 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row133_col0" class="data row133 col0" >6840.TWO</td>
+      <td id="T_a2e55_row133_col1" class="data row133 col1" >東研信超</td>
+      <td id="T_a2e55_row133_col2" class="data row133 col2" >63.40</td>
+      <td id="T_a2e55_row133_col3" class="data row133 col3" >-19</td>
+      <td id="T_a2e55_row133_col4" class="data row133 col4" >132</td>
+      <td id="T_a2e55_row133_col5" class="data row133 col5" >151</td>
+      <td id="T_a2e55_row133_col6" class="data row133 col6" >-6.7x</td>
+      <td id="T_a2e55_row133_col7" class="data row133 col7" >0.00%</td>
+      <td id="T_a2e55_row133_col8" class="data row133 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row134_col0" class="data row134 col0" >6592.TW</td>
+      <td id="T_a2e55_row134_col1" class="data row134 col1" >和潤企業</td>
+      <td id="T_a2e55_row134_col2" class="data row134 col2" >60.00</td>
+      <td id="T_a2e55_row134_col3" class="data row134 col3" >-89</td>
+      <td id="T_a2e55_row134_col4" class="data row134 col4" >57</td>
+      <td id="T_a2e55_row134_col5" class="data row134 col5" >146</td>
+      <td id="T_a2e55_row134_col6" class="data row134 col6" >-0.6x</td>
+      <td id="T_a2e55_row134_col7" class="data row134 col7" >-1.32%</td>
+      <td id="T_a2e55_row134_col8" class="data row134 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row135_col0" class="data row135 col0" >6924.TW</td>
+      <td id="T_a2e55_row135_col1" class="data row135 col1" >榮惠-KY創</td>
+      <td id="T_a2e55_row135_col2" class="data row135 col2" >175.00</td>
+      <td id="T_a2e55_row135_col3" class="data row135 col3" >-151</td>
+      <td id="T_a2e55_row135_col4" class="data row135 col4" >-6</td>
+      <td id="T_a2e55_row135_col5" class="data row135 col5" >144</td>
+      <td id="T_a2e55_row135_col6" class="data row135 col6" >0.0x</td>
+      <td id="T_a2e55_row135_col7" class="data row135 col7" >6.71%</td>
+      <td id="T_a2e55_row135_col8" class="data row135 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row136_col0" class="data row136 col0" >7703.TWO</td>
+      <td id="T_a2e55_row136_col1" class="data row136 col1" >銳澤</td>
+      <td id="T_a2e55_row136_col2" class="data row136 col2" >206.50</td>
+      <td id="T_a2e55_row136_col3" class="data row136 col3" >35</td>
+      <td id="T_a2e55_row136_col4" class="data row136 col4" >177</td>
+      <td id="T_a2e55_row136_col5" class="data row136 col5" >142</td>
+      <td id="T_a2e55_row136_col6" class="data row136 col6" >5.0x</td>
+      <td id="T_a2e55_row136_col7" class="data row136 col7" >-0.96%</td>
+      <td id="T_a2e55_row136_col8" class="data row136 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row137_col0" class="data row137 col0" >8476.TW</td>
+      <td id="T_a2e55_row137_col1" class="data row137 col1" >台境*</td>
+      <td id="T_a2e55_row137_col2" class="data row137 col2" >15.35</td>
+      <td id="T_a2e55_row137_col3" class="data row137 col3" >1</td>
+      <td id="T_a2e55_row137_col4" class="data row137 col4" >140</td>
+      <td id="T_a2e55_row137_col5" class="data row137 col5" >139</td>
+      <td id="T_a2e55_row137_col6" class="data row137 col6" >新進貨</td>
+      <td id="T_a2e55_row137_col7" class="data row137 col7" >-4.66%</td>
+      <td id="T_a2e55_row137_col8" class="data row137 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row138_col0" class="data row138 col0" >6906.TW</td>
+      <td id="T_a2e55_row138_col1" class="data row138 col1" >現觀科</td>
+      <td id="T_a2e55_row138_col2" class="data row138 col2" >108.50</td>
+      <td id="T_a2e55_row138_col3" class="data row138 col3" >-301</td>
+      <td id="T_a2e55_row138_col4" class="data row138 col4" >-163</td>
+      <td id="T_a2e55_row138_col5" class="data row138 col5" >138</td>
+      <td id="T_a2e55_row138_col6" class="data row138 col6" >0.5x</td>
+      <td id="T_a2e55_row138_col7" class="data row138 col7" >41.46%</td>
+      <td id="T_a2e55_row138_col8" class="data row138 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row139_col0" class="data row139 col0" >8048.TWO</td>
+      <td id="T_a2e55_row139_col1" class="data row139 col1" >德勝</td>
+      <td id="T_a2e55_row139_col2" class="data row139 col2" >61.40</td>
+      <td id="T_a2e55_row139_col3" class="data row139 col3" >21</td>
+      <td id="T_a2e55_row139_col4" class="data row139 col4" >159</td>
+      <td id="T_a2e55_row139_col5" class="data row139 col5" >137</td>
+      <td id="T_a2e55_row139_col6" class="data row139 col6" >7.3x</td>
+      <td id="T_a2e55_row139_col7" class="data row139 col7" >0.66%</td>
+      <td id="T_a2e55_row139_col8" class="data row139 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row140_col0" class="data row140 col0" >6684.TWO</td>
+      <td id="T_a2e55_row140_col1" class="data row140 col1" >安格</td>
+      <td id="T_a2e55_row140_col2" class="data row140 col2" >44.25</td>
+      <td id="T_a2e55_row140_col3" class="data row140 col3" >-24</td>
+      <td id="T_a2e55_row140_col4" class="data row140 col4" >100</td>
+      <td id="T_a2e55_row140_col5" class="data row140 col5" >125</td>
+      <td id="T_a2e55_row140_col6" class="data row140 col6" >-4.1x</td>
+      <td id="T_a2e55_row140_col7" class="data row140 col7" >-4.43%</td>
+      <td id="T_a2e55_row140_col8" class="data row140 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row141_col0" class="data row141 col0" >8440.TWO</td>
+      <td id="T_a2e55_row141_col1" class="data row141 col1" >綠電</td>
+      <td id="T_a2e55_row141_col2" class="data row141 col2" >23.40</td>
+      <td id="T_a2e55_row141_col3" class="data row141 col3" >-593</td>
+      <td id="T_a2e55_row141_col4" class="data row141 col4" >-471</td>
+      <td id="T_a2e55_row141_col5" class="data row141 col5" >121</td>
+      <td id="T_a2e55_row141_col6" class="data row141 col6" >0.8x</td>
+      <td id="T_a2e55_row141_col7" class="data row141 col7" >3.08%</td>
+      <td id="T_a2e55_row141_col8" class="data row141 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row142_col0" class="data row142 col0" >9917.TW</td>
+      <td id="T_a2e55_row142_col1" class="data row142 col1" >中保科</td>
+      <td id="T_a2e55_row142_col2" class="data row142 col2" >113.00</td>
+      <td id="T_a2e55_row142_col3" class="data row142 col3" >-105</td>
+      <td id="T_a2e55_row142_col4" class="data row142 col4" >13</td>
+      <td id="T_a2e55_row142_col5" class="data row142 col5" >119</td>
+      <td id="T_a2e55_row142_col6" class="data row142 col6" >-0.1x</td>
+      <td id="T_a2e55_row142_col7" class="data row142 col7" >0.44%</td>
+      <td id="T_a2e55_row142_col8" class="data row142 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row143_col0" class="data row143 col0" >7749.TW</td>
+      <td id="T_a2e55_row143_col1" class="data row143 col1" >意騰-KY</td>
+      <td id="T_a2e55_row143_col2" class="data row143 col2" >488.00</td>
+      <td id="T_a2e55_row143_col3" class="data row143 col3" >103</td>
+      <td id="T_a2e55_row143_col4" class="data row143 col4" >215</td>
+      <td id="T_a2e55_row143_col5" class="data row143 col5" >112</td>
+      <td id="T_a2e55_row143_col6" class="data row143 col6" >2.1x</td>
+      <td id="T_a2e55_row143_col7" class="data row143 col7" >-4.69%</td>
+      <td id="T_a2e55_row143_col8" class="data row143 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row144_col0" class="data row144 col0" >8034.TWO</td>
+      <td id="T_a2e55_row144_col1" class="data row144 col1" >榮群</td>
+      <td id="T_a2e55_row144_col2" class="data row144 col2" >23.75</td>
+      <td id="T_a2e55_row144_col3" class="data row144 col3" >-102</td>
+      <td id="T_a2e55_row144_col4" class="data row144 col4" >4</td>
+      <td id="T_a2e55_row144_col5" class="data row144 col5" >106</td>
+      <td id="T_a2e55_row144_col6" class="data row144 col6" >-0.0x</td>
+      <td id="T_a2e55_row144_col7" class="data row144 col7" >-1.45%</td>
+      <td id="T_a2e55_row144_col8" class="data row144 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row145_col0" class="data row145 col0" >8176.TWO</td>
+      <td id="T_a2e55_row145_col1" class="data row145 col1" >智捷</td>
+      <td id="T_a2e55_row145_col2" class="data row145 col2" >10.00</td>
+      <td id="T_a2e55_row145_col3" class="data row145 col3" >-19</td>
+      <td id="T_a2e55_row145_col4" class="data row145 col4" >79</td>
+      <td id="T_a2e55_row145_col5" class="data row145 col5" >99</td>
+      <td id="T_a2e55_row145_col6" class="data row145 col6" >-4.0x</td>
+      <td id="T_a2e55_row145_col7" class="data row145 col7" >0.20%</td>
+      <td id="T_a2e55_row145_col8" class="data row145 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row146_col0" class="data row146 col0" >8183.TWO</td>
+      <td id="T_a2e55_row146_col1" class="data row146 col1" >精星</td>
+      <td id="T_a2e55_row146_col2" class="data row146 col2" >32.15</td>
+      <td id="T_a2e55_row146_col3" class="data row146 col3" >-30</td>
+      <td id="T_a2e55_row146_col4" class="data row146 col4" >64</td>
+      <td id="T_a2e55_row146_col5" class="data row146 col5" >95</td>
+      <td id="T_a2e55_row146_col6" class="data row146 col6" >-2.1x</td>
+      <td id="T_a2e55_row146_col7" class="data row146 col7" >4.38%</td>
+      <td id="T_a2e55_row146_col8" class="data row146 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row147_col0" class="data row147 col0" >6474.TWO</td>
+      <td id="T_a2e55_row147_col1" class="data row147 col1" >華豫寧</td>
+      <td id="T_a2e55_row147_col2" class="data row147 col2" >37.80</td>
+      <td id="T_a2e55_row147_col3" class="data row147 col3" >0</td>
+      <td id="T_a2e55_row147_col4" class="data row147 col4" >95</td>
+      <td id="T_a2e55_row147_col5" class="data row147 col5" >95</td>
+      <td id="T_a2e55_row147_col6" class="data row147 col6" >新進貨</td>
+      <td id="T_a2e55_row147_col7" class="data row147 col7" >0.13%</td>
+      <td id="T_a2e55_row147_col8" class="data row147 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row148_col0" class="data row148 col0" >7744.TWO</td>
+      <td id="T_a2e55_row148_col1" class="data row148 col1" >崴寶</td>
+      <td id="T_a2e55_row148_col2" class="data row148 col2" >478.00</td>
+      <td id="T_a2e55_row148_col3" class="data row148 col3" >-53</td>
+      <td id="T_a2e55_row148_col4" class="data row148 col4" >37</td>
+      <td id="T_a2e55_row148_col5" class="data row148 col5" >90</td>
+      <td id="T_a2e55_row148_col6" class="data row148 col6" >-0.7x</td>
+      <td id="T_a2e55_row148_col7" class="data row148 col7" >-5.16%</td>
+      <td id="T_a2e55_row148_col8" class="data row148 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row149_col0" class="data row149 col0" >8222.TW</td>
+      <td id="T_a2e55_row149_col1" class="data row149 col1" >寶一</td>
+      <td id="T_a2e55_row149_col2" class="data row149 col2" >35.75</td>
+      <td id="T_a2e55_row149_col3" class="data row149 col3" >-25</td>
+      <td id="T_a2e55_row149_col4" class="data row149 col4" >65</td>
+      <td id="T_a2e55_row149_col5" class="data row149 col5" >90</td>
+      <td id="T_a2e55_row149_col6" class="data row149 col6" >-2.6x</td>
+      <td id="T_a2e55_row149_col7" class="data row149 col7" >-1.65%</td>
+      <td id="T_a2e55_row149_col8" class="data row149 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row150_col0" class="data row150 col0" >6617.TWO</td>
+      <td id="T_a2e55_row150_col1" class="data row150 col1" >共信-KY</td>
+      <td id="T_a2e55_row150_col2" class="data row150 col2" >71.80</td>
+      <td id="T_a2e55_row150_col3" class="data row150 col3" >2</td>
+      <td id="T_a2e55_row150_col4" class="data row150 col4" >93</td>
+      <td id="T_a2e55_row150_col5" class="data row150 col5" >90</td>
+      <td id="T_a2e55_row150_col6" class="data row150 col6" >新進貨</td>
+      <td id="T_a2e55_row150_col7" class="data row150 col7" >9.62%</td>
+      <td id="T_a2e55_row150_col8" class="data row150 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row151_col0" class="data row151 col0" >7780.TW</td>
+      <td id="T_a2e55_row151_col1" class="data row151 col1" >大研生醫*</td>
+      <td id="T_a2e55_row151_col2" class="data row151 col2" >17.60</td>
+      <td id="T_a2e55_row151_col3" class="data row151 col3" >-106</td>
+      <td id="T_a2e55_row151_col4" class="data row151 col4" >-17</td>
+      <td id="T_a2e55_row151_col5" class="data row151 col5" >88</td>
+      <td id="T_a2e55_row151_col6" class="data row151 col6" >0.2x</td>
+      <td id="T_a2e55_row151_col7" class="data row151 col7" >-4.86%</td>
+      <td id="T_a2e55_row151_col8" class="data row151 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row152_col0" class="data row152 col0" >6203.TWO</td>
+      <td id="T_a2e55_row152_col1" class="data row152 col1" >海韻電</td>
+      <td id="T_a2e55_row152_col2" class="data row152 col2" >70.40</td>
+      <td id="T_a2e55_row152_col3" class="data row152 col3" >-30</td>
+      <td id="T_a2e55_row152_col4" class="data row152 col4" >57</td>
+      <td id="T_a2e55_row152_col5" class="data row152 col5" >87</td>
+      <td id="T_a2e55_row152_col6" class="data row152 col6" >-1.8x</td>
+      <td id="T_a2e55_row152_col7" class="data row152 col7" >-0.42%</td>
+      <td id="T_a2e55_row152_col8" class="data row152 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row153_col0" class="data row153 col0" >7709.TWO</td>
+      <td id="T_a2e55_row153_col1" class="data row153 col1" >榮田</td>
+      <td id="T_a2e55_row153_col2" class="data row153 col2" >100.50</td>
+      <td id="T_a2e55_row153_col3" class="data row153 col3" >-11</td>
+      <td id="T_a2e55_row153_col4" class="data row153 col4" >72</td>
+      <td id="T_a2e55_row153_col5" class="data row153 col5" >84</td>
+      <td id="T_a2e55_row153_col6" class="data row153 col6" >-6.1x</td>
+      <td id="T_a2e55_row153_col7" class="data row153 col7" >8.18%</td>
+      <td id="T_a2e55_row153_col8" class="data row153 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row154_col0" class="data row154 col0" >8076.TWO</td>
+      <td id="T_a2e55_row154_col1" class="data row154 col1" >伍豐</td>
+      <td id="T_a2e55_row154_col2" class="data row154 col2" >23.60</td>
+      <td id="T_a2e55_row154_col3" class="data row154 col3" >18</td>
+      <td id="T_a2e55_row154_col4" class="data row154 col4" >103</td>
+      <td id="T_a2e55_row154_col5" class="data row154 col5" >84</td>
+      <td id="T_a2e55_row154_col6" class="data row154 col6" >5.6x</td>
+      <td id="T_a2e55_row154_col7" class="data row154 col7" >-1.87%</td>
+      <td id="T_a2e55_row154_col8" class="data row154 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row155_col0" class="data row155 col0" >7792.TWO</td>
+      <td id="T_a2e55_row155_col1" class="data row155 col1" >安葆</td>
+      <td id="T_a2e55_row155_col2" class="data row155 col2" >256.00</td>
+      <td id="T_a2e55_row155_col3" class="data row155 col3" >-87</td>
+      <td id="T_a2e55_row155_col4" class="data row155 col4" >-7</td>
+      <td id="T_a2e55_row155_col5" class="data row155 col5" >80</td>
+      <td id="T_a2e55_row155_col6" class="data row155 col6" >0.1x</td>
+      <td id="T_a2e55_row155_col7" class="data row155 col7" >-4.12%</td>
+      <td id="T_a2e55_row155_col8" class="data row155 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row156_col0" class="data row156 col0" >6470.TWO</td>
+      <td id="T_a2e55_row156_col1" class="data row156 col1" >宇智</td>
+      <td id="T_a2e55_row156_col2" class="data row156 col2" >48.45</td>
+      <td id="T_a2e55_row156_col3" class="data row156 col3" >39</td>
+      <td id="T_a2e55_row156_col4" class="data row156 col4" >106</td>
+      <td id="T_a2e55_row156_col5" class="data row156 col5" >66</td>
+      <td id="T_a2e55_row156_col6" class="data row156 col6" >2.7x</td>
+      <td id="T_a2e55_row156_col7" class="data row156 col7" >0.52%</td>
+      <td id="T_a2e55_row156_col8" class="data row156 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row157_col0" class="data row157 col0" >6657.TW</td>
+      <td id="T_a2e55_row157_col1" class="data row157 col1" >華安</td>
+      <td id="T_a2e55_row157_col2" class="data row157 col2" >38.30</td>
+      <td id="T_a2e55_row157_col3" class="data row157 col3" >-31</td>
+      <td id="T_a2e55_row157_col4" class="data row157 col4" >32</td>
+      <td id="T_a2e55_row157_col5" class="data row157 col5" >63</td>
+      <td id="T_a2e55_row157_col6" class="data row157 col6" >-1.0x</td>
+      <td id="T_a2e55_row157_col7" class="data row157 col7" >-3.89%</td>
+      <td id="T_a2e55_row157_col8" class="data row157 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row158_col0" class="data row158 col0" >8107.TWO</td>
+      <td id="T_a2e55_row158_col1" class="data row158 col1" >大億金茂</td>
+      <td id="T_a2e55_row158_col2" class="data row158 col2" >12.30</td>
+      <td id="T_a2e55_row158_col3" class="data row158 col3" >0</td>
+      <td id="T_a2e55_row158_col4" class="data row158 col4" >62</td>
+      <td id="T_a2e55_row158_col5" class="data row158 col5" >62</td>
+      <td id="T_a2e55_row158_col6" class="data row158 col6" >新進貨</td>
+      <td id="T_a2e55_row158_col7" class="data row158 col7" >6.03%</td>
+      <td id="T_a2e55_row158_col8" class="data row158 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row159_col0" class="data row159 col0" >6629.TWO</td>
+      <td id="T_a2e55_row159_col1" class="data row159 col1" >泰金-KY</td>
+      <td id="T_a2e55_row159_col2" class="data row159 col2" >117.50</td>
+      <td id="T_a2e55_row159_col3" class="data row159 col3" >1</td>
+      <td id="T_a2e55_row159_col4" class="data row159 col4" >56</td>
+      <td id="T_a2e55_row159_col5" class="data row159 col5" >55</td>
+      <td id="T_a2e55_row159_col6" class="data row159 col6" >新進貨</td>
+      <td id="T_a2e55_row159_col7" class="data row159 col7" >-4.08%</td>
+      <td id="T_a2e55_row159_col8" class="data row159 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row160_col0" class="data row160 col0" >6811.TWO</td>
+      <td id="T_a2e55_row160_col1" class="data row160 col1" >宏�硌穈T</td>
+      <td id="T_a2e55_row160_col2" class="data row160 col2" >209.00</td>
+      <td id="T_a2e55_row160_col3" class="data row160 col3" >37</td>
+      <td id="T_a2e55_row160_col4" class="data row160 col4" >86</td>
+      <td id="T_a2e55_row160_col5" class="data row160 col5" >48</td>
+      <td id="T_a2e55_row160_col6" class="data row160 col6" >2.3x</td>
+      <td id="T_a2e55_row160_col7" class="data row160 col7" >0.00%</td>
+      <td id="T_a2e55_row160_col8" class="data row160 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row161_col0" class="data row161 col0" >6922.TWO</td>
+      <td id="T_a2e55_row161_col1" class="data row161 col1" >宸曜</td>
+      <td id="T_a2e55_row161_col2" class="data row161 col2" >191.00</td>
+      <td id="T_a2e55_row161_col3" class="data row161 col3" >147</td>
+      <td id="T_a2e55_row161_col4" class="data row161 col4" >192</td>
+      <td id="T_a2e55_row161_col5" class="data row161 col5" >45</td>
+      <td id="T_a2e55_row161_col6" class="data row161 col6" >1.3x</td>
+      <td id="T_a2e55_row161_col7" class="data row161 col7" >4.95%</td>
+      <td id="T_a2e55_row161_col8" class="data row161 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row162_col0" class="data row162 col0" >6277.TW</td>
+      <td id="T_a2e55_row162_col1" class="data row162 col1" >宏正</td>
+      <td id="T_a2e55_row162_col2" class="data row162 col2" >76.00</td>
+      <td id="T_a2e55_row162_col3" class="data row162 col3" >98</td>
+      <td id="T_a2e55_row162_col4" class="data row162 col4" >143</td>
+      <td id="T_a2e55_row162_col5" class="data row162 col5" >45</td>
+      <td id="T_a2e55_row162_col6" class="data row162 col6" >1.5x</td>
+      <td id="T_a2e55_row162_col7" class="data row162 col7" >1.88%</td>
+      <td id="T_a2e55_row162_col8" class="data row162 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row163_col0" class="data row163 col0" >6233.TWO</td>
+      <td id="T_a2e55_row163_col1" class="data row163 col1" >旺玖</td>
+      <td id="T_a2e55_row163_col2" class="data row163 col2" >25.00</td>
+      <td id="T_a2e55_row163_col3" class="data row163 col3" >92</td>
+      <td id="T_a2e55_row163_col4" class="data row163 col4" >138</td>
+      <td id="T_a2e55_row163_col5" class="data row163 col5" >45</td>
+      <td id="T_a2e55_row163_col6" class="data row163 col6" >1.5x</td>
+      <td id="T_a2e55_row163_col7" class="data row163 col7" >-4.03%</td>
+      <td id="T_a2e55_row163_col8" class="data row163 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row164_col0" class="data row164 col0" >7704.TWO</td>
+      <td id="T_a2e55_row164_col1" class="data row164 col1" >明遠精密</td>
+      <td id="T_a2e55_row164_col2" class="data row164 col2" >60.20</td>
+      <td id="T_a2e55_row164_col3" class="data row164 col3" >23</td>
+      <td id="T_a2e55_row164_col4" class="data row164 col4" >65</td>
+      <td id="T_a2e55_row164_col5" class="data row164 col5" >42</td>
+      <td id="T_a2e55_row164_col6" class="data row164 col6" >2.8x</td>
+      <td id="T_a2e55_row164_col7" class="data row164 col7" >-4.14%</td>
+      <td id="T_a2e55_row164_col8" class="data row164 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row165_col0" class="data row165 col0" >6418.TWO</td>
+      <td id="T_a2e55_row165_col1" class="data row165 col1" >詠昇</td>
+      <td id="T_a2e55_row165_col2" class="data row165 col2" >30.20</td>
+      <td id="T_a2e55_row165_col3" class="data row165 col3" >-38</td>
+      <td id="T_a2e55_row165_col4" class="data row165 col4" >1</td>
+      <td id="T_a2e55_row165_col5" class="data row165 col5" >39</td>
+      <td id="T_a2e55_row165_col6" class="data row165 col6" >-0.0x</td>
+      <td id="T_a2e55_row165_col7" class="data row165 col7" >-3.67%</td>
+      <td id="T_a2e55_row165_col8" class="data row165 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row166_col0" class="data row166 col0" >6294.TWO</td>
+      <td id="T_a2e55_row166_col1" class="data row166 col1" >智基</td>
+      <td id="T_a2e55_row166_col2" class="data row166 col2" >27.50</td>
+      <td id="T_a2e55_row166_col3" class="data row166 col3" >-33</td>
+      <td id="T_a2e55_row166_col4" class="data row166 col4" >5</td>
+      <td id="T_a2e55_row166_col5" class="data row166 col5" >39</td>
+      <td id="T_a2e55_row166_col6" class="data row166 col6" >-0.2x</td>
+      <td id="T_a2e55_row166_col7" class="data row166 col7" >1.10%</td>
+      <td id="T_a2e55_row166_col8" class="data row166 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row167_col0" class="data row167 col0" >8942.TWO</td>
+      <td id="T_a2e55_row167_col1" class="data row167 col1" >森鉅</td>
+      <td id="T_a2e55_row167_col2" class="data row167 col2" >41.45</td>
+      <td id="T_a2e55_row167_col3" class="data row167 col3" >31</td>
+      <td id="T_a2e55_row167_col4" class="data row167 col4" >69</td>
+      <td id="T_a2e55_row167_col5" class="data row167 col5" >37</td>
+      <td id="T_a2e55_row167_col6" class="data row167 col6" >2.2x</td>
+      <td id="T_a2e55_row167_col7" class="data row167 col7" >-0.96%</td>
+      <td id="T_a2e55_row167_col8" class="data row167 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row168_col0" class="data row168 col0" >8024.TWO</td>
+      <td id="T_a2e55_row168_col1" class="data row168 col1" >佑華</td>
+      <td id="T_a2e55_row168_col2" class="data row168 col2" >12.65</td>
+      <td id="T_a2e55_row168_col3" class="data row168 col3" >-33</td>
+      <td id="T_a2e55_row168_col4" class="data row168 col4" >1</td>
+      <td id="T_a2e55_row168_col5" class="data row168 col5" >34</td>
+      <td id="T_a2e55_row168_col6" class="data row168 col6" >-0.0x</td>
+      <td id="T_a2e55_row168_col7" class="data row168 col7" >2.43%</td>
+      <td id="T_a2e55_row168_col8" class="data row168 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row169_col0" class="data row169 col0" >6722.TW</td>
+      <td id="T_a2e55_row169_col1" class="data row169 col1" >輝創</td>
+      <td id="T_a2e55_row169_col2" class="data row169 col2" >36.95</td>
+      <td id="T_a2e55_row169_col3" class="data row169 col3" >-16</td>
+      <td id="T_a2e55_row169_col4" class="data row169 col4" >18</td>
+      <td id="T_a2e55_row169_col5" class="data row169 col5" >34</td>
+      <td id="T_a2e55_row169_col6" class="data row169 col6" >-1.1x</td>
+      <td id="T_a2e55_row169_col7" class="data row169 col7" >-2.25%</td>
+      <td id="T_a2e55_row169_col8" class="data row169 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row170_col0" class="data row170 col0" >6703.TWO</td>
+      <td id="T_a2e55_row170_col1" class="data row170 col1" >軒郁</td>
+      <td id="T_a2e55_row170_col2" class="data row170 col2" >108.50</td>
+      <td id="T_a2e55_row170_col3" class="data row170 col3" >-27</td>
+      <td id="T_a2e55_row170_col4" class="data row170 col4" >6</td>
+      <td id="T_a2e55_row170_col5" class="data row170 col5" >34</td>
+      <td id="T_a2e55_row170_col6" class="data row170 col6" >-0.2x</td>
+      <td id="T_a2e55_row170_col7" class="data row170 col7" >-5.65%</td>
+      <td id="T_a2e55_row170_col8" class="data row170 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row171_col0" class="data row171 col0" >8349.TWO</td>
+      <td id="T_a2e55_row171_col1" class="data row171 col1" >恒耀</td>
+      <td id="T_a2e55_row171_col2" class="data row171 col2" >40.80</td>
+      <td id="T_a2e55_row171_col3" class="data row171 col3" >0</td>
+      <td id="T_a2e55_row171_col4" class="data row171 col4" >33</td>
+      <td id="T_a2e55_row171_col5" class="data row171 col5" >32</td>
+      <td id="T_a2e55_row171_col6" class="data row171 col6" >新進貨</td>
+      <td id="T_a2e55_row171_col7" class="data row171 col7" >-1.69%</td>
+      <td id="T_a2e55_row171_col8" class="data row171 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row172_col0" class="data row172 col0" >6221.TWO</td>
+      <td id="T_a2e55_row172_col1" class="data row172 col1" >晉泰</td>
+      <td id="T_a2e55_row172_col2" class="data row172 col2" >23.10</td>
+      <td id="T_a2e55_row172_col3" class="data row172 col3" >-19</td>
+      <td id="T_a2e55_row172_col4" class="data row172 col4" >12</td>
+      <td id="T_a2e55_row172_col5" class="data row172 col5" >32</td>
+      <td id="T_a2e55_row172_col6" class="data row172 col6" >-0.6x</td>
+      <td id="T_a2e55_row172_col7" class="data row172 col7" >0.43%</td>
+      <td id="T_a2e55_row172_col8" class="data row172 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row173_col0" class="data row173 col0" >6654.TWO</td>
+      <td id="T_a2e55_row173_col1" class="data row173 col1" >天正國際</td>
+      <td id="T_a2e55_row173_col2" class="data row173 col2" >140.00</td>
+      <td id="T_a2e55_row173_col3" class="data row173 col3" >1</td>
+      <td id="T_a2e55_row173_col4" class="data row173 col4" >30</td>
+      <td id="T_a2e55_row173_col5" class="data row173 col5" >29</td>
+      <td id="T_a2e55_row173_col6" class="data row173 col6" >新進貨</td>
+      <td id="T_a2e55_row173_col7" class="data row173 col7" >44.33%</td>
+      <td id="T_a2e55_row173_col8" class="data row173 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row174_col0" class="data row174 col0" >8489.TWO</td>
+      <td id="T_a2e55_row174_col1" class="data row174 col1" >三貝德</td>
+      <td id="T_a2e55_row174_col2" class="data row174 col2" >22.70</td>
+      <td id="T_a2e55_row174_col3" class="data row174 col3" >4</td>
+      <td id="T_a2e55_row174_col4" class="data row174 col4" >31</td>
+      <td id="T_a2e55_row174_col5" class="data row174 col5" >27</td>
+      <td id="T_a2e55_row174_col6" class="data row174 col6" >新進貨</td>
+      <td id="T_a2e55_row174_col7" class="data row174 col7" >-6.97%</td>
+      <td id="T_a2e55_row174_col8" class="data row174 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row175_col0" class="data row175 col0" >7556.TWO</td>
+      <td id="T_a2e55_row175_col1" class="data row175 col1" >意德士</td>
+      <td id="T_a2e55_row175_col2" class="data row175 col2" >272.50</td>
+      <td id="T_a2e55_row175_col3" class="data row175 col3" >26</td>
+      <td id="T_a2e55_row175_col4" class="data row175 col4" >52</td>
+      <td id="T_a2e55_row175_col5" class="data row175 col5" >26</td>
+      <td id="T_a2e55_row175_col6" class="data row175 col6" >2.0x</td>
+      <td id="T_a2e55_row175_col7" class="data row175 col7" >1.30%</td>
+      <td id="T_a2e55_row175_col8" class="data row175 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row176_col0" class="data row176 col0" >6863.TW</td>
+      <td id="T_a2e55_row176_col1" class="data row176 col1" >永道-KY</td>
+      <td id="T_a2e55_row176_col2" class="data row176 col2" >109.50</td>
+      <td id="T_a2e55_row176_col3" class="data row176 col3" >-23</td>
+      <td id="T_a2e55_row176_col4" class="data row176 col4" >0</td>
+      <td id="T_a2e55_row176_col5" class="data row176 col5" >22</td>
+      <td id="T_a2e55_row176_col6" class="data row176 col6" >0.0x</td>
+      <td id="T_a2e55_row176_col7" class="data row176 col7" >-1.79%</td>
+      <td id="T_a2e55_row176_col8" class="data row176 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row177_col0" class="data row177 col0" >8477.TWO</td>
+      <td id="T_a2e55_row177_col1" class="data row177 col1" >創業家</td>
+      <td id="T_a2e55_row177_col2" class="data row177 col2" >20.00</td>
+      <td id="T_a2e55_row177_col3" class="data row177 col3" >2</td>
+      <td id="T_a2e55_row177_col4" class="data row177 col4" >21</td>
+      <td id="T_a2e55_row177_col5" class="data row177 col5" >19</td>
+      <td id="T_a2e55_row177_col6" class="data row177 col6" >新進貨</td>
+      <td id="T_a2e55_row177_col7" class="data row177 col7" >22.32%</td>
+      <td id="T_a2e55_row177_col8" class="data row177 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row178_col0" class="data row178 col0" >8084.TWO</td>
+      <td id="T_a2e55_row178_col1" class="data row178 col1" >巨虹</td>
+      <td id="T_a2e55_row178_col2" class="data row178 col2" >46.35</td>
+      <td id="T_a2e55_row178_col3" class="data row178 col3" >-2</td>
+      <td id="T_a2e55_row178_col4" class="data row178 col4" >17</td>
+      <td id="T_a2e55_row178_col5" class="data row178 col5" >19</td>
+      <td id="T_a2e55_row178_col6" class="data row178 col6" >新進貨</td>
+      <td id="T_a2e55_row178_col7" class="data row178 col7" >7.54%</td>
+      <td id="T_a2e55_row178_col8" class="data row178 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row179_col0" class="data row179 col0" >6574.TWO</td>
+      <td id="T_a2e55_row179_col1" class="data row179 col1" >霈方</td>
+      <td id="T_a2e55_row179_col2" class="data row179 col2" >115.50</td>
+      <td id="T_a2e55_row179_col3" class="data row179 col3" >-2</td>
+      <td id="T_a2e55_row179_col4" class="data row179 col4" >15</td>
+      <td id="T_a2e55_row179_col5" class="data row179 col5" >18</td>
+      <td id="T_a2e55_row179_col6" class="data row179 col6" >新進貨</td>
+      <td id="T_a2e55_row179_col7" class="data row179 col7" >-1.70%</td>
+      <td id="T_a2e55_row179_col8" class="data row179 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row180_col0" class="data row180 col0" >6417.TWO</td>
+      <td id="T_a2e55_row180_col1" class="data row180 col1" >韋僑</td>
+      <td id="T_a2e55_row180_col2" class="data row180 col2" >146.00</td>
+      <td id="T_a2e55_row180_col3" class="data row180 col3" >49</td>
+      <td id="T_a2e55_row180_col4" class="data row180 col4" >66</td>
+      <td id="T_a2e55_row180_col5" class="data row180 col5" >16</td>
+      <td id="T_a2e55_row180_col6" class="data row180 col6" >1.3x</td>
+      <td id="T_a2e55_row180_col7" class="data row180 col7" >12.31%</td>
+      <td id="T_a2e55_row180_col8" class="data row180 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row181_col0" class="data row181 col0" >8201.TW</td>
+      <td id="T_a2e55_row181_col1" class="data row181 col1" >無敵</td>
+      <td id="T_a2e55_row181_col2" class="data row181 col2" >13.00</td>
+      <td id="T_a2e55_row181_col3" class="data row181 col3" >-2</td>
+      <td id="T_a2e55_row181_col4" class="data row181 col4" >14</td>
+      <td id="T_a2e55_row181_col5" class="data row181 col5" >16</td>
+      <td id="T_a2e55_row181_col6" class="data row181 col6" >新進貨</td>
+      <td id="T_a2e55_row181_col7" class="data row181 col7" >-0.38%</td>
+      <td id="T_a2e55_row181_col8" class="data row181 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row182_col0" class="data row182 col0" >6934.TW</td>
+      <td id="T_a2e55_row182_col1" class="data row182 col1" >心誠鎂</td>
+      <td id="T_a2e55_row182_col2" class="data row182 col2" >74.50</td>
+      <td id="T_a2e55_row182_col3" class="data row182 col3" >-10</td>
+      <td id="T_a2e55_row182_col4" class="data row182 col4" >5</td>
+      <td id="T_a2e55_row182_col5" class="data row182 col5" >15</td>
+      <td id="T_a2e55_row182_col6" class="data row182 col6" >-0.5x</td>
+      <td id="T_a2e55_row182_col7" class="data row182 col7" >-1.97%</td>
+      <td id="T_a2e55_row182_col8" class="data row182 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row183_col0" class="data row183 col0" >8455.TWO</td>
+      <td id="T_a2e55_row183_col1" class="data row183 col1" >大拓-KY</td>
+      <td id="T_a2e55_row183_col2" class="data row183 col2" >43.70</td>
+      <td id="T_a2e55_row183_col3" class="data row183 col3" >-13</td>
+      <td id="T_a2e55_row183_col4" class="data row183 col4" >1</td>
+      <td id="T_a2e55_row183_col5" class="data row183 col5" >14</td>
+      <td id="T_a2e55_row183_col6" class="data row183 col6" >-0.1x</td>
+      <td id="T_a2e55_row183_col7" class="data row183 col7" >2.10%</td>
+      <td id="T_a2e55_row183_col8" class="data row183 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row184_col0" class="data row184 col0" >6743.TW</td>
+      <td id="T_a2e55_row184_col1" class="data row184 col1" >安普新</td>
+      <td id="T_a2e55_row184_col2" class="data row184 col2" >29.35</td>
+      <td id="T_a2e55_row184_col3" class="data row184 col3" >14</td>
+      <td id="T_a2e55_row184_col4" class="data row184 col4" >27</td>
+      <td id="T_a2e55_row184_col5" class="data row184 col5" >13</td>
+      <td id="T_a2e55_row184_col6" class="data row184 col6" >1.9x</td>
+      <td id="T_a2e55_row184_col7" class="data row184 col7" >1.56%</td>
+      <td id="T_a2e55_row184_col8" class="data row184 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row185_col0" class="data row185 col0" >8463.TW</td>
+      <td id="T_a2e55_row185_col1" class="data row185 col1" >潤泰材</td>
+      <td id="T_a2e55_row185_col2" class="data row185 col2" >21.65</td>
+      <td id="T_a2e55_row185_col3" class="data row185 col3" >-4</td>
+      <td id="T_a2e55_row185_col4" class="data row185 col4" >7</td>
+      <td id="T_a2e55_row185_col5" class="data row185 col5" >12</td>
+      <td id="T_a2e55_row185_col6" class="data row185 col6" >新進貨</td>
+      <td id="T_a2e55_row185_col7" class="data row185 col7" >2.85%</td>
+      <td id="T_a2e55_row185_col8" class="data row185 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row186_col0" class="data row186 col0" >9918.TW</td>
+      <td id="T_a2e55_row186_col1" class="data row186 col1" >欣天然</td>
+      <td id="T_a2e55_row186_col2" class="data row186 col2" >44.35</td>
+      <td id="T_a2e55_row186_col3" class="data row186 col3" >1</td>
+      <td id="T_a2e55_row186_col4" class="data row186 col4" >13</td>
+      <td id="T_a2e55_row186_col5" class="data row186 col5" >12</td>
+      <td id="T_a2e55_row186_col6" class="data row186 col6" >新進貨</td>
+      <td id="T_a2e55_row186_col7" class="data row186 col7" >2.42%</td>
+      <td id="T_a2e55_row186_col8" class="data row186 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row187_col0" class="data row187 col0" >7799.TW</td>
+      <td id="T_a2e55_row187_col1" class="data row187 col1" >禾榮科</td>
+      <td id="T_a2e55_row187_col2" class="data row187 col2" >321.00</td>
+      <td id="T_a2e55_row187_col3" class="data row187 col3" >-36</td>
+      <td id="T_a2e55_row187_col4" class="data row187 col4" >-23</td>
+      <td id="T_a2e55_row187_col5" class="data row187 col5" >12</td>
+      <td id="T_a2e55_row187_col6" class="data row187 col6" >0.6x</td>
+      <td id="T_a2e55_row187_col7" class="data row187 col7" >1.26%</td>
+      <td id="T_a2e55_row187_col8" class="data row187 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row188_col0" class="data row188 col0" >9962.TWO</td>
+      <td id="T_a2e55_row188_col1" class="data row188 col1" >有益</td>
+      <td id="T_a2e55_row188_col2" class="data row188 col2" >9.61</td>
+      <td id="T_a2e55_row188_col3" class="data row188 col3" >0</td>
+      <td id="T_a2e55_row188_col4" class="data row188 col4" >11</td>
+      <td id="T_a2e55_row188_col5" class="data row188 col5" >12</td>
+      <td id="T_a2e55_row188_col6" class="data row188 col6" >新進貨</td>
+      <td id="T_a2e55_row188_col7" class="data row188 col7" >1.69%</td>
+      <td id="T_a2e55_row188_col8" class="data row188 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row189_col0" class="data row189 col0" >8930.TWO</td>
+      <td id="T_a2e55_row189_col1" class="data row189 col1" >青鋼</td>
+      <td id="T_a2e55_row189_col2" class="data row189 col2" >28.45</td>
+      <td id="T_a2e55_row189_col3" class="data row189 col3" >-10</td>
+      <td id="T_a2e55_row189_col4" class="data row189 col4" >0</td>
+      <td id="T_a2e55_row189_col5" class="data row189 col5" >11</td>
+      <td id="T_a2e55_row189_col6" class="data row189 col6" >-0.1x</td>
+      <td id="T_a2e55_row189_col7" class="data row189 col7" >0.18%</td>
+      <td id="T_a2e55_row189_col8" class="data row189 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row190_col0" class="data row190 col0" >6870.TWO</td>
+      <td id="T_a2e55_row190_col1" class="data row190 col1" >騰雲</td>
+      <td id="T_a2e55_row190_col2" class="data row190 col2" >263.00</td>
+      <td id="T_a2e55_row190_col3" class="data row190 col3" >-45</td>
+      <td id="T_a2e55_row190_col4" class="data row190 col4" >-34</td>
+      <td id="T_a2e55_row190_col5" class="data row190 col5" >11</td>
+      <td id="T_a2e55_row190_col6" class="data row190 col6" >0.8x</td>
+      <td id="T_a2e55_row190_col7" class="data row190 col7" >17.41%</td>
+      <td id="T_a2e55_row190_col8" class="data row190 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row191_col0" class="data row191 col0" >6791.TWO</td>
+      <td id="T_a2e55_row191_col1" class="data row191 col1" >虎門科技</td>
+      <td id="T_a2e55_row191_col2" class="data row191 col2" >111.00</td>
+      <td id="T_a2e55_row191_col3" class="data row191 col3" >6</td>
+      <td id="T_a2e55_row191_col4" class="data row191 col4" >18</td>
+      <td id="T_a2e55_row191_col5" class="data row191 col5" >11</td>
+      <td id="T_a2e55_row191_col6" class="data row191 col6" >2.6x</td>
+      <td id="T_a2e55_row191_col7" class="data row191 col7" >0.91%</td>
+      <td id="T_a2e55_row191_col8" class="data row191 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row192_col0" class="data row192 col0" >8416.TWO</td>
+      <td id="T_a2e55_row192_col1" class="data row192 col1" >實威</td>
+      <td id="T_a2e55_row192_col2" class="data row192 col2" >189.00</td>
+      <td id="T_a2e55_row192_col3" class="data row192 col3" >0</td>
+      <td id="T_a2e55_row192_col4" class="data row192 col4" >10</td>
+      <td id="T_a2e55_row192_col5" class="data row192 col5" >10</td>
+      <td id="T_a2e55_row192_col6" class="data row192 col6" >新進貨</td>
+      <td id="T_a2e55_row192_col7" class="data row192 col7" >8.62%</td>
+      <td id="T_a2e55_row192_col8" class="data row192 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row193_col0" class="data row193 col0" >6241.TWO</td>
+      <td id="T_a2e55_row193_col1" class="data row193 col1" >鑫永洋</td>
+      <td id="T_a2e55_row193_col2" class="data row193 col2" >10.00</td>
+      <td id="T_a2e55_row193_col3" class="data row193 col3" >14</td>
+      <td id="T_a2e55_row193_col4" class="data row193 col4" >25</td>
+      <td id="T_a2e55_row193_col5" class="data row193 col5" >10</td>
+      <td id="T_a2e55_row193_col6" class="data row193 col6" >1.7x</td>
+      <td id="T_a2e55_row193_col7" class="data row193 col7" >-7.41%</td>
+      <td id="T_a2e55_row193_col8" class="data row193 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row194_col0" class="data row194 col0" >8099.TWO</td>
+      <td id="T_a2e55_row194_col1" class="data row194 col1" >大世科</td>
+      <td id="T_a2e55_row194_col2" class="data row194 col2" >60.50</td>
+      <td id="T_a2e55_row194_col3" class="data row194 col3" >-4</td>
+      <td id="T_a2e55_row194_col4" class="data row194 col4" >5</td>
+      <td id="T_a2e55_row194_col5" class="data row194 col5" >9</td>
+      <td id="T_a2e55_row194_col6" class="data row194 col6" >新進貨</td>
+      <td id="T_a2e55_row194_col7" class="data row194 col7" >0.67%</td>
+      <td id="T_a2e55_row194_col8" class="data row194 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row195_col0" class="data row195 col0" >6965.TW</td>
+      <td id="T_a2e55_row195_col1" class="data row195 col1" >中傑-KY</td>
+      <td id="T_a2e55_row195_col2" class="data row195 col2" >78.00</td>
+      <td id="T_a2e55_row195_col3" class="data row195 col3" >-5</td>
+      <td id="T_a2e55_row195_col4" class="data row195 col4" >4</td>
+      <td id="T_a2e55_row195_col5" class="data row195 col5" >9</td>
+      <td id="T_a2e55_row195_col6" class="data row195 col6" >-0.9x</td>
+      <td id="T_a2e55_row195_col7" class="data row195 col7" >2.23%</td>
+      <td id="T_a2e55_row195_col8" class="data row195 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row196_col0" class="data row196 col0" >8171.TWO</td>
+      <td id="T_a2e55_row196_col1" class="data row196 col1" >天宇</td>
+      <td id="T_a2e55_row196_col2" class="data row196 col2" >22.95</td>
+      <td id="T_a2e55_row196_col3" class="data row196 col3" >16</td>
+      <td id="T_a2e55_row196_col4" class="data row196 col4" >24</td>
+      <td id="T_a2e55_row196_col5" class="data row196 col5" >8</td>
+      <td id="T_a2e55_row196_col6" class="data row196 col6" >1.5x</td>
+      <td id="T_a2e55_row196_col7" class="data row196 col7" >-1.71%</td>
+      <td id="T_a2e55_row196_col8" class="data row196 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row197_col0" class="data row197 col0" >6230.TW</td>
+      <td id="T_a2e55_row197_col1" class="data row197 col1" >尼得科超眾</td>
+      <td id="T_a2e55_row197_col2" class="data row197 col2" >134.00</td>
+      <td id="T_a2e55_row197_col3" class="data row197 col3" >-11</td>
+      <td id="T_a2e55_row197_col4" class="data row197 col4" >-2</td>
+      <td id="T_a2e55_row197_col5" class="data row197 col5" >8</td>
+      <td id="T_a2e55_row197_col6" class="data row197 col6" >0.2x</td>
+      <td id="T_a2e55_row197_col7" class="data row197 col7" >0.00%</td>
+      <td id="T_a2e55_row197_col8" class="data row197 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row198_col0" class="data row198 col0" >8354.TWO</td>
+      <td id="T_a2e55_row198_col1" class="data row198 col1" >冠好</td>
+      <td id="T_a2e55_row198_col2" class="data row198 col2" >17.10</td>
+      <td id="T_a2e55_row198_col3" class="data row198 col3" >0</td>
+      <td id="T_a2e55_row198_col4" class="data row198 col4" >7</td>
+      <td id="T_a2e55_row198_col5" class="data row198 col5" >8</td>
+      <td id="T_a2e55_row198_col6" class="data row198 col6" >新進貨</td>
+      <td id="T_a2e55_row198_col7" class="data row198 col7" >3.95%</td>
+      <td id="T_a2e55_row198_col8" class="data row198 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row199_col0" class="data row199 col0" >7631.TW</td>
+      <td id="T_a2e55_row199_col1" class="data row199 col1" >聚賢研發-創</td>
+      <td id="T_a2e55_row199_col2" class="data row199 col2" >122.50</td>
+      <td id="T_a2e55_row199_col3" class="data row199 col3" >-2</td>
+      <td id="T_a2e55_row199_col4" class="data row199 col4" >6</td>
+      <td id="T_a2e55_row199_col5" class="data row199 col5" >8</td>
+      <td id="T_a2e55_row199_col6" class="data row199 col6" >新進貨</td>
+      <td id="T_a2e55_row199_col7" class="data row199 col7" >-3.54%</td>
+      <td id="T_a2e55_row199_col8" class="data row199 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row200_col0" class="data row200 col0" >4195.TWO</td>
+      <td id="T_a2e55_row200_col1" class="data row200 col1" ></td>
+      <td id="T_a2e55_row200_col2" class="data row200 col2" >16.70</td>
+      <td id="T_a2e55_row200_col3" class="data row200 col3" >76</td>
+      <td id="T_a2e55_row200_col4" class="data row200 col4" >84</td>
+      <td id="T_a2e55_row200_col5" class="data row200 col5" >7</td>
+      <td id="T_a2e55_row200_col6" class="data row200 col6" >1.1x</td>
+      <td id="T_a2e55_row200_col7" class="data row200 col7" >-10.70%</td>
+      <td id="T_a2e55_row200_col8" class="data row200 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row201_col0" class="data row201 col0" >4195.TWO</td>
+      <td id="T_a2e55_row201_col1" class="data row201 col1" ></td>
+      <td id="T_a2e55_row201_col2" class="data row201 col2" >16.70</td>
+      <td id="T_a2e55_row201_col3" class="data row201 col3" >76</td>
+      <td id="T_a2e55_row201_col4" class="data row201 col4" >84</td>
+      <td id="T_a2e55_row201_col5" class="data row201 col5" >7</td>
+      <td id="T_a2e55_row201_col6" class="data row201 col6" >1.1x</td>
+      <td id="T_a2e55_row201_col7" class="data row201 col7" >-10.70%</td>
+      <td id="T_a2e55_row201_col8" class="data row201 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row202_col0" class="data row202 col0" >8937.TWO</td>
+      <td id="T_a2e55_row202_col1" class="data row202 col1" >合騏*</td>
+      <td id="T_a2e55_row202_col2" class="data row202 col2" >28.20</td>
+      <td id="T_a2e55_row202_col3" class="data row202 col3" >1</td>
+      <td id="T_a2e55_row202_col4" class="data row202 col4" >7</td>
+      <td id="T_a2e55_row202_col5" class="data row202 col5" >6</td>
+      <td id="T_a2e55_row202_col6" class="data row202 col6" >新進貨</td>
+      <td id="T_a2e55_row202_col7" class="data row202 col7" >-11.88%</td>
+      <td id="T_a2e55_row202_col8" class="data row202 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row203_col0" class="data row203 col0" >6865.TWO</td>
+      <td id="T_a2e55_row203_col1" class="data row203 col1" >偉康科技</td>
+      <td id="T_a2e55_row203_col2" class="data row203 col2" >26.50</td>
+      <td id="T_a2e55_row203_col3" class="data row203 col3" >-6</td>
+      <td id="T_a2e55_row203_col4" class="data row203 col4" >0</td>
+      <td id="T_a2e55_row203_col5" class="data row203 col5" >6</td>
+      <td id="T_a2e55_row203_col6" class="data row203 col6" >-0.1x</td>
+      <td id="T_a2e55_row203_col7" class="data row203 col7" >-4.16%</td>
+      <td id="T_a2e55_row203_col8" class="data row203 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row204_col0" class="data row204 col0" >6928.TW</td>
+      <td id="T_a2e55_row204_col1" class="data row204 col1" >攸泰科技</td>
+      <td id="T_a2e55_row204_col2" class="data row204 col2" >46.40</td>
+      <td id="T_a2e55_row204_col3" class="data row204 col3" >-3</td>
+      <td id="T_a2e55_row204_col4" class="data row204 col4" >3</td>
+      <td id="T_a2e55_row204_col5" class="data row204 col5" >6</td>
+      <td id="T_a2e55_row204_col6" class="data row204 col6" >新進貨</td>
+      <td id="T_a2e55_row204_col7" class="data row204 col7" >-0.22%</td>
+      <td id="T_a2e55_row204_col8" class="data row204 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row205_col0" class="data row205 col0" >6689.TW</td>
+      <td id="T_a2e55_row205_col1" class="data row205 col1" >伊雲谷</td>
+      <td id="T_a2e55_row205_col2" class="data row205 col2" >64.60</td>
+      <td id="T_a2e55_row205_col3" class="data row205 col3" >-2</td>
+      <td id="T_a2e55_row205_col4" class="data row205 col4" >3</td>
+      <td id="T_a2e55_row205_col5" class="data row205 col5" >6</td>
+      <td id="T_a2e55_row205_col6" class="data row205 col6" >新進貨</td>
+      <td id="T_a2e55_row205_col7" class="data row205 col7" >-3.29%</td>
+      <td id="T_a2e55_row205_col8" class="data row205 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row206_col0" class="data row206 col0" >9926.TW</td>
+      <td id="T_a2e55_row206_col1" class="data row206 col1" >新海</td>
+      <td id="T_a2e55_row206_col2" class="data row206 col2" >49.00</td>
+      <td id="T_a2e55_row206_col3" class="data row206 col3" >0</td>
+      <td id="T_a2e55_row206_col4" class="data row206 col4" >4</td>
+      <td id="T_a2e55_row206_col5" class="data row206 col5" >5</td>
+      <td id="T_a2e55_row206_col6" class="data row206 col6" >新進貨</td>
+      <td id="T_a2e55_row206_col7" class="data row206 col7" >0.10%</td>
+      <td id="T_a2e55_row206_col8" class="data row206 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row207_col0" class="data row207 col0" >6637.TWO</td>
+      <td id="T_a2e55_row207_col1" class="data row207 col1" >醫影</td>
+      <td id="T_a2e55_row207_col2" class="data row207 col2" >66.00</td>
+      <td id="T_a2e55_row207_col3" class="data row207 col3" >0</td>
+      <td id="T_a2e55_row207_col4" class="data row207 col4" >5</td>
+      <td id="T_a2e55_row207_col5" class="data row207 col5" >5</td>
+      <td id="T_a2e55_row207_col6" class="data row207 col6" >新進貨</td>
+      <td id="T_a2e55_row207_col7" class="data row207 col7" >0.46%</td>
+      <td id="T_a2e55_row207_col8" class="data row207 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row208_col0" class="data row208 col0" >8047.TWO</td>
+      <td id="T_a2e55_row208_col1" class="data row208 col1" >星雲</td>
+      <td id="T_a2e55_row208_col2" class="data row208 col2" >43.45</td>
+      <td id="T_a2e55_row208_col3" class="data row208 col3" >-7</td>
+      <td id="T_a2e55_row208_col4" class="data row208 col4" >-2</td>
+      <td id="T_a2e55_row208_col5" class="data row208 col5" >5</td>
+      <td id="T_a2e55_row208_col6" class="data row208 col6" >0.3x</td>
+      <td id="T_a2e55_row208_col7" class="data row208 col7" >-5.23%</td>
+      <td id="T_a2e55_row208_col8" class="data row208 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row209_col0" class="data row209 col0" >6645.TW</td>
+      <td id="T_a2e55_row209_col1" class="data row209 col1" >金萬林-創</td>
+      <td id="T_a2e55_row209_col2" class="data row209 col2" >11.90</td>
+      <td id="T_a2e55_row209_col3" class="data row209 col3" >-2</td>
+      <td id="T_a2e55_row209_col4" class="data row209 col4" >2</td>
+      <td id="T_a2e55_row209_col5" class="data row209 col5" >4</td>
+      <td id="T_a2e55_row209_col6" class="data row209 col6" >新進貨</td>
+      <td id="T_a2e55_row209_col7" class="data row209 col7" >-0.83%</td>
+      <td id="T_a2e55_row209_col8" class="data row209 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row210_col0" class="data row210 col0" >6666.TW</td>
+      <td id="T_a2e55_row210_col1" class="data row210 col1" >羅麗芬-KY</td>
+      <td id="T_a2e55_row210_col2" class="data row210 col2" >39.60</td>
+      <td id="T_a2e55_row210_col3" class="data row210 col3" >0</td>
+      <td id="T_a2e55_row210_col4" class="data row210 col4" >3</td>
+      <td id="T_a2e55_row210_col5" class="data row210 col5" >4</td>
+      <td id="T_a2e55_row210_col6" class="data row210 col6" >新進貨</td>
+      <td id="T_a2e55_row210_col7" class="data row210 col7" >-4.92%</td>
+      <td id="T_a2e55_row210_col8" class="data row210 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row211_col0" class="data row211 col0" >6794.TW</td>
+      <td id="T_a2e55_row211_col1" class="data row211 col1" >向榮生技</td>
+      <td id="T_a2e55_row211_col2" class="data row211 col2" >79.80</td>
+      <td id="T_a2e55_row211_col3" class="data row211 col3" >0</td>
+      <td id="T_a2e55_row211_col4" class="data row211 col4" >4</td>
+      <td id="T_a2e55_row211_col5" class="data row211 col5" >4</td>
+      <td id="T_a2e55_row211_col6" class="data row211 col6" >新進貨</td>
+      <td id="T_a2e55_row211_col7" class="data row211 col7" >-0.25%</td>
+      <td id="T_a2e55_row211_col8" class="data row211 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row212_col0" class="data row212 col0" >6875.TWO</td>
+      <td id="T_a2e55_row212_col1" class="data row212 col1" >國邑*</td>
+      <td id="T_a2e55_row212_col2" class="data row212 col2" >35.45</td>
+      <td id="T_a2e55_row212_col3" class="data row212 col3" >-7</td>
+      <td id="T_a2e55_row212_col4" class="data row212 col4" >-2</td>
+      <td id="T_a2e55_row212_col5" class="data row212 col5" >4</td>
+      <td id="T_a2e55_row212_col6" class="data row212 col6" >0.4x</td>
+      <td id="T_a2e55_row212_col7" class="data row212 col7" >-6.96%</td>
+      <td id="T_a2e55_row212_col8" class="data row212 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row213_col0" class="data row213 col0" >6988.TW</td>
+      <td id="T_a2e55_row213_col1" class="data row213 col1" >威力暘-創</td>
+      <td id="T_a2e55_row213_col2" class="data row213 col2" >16.45</td>
+      <td id="T_a2e55_row213_col3" class="data row213 col3" >-4</td>
+      <td id="T_a2e55_row213_col4" class="data row213 col4" >0</td>
+      <td id="T_a2e55_row213_col5" class="data row213 col5" >3</td>
+      <td id="T_a2e55_row213_col6" class="data row213 col6" >轉買進</td>
+      <td id="T_a2e55_row213_col7" class="data row213 col7" >-1.50%</td>
+      <td id="T_a2e55_row213_col8" class="data row213 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row214_col0" class="data row214 col0" >6961.TWO</td>
+      <td id="T_a2e55_row214_col1" class="data row214 col1" >旅天下</td>
+      <td id="T_a2e55_row214_col2" class="data row214 col2" >59.90</td>
+      <td id="T_a2e55_row214_col3" class="data row214 col3" >0</td>
+      <td id="T_a2e55_row214_col4" class="data row214 col4" >2</td>
+      <td id="T_a2e55_row214_col5" class="data row214 col5" >3</td>
+      <td id="T_a2e55_row214_col6" class="data row214 col6" >新進貨</td>
+      <td id="T_a2e55_row214_col7" class="data row214 col7" >2.39%</td>
+      <td id="T_a2e55_row214_col8" class="data row214 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row215_col0" class="data row215 col0" >7753.TWO</td>
+      <td id="T_a2e55_row215_col1" class="data row215 col1" >星亞</td>
+      <td id="T_a2e55_row215_col2" class="data row215 col2" >42.40</td>
+      <td id="T_a2e55_row215_col3" class="data row215 col3" >0</td>
+      <td id="T_a2e55_row215_col4" class="data row215 col4" >3</td>
+      <td id="T_a2e55_row215_col5" class="data row215 col5" >2</td>
+      <td id="T_a2e55_row215_col6" class="data row215 col6" >新進貨</td>
+      <td id="T_a2e55_row215_col7" class="data row215 col7" >2.66%</td>
+      <td id="T_a2e55_row215_col8" class="data row215 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row216_col0" class="data row216 col0" >8437.TWO</td>
+      <td id="T_a2e55_row216_col1" class="data row216 col1" >大地-KY</td>
+      <td id="T_a2e55_row216_col2" class="data row216 col2" >11.55</td>
+      <td id="T_a2e55_row216_col3" class="data row216 col3" >4</td>
+      <td id="T_a2e55_row216_col4" class="data row216 col4" >7</td>
+      <td id="T_a2e55_row216_col5" class="data row216 col5" >2</td>
+      <td id="T_a2e55_row216_col6" class="data row216 col6" >新進貨</td>
+      <td id="T_a2e55_row216_col7" class="data row216 col7" >-4.15%</td>
+      <td id="T_a2e55_row216_col8" class="data row216 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row217_col0" class="data row217 col0" >6918.TW</td>
+      <td id="T_a2e55_row217_col1" class="data row217 col1" >愛派司</td>
+      <td id="T_a2e55_row217_col2" class="data row217 col2" >73.00</td>
+      <td id="T_a2e55_row217_col3" class="data row217 col3" >-7</td>
+      <td id="T_a2e55_row217_col4" class="data row217 col4" >-4</td>
+      <td id="T_a2e55_row217_col5" class="data row217 col5" >2</td>
+      <td id="T_a2e55_row217_col6" class="data row217 col6" >0.7x</td>
+      <td id="T_a2e55_row217_col7" class="data row217 col7" >-2.93%</td>
+      <td id="T_a2e55_row217_col8" class="data row217 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row218_col0" class="data row218 col0" >6916.TW</td>
+      <td id="T_a2e55_row218_col1" class="data row218 col1" >華凌</td>
+      <td id="T_a2e55_row218_col2" class="data row218 col2" >18.00</td>
+      <td id="T_a2e55_row218_col3" class="data row218 col3" >-2</td>
+      <td id="T_a2e55_row218_col4" class="data row218 col4" >0</td>
+      <td id="T_a2e55_row218_col5" class="data row218 col5" >2</td>
+      <td id="T_a2e55_row218_col6" class="data row218 col6" >轉買進</td>
+      <td id="T_a2e55_row218_col7" class="data row218 col7" >3.45%</td>
+      <td id="T_a2e55_row218_col8" class="data row218 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row219_col0" class="data row219 col0" >6754.TW</td>
+      <td id="T_a2e55_row219_col1" class="data row219 col1" >匯僑設計</td>
+      <td id="T_a2e55_row219_col2" class="data row219 col2" >43.50</td>
+      <td id="T_a2e55_row219_col3" class="data row219 col3" >-1</td>
+      <td id="T_a2e55_row219_col4" class="data row219 col4" >0</td>
+      <td id="T_a2e55_row219_col5" class="data row219 col5" >2</td>
+      <td id="T_a2e55_row219_col6" class="data row219 col6" >新進貨</td>
+      <td id="T_a2e55_row219_col7" class="data row219 col7" >-1.02%</td>
+      <td id="T_a2e55_row219_col8" class="data row219 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row220_col0" class="data row220 col0" >7732.TW</td>
+      <td id="T_a2e55_row220_col1" class="data row220 col1" >金興精密</td>
+      <td id="T_a2e55_row220_col2" class="data row220 col2" >36.00</td>
+      <td id="T_a2e55_row220_col3" class="data row220 col3" >-1</td>
+      <td id="T_a2e55_row220_col4" class="data row220 col4" >0</td>
+      <td id="T_a2e55_row220_col5" class="data row220 col5" >2</td>
+      <td id="T_a2e55_row220_col6" class="data row220 col6" >新進貨</td>
+      <td id="T_a2e55_row220_col7" class="data row220 col7" >2.86%</td>
+      <td id="T_a2e55_row220_col8" class="data row220 col8" >▲ 順勢追意</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row221_col0" class="data row221 col0" >6908.TW</td>
+      <td id="T_a2e55_row221_col1" class="data row221 col1" >宏碁遊戲-創</td>
+      <td id="T_a2e55_row221_col2" class="data row221 col2" >37.35</td>
+      <td id="T_a2e55_row221_col3" class="data row221 col3" >0</td>
+      <td id="T_a2e55_row221_col4" class="data row221 col4" >2</td>
+      <td id="T_a2e55_row221_col5" class="data row221 col5" >2</td>
+      <td id="T_a2e55_row221_col6" class="data row221 col6" >新進貨</td>
+      <td id="T_a2e55_row221_col7" class="data row221 col7" >-2.99%</td>
+      <td id="T_a2e55_row221_col8" class="data row221 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row222_col0" class="data row222 col0" >9960.TWO</td>
+      <td id="T_a2e55_row222_col1" class="data row222 col1" >邁達康</td>
+      <td id="T_a2e55_row222_col2" class="data row222 col2" >30.45</td>
+      <td id="T_a2e55_row222_col3" class="data row222 col3" >-2</td>
+      <td id="T_a2e55_row222_col4" class="data row222 col4" >0</td>
+      <td id="T_a2e55_row222_col5" class="data row222 col5" >2</td>
+      <td id="T_a2e55_row222_col6" class="data row222 col6" >轉買進</td>
+      <td id="T_a2e55_row222_col7" class="data row222 col7" >-2.56%</td>
+      <td id="T_a2e55_row222_col8" class="data row222 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row223_col0" class="data row223 col0" >8940.TW</td>
+      <td id="T_a2e55_row223_col1" class="data row223 col1" >新天地</td>
+      <td id="T_a2e55_row223_col2" class="data row223 col2" >16.60</td>
+      <td id="T_a2e55_row223_col3" class="data row223 col3" >-1</td>
+      <td id="T_a2e55_row223_col4" class="data row223 col4" >0</td>
+      <td id="T_a2e55_row223_col5" class="data row223 col5" >1</td>
+      <td id="T_a2e55_row223_col6" class="data row223 col6" >新進貨</td>
+      <td id="T_a2e55_row223_col7" class="data row223 col7" >-1.78%</td>
+      <td id="T_a2e55_row223_col8" class="data row223 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row224_col0" class="data row224 col0" >6210.TWO</td>
+      <td id="T_a2e55_row224_col1" class="data row224 col1" >慶生</td>
+      <td id="T_a2e55_row224_col2" class="data row224 col2" >21.05</td>
+      <td id="T_a2e55_row224_col3" class="data row224 col3" >0</td>
+      <td id="T_a2e55_row224_col4" class="data row224 col4" >1</td>
+      <td id="T_a2e55_row224_col5" class="data row224 col5" >1</td>
+      <td id="T_a2e55_row224_col6" class="data row224 col6" >新進貨</td>
+      <td id="T_a2e55_row224_col7" class="data row224 col7" >0.00%</td>
+      <td id="T_a2e55_row224_col8" class="data row224 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row225_col0" class="data row225 col0" >6641.TW</td>
+      <td id="T_a2e55_row225_col1" class="data row225 col1" >基士德-KY</td>
+      <td id="T_a2e55_row225_col2" class="data row225 col2" >18.25</td>
+      <td id="T_a2e55_row225_col3" class="data row225 col3" >0</td>
+      <td id="T_a2e55_row225_col4" class="data row225 col4" >1</td>
+      <td id="T_a2e55_row225_col5" class="data row225 col5" >1</td>
+      <td id="T_a2e55_row225_col6" class="data row225 col6" >新進貨</td>
+      <td id="T_a2e55_row225_col7" class="data row225 col7" >-0.27%</td>
+      <td id="T_a2e55_row225_col8" class="data row225 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row226_col0" class="data row226 col0" >6597.TWO</td>
+      <td id="T_a2e55_row226_col1" class="data row226 col1" >立誠</td>
+      <td id="T_a2e55_row226_col2" class="data row226 col2" >72.70</td>
+      <td id="T_a2e55_row226_col3" class="data row226 col3" >0</td>
+      <td id="T_a2e55_row226_col4" class="data row226 col4" >1</td>
+      <td id="T_a2e55_row226_col5" class="data row226 col5" >1</td>
+      <td id="T_a2e55_row226_col6" class="data row226 col6" >新進貨</td>
+      <td id="T_a2e55_row226_col7" class="data row226 col7" >-0.41%</td>
+      <td id="T_a2e55_row226_col8" class="data row226 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row227_col0" class="data row227 col0" >8401.TWO</td>
+      <td id="T_a2e55_row227_col1" class="data row227 col1" >白紗科</td>
+      <td id="T_a2e55_row227_col2" class="data row227 col2" >23.20</td>
+      <td id="T_a2e55_row227_col3" class="data row227 col3" >-3</td>
+      <td id="T_a2e55_row227_col4" class="data row227 col4" >-2</td>
+      <td id="T_a2e55_row227_col5" class="data row227 col5" >1</td>
+      <td id="T_a2e55_row227_col6" class="data row227 col6" >轉買進</td>
+      <td id="T_a2e55_row227_col7" class="data row227 col7" >0.87%</td>
+      <td id="T_a2e55_row227_col8" class="data row227 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row228_col0" class="data row228 col0" >8410.TWO</td>
+      <td id="T_a2e55_row228_col1" class="data row228 col1" >森田</td>
+      <td id="T_a2e55_row228_col2" class="data row228 col2" >33.35</td>
+      <td id="T_a2e55_row228_col3" class="data row228 col3" >-3</td>
+      <td id="T_a2e55_row228_col4" class="data row228 col4" >-1</td>
+      <td id="T_a2e55_row228_col5" class="data row228 col5" >1</td>
+      <td id="T_a2e55_row228_col6" class="data row228 col6" >轉買進</td>
+      <td id="T_a2e55_row228_col7" class="data row228 col7" >-5.12%</td>
+      <td id="T_a2e55_row228_col8" class="data row228 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row229_col0" class="data row229 col0" >8931.TWO</td>
+      <td id="T_a2e55_row229_col1" class="data row229 col1" >大汽電</td>
+      <td id="T_a2e55_row229_col2" class="data row229 col2" >42.15</td>
+      <td id="T_a2e55_row229_col3" class="data row229 col3" >-1</td>
+      <td id="T_a2e55_row229_col4" class="data row229 col4" >0</td>
+      <td id="T_a2e55_row229_col5" class="data row229 col5" >1</td>
+      <td id="T_a2e55_row229_col6" class="data row229 col6" >新進貨</td>
+      <td id="T_a2e55_row229_col7" class="data row229 col7" >0.36%</td>
+      <td id="T_a2e55_row229_col8" class="data row229 col8" >★ 壓低偷買</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row230_col0" class="data row230 col0" >6578.TWO</td>
+      <td id="T_a2e55_row230_col1" class="data row230 col1" >達邦蛋白</td>
+      <td id="T_a2e55_row230_col2" class="data row230 col2" >16.40</td>
+      <td id="T_a2e55_row230_col3" class="data row230 col3" >-6</td>
+      <td id="T_a2e55_row230_col4" class="data row230 col4" >-4</td>
+      <td id="T_a2e55_row230_col5" class="data row230 col5" >1</td>
+      <td id="T_a2e55_row230_col6" class="data row230 col6" >0.8x</td>
+      <td id="T_a2e55_row230_col7" class="data row230 col7" >-4.65%</td>
+      <td id="T_a2e55_row230_col8" class="data row230 col8" >無</td>
+    </tr>
+    <tr>
+      <td id="T_a2e55_row231_col0" class="data row231 col0" >6692.TWO</td>
+      <td id="T_a2e55_row231_col1" class="data row231 col1" >進能服</td>
+      <td id="T_a2e55_row231_col2" class="data row231 col2" >27.00</td>
+      <td id="T_a2e55_row231_col3" class="data row231 col3" >0</td>
+      <td id="T_a2e55_row231_col4" class="data row231 col4" >0</td>
+      <td id="T_a2e55_row231_col5" class="data row231 col5" >1</td>
+      <td id="T_a2e55_row231_col6" class="data row231 col6" >新進貨</td>
+      <td id="T_a2e55_row231_col7" class="data row231 col7" >-5.92%</td>
+      <td id="T_a2e55_row231_col8" class="data row231 col8" >★ 壓低偷買</td>
+    </tr>
+  </tbody>
+</table>
+
+
+        <div class="footer" style="margin-top: 20px; font-size: 16px; color: #888;">系統自動化產出時間: 2026-05-30 03:22:40</div>
+        
+        
+    <script>
+    function applyFilters() {
+        var searchInput = document.getElementById("searchInput");
+        var searchFilter = searchInput.value.trim().toUpperCase();
+        
+        var statusSelect = document.getElementById("statusSelect");
+        var statusFilter = statusSelect.value;
+        
+        var table = document.querySelector("table");
+        var tr = table.getElementsByTagName("tr");
+
+        for (var i = 1; i < tr.length; i++) {
+            var tds = tr[i].getElementsByTagName("td");
+            if (tds.length === 0) continue;
+
+            var tdStock = tds[0];
+            var tdName = tds[1];
+            
+            var txtStock = tdStock ? (tdStock.textContent || tdStock.innerText) : "";
+            var txtName = tdName ? (tdName.textContent || tdName.innerText) : "";
+            
+            var txtRatio = tds[6] ? (tds[6].textContent || tds[6].innerText).trim() : "";
+            var txtReturn = tds[7] ? (tds[7].textContent || tds[7].innerText).trim() : "";
+            var txtStatus = tds[tds.length - 1] ? (tds[tds.length - 1].textContent || tds[tds.length - 1].innerText).trim() : "";
+            
+            var matchesSearch = (txtStock.toUpperCase().indexOf(searchFilter) > -1 || txtName.toUpperCase().indexOf(searchFilter) > -1);
+            var matchesStatus = false;
+            
+            var numRatio = parseFloat(txtRatio.replace('x',''));
+            var numReturn = parseFloat(txtReturn.replace('%',''));
+
+            if (statusFilter === "ALL") {
+                matchesStatus = true;
+            } else if (statusFilter === "★ 壓低偷買" || statusFilter === "▲ 順勢追意" || statusFilter === "無") {
+                matchesStatus = (txtStatus === statusFilter);
+            } else if (statusFilter === "STATUS_NEW") {
+                // 獨立篩選：新進貨
+                matchesStatus = (txtRatio === "新進貨");
+            } else if (statusFilter === "STATUS_TURN") {
+                // 獨立篩選：轉買進
+                matchesStatus = (txtRatio === "轉買進");
+            } else if (statusFilter === "RATIO_30") {
+                matchesStatus = (!isNaN(numRatio) && numRatio > 30);
+            } else if (statusFilter === "RATIO_50") {
+                matchesStatus = (!isNaN(numRatio) && numRatio > 50);
+            } else if (statusFilter === "RETURN_GT_0") {
+                matchesStatus = (!isNaN(numReturn) && numReturn > 0);
+            } else if (statusFilter === "RETURN_LT_0") {
+                matchesStatus = (!isNaN(numReturn) && numReturn < 0);
+            }
+
+            if (matchesSearch && matchesStatus) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+
+    function resetFilters() {
+        document.getElementById("searchInput").value = "";
+        document.getElementById("statusSelect").value = "ALL";
+        applyFilters();
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+
+        const comparer = (idx, asc) => (a, b) => ((v1, v2) => 
+            v1 !== '' && v2 !== '' && !isNaN(v1.replace('%','').replace('x','').replace(',','')) && !isNaN(v2.replace('%','').replace('x','').replace(',','')) ? 
+            parseFloat(v1.replace('%','').replace('x','').replace(',','')) - parseFloat(v2.replace('%','').replace('x','').replace(',','')) : 
+            v1.toString().localeCompare(v2)
+            )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+
+        document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
+            const table = th.closest('table');
+            const tbody = table.querySelector('tbody') || table;
+            Array.from(tbody.querySelectorAll('tr:nth-child(n+1)'))
+                .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
+                .forEach(tr => tbody.appendChild(tr) );
+        })));
+    });
+    </script>
+    
+    </body>
+    </html>
+    
