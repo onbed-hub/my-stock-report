@@ -32,15 +32,41 @@
         <h2>外資籌碼動態【量能乘積】進貨監控報表</h2>
         <div class="sub-title">基準日期：20260529 ｜ 排列順序：依據「淨增進貨(張)」由大到小排序</div>
 
-        <div class="instruction-box" style="background-color: #f8f9fa; border-left: 8px solid #0052cc; padding: 15px 20px; margin-bottom: 20px; font-size: 24px;">
-            <h3> 指標定義與邏輯說明 (💡 提示：點擊下方表格欄位標頭，可直接進行大小排序)</h3>
-            <ul>
-                <li><strong>代號</strong>：點擊代號，會開啟新視窗連到該股的 Yahoo 股市技術分析。</li>
-                <li><strong>名稱</strong>：點擊名稱，可彈出分流子目錄下的詳細趨勢回測報告文本細節。</li>
-                <li><strong>現價</strong>：點擊現價數字，內嵌開啟本地高階技術分析 K 線圖表。</li>
-                <li><strong>淨增進貨 (張)</strong>：【這週估買】 減去 【上週估買】。代表外資近 5 日進貨的「絕對加速度增量」。</li>
-                <li><strong>增長倍數</strong>：本週進貨與上週的對比。若上週無動作而本週突發買進，會顯示 <strong>[新進貨]</strong> 或 <strong>[轉買進]</strong>。</li>
-            </ul>
+        <div class="instruction-box" style="background-color: #f8f9fa; border-left: 8px solid #0052cc; padding: 20px 25px; margin-bottom: 25px; font-size: 22px; line-height: 1.6; border-radius: 0 10px 10px 0;">
+            <h3 style="margin-top: 0; color: #0052cc; font-size: 26px;">💡 指標定義與量化篩選邏輯說明</h3>
+            
+            <div style="margin-bottom: 15px;">
+                <strong>1. 📊 推估外資進貨 (張) 邏輯</strong>
+                <ul style="margin: 5px 0 0 20px; padding-left: 10px; color: #444;">
+                    <li>由每日盤後交易量，結合外資持股比例逐日變化進行加權推估。</li>
+                    <li><strong>【這週估買】</strong>：近 5 個交易日的外資推估買進總張數。</li>
+                    <li><strong>【上週估買】</strong>：再往前推 5 個交易日的外資推估買進總張數。</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <strong>2. 🚀 核心動態指標：淨增進貨 (張) 與增長倍數</strong>
+                <ul style="margin: 5px 0 0 20px; padding-left: 10px; color: #444;">
+                    <li><strong>【淨增進貨(張)】</strong> = <code style="background:#eef2ff; color:#3b82f6; padding:2px 6px; border-radius:4px; font-family:monospace;">這週估買</code> − <code style="background:#eef2ff; color:#3b82f6; padding:2px 6px; border-radius:4px; font-family:monospace;">上週估買</code>。代表外資近期的「進貨絕對加速度」。數值越大，代表短線現貨籌碼被外資急吞。</li>
+                    <li><strong>【增長倍數】</strong>：若顯示為倍數（如 5.5x），代表本週進貨力道是上週的數倍。若上週無動作而本週突發性大買，則會觸發 <strong>[新進貨]</strong> 或 <strong>[轉買進]</strong> 等短線籌碼突變訊號。</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <strong>3. 🎯 狀態與型態判定</strong>
+                <ul style="margin: 5px 0 0 20px; padding-left: 10px; color: #444;">
+                    <li><span style="background-color: #ffcccc; color: #cc0000; font-weight: bold; padding: 2px 6px; border-radius: 4px;">★ 壓低偷買</span>：代表 5 日股價表現為「下跌或平盤」，但外資淨增進貨大增。屬於典型的「假破位、真吃貨」背離訊號。</li>
+                    <li><span style="background-color: #e6f2ff; color: #0066cc; font-weight: bold; padding: 2px 6px; border-radius: 4px;">▲ 順勢追意</span>：代表 5 日股價表現為「上漲」，且外資籌碼同步暴增。屬於強勢的「價量齊揚、趨勢突破」訊號。</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 0; background: #eff6ff; padding: 10px 15px; border-radius: 6px; border: 1px dashed #bfdbfe;">
+                <strong>🖱️ 多功能互動看盤指引：</strong><br>
+                • 點擊 <strong>【代號】</strong>：直接在新分頁開啟 <span style="color:#6b21a8; font-weight:bold;">Yahoo 股市技術分析</span>，方便查看即時三大法人與盤後籌碼。<br>
+                • 點擊 <strong>【名稱】</strong>：原地彈出系統內建的 <span style="color:#2563eb; font-weight:bold;">詳細趨勢回測文字報告</span>，檢視長線多空勝率。<br>
+                • 點擊 <strong>【現價】</strong>：原地內嵌載入 <span style="color:#10b981; font-weight:bold;">量化 K 線技術圖表彈窗</span>，無縫切換技術面指標。<br>
+                • 點擊 <strong>【任何欄位標頭 (如淨增進貨)】</strong>：可對該欄位進行由大到小 / 由小到大的數據動態排序。
+            </div>
         </div>
 
         <div class="filter-container">
@@ -3422,53 +3448,6 @@
         </tr>
         
         <tr>
-            <td><a href="https://tw.stock.yahoo.com/quote/6259.TWO/technical-analysis" 
-           target="_blank" 
-           style="text-decoration:none;color:#6b21a8;font-weight:bold;">6259.TWO</a></td>  <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
-                   mc.style.width = "95%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
-                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
-                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
-               }
-               showAnalysisModal("6259.TWO", "9");
-           '>百徽</a></td>
-            <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#10b981;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
-                   mc.style.width = "90%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
-                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
-                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
-                   lc.innerHTML = "<iframe src=\"stock-analysis/9/6259.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
-               }
-               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 6259.TWO";
-               m.style.display = "block";
-           '>27.00</a></td>
-            <td>335</td>
-            <td>694</td>
-            <td>358</td>
-            <td>2.1x</td>
-            <td>7.14%</td>
-            <td style="background-color: #e6f2ff; color: #0066cc; font-weight: bold;">▲ 順勢追意</td>
-        </tr>
-        
-        <tr>
             <td><a href="https://tw.stock.yahoo.com/quote/6996.TWO/technical-analysis" 
            target="_blank" 
            style="text-decoration:none;color:#6b21a8;font-weight:bold;">6996.TWO</a></td>  <td><a href='javascript:void(0)' 
@@ -3513,6 +3492,53 @@
             <td>-0.3x</td>
             <td>-1.29%</td>
             <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
+        </tr>
+        
+        <tr>
+            <td><a href="https://tw.stock.yahoo.com/quote/6259.TWO/technical-analysis" 
+           target="_blank" 
+           style="text-decoration:none;color:#6b21a8;font-weight:bold;">6259.TWO</a></td>  <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
+                   mc.style.width = "95%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
+                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
+                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
+               }
+               showAnalysisModal("6259.TWO", "9");
+           '>百徽</a></td>
+            <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#10b981;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
+                   mc.style.width = "90%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
+                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
+                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
+                   lc.innerHTML = "<iframe src=\"stock-analysis/9/6259.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
+               }
+               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 6259.TWO";
+               m.style.display = "block";
+           '>27.00</a></td>
+            <td>335</td>
+            <td>694</td>
+            <td>358</td>
+            <td>2.1x</td>
+            <td>7.14%</td>
+            <td style="background-color: #e6f2ff; color: #0066cc; font-weight: bold;">▲ 順勢追意</td>
         </tr>
         
         <tr>
@@ -4409,53 +4435,6 @@
         </tr>
         
         <tr>
-            <td><a href="https://tw.stock.yahoo.com/quote/8442.TW/technical-analysis" 
-           target="_blank" 
-           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8442.TW</a></td>  <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
-                   mc.style.width = "95%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
-                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
-                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
-               }
-               showAnalysisModal("8442.TW", "2");
-           '>威宏-KY</a></td>
-            <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#10b981;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
-                   mc.style.width = "90%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
-                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
-                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
-                   lc.innerHTML = "<iframe src=\"stock-analysis/2/8442.TW-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
-               }
-               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8442.TW";
-               m.style.display = "block";
-           '>39.95</a></td>
-            <td>-106</td>
-            <td>10</td>
-            <td>117</td>
-            <td>-0.1x</td>
-            <td>-1.36%</td>
-            <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
-        </tr>
-        
-        <tr>
             <td><a href="https://tw.stock.yahoo.com/quote/6283.TW/technical-analysis" 
            target="_blank" 
            style="text-decoration:none;color:#6b21a8;font-weight:bold;">6283.TW</a></td>  <td><a href='javascript:void(0)' 
@@ -4499,6 +4478,53 @@
             <td>117</td>
             <td>-16.3x</td>
             <td>-2.44%</td>
+            <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
+        </tr>
+        
+        <tr>
+            <td><a href="https://tw.stock.yahoo.com/quote/8442.TW/technical-analysis" 
+           target="_blank" 
+           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8442.TW</a></td>  <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
+                   mc.style.width = "95%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
+                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
+                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
+               }
+               showAnalysisModal("8442.TW", "2");
+           '>威宏-KY</a></td>
+            <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#10b981;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
+                   mc.style.width = "90%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
+                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
+                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
+                   lc.innerHTML = "<iframe src=\"stock-analysis/2/8442.TW-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
+               }
+               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8442.TW";
+               m.style.display = "block";
+           '>39.95</a></td>
+            <td>-106</td>
+            <td>10</td>
+            <td>117</td>
+            <td>-0.1x</td>
+            <td>-1.36%</td>
             <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
         </tr>
         
@@ -5161,53 +5187,6 @@
         </tr>
         
         <tr>
-            <td><a href="https://tw.stock.yahoo.com/quote/6241.TWO/technical-analysis" 
-           target="_blank" 
-           style="text-decoration:none;color:#6b21a8;font-weight:bold;">6241.TWO</a></td>  <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
-                   mc.style.width = "95%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
-                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
-                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
-               }
-               showAnalysisModal("6241.TWO", "1");
-           '>鑫永洋</a></td>
-            <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#10b981;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
-                   mc.style.width = "90%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
-                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
-                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
-                   lc.innerHTML = "<iframe src=\"stock-analysis/1/6241.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
-               }
-               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 6241.TWO";
-               m.style.display = "block";
-           '>9.89</a></td>
-            <td>-45</td>
-            <td>17</td>
-            <td>63</td>
-            <td>-0.4x</td>
-            <td>-7.14%</td>
-            <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
-        </tr>
-        
-        <tr>
             <td><a href="https://tw.stock.yahoo.com/quote/6703.TWO/technical-analysis" 
            target="_blank" 
            style="text-decoration:none;color:#6b21a8;font-weight:bold;">6703.TWO</a></td>  <td><a href='javascript:void(0)' 
@@ -5251,6 +5230,53 @@
             <td>63</td>
             <td>-0.4x</td>
             <td>-2.68%</td>
+            <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
+        </tr>
+        
+        <tr>
+            <td><a href="https://tw.stock.yahoo.com/quote/6241.TWO/technical-analysis" 
+           target="_blank" 
+           style="text-decoration:none;color:#6b21a8;font-weight:bold;">6241.TWO</a></td>  <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
+                   mc.style.width = "95%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
+                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
+                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
+               }
+               showAnalysisModal("6241.TWO", "1");
+           '>鑫永洋</a></td>
+            <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#10b981;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
+                   mc.style.width = "90%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
+                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
+                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
+                   lc.innerHTML = "<iframe src=\"stock-analysis/1/6241.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
+               }
+               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 6241.TWO";
+               m.style.display = "block";
+           '>9.89</a></td>
+            <td>-45</td>
+            <td>17</td>
+            <td>63</td>
+            <td>-0.4x</td>
+            <td>-7.14%</td>
             <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
         </tr>
         
@@ -5584,53 +5610,6 @@
         </tr>
         
         <tr>
-            <td><a href="https://tw.stock.yahoo.com/quote/8084.TWO/technical-analysis" 
-           target="_blank" 
-           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8084.TWO</a></td>  <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
-                   mc.style.width = "95%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
-                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
-                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
-               }
-               showAnalysisModal("8084.TWO", "4");
-           '>巨虹</a></td>
-            <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#10b981;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
-                   mc.style.width = "90%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
-                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
-                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
-                   lc.innerHTML = "<iframe src=\"stock-analysis/4/8084.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
-               }
-               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8084.TWO";
-               m.style.display = "block";
-           '>47.40</a></td>
-            <td>-9</td>
-            <td>24</td>
-            <td>33</td>
-            <td>-2.7x</td>
-            <td>12.06%</td>
-            <td style="background-color: #e6f2ff; color: #0066cc; font-weight: bold;">▲ 順勢追意</td>
-        </tr>
-        
-        <tr>
             <td><a href="https://tw.stock.yahoo.com/quote/8201.TW/technical-analysis" 
            target="_blank" 
            style="text-decoration:none;color:#6b21a8;font-weight:bold;">8201.TW</a></td>  <td><a href='javascript:void(0)' 
@@ -5674,6 +5653,53 @@
             <td>33</td>
             <td>-2.3x</td>
             <td>1.13%</td>
+            <td style="background-color: #e6f2ff; color: #0066cc; font-weight: bold;">▲ 順勢追意</td>
+        </tr>
+        
+        <tr>
+            <td><a href="https://tw.stock.yahoo.com/quote/8084.TWO/technical-analysis" 
+           target="_blank" 
+           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8084.TWO</a></td>  <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
+                   mc.style.width = "95%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
+                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
+                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
+               }
+               showAnalysisModal("8084.TWO", "4");
+           '>巨虹</a></td>
+            <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#10b981;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
+                   mc.style.width = "90%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
+                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
+                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
+                   lc.innerHTML = "<iframe src=\"stock-analysis/4/8084.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
+               }
+               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8084.TWO";
+               m.style.display = "block";
+           '>47.40</a></td>
+            <td>-9</td>
+            <td>24</td>
+            <td>33</td>
+            <td>-2.7x</td>
+            <td>12.06%</td>
             <td style="background-color: #e6f2ff; color: #0066cc; font-weight: bold;">▲ 順勢追意</td>
         </tr>
         
@@ -5866,53 +5892,6 @@
         </tr>
         
         <tr>
-            <td><a href="https://tw.stock.yahoo.com/quote/8908.TWO/technical-analysis" 
-           target="_blank" 
-           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8908.TWO</a></td>  <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
-                   mc.style.width = "95%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
-                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
-                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
-               }
-               showAnalysisModal("8908.TWO", "8");
-           '>欣雄</a></td>
-            <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#10b981;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
-                   mc.style.width = "90%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
-                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
-                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
-                   lc.innerHTML = "<iframe src=\"stock-analysis/8/8908.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
-               }
-               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8908.TWO";
-               m.style.display = "block";
-           '>40.85</a></td>
-            <td>-14</td>
-            <td>7</td>
-            <td>22</td>
-            <td>-0.5x</td>
-            <td>0.62%</td>
-            <td style="background-color: #e6f2ff; color: #0066cc; font-weight: bold;">▲ 順勢追意</td>
-        </tr>
-        
-        <tr>
             <td><a href="https://tw.stock.yahoo.com/quote/8477.TWO/technical-analysis" 
            target="_blank" 
            style="text-decoration:none;color:#6b21a8;font-weight:bold;">8477.TWO</a></td>  <td><a href='javascript:void(0)' 
@@ -5960,9 +5939,9 @@
         </tr>
         
         <tr>
-            <td><a href="https://tw.stock.yahoo.com/quote/7810.TWO/technical-analysis" 
+            <td><a href="https://tw.stock.yahoo.com/quote/8908.TWO/technical-analysis" 
            target="_blank" 
-           style="text-decoration:none;color:#6b21a8;font-weight:bold;">7810.TWO</a></td>  <td><a href='javascript:void(0)' 
+           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8908.TWO</a></td>  <td><a href='javascript:void(0)' 
            style='text-decoration:none;color:#2563eb;font-weight:bold;' 
            onclick='
                var m = document.getElementById("logModal");
@@ -5977,8 +5956,8 @@
                    lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
                    lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
                }
-               showAnalysisModal("7810.TWO", "0");
-           '>捷創科技</a></td>
+               showAnalysisModal("8908.TWO", "8");
+           '>欣雄</a></td>
             <td><a href='javascript:void(0)' 
            style='text-decoration:none;color:#10b981;font-weight:bold;' 
            onclick='
@@ -5993,16 +5972,16 @@
                    lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
                    lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
                    lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
-                   lc.innerHTML = "<iframe src=\"stock-analysis/0/7810.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
+                   lc.innerHTML = "<iframe src=\"stock-analysis/8/8908.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
                }
-               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 7810.TWO";
+               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8908.TWO";
                m.style.display = "block";
-           '>232.00</a></td>
-            <td>-17</td>
-            <td>0</td>
-            <td>18</td>
-            <td>-0.0x</td>
-            <td>1.31%</td>
+           '>40.85</a></td>
+            <td>-14</td>
+            <td>7</td>
+            <td>22</td>
+            <td>-0.5x</td>
+            <td>0.62%</td>
             <td style="background-color: #e6f2ff; color: #0066cc; font-weight: bold;">▲ 順勢追意</td>
         </tr>
         
@@ -6051,6 +6030,53 @@
             <td>新進貨</td>
             <td>-12.30%</td>
             <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
+        </tr>
+        
+        <tr>
+            <td><a href="https://tw.stock.yahoo.com/quote/7810.TWO/technical-analysis" 
+           target="_blank" 
+           style="text-decoration:none;color:#6b21a8;font-weight:bold;">7810.TWO</a></td>  <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
+                   mc.style.width = "95%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
+                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
+                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
+               }
+               showAnalysisModal("7810.TWO", "0");
+           '>捷創科技</a></td>
+            <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#10b981;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
+                   mc.style.width = "90%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
+                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
+                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
+                   lc.innerHTML = "<iframe src=\"stock-analysis/0/7810.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
+               }
+               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 7810.TWO";
+               m.style.display = "block";
+           '>232.00</a></td>
+            <td>-17</td>
+            <td>0</td>
+            <td>18</td>
+            <td>-0.0x</td>
+            <td>1.31%</td>
+            <td style="background-color: #e6f2ff; color: #0066cc; font-weight: bold;">▲ 順勢追意</td>
         </tr>
         
         <tr>
@@ -6242,53 +6268,6 @@
         </tr>
         
         <tr>
-            <td><a href="https://tw.stock.yahoo.com/quote/8416.TWO/technical-analysis" 
-           target="_blank" 
-           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8416.TWO</a></td>  <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
-                   mc.style.width = "95%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
-                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
-                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
-               }
-               showAnalysisModal("8416.TWO", "6");
-           '>實威</a></td>
-            <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#10b981;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
-                   mc.style.width = "90%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
-                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
-                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
-                   lc.innerHTML = "<iframe src=\"stock-analysis/6/8416.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
-               }
-               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8416.TWO";
-               m.style.display = "block";
-           '>186.00</a></td>
-            <td>0</td>
-            <td>10</td>
-            <td>10</td>
-            <td>新進貨</td>
-            <td>7.51%</td>
-            <td style="background-color: #e6f2ff; color: #0066cc; font-weight: bold;">▲ 順勢追意</td>
-        </tr>
-        
-        <tr>
             <td><a href="https://tw.stock.yahoo.com/quote/6657.TW/technical-analysis" 
            target="_blank" 
            style="text-decoration:none;color:#6b21a8;font-weight:bold;">6657.TW</a></td>  <td><a href='javascript:void(0)' 
@@ -6333,6 +6312,53 @@
             <td>新進貨</td>
             <td>-4.34%</td>
             <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
+        </tr>
+        
+        <tr>
+            <td><a href="https://tw.stock.yahoo.com/quote/8416.TWO/technical-analysis" 
+           target="_blank" 
+           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8416.TWO</a></td>  <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
+                   mc.style.width = "95%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
+                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
+                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
+               }
+               showAnalysisModal("8416.TWO", "6");
+           '>實威</a></td>
+            <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#10b981;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
+                   mc.style.width = "90%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
+                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
+                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
+                   lc.innerHTML = "<iframe src=\"stock-analysis/6/8416.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
+               }
+               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8416.TWO";
+               m.style.display = "block";
+           '>186.00</a></td>
+            <td>0</td>
+            <td>10</td>
+            <td>10</td>
+            <td>新進貨</td>
+            <td>7.51%</td>
+            <td style="background-color: #e6f2ff; color: #0066cc; font-weight: bold;">▲ 順勢追意</td>
         </tr>
         
         <tr>
@@ -6426,53 +6452,6 @@
             <td>7</td>
             <td>新進貨</td>
             <td>0.50%</td>
-            <td style="background-color: #e6f2ff; color: #0066cc; font-weight: bold;">▲ 順勢追意</td>
-        </tr>
-        
-        <tr>
-            <td><a href="https://tw.stock.yahoo.com/quote/8354.TWO/technical-analysis" 
-           target="_blank" 
-           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8354.TWO</a></td>  <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
-                   mc.style.width = "95%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
-                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
-                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
-               }
-               showAnalysisModal("8354.TWO", "4");
-           '>冠好</a></td>
-            <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#10b981;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
-                   mc.style.width = "90%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
-                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
-                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
-                   lc.innerHTML = "<iframe src=\"stock-analysis/4/8354.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
-               }
-               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8354.TWO";
-               m.style.display = "block";
-           '>16.85</a></td>
-            <td>1</td>
-            <td>7</td>
-            <td>6</td>
-            <td>新進貨</td>
-            <td>1.20%</td>
             <td style="background-color: #e6f2ff; color: #0066cc; font-weight: bold;">▲ 順勢追意</td>
         </tr>
         
@@ -6571,6 +6550,53 @@
         </tr>
         
         <tr>
+            <td><a href="https://tw.stock.yahoo.com/quote/8354.TWO/technical-analysis" 
+           target="_blank" 
+           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8354.TWO</a></td>  <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
+                   mc.style.width = "95%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
+                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
+                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
+               }
+               showAnalysisModal("8354.TWO", "4");
+           '>冠好</a></td>
+            <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#10b981;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
+                   mc.style.width = "90%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
+                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
+                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
+                   lc.innerHTML = "<iframe src=\"stock-analysis/4/8354.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
+               }
+               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8354.TWO";
+               m.style.display = "block";
+           '>16.85</a></td>
+            <td>1</td>
+            <td>7</td>
+            <td>6</td>
+            <td>新進貨</td>
+            <td>1.20%</td>
+            <td style="background-color: #e6f2ff; color: #0066cc; font-weight: bold;">▲ 順勢追意</td>
+        </tr>
+        
+        <tr>
             <td><a href="https://tw.stock.yahoo.com/quote/6895.TWO/technical-analysis" 
            target="_blank" 
            style="text-decoration:none;color:#6b21a8;font-weight:bold;">6895.TWO</a></td>  <td><a href='javascript:void(0)' 
@@ -6614,53 +6640,6 @@
             <td>5</td>
             <td>新進貨</td>
             <td>-4.90%</td>
-            <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
-        </tr>
-        
-        <tr>
-            <td><a href="https://tw.stock.yahoo.com/quote/6612.TWO/technical-analysis" 
-           target="_blank" 
-           style="text-decoration:none;color:#6b21a8;font-weight:bold;">6612.TWO</a></td>  <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
-                   mc.style.width = "95%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
-                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
-                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
-               }
-               showAnalysisModal("6612.TWO", "2");
-           '>奈米醫材</a></td>
-            <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#10b981;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
-                   mc.style.width = "90%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
-                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
-                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
-                   lc.innerHTML = "<iframe src=\"stock-analysis/2/6612.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
-               }
-               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 6612.TWO";
-               m.style.display = "block";
-           '>72.40</a></td>
-            <td>-4</td>
-            <td>0</td>
-            <td>5</td>
-            <td>新進貨</td>
-            <td>-2.16%</td>
             <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
         </tr>
         
@@ -6759,9 +6738,9 @@
         </tr>
         
         <tr>
-            <td><a href="https://tw.stock.yahoo.com/quote/8277.TWO/technical-analysis" 
+            <td><a href="https://tw.stock.yahoo.com/quote/6612.TWO/technical-analysis" 
            target="_blank" 
-           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8277.TWO</a></td>  <td><a href='javascript:void(0)' 
+           style="text-decoration:none;color:#6b21a8;font-weight:bold;">6612.TWO</a></td>  <td><a href='javascript:void(0)' 
            style='text-decoration:none;color:#2563eb;font-weight:bold;' 
            onclick='
                var m = document.getElementById("logModal");
@@ -6776,8 +6755,8 @@
                    lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
                    lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
                }
-               showAnalysisModal("8277.TWO", "7");
-           '>商丞</a></td>
+               showAnalysisModal("6612.TWO", "2");
+           '>奈米醫材</a></td>
             <td><a href='javascript:void(0)' 
            style='text-decoration:none;color:#10b981;font-weight:bold;' 
            onclick='
@@ -6792,17 +6771,64 @@
                    lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
                    lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
                    lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
-                   lc.innerHTML = "<iframe src=\"stock-analysis/7/8277.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
+                   lc.innerHTML = "<iframe src=\"stock-analysis/2/6612.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
                }
-               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8277.TWO";
+               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 6612.TWO";
                m.style.display = "block";
-           '>8.61</a></td>
-            <td>1</td>
-            <td>6</td>
-            <td>4</td>
+           '>72.40</a></td>
+            <td>-4</td>
+            <td>0</td>
+            <td>5</td>
             <td>新進貨</td>
-            <td>23.00%</td>
-            <td style="background-color: #e6f2ff; color: #0066cc; font-weight: bold;">▲ 順勢追意</td>
+            <td>-2.16%</td>
+            <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
+        </tr>
+        
+        <tr>
+            <td><a href="https://tw.stock.yahoo.com/quote/8349.TWO/technical-analysis" 
+           target="_blank" 
+           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8349.TWO</a></td>  <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
+                   mc.style.width = "95%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
+                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
+                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
+               }
+               showAnalysisModal("8349.TWO", "9");
+           '>恒耀</a></td>
+            <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#10b981;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
+                   mc.style.width = "90%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
+                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
+                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
+                   lc.innerHTML = "<iframe src=\"stock-analysis/9/8349.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
+               }
+               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8349.TWO";
+               m.style.display = "block";
+           '>41.50</a></td>
+            <td>15</td>
+            <td>20</td>
+            <td>4</td>
+            <td>1.3x</td>
+            <td>0.00%</td>
+            <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
         </tr>
         
         <tr>
@@ -6900,9 +6926,9 @@
         </tr>
         
         <tr>
-            <td><a href="https://tw.stock.yahoo.com/quote/8349.TWO/technical-analysis" 
+            <td><a href="https://tw.stock.yahoo.com/quote/8277.TWO/technical-analysis" 
            target="_blank" 
-           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8349.TWO</a></td>  <td><a href='javascript:void(0)' 
+           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8277.TWO</a></td>  <td><a href='javascript:void(0)' 
            style='text-decoration:none;color:#2563eb;font-weight:bold;' 
            onclick='
                var m = document.getElementById("logModal");
@@ -6917,8 +6943,8 @@
                    lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
                    lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
                }
-               showAnalysisModal("8349.TWO", "9");
-           '>恒耀</a></td>
+               showAnalysisModal("8277.TWO", "7");
+           '>商丞</a></td>
             <td><a href='javascript:void(0)' 
            style='text-decoration:none;color:#10b981;font-weight:bold;' 
            onclick='
@@ -6933,111 +6959,17 @@
                    lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
                    lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
                    lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
-                   lc.innerHTML = "<iframe src=\"stock-analysis/9/8349.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
+                   lc.innerHTML = "<iframe src=\"stock-analysis/7/8277.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
                }
-               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8349.TWO";
+               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8277.TWO";
                m.style.display = "block";
-           '>41.50</a></td>
-            <td>15</td>
-            <td>20</td>
+           '>8.61</a></td>
+            <td>1</td>
+            <td>6</td>
             <td>4</td>
-            <td>1.3x</td>
-            <td>0.00%</td>
-            <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
-        </tr>
-        
-        <tr>
-            <td><a href="https://tw.stock.yahoo.com/quote/8099.TWO/technical-analysis" 
-           target="_blank" 
-           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8099.TWO</a></td>  <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
-                   mc.style.width = "95%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
-                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
-                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
-               }
-               showAnalysisModal("8099.TWO", "9");
-           '>大世科</a></td>
-            <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#10b981;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
-                   mc.style.width = "90%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
-                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
-                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
-                   lc.innerHTML = "<iframe src=\"stock-analysis/9/8099.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
-               }
-               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8099.TWO";
-               m.style.display = "block";
-           '>61.30</a></td>
-            <td>1</td>
-            <td>5</td>
-            <td>3</td>
             <td>新進貨</td>
-            <td>3.03%</td>
+            <td>23.00%</td>
             <td style="background-color: #e6f2ff; color: #0066cc; font-weight: bold;">▲ 順勢追意</td>
-        </tr>
-        
-        <tr>
-            <td><a href="https://tw.stock.yahoo.com/quote/6624.TWO/technical-analysis" 
-           target="_blank" 
-           style="text-decoration:none;color:#6b21a8;font-weight:bold;">6624.TWO</a></td>  <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
-                   mc.style.width = "95%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
-                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
-                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
-               }
-               showAnalysisModal("6624.TWO", "4");
-           '>萬年清</a></td>
-            <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#10b981;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
-                   mc.style.width = "90%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
-                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
-                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
-                   lc.innerHTML = "<iframe src=\"stock-analysis/4/6624.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
-               }
-               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 6624.TWO";
-               m.style.display = "block";
-           '>39.90</a></td>
-            <td>-2</td>
-            <td>1</td>
-            <td>3</td>
-            <td>新進貨</td>
-            <td>-6.34%</td>
-            <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
         </tr>
         
         <tr>
@@ -7135,6 +7067,100 @@
         </tr>
         
         <tr>
+            <td><a href="https://tw.stock.yahoo.com/quote/6624.TWO/technical-analysis" 
+           target="_blank" 
+           style="text-decoration:none;color:#6b21a8;font-weight:bold;">6624.TWO</a></td>  <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
+                   mc.style.width = "95%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
+                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
+                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
+               }
+               showAnalysisModal("6624.TWO", "4");
+           '>萬年清</a></td>
+            <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#10b981;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
+                   mc.style.width = "90%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
+                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
+                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
+                   lc.innerHTML = "<iframe src=\"stock-analysis/4/6624.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
+               }
+               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 6624.TWO";
+               m.style.display = "block";
+           '>39.90</a></td>
+            <td>-2</td>
+            <td>1</td>
+            <td>3</td>
+            <td>新進貨</td>
+            <td>-6.34%</td>
+            <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
+        </tr>
+        
+        <tr>
+            <td><a href="https://tw.stock.yahoo.com/quote/8099.TWO/technical-analysis" 
+           target="_blank" 
+           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8099.TWO</a></td>  <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
+                   mc.style.width = "95%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
+                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
+                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
+               }
+               showAnalysisModal("8099.TWO", "9");
+           '>大世科</a></td>
+            <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#10b981;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
+                   mc.style.width = "90%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
+                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
+                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
+                   lc.innerHTML = "<iframe src=\"stock-analysis/9/8099.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
+               }
+               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8099.TWO";
+               m.style.display = "block";
+           '>61.30</a></td>
+            <td>1</td>
+            <td>5</td>
+            <td>3</td>
+            <td>新進貨</td>
+            <td>3.03%</td>
+            <td style="background-color: #e6f2ff; color: #0066cc; font-weight: bold;">▲ 順勢追意</td>
+        </tr>
+        
+        <tr>
             <td><a href="https://tw.stock.yahoo.com/quote/7732.TW/technical-analysis" 
            target="_blank" 
            style="text-decoration:none;color:#6b21a8;font-weight:bold;">7732.TW</a></td>  <td><a href='javascript:void(0)' 
@@ -7179,53 +7205,6 @@
             <td>新進貨</td>
             <td>2.27%</td>
             <td style="background-color: #e6f2ff; color: #0066cc; font-weight: bold;">▲ 順勢追意</td>
-        </tr>
-        
-        <tr>
-            <td><a href="https://tw.stock.yahoo.com/quote/6908.TW/technical-analysis" 
-           target="_blank" 
-           style="text-decoration:none;color:#6b21a8;font-weight:bold;">6908.TW</a></td>  <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
-                   mc.style.width = "95%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
-                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
-                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
-               }
-               showAnalysisModal("6908.TW", "8");
-           '>宏碁遊戲-創</a></td>
-            <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#10b981;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
-                   mc.style.width = "90%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
-                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
-                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
-                   lc.innerHTML = "<iframe src=\"stock-analysis/8/6908.TW-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
-               }
-               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 6908.TW";
-               m.style.display = "block";
-           '>38.00</a></td>
-            <td>0</td>
-            <td>2</td>
-            <td>2</td>
-            <td>新進貨</td>
-            <td>-0.78%</td>
-            <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
         </tr>
         
         <tr>
@@ -7276,9 +7255,9 @@
         </tr>
         
         <tr>
-            <td><a href="https://tw.stock.yahoo.com/quote/6597.TWO/technical-analysis" 
+            <td><a href="https://tw.stock.yahoo.com/quote/6908.TW/technical-analysis" 
            target="_blank" 
-           style="text-decoration:none;color:#6b21a8;font-weight:bold;">6597.TWO</a></td>  <td><a href='javascript:void(0)' 
+           style="text-decoration:none;color:#6b21a8;font-weight:bold;">6908.TW</a></td>  <td><a href='javascript:void(0)' 
            style='text-decoration:none;color:#2563eb;font-weight:bold;' 
            onclick='
                var m = document.getElementById("logModal");
@@ -7293,8 +7272,8 @@
                    lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
                    lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
                }
-               showAnalysisModal("6597.TWO", "7");
-           '>立誠</a></td>
+               showAnalysisModal("6908.TW", "8");
+           '>宏碁遊戲-創</a></td>
             <td><a href='javascript:void(0)' 
            style='text-decoration:none;color:#10b981;font-weight:bold;' 
            onclick='
@@ -7309,16 +7288,16 @@
                    lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
                    lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
                    lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
-                   lc.innerHTML = "<iframe src=\"stock-analysis/7/6597.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
+                   lc.innerHTML = "<iframe src=\"stock-analysis/8/6908.TW-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
                }
-               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 6597.TWO";
+               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 6908.TW";
                m.style.display = "block";
-           '>71.00</a></td>
+           '>38.00</a></td>
             <td>0</td>
-            <td>1</td>
-            <td>1</td>
+            <td>2</td>
+            <td>2</td>
             <td>新進貨</td>
-            <td>-0.70%</td>
+            <td>-0.78%</td>
             <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
         </tr>
         
@@ -7366,147 +7345,6 @@
             <td>1</td>
             <td>新進貨</td>
             <td>-4.88%</td>
-            <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
-        </tr>
-        
-        <tr>
-            <td><a href="https://tw.stock.yahoo.com/quote/8931.TWO/technical-analysis" 
-           target="_blank" 
-           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8931.TWO</a></td>  <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
-                   mc.style.width = "95%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
-                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
-                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
-               }
-               showAnalysisModal("8931.TWO", "1");
-           '>大汽電</a></td>
-            <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#10b981;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
-                   mc.style.width = "90%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
-                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
-                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
-                   lc.innerHTML = "<iframe src=\"stock-analysis/1/8931.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
-               }
-               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8931.TWO";
-               m.style.display = "block";
-           '>42.30</a></td>
-            <td>-1</td>
-            <td>0</td>
-            <td>1</td>
-            <td>新進貨</td>
-            <td>0.12%</td>
-            <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
-        </tr>
-        
-        <tr>
-            <td><a href="https://tw.stock.yahoo.com/quote/8940.TW/technical-analysis" 
-           target="_blank" 
-           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8940.TW</a></td>  <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
-                   mc.style.width = "95%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
-                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
-                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
-               }
-               showAnalysisModal("8940.TW", "0");
-           '>新天地</a></td>
-            <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#10b981;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
-                   mc.style.width = "90%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
-                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
-                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
-                   lc.innerHTML = "<iframe src=\"stock-analysis/0/8940.TW-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
-               }
-               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8940.TW";
-               m.style.display = "block";
-           '>16.60</a></td>
-            <td>-1</td>
-            <td>0</td>
-            <td>1</td>
-            <td>新進貨</td>
-            <td>-2.35%</td>
-            <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
-        </tr>
-        
-        <tr>
-            <td><a href="https://tw.stock.yahoo.com/quote/6210.TWO/technical-analysis" 
-           target="_blank" 
-           style="text-decoration:none;color:#6b21a8;font-weight:bold;">6210.TWO</a></td>  <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
-                   mc.style.width = "95%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
-                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
-                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
-               }
-               showAnalysisModal("6210.TWO", "0");
-           '>慶生</a></td>
-            <td><a href='javascript:void(0)' 
-           style='text-decoration:none;color:#10b981;font-weight:bold;' 
-           onclick='
-               var m = document.getElementById("logModal");
-               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
-               if (mc) {
-                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
-                   mc.style.width = "90%";
-               }
-               var lc = document.getElementById("logContent");
-               if (lc) {
-                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
-                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
-                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
-                   lc.innerHTML = "<iframe src=\"stock-analysis/0/6210.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
-               }
-               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 6210.TWO";
-               m.style.display = "block";
-           '>20.90</a></td>
-            <td>0</td>
-            <td>1</td>
-            <td>1</td>
-            <td>新進貨</td>
-            <td>-0.71%</td>
             <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
         </tr>
         
@@ -7605,6 +7443,194 @@
         </tr>
         
         <tr>
+            <td><a href="https://tw.stock.yahoo.com/quote/8940.TW/technical-analysis" 
+           target="_blank" 
+           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8940.TW</a></td>  <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
+                   mc.style.width = "95%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
+                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
+                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
+               }
+               showAnalysisModal("8940.TW", "0");
+           '>新天地</a></td>
+            <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#10b981;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
+                   mc.style.width = "90%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
+                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
+                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
+                   lc.innerHTML = "<iframe src=\"stock-analysis/0/8940.TW-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
+               }
+               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8940.TW";
+               m.style.display = "block";
+           '>16.60</a></td>
+            <td>-1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>新進貨</td>
+            <td>-2.35%</td>
+            <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
+        </tr>
+        
+        <tr>
+            <td><a href="https://tw.stock.yahoo.com/quote/6597.TWO/technical-analysis" 
+           target="_blank" 
+           style="text-decoration:none;color:#6b21a8;font-weight:bold;">6597.TWO</a></td>  <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
+                   mc.style.width = "95%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
+                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
+                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
+               }
+               showAnalysisModal("6597.TWO", "7");
+           '>立誠</a></td>
+            <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#10b981;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
+                   mc.style.width = "90%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
+                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
+                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
+                   lc.innerHTML = "<iframe src=\"stock-analysis/7/6597.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
+               }
+               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 6597.TWO";
+               m.style.display = "block";
+           '>71.00</a></td>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+            <td>新進貨</td>
+            <td>-0.70%</td>
+            <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
+        </tr>
+        
+        <tr>
+            <td><a href="https://tw.stock.yahoo.com/quote/8931.TWO/technical-analysis" 
+           target="_blank" 
+           style="text-decoration:none;color:#6b21a8;font-weight:bold;">8931.TWO</a></td>  <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
+                   mc.style.width = "95%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
+                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
+                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
+               }
+               showAnalysisModal("8931.TWO", "1");
+           '>大汽電</a></td>
+            <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#10b981;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
+                   mc.style.width = "90%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
+                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
+                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
+                   lc.innerHTML = "<iframe src=\"stock-analysis/1/8931.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
+               }
+               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 8931.TWO";
+               m.style.display = "block";
+           '>42.30</a></td>
+            <td>-1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>新進貨</td>
+            <td>0.12%</td>
+            <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
+        </tr>
+        
+        <tr>
+            <td><a href="https://tw.stock.yahoo.com/quote/6210.TWO/technical-analysis" 
+           target="_blank" 
+           style="text-decoration:none;color:#6b21a8;font-weight:bold;">6210.TWO</a></td>  <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#2563eb;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1300px"; /* 👈 文字報告展開寬度 */
+                   mc.style.width = "95%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#1e293b"; /* 👈 強制還原文字報告的深色背景 */
+                   lc.style.color = "#f8fafc";      /* 👈 強制還原文字報告的文字顏色 */
+                   lc.style.padding = "25px";       /* 👈 恢復文字報告預設內距 */
+               }
+               showAnalysisModal("6210.TWO", "0");
+           '>慶生</a></td>
+            <td><a href='javascript:void(0)' 
+           style='text-decoration:none;color:#10b981;font-weight:bold;' 
+           onclick='
+               var m = document.getElementById("logModal");
+               var mc = m.querySelector(".modal-content") || document.getElementById("logContent").parentNode;
+               if (mc) {
+                   mc.style.maxWidth = "1050px"; /* 👈 圖表外框緊湊寬度 */
+                   mc.style.width = "90%";
+               }
+               var lc = document.getElementById("logContent");
+               if (lc) {
+                   lc.style.background = "#ffffff"; /* 👈 圖表強制白底 */
+                   lc.style.color = "#000000";      /* 👈 圖表內文強制黑字 */
+                   lc.style.padding = "0px";        /* 👈 圖表不需要內距，100%撐滿 */
+                   lc.innerHTML = "<iframe src=\"stock-analysis/0/6210.TWO-stock-analysis.html\" style=\"width:100%;height:85vh;border:none;background:#ffffff;display:block;\"></iframe>";
+               }
+               document.getElementById("logTitle").innerText = "🔍 技術分析圖表: 6210.TWO";
+               m.style.display = "block";
+           '>20.90</a></td>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+            <td>新進貨</td>
+            <td>-0.71%</td>
+            <td style="background-color: #ffcccc; color: #cc0000; font-weight: bold;">★ 壓低偷買</td>
+        </tr>
+        
+        <tr>
             <td><a href="https://tw.stock.yahoo.com/quote/9931.TW/technical-analysis" 
            target="_blank" 
            style="text-decoration:none;color:#6b21a8;font-weight:bold;">9931.TW</a></td>  <td><a href='javascript:void(0)' 
@@ -7662,7 +7688,7 @@
             </div>
         </div>
 
-        <div class="footer" style="margin-top: 20px; font-size: 16px; color: #888;">系統自動化產出時間: 2026-05-30 23:13:33</div>
+        <div class="footer" style="margin-top: 20px; font-size: 16px; color: #888;">系統自動化產出時間: 2026-05-31 00:13:30</div>
         
     <script>
     function showChartModal(fullId) {
