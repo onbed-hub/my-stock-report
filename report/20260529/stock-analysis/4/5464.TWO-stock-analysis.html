@@ -76,8 +76,18 @@
             const ma20 = { x: x, y: data.map(d => d.MA_20), name: 'MA20', type: 'scatter', mode: 'lines', yaxis: 'y2', line: {color: '#9c27b0', width: 2} };
             const bUp = { x: x, y: data.map(d => d.Upper_Band), name: '上軌', type: 'scatter', mode: 'lines', yaxis: 'y2', line: {color: '#ccc', dash: 'dot', width: 1} };
             const bLo = { x: x, y: data.map(d => d.Lower_Band), name: '下軌', type: 'scatter', mode: 'lines', yaxis: 'y2', line: {color: '#ccc', dash: 'dot', width: 1}, fill: 'tonexty', fillcolor: 'rgba(200,200,200,0.05)' };
-            const vol = { x: x, y: data.map(d => d.Volume), type: 'bar', name: '量', yaxis: 'y', marker: { color: data.map(d => d.Close >= d.Open ? '#ef5350' : '#26a69a') } };
-            
+
+            // 請務必加上 name: '成交量'，這樣 hover 框才會顯示標籤
+            const vol = {
+                x: x, 
+                y: data.map(d => d.Volume), 
+                type: 'bar', 
+                name: '成交量',      // 確保這裡有名稱，這會顯示在 hover 框裡
+                yaxis: 'y', 
+                marker: { color: data.map(d => d.Close >= d.Open ? '#ef5350' : '#26a69a') },
+                hoverinfo: 'y'       // 強制顯示 y 值
+            };
+
             const layout = {
                 xaxis: { type: 'category', rangeslider: { visible: false }, tickfont: { size: 10 } },
                 yaxis: { domain: [0, 0.15], showgrid: false },
@@ -88,7 +98,7 @@
                 template: 'plotly_white'
             };
 
-            Plotly.newPlot('plot', [vol, bUp, bLo, candle, ma5, ma10, ma20], layout, { responsive: true, displayModeBar: false });
+            Plotly.newPlot('plot', [bUp, bLo, candle, ma5, ma10, ma20, vol], layout, { responsive: true, displayModeBar: false });
         }
 
         function updateRange(days, btn) {
