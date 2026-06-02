@@ -379,34 +379,21 @@
         updateDisplay();
     }
 
-    // 🎯 新增：控管自定義清單切換與按鈕顯示狀態
-    function handleMarkFilterChange() {
-        const mFilter = document.getElementById('mFilter');
-        const btn = document.getElementById('markDocBtn');
-        const selectedValue = mFilter.value;
-
-        if (selectedValue === 'all') {
-            btn.style.display = 'none';
-        } else {
-            btn.style.display = 'inline-block';
-            btn.innerText = `📄 ${selectedValue}-stock`;
-        }
-        // 觸發原本的資料篩選
-        filter();
-    }
-
-    // 🎯 新增：開啟對應清單的專屬 txt 文件彈窗
+    // 🎯 完美修復版：直接用傳統字串拼接，杜絕 [object Object] 轉型錯誤
     function openMarkDoc() {
-        const mFilter = document.getElementById('mFilter');
-        const selectedValue = mFilter.value;
-        if (selectedValue === 'all') return;
+        // 直接精準抓取 select 元件
+        var mFilterEl = document.getElementById('mFilter');
+        if (!mFilterEl) return;
+        
+        var listName = mFilterEl.value;
+        if (listName === 'all' || !listName) return;
 
-        // 目標路徑：data/pc-stock.txt
-        const docPath = `../../data/${{selectedValue}}-stock.txt?v=` + new Date().getTime();
-        const modalContent = document.querySelector('.modal-content');
+        // 使用傳統的 '+' 號拼接字串，完全避開 Python f-string 轉義陷阱
+        var docPath = '../../data/' + listName + '-stock.txt?v=' + new Date().getTime();
+        var modalContent = document.querySelector('.modal-content');
 
         // 清除舊有的樣式 Patch
-        const patch = document.getElementById('bs-style-patch');
+        var patch = document.getElementById('bs-style-patch');
         if (patch) patch.remove();
 
         if (modalContent) {
@@ -420,7 +407,7 @@
         }
 
         document.getElementById('logTitle').style.display = '';
-        document.getElementById('logTitle').innerText = `📋 清單專屬文件: ${selectedValue}-stock.txt`;
+        document.getElementById('logTitle').innerText = '📋 清單專屬文件: ' + listName + '-stock.txt';
         document.getElementById('logContent').innerText = '載入中...';
         document.getElementById('logContent').style.background = '#0f172a';
         document.getElementById('logContent').style.padding = '25px';
@@ -435,8 +422,25 @@
                 document.getElementById('logContent').innerText = data;
             })
             .catch(function(err) {
-                document.getElementById('logContent').innerText = `❌ 無法讀取清單描述文件，請確認檔案是否存在。路徑為: ${docPath}`;
+                document.getElementById('logContent').innerText = '❌ 無法讀取清單描述文件，請確認檔案是否存在。路徑為: ' + docPath;
             });
+    }
+
+    // 🎯 順便檢查這個函式，也改成最安全的傳統拼接
+    function handleMarkFilterChange() {
+        var mFilterEl = document.getElementById('mFilter');
+        var btn = document.getElementById('markDocBtn');
+        if (!mFilterEl || !btn) return;
+
+        var selectedValue = mFilterEl.value;
+
+        if (selectedValue === 'all') {
+            btn.style.display = 'none';
+        } else {
+            btn.style.display = 'inline-block';
+            btn.innerText = '📄 ' + selectedValue + '-stock';
+        }
+        filter();
     }
 
     // 🎯 修改：重置按鈕時，也把備忘錄按鈕隱藏
