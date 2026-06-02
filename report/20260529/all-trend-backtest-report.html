@@ -402,7 +402,7 @@
         if (selectedValue === 'all') return;
 
         // 目標路徑：data/pc-stock.txt
-        const docPath = `data/${selectedValue}-stock.txt?v=` + new Date().getTime();
+        const docPath = `../../data/${{selectedValue}}-stock.txt?v=` + new Date().getTime();
         const modalContent = document.querySelector('.modal-content');
 
         // 清除舊有的樣式 Patch
