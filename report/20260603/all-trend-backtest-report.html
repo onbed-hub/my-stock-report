@@ -608,6 +608,52 @@
         }
     }
 
+    // ⚛️ 新增：點擊量子訊號燈號時，彈出讀取量子戰報文字檔的 Modal
+    function showQuantumLog(fullId, subDir) {
+        // 拼接出你的真實量子報告路徑
+        // 這裡會自動帶入當前畫面的 sim_date_str 與子夾編號
+        var cleanDate = '20260603'.replace(/-/g, '').replace(/\//g, '').trim();
+        var qLogPath = 'report/' + cleanDate + '/qiskit/' + subDir + '/' + fullId + '-report.txt?v=' + new Date().getTime();
+
+        var modalContent = document.querySelector('.modal-content');
+        var patch = document.getElementById('bs-style-patch');
+        if (patch) patch.remove();
+
+        if (modalContent) {
+            modalContent.style.width = '85%';
+            modalContent.style.maxWidth = '1050px';
+            modalContent.style.padding = '25px';
+            modalContent.style.margin = '2% auto';
+            modalContent.style.background = '#ffffff';
+            modalContent.style.borderRadius = '15px';
+            modalContent.style.overflow = '';
+        }
+
+        var logTitle = document.getElementById('logTitle');
+        if (logTitle) {
+            logTitle.style.display = '';
+            logTitle.innerText = '⚛️ 量子交易模型戰報: ' + fullId;
+        }
+        
+        document.getElementById('logContent').innerText = '量子數據載入中...';
+        document.getElementById('logContent').style.background = '#0f172a';
+        document.getElementById('logContent').style.padding = '25px';
+        document.getElementById('logModal').style.display = 'block';
+
+        fetch(qLogPath)
+            .then(function(response) {
+                if (!response.ok) throw new Error('File not found');
+                return response.text();
+            })
+            .then(function(data) {
+                document.getElementById('logContent').innerText = data;
+            })
+            .catch(function(err) {
+                document.getElementById('logContent').innerText = '❌ 無法讀取量子戰報，請確認檔案是否存在。
+預期路徑為: ' + qLogPath;
+            });
+    }
+
     window.onclick = function(event) {
         const modal = document.getElementById('logModal');
         if (event.target === modal) {
