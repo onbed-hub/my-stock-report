@@ -322,9 +322,9 @@
             const rowType = row.getAttribute('data-type');
 
             const bizText = (row.getAttribute('data-biz-text') || '').toUpperCase().trim();
+
             const signalText = row.cells[4] ? row.cells[4].textContent : '';
             let rawPnl = row.cells[5] ? row.cells[5].textContent.replace('%', '') : '0';
-
             const pnlValue = isNaN(parseFloat(rawPnl)) ? 0 : parseFloat(rawPnl);
 
             const matchSearch = idFull.includes(search) || nameText.includes(search) || bizText.includes(search);
@@ -352,7 +352,7 @@
 
         document.getElementById('pageInfo').innerText = '第 ' + currentPage + ' / ' + totalPages + ' 頁 (共 ' + filteredRows.length + ' 檔)';
         document.getElementById('prevBtn').disabled = (currentPage === 1);
-        document.getElementById('nextBtn').disabled = (currentPage === totalPages);
+        document.getElementById('nextBtn').disabled = (totalPages === 1 || currentPage === totalPages);
     }
 
     function changePage(step) { currentPage += step; updateDisplay(); }
@@ -566,16 +566,16 @@
         var logContent = document.getElementById('logContent');
         var logTitle = document.getElementById('logTitle');
 
-        // 🎯 核心修復點：移除干擾大括號，改用標準安全且乾淨的 JS 物件樣式動態注入
         var stylePatch = document.getElementById('bs-style-patch');
         if (!stylePatch) {
             stylePatch = document.createElement('style');
             stylePatch.id = 'bs-style-patch';
+            stylePatch.innerHTML = `
+                .modal-content { padding: 0px !important; margin: 1.5% auto !important; height: auto !important; max-height: 95vh !important; }
+                #logContent { padding: 0px !important; margin: 0px !important; }
+            `;
             document.head.appendChild(stylePatch);
         }
-        // 避開所有反引號與 CSS 換行大括號，百分之百不干擾 Python 與前端解譯器
-        stylePatch.sheet.insertRule('.modal-content { padding: 0px !important; margin: 1.5% auto !important; height: auto !important; max-height: 95vh !important; }', 0);
-        stylePatch.sheet.insertRule('#logContent { padding: 0px !important; margin: 0px !important; }', 1);
 
         if (modalContent) {
             modalContent.style.background = '#ffffff';
@@ -604,15 +604,16 @@
             logContent.innerHTML = '<div style="text-align:center; padding: 40px; color:#ef4444; font-size:1.1rem; background:#ffffff;">❌ 尚未生成此標的的財報專屬分析報告</div>';
         }
     }
+    
 
     function showQuantumLog(fullId, subDir, element) {
         var cleanDate = element.getAttribute('data-date') || '';
         var qLogPath = 'report/' + cleanDate + '/qiskit/' + subDir + '/' + fullId + '-report.txt?v=' + new Date().getTime();
 
-        var modalContent = document.querySelector('.modal-content');
         var patch = document.getElementById('bs-style-patch');
         if (patch) patch.remove();
 
+        var modalContent = document.querySelector('.modal-content');
         if (modalContent) {
             modalContent.style.width = '85%';
             modalContent.style.maxWidth = '1050px';
@@ -623,12 +624,8 @@
             modalContent.style.overflow = '';
         }
 
-        var logTitle = document.getElementById('logTitle');
-        if (logTitle) {
-            logTitle.style.display = '';
-            logTitle.innerText = '⚛️ 量子交易模型戰報: ' + fullId;
-        }
-
+        document.getElementById('logTitle').style.display = '';
+        document.getElementById('logTitle').innerText = '⚛️ 量子交易模型戰報: ' + fullId;
         document.getElementById('logContent').innerText = '量子數據載入中...';
         document.getElementById('logContent').style.background = '#0f172a';
         document.getElementById('logContent').style.padding = '25px';
@@ -643,10 +640,10 @@
                 document.getElementById('logContent').innerText = data;
             })
             .catch(function(err) {
-                document.getElementById('logContent').innerText = '❌ 無法讀取量子戰報，請確認檔案是否存在。
-預期路徑為: ' + qLogPath;
+                document.getElementById('logContent').innerText = '❌ 無法讀取量子戰報，請確認檔案是否存在。\n預期路徑為: ' + qLogPath;
             });
     }
+    
 
     window.onclick = function(event) {
         const modal = document.getElementById('logModal');
