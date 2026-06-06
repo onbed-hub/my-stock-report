@@ -608,7 +608,13 @@
 
     function showQuantumLog(fullId, subDir, element) {
         var cleanDate = element.getAttribute('data-date') || '';
-        var qLogPath = 'report/' + cleanDate + '/qiskit/' + subDir + '/' + fullId + '-report.txt?v=' + new Date().getTime();
+        var timestamp = new Date().getTime();
+        
+        // 自動路徑配對探測：
+        // 1. pathCurrent: 當網頁在 report/20260603/ 底下，直接讀取同目錄的 qiskit (100% 命中)
+        var pathCurrent = 'qiskit/' + subDir + '/' + fullId + '-report.txt?v=' + timestamp;
+        var pathRelative = '../../report/' + cleanDate + '/qiskit/' + subDir + '/' + fullId + '-report.txt?v=' + timestamp;
+        var pathRoot = 'report/' + cleanDate + '/qiskit/' + subDir + '/' + fullId + '-report.txt?v=' + timestamp;
 
         var patch = document.getElementById('bs-style-patch');
         if (patch) patch.remove();
@@ -631,17 +637,27 @@
         document.getElementById('logContent').style.padding = '25px';
         document.getElementById('logModal').style.display = 'block';
 
-        fetch(qLogPath)
-            .then(function(response) {
-                if (!response.ok) throw new Error('File not found');
-                return response.text();
-            })
-            .then(function(data) {
-                document.getElementById('logContent').innerText = data;
-            })
-            .catch(function(err) {
-                document.getElementById('logContent').innerText = '❌ 無法讀取量子戰報，請確認檔案是否存在。\n預期路徑為: ' + qLogPath;
-            });
+        // 輪詢探測讀取
+        function tryFetch(paths, index) {
+            if (index >= paths.length) {
+                document.getElementById('logContent').innerText = '❌ 無法讀取量子戰報，請確認檔案相對路徑是否正確。\n最後嘗試路徑為: ' + paths[0];
+                return;
+            }
+            
+            fetch(paths[index])
+                .then(function(response) {
+                    if (!response.ok) throw new Error('404');
+                    return response.text();
+                })
+                .then(function(data) {
+                    document.getElementById('logContent').innerText = data;
+                })
+                .catch(function(err) {
+                    tryFetch(paths, index + 1); // 失敗自動切換下一條備用路徑
+                });
+        }
+
+        tryFetch([pathCurrent, pathRelative, pathRoot], 0);
     }
     
 
