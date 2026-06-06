@@ -249,7 +249,8 @@
                         <th onclick="sortTable(2)">分類 ↕</th>
                         <th onclick="sortTable(3)">現價 ↕</th>
                         <th onclick="sortTable(4)">趨勢訊號 ↕</th>
-                        <th onclick="sortTable(5)">量子訊號 ↕</th> <th onclick="sortTable(6)">累積獲利 ↕️</th>
+                        <th onclick="sortTable(5)">量子訊號 ↕</th>
+                        <th onclick="sortTable(6)">累積獲利 ↕️</th>
                         <th onclick="sortTable(7)">次數 ↕️</th>
                         <th onclick="sortTable(8)">勝率 ↕️</th>
                         <th>進場管道 & 狀態理由 ↕️</th>
@@ -326,10 +327,9 @@
             const rowType = row.getAttribute('data-type');
             const bizText = (row.getAttribute('data-biz-text') || '').toUpperCase().trim();
 
-            # 🎯 核心修正：因增加了量子訊號，cell 欄位索引值全部加 1 遞延
             const signalText = row.cells[4] ? row.cells[4].textContent : '';
-            const quantumText = row.cells[5] ? row.cells[5].textContent : ''; // ⚛️ 讀取量子訊號文字
-            let rawPnl = row.cells[6] ? row.cells[6].textContent.replace('%', '') : '0'; // 5 -> 6
+            const quantumText = row.cells[5] ? row.cells[5].textContent : ''; 
+            let rawPnl = row.cells[6] ? row.cells[6].textContent.replace('%', '') : '0'; 
             const pnlValue = isNaN(parseFloat(rawPnl)) ? 0 : parseFloat(rawPnl);
 
             const matchSearch = idFull.includes(search) || nameText.includes(search) || bizText.includes(search);
@@ -338,7 +338,6 @@
 
             let matchPnl = (pFilterVal === "loss") ? pnlValue < 0 : (pFilterVal === "-999" ? true : pnlValue >= parseFloat(pFilterVal));
             
-            # 🎯 訊號優化：篩選「今日訊號」時，不論是趨勢訊號還是量子訊號相符，皆顯示出來
             let matchSignal = (sFilter === 'all') ? true : (signalText.includes(sFilter) || quantumText.includes(sFilter));
             let matchMark = (mFilter === 'all') ? true : (markLists[mFilter] || []).some(item => item.trim() === idPure);
 
@@ -356,7 +355,8 @@
         const start = (currentPage - 1) * pageSize;
         filteredRows.slice(start, start + pageSize).forEach(row => row.style.display = '');
 
-        document.getElementById('pageInfo').innerText = `第 ${currentPage} / ${totalPages} 頁 (共 ${filteredRows.length} 檔)`;
+        // 💡 修正點：移除多餘的大括號，確保變數正確渲染
+        document.getElementById('pageInfo').innerText = '第 ' + currentPage + ' / ' + totalPages + ' 頁 (共 ' + filteredRows.length + ' 檔)';
         document.getElementById('prevBtn').disabled = (currentPage === 1);
         document.getElementById('nextBtn').disabled = (currentPage === totalPages);
     }
@@ -517,12 +517,49 @@
         if (logContent) {
             logContent.style.background = 'transparent';
             logContent.style.padding = '0px';
-            logContent.innerHTML = `<iframe src="${analysisPath}" style="width:100%; height:75vh; border:none; background:#ffffff; display:block;"></iframe>`;
+            logContent.innerHTML = '<iframe src="' + analysisPath + '" style="width:100%; height:75vh; border:none; background:#ffffff; display:block;"></iframe>';
         }
         document.getElementById('logModal').style.display = 'block';
     }
 
-    // 初始化產業標籤
+    function showBusinessLog(fullId, subDir) {
+        var patch = document.getElementById('bs-style-patch');
+        if (patch) patch.remove();
+
+        var bizPath = '/my-stock-report/basic_data/balance-sheet/' + subDir + '/' + fullId + '-industry-business.txt?v=' + new Date().getTime();
+        var modalContent = document.querySelector('.modal-content');
+        var logTitle = document.getElementById('logTitle');
+
+        if (logTitle) { logTitle.style.display = ''; }
+
+        if (modalContent) {
+            modalContent.style.width = '85%';
+            modalContent.style.maxWidth = '950px';
+            modalContent.style.padding = '25px';
+            modalContent.style.margin = '2% auto';
+            modalContent.style.background = '#ffffff';
+            modalContent.style.borderRadius = '15px';
+        }
+        
+        document.getElementById('logTitle').innerText = '🏢 產業營收結構: ' + fullId;
+        document.getElementById('logContent').innerText = '載入中...';
+        document.getElementById('logContent').style.background = '#0f172a';
+        document.getElementById('logContent').style.padding = '25px';
+        document.getElementById('logModal').style.display = 'block';
+
+        fetch(bizPath)
+            .then(function(response) {
+                if (!response.ok) throw new Error('File not found');
+                return response.text();
+            })
+            .then(function(data) {
+                document.getElementById('logContent').innerText = data;
+            })
+            .catch(function(err) {
+                document.getElementById('logContent').innerText = '❌ 無法讀取產業營收文件。';
+            });
+    }
+
     window.onload = function() {
         initSectorFilter();
         updateDisplay();
