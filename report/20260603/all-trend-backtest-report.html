@@ -343,7 +343,6 @@
         updateDisplay();
     }
 
-    // 🎯 修正處 1：全面改為傳統字串拼接，避開 Python 轉義地獄
     function updateDisplay() {
         const allRows = document.querySelectorAll('#stockTable tbody tr');
         allRows.forEach(row => row.style.display = 'none');
@@ -493,7 +492,6 @@
             });
     }
 
-    // 🎯 修正處 2：將分析圖表的 iframe 生成改為安全拼接，並修復 displayock 錯字
     function showAnalysisModal(fullId, subDir) {
         var patch = document.getElementById('bs-style-patch');
         if (patch) patch.remove();
@@ -568,16 +566,16 @@
         var logContent = document.getElementById('logContent');
         var logTitle = document.getElementById('logTitle');
 
+        // 🎯 核心修復點：移除干擾大括號，改用標準安全且乾淨的 JS 物件樣式動態注入
         var stylePatch = document.getElementById('bs-style-patch');
         if (!stylePatch) {
             stylePatch = document.createElement('style');
             stylePatch.id = 'bs-style-patch';
-            stylePatch.innerHTML = `
-                .modal-content { padding: 0px !important; margin: 1.5% auto !important; height: auto !important; max-height: 95vh !important; }
-                #logContent { padding: 0px !important; margin: 0px !important; }
-            `;
             document.head.appendChild(stylePatch);
         }
+        // 避開所有反引號與 CSS 換行大括號，百分之百不干擾 Python 與前端解譯器
+        stylePatch.sheet.insertRule('.modal-content { padding: 0px !important; margin: 1.5% auto !important; height: auto !important; max-height: 95vh !important; }', 0);
+        stylePatch.sheet.insertRule('#logContent { padding: 0px !important; margin: 0px !important; }', 1);
 
         if (modalContent) {
             modalContent.style.background = '#ffffff';
@@ -599,7 +597,6 @@
             .then(function(res2) { if (res2) { if (res2.ok) { loadIframe(altBsPath); } else { showNoReportMessage(); } } })
             .catch(function(err) { loadIframe(bsPath); });
 
-        // 🎯 修正處 3：改成單引號傳統拼接，修正 display:ck 錯字
         function loadIframe(targetPath) {
             logContent.innerHTML = '<iframe src="' + targetPath + '" style="width:100%; height:540px; border:none; background:#ffffff; display:block;"></iframe>';
         }
@@ -608,12 +605,10 @@
         }
     }
 
-    // ⚛️ 全新修復：純前端無衝突版本量子戰報 Modal 觸發器
     function showQuantumLog(fullId, subDir, element) {
-        // 直接從 HTML 節點的屬性動態拿取日期，完美避開 Python 轉義地獄
         var cleanDate = element.getAttribute('data-date') || '';
         var qLogPath = 'report/' + cleanDate + '/qiskit/' + subDir + '/' + fullId + '-report.txt?v=' + new Date().getTime();
-        
+
         var modalContent = document.querySelector('.modal-content');
         var patch = document.getElementById('bs-style-patch');
         if (patch) patch.remove();
@@ -633,7 +628,7 @@
             logTitle.style.display = '';
             logTitle.innerText = '⚛️ 量子交易模型戰報: ' + fullId;
         }
-        
+
         document.getElementById('logContent').innerText = '量子數據載入中...';
         document.getElementById('logContent').style.background = '#0f172a';
         document.getElementById('logContent').style.padding = '25px';
