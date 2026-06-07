@@ -674,6 +674,7 @@
     });
     
 
+    
     function showQuantumLog(fullId, subDir, element) {
         var cleanDate = element.getAttribute('data-date') || '';
         var timestamp = new Date().getTime();
@@ -706,10 +707,11 @@
 
         function tryFetch(paths, index) {
             if (index >= paths.length) {
-                document.getElementById('logContent').innerText = '❌ 無法讀取量子戰報，請確認檔案相對路徑是否正確。\n最後嘗試路徑為: ' + paths[0];
+                document.getElementById('logContent').innerText = '❌ 無法讀取量子戰報，請確認檔案相對路徑是否正確。
+最後嘗試路徑為: ' + paths[0];
                 return;
             }
-            
+
             fetch(paths[index])
                 .then(function(response) {
                     if (!response.ok) throw new Error('404');
