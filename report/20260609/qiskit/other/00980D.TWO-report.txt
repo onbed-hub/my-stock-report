@@ -16,7 +16,7 @@
 🧬 採用特徵組合: KD_Diff, Vol_Ratio, MA_Slope, BB_Upper
 📈 今日即時最佳技術指標計算结果:
    - KD_Diff 原始計算指標值: -5.7575
-   - Vol_Ratio 原始計算指標值: 0.4989
+   - Vol_Ratio 原始計算指標值: 0.4961
    - MA_Slope 原始計算指標值: 0.0000
    - BB_Upper 原始計算指標值: 0.4598
 🎯 策略動作指引: ❄️ 繼續維持空倉手握現鈔 (EMPTY) ❄️
