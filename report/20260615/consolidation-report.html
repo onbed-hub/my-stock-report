@@ -27,26 +27,21 @@
 
             <div class="logic-box">
                 <span class="logic-title">🔍 技術指標判斷邏輯說明</span>
-                1. <span class="badge bg-blue">均線糾纏</span> (MA Convergence)：<br>
+                1. <span class="badge bg-red">強勢突破 (軌外)</span> (Upper Band Breakout)：<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;當收盤價大於或等於布林通道上軌（2倍標準差）。代表股價進入極強勢噴發段。<br><br>
+
+                2. <span class="badge bg-orange">貼軌運行</span> (Riding Upper Band)：<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;當收盤價位於布林中軌與上軌間的 75% 區間以上（約大於 1.5 倍標準差）。<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="insight">💡 意涵：代表股價沿著布林上軌強勢推升，屬於高動能的波段多頭走勢。</span>
+
+                3. <span class="badge bg-blue">均線糾擺</span> (MA Convergence)：<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;計算 MA5、MA10、MA20 三線之標準差。若標準差小於 MA20 的 1.5%，視為「成本高度集中」。<br>
-                <span class="insight">💡 意涵：代表短中長期投資者持股成本一致，能量高度壓縮，即將出現大級別變盤。</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="insight">💡 意涵：能量高度壓縮，即將出現大級別變盤。</span>
 
-                2. <span class="badge bg-orange">進入盤整</span> (Trendless Phase)：<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;當 ADX 指標低於 20。ADX 衡量趨勢強度，不論方向。<br>
-                <span class="insight">💡 意涵：市場多空拉鋸，缺乏推動股價的動能，此時應過濾趨勢型指標訊號。</span>
-
-                3. <span class="badge bg-green">離開盤整 (向上/向下)</span> (Breakout)：<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;當收盤價 突破或跌破布林通道上下軌 (2倍標準差)。<br>
-                <span class="insight">💡 意涵：價格脫離震盪平衡，新的趨勢可能剛開始發動。</span>
-
-                4. <span class="badge bg-gray">趨勢運行</span> (Trending)：<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;股價於均線上方或下方穩定波動，且不具備上述盤整或糾纏特徵。<br>
-                <span class="insight">💡 意涵：目前處於既有趨勢中，適合順勢操作。</span>
-
-                <hr style="border: none; border-top: 1px dashed #90caf9; margin: 20px 0;">
-                📌 <strong>判斷基準說明</strong><br>
-                &nbsp;&nbsp;&nbsp;&nbsp;<strong>大漲/大跌</strong>：以收盤價變動 5.0% 為判定門檻。
+                4. <span class="badge bg-gray">進入盤整</span> (Trendless Phase)：<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;當 ADX 指標低於 20。市場拉鋸，缺乏多空推動股價的動能。
             </div>
+            
             <div class="controls">
                 <div class="control-item">🔍 搜尋股票：<input type="text" id="customSearch" placeholder="搜尋股號、名稱..."></div>
                 <div class="control-item">🎯 狀態過濾：
@@ -57,7 +52,6 @@
                         <option value="均線糾擺">均線糾擺</option>
                         <option value="進入盤整">進入盤整</option>
                         <option value="趨勢運行">趨勢運行</option>
-                        <option value="離開盤整 (向上)">離開盤整 (向上)</option>
                         <option value="離開盤整 (向下)">離開盤整 (向下)</option>
                     </select>
                 </div>
@@ -1404,7 +1398,7 @@
       <td>981</td>
       <td>233.00</td>
       <td>46.40</td>
-      <td>📅 預告 (20260624)</td>
+      <td><a href="../../basic_data/dividend/8/6658.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260624)</a></td>
       <td>進入盤整</td>
       <td><span class="badge bg-red">連1日大漲</span></td>
       <td>無</td>
@@ -1495,7 +1489,7 @@
       <td>2,780</td>
       <td>419.50</td>
       <td>124.59</td>
-      <td>📅 預告 (20260626)</td>
+      <td><a href="../../basic_data/dividend/0/3030.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260626)</a></td>
       <td>趨勢運行</td>
       <td>無</td>
       <td>無</td>
@@ -1924,7 +1918,7 @@
       <td>41,392</td>
       <td>35.10</td>
       <td>29.13</td>
-      <td>📅 預告 (20260616)</td>
+      <td><a href="../../basic_data/dividend/4/2884.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260616)</a></td>
       <td>貼軌運行</td>
       <td>無</td>
       <td>無</td>
@@ -4056,7 +4050,7 @@
       <td>58</td>
       <td>36.70</td>
       <td>29.20</td>
-      <td>📅 預告 (20260617)</td>
+      <td><a href="../../basic_data/dividend/5/6615.TWO-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260617)</a></td>
       <td>貼軌運行</td>
       <td>無</td>
       <td>無</td>
@@ -6149,7 +6143,7 @@
       <td>76</td>
       <td>21.00</td>
       <td>12.35</td>
-      <td>📅 預告 (20260617)</td>
+      <td><a href="../../basic_data/dividend/8/6988.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260617)</a></td>
       <td>趨勢運行</td>
       <td>無</td>
       <td>無</td>
@@ -6188,7 +6182,7 @@
       <td>17</td>
       <td>36.90</td>
       <td>19.00</td>
-      <td>📅 預告 (20260625)</td>
+      <td><a href="../../basic_data/dividend/3/5543.TWO-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260625)</a></td>
       <td>貼軌運行 -> 均線糾擺</td>
       <td>無</td>
       <td>無</td>
@@ -6396,7 +6390,7 @@
       <td>582</td>
       <td>349.00</td>
       <td>274.50</td>
-      <td>📅 預告 (20260616)</td>
+      <td><a href="../../basic_data/dividend/1/6491.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260616)</a></td>
       <td>均線糾擺</td>
       <td>無</td>
       <td>無</td>
@@ -7020,7 +7014,7 @@
       <td>1,466</td>
       <td>136.00</td>
       <td>80.40</td>
-      <td>📅 預告 (20260618)</td>
+      <td><a href="../../basic_data/dividend/5/6585.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260618)</a></td>
       <td>強勢突破 (軌外) -> 貼軌運行</td>
       <td>無</td>
       <td>無</td>
@@ -7085,7 +7079,7 @@
       <td>2,313</td>
       <td>51.90</td>
       <td>36.65</td>
-      <td>📅 預告 (20260617)</td>
+      <td><a href="../../basic_data/dividend/2/2362.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260617)</a></td>
       <td>趨勢運行</td>
       <td>無</td>
       <td>無</td>
@@ -7722,7 +7716,7 @@
       <td>4,562</td>
       <td>371.00</td>
       <td>273.50</td>
-      <td>📅 預告 (20260616)</td>
+      <td><a href="../../basic_data/dividend/3/3413.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260616)</a></td>
       <td>進入盤整 -> 均線糾擺</td>
       <td>無</td>
       <td>無</td>
@@ -8203,7 +8197,7 @@
       <td>438</td>
       <td>117.50</td>
       <td>48.70</td>
-      <td>📅 預告 (20260625)</td>
+      <td><a href="../../basic_data/dividend/4/3444.TWO-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260625)</a></td>
       <td>進入盤整</td>
       <td>無</td>
       <td>無</td>
@@ -9035,7 +9029,7 @@
       <td>1,986</td>
       <td>2625.00</td>
       <td>331.55</td>
-      <td>📅 預告 (20260623)</td>
+      <td><a href="../../basic_data/dividend/0/2360.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260623)</a></td>
       <td>趨勢運行</td>
       <td>無</td>
       <td>無</td>
@@ -10231,7 +10225,7 @@
       <td>9,397</td>
       <td>2520.00</td>
       <td>382.20</td>
-      <td>📅 預告 (20260708)</td>
+      <td><a href="../../basic_data/dividend/8/2308.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260708)</a></td>
       <td>均線糾擺</td>
       <td>無</td>
       <td>無</td>
@@ -10543,7 +10537,7 @@
       <td>5,386</td>
       <td>257.00</td>
       <td>174.16</td>
-      <td>📅 預告 (20260618)</td>
+      <td><a href="../../basic_data/dividend/4/2474.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260618)</a></td>
       <td>趨勢運行</td>
       <td>無</td>
       <td>無</td>
@@ -10569,7 +10563,7 @@
       <td>359</td>
       <td>61.40</td>
       <td>30.10</td>
-      <td>⚠️ 今天 (20260615)</td>
+      <td><a href="../../basic_data/dividend/2/6272.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">⚠️ 今天 (20260615)</a></td>
       <td>趨勢運行 -> 進入盤整</td>
       <td>無</td>
       <td>無</td>
@@ -12519,7 +12513,7 @@
       <td>43,536</td>
       <td>250.00</td>
       <td>103.93</td>
-      <td>📅 預告 (20260622)</td>
+      <td><a href="../../basic_data/dividend/1/2301.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260622)</a></td>
       <td>趨勢運行</td>
       <td>無</td>
       <td>無</td>
@@ -14729,7 +14723,7 @@
       <td>3,499</td>
       <td>92.00</td>
       <td>36.40</td>
-      <td>📅 預告 (20260617)</td>
+      <td><a href="../../basic_data/dividend/0/6190.TWO-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260617)</a></td>
       <td>均線糾擺</td>
       <td>無</td>
       <td>無</td>
@@ -16731,7 +16725,7 @@
       <td>42,901</td>
       <td>70.50</td>
       <td>39.04</td>
-      <td>📅 預告 (20260616)</td>
+      <td><a href="../../basic_data/dividend/1/2891.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260616)</a></td>
       <td>趨勢運行</td>
       <td>無</td>
       <td>無</td>
@@ -17693,7 +17687,7 @@
       <td>25,838</td>
       <td>127.50</td>
       <td>78.34</td>
-      <td>📅 預告 (20260616)</td>
+      <td><a href="../../basic_data/dividend/1/2881.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260616)</a></td>
       <td>趨勢運行 -> 貼軌運行</td>
       <td>無</td>
       <td>無</td>
@@ -18421,7 +18415,7 @@
       <td>720</td>
       <td>38.50</td>
       <td>17.20</td>
-      <td>📅 預告 (20260618)</td>
+      <td><a href="../../basic_data/dividend/7/3027.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260618)</a></td>
       <td>趨勢運行</td>
       <td>無</td>
       <td>無</td>
@@ -18473,7 +18467,7 @@
       <td>2,004</td>
       <td>2945.00</td>
       <td>670.14</td>
-      <td>📅 預告 (20260616)</td>
+      <td><a href="../../basic_data/dividend/7/3017.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260616)</a></td>
       <td>進入盤整</td>
       <td>無</td>
       <td>無</td>
@@ -18863,7 +18857,7 @@
       <td>42</td>
       <td>58.80</td>
       <td>46.30</td>
-      <td>📅 預告 (20260616)</td>
+      <td><a href="../../basic_data/dividend/2/8432.TWO-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260616)</a></td>
       <td>均線糾擺</td>
       <td>無</td>
       <td>無</td>
@@ -19123,7 +19117,7 @@
       <td>3,624</td>
       <td>16.00</td>
       <td>11.15</td>
-      <td>📅 預告 (20260623)</td>
+      <td><a href="../../basic_data/dividend/0/1710.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260623)</a></td>
       <td>趨勢運行</td>
       <td>無</td>
       <td>無</td>
@@ -21437,7 +21431,7 @@
       <td>1,922</td>
       <td>249.50</td>
       <td>152.00</td>
-      <td>📅 預告 (20260616)</td>
+      <td><a href="../../basic_data/dividend/6/3596.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260616)</a></td>
       <td>均線糾擺</td>
       <td>無</td>
       <td>無</td>
@@ -24323,7 +24317,7 @@
       <td>1,663</td>
       <td>975.00</td>
       <td>115.82</td>
-      <td>📅 預告 (20260616)</td>
+      <td><a href="../../basic_data/dividend/0/6830.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260616)</a></td>
       <td>趨勢運行</td>
       <td><span class="badge bg-orange">隔一漲</span></td>
       <td>無</td>
@@ -24349,7 +24343,7 @@
       <td>1,420</td>
       <td>142.00</td>
       <td>86.80</td>
-      <td>📅 預告 (20260616)</td>
+      <td><a href="../../basic_data/dividend/0/3010.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260616)</a></td>
       <td>趨勢運行</td>
       <td>無</td>
       <td>無</td>
@@ -24362,7 +24356,7 @@
       <td>28,675</td>
       <td>44.00</td>
       <td>38.22</td>
-      <td>📅 預告 (20260629)</td>
+      <td><a href="../../basic_data/dividend/6/2886.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260629)</a></td>
       <td>貼軌運行</td>
       <td>無</td>
       <td>無</td>
@@ -25090,7 +25084,7 @@
       <td>760</td>
       <td>337.50</td>
       <td>201.00</td>
-      <td>📅 預告 (20260618)</td>
+      <td><a href="../../basic_data/dividend/5/3515.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260618)</a></td>
       <td>趨勢運行 -> 均線糾擺</td>
       <td>無</td>
       <td>無</td>
@@ -26247,7 +26241,7 @@
       <td>36</td>
       <td>54.37</td>
       <td>40.33</td>
-      <td>📅 預告 (20260623)</td>
+      <td><a href="../../basic_data/dividend/7/6697.TWO-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260623)</a></td>
       <td>均線糾擺</td>
       <td>無</td>
       <td>無</td>
@@ -26455,7 +26449,7 @@
       <td>9,208</td>
       <td>53.60</td>
       <td>11.30</td>
-      <td>📅 預告 (20260616)</td>
+      <td><a href="../../basic_data/dividend/4/5864.TWO-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260616)</a></td>
       <td>趨勢運行</td>
       <td><span class="badge bg-red">連2日大漲</span></td>
       <td>無</td>
@@ -26468,7 +26462,7 @@
       <td>2,748</td>
       <td>163.50</td>
       <td>111.00</td>
-      <td>⚠️ 今天 (20260615)</td>
+      <td><a href="../../basic_data/dividend/5/1215.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">⚠️ 今天 (20260615)</a></td>
       <td>趨勢運行</td>
       <td>無</td>
       <td>無</td>
@@ -27911,7 +27905,7 @@
       <td>55,266</td>
       <td>35.20</td>
       <td>21.39</td>
-      <td>📅 預告 (20260617)</td>
+      <td><a href="../../basic_data/dividend/0/2890.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260617)</a></td>
       <td>貼軌運行</td>
       <td>無</td>
       <td>無</td>
@@ -28665,7 +28659,7 @@
       <td>4,549</td>
       <td>88.82</td>
       <td>47.65</td>
-      <td>📅 預告 (20260616)</td>
+      <td><a href="../../basic_data/dividend/7/6757.TW-dividend.txt" target="_blank" style="text-decoration: none; color: #1565c0; font-weight: bold;">📅 預告 (20260616)</a></td>
       <td>均線糾擺 -> 貼軌運行</td>
       <td><span class="badge bg-orange">隔一漲</span></td>
       <td>無</td>
@@ -30446,52 +30440,54 @@
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script>
             $(document).ready(function() {
-                var table = $('#main_table').DataTable({ 
-                    "pageLength": 50, 
-                    "dom": 'ltip', 
-                    "language": { "info": "共 _TOTAL_ 筆" } 
+                var table = $('#main_table').DataTable({
+                    "pageLength": 50,
+                    "dom": 'ltip',
+                    "language": { "info": "共 _TOTAL_ 筆" }
                 });
-                
+
                 $('#customSearch').on('input', function() { table.search(this.value).draw(); });
-                
-                function getIdx(n) { 
-                    var i=-1; 
-                    $('#main_table thead th').each(function(j){ 
-                        if($(this).text().trim()===n) i=j; 
-                    }); 
-                    return i; 
+
+                function getIdx(n) {
+                    var i=-1;
+                    $('#main_table thead th').each(function(j){
+                        if($(this).text().trim()===n) i=j;
+                    });
+                    return i;
                 }
-                
-                var sIdx = getIdx('狀態'), 
-                    rIdx = getIdx('連續大漲'), 
+
+                var sIdx = getIdx('狀態'),
+                    rIdx = getIdx('連續大漲'),
                     dIdx = getIdx('連續大跌'),
                     cIdx = getIdx('法說會');
-                
-                $('#statusFilter').on('change', function() { table.column(sIdx).search(this.value).draw(); });
+
+                $('#statusFilter').on('change', function() {
+                    var val = $(this).val();
+                    if(val) {
+                        table.column(sIdx).search(val + '$', true, false).draw();
+                    } else {
+                        table.column(sIdx).search('').draw();
+                    }
+                });
+
                 $('#riseFilter').on('change', function() {
                     var val = $(this).val();
-    
                     if (val === "連4日大漲") {
-                        // 選 4 日時，搜尋條件設為 "4日" OR "5日"
                         table.column(rIdx).search("4日|5日", true, false).draw();
                     } else if (val === "連3日大漲") {
-                        // 選 3 日時，搜尋條件設為 "3日" OR "4日" OR "5日"
                         table.column(rIdx).search("3日|4日|5日", true, false).draw();
                     } else if (val === "連2日大漲") {
-                        // 選 2 日時，搜尋條件設為 "2日" OR "3日" OR "4日" OR "5日"
                         table.column(rIdx).search("2日|3日|4日|5日", true, false).draw();
                     } else if (val === "連1日大漲") {
-                        // 選 1 日大漲時，顯示所有連漲標籤 (1|2|3|4|5)
                         table.column(rIdx).search("1日|2日|3日|4日|5日", true, false).draw();
                     } else {
-                        // 其他 (連5日 或 全部) 就按正常搜尋
                         table.column(rIdx).search(val).draw();
                     }
                 });
+
                 $('#dropFilter').on('change', function() {
                     var val = $(this).val();
                     if (val === "連4日大跌") {
-                        // 選 4 日跌，也要看到更慘的 5 日跌
                         table.column(dIdx).search("4日|5日", true, false).draw();
                     } else if (val === "連3日大跌") {
                         table.column(dIdx).search("3日|4日|5日", true, false).draw();
@@ -30503,9 +30499,10 @@
                         table.column(dIdx).search(val).draw();
                     }
                 });
+
+                // 法說會過濾修正：因為加了連結 A 標籤，改用模糊比對包含文字即可
                 $('#confFilter').on('change', function() { table.column(cIdx).search(this.value).draw(); });
             });
-
         </script>
     </body>
     </html>
