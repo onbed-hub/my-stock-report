@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9907 歷年股利分配報告</title>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .header {
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .header h1 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 24px;
+        }
+        .header .timestamp {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        th {
+            background-color: #f4f6f7;
+            color: #34495e;
+            font-weight: 600;
+        }
+        tr:hover {
+            background-color: #fdfefe;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 13px;
+            color: #95a5a6;
+        }
+        /* RWD 響應式手機排版最佳化 */
+        @media screen and (max-width: 768px) {
+            table, thead, tbody, th, td, tr { 
+                display: block; 
+            }
+            thead tr { 
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr { 
+                border: 1px solid #ccc; 
+                margin-bottom: 15px;
+                border-radius: 4px;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            }
+            td { 
+                border: none;
+                border-bottom: 1px solid #eee; 
+                position: relative;
+                padding-left: 50%; 
+                text-align: right;
+            }
+            td:before { 
+                position: absolute;
+                top: 12px;
+                left: 15px;
+                width: 45%; 
+                padding-right: 10px; 
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+                color: #7f8c8d;
+                content: attr(data-label);
+            }
+            td:last-child {
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>📊 股票代號 (9907) 歷年股利分配報告 <small style="color:#7f8c8d; font-size:16px;">(最新2筆)</small></h1>
+        <div class="timestamp">產生時間：2026-06-16 18:06</div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>所屬年度</th>
+                <th>總股利合計</th>
+                <th>現金股利</th>
+                <th>股票股利</th>
+                <th>除息日期</th>
+                <th>股利發放日</th>
+                <th>除息前收盤</th>
+                <th>預估殖利率</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        <tr>
+            <td data-label="所屬年度" style="font-weight: bold; color: #2c3e50;">2025 年</td>
+            <td data-label="總股利合計" style="font-weight: bold; color: #27ae60;">1.18 元</td>
+            <td data-label="現金股利">1.18 元</td>
+            <td data-label="股票股利">0.00 元</td>
+            <td data-label="除息日期">2026-06-22</td>
+            <td data-label="股利發放日">2026-07-22</td>
+            <td data-label="除息前收盤">16.65 元</td>
+            <td data-label="預估殖利率" style="font-weight: bold; color: #d35400;">7.09%</td>
+        </tr>
+        
+        <tr>
+            <td data-label="所屬年度" style="font-weight: bold; color: #2c3e50;">2024 年</td>
+            <td data-label="總股利合計" style="font-weight: bold; color: #27ae60;">0.97 元</td>
+            <td data-label="現金股利">0.97 元</td>
+            <td data-label="股票股利">0.00 元</td>
+            <td data-label="除息日期">2025-07-18</td>
+            <td data-label="股利發放日">2025-08-20</td>
+            <td data-label="除息前收盤">19.00 元</td>
+            <td data-label="預估殖利率" style="font-weight: bold; color: #d35400;">5.11%</td>
+        </tr>
+        
+        </tbody>
+    </table>
+
+    <div class="footer">
+        stock-Quantum Automated Report System
+    </div>
+</div>
+
+</body>
+</html>
