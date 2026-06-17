@@ -22,6 +22,10 @@ IMG_TARGET_DIR="./analysis_data"
 STATIC_0520_SRC="../stock-Quantum/my-code/topology-4-20260209/basic_data/0520"
 STATIC_0520_DIR="./basic_data/0520"
 
+# 🚀 【全新新增】：basic_data/dividend 的來源與目標路徑
+STATIC_DIVIDEND_SRC="../stock-Quantum/my-code/topology-4-20260209/basic_data/dividend"
+STATIC_DIVIDEND_DIR="./basic_data/dividend"
+
 echo "📅 準備更新報告與同步基礎資料..."
 
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -44,16 +48,28 @@ else
     echo "⚠️ 找不到基礎資料來源：$STATIC_BASE_SRC"
 fi
 
-# 🔥 新增：同步 basic_data/0520 資料夾的所有檔案
+# 🔥 同步 basic_data/0520 資料夾的所有檔案
 if [ -d "$STATIC_0520_SRC" ]; then
     echo "📂 正在同步 basic_data/0520 資料夾至本地根目錄: $STATIC_0520_DIR"
     mkdir -p "$STATIC_0520_DIR"
-    
+
     # 完整同步 0520 內的所有檔案與子目錄
     rsync -av --delete "$STATIC_0520_SRC/" "$STATIC_0520_DIR/"
     echo "✅ 基礎資料 0520 同步完成"
 else
     echo "⚠️ 找不到 0520 資料夾來源：$STATIC_0520_SRC"
+fi
+
+# 🚀 【全新新增】：同步 basic_data/dividend 資料夾及其所有子目錄（0~9, other）
+if [ -d "$STATIC_DIVIDEND_SRC" ]; then
+    echo "📂 正在同步 basic_data/dividend 股利資料夾至本地根目錄: $STATIC_DIVIDEND_DIR"
+    mkdir -p "$STATIC_DIVIDEND_DIR"
+
+    # 完整同步 dividend 內的所有子目錄及檔案 (--delete 會確保兩邊檔案完全一致)
+    rsync -av --delete "$STATIC_DIVIDEND_SRC/" "$STATIC_DIVIDEND_DIR/"
+    echo "✅ 股利基礎資料 dividend 同步完成"
+else
+    echo "⚠️ 找不到 dividend 資料夾來源：$STATIC_DIVIDEND_SRC"
 fi
 
 # --- B. 同步日期報告 ---
@@ -77,9 +93,7 @@ do
         fi
     done
 
-    # 2. ✨ 新增：同步對應日期的 summary_combined_*.png 圖片
-    # 使用前一天的日期來對應（例如 16 號處理 15 號的圖片）
-    # 如果你的圖片命名邏輯跟 CURR_D 是一致的，請把下面的 PREV_D 直接改成 CURR_D 即可
+    # 2. ✨ 同步對應日期的 summary_combined_*.png 圖片
     DAYS_AGO=$((i + 1))
     PREV_D=$(date -d "$DAYS_AGO days ago" +%Y%m%d)
     IMG_NAME="summary_combined_${PREV_D}.png"
@@ -114,10 +128,11 @@ find ./report -name "basic_data" -type d -exec rm -rf {} +
 echo "🔄 正在上傳至 GitHub..."
 git add -A
 COMMIT_TIME=$(date "+%Y-%m-%d %H:%M:%S")
-git commit -m "Update: Combined reports and sub-dir sync ($COMMIT_TIME)"
+git commit -m "Update: Combined reports, sub-dir sync and dividend data ($COMMIT_TIME)"
 git push origin main
 
 echo "✨ 全部完成！"
 echo "🌐 GitHub: https://github.com/onbed-hub/my-stock-report"
 echo "🌐 網址: https://onbed-hub.github.io/my-stock-report/"
+
 
