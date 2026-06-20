@@ -122,6 +122,8 @@ done
 
 echo "------------------------------------------"
 
+cp ../stock-Quantum/my-code/topology-4-20260209/data/*stock.txt data/
+
 # 在腳本的 git add -A 之前加入
 find ./report -name "basic_data" -type d -exec rm -rf {} +
 
