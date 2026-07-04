@@ -127,6 +127,9 @@ cp ../stock-Quantum/my-code/topology-4-20260209/data/*stock.txt data/
 # 在腳本的 git add -A 之前加入
 find ./report -name "basic_data" -type d -exec rm -rf {} +
 
+# 💡 【在這裡加上這行】：自動刪除 report 資料夾底下的所有空資料夾
+find ./report -type d -empty -delete
+
 echo "🔄 正在上傳至 GitHub..."
 git add -A
 COMMIT_TIME=$(date "+%Y-%m-%d %H:%M:%S")
