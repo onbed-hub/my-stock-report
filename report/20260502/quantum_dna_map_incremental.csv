@@ -1,6 +1,0 @@
-stock_id,best_combo,win_rate,profit_factor,update_at
-0050,"['MACD_Momentum_Up', 'OBV_MA']",0.7105,5.7635,2026-05-02 21:52
-0052,"['MACD_Golden_Cross', 'BIAS_20']",0.7895,6.4181,2026-05-02 21:55
-0056,"['MACD_Death_Cross', 'MA_60']",0.6579,6.1601,2026-05-02 21:58
-006203,"['MACD_Death_Cross', 'DMA_Golden_Cross']",0.6842,6.9194,2026-05-02 22:01
-006208,"['MACD_Bearish_Strong', 'Vol_Spike']",0.6579,8.2507,2026-05-02 22:04
