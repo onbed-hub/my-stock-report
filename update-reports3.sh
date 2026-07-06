@@ -113,9 +113,9 @@ do
     rm -rf "$TARGET_DIR/basic_data"
 
     # 4. 索引更新
-#    find "$TARGET_DIR" -maxdepth 1 -type f -name "[0-9]*.txt" -delete
-#    FILE_DATA=$(find "$TARGET_DIR" -maxdepth 4 -type f \( -name "*.html" -o -name "*.txt" \) ! -name "files.json" -printf "%P\n")
-#    echo "$FILE_DATA" | $JQ_CMD -R . | $JQ_CMD -s . > "$TARGET_DIR/files.json"
+    find "$TARGET_DIR" -maxdepth 1 -type f -name "[0-9]*.txt" -delete
+    FILE_DATA=$(find "$TARGET_DIR" -maxdepth 4 -type f \( -name "*.html" -o -name "*.txt" \) ! -name "files.json" -printf "%P\n")
+    echo "$FILE_DATA" | $JQ_CMD -R . | $JQ_CMD -s . > "$TARGET_DIR/files.json"
 
     # 💡 【在這裡加上這段安全性檢查】：
     # 檢查該日期資料夾內，除了 files.json 之外，還有沒有其他實體檔案
