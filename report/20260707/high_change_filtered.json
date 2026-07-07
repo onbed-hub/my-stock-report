@@ -1,0 +1,50 @@
+[
+    {
+        "symbol": "2458.TW",
+        "name": "義隆",
+        "price": "188.0",
+        "change": "9.0",
+        "changePercent": "+5.03%",
+        "volume_k": 22097,
+        "dayHigh": "196.5",
+        "dayLow": "180.5",
+        "isLimitUp": false,
+        "rank": "34"
+    },
+    {
+        "symbol": "8071.TWO",
+        "name": "能率網通",
+        "price": "33.35",
+        "change": "2.40",
+        "changePercent": "+7.75%",
+        "volume_k": 12196,
+        "dayHigh": "34.00",
+        "dayLow": "30.10",
+        "isLimitUp": false,
+        "rank": "20"
+    },
+    {
+        "symbol": "6919.TW",
+        "name": "康霈*",
+        "price": "110.0",
+        "change": "10.0",
+        "changePercent": "+10%",
+        "volume_k": 10718,
+        "dayHigh": "110.0",
+        "dayLow": "101.5",
+        "isLimitUp": true,
+        "rank": "1"
+    },
+    {
+        "symbol": "3413.TW",
+        "name": "京鼎",
+        "price": "344.0",
+        "change": "18.5",
+        "changePercent": "+5.68%",
+        "volume_k": 10349,
+        "dayHigh": "358.0",
+        "dayLow": "331.5",
+        "isLimitUp": false,
+        "rank": "30"
+    }
+]
