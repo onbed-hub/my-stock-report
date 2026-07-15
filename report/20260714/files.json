@@ -1,4 +1,6 @@
 [
+  "macro_risk_radar.txt",
+  "all-eps-report.html",
   "all-trend-backtest-report.txt",
   "all-trend-backtest-report.html",
   "dayan-invest-stock.html",
@@ -2339,6 +2341,7 @@
   "qiskit/9/7919.TWO-report.txt",
   "qiskit/9/5489.TWO-report.txt",
   "bor-invest-stock.txt",
+  "foreign-acceleration-report.html",
   "bor-invest-stock.html",
   "stock-analysis/6/8426.TWO-stock-analysis.html",
   "stock-analysis/6/3406.TW-stock-analysis.html",
@@ -11818,5 +11821,6 @@
   "hmm/9/4549.TWO-hmm.txt",
   "hmm/9/3489.TWO-hmm.html",
   "hmm/9/8299.TWO-hmm.html",
-  "hmm/9/9919.TW-hmm.txt"
+  "hmm/9/9919.TW-hmm.txt",
+  "consolidation-report.html"
 ]
