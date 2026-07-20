@@ -1,0 +1,86 @@
+[
+    {
+        "symbol": "2634.TW",
+        "name": "漢翔",
+        "price": "65.0",
+        "change": "3.8",
+        "changePercent": "+6.21%",
+        "volume_k": 86417,
+        "dayHigh": "67.3",
+        "dayLow": "61.8",
+        "isLimitUp": false,
+        "rank": "34"
+    },
+    {
+        "symbol": "00665L.TW",
+        "name": "富邦恒生國企正2",
+        "price": "9.37",
+        "change": "0.69",
+        "changePercent": "+7.95%",
+        "volume_k": 30787,
+        "dayHigh": "9.39",
+        "dayLow": "8.88",
+        "isLimitUp": false,
+        "rank": "22"
+    },
+    {
+        "symbol": "4939.TWO",
+        "name": "亞電",
+        "price": "66.2",
+        "change": "6.0",
+        "changePercent": "+9.97%",
+        "volume_k": 28996,
+        "dayHigh": "66.2",
+        "dayLow": "59.8",
+        "isLimitUp": true,
+        "rank": "8"
+    },
+    {
+        "symbol": "00753L.TW",
+        "name": "中信中國50正2",
+        "price": "9.52",
+        "change": "0.60",
+        "changePercent": "+6.73%",
+        "volume_k": 26286,
+        "dayHigh": "9.57",
+        "dayLow": "9.12",
+        "isLimitUp": false,
+        "rank": "31"
+    },
+    {
+        "symbol": "00715L.TW",
+        "name": "期街口布蘭特正2",
+        "price": "49.00",
+        "change": "5.00",
+        "changePercent": "+11.36%",
+        "volume_k": 15160,
+        "dayHigh": "49.10",
+        "dayLow": "48.50",
+        "isLimitUp": false,
+        "rank": "1"
+    },
+    {
+        "symbol": "3532.TW",
+        "name": "台勝科",
+        "price": "466.0",
+        "change": "42.0",
+        "changePercent": "+9.91%",
+        "volume_k": 12781,
+        "dayHigh": "466.0",
+        "dayLow": "401.0",
+        "isLimitUp": true,
+        "rank": "14"
+    },
+    {
+        "symbol": "4763.TW",
+        "name": "材料*-KY",
+        "price": "48.60",
+        "change": "3.25",
+        "changePercent": "+7.17%",
+        "volume_k": 12728,
+        "dayHigh": "49.35",
+        "dayLow": "45.10",
+        "isLimitUp": false,
+        "rank": "27"
+    }
+]
