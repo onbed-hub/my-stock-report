@@ -1,0 +1,74 @@
+[
+    {
+        "symbol": "3231.TW",
+        "name": "緯創",
+        "price": "173.5",
+        "change": "9.5",
+        "changePercent": "+5.79%",
+        "volume_k": 215326,
+        "dayHigh": "179.5",
+        "dayLow": "165.5",
+        "isLimitUp": false,
+        "rank": "41"
+    },
+    {
+        "symbol": "6505.TW",
+        "name": "台塑化",
+        "price": "93.2",
+        "change": "8.1",
+        "changePercent": "+9.52%",
+        "volume_k": 95381,
+        "dayHigh": "93.6",
+        "dayLow": "86.6",
+        "isLimitUp": false,
+        "rank": "19"
+    },
+    {
+        "symbol": "8039.TW",
+        "name": "台虹",
+        "price": "256.0",
+        "change": "23.0",
+        "changePercent": "+9.87%",
+        "volume_k": 47571,
+        "dayHigh": "256.0",
+        "dayLow": "231.0",
+        "isLimitUp": true,
+        "rank": "15"
+    },
+    {
+        "symbol": "2455.TW",
+        "name": "全新",
+        "price": "345.0",
+        "change": "20.5",
+        "changePercent": "+6.32%",
+        "volume_k": 18874,
+        "dayHigh": "356.5",
+        "dayLow": "329.0",
+        "isLimitUp": false,
+        "rank": "35"
+    },
+    {
+        "symbol": "1309.TW",
+        "name": "台達化",
+        "price": "15.40",
+        "change": "0.75",
+        "changePercent": "+5.12%",
+        "volume_k": 17997,
+        "dayHigh": "16.10",
+        "dayLow": "14.75",
+        "isLimitUp": false,
+        "rank": "51"
+    },
+    {
+        "symbol": "4979.TWO",
+        "name": "華星光",
+        "price": "407.5",
+        "change": "28.5",
+        "changePercent": "+7.52%",
+        "volume_k": 13357,
+        "dayHigh": "416.5",
+        "dayLow": "375.5",
+        "isLimitUp": false,
+        "rank": "24"
+    }
+]
