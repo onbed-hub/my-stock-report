@@ -1,0 +1,50 @@
+[
+    {
+        "symbol": "2634.TW",
+        "name": "漢翔",
+        "price": "65.4",
+        "change": "3.5",
+        "changePercent": "+5.65%",
+        "volume_k": 92545,
+        "dayHigh": "67.8",
+        "dayLow": "62.4",
+        "isLimitUp": false,
+        "rank": "26"
+    },
+    {
+        "symbol": "8111.TWO",
+        "name": "立碁",
+        "price": "60.6",
+        "change": "3.8",
+        "changePercent": "+6.69%",
+        "volume_k": 20642,
+        "dayHigh": "62.0",
+        "dayLow": "56.1",
+        "isLimitUp": false,
+        "rank": "23"
+    },
+    {
+        "symbol": "2451.TW",
+        "name": "創見",
+        "price": "264.0",
+        "change": "19.5",
+        "changePercent": "+7.98%",
+        "volume_k": 18522,
+        "dayHigh": "268.5",
+        "dayLow": "253.5",
+        "isLimitUp": false,
+        "rank": "20"
+    },
+    {
+        "symbol": "00715L.TW",
+        "name": "期街口布蘭特正2",
+        "price": "55.35",
+        "change": "2.80",
+        "changePercent": "+5.33%",
+        "volume_k": 15324,
+        "dayHigh": "55.80",
+        "dayLow": "54.40",
+        "isLimitUp": false,
+        "rank": "29"
+    }
+]
