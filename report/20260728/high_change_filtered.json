@@ -1,0 +1,38 @@
+[
+    {
+        "symbol": "00664R.TW",
+        "name": "國泰臺灣加權反1",
+        "price": "1.79",
+        "change": "0.09",
+        "changePercent": "+5.29%",
+        "volume_k": 47968,
+        "dayHigh": "1.79",
+        "dayLow": "1.76",
+        "isLimitUp": false,
+        "rank": "13"
+    },
+    {
+        "symbol": "3441.TWO",
+        "name": "聯一光",
+        "price": "77.2",
+        "change": "6.5",
+        "changePercent": "+9.19%",
+        "volume_k": 26629,
+        "dayHigh": "77.7",
+        "dayLow": "67.0",
+        "isLimitUp": false,
+        "rank": "7"
+    },
+    {
+        "symbol": "6226.TW",
+        "name": "光鼎",
+        "price": "20.50",
+        "change": "1.85",
+        "changePercent": "+9.92%",
+        "volume_k": 23312,
+        "dayHigh": "20.50",
+        "dayLow": "17.90",
+        "isLimitUp": true,
+        "rank": "2"
+    }
+]
