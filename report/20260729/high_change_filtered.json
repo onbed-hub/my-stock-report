@@ -1,0 +1,86 @@
+[
+    {
+        "symbol": "5328.TWO",
+        "name": "華容",
+        "price": "64.5",
+        "change": "3.2",
+        "changePercent": "+5.22%",
+        "volume_k": 65659,
+        "dayHigh": "66.0",
+        "dayLow": "57.1",
+        "isLimitUp": false,
+        "rank": "23"
+    },
+    {
+        "symbol": "3441.TWO",
+        "name": "聯一光",
+        "price": "84.8",
+        "change": "7.6",
+        "changePercent": "+9.84%",
+        "volume_k": 58595,
+        "dayHigh": "84.9",
+        "dayLow": "75.0",
+        "isLimitUp": false,
+        "rank": "10"
+    },
+    {
+        "symbol": "3260.TWO",
+        "name": "威剛",
+        "price": "394.0",
+        "change": "25.0",
+        "changePercent": "+6.78%",
+        "volume_k": 30698,
+        "dayHigh": "405.0",
+        "dayLow": "350.0",
+        "isLimitUp": false,
+        "rank": "18"
+    },
+    {
+        "symbol": "3362.TWO",
+        "name": "先進光",
+        "price": "173.5",
+        "change": "15.5",
+        "changePercent": "+9.81%",
+        "volume_k": 22994,
+        "dayHigh": "173.5",
+        "dayLow": "158.0",
+        "isLimitUp": true,
+        "rank": "11"
+    },
+    {
+        "symbol": "8271.TW",
+        "name": "宇瞻",
+        "price": "222.5",
+        "change": "17.5",
+        "changePercent": "+8.54%",
+        "volume_k": 18189,
+        "dayHigh": "225.5",
+        "dayLow": "201.5",
+        "isLimitUp": false,
+        "rank": "14"
+    },
+    {
+        "symbol": "6226.TW",
+        "name": "光鼎",
+        "price": "22.55",
+        "change": "2.05",
+        "changePercent": "+10%",
+        "volume_k": 15956,
+        "dayHigh": "22.55",
+        "dayLow": "21.55",
+        "isLimitUp": true,
+        "rank": "1"
+    },
+    {
+        "symbol": "4976.TW",
+        "name": "佳凌",
+        "price": "37.70",
+        "change": "3.40",
+        "changePercent": "+9.91%",
+        "volume_k": 13023,
+        "dayHigh": "37.70",
+        "dayLow": "34.55",
+        "isLimitUp": true,
+        "rank": "5"
+    }
+]

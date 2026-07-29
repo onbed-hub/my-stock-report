@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中華立鼎(7926.TWO) - 20260729</title>
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+    <style>
+        body { font-family: -apple-system, "Segoe UI", sans-serif; margin: 0; background: #f4f7f9; color: #334155; }
+        .container { max-width: 1100px; margin: 10px auto; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        h3 { margin-top: 0; color: #1e293b; border-left: 4px solid #2563eb; padding-left: 10px; }
+        .controls { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+        .btn {
+            padding: 6px 14px; border: 1px solid #e2e8f0; background: white; color: #64748b;
+            border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn.active { background: #2563eb; color: white; border-color: #2563eb; }
+        .legend-box {
+            display: flex; gap: 12px; flex-wrap: wrap;
+            background: #f8fafc; padding: 10px; border-radius: 8px;
+            margin-bottom: 15px; font-size: 12px; border: 1px solid #f1f5f9;
+        }
+        .leg-item { display: flex; align-items: center; gap: 4px; font-weight: 500; }
+        .dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+        #plot { width: 100%; height: 65vh; min-height: 420px; }
+        @media (max-width: 600px) {
+            .container { margin: 0; border-radius: 0; padding: 10px; }
+            h3 { font-size: 1rem; }
+            .legend-box { gap: 8px; padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>中華立鼎(7926.TWO) 技術分析 (20260729)</h3>
+
+        <div class="controls">
+            <button class="btn" onclick="updateRange(20, this)">20天</button>
+            <button class="btn" onclick="updateRange(30, this)">30天</button>
+            <button class="btn" onclick="updateRange(60, this)">60天</button>
+            <button class="btn active" onclick="updateRange(150, this)">全部</button>
+        </div>
+
+        <div class="legend-box">
+            <div class="leg-item"><span class="dot" style="background:#ffa726"></span> MA5</div>
+            <div class="leg-item"><span class="dot" style="background:#2196f3"></span> MA10</div>
+            <div class="leg-item"><span class="dot" style="background:#9c27b0"></span> MA20</div>
+            <div class="leg-item"><span class="dot" style="background:#ccc; border:1px dashed #999"></span> 布林通道 (上下軌)</div>
+            <div class="leg-item"><span class="dot" style="background:#ef5350"></span> 漲</div>
+            <div class="leg-item"><span class="dot" style="background:#26a69a"></span> 跌</div>
+        </div>
+
+        <div id="plot"></div>
+    </div>
+
+    <script>
+        const rawData = [{"Date": "2026-06-17", "Open": 220, "High": 754, "Low": 220, "Close": 737, "Volume": 911990, "MA_5": 0, "MA_10": 737, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-06-18", "Open": 632, "High": 720, "Low": 603, "Close": 690, "Volume": 362629, "MA_5": 0, "MA_10": 713.5, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-06-22", "Open": 703, "High": 900, "Low": 703, "Close": 845, "Volume": 473727, "MA_5": 0, "MA_10": 757.3333333333, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-06-23", "Open": 845, "High": 849, "Low": 709, "Close": 762, "Volume": 317005, "MA_5": 0, "MA_10": 758.5, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-06-24", "Open": 740, "High": 762, "Low": 708, "Close": 738, "Volume": 164763, "MA_5": 754.4, "MA_10": 754.4, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-06-25", "Open": 757, "High": 757, "Low": 650, "Close": 688, "Volume": 159352, "MA_5": 744.6, "MA_10": 743.3333333333, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-06-26", "Open": 699, "High": 700, "Low": 627, "Close": 649, "Volume": 83444, "MA_5": 736.4, "MA_10": 729.8571428571, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-06-29", "Open": 631, "High": 670, "Low": 621, "Close": 641, "Volume": 90281, "MA_5": 695.6, "MA_10": 718.75, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-06-30", "Open": 651, "High": 691, "Low": 638, "Close": 654, "Volume": 77025, "MA_5": 674, "MA_10": 711.5555555556, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-07-01", "Open": 662, "High": 664, "Low": 633, "Close": 657, "Volume": 43336, "MA_5": 657.8, "MA_10": 706.1, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-07-02", "Open": 655, "High": 664, "Low": 622, "Close": 652, "Volume": 49127, "MA_5": 650.6, "MA_10": 697.6, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-07-03", "Open": 652, "High": 671, "Low": 619, "Close": 649, "Volume": 62088, "MA_5": 650.6, "MA_10": 693.5, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-07-06", "Open": 648, "High": 653, "Low": 636, "Close": 645, "Volume": 61182, "MA_5": 651.4, "MA_10": 673.5, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-07-07", "Open": 652, "High": 652, "Low": 524, "Close": 550, "Volume": 222033, "MA_5": 630.6, "MA_10": 652.3, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-07-08", "Open": 545, "High": 562, "Low": 489, "Close": 519, "Volume": 105659, "MA_5": 603, "MA_10": 630.4, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-07-09", "Open": 510, "High": 550, "Low": 500, "Close": 529, "Volume": 47044, "MA_5": 578.4, "MA_10": 614.5, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-07-13", "Open": 530, "High": 536, "Low": 467, "Close": 485, "Volume": 30147, "MA_5": 545.6, "MA_10": 598.1, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-07-14", "Open": 502, "High": 502, "Low": 425, "Close": 461, "Volume": 81507, "MA_5": 508.8, "MA_10": 580.1, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-07-15", "Open": 452, "High": 500, "Low": 450, "Close": 500, "Volume": 32406, "MA_5": 498.8, "MA_10": 564.7, "MA_20": 0, "Upper_Band": 0, "Lower_Band": 0, "BOLL": 0}, {"Date": "2026-07-16", "Open": 477, "High": 509, "Low": 456.5, "Close": 486, "Volume": 37958, "MA_5": 492.2, "MA_10": 547.6, "MA_20": 626.85, "Upper_Band": 838.3750638378, "Lower_Band": 415.3249361622, "BOLL": 626.85}, {"Date": "2026-07-17", "Open": 475, "High": 499.5, "Low": 475, "Close": 499.5, "Volume": 31181, "MA_5": 486.3, "MA_10": 532.35, "MA_20": 614.975, "Upper_Band": 827.1284883795, "Lower_Band": 402.8215116205, "BOLL": 614.975}, {"Date": "2026-07-20", "Open": 500, "High": 500, "Low": 458, "Close": 480, "Volume": 65665, "MA_5": 485.3, "MA_10": 515.45, "MA_20": 604.475, "Upper_Band": 821.7198230865, "Lower_Band": 387.2301769135, "BOLL": 604.475}, {"Date": "2026-07-21", "Open": 482, "High": 499.5, "Low": 479, "Close": 499.5, "Volume": 13964, "MA_5": 493, "MA_10": 500.9, "MA_20": 587.2, "Upper_Band": 777.145532359, "Lower_Band": 397.254467641, "BOLL": 587.2}, {"Date": "2026-07-22", "Open": 499.5, "High": 500, "Low": 459, "Close": 480, "Volume": 22438, "MA_5": 489, "MA_10": 493.9, "MA_20": 573.1, "Upper_Band": 749.8170202984, "Lower_Band": 396.3829797016, "BOLL": 573.1}, {"Date": "2026-07-23", "Open": 482, "High": 500, "Low": 467, "Close": 500, "Volume": 30877, "MA_5": 491.8, "MA_10": 492, "MA_20": 561.2, "Upper_Band": 722.5474185529, "Lower_Band": 399.8525814471, "BOLL": 561.2}, {"Date": "2026-07-24", "Open": 499.5, "High": 517, "Low": 475, "Close": 490.5, "Volume": 61546, "MA_5": 490, "MA_10": 488.15, "MA_20": 551.325, "Upper_Band": 703.9350207098, "Lower_Band": 398.7149792902, "BOLL": 551.325}, {"Date": "2026-07-27", "Open": 481, "High": 499.5, "Low": 480, "Close": 491, "Volume": 28429, "MA_5": 492.2, "MA_10": 488.75, "MA_20": 543.425, "Upper_Band": 691.0212754487, "Lower_Band": 395.8287245513, "BOLL": 543.425}, {"Date": "2026-07-28", "Open": 491, "High": 491, "Low": 463.5, "Close": 469, "Volume": 65334, "MA_5": 486.1, "MA_10": 489.55, "MA_20": 534.825, "Upper_Band": 678.4737950377, "Lower_Band": 391.1762049623, "BOLL": 534.825}, {"Date": "2026-07-29", "Open": 475, "High": 475, "Low": 441, "Close": 463.5, "Volume": 45230, "MA_5": 482.8, "MA_10": 485.9, "MA_20": 525.3, "Upper_Band": 660.7028686628, "Lower_Band": 389.8971313372, "BOLL": 525.3}];
+
+        function drawPlot(displayCount) {
+            const data = rawData.slice(-displayCount);
+            const x = data.map(d => d.Date);
+
+            // 1. 定義一個兩邊通用的完美提示框內容（包含K線與成交量）
+            const jointHoverText = data.map(function(d) {
+                return "<b>日期: " + d.Date + "</b><br>" +
+                       "開盤: " + d.Open.toFixed(2) + "<br>" +
+                       "最高: " + d.High.toFixed(2) + "<br>" +
+                       "最低: " + d.Low.toFixed(2) + "<br>" +
+                       "收盤: " + d.Close.toFixed(2) + "<br>" +
+                       "<b>成交量: " + d.Volume.toLocaleString() + " 股</b>";
+            });
+
+            // 2. K線圖層：綁定 jointHoverText
+            const candle = { 
+                x: x, 
+                open: data.map(d => d.Open), 
+                high: data.map(d => d.High), 
+                low: data.map(d => d.Low), 
+                close: data.map(d => d.Close), 
+                type: 'candlestick', 
+                name: 'K線', 
+                yaxis: 'y2', 
+                text: jointHoverText,
+                hoverinfo: 'text',
+                increasing: {line: {color: '#ef5350'}}, 
+                decreasing: {line: {color: '#26a69a'}} 
+            };
+
+            const ma5 = { x: x, y: data.map(d => d.MA_5), name: 'MA5', type: 'scatter', mode: 'lines', yaxis: 'y2', line: {color: '#ffa726', width: 1.2} };
+            const ma10 = { x: x, y: data.map(d => d.MA_10), name: 'MA10', type: 'scatter', mode: 'lines', yaxis: 'y2', line: {color: '#2196f3', width: 1.2} };
+            const ma20 = { x: x, y: data.map(d => d.MA_20), name: 'MA20', type: 'scatter', mode: 'lines', yaxis: 'y2', line: {color: '#9c27b0', width: 2} };
+            const bUp = { x: x, y: data.map(d => d.Upper_Band), name: '布林上軌', type: 'scatter', mode: 'lines', yaxis: 'y2', line: {color: '#ccc', dash: 'dot', width: 1} };
+            const bLo = { x: x, y: data.map(d => d.Lower_Band), name: '布林下軌', type: 'scatter', mode: 'lines', yaxis: 'y2', line: {color: '#ccc', dash: 'dot', width: 1}, fill: 'tonexty', fillcolor: 'rgba(200,200,200,0.05)' };
+
+            // 3. 成交量柱狀圖：同樣綁定 jointHoverText，並開啟 hoverinfo: 'text'
+            // 同時加上 hoverlabel 設定，強制兩邊的提示框行為與外觀同步
+            const vol = {
+                x: x,
+                y: data.map(d => d.Volume),
+                type: 'bar',
+                name: '成交量',
+                yaxis: 'y',
+                text: jointHoverText,
+                hoverinfo: 'text', 
+                hoverlabel: { namelength: 0 },
+                marker: { color: data.map(d => d.Close >= d.Open ? '#ef5350' : '#26a69a') }
+            };
+
+            const layout = {
+                xaxis: { type: 'category', rangeslider: { visible: false }, tickfont: { size: 10 } },
+                yaxis: { domain: [0, 0.15], showgrid: false },
+                yaxis2: { domain: [0.2, 1] },
+                hovermode: 'x unified', // 縱向對齊虛線
+                showlegend: false,
+                margin: { t: 10, b: 30, l: 50, r: 10 },
+                template: 'plotly_white'
+            };
+
+            Plotly.newPlot('plot', [bUp, bLo, candle, ma5, ma10, ma20, vol], layout, { responsive: true, displayModeBar: false });
+        }
+
+        function updateRange(days, btn) {
+            document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            drawPlot(days);
+        }
+
+        if(window.innerWidth < 600) {
+             document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+             document.querySelectorAll('.btn')[0].classList.add('active');
+             drawPlot(20);
+        } else {
+             drawPlot(150);
+        }
+    </script>
+</body>
+</html>
+            
