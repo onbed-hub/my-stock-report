@@ -1,0 +1,26 @@
+[
+    {
+        "symbol": "2303.TW",
+        "name": "聯電",
+        "price": "110.0",
+        "change": "7.5",
+        "changePercent": "+7.32%",
+        "volume_k": 373203,
+        "dayHigh": "112.5",
+        "dayLow": "105.0",
+        "isLimitUp": false,
+        "rank": "14"
+    },
+    {
+        "symbol": "00715L.TW",
+        "name": "期街口布蘭特正2",
+        "price": "48.26",
+        "change": "3.85",
+        "changePercent": "+8.67%",
+        "volume_k": 10940,
+        "dayHigh": "48.35",
+        "dayLow": "46.85",
+        "isLimitUp": false,
+        "rank": "8"
+    }
+]
