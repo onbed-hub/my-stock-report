@@ -1,0 +1,122 @@
+[
+    {
+        "symbol": "1303.TW",
+        "name": "南亞",
+        "price": "188.0",
+        "change": "9.5",
+        "changePercent": "+5.32%",
+        "volume_k": 128172,
+        "dayHigh": "193.0",
+        "dayLow": "178.5",
+        "isLimitUp": false,
+        "rank": "65"
+    },
+    {
+        "symbol": "6505.TW",
+        "name": "台塑化",
+        "price": "71.0",
+        "change": "3.9",
+        "changePercent": "+5.81%",
+        "volume_k": 41378,
+        "dayHigh": "73.0",
+        "dayLow": "68.8",
+        "isLimitUp": false,
+        "rank": "54"
+    },
+    {
+        "symbol": "2049.TW",
+        "name": "上銀",
+        "price": "387.0",
+        "change": "25.0",
+        "changePercent": "+6.91%",
+        "volume_k": 16836,
+        "dayHigh": "398.0",
+        "dayLow": "368.0",
+        "isLimitUp": false,
+        "rank": "46"
+    },
+    {
+        "symbol": "2426.TW",
+        "name": "鼎元",
+        "price": "67.8",
+        "change": "3.9",
+        "changePercent": "+6.1%",
+        "volume_k": 16729,
+        "dayHigh": "69.2",
+        "dayLow": "62.5",
+        "isLimitUp": false,
+        "rank": "49"
+    },
+    {
+        "symbol": "8050.TWO",
+        "name": "廣積",
+        "price": "69.0",
+        "change": "5.9",
+        "changePercent": "+9.35%",
+        "volume_k": 16148,
+        "dayHigh": "69.4",
+        "dayLow": "62.8",
+        "isLimitUp": false,
+        "rank": "32"
+    },
+    {
+        "symbol": "2425.TW",
+        "name": "承啟",
+        "price": "52.9",
+        "change": "4.7",
+        "changePercent": "+9.87%",
+        "volume_k": 14415,
+        "dayHigh": "52.9",
+        "dayLow": "47.55",
+        "isLimitUp": true,
+        "rank": "23"
+    },
+    {
+        "symbol": "00715L.TW",
+        "name": "期街口布蘭特正2",
+        "price": "43.02",
+        "change": "4.54",
+        "changePercent": "+11.8%",
+        "volume_k": 13170,
+        "dayHigh": "43.55",
+        "dayLow": "42.25",
+        "isLimitUp": false,
+        "rank": "1"
+    },
+    {
+        "symbol": "4540.TW",
+        "name": "全球傳動",
+        "price": "60.0",
+        "change": "4.2",
+        "changePercent": "+7.53%",
+        "volume_k": 12919,
+        "dayHigh": "61.3",
+        "dayLow": "55.1",
+        "isLimitUp": false,
+        "rank": "41"
+    },
+    {
+        "symbol": "3717.TW",
+        "name": "聯嘉投控",
+        "price": "24.05",
+        "change": "1.15",
+        "changePercent": "+5.02%",
+        "volume_k": 10486,
+        "dayHigh": "25.15",
+        "dayLow": "23.95",
+        "isLimitUp": false,
+        "rank": "73"
+    },
+    {
+        "symbol": "2031.TW",
+        "name": "新光鋼",
+        "price": "45.00",
+        "change": "4.05",
+        "changePercent": "+9.89%",
+        "volume_k": 10398,
+        "dayHigh": "45.00",
+        "dayLow": "42.50",
+        "isLimitUp": true,
+        "rank": "18"
+    }
+]
