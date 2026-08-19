@@ -1,0 +1,86 @@
+[
+    {
+        "symbol": "2492.TW",
+        "name": "華新科",
+        "price": "298.0",
+        "change": "16.0",
+        "changePercent": "+5.67%",
+        "volume_k": 45927,
+        "dayHigh": "308.5",
+        "dayLow": "270.0",
+        "isLimitUp": false,
+        "rank": "38"
+    },
+    {
+        "symbol": "5608.TW",
+        "name": "四維航",
+        "price": "17.50",
+        "change": "1.55",
+        "changePercent": "+9.72%",
+        "volume_k": 36102,
+        "dayHigh": "17.50",
+        "dayLow": "15.60",
+        "isLimitUp": true,
+        "rank": "17"
+    },
+    {
+        "symbol": "3090.TW",
+        "name": "日電貿",
+        "price": "177.5",
+        "change": "16.0",
+        "changePercent": "+9.91%",
+        "volume_k": 21207,
+        "dayHigh": "177.5",
+        "dayLow": "158.0",
+        "isLimitUp": true,
+        "rank": "6"
+    },
+    {
+        "symbol": "3490.TWO",
+        "name": "單井",
+        "price": "46.80",
+        "change": "2.30",
+        "changePercent": "+5.17%",
+        "volume_k": 11879,
+        "dayHigh": "47.95",
+        "dayLow": "43.05",
+        "isLimitUp": false,
+        "rank": "44"
+    },
+    {
+        "symbol": "2478.TW",
+        "name": "大毅",
+        "price": "134.5",
+        "change": "12.0",
+        "changePercent": "+9.8%",
+        "volume_k": 11448,
+        "dayHigh": "134.5",
+        "dayLow": "118.0",
+        "isLimitUp": true,
+        "rank": "14"
+    },
+    {
+        "symbol": "5314.TWO",
+        "name": "世紀*",
+        "price": "21.50",
+        "change": "1.95",
+        "changePercent": "+9.97%",
+        "volume_k": 11016,
+        "dayHigh": "21.50",
+        "dayLow": "21.50",
+        "isLimitUp": true,
+        "rank": "2"
+    },
+    {
+        "symbol": "3624.TWO",
+        "name": "光頡",
+        "price": "89.7",
+        "change": "4.9",
+        "changePercent": "+5.78%",
+        "volume_k": 10456,
+        "dayHigh": "93.0",
+        "dayLow": "82.5",
+        "isLimitUp": false,
+        "rank": "36"
+    }
+]
