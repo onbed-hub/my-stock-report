@@ -1,0 +1,122 @@
+[
+    {
+        "symbol": "2344.TW",
+        "name": "華邦電",
+        "price": "176.5",
+        "change": "8.5",
+        "changePercent": "+5.06%",
+        "volume_k": 148599,
+        "dayHigh": "180.5",
+        "dayLow": "172.0",
+        "isLimitUp": false,
+        "rank": "74"
+    },
+    {
+        "symbol": "1815.TWO",
+        "name": "富喬",
+        "price": "107.0",
+        "change": "9.0",
+        "changePercent": "+9.18%",
+        "volume_k": 133016,
+        "dayHigh": "107.5",
+        "dayLow": "101.5",
+        "isLimitUp": false,
+        "rank": "33"
+    },
+    {
+        "symbol": "2408.TW",
+        "name": "南亞科",
+        "price": "517",
+        "change": "36",
+        "changePercent": "+7.48%",
+        "volume_k": 86172,
+        "dayHigh": "523",
+        "dayLow": "498.0",
+        "isLimitUp": false,
+        "rank": "42"
+    },
+    {
+        "symbol": "2634.TW",
+        "name": "漢翔",
+        "price": "72.3",
+        "change": "3.7",
+        "changePercent": "+5.39%",
+        "volume_k": 79389,
+        "dayHigh": "75.4",
+        "dayLow": "69.0",
+        "isLimitUp": false,
+        "rank": "67"
+    },
+    {
+        "symbol": "2615.TW",
+        "name": "萬海",
+        "price": "113.5",
+        "change": "7.0",
+        "changePercent": "+6.57%",
+        "volume_k": 75856,
+        "dayHigh": "113.5",
+        "dayLow": "105.5",
+        "isLimitUp": false,
+        "rank": "52"
+    },
+    {
+        "symbol": "2426.TW",
+        "name": "鼎元",
+        "price": "74.8",
+        "change": "6.8",
+        "changePercent": "+10%",
+        "volume_k": 28981,
+        "dayHigh": "74.8",
+        "dayLow": "73.5",
+        "isLimitUp": true,
+        "rank": "2"
+    },
+    {
+        "symbol": "3441.TWO",
+        "name": "聯一光",
+        "price": "97.3",
+        "change": "8.8",
+        "changePercent": "+9.94%",
+        "volume_k": 17229,
+        "dayHigh": "97.3",
+        "dayLow": "91.7",
+        "isLimitUp": true,
+        "rank": "10"
+    },
+    {
+        "symbol": "5483.TWO",
+        "name": "中美晶",
+        "price": "186.5",
+        "change": "10.0",
+        "changePercent": "+5.67%",
+        "volume_k": 17039,
+        "dayHigh": "187.0",
+        "dayLow": "177.5",
+        "isLimitUp": false,
+        "rank": "63"
+    },
+    {
+        "symbol": "2486.TW",
+        "name": "一詮",
+        "price": "251.0",
+        "change": "16.0",
+        "changePercent": "+6.81%",
+        "volume_k": 16540,
+        "dayHigh": "255.0",
+        "dayLow": "227.0",
+        "isLimitUp": false,
+        "rank": "47"
+    },
+    {
+        "symbol": "3673.TW",
+        "name": "TPK-KY",
+        "price": "65.1",
+        "change": "5.6",
+        "changePercent": "+9.41%",
+        "volume_k": 11625,
+        "dayHigh": "65.4",
+        "dayLow": "62.3",
+        "isLimitUp": false,
+        "rank": "30"
+    }
+]
