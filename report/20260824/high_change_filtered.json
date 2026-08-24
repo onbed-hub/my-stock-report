@@ -1,0 +1,122 @@
+[
+    {
+        "symbol": "2303.TW",
+        "name": "聯電",
+        "price": "123.5",
+        "change": "7.0",
+        "changePercent": "+6.01%",
+        "volume_k": 194134,
+        "dayHigh": "128.0",
+        "dayLow": "117.5",
+        "isLimitUp": false,
+        "rank": "41"
+    },
+    {
+        "symbol": "2324.TW",
+        "name": "仁寶",
+        "price": "41.60",
+        "change": "2.65",
+        "changePercent": "+6.8%",
+        "volume_k": 136072,
+        "dayHigh": "42.60",
+        "dayLow": "39.50",
+        "isLimitUp": false,
+        "rank": "33"
+    },
+    {
+        "symbol": "2301.TW",
+        "name": "光寶科",
+        "price": "287.0",
+        "change": "26.0",
+        "changePercent": "+9.96%",
+        "volume_k": 43154,
+        "dayHigh": "287.0",
+        "dayLow": "263.5",
+        "isLimitUp": true,
+        "rank": "4"
+    },
+    {
+        "symbol": "3441.TWO",
+        "name": "聯一光",
+        "price": "112.5",
+        "change": "5.5",
+        "changePercent": "+5.14%",
+        "volume_k": 28030,
+        "dayHigh": "117.0",
+        "dayLow": "109.0",
+        "isLimitUp": false,
+        "rank": "48"
+    },
+    {
+        "symbol": "6226.TW",
+        "name": "光鼎",
+        "price": "23.30",
+        "change": "2.10",
+        "changePercent": "+9.91%",
+        "volume_k": 18993,
+        "dayHigh": "23.30",
+        "dayLow": "21.00",
+        "isLimitUp": true,
+        "rank": "10"
+    },
+    {
+        "symbol": "3006.TW",
+        "name": "晶豪科",
+        "price": "282.0",
+        "change": "25.5",
+        "changePercent": "+9.94%",
+        "volume_k": 17295,
+        "dayHigh": "282.0",
+        "dayLow": "252.5",
+        "isLimitUp": true,
+        "rank": "6"
+    },
+    {
+        "symbol": "3605.TW",
+        "name": "宏致",
+        "price": "115.5",
+        "change": "7.0",
+        "changePercent": "+6.45%",
+        "volume_k": 14255,
+        "dayHigh": "119.0",
+        "dayLow": "108.5",
+        "isLimitUp": false,
+        "rank": "36"
+    },
+    {
+        "symbol": "4707.TWO",
+        "name": "磐亞",
+        "price": "35.80",
+        "change": "2.90",
+        "changePercent": "+8.81%",
+        "volume_k": 13227,
+        "dayHigh": "36.15",
+        "dayLow": "34.30",
+        "isLimitUp": false,
+        "rank": "21"
+    },
+    {
+        "symbol": "6488.TWO",
+        "name": "環球晶",
+        "price": "1010",
+        "change": "69",
+        "changePercent": "+7.33%",
+        "volume_k": 11447,
+        "dayHigh": "1035",
+        "dayLow": "970",
+        "isLimitUp": false,
+        "rank": "28"
+    },
+    {
+        "symbol": "3049.TW",
+        "name": "精金",
+        "price": "12.70",
+        "change": "1.15",
+        "changePercent": "+9.96%",
+        "volume_k": 10069,
+        "dayHigh": "12.70",
+        "dayLow": "12.60",
+        "isLimitUp": true,
+        "rank": "5"
+    }
+]
