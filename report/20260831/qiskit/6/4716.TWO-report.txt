@@ -16,7 +16,7 @@
 🧬 採用特徵組合: D_Value, Vol_Ratio, MA_Slope, BB_Upper
 📈 今日即時最佳技術指標計算结果:
    - D_Value 原始計算指標值: 48.1391
-   - Vol_Ratio 原始計算指標值: 2.7741
+   - Vol_Ratio 原始計算指標值: 2.7729
    - MA_Slope 原始計算指標值: 0.8078
    - BB_Upper 原始計算指標值: -1.6485
 🎯 策略動作指引: 🟢 持續持有股權 (HOLD) 🟢
