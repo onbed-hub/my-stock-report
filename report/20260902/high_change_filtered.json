@@ -1,0 +1,74 @@
+[
+    {
+        "symbol": "2464.TW",
+        "name": "盟立",
+        "price": "202.0",
+        "change": "18.0",
+        "changePercent": "+9.78%",
+        "volume_k": 27055,
+        "dayHigh": "202.0",
+        "dayLow": "181.5",
+        "isLimitUp": true,
+        "rank": "21"
+    },
+    {
+        "symbol": "3019.TW",
+        "name": "亞光",
+        "price": "157.5",
+        "change": "14.0",
+        "changePercent": "+9.76%",
+        "volume_k": 24164,
+        "dayHigh": "157.5",
+        "dayLow": "141.5",
+        "isLimitUp": true,
+        "rank": "23"
+    },
+    {
+        "symbol": "3141.TWO",
+        "name": "晶宏",
+        "price": "99.5",
+        "change": "9.0",
+        "changePercent": "+9.94%",
+        "volume_k": 18056,
+        "dayHigh": "99.5",
+        "dayLow": "91.6",
+        "isLimitUp": true,
+        "rank": "6"
+    },
+    {
+        "symbol": "00715L.TW",
+        "name": "期街口布蘭特正2",
+        "price": "57.00",
+        "change": "4.75",
+        "changePercent": "+9.09%",
+        "volume_k": 13338,
+        "dayHigh": "58.35",
+        "dayLow": "56.75",
+        "isLimitUp": false,
+        "rank": "27"
+    },
+    {
+        "symbol": "4976.TW",
+        "name": "佳凌",
+        "price": "41.55",
+        "change": "3.75",
+        "changePercent": "+9.92%",
+        "volume_k": 12839,
+        "dayHigh": "41.55",
+        "dayLow": "37.85",
+        "isLimitUp": true,
+        "rank": "11"
+    },
+    {
+        "symbol": "6451.TW",
+        "name": "訊芯-KY",
+        "price": "500",
+        "change": "45",
+        "changePercent": "+9.89%",
+        "volume_k": 10054,
+        "dayHigh": "500",
+        "dayLow": "447.5",
+        "isLimitUp": true,
+        "rank": "15"
+    }
+]
