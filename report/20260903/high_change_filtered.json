@@ -1,0 +1,50 @@
+[
+    {
+        "symbol": "2884.TW",
+        "name": "玉山金",
+        "price": "43.20",
+        "change": "2.70",
+        "changePercent": "+6.67%",
+        "volume_k": 95471,
+        "dayHigh": "43.50",
+        "dayLow": "40.55",
+        "isLimitUp": false,
+        "rank": "15"
+    },
+    {
+        "symbol": "2481.TW",
+        "name": "強茂",
+        "price": "156.0",
+        "change": "8.0",
+        "changePercent": "+5.41%",
+        "volume_k": 65745,
+        "dayHigh": "162.5",
+        "dayLow": "150.5",
+        "isLimitUp": false,
+        "rank": "21"
+    },
+    {
+        "symbol": "2464.TW",
+        "name": "盟立",
+        "price": "222.0",
+        "change": "20.0",
+        "changePercent": "+9.9%",
+        "volume_k": 16736,
+        "dayHigh": "222.0",
+        "dayLow": "214.0",
+        "isLimitUp": true,
+        "rank": "7"
+    },
+    {
+        "symbol": "5608.TW",
+        "name": "四維航",
+        "price": "17.45",
+        "change": "0.95",
+        "changePercent": "+5.76%",
+        "volume_k": 13180,
+        "dayHigh": "17.75",
+        "dayLow": "17.15",
+        "isLimitUp": false,
+        "rank": "19"
+    }
+]
