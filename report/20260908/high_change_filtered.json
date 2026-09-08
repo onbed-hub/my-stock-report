@@ -1,0 +1,50 @@
+[
+    {
+        "symbol": "3167.TW",
+        "name": "大量",
+        "price": "938",
+        "change": "55",
+        "changePercent": "+6.23%",
+        "volume_k": 15567,
+        "dayHigh": "971",
+        "dayLow": "871",
+        "isLimitUp": false,
+        "rank": "32"
+    },
+    {
+        "symbol": "3715.TW",
+        "name": "定穎投控",
+        "price": "126.5",
+        "change": "7.0",
+        "changePercent": "+5.86%",
+        "volume_k": 12701,
+        "dayHigh": "130.5",
+        "dayLow": "124.0",
+        "isLimitUp": false,
+        "rank": "37"
+    },
+    {
+        "symbol": "6179.TWO",
+        "name": "亞通",
+        "price": "33.10",
+        "change": "3.00",
+        "changePercent": "+9.97%",
+        "volume_k": 12144,
+        "dayHigh": "33.10",
+        "dayLow": "29.40",
+        "isLimitUp": true,
+        "rank": "3"
+    },
+    {
+        "symbol": "5314.TWO",
+        "name": "世紀*",
+        "price": "38.70",
+        "change": "3.50",
+        "changePercent": "+9.94%",
+        "volume_k": 10151,
+        "dayHigh": "38.70",
+        "dayLow": "37.65",
+        "isLimitUp": true,
+        "rank": "5"
+    }
+]
