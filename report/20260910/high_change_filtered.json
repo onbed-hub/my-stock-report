@@ -1,0 +1,122 @@
+[
+    {
+        "symbol": "5314.TWO",
+        "name": "世紀*",
+        "price": "46.80",
+        "change": "4.25",
+        "changePercent": "+9.99%",
+        "volume_k": 38082,
+        "dayHigh": "46.80",
+        "dayLow": "45.35",
+        "isLimitUp": true,
+        "rank": "7"
+    },
+    {
+        "symbol": "3441.TWO",
+        "name": "聯一光",
+        "price": "151.0",
+        "change": "7.5",
+        "changePercent": "+5.23%",
+        "volume_k": 27618,
+        "dayHigh": "157.0",
+        "dayLow": "137.0",
+        "isLimitUp": false,
+        "rank": "40"
+    },
+    {
+        "symbol": "6949.TW",
+        "name": "沛爾生醫*-創",
+        "price": "58.8",
+        "change": "3.9",
+        "changePercent": "+7.1%",
+        "volume_k": 25962,
+        "dayHigh": "60.3",
+        "dayLow": "55.4",
+        "isLimitUp": false,
+        "rank": "30"
+    },
+    {
+        "symbol": "6173.TWO",
+        "name": "信昌電",
+        "price": "295.0",
+        "change": "26.5",
+        "changePercent": "+9.87%",
+        "volume_k": 21386,
+        "dayHigh": "295.0",
+        "dayLow": "265.5",
+        "isLimitUp": true,
+        "rank": "19"
+    },
+    {
+        "symbol": "3624.TWO",
+        "name": "光頡",
+        "price": "113.5",
+        "change": "10.0",
+        "changePercent": "+9.66%",
+        "volume_k": 20864,
+        "dayHigh": "113.5",
+        "dayLow": "100.0",
+        "isLimitUp": true,
+        "rank": "23"
+    },
+    {
+        "symbol": "2305.TW",
+        "name": "全友",
+        "price": "38.50",
+        "change": "3.50",
+        "changePercent": "+10%",
+        "volume_k": 17596,
+        "dayHigh": "38.50",
+        "dayLow": "35.80",
+        "isLimitUp": true,
+        "rank": "2"
+    },
+    {
+        "symbol": "6226.TW",
+        "name": "光鼎",
+        "price": "32.60",
+        "change": "2.95",
+        "changePercent": "+9.95%",
+        "volume_k": 15172,
+        "dayHigh": "32.60",
+        "dayLow": "29.45",
+        "isLimitUp": true,
+        "rank": "13"
+    },
+    {
+        "symbol": "3016.TW",
+        "name": "嘉晶",
+        "price": "110.0",
+        "change": "10.0",
+        "changePercent": "+10%",
+        "volume_k": 13795,
+        "dayHigh": "110.0",
+        "dayLow": "99.3",
+        "isLimitUp": true,
+        "rank": "4"
+    },
+    {
+        "symbol": "3026.TW",
+        "name": "禾伸堂",
+        "price": "803",
+        "change": "45",
+        "changePercent": "+5.94%",
+        "volume_k": 13445,
+        "dayHigh": "826",
+        "dayLow": "730",
+        "isLimitUp": false,
+        "rank": "36"
+    },
+    {
+        "symbol": "2338.TW",
+        "name": "光罩",
+        "price": "45.65",
+        "change": "4.15",
+        "changePercent": "+10%",
+        "volume_k": 12768,
+        "dayHigh": "45.65",
+        "dayLow": "43.55",
+        "isLimitUp": true,
+        "rank": "3"
+    }
+]
