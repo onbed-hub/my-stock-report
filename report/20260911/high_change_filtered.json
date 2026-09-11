@@ -1,0 +1,50 @@
+[
+    {
+        "symbol": "3624.TWO",
+        "name": "光頡",
+        "price": "124.5",
+        "change": "11.0",
+        "changePercent": "+9.69%",
+        "volume_k": 64584,
+        "dayHigh": "124.5",
+        "dayLow": "107.0",
+        "isLimitUp": true,
+        "rank": "17"
+    },
+    {
+        "symbol": "2305.TW",
+        "name": "全友",
+        "price": "41.05",
+        "change": "2.55",
+        "changePercent": "+6.62%",
+        "volume_k": 57860,
+        "dayHigh": "41.05",
+        "dayLow": "37.70",
+        "isLimitUp": false,
+        "rank": "27"
+    },
+    {
+        "symbol": "3441.TWO",
+        "name": "聯一光",
+        "price": "166.0",
+        "change": "15.0",
+        "changePercent": "+9.93%",
+        "volume_k": 22969,
+        "dayHigh": "166.0",
+        "dayLow": "147.0",
+        "isLimitUp": true,
+        "rank": "8"
+    },
+    {
+        "symbol": "00715L.TW",
+        "name": "期街口布蘭特正2",
+        "price": "70.65",
+        "change": "7.65",
+        "changePercent": "+12.14%",
+        "volume_k": 14409,
+        "dayHigh": "72.65",
+        "dayLow": "70.05",
+        "isLimitUp": false,
+        "rank": "1"
+    }
+]
