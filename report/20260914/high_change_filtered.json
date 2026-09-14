@@ -1,0 +1,110 @@
+[
+    {
+        "symbol": "2481.TW",
+        "name": "強茂",
+        "price": "159.0",
+        "change": "9.0",
+        "changePercent": "+6%",
+        "volume_k": 60522,
+        "dayHigh": "164.0",
+        "dayLow": "146.0",
+        "isLimitUp": false,
+        "rank": "37"
+    },
+    {
+        "symbol": "6226.TW",
+        "name": "光鼎",
+        "price": "33.00",
+        "change": "3.00",
+        "changePercent": "+10%",
+        "volume_k": 33399,
+        "dayHigh": "33.00",
+        "dayLow": "29.40",
+        "isLimitUp": true,
+        "rank": "3"
+    },
+    {
+        "symbol": "2305.TW",
+        "name": "全友",
+        "price": "45.15",
+        "change": "4.10",
+        "changePercent": "+9.99%",
+        "volume_k": 33340,
+        "dayHigh": "45.15",
+        "dayLow": "39.50",
+        "isLimitUp": true,
+        "rank": "4"
+    },
+    {
+        "symbol": "8358.TWO",
+        "name": "金居",
+        "price": "518",
+        "change": "33",
+        "changePercent": "+6.8%",
+        "volume_k": 33327,
+        "dayHigh": "530",
+        "dayLow": "477.0",
+        "isLimitUp": false,
+        "rank": "32"
+    },
+    {
+        "symbol": "6706.TW",
+        "name": "惠特",
+        "price": "151.0",
+        "change": "13.5",
+        "changePercent": "+9.82%",
+        "volume_k": 22867,
+        "dayHigh": "151.0",
+        "dayLow": "133.0",
+        "isLimitUp": true,
+        "rank": "23"
+    },
+    {
+        "symbol": "2489.TW",
+        "name": "瑞軒",
+        "price": "39.30",
+        "change": "2.40",
+        "changePercent": "+6.5%",
+        "volume_k": 20766,
+        "dayHigh": "40.40",
+        "dayLow": "36.20",
+        "isLimitUp": false,
+        "rank": "33"
+    },
+    {
+        "symbol": "1528.TW",
+        "name": "恩德",
+        "price": "23.30",
+        "change": "2.10",
+        "changePercent": "+9.91%",
+        "volume_k": 15570,
+        "dayHigh": "23.30",
+        "dayLow": "21.40",
+        "isLimitUp": true,
+        "rank": "13"
+    },
+    {
+        "symbol": "2351.TW",
+        "name": "順德",
+        "price": "257.0",
+        "change": "23.0",
+        "changePercent": "+9.83%",
+        "volume_k": 13565,
+        "dayHigh": "257.0",
+        "dayLow": "228.5",
+        "isLimitUp": true,
+        "rank": "22"
+    },
+    {
+        "symbol": "6112.TW",
+        "name": "邁達特",
+        "price": "50.6",
+        "change": "4.5",
+        "changePercent": "+9.88%",
+        "volume_k": 10823,
+        "dayHigh": "50.6",
+        "dayLow": "47.30",
+        "isLimitUp": true,
+        "rank": "17"
+    }
+]
