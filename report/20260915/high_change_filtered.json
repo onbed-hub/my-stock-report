@@ -1,0 +1,50 @@
+[
+    {
+        "symbol": "6226.TW",
+        "name": "光鼎",
+        "price": "36.30",
+        "change": "3.30",
+        "changePercent": "+10%",
+        "volume_k": 80984,
+        "dayHigh": "36.30",
+        "dayLow": "33.05",
+        "isLimitUp": true,
+        "rank": "3"
+    },
+    {
+        "symbol": "6147.TWO",
+        "name": "頎邦",
+        "price": "200.0",
+        "change": "11.0",
+        "changePercent": "+5.82%",
+        "volume_k": 63791,
+        "dayHigh": "206.5",
+        "dayLow": "194.5",
+        "isLimitUp": false,
+        "rank": "34"
+    },
+    {
+        "symbol": "3441.TWO",
+        "name": "聯一光",
+        "price": "169.5",
+        "change": "9.0",
+        "changePercent": "+5.61%",
+        "volume_k": 37717,
+        "dayHigh": "176.5",
+        "dayLow": "159.0",
+        "isLimitUp": false,
+        "rank": "37"
+    },
+    {
+        "symbol": "1528.TW",
+        "name": "恩德",
+        "price": "24.65",
+        "change": "1.35",
+        "changePercent": "+5.79%",
+        "volume_k": 36994,
+        "dayHigh": "25.30",
+        "dayLow": "23.60",
+        "isLimitUp": false,
+        "rank": "36"
+    }
+]
