@@ -31,7 +31,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>📊 標的分析：4804.TWO (截止日: 2026-09-16)</h1>
+        <h1>📊 標的分析：4804.TWO (截止日: 2026-09-17)</h1>
         
         <h2>📌 隱馬可夫模型 (HMM) 歷史狀態特徵統計</h2>
         <table border="1" class="dataframe table">
@@ -56,36 +56,36 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>-0.020005</td>
-      <td>0.007696</td>
-      <td>207</td>
+      <td>-0.003201</td>
+      <td>0.031768</td>
+      <td>-0.101450</td>
+      <td>-0.113818</td>
+      <td>484</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>-0.001802</td>
-      <td>0.021399</td>
-      <td>-1.459245</td>
-      <td>0.015648</td>
-      <td>1516</td>
+      <td>0.001502</td>
+      <td>0.044591</td>
+      <td>-0.402763</td>
+      <td>0.049678</td>
+      <td>952</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>-0.000401</td>
-      <td>0.041860</td>
-      <td>0.133791</td>
-      <td>-0.022860</td>
-      <td>1098</td>
+      <td>-0.002202</td>
+      <td>0.012854</td>
+      <td>-1.181040</td>
+      <td>0.005779</td>
+      <td>1386</td>
     </tr>
   </tbody>
 </table>
         
         <h2>⚙️ 自動解碼狀態權重配置</h2>
         <ul class="config-list">
-            <li>📈 <strong>狀態 0 (多頭主升段)</strong> &rarr; 配置權重: 1.0 (滿倉續抱)</li>
+            <li>📈 <strong>狀態 1 (多頭主升段)</strong> &rarr; 配置權重: 1.0 (滿倉續抱)</li>
             <li>🔄 <strong>狀態 2 (驚驚漲常態)</strong> &rarr; 配置權重: 1.0 (持股續抱)</li>
-            <li>📉 <strong>狀態 1 (低波盤整市)</strong> &rarr; 配置權重: 0.2 (大幅減倉)</li>
+            <li>📉 <strong>狀態 0 (低波盤整市)</strong> &rarr; 配置權重: 0.2 (大幅減倉)</li>
         </ul>
         
         <h2>📈 全歷史回測績效對比</h2>
@@ -96,24 +96,24 @@
             </div>
             <div class="perf-card strat">
                 <div style="font-size:14px; color:#28a745;">HMM 優化策略 累積報酬率</div>
-                <div class="val">-62.27%</div>
+                <div class="val">-89.56%</div>
             </div>
         </div>
 
-        <div class="signal-panel status-bull">
+        <div class="signal-panel status-sideways">
             <h3>
                 <span>🎯 最新量化實戰戰術指南</span>
                 <span>收盤價: 3.2699999808999998 元</span>
             </h3>
             <div style="font-size: 15px; opacity: 0.95; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 10px; margin-bottom: 10px;">
-                <strong>當前市場狀態：</strong>狀態 0 - 多頭極速主升段 <br>
+                <strong>當前市場狀態：</strong>狀態 2 - 驚驚漲常態慢多頭 <br>
                 <strong>即時技術特徵：</strong>目前 20 日乖離率為 0.00%，中線特徵慣性確立。
             </div>
             <strong>💡 實戰動作建議：</strong>
             <ul>
                 
-                <li>現有持股（如投資組合持倉）請 <strong>【堅定續抱、絕對不要隨便下車】</strong>。</li>
-                <li>空手或想加碼者，此狀態為正宗趨勢發動期，<strong>【可開盤直接建立多單或分批進場】</strong>。</li>
+                <li>策略維持滿倉 <strong>【穩健持有】</strong>。</li>
+                <li>此時非常適合配合你系統內的 <strong>Fair Value Gap (FVG)</strong> 缺口突破做右側微調。</li>
             
             </ul>
         </div>
