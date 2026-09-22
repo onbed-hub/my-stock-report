@@ -138,6 +138,19 @@ find ./report -name "basic_data" -type d -exec rm -rf {} +
 # 💡 【在這裡加上這行】：自動刪除 report 資料夾底下的所有空資料夾
 find ./report -type d -empty -delete
 
+# 🧹 自動刪除 report 底下超過 30 天的舊日期資料夾 (依據資料夾名稱數字比對)
+THRESHOLD_DATE=$(date -d "30 days ago" +%Y%m%d)
+echo "🧹 正在清理舊報告 (保留 $THRESHOLD_DATE 之後的資料)..."
+for dir in ./report/20[0-9][0-9][0-9][0-9][0-9][0-9]; do
+    if [ -d "$dir" ]; then
+        dirname=$(basename "$dir")
+        if [ "$dirname" -lt "$THRESHOLD_DATE" ]; then
+            echo "🗑️ 移除過期資料夾: $dir"
+            rm -rf "$dir"
+        fi
+    fi
+done
+
 echo "🔄 正在上傳至 GitHub..."
 git add -A
 COMMIT_TIME=$(date "+%Y-%m-%d %H:%M:%S")
