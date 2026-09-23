@@ -1,0 +1,110 @@
+[
+    {
+        "symbol": "1709.TW",
+        "name": "和益",
+        "price": "48.30",
+        "change": "2.35",
+        "changePercent": "+5.11%",
+        "volume_k": 84375,
+        "dayHigh": "50.5",
+        "dayLow": "45.50",
+        "isLimitUp": false,
+        "rank": "60"
+    },
+    {
+        "symbol": "3042.TW",
+        "name": "晶技",
+        "price": "198.0",
+        "change": "14.5",
+        "changePercent": "+7.9%",
+        "volume_k": 32683,
+        "dayHigh": "201.5",
+        "dayLow": "179.0",
+        "isLimitUp": false,
+        "rank": "36"
+    },
+    {
+        "symbol": "3016.TW",
+        "name": "嘉晶",
+        "price": "145.5",
+        "change": "13.0",
+        "changePercent": "+9.81%",
+        "volume_k": 30659,
+        "dayHigh": "145.5",
+        "dayLow": "141.5",
+        "isLimitUp": true,
+        "rank": "27"
+    },
+    {
+        "symbol": "6456.TW",
+        "name": "GIS-KY",
+        "price": "78.6",
+        "change": "5.0",
+        "changePercent": "+6.79%",
+        "volume_k": 26636,
+        "dayHigh": "80.9",
+        "dayLow": "76.5",
+        "isLimitUp": false,
+        "rank": "40"
+    },
+    {
+        "symbol": "3624.TWO",
+        "name": "光頡",
+        "price": "134.0",
+        "change": "12.0",
+        "changePercent": "+9.84%",
+        "volume_k": 23092,
+        "dayHigh": "134.0",
+        "dayLow": "122.0",
+        "isLimitUp": true,
+        "rank": "25"
+    },
+    {
+        "symbol": "1727.TW",
+        "name": "中華化",
+        "price": "116.5",
+        "change": "10.5",
+        "changePercent": "+9.91%",
+        "volume_k": 21164,
+        "dayHigh": "116.5",
+        "dayLow": "103.0",
+        "isLimitUp": true,
+        "rank": "19"
+    },
+    {
+        "symbol": "2104.TW",
+        "name": "國際中橡",
+        "price": "11.65",
+        "change": "1.05",
+        "changePercent": "+9.91%",
+        "volume_k": 20968,
+        "dayHigh": "11.65",
+        "dayLow": "10.65",
+        "isLimitUp": true,
+        "rank": "20"
+    },
+    {
+        "symbol": "2368.TW",
+        "name": "金像電",
+        "price": "1140",
+        "change": "100",
+        "changePercent": "+9.62%",
+        "volume_k": 13468,
+        "dayHigh": "1140",
+        "dayLow": "1030",
+        "isLimitUp": true,
+        "rank": "31"
+    },
+    {
+        "symbol": "2342.TW",
+        "name": "茂矽",
+        "price": "46.35",
+        "change": "4.20",
+        "changePercent": "+9.96%",
+        "volume_k": 10963,
+        "dayHigh": "46.35",
+        "dayLow": "42.45",
+        "isLimitUp": true,
+        "rank": "7"
+    }
+]
