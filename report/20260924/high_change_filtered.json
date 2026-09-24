@@ -1,0 +1,86 @@
+[
+    {
+        "symbol": "3016.TW",
+        "name": "嘉晶",
+        "price": "160.0",
+        "change": "14.5",
+        "changePercent": "+9.97%",
+        "volume_k": 48695,
+        "dayHigh": "160.0",
+        "dayLow": "147.0",
+        "isLimitUp": true,
+        "rank": "7"
+    },
+    {
+        "symbol": "3189.TW",
+        "name": "景碩",
+        "price": "962",
+        "change": "56",
+        "changePercent": "+6.18%",
+        "volume_k": 41329,
+        "dayHigh": "996",
+        "dayLow": "929",
+        "isLimitUp": false,
+        "rank": "46"
+    },
+    {
+        "symbol": "2030.TW",
+        "name": "彰源",
+        "price": "30.40",
+        "change": "2.75",
+        "changePercent": "+9.95%",
+        "volume_k": 17898,
+        "dayHigh": "30.40",
+        "dayLow": "27.90",
+        "isLimitUp": true,
+        "rank": "9"
+    },
+    {
+        "symbol": "6213.TW",
+        "name": "聯茂",
+        "price": "595",
+        "change": "54",
+        "changePercent": "+9.98%",
+        "volume_k": 16280,
+        "dayHigh": "595",
+        "dayLow": "592",
+        "isLimitUp": true,
+        "rank": "6"
+    },
+    {
+        "symbol": "6672.TW",
+        "name": "騰輝電子-KY",
+        "price": "337.5",
+        "change": "30.5",
+        "changePercent": "+9.93%",
+        "volume_k": 14967,
+        "dayHigh": "337.5",
+        "dayLow": "315.0",
+        "isLimitUp": true,
+        "rank": "13"
+    },
+    {
+        "symbol": "3026.TW",
+        "name": "禾伸堂",
+        "price": "810",
+        "change": "42",
+        "changePercent": "+5.47%",
+        "volume_k": 12812,
+        "dayHigh": "820",
+        "dayLow": "765",
+        "isLimitUp": false,
+        "rank": "52"
+    },
+    {
+        "symbol": "6207.TWO",
+        "name": "雷科",
+        "price": "125.0",
+        "change": "11.0",
+        "changePercent": "+9.65%",
+        "volume_k": 11895,
+        "dayHigh": "125.0",
+        "dayLow": "115.5",
+        "isLimitUp": true,
+        "rank": "22"
+    }
+]
