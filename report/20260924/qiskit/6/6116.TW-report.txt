@@ -31,7 +31,7 @@
 🧬 採用特徵組合: MACD, Vol_Ratio, MA_Slope, BB_Upper
 📈 今日即時最佳技術指標計算结果:
    - MACD 原始計算指標值: 0.1486
-   - Vol_Ratio 原始計算指標值: 0.5007
+   - Vol_Ratio 原始計算指標值: 0.5004
    - MA_Slope 原始計算指標值: 0.1398
    - BB_Upper 原始計算指標值: 2.3117
 🎯 策略動作指引: ❄️ 繼續維持空倉手握現鈔 (EMPTY) ❄️

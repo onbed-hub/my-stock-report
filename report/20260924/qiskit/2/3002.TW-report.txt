@@ -29,7 +29,7 @@
 🧬 採用特徵組合: KD_Diff, Vol_Ratio, MA_Slope, MA_Bull
 📈 今日即時最佳技術指標計算结果:
    - KD_Diff 原始計算指標值: -3.7960
-   - Vol_Ratio 原始計算指標值: 0.3322
+   - Vol_Ratio 原始計算指標值: 0.3324
    - MA_Slope 原始計算指標值: 0.4055
    - MA_Bull 原始計算指標值: 0.0000
 🎯 策略動作指引: 💥 開盤立刻賣出平倉 (SELL) 💥
