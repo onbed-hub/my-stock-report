@@ -1,0 +1,110 @@
+[
+    {
+        "symbol": "2492.TW",
+        "name": "華新科",
+        "price": "389.5",
+        "change": "21.0",
+        "changePercent": "+5.7%",
+        "volume_k": 55498,
+        "dayHigh": "395.0",
+        "dayLow": "362.5",
+        "isLimitUp": false,
+        "rank": "57"
+    },
+    {
+        "symbol": "1785.TWO",
+        "name": "光洋科",
+        "price": "110.5",
+        "change": "8.0",
+        "changePercent": "+7.8%",
+        "volume_k": 43360,
+        "dayHigh": "112.5",
+        "dayLow": "102.0",
+        "isLimitUp": false,
+        "rank": "36"
+    },
+    {
+        "symbol": "6257.TW",
+        "name": "矽格",
+        "price": "286.0",
+        "change": "26.0",
+        "changePercent": "+10%",
+        "volume_k": 35462,
+        "dayHigh": "286.0",
+        "dayLow": "267.5",
+        "isLimitUp": true,
+        "rank": "3"
+    },
+    {
+        "symbol": "1711.TW",
+        "name": "永光",
+        "price": "48.60",
+        "change": "4.40",
+        "changePercent": "+9.95%",
+        "volume_k": 32459,
+        "dayHigh": "48.60",
+        "dayLow": "44.05",
+        "isLimitUp": true,
+        "rank": "9"
+    },
+    {
+        "symbol": "3441.TWO",
+        "name": "聯一光",
+        "price": "255.0",
+        "change": "23.0",
+        "changePercent": "+9.91%",
+        "volume_k": 19586,
+        "dayHigh": "255.0",
+        "dayLow": "238.0",
+        "isLimitUp": true,
+        "rank": "17"
+    },
+    {
+        "symbol": "6278.TW",
+        "name": "台表科",
+        "price": "234.0",
+        "change": "14.0",
+        "changePercent": "+6.36%",
+        "volume_k": 19052,
+        "dayHigh": "237.5",
+        "dayLow": "217.5",
+        "isLimitUp": false,
+        "rank": "46"
+    },
+    {
+        "symbol": "2605.TW",
+        "name": "新興",
+        "price": "36.95",
+        "change": "1.80",
+        "changePercent": "+5.12%",
+        "volume_k": 18724,
+        "dayHigh": "37.30",
+        "dayLow": "35.05",
+        "isLimitUp": false,
+        "rank": "67"
+    },
+    {
+        "symbol": "6456.TW",
+        "name": "GIS-KY",
+        "price": "99.6",
+        "change": "9.0",
+        "changePercent": "+9.93%",
+        "volume_k": 15822,
+        "dayHigh": "99.6",
+        "dayLow": "96.2",
+        "isLimitUp": true,
+        "rank": "12"
+    },
+    {
+        "symbol": "4707.TWO",
+        "name": "磐亞",
+        "price": "33.25",
+        "change": "3.00",
+        "changePercent": "+9.92%",
+        "volume_k": 12474,
+        "dayHigh": "33.25",
+        "dayLow": "30.30",
+        "isLimitUp": true,
+        "rank": "13"
+    }
+]
