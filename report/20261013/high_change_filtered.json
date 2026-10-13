@@ -1,0 +1,122 @@
+[
+    {
+        "symbol": "1312.TW",
+        "name": "國喬",
+        "price": "17.65",
+        "change": "1.60",
+        "changePercent": "+9.97%",
+        "volume_k": 135761,
+        "dayHigh": "17.65",
+        "dayLow": "15.75",
+        "isLimitUp": true,
+        "rank": "7"
+    },
+    {
+        "symbol": "1303.TW",
+        "name": "南亞",
+        "price": "319.0",
+        "change": "16.0",
+        "changePercent": "+5.28%",
+        "volume_k": 120312,
+        "dayHigh": "319.0",
+        "dayLow": "295.0",
+        "isLimitUp": false,
+        "rank": "45"
+    },
+    {
+        "symbol": "6505.TW",
+        "name": "台塑化",
+        "price": "119.0",
+        "change": "10.5",
+        "changePercent": "+9.68%",
+        "volume_k": 68616,
+        "dayHigh": "119.0",
+        "dayLow": "105.0",
+        "isLimitUp": true,
+        "rank": "24"
+    },
+    {
+        "symbol": "9103.TW",
+        "name": "美德醫療-DR",
+        "price": "7.02",
+        "change": "0.56",
+        "changePercent": "+8.67%",
+        "volume_k": 30721,
+        "dayHigh": "7.10",
+        "dayLow": "6.53",
+        "isLimitUp": false,
+        "rank": "29"
+    },
+    {
+        "symbol": "1710.TW",
+        "name": "東聯",
+        "price": "19.50",
+        "change": "1.45",
+        "changePercent": "+8.03%",
+        "volume_k": 25335,
+        "dayHigh": "19.85",
+        "dayLow": "18.45",
+        "isLimitUp": false,
+        "rank": "32"
+    },
+    {
+        "symbol": "1569.TWO",
+        "name": "濱川",
+        "price": "81.0",
+        "change": "7.3",
+        "changePercent": "+9.91%",
+        "volume_k": 17364,
+        "dayHigh": "81.0",
+        "dayLow": "72.0",
+        "isLimitUp": true,
+        "rank": "13"
+    },
+    {
+        "symbol": "6834.TW",
+        "name": "天二科技",
+        "price": "159.5",
+        "change": "14.5",
+        "changePercent": "+10%",
+        "volume_k": 16212,
+        "dayHigh": "159.5",
+        "dayLow": "148.5",
+        "isLimitUp": true,
+        "rank": "4"
+    },
+    {
+        "symbol": "6668.TW",
+        "name": "中揚光",
+        "price": "60.5",
+        "change": "5.5",
+        "changePercent": "+10%",
+        "volume_k": 15009,
+        "dayHigh": "60.5",
+        "dayLow": "54.3",
+        "isLimitUp": true,
+        "rank": "3"
+    },
+    {
+        "symbol": "6217.TWO",
+        "name": "中探針",
+        "price": "197.0",
+        "change": "17.5",
+        "changePercent": "+9.75%",
+        "volume_k": 14778,
+        "dayHigh": "197.0",
+        "dayLow": "176.5",
+        "isLimitUp": true,
+        "rank": "22"
+    },
+    {
+        "symbol": "3406.TW",
+        "name": "玉晶光",
+        "price": "1175",
+        "change": "105",
+        "changePercent": "+9.81%",
+        "volume_k": 13510,
+        "dayHigh": "1175",
+        "dayLow": "1040",
+        "isLimitUp": true,
+        "rank": "19"
+    }
+]
