@@ -1,0 +1,62 @@
+[
+    {
+        "symbol": "1815.TWO",
+        "name": "富喬",
+        "price": "154.0",
+        "change": "14.0",
+        "changePercent": "+10%",
+        "volume_k": 195712,
+        "dayHigh": "154.0",
+        "dayLow": "136.0",
+        "isLimitUp": true,
+        "rank": "2"
+    },
+    {
+        "symbol": "5498.TWO",
+        "name": "凱崴",
+        "price": "65.7",
+        "change": "5.9",
+        "changePercent": "+9.87%",
+        "volume_k": 47051,
+        "dayHigh": "65.7",
+        "dayLow": "58.1",
+        "isLimitUp": true,
+        "rank": "17"
+    },
+    {
+        "symbol": "4927.TW",
+        "name": "泰鼎-KY",
+        "price": "58.9",
+        "change": "2.9",
+        "changePercent": "+5.18%",
+        "volume_k": 19282,
+        "dayHigh": "59.7",
+        "dayLow": "52.7",
+        "isLimitUp": false,
+        "rank": "34"
+    },
+    {
+        "symbol": "4960.TW",
+        "name": "誠美材",
+        "price": "27.80",
+        "change": "2.50",
+        "changePercent": "+9.88%",
+        "volume_k": 19070,
+        "dayHigh": "27.80",
+        "dayLow": "24.20",
+        "isLimitUp": true,
+        "rank": "15"
+    },
+    {
+        "symbol": "8021.TW",
+        "name": "尖點",
+        "price": "520",
+        "change": "26",
+        "changePercent": "+5.26%",
+        "volume_k": 17180,
+        "dayHigh": "541",
+        "dayLow": "466.0",
+        "isLimitUp": false,
+        "rank": "32"
+    }
+]
