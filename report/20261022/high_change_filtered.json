@@ -1,0 +1,74 @@
+[
+    {
+        "symbol": "4526.TW",
+        "name": "東台",
+        "price": "41.05",
+        "change": "3.00",
+        "changePercent": "+7.88%",
+        "volume_k": 56672,
+        "dayHigh": "41.85",
+        "dayLow": "38.80",
+        "isLimitUp": false,
+        "rank": "27"
+    },
+    {
+        "symbol": "4720.TW",
+        "name": "德淵",
+        "price": "30.95",
+        "change": "1.70",
+        "changePercent": "+5.81%",
+        "volume_k": 21732,
+        "dayHigh": "32.15",
+        "dayLow": "29.55",
+        "isLimitUp": false,
+        "rank": "39"
+    },
+    {
+        "symbol": "2468.TW",
+        "name": "華經",
+        "price": "55.0",
+        "change": "5.0",
+        "changePercent": "+10%",
+        "volume_k": 21420,
+        "dayHigh": "55.0",
+        "dayLow": "50.2",
+        "isLimitUp": true,
+        "rank": "1"
+    },
+    {
+        "symbol": "6148.TWO",
+        "name": "驊宏資",
+        "price": "44.20",
+        "change": "4.00",
+        "changePercent": "+9.95%",
+        "volume_k": 16522,
+        "dayHigh": "44.20",
+        "dayLow": "40.15",
+        "isLimitUp": true,
+        "rank": "6"
+    },
+    {
+        "symbol": "2069.TW",
+        "name": "運錩",
+        "price": "28.95",
+        "change": "1.60",
+        "changePercent": "+5.85%",
+        "volume_k": 11014,
+        "dayHigh": "30.05",
+        "dayLow": "28.00",
+        "isLimitUp": false,
+        "rank": "38"
+    },
+    {
+        "symbol": "2465.TW",
+        "name": "麗臺",
+        "price": "96.2",
+        "change": "8.7",
+        "changePercent": "+9.94%",
+        "volume_k": 10339,
+        "dayHigh": "96.2",
+        "dayLow": "89.0",
+        "isLimitUp": true,
+        "rank": "8"
+    }
+]
