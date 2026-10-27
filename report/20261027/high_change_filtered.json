@@ -1,0 +1,110 @@
+[
+    {
+        "symbol": "2344.TW",
+        "name": "華邦電",
+        "price": "163.0",
+        "change": "8.5",
+        "changePercent": "+5.5%",
+        "volume_k": 66248,
+        "dayHigh": "164.0",
+        "dayLow": "157.5",
+        "isLimitUp": false,
+        "rank": "57"
+    },
+    {
+        "symbol": "4526.TW",
+        "name": "東台",
+        "price": "45.15",
+        "change": "4.10",
+        "changePercent": "+9.99%",
+        "volume_k": 52253,
+        "dayHigh": "45.15",
+        "dayLow": "41.05",
+        "isLimitUp": true,
+        "rank": "3"
+    },
+    {
+        "symbol": "2408.TW",
+        "name": "南亞科",
+        "price": "441.0",
+        "change": "27.0",
+        "changePercent": "+6.52%",
+        "volume_k": 42967,
+        "dayHigh": "449.0",
+        "dayLow": "431.0",
+        "isLimitUp": false,
+        "rank": "44"
+    },
+    {
+        "symbol": "5426.TWO",
+        "name": "振發",
+        "price": "33.30",
+        "change": "3.00",
+        "changePercent": "+9.9%",
+        "volume_k": 14436,
+        "dayHigh": "33.30",
+        "dayLow": "30.25",
+        "isLimitUp": true,
+        "rank": "14"
+    },
+    {
+        "symbol": "2464.TW",
+        "name": "盟立",
+        "price": "177.0",
+        "change": "16.0",
+        "changePercent": "+9.94%",
+        "volume_k": 13417,
+        "dayHigh": "177.0",
+        "dayLow": "165.0",
+        "isLimitUp": true,
+        "rank": "9"
+    },
+    {
+        "symbol": "2504.TW",
+        "name": "國產",
+        "price": "34.75",
+        "change": "2.55",
+        "changePercent": "+7.92%",
+        "volume_k": 12828,
+        "dayHigh": "35.05",
+        "dayLow": "31.75",
+        "isLimitUp": false,
+        "rank": "30"
+    },
+    {
+        "symbol": "6221.TWO",
+        "name": "晉泰",
+        "price": "40.00",
+        "change": "3.60",
+        "changePercent": "+9.89%",
+        "volume_k": 12285,
+        "dayHigh": "40.00",
+        "dayLow": "36.80",
+        "isLimitUp": true,
+        "rank": "16"
+    },
+    {
+        "symbol": "4720.TW",
+        "name": "德淵",
+        "price": "34.00",
+        "change": "3.05",
+        "changePercent": "+9.85%",
+        "volume_k": 12021,
+        "dayHigh": "34.00",
+        "dayLow": "31.35",
+        "isLimitUp": true,
+        "rank": "20"
+    },
+    {
+        "symbol": "1808.TW",
+        "name": "潤隆",
+        "price": "36.80",
+        "change": "2.90",
+        "changePercent": "+8.55%",
+        "volume_k": 10467,
+        "dayHigh": "37.20",
+        "dayLow": "33.75",
+        "isLimitUp": false,
+        "rank": "28"
+    }
+]
