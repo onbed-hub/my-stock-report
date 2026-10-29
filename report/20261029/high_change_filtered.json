@@ -1,0 +1,74 @@
+[
+    {
+        "symbol": "4526.TW",
+        "name": "東台",
+        "price": "52.8",
+        "change": "3.1",
+        "changePercent": "+6.34%",
+        "volume_k": 108744,
+        "dayHigh": "54.6",
+        "dayLow": "50.2",
+        "isLimitUp": false,
+        "rank": "31"
+    },
+    {
+        "symbol": "2352.TW",
+        "name": "佳世達",
+        "price": "32.80",
+        "change": "2.95",
+        "changePercent": "+9.88%",
+        "volume_k": 86587,
+        "dayHigh": "32.80",
+        "dayLow": "30.15",
+        "isLimitUp": true,
+        "rank": "18"
+    },
+    {
+        "symbol": "3105.TWO",
+        "name": "穩懋",
+        "price": "594",
+        "change": "54",
+        "changePercent": "+10%",
+        "volume_k": 56432,
+        "dayHigh": "594",
+        "dayLow": "584",
+        "isLimitUp": true,
+        "rank": "2"
+    },
+    {
+        "symbol": "2492.TW",
+        "name": "華新科",
+        "price": "423.0",
+        "change": "25.0",
+        "changePercent": "+6.28%",
+        "volume_k": 54716,
+        "dayHigh": "431.5",
+        "dayLow": "390.5",
+        "isLimitUp": false,
+        "rank": "32"
+    },
+    {
+        "symbol": "2426.TW",
+        "name": "鼎元",
+        "price": "97.0",
+        "change": "5.8",
+        "changePercent": "+6.36%",
+        "volume_k": 45364,
+        "dayHigh": "100.0",
+        "dayLow": "92.4",
+        "isLimitUp": false,
+        "rank": "29"
+    },
+    {
+        "symbol": "3035.TW",
+        "name": "智原",
+        "price": "231.5",
+        "change": "21.0",
+        "changePercent": "+9.98%",
+        "volume_k": 34595,
+        "dayHigh": "231.5",
+        "dayLow": "222.0",
+        "isLimitUp": true,
+        "rank": "5"
+    }
+]
