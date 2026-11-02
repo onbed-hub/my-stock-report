@@ -1,0 +1,98 @@
+[
+    {
+        "symbol": "1815.TWO",
+        "name": "富喬",
+        "price": "139.0",
+        "change": "12.5",
+        "changePercent": "+9.88%",
+        "volume_k": 89245,
+        "dayHigh": "139.0",
+        "dayLow": "122.0",
+        "isLimitUp": true,
+        "rank": "32"
+    },
+    {
+        "symbol": "6456.TW",
+        "name": "GIS-KY",
+        "price": "97.0",
+        "change": "4.7",
+        "changePercent": "+5.09%",
+        "volume_k": 36984,
+        "dayHigh": "99.5",
+        "dayLow": "87.0",
+        "isLimitUp": false,
+        "rank": "75"
+    },
+    {
+        "symbol": "2468.TW",
+        "name": "華經",
+        "price": "58.5",
+        "change": "5.3",
+        "changePercent": "+9.96%",
+        "volume_k": 22372,
+        "dayHigh": "58.5",
+        "dayLow": "52.7",
+        "isLimitUp": true,
+        "rank": "16"
+    },
+    {
+        "symbol": "1528.TW",
+        "name": "恩德",
+        "price": "26.90",
+        "change": "1.95",
+        "changePercent": "+7.82%",
+        "volume_k": 20310,
+        "dayHigh": "27.40",
+        "dayLow": "24.45",
+        "isLimitUp": false,
+        "rank": "46"
+    },
+    {
+        "symbol": "2371.TW",
+        "name": "大同",
+        "price": "29.80",
+        "change": "1.85",
+        "changePercent": "+6.62%",
+        "volume_k": 18807,
+        "dayHigh": "30.30",
+        "dayLow": "27.70",
+        "isLimitUp": false,
+        "rank": "53"
+    },
+    {
+        "symbol": "6148.TWO",
+        "name": "驊宏資",
+        "price": "40.95",
+        "change": "2.45",
+        "changePercent": "+6.36%",
+        "volume_k": 12333,
+        "dayHigh": "42.25",
+        "dayLow": "38.60",
+        "isLimitUp": false,
+        "rank": "56"
+    },
+    {
+        "symbol": "6234.TWO",
+        "name": "高僑",
+        "price": "53.2",
+        "change": "4.8",
+        "changePercent": "+9.92%",
+        "volume_k": 11576,
+        "dayHigh": "53.2",
+        "dayLow": "47.25",
+        "isLimitUp": true,
+        "rank": "24"
+    },
+    {
+        "symbol": "4903.TWO",
+        "name": "聯光通",
+        "price": "53.6",
+        "change": "4.8",
+        "changePercent": "+9.95%",
+        "volume_k": 10047,
+        "dayHigh": "53.6",
+        "dayLow": "47.05",
+        "isLimitUp": true,
+        "rank": "19"
+    }
+]
