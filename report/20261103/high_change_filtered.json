@@ -1,0 +1,26 @@
+[
+    {
+        "symbol": "1802.TW",
+        "name": "台玻",
+        "price": "67.7",
+        "change": "4.0",
+        "changePercent": "+6.28%",
+        "volume_k": 299976,
+        "dayHigh": "70.0",
+        "dayLow": "63.8",
+        "isLimitUp": false,
+        "rank": "14"
+    },
+    {
+        "symbol": "00686R.TW",
+        "name": "群益臺灣加權反1",
+        "price": "1.04",
+        "change": "0.05",
+        "changePercent": "+5.05%",
+        "volume_k": 20675,
+        "dayHigh": "1.04",
+        "dayLow": "1.01",
+        "isLimitUp": false,
+        "rank": "17"
+    }
+]
