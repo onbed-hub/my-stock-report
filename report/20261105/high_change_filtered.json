@@ -1,0 +1,86 @@
+[
+    {
+        "symbol": "00673R.TW",
+        "name": "期元大S&P原油反1",
+        "price": "10.94",
+        "change": "0.95",
+        "changePercent": "+9.51%",
+        "volume_k": 113878,
+        "dayHigh": "11.00",
+        "dayLow": "10.84",
+        "isLimitUp": false,
+        "rank": "11"
+    },
+    {
+        "symbol": "2610.TW",
+        "name": "華航",
+        "price": "21.65",
+        "change": "1.15",
+        "changePercent": "+5.61%",
+        "volume_k": 89931,
+        "dayHigh": "22.15",
+        "dayLow": "21.30",
+        "isLimitUp": false,
+        "rank": "32"
+    },
+    {
+        "symbol": "00753L.TW",
+        "name": "中信中國50正2",
+        "price": "8.60",
+        "change": "0.72",
+        "changePercent": "+9.14%",
+        "volume_k": 49653,
+        "dayHigh": "8.68",
+        "dayLow": "8.24",
+        "isLimitUp": false,
+        "rank": "14"
+    },
+    {
+        "symbol": "00665L.TW",
+        "name": "富邦恒生國企正2",
+        "price": "9.29",
+        "change": "0.74",
+        "changePercent": "+8.65%",
+        "volume_k": 39730,
+        "dayHigh": "9.30",
+        "dayLow": "8.80",
+        "isLimitUp": false,
+        "rank": "16"
+    },
+    {
+        "symbol": "009832.TW",
+        "name": "兆豐美國黃金",
+        "price": "10.17",
+        "change": "0.83",
+        "changePercent": "+8.89%",
+        "volume_k": 21287,
+        "dayHigh": "10.25",
+        "dayLow": "9.98",
+        "isLimitUp": false,
+        "rank": "15"
+    },
+    {
+        "symbol": "1416.TW",
+        "name": "廣豐",
+        "price": "14.90",
+        "change": "0.75",
+        "changePercent": "+5.3%",
+        "volume_k": 13285,
+        "dayHigh": "15.55",
+        "dayLow": "14.45",
+        "isLimitUp": false,
+        "rank": "37"
+    },
+    {
+        "symbol": "00955.TWO",
+        "name": "中信日本商社",
+        "price": "16.94",
+        "change": "0.90",
+        "changePercent": "+5.61%",
+        "volume_k": 11482,
+        "dayHigh": "17.00",
+        "dayLow": "16.58",
+        "isLimitUp": false,
+        "rank": "33"
+    }
+]
