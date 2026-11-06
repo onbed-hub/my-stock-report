@@ -1,0 +1,86 @@
+[
+    {
+        "symbol": "3576.TW",
+        "name": "聯合再生",
+        "price": "17.80",
+        "change": "1.40",
+        "changePercent": "+8.54%",
+        "volume_k": 48498,
+        "dayHigh": "18.00",
+        "dayLow": "15.15",
+        "isLimitUp": false,
+        "rank": "25"
+    },
+    {
+        "symbol": "6443.TW",
+        "name": "元晶",
+        "price": "25.95",
+        "change": "2.35",
+        "changePercent": "+9.96%",
+        "volume_k": 40640,
+        "dayHigh": "25.95",
+        "dayLow": "21.25",
+        "isLimitUp": true,
+        "rank": "5"
+    },
+    {
+        "symbol": "00686R.TW",
+        "name": "群益臺灣加權反1",
+        "price": "1.13",
+        "change": "0.06",
+        "changePercent": "+5.61%",
+        "volume_k": 31544,
+        "dayHigh": "1.17",
+        "dayLow": "1.10",
+        "isLimitUp": false,
+        "rank": "35"
+    },
+    {
+        "symbol": "1416.TW",
+        "name": "廣豐",
+        "price": "16.35",
+        "change": "1.45",
+        "changePercent": "+9.73%",
+        "volume_k": 19289,
+        "dayHigh": "16.35",
+        "dayLow": "13.50",
+        "isLimitUp": true,
+        "rank": "19"
+    },
+    {
+        "symbol": "6244.TWO",
+        "name": "茂迪",
+        "price": "20.85",
+        "change": "1.45",
+        "changePercent": "+7.47%",
+        "volume_k": 17461,
+        "dayHigh": "21.30",
+        "dayLow": "17.80",
+        "isLimitUp": false,
+        "rank": "28"
+    },
+    {
+        "symbol": "00676R.TW",
+        "name": "富邦臺灣加權反1",
+        "price": "6.35",
+        "change": "0.33",
+        "changePercent": "+5.48%",
+        "volume_k": 17439,
+        "dayHigh": "6.62",
+        "dayLow": "6.18",
+        "isLimitUp": false,
+        "rank": "37"
+    },
+    {
+        "symbol": "6112.TW",
+        "name": "邁達特",
+        "price": "51.4",
+        "change": "3.7",
+        "changePercent": "+7.76%",
+        "volume_k": 12964,
+        "dayHigh": "52.4",
+        "dayLow": "42.95",
+        "isLimitUp": false,
+        "rank": "27"
+    }
+]
