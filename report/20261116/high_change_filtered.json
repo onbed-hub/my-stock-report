@@ -1,0 +1,86 @@
+[
+    {
+        "symbol": "00632R.TW",
+        "name": "元大台灣50反1",
+        "price": "10.99",
+        "change": "0.68",
+        "changePercent": "+6.6%",
+        "volume_k": 340985,
+        "dayHigh": "10.99",
+        "dayLow": "10.42",
+        "isLimitUp": false,
+        "rank": "41"
+    },
+    {
+        "symbol": "00664R.TW",
+        "name": "國泰臺灣加權反1",
+        "price": "1.77",
+        "change": "0.11",
+        "changePercent": "+6.63%",
+        "volume_k": 50823,
+        "dayHigh": "1.77",
+        "dayLow": "1.68",
+        "isLimitUp": false,
+        "rank": "40"
+    },
+    {
+        "symbol": "2323.TW",
+        "name": "中環",
+        "price": "11.65",
+        "change": "0.70",
+        "changePercent": "+6.39%",
+        "volume_k": 45244,
+        "dayHigh": "12.00",
+        "dayLow": "11.50",
+        "isLimitUp": false,
+        "rank": "42"
+    },
+    {
+        "symbol": "6148.TWO",
+        "name": "驊宏資",
+        "price": "63.9",
+        "change": "5.8",
+        "changePercent": "+9.98%",
+        "volume_k": 17661,
+        "dayHigh": "63.9",
+        "dayLow": "58.8",
+        "isLimitUp": true,
+        "rank": "8"
+    },
+    {
+        "symbol": "1416.TW",
+        "name": "廣豐",
+        "price": "19.45",
+        "change": "1.15",
+        "changePercent": "+6.28%",
+        "volume_k": 16144,
+        "dayHigh": "20.10",
+        "dayLow": "17.75",
+        "isLimitUp": false,
+        "rank": "44"
+    },
+    {
+        "symbol": "00676R.TW",
+        "name": "富邦臺灣加權反1",
+        "price": "6.06",
+        "change": "0.36",
+        "changePercent": "+6.32%",
+        "volume_k": 15570,
+        "dayHigh": "6.06",
+        "dayLow": "5.76",
+        "isLimitUp": false,
+        "rank": "43"
+    },
+    {
+        "symbol": "2471.TW",
+        "name": "資通",
+        "price": "78.2",
+        "change": "7.1",
+        "changePercent": "+9.99%",
+        "volume_k": 13176,
+        "dayHigh": "78.2",
+        "dayLow": "72.5",
+        "isLimitUp": true,
+        "rank": "6"
+    }
+]
