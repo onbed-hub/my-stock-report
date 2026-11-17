@@ -1,0 +1,38 @@
+[
+    {
+        "symbol": "9933.TW",
+        "name": "中鼎",
+        "price": "56.6",
+        "change": "5.1",
+        "changePercent": "+9.9%",
+        "volume_k": 53175,
+        "dayHigh": "56.6",
+        "dayLow": "52.4",
+        "isLimitUp": true,
+        "rank": "10"
+    },
+    {
+        "symbol": "5230.TWO",
+        "name": "雷笛克光學",
+        "price": "34.50",
+        "change": "1.85",
+        "changePercent": "+5.67%",
+        "volume_k": 16743,
+        "dayHigh": "35.90",
+        "dayLow": "32.20",
+        "isLimitUp": false,
+        "rank": "26"
+    },
+    {
+        "symbol": "6919.TW",
+        "name": "康霈*",
+        "price": "74.8",
+        "change": "6.6",
+        "changePercent": "+9.68%",
+        "volume_k": 12617,
+        "dayHigh": "75.0",
+        "dayLow": "66.4",
+        "isLimitUp": false,
+        "rank": "12"
+    }
+]
