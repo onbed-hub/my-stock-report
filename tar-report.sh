@@ -13,7 +13,7 @@ if [ -n "$1" ]; then
     
     # 檢查指定的日期資料夾是否存在
     if [ -d "$target_dir" ]; then
-        tar_file="report-${target_date}.tar.gz"
+        tar_file="my-stock-report-${target_date}.tar.gz"
         echo "正在壓縮指定日期：${target_dir} -> ${tar_file}"
         tar czvf "$tar_file" "$target_dir"
         echo "壓縮完成！"
@@ -28,7 +28,7 @@ else
         if [ -d "$dir" ]; then
             found=1
             date_str=$(basename "$dir")
-            tar_file="report-${date_str}.tar.gz"
+            tar_file="my-stock-report-${date_str}.tar.gz"
             echo "正在壓縮：report/${date_str} -> ${tar_file}"
             tar czvf "$tar_file" "report/${date_str}"
         fi
