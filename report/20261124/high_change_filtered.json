@@ -1,0 +1,110 @@
+[
+    {
+        "symbol": "009828.TW",
+        "name": "中信台日韓PCB",
+        "price": "8.05",
+        "change": "1.77",
+        "changePercent": "+28.18%",
+        "volume_k": 184940,
+        "dayHigh": "8.45",
+        "dayLow": "7.55",
+        "isLimitUp": false,
+        "rank": "1"
+    },
+    {
+        "symbol": "00685L.TW",
+        "name": "群益臺灣加權正2",
+        "price": "8.61",
+        "change": "1.43",
+        "changePercent": "+19.92%",
+        "volume_k": 155040,
+        "dayHigh": "8.61",
+        "dayLow": "8.61",
+        "isLimitUp": true,
+        "rank": "6"
+    },
+    {
+        "symbol": "00631L.TW",
+        "name": "元大台灣50正2",
+        "price": "27.00",
+        "change": "4.50",
+        "changePercent": "+20%",
+        "volume_k": 109163,
+        "dayHigh": "27.00",
+        "dayLow": "27.00",
+        "isLimitUp": true,
+        "rank": "2"
+    },
+    {
+        "symbol": "0056.TW",
+        "name": "元大高股息",
+        "price": "49.94",
+        "change": "4.54",
+        "changePercent": "+10%",
+        "volume_k": 69415,
+        "dayHigh": "49.94",
+        "dayLow": "49.84",
+        "isLimitUp": true,
+        "rank": "12"
+    },
+    {
+        "symbol": "2887.TW",
+        "name": "台新新光金",
+        "price": "36.30",
+        "change": "3.30",
+        "changePercent": "+10%",
+        "volume_k": 68583,
+        "dayHigh": "36.30",
+        "dayLow": "35.15",
+        "isLimitUp": true,
+        "rank": "28"
+    },
+    {
+        "symbol": "0050.TW",
+        "name": "元大台灣50",
+        "price": "95.70",
+        "change": "8.70",
+        "changePercent": "+10%",
+        "volume_k": 52695,
+        "dayHigh": "95.70",
+        "dayLow": "95.70",
+        "isLimitUp": true,
+        "rank": "10"
+    },
+    {
+        "symbol": "2882.TW",
+        "name": "國泰金",
+        "price": "104.5",
+        "change": "9.5",
+        "changePercent": "+10%",
+        "volume_k": 46950,
+        "dayHigh": "104.5",
+        "dayLow": "102.0",
+        "isLimitUp": true,
+        "rank": "26"
+    },
+    {
+        "symbol": "2886.TW",
+        "name": "兆豐金",
+        "price": "55.0",
+        "change": "5.0",
+        "changePercent": "+10%",
+        "volume_k": 39302,
+        "dayHigh": "55.0",
+        "dayLow": "52.0",
+        "isLimitUp": true,
+        "rank": "27"
+    },
+    {
+        "symbol": "00995A.TW",
+        "name": "主動中信台灣卓越",
+        "price": "12.10",
+        "change": "1.10",
+        "changePercent": "+10%",
+        "volume_k": 12256,
+        "dayHigh": "12.10",
+        "dayLow": "12.02",
+        "isLimitUp": true,
+        "rank": "100"
+    }
+]
