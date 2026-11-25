@@ -1,0 +1,86 @@
+[
+    {
+        "symbol": "00632R.TW",
+        "name": "元大台灣50反1",
+        "price": "11.71",
+        "change": "0.76",
+        "changePercent": "+6.94%",
+        "volume_k": 545169,
+        "dayHigh": "12.04",
+        "dayLow": "11.39",
+        "isLimitUp": false,
+        "rank": "13"
+    },
+    {
+        "symbol": "00664R.TW",
+        "name": "國泰臺灣加權反1",
+        "price": "1.89",
+        "change": "0.13",
+        "changePercent": "+7.39%",
+        "volume_k": 83412,
+        "dayHigh": "1.93",
+        "dayLow": "1.83",
+        "isLimitUp": false,
+        "rank": "11"
+    },
+    {
+        "symbol": "00676R.TW",
+        "name": "富邦臺灣加權反1",
+        "price": "6.46",
+        "change": "0.43",
+        "changePercent": "+7.13%",
+        "volume_k": 55374,
+        "dayHigh": "6.63",
+        "dayLow": "6.28",
+        "isLimitUp": false,
+        "rank": "12"
+    },
+    {
+        "symbol": "00686R.TW",
+        "name": "群益臺灣加權反1",
+        "price": "1.17",
+        "change": "0.09",
+        "changePercent": "+8.33%",
+        "volume_k": 37830,
+        "dayHigh": "1.18",
+        "dayLow": "1.13",
+        "isLimitUp": false,
+        "rank": "10"
+    },
+    {
+        "symbol": "2471.TW",
+        "name": "資通",
+        "price": "66.6",
+        "change": "6.0",
+        "changePercent": "+9.9%",
+        "volume_k": 27995,
+        "dayHigh": "66.6",
+        "dayLow": "60.1",
+        "isLimitUp": true,
+        "rank": "4"
+    },
+    {
+        "symbol": "2368.TW",
+        "name": "金像電",
+        "price": "905",
+        "change": "45",
+        "changePercent": "+5.23%",
+        "volume_k": 27228,
+        "dayHigh": "921",
+        "dayLow": "827",
+        "isLimitUp": false,
+        "rank": "19"
+    },
+    {
+        "symbol": "5202.TWO",
+        "name": "力新",
+        "price": "17.60",
+        "change": "0.90",
+        "changePercent": "+5.39%",
+        "volume_k": 10759,
+        "dayHigh": "18.25",
+        "dayLow": "16.40",
+        "isLimitUp": false,
+        "rank": "18"
+    }
+]
