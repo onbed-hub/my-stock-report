@@ -1,0 +1,98 @@
+[
+    {
+        "symbol": "2313.TW",
+        "name": "華通",
+        "price": "184.5",
+        "change": "16.5",
+        "changePercent": "+9.82%",
+        "volume_k": 47895,
+        "dayHigh": "184.5",
+        "dayLow": "180.0",
+        "isLimitUp": true,
+        "rank": "27"
+    },
+    {
+        "symbol": "6443.TW",
+        "name": "元晶",
+        "price": "25.70",
+        "change": "1.50",
+        "changePercent": "+6.2%",
+        "volume_k": 22395,
+        "dayHigh": "26.55",
+        "dayLow": "24.55",
+        "isLimitUp": false,
+        "rank": "51"
+    },
+    {
+        "symbol": "00637L.TW",
+        "name": "元大滬深300正2",
+        "price": "16.68",
+        "change": "1.01",
+        "changePercent": "+6.45%",
+        "volume_k": 20379,
+        "dayHigh": "16.68",
+        "dayLow": "15.63",
+        "isLimitUp": false,
+        "rank": "47"
+    },
+    {
+        "symbol": "2413.TW",
+        "name": "環科",
+        "price": "54.0",
+        "change": "4.9",
+        "changePercent": "+9.98%",
+        "volume_k": 20358,
+        "dayHigh": "54.0",
+        "dayLow": "49.95",
+        "isLimitUp": true,
+        "rank": "4"
+    },
+    {
+        "symbol": "5457.TWO",
+        "name": "宣德",
+        "price": "30.10",
+        "change": "1.70",
+        "changePercent": "+5.99%",
+        "volume_k": 19023,
+        "dayHigh": "31.20",
+        "dayLow": "28.85",
+        "isLimitUp": false,
+        "rank": "53"
+    },
+    {
+        "symbol": "3701.TW",
+        "name": "大眾控",
+        "price": "58.1",
+        "change": "5.2",
+        "changePercent": "+9.83%",
+        "volume_k": 16766,
+        "dayHigh": "58.1",
+        "dayLow": "53.0",
+        "isLimitUp": true,
+        "rank": "26"
+    },
+    {
+        "symbol": "6152.TW",
+        "name": "百一",
+        "price": "16.65",
+        "change": "1.50",
+        "changePercent": "+9.9%",
+        "volume_k": 14604,
+        "dayHigh": "16.65",
+        "dayLow": "16.00",
+        "isLimitUp": true,
+        "rank": "17"
+    },
+    {
+        "symbol": "2485.TW",
+        "name": "兆赫",
+        "price": "28.85",
+        "change": "2.60",
+        "changePercent": "+9.9%",
+        "volume_k": 11134,
+        "dayHigh": "28.85",
+        "dayLow": "27.25",
+        "isLimitUp": true,
+        "rank": "14"
+    }
+]
